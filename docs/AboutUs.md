@@ -19,7 +19,7 @@ As a Team Leader, I will
 
 As a Code Quality Surveyor, I will
 * Look after the code quality
-* Ensure that they adhere to the Java coding standards
+* Ensure that the team adhere to the Java coding standards
 * Ensure that code follows software design principles
 
 -----
@@ -32,7 +32,7 @@ As a Code Quality Surveyor, I will
 As a Code Integrator, I will
 * Make sure code works well when integrating a new feature to system (by liaising with those in-charge of Documentation, Code Quality and Testing)
 * Make sure any new code follows software design principles for easier maintenance
-* Look after the Github repo
+* Look after the Github repository
 * Ensure that branches and PRs are well-labeled and specific for easier tracking
 <br>
 
@@ -64,11 +64,11 @@ As a Scheduling Deputy Leader, I will
 #### [Zuo ZhuoLin](https://github.com/ZuoZhuolin)
 <img src="images/ZhuoLin.png" width="150"><br>
 **Role**: Developer <br>
-**Responsibilities**: Dev Ops <br>
+**Responsibilities**: Development and Operations, Testing, Scheduling and Tracking of deadlines <br>
 
 As a Scheduling Leader, I will
 * Set realistic deadline for different milestones of the project
-* Remind team mates when deadlines are nearing and help them to manage time
+* Remind team mates when deadlines are nearing
 <br>
 
 As Testing Deputy Leader, I will
