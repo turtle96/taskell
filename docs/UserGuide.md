@@ -18,7 +18,7 @@
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
     > ![gui listToday](gif/listToday.gif)<br>
-   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
+   e.g. typing **`list today`** and pressing <kbd>Enter</kbd> will list the tasks of today.
 5. Some example commands you can try:
    * **`list`** : lists all contacts
    * **`add`** `add buy MA1101R textbook today` : adds a task called “buy MA1101R textbook” to be done by today
