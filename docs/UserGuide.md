@@ -17,7 +17,7 @@
    > <img src="images/Ui.png" width="600">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-   ![gui listToday](gif/listToday.gif width="600")
+   ![gui listToday](gif/listToday.gif)
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
    * **`list`** : lists all contacts
