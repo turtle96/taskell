@@ -5,7 +5,7 @@
 
 <img src="docs/images/Ui.png" width="600"><br>
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using 
+* This is a desktop Task Manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).
 * It is a Java sample application intended for students learning Software Engineering while using Java as 
   the main programming language. 
@@ -25,10 +25,10 @@
 * [Contact Us](docs/ContactUs.md)
 
 
-#### Acknowledgements
+#### Acknowledgement
 
 * Some parts of this sample application were inspired by the excellent 
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*. 
 
 
-#### Licence : [MIT](LICENSE)
+#### License : [MIT](LICENSE)
