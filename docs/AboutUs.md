@@ -25,7 +25,7 @@ As a Code Quality Surveyor, I will
 -----
 
 #### [Jazlyn Ang Chue Ching](https://github.com/turtle96)
-<img src="images/Jazlyn.jpg" width="150"><br>
+<img src="images/Jazlyn.png" width="150"><br>
 **Role**: Developer <br>
 **Responsibilities**: UI, Testing and Integrating of codes <br>
 
