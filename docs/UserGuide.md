@@ -41,38 +41,38 @@ Format: `help`
 > Help is also shown if you enter an incorrect command e.g. `abcd`
  
 #### Adding a person: `add`
-Adds a person to the address book<br>
-Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` 
+Adds a task to Taskell.<br>
+Format: `add TASK ITEM [DATE]` 
 
-> Persons can have any number of tags (including 0)
+> Dates can be added as “today”, “tomorrow”, “5th October”
 
 Examples: 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe p/1234567 e/betsycrowe@gmail.com a/Newgate Prison t/criminal t/friend`
+* `add buy MA1101R textbook today`
+* `add do CS2100 assignment by 10th August`
 
 #### Listing all persons : `list`
-Shows a list of all persons in the address book.<br>
+Shows a list of all persons in Taskell.<br>
 Format: `list`
 
-#### Finding all persons containing any keyword in their name: `find`
-Finds persons whose names contain any of the given keywords.<br>
+#### Finding all tasks containing any keyword in their name: `find`
+Finds tasks whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> * The search is case sensitive. e.g `hans` will not match `Hans`
-> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-> * Only the name is searched.
-> * Only full words will be matched e.g. `Han` will not match `Hans`
-> * Persons matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `Hans` will match `Hans Bo`
+> * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`
+> * Only the task item is searched, not the tags.
+> * Only full words will be matched e.g. `chicken` will not match `chickens`
+> * Taskss matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `chicken` will match `chicken duck`
 
 Examples: 
-* `find John`<br>
-  Returns `John Doe` but not `john`
-* `find Betsy Tim John`<br>
-  Returns Any person having names `Betsy`, `Tim`, or `John`
+* `find banana`<br>
+  Returns ` buy bananas by 16th Feb`
+* `find banana milk essay`<br>
+  Returns Any task having words `banana`, `milk`, or `essay`
+  
 
 #### Deleting a person : `delete`
-Deletes the specified person from the address book. Irreversible.<br>
+Deletes the specified task from Taskell. Can be reversed via undo, but only if no new commands are entered after deleting.<br>
 Format: `delete INDEX`
 
 > Deletes the person at the specified `INDEX`. 
@@ -82,29 +82,22 @@ Format: `delete INDEX`
 Examples: 
 * `list`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
-* `find Betsy`<br> 
+  Deletes the 2nd task in Taskell.
+* `find violin`<br> 
   `delete 1`<br>
-  Deletes the 1st person in the results of the `find` command.
+  Deletes the 1st task in the results of the `find` command.
 
-#### Select a person : `select`
-Selects the person identified by the index number used in the last person listing.<br>
-Format: `select INDEX`
+#### Editing an entry : `edit`
+Edit the specified task in Taskell.<br>
+Format: `edit INDEX read lord of the rings`
 
-> Selects the person and loads the Google search page the person at the specified `INDEX`. 
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
-
-Examples: 
+Examples:
 * `list`<br>
-  `select 2`<br>
-  Selects the 2nd person in the address book.
-* `find Betsy` <br> 
-  `select 1`<br>
-  Selects the 1st person in the results of the `find` command.
+* `edit 2`<br>
+Edits the 2nd task in Taskell to “read lord of the rings”. 
 
 #### Clearing all entries : `clear`
-Clears all entries from the address book.<br>
+Clear all entries in Taskell.<br>
 Format: `clear`  
 
 #### Exiting the program : `exit`
