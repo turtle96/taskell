@@ -51,7 +51,7 @@ Examples:
 * `add do CS2100 assignment by 10th August`
 
 #### Listing all persons : `list`
-Shows a list of all persons in Taskell.<br>
+Shows a list of all the tasks in Taskell.<br>
 Format: `list`
 
 #### Finding all tasks containing any keyword in their name: `find`
@@ -75,7 +75,7 @@ Examples:
 Deletes the specified task from Taskell. Can be reversed via undo, but only if no new commands are entered after deleting.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. 
+> Deletes the task at the specified `INDEX`. 
   The index refers to the index number shown in the most recent listing.<br>
   The index **must be a positive integer** 1, 2, 3, ...
 
@@ -105,13 +105,13 @@ Exits the program.<br>
 Format: `exit`  
 
 #### Saving the data 
-Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+Taskell data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with 
+**A**: Install the application in the other computer and overwrite the empty data file it creates with 
        the file that contains the data of your previous Taskell folder.
        
 ## Command Summary
