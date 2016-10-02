@@ -61,7 +61,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`
 > * Only the task item is searched, not the tags.
 > * Only full words will be matched e.g. `chicken` will not match `chickens`
-> * Taskss matching at least one keyword will be returned (i.e. `OR` search).
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `chicken` will match `chicken duck`
 
 Examples: 
