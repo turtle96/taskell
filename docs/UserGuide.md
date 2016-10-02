@@ -14,10 +14,10 @@
 1. Download the latest `taskell.jar` from here.
 2. Copy the file to the folder you want to use as the home folder for your task manager.
 3. Double-click the file to start the application. The GUI should appear in a few seconds. 
-   > <img src="images/Ui.png" width="800">
+   > <img src="images/Ui.png" width="700">
 
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
-    >![gui listToday](gif/listToday.gif)
+    >![gui listToday](gif/listToday.gif)<br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
 5. Some example commands you can try:
    * **`list`** : lists all contacts
