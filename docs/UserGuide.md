@@ -21,7 +21,7 @@
    e.g. typing **`list today`** and pressing <kbd>Enter</kbd> will list the tasks of today.
 5. Some example commands you can try:
    * **`list`** : lists all contacts
-   * **`add`** `add buy MA1101R textbook today` : adds a task called “buy MA1101R textbook” to be done by today
+   * **`add`** `buy MA1101R textbook today` : adds a task called “buy MA1101R textbook” to be done by today
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the application
 6. Refer to the [Features](#features) section below for details of each command.<br>
