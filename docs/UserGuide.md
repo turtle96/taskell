@@ -21,7 +21,7 @@
    e.g. typing **`list today`** and pressing <kbd>Enter</kbd> will list the tasks of today.
 5. Some example commands you can try:
    * **`list`** : lists all contacts
-   * **`add`** `buy MA1101R textbook today` : adds a task called ìbuy MA1101R textbookî to be done by today
+   * **`add`** `buy MA1101R textbook today` : adds a task called ‚Äúbuy MA1101R textbook‚Äù to be done by today
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the application
 6. Refer to the [Features](#features) section below for details of each command.<br>
@@ -44,7 +44,7 @@ Format: `help`
 Adds a task to Taskell.<br>
 Format: `add TASK ITEM [DATE]` 
 
-> Dates can be added as ìtodayî, ìtomorrowî, ì5th Octoberî
+> Dates can be added as ‚Äútoday‚Äù, ‚Äútomorrow‚Äù, ‚Äú5th October‚Äù
 
 Examples: 
 * `add buy MA1101R textbook today`
@@ -94,10 +94,10 @@ Format: `edit INDEX read lord of the rings`
 Examples:
 * `list`<br>
 * `edit 2`<br>
-Edits the 2nd task in Taskell to ìread lord of the ringsî. 
+Edits the 2nd task in Taskell to ‚Äúread lord of the rings‚Äù. 
 
 #### Clearing all entries : `clear`
-Clear all entries in Taskell.<br>
+Clears all entries in Taskell.<br>
 Format: `clear`  
 
 #### Exiting the program : `exit`
