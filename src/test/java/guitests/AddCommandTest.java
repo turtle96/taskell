@@ -3,10 +3,10 @@ package guitests;
 import guitests.guihandles.PersonCardHandle;
 import org.junit.Test;
 
-import seedu.address.testutil.TestPerson;
-import seedu.address.testutil.TestUtil;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.testutil.TestPerson;
+import seedu.taskell.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
 

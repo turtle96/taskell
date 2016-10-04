@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.taskell.storage;
 
 
 import org.junit.Before;
@@ -6,7 +6,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.testutil.TypicalTestPersons;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskell.model.ReadOnlyTaskManager;
@@ -16,7 +15,8 @@ import seedu.taskell.storage.JsonUserPrefsStorage;
 import seedu.taskell.storage.Storage;
 import seedu.taskell.storage.StorageManager;
 import seedu.taskell.storage.XmlTaskManagerStorage;
-import seedu.address.testutil.EventsCollector;
+import seedu.taskell.testutil.EventsCollector;
+import seedu.taskell.testutil.TypicalTestPersons;
 
 import java.io.IOException;
 

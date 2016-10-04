@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.taskell.testutil;
 
 import com.google.common.io.Files;
 import guitests.guihandles.PersonCardHandle;
@@ -12,7 +12,8 @@ import javafx.scene.input.KeyCombination;
 import junit.framework.AssertionFailedError;
 import org.loadui.testfx.GuiTest;
 import org.testfx.api.FxToolkit;
-import seedu.address.TestApp;
+
+import seedu.taskell.TestApp;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.commons.util.XmlUtil;

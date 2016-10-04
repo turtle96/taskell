@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.taskell.storage;
 
 
 import org.junit.Rule;
@@ -6,13 +6,13 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.testutil.TypicalTestPersons;
 import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.person.Person;
 import seedu.taskell.storage.XmlTaskManagerStorage;
+import seedu.taskell.testutil.TypicalTestPersons;
 
 import java.io.IOException;
 
