@@ -13,14 +13,14 @@ import junit.framework.AssertionFailedError;
 import org.loadui.testfx.GuiTest;
 import org.testfx.api.FxToolkit;
 import seedu.address.TestApp;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.FileUtil;
-import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.*;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.commons.util.FileUtil;
+import seedu.taskell.commons.util.XmlUtil;
+import seedu.taskell.model.TaskManager;
+import seedu.taskell.model.person.*;
+import seedu.taskell.model.tag.Tag;
+import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.storage.XmlSerializableTaskManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -117,7 +117,7 @@ public class TestUtil {
     }
 
     public static void createDataFileWithSampleData(String filePath) {
-        createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+        createDataFileWithData(generateSampleStorageTaskManager(), filePath);
     }
 
     public static <T> void createDataFileWithData(T data, String filePath) {
@@ -134,12 +134,12 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static AddressBook generateEmptyAddressBook() {
-        return new AddressBook(new UniquePersonList(), new UniqueTagList());
+    public static TaskManager generateEmptyTaskManager() {
+        return new TaskManager(new UniquePersonList(), new UniqueTagList());
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(generateEmptyAddressBook());
+    public static XmlSerializableTaskManager generateSampleStorageTaskManager() {
+        return new XmlSerializableTaskManager(generateEmptyTaskManager());
     }
 
     /**

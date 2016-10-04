@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.person.*;
+import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.model.person.*;
+import seedu.taskell.model.tag.Tag;
 
 /**
  *

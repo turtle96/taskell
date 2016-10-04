@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.person.*;
+import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.model.TaskManager;
+import seedu.taskell.model.person.*;
 
 /**
  *
@@ -34,7 +34,7 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadTaskManagerWithSampleData(TaskManager ab) {
 
         try {
             ab.addPerson(new Person(alice));
@@ -53,9 +53,9 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook(){
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
+    public TaskManager getTypicalTaskManager(){
+        TaskManager ab = new TaskManager();
+        loadTaskManagerWithSampleData(ab);
         return ab;
     }
 }
