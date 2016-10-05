@@ -10,9 +10,9 @@ import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.TaskManager;
-import seedu.taskell.model.person.Person;
+import seedu.taskell.model.task.Task;
 import seedu.taskell.storage.XmlTaskManagerStorage;
-import seedu.taskell.testutil.TypicalTestPersons;
+import seedu.taskell.testutil.TypicalTestTasks;
 
 import java.io.IOException;
 
@@ -63,7 +63,7 @@ public class XmlTaskManagerStorageTest {
     @Test
     public void readAndSaveTaskManager_allInOrder_success() throws Exception {
         String filePath = testFolder.getRoot().getPath() + "TempTaskManager.xml";
-        TypicalTestPersons td = new TypicalTestPersons();
+        TypicalTestTasks td = new TypicalTestTasks();
         TaskManager original = td.getTypicalTaskManager();
         XmlTaskManagerStorage xmlTaskManagerStorage = new XmlTaskManagerStorage(filePath);
 
@@ -73,14 +73,14 @@ public class XmlTaskManagerStorageTest {
         assertEquals(original, new TaskManager(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addPerson(new Person(TypicalTestPersons.hoon));
-        original.removePerson(new Person(TypicalTestPersons.alice));
+        original.addTask(new Task(TypicalTestTasks.hoon));
+        original.removeTask(new Task(TypicalTestTasks.alice));
         xmlTaskManagerStorage.saveTaskManager(original, filePath);
         readBack = xmlTaskManagerStorage.readTaskManager(filePath).get();
         assertEquals(original, new TaskManager(readBack));
 
         //Save and read without specifying file path
-        original.addPerson(new Person(TypicalTestPersons.ida));
+        original.addTask(new Task(TypicalTestTasks.ida));
         xmlTaskManagerStorage.saveTaskManager(original); //file path not specified
         readBack = xmlTaskManagerStorage.readTaskManager().get(); //file path not specified
         assertEquals(original, new TaskManager(readBack));
