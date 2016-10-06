@@ -6,10 +6,10 @@ import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.util.StringUtil;
-import seedu.taskell.model.person.Person;
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
-import seedu.taskell.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.taskell.model.task.Task;
+import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.UniqueTaskList;
+import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
 import java.util.logging.Logger;
@@ -22,7 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given TaskManager
@@ -36,7 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
         logger.fine("Initializing with task manager: " + src + " and user prefs " + userPrefs);
 
         taskManager = new TaskManager(src);
-        filteredPersons = new FilteredList<>(taskManager.getPersons());
+        filteredTasks = new FilteredList<>(taskManager.getTasks());
     }
 
     public ModelManager() {
@@ -45,7 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyTaskManager initialData, UserPrefs userPrefs) {
         taskManager = new TaskManager(initialData);
-        filteredPersons = new FilteredList<>(taskManager.getPersons());
+        filteredTasks = new FilteredList<>(taskManager.getTasks());
     }
 
     @Override
@@ -65,43 +65,43 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void deletePerson(ReadOnlyPerson target) throws PersonNotFoundException {
-        taskManager.removePerson(target);
+    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+        taskManager.removeTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        taskManager.addPerson(person);
+    public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
+        taskManager.addTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
 
-    //=========== Filtered Person List Accessors ===============================================================
+    //=========== Filtered Task List Accessors ===============================================================
 
     @Override
-    public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {
-        return new UnmodifiableObservableList<>(filteredPersons);
+    public UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList() {
+        return new UnmodifiableObservableList<>(filteredTasks);
     }
 
     @Override
     public void updateFilteredListToShowAll() {
-        filteredPersons.setPredicate(null);
+        filteredTasks.setPredicate(null);
     }
 
     @Override
-    public void updateFilteredPersonList(Set<String> keywords){
-        updateFilteredPersonList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTaskList(Set<String> keywords){
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    private void updateFilteredPersonList(Expression expression) {
-        filteredPersons.setPredicate(expression::satisfies);
+    private void updateFilteredTaskList(Expression expression) {
+        filteredTasks.setPredicate(expression::satisfies);
     }
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
     interface Expression {
-        boolean satisfies(ReadOnlyPerson person);
+        boolean satisfies(ReadOnlyTask task);
         String toString();
     }
 
@@ -114,8 +114,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean satisfies(ReadOnlyPerson person) {
-            return qualifier.run(person);
+        public boolean satisfies(ReadOnlyTask task) {
+            return qualifier.run(task);
         }
 
         @Override
@@ -125,7 +125,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     interface Qualifier {
-        boolean run(ReadOnlyPerson person);
+        boolean run(ReadOnlyTask task);
         String toString();
     }
 
@@ -137,9 +137,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         @Override
-        public boolean run(ReadOnlyPerson person) {
+        public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
                     .findAny()
                     .isPresent();
         }

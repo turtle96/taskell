@@ -5,8 +5,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.ReadOnlyTaskManager;
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
+import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 
@@ -22,12 +22,12 @@ import java.util.stream.Collectors;
 public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @XmlElement
-    private List<XmlAdaptedPerson> persons;
+    private List<XmlAdaptedTask> tasks;
     @XmlElement
     private List<Tag> tags;
 
     {
-        persons = new ArrayList<>();
+        tasks = new ArrayList<>();
         tags = new ArrayList<>();
     }
 
@@ -40,7 +40,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
      * Conversion
      */
     public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
-        persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags = src.getTagList();
     }
 
@@ -56,9 +56,9 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public UniquePersonList getUniquePersonList() {
-        UniquePersonList lists = new UniquePersonList();
-        for (XmlAdaptedPerson p : persons) {
+    public UniqueTaskList getUniqueTaskList() {
+        UniqueTaskList lists = new UniqueTaskList();
+        for (XmlAdaptedTask p : tasks) {
             try {
                 lists.add(p.toModelType());
             } catch (IllegalValueException e) {
@@ -69,8 +69,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public List<ReadOnlyPerson> getPersonList() {
-        return persons.stream().map(p -> {
+    public List<ReadOnlyTask> getTaskList() {
+        return tasks.stream().map(p -> {
             try {
                 return p.toModelType();
             } catch (IllegalValueException e) {
