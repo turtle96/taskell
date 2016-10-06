@@ -16,7 +16,7 @@ Step 3: Copy the file to the folder you want to use as the home folder for your 
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
  <img src="images/GUI.png" width="600"><br>
 Picture 1: A screenshot of the Graphical User Interface (GUI)<br>
-Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
+<br>Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
    * **`list`** : `lists` all contacts
    * **`add`**` buy MA1101R textbook today` : ` adds` a task called buy MA1101R textbook to be done `by` today.
@@ -81,7 +81,8 @@ To view tasks with similar keyword, use the find command.<br>
 Formats: <br>
 -`find KEYWORD [MORE_KEYWORDS]`<br>
 Prints a list of activities that match the keywords.<br>
-Example: `find banana milk essay: returns any task description having keywords banana, milk, essay.` <br>
+> Example: `find banana milk essay:` returns any task description having keywords banana, milk, essay. <br>
+
 -`find-tag KEYWORD `<br>
 Prints list of activities with the same tag.<br>
  <img src="images/findReport.png" width="600">
@@ -115,7 +116,7 @@ Example:
 To edit a task, use the edit command. This command edits the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `edit INDEX NEWTASK`<br>
  <img src="images/editCmd.png" width="600"> <br>
-Picture 6: edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to “schedule meeting on wednesday”.
+Picture 6: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
 
 #### Saving the information in Taskell
 Specify the path of a new folder to store the data file of Taskell. The user should have permissions to access the folder.<br>
