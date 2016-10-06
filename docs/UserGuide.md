@@ -91,7 +91,8 @@ Prints list of activities with the same tag.<br>
 
 Picture 3 and 4: Keying in “find report” displays list of tasks with report as one of the keywords in task description
 
-> * Take Note! The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
+> Take Note! <br>
+> * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
 > * Full words will be matched e.g. `chicken` will match `chickens`.
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `chicken` will match `chicken duck`
@@ -107,7 +108,7 @@ Format: `delete INDEX`<br>
  <br><img src="images/delete1Result.png" width="600"></br>
 Picture 5: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
-Example: `find violin, then delete 1
+Example: `find violin, then delete 1<br>
 This deletes the 1st task in the results of the find command.
 
 > Take Note! This action can be reversed via undo, only if no new commands are entered 
