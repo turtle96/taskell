@@ -118,7 +118,7 @@ This deletes the 1st task in the results of the find command.
 To edit a task, use the edit command. This command edits the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `edit INDEX NEWTASK`<br>
  <br> <img src="images/editCmd.png" width="600"> </br>
-Picture 6: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
+Picture 7: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
 
 #### Saving the information in Taskell
 
