@@ -11,7 +11,7 @@ Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Compu
    This application will not work with earlier versions of Java 8.
    
 Step 2: Download the latest `taskell.jar` from here.<br>
-	 <img src="images/Icon.png" width="100"><br>
+	<br> <img src="images/Icon.png" width="100"></br>
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
  <br><img src="images/GUI.png" width="600"><br>
@@ -81,7 +81,8 @@ To view tasks with similar keyword, use the find command.<br>
 Formats: <br>
 -`find KEYWORD [MORE_KEYWORDS]`<br>
 Prints a list of activities that match the keywords.<br>
-Example: `find banana milk essay:` returns any task description having keywords banana, milk, essay. <br>
+Example: `find banana milk essay:`<br>
+This returns any task description having keywords banana, milk, essay. <br>
 
 -`find-tag KEYWORD `<br>
 Prints list of activities with the same tag.<br>
@@ -106,7 +107,8 @@ Format: `delete INDEX`<br>
  <br><img src="images/delete1Result.png" width="600"></br>
 Picture 5: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
-Example: `find violin, then delete 1: deletes `the 1st task in the results of the find command.
+Example: `find violin, then delete 1
+This deletes the 1st task in the results of the find command.
 
 > Take Note! This action can be reversed via undo, only if no new commands are entered 
 > after deleting.
