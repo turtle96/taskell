@@ -81,7 +81,7 @@ To view tasks with similar keyword, use the find command.<br>
 Formats: <br>
 -`find KEYWORD [MORE_KEYWORDS]`<br>
 Prints a list of activities that match the keywords.<br>
-> Example: `find banana milk essay:` returns any task description having keywords banana, milk, essay. <br>
+Example: `find banana milk essay:` returns any task description having keywords banana, milk, essay. <br>
 
 -`find-tag KEYWORD `<br>
 Prints list of activities with the same tag.<br>
@@ -121,7 +121,7 @@ Picture 6: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell 
 
 Specify the path of a new folder to store the data file of Taskell. The user should have permissions to access the folder.<br>
 Format: `save /FOLDERPATH`<br>
-> Example: `save /Jim/Documents`
+Example: `save /Jim/Documents`
 
 #### Clearing all entries : `clear`
 To clear all tasks, <kbd>Enter</kbd> clear.<br>
