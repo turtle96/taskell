@@ -61,5 +61,16 @@ public interface ReadOnlyPerson {
             return buffer.substring(0, buffer.length() - separator.length());
         }
     }
+    
+    default String tagsSimpleString() {
+        final StringBuffer buffer = new StringBuffer();
+        final String separator = " ";
+        getTags().forEach(tag -> buffer.append(tag.toSimpleString()).append(separator));
+        if (buffer.length() == 0) {
+            return "";
+        } else {
+            return buffer.substring(0, buffer.length() - separator.length());
+        }
+    }
 
 }
