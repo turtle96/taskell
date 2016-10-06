@@ -16,7 +16,7 @@ Step 3: Copy the file to the folder you want to use as the home folder for your 
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
  <img src="images/GUI.png" width="600"><br>
 Picture 1: A screenshot of the Graphical User Interface (GUI)<br>
-Step 5:	Type the relevant command in the command box and press enter to execute it.<br>
+Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 <br>Step 6: Some example commands you can try:<br>
    * **`list`** : `lists` all contacts
    * **`add`**` buy MA1101R textbook today` : ` adds` a task called buy MA1101R textbook to be done `by` today.
@@ -34,7 +34,7 @@ Refer to the [Features](#features) section below for details of each command.<br
 
 #### Viewing list of commands : `help`
 
-When unsure of the available commands or command format, Enter help. 
+When unsure of the available commands or command format, <kbd>Enter</kbd> help. 
 If you enter an incorrect command eg. search, the instruction for using each command will be displayed as well.<br>
  
  Format: `help`
@@ -59,10 +59,12 @@ The use of word “on” gives more flexibility for you.<br>
 - `add TASK ITEM on [DATE][TIME]` <br>
 > Example: `add meet teacher on Friday 7pm` <br>
 
-Take Note! Dates need to refer to the current week dates the task was keyed in. Eg. "tomorrow" and "thursday" is valid but "next Saturday" is invalid. Only the words "on" or "by" has to be used to distinguish between dateline and task description.<br>
+> Take Note! Dates need to refer to the current week dates the task was keyed in. Eg. 
+> "tomorrow" and "thursday" is valid but "next Saturday" is invalid. Only the words "on"
+> or "by" has to be used to distinguish between dateline and task description.<br>
 
 #### Listing all tasks : `list`
-To view a list of all the tasks, <kbd>Enter<kbd> list.<br>
+To view a list of all the tasks, <kbd>Enter<./kbd> list.<br>
 <br>
 Formats: 
 - `list` <br>
