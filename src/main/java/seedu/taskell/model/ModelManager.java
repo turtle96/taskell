@@ -12,6 +12,7 @@ import seedu.taskell.model.person.UniquePersonList;
 import seedu.taskell.model.person.UniquePersonList.PersonNotFoundException;
 
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -138,8 +139,10 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyPerson person) {
+            String stringToCheck = person.getName().fullName + " " + person.tagsSimpleString();
+
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(person.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsIgnoreCase(stringToCheck, keyword))
                     .findAny()
                     .isPresent();
         }
