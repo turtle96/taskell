@@ -19,9 +19,9 @@ Picture 1: A screenshot of the Graphical User Interface (GUI)<br>
 <br>Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
    * **`list`** : `lists` all contacts
-   * **`add`**` buy MA1101R textbook today` : ` adds` a task called buy MA1101R textbook to be done `by` today.
-   * **`delete`**` 3` : `deletes` the 3rd task shown in the current list
-   * **`exit`** : `exits` the application <br>
+   * **`add`**` buy MA1101R textbook today` : adds a task called buy MA1101R textbook to be done by today.
+   * **`delete`**` 3` : deletes the 3rd task shown in the current list
+   * **`exit`** : exits the application <br>
 Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -35,7 +35,7 @@ Refer to the [Features](#features) section below for details of each command.<br
 #### Viewing list of commands : `help`
 
 When unsure of the available commands or command format, <kbd>Enter</kbd> help. 
-If you enter an incorrect command eg. search, the instruction for using each command will be displayed as well.<br>
+If you enter an incorrect command, eg. search, the instruction for using each command will be displayed as well.<br>
  
  Format: `help`
  
@@ -104,10 +104,9 @@ To delete a task, use the delete command. This command deletes the task at a spe
 Format: `delete INDEX`<br>
  <img src="images/delete1.png" width="600">
  <img src="images/delete1Result.png" width="600"><br>
-Picture 5: Entering `delete 1 will delete "Arrange meeting with XYZ company"`<br>
+Picture 5: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
-Example:
-* `find violin, then delete 1: deletes `the 1st task in the results of the find command.
+Example: `find violin, then delete 1: deletes `the 1st task in the results of the find command.
 
 > Take Note! This action can be reversed via undo, only if no new commands are entered 
 > after deleting.
@@ -131,6 +130,7 @@ Format: `exit`
 
 >  Done already? So where are all these information saved? No need to worry, Taskell will 
 >  have them saved it for you!
+<br>
 
 ## FAQ
 
