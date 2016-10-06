@@ -62,6 +62,11 @@ public interface ReadOnlyPerson {
         }
     }
     
+    /**
+     * 
+     * @return an unformatted string representation of this Person's tags
+     *          each tag is separated from the other by a whitespace
+     */
     default String tagsSimpleString() {
         final StringBuffer buffer = new StringBuffer();
         final String separator = " ";
