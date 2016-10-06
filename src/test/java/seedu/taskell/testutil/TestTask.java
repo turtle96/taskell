@@ -9,7 +9,6 @@ import seedu.taskell.model.tag.UniqueTagList;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
@@ -20,10 +19,6 @@ public class TestTask implements ReadOnlyTask {
 
     public void setName(Name name) {
         this.name = name;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public void setEmail(Email email) {
@@ -50,11 +45,6 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
-    }
-
-    @Override
     public UniqueTagList getTags() {
         return tags;
     }
@@ -69,7 +59,6 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getName().fullName + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
-        sb.append("a/" + this.getAddress().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
