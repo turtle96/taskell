@@ -17,7 +17,7 @@ Step 4: Double-click the file to start the application. The GUI should appear in
  <img src="images/GUI.png" width="600"><br>
 Picture 1: A screenshot of the Graphical User Interface (GUI)<br>
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-<br>Step 6: Some example commands you can try:<br>
+Step 6: Some example commands you can try:<br>
    * **`list`** : `lists` all contacts
    * **`add`**` buy MA1101R textbook today` : ` adds` a task called buy MA1101R textbook to be done `by` today.
    * **`delete`**` 3` : `deletes` the 3rd task shown in the current list
@@ -64,7 +64,7 @@ The use of word “on” gives more flexibility for you.<br>
 > or "by" has to be used to distinguish between dateline and task description.<br>
 
 #### Listing all tasks : `list`
-To view a list of all the tasks, <kbd>Enter<./kbd> list.<br>
+To view a list of all the tasks, <kbd>Enter</kbd> list.<br>
 <br>
 Formats: 
 - `list` <br>
@@ -73,7 +73,7 @@ Prints a list of all the uncompleted tasks.<br>
 Prints a list of all the completed tasks.<br>
 - `list DONE` <br>
 Prints a list of all the tasks due on the specific date.<br>
-    <img src="images/ListToday.png" width="600"><br>
+img src="images/ListToday.png" width="600"><br>
 Picture 2: List of tasks due today printed when “List today” is keyed in.
    
 #### Finding tasks: `find`
@@ -103,9 +103,10 @@ To delete a task, use the delete command. This command deletes the task at a spe
 Format: `delete INDEX`<br>
  <img src="images/delete1.png" width="600">
  <img src="images/delete1Result.png" width="600"><br>
-Picture 5: Entering delete 1 will delete “Arrange meeting with XYZ company”<br>
+Picture 5: Entering `delete 1 will delete "Arrange meeting with XYZ company"`<br>
+
 Example:
-* `find violin, then delete 1: deletes the 1st task in the results of the find command.`
+* `find violin, then delete 1: deletes `the 1st task in the results of the find command.
 
 > Take Note! This action can be reversed via undo, only if no new commands are entered 
 > after deleting.
