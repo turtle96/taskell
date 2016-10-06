@@ -14,7 +14,7 @@ Step 2: Download the latest `taskell.jar` from here.<br>
 	 <img src="images/Icon.png" width="100"><br>
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
- <img src="images/GUI.png" width="600"><br>
+ <br><img src="images/GUI.png" width="600"><br>
 Picture 1: A screenshot of the Graphical User Interface (GUI)<br>
 <br>Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
@@ -73,7 +73,8 @@ Prints a list of all the uncompleted tasks.<br>
 Prints a list of all the completed tasks.<br>
 - `list DONE` <br>
 Prints a list of all the tasks due on the specific date.<br>
-img src="images/ListToday.png" width="600"><br>
+<br>
+<img src="images/ListToday.png" width="600"><br>
 Picture 2: List of tasks due today printed when “List today” is keyed in.
    
 #### Finding tasks: `find`
@@ -85,8 +86,8 @@ Prints a list of activities that match the keywords.<br>
 
 -`find-tag KEYWORD `<br>
 Prints list of activities with the same tag.<br>
- <img src="images/findReport.png" width="600">
- <img src="images/findReportResult.png" width="600"><br>
+ <br><img src="images/findReport.png" width="600"></br>
+ <br><img src="images/findReportResult.png" width="600"></br>
 
 Picture 3 and 4: Keying in “find report” displays list of tasks with report as one of the keywords in task description
 
@@ -102,8 +103,8 @@ Format: `undo`
 #### Deleting a task : `delete`
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
- <img src="images/delete1.png" width="600">
- <img src="images/delete1Result.png" width="600"><br>
+ <br><img src="images/delete1.png" width="600"></br>
+ <br><img src="images/delete1Result.png" width="600"></br>
 Picture 5: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
 Example: `find violin, then delete 1: deletes `the 1st task in the results of the find command.
@@ -114,11 +115,14 @@ Example: `find violin, then delete 1: deletes `the 1st task in the results of th
 #### Editing a task : `edit`
 To edit a task, use the edit command. This command edits the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `edit INDEX NEWTASK`<br>
- <img src="images/editCmd.png" width="600"> <br>
+ <br> <img src="images/editCmd.png" width="600"> </br>
 Picture 6: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
 
 #### Saving the information in Taskell
+
 Specify the path of a new folder to store the data file of Taskell. The user should have permissions to access the folder.<br>
+Format: `save /FOLDERPATH`<br>
+> Example: `save /Jim/Documents`
 
 #### Clearing all entries : `clear`
 To clear all tasks, <kbd>Enter</kbd> clear.<br>
@@ -141,14 +145,14 @@ Format: `exit`
 
 Command | Format  
 -------- | :-------- 
-Add floating task | `add TASK ITEM `
-Add event | `add TASK ITEM by [DATE]`
-Add event | `add TASK ITEM by [TIME]`
-Add event with deadline | `add TASK ITEM by [DATE][TIME]`
+Add Floating Task | `add TASK ITEM `
+Add Event | `add TASK ITEM by [DATE]`
+Add Event | `add TASK ITEM by [TIME]`
+Add Event With Deadline | `add TASK ITEM by [DATE][TIME]`
 Clear | `clear`
 Delete | `delete INDEX`
 Find | `find KEYWORD [MORE_KEYWORDS]`
-Find tag | `find-tag KEYWORD`
+Find Tag | `find-tag KEYWORD`
 List | `list`
 List Given Day | `list [DATE]`
 List Tasks Done | `list [DONE]`
