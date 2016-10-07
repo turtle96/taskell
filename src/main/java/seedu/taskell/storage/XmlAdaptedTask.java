@@ -16,7 +16,7 @@ import java.util.List;
 public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String description;
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
@@ -39,7 +39,7 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-        name = source.getName().fullName;
+        description = source.getDescription().description;
         phone = source.getPhone().value;
         email = source.getEmail().value;
         address = source.getAddress().value;
@@ -59,11 +59,11 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        final Name name = new Name(this.name);
+        final Description description= new Description(this.description);
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(name, phone, email, address, tags);
+        return new Task(description, phone, email, address, tags);
     }
 }

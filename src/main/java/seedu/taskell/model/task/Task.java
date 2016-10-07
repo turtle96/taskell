@@ -11,7 +11,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
+    private Description description;
     private Phone phone;
     private Email email;
     private Address address;
@@ -21,9 +21,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
-        this.name = name;
+    public Task(Description description, Phone phone, Email email, Address address, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, phone, email, address, tags);
+        this.description= description;
         this.phone = phone;
         this.email = email;
         this.address = address;
@@ -34,12 +34,12 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getDescription(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Description getDescription() {
+        return description;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(description, phone, email, address, tags);
     }
 
     @Override

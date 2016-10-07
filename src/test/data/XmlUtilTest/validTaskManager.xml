@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
-        <name>Hans Muster</name>
+        <description>Hans Muster</description>
         <phone isPrivate="false">9482424</phone>
         <email isPrivate="false">hans@google.com</email>
         <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
-        <name>Ruth Mueller</name>
+        <description>Ruth Mueller</description>
         <phone isPrivate="false">87249245</phone>
         <email isPrivate="false">ruth@google.com</email>
         <address isPrivate="false">81th street</address>
     </tasks>
     <tasks>
-        <name>Heinz Kurz</name>
+        <description>Heinz Kurz</description>
         <phone isPrivate="false">95352563</phone>
         <email isPrivate="false">heinz@yahoo.com</email>
         <address isPrivate="false">wall street</address>
     </tasks>
     <tasks>
-        <name>Cornelia Meier</name>
+        <description>Cornelia Meier</description>
         <phone isPrivate="false">87652533</phone>
         <email isPrivate="false">cornelia@google.com</email>
         <address isPrivate="false">10th street</address>
     </tasks>
     <tasks>
-        <name>Werner Meyer</name>
+        <description>Werner Meyer</description>
         <phone isPrivate="false">9482224</phone>
         <email isPrivate="false">werner@gmail.com</email>
         <address isPrivate="false">michegan ave</address>
     </tasks>
     <tasks>
-        <name>Lydia Kunz</name>
+        <description>Lydia Kunz</description>
         <phone isPrivate="false">9482427</phone>
         <email isPrivate="false">lydia@gmail.com</email>
         <address isPrivate="false">little tokyo</address>
     </tasks>
     <tasks>
-        <name>Anna Best</name>
+        <description>Anna Best</description>
         <phone isPrivate="false">9482442</phone>
         <email isPrivate="false">anna@google.com</email>
         <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
-        <name>Stefan Meier</name>
+        <description>Stefan Meier</description>
         <phone isPrivate="false">8482424</phone>
         <email isPrivate="false">stefan@mail.com</email>
         <address isPrivate="false">little india</address>
     </tasks>
     <tasks>
-        <name>Martin Mueller</name>
+        <description>Martin Mueller</description>
         <phone isPrivate="false">8482131</phone>
         <email isPrivate="false">hans@google.com</email>
         <address isPrivate="false">chicago ave</address>
