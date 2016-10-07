@@ -123,6 +123,7 @@
 
 .result-display {
     -fx-background-color: #ffffff;
+    -fx-font-size: 18px;
 }
 
 .result-display .label {
