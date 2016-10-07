@@ -37,11 +37,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task){
-<<<<<<< HEAD
-        return getDescription().equals(task.getDescription().description) && getPhone().equals(task.getPhone().value)
-=======
-        return getFullName().equals(task.getName().fullName)
->>>>>>> remove-phone-from-task
+        return getDescription().equals(task.getDescription().description)
                 && getEmail().equals(task.getEmail().value) && getAddress().equals(task.getAddress().value);
     }
 

@@ -11,12 +11,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-<<<<<<< HEAD
     private Description description;
-    private Phone phone;
-=======
-    private Name name;
->>>>>>> remove-phone-from-task
     private Email email;
     private Address address;
 
@@ -25,16 +20,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-<<<<<<< HEAD
-    public Task(Description description, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, phone, email, address, tags);
+    public Task(Description description, Email email, Address address, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, email, address, tags);
         this.description= description;
-        this.phone = phone;
-=======
-    public Task(Name name, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, email, address, tags);
-        this.name = name;
->>>>>>> remove-phone-from-task
         this.email = email;
         this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -44,11 +32,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-<<<<<<< HEAD
-        this(source.getDescription(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
-=======
-        this(source.getName(), source.getEmail(), source.getAddress(), source.getTags());
->>>>>>> remove-phone-from-task
+        this(source.getDescription(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
     @Override
@@ -88,11 +72,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-<<<<<<< HEAD
-        return Objects.hash(description, phone, email, address, tags);
-=======
-        return Objects.hash(name, email, address, tags);
->>>>>>> remove-phone-from-task
+        return Objects.hash(description, email, address, tags);
     }
 
     @Override

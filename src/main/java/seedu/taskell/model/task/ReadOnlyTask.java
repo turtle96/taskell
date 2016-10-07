@@ -8,12 +8,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-<<<<<<< HEAD
     Description getDescription();
-    Phone getPhone();
-=======
-    Name getName();
->>>>>>> remove-phone-from-task
     Email getEmail();
     Address getAddress();
 
@@ -29,12 +24,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-<<<<<<< HEAD
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-=======
-                && other.getName().equals(this.getName()) // state checks here onwards
->>>>>>> remove-phone-from-task
                 && other.getEmail().equals(this.getEmail())
                 && other.getAddress().equals(this.getAddress()));
     }
@@ -44,13 +34,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-<<<<<<< HEAD
         builder.append(getDescription())
-                .append(" Phone: ")
-                .append(getPhone())
-=======
-        builder.append(getName())
->>>>>>> remove-phone-from-task
                 .append(" Email: ")
                 .append(getEmail())
                 .append(" Address: ")
