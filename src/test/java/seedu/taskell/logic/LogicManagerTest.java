@@ -156,17 +156,34 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
+<<<<<<< HEAD
                 "add Valid Description valid@email.butNoPrefix", expectedMessage);
+=======
+                "add Valid Name 12345.butNoPhonePrefix a/valid, address", expectedMessage);
+        
+        assertCommandBehavior(
+                "add Valid Name p/12345.butNoAddressPrefix valid, address", expectedMessage);
+>>>>>>> remove-email-from-task
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
+<<<<<<< HEAD
                 "add []\\[;] e/valid@e.mail", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description e/notAnEmail", Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description e/valid@e.mail t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+=======
+                "add []\\[;] p/12345 a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Name p/not_numbers a/valid, address", Phone.MESSAGE_PHONE_CONSTRAINTS);
+        
+        assertCommandBehavior(
+                "add Valid Name p/12345 a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+
+>>>>>>> remove-email-from-task
     }
 
     @Test
@@ -380,12 +397,23 @@ public class LogicManagerTest {
     class TestDataHelper{
 
         Task adam() throws Exception {
+<<<<<<< HEAD
             Description description= new Description("Adam Brown");
             Email email = new Email("adam@gmail.com");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Task(description, email, tags);
+=======
+            Name name = new Name("Adam Brown");
+            Phone privatePhone = new Phone("111111");
+            
+            Address privateAddress = new Address("111, alpha street");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("tag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(name, privatePhone, privateAddress, tags);
+>>>>>>> remove-email-from-task
         }
 
         /**
@@ -397,8 +425,15 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
+<<<<<<< HEAD
                     new Description("Task " + seed),
                     new Email(seed + "@email"),
+=======
+                    new Name("Task " + seed),
+                    new Phone("" + Math.abs(seed)),
+                    
+                    new Address("House of " + seed),
+>>>>>>> remove-email-from-task
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -409,8 +444,15 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
+<<<<<<< HEAD
             cmd.append(p.getDescription().toString());
             cmd.append(" e/").append(p.getEmail());
+=======
+            cmd.append(p.getName().toString());
+            cmd.append(" p/").append(p.getPhone());
+            
+            cmd.append(" a/").append(p.getAddress());
+>>>>>>> remove-email-from-task
 
             UniqueTagList tags = p.getTags();
             for(Tag t: tags){
@@ -492,8 +534,15 @@ public class LogicManagerTest {
          */
         Task generateTaskWithDescription(String description) throws Exception {
             return new Task(
+<<<<<<< HEAD
                     new Description(description),
                     new Email("1@email"),
+=======
+                    new Name(name),
+                    new Phone("1"),
+                   
+                    new Address("House of 1"),
+>>>>>>> remove-email-from-task
                     new UniqueTagList(new Tag("tag"))
             );
         }

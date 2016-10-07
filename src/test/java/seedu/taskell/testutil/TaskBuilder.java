@@ -27,10 +27,24 @@ public class TaskBuilder {
         return this;
     }
 
+<<<<<<< HEAD
     public TaskBuilder withEmail(String email) throws IllegalValueException {
         this.task.setEmail(new Email(email));
         return this;
     }
+=======
+    public TaskBuilder withAddress(String address) throws IllegalValueException {
+        this.task.setAddress(new Address(address));
+        return this;
+    }
+
+    public TaskBuilder withPhone(String phone) throws IllegalValueException {
+        this.task.setPhone(new Phone(phone));
+        return this;
+    }
+
+    
+>>>>>>> remove-email-from-task
 
     public TestTask build() {
         return this.task;

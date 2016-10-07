@@ -13,6 +13,7 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
+<<<<<<< HEAD
             alice =  new TaskBuilder().withDescription("Archive past emails")
                     .withEmail("alice@gmail.com")
                     .withTags("friends").build();
@@ -28,6 +29,23 @@ public class TypicalTestTasks {
             //Manually added
             hoon = new TaskBuilder().withDescription("Hold meeting").withEmail("stefan@mail.com").build();
             ida = new TaskBuilder().withDescription("Inspect warehouse").withEmail("hans@google.com").build();
+=======
+            alice =  new TaskBuilder().withName("Alice Pauline").withAddress("123, Jurong West Ave 6, #08-111")
+                    .withPhone("85355255")
+                    .withTags("friends").build();
+            benson = new TaskBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
+                    .withPhone("98765432")
+                    .withTags("owesMoney", "friends").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withPhone("95352563").withAddress("wall street").build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withPhone("87652533").withAddress("10th street").build();
+            elle = new TaskBuilder().withName("Elle Meyer").withPhone("9482224").withAddress("michegan ave").build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").withPhone("9482427").withAddress("little tokyo").build();
+            george = new TaskBuilder().withName("George Best").withPhone("9482442").withAddress("4th street").build();
+
+            //Manually added
+            hoon = new TaskBuilder().withName("Hoon Meier").withPhone("8482424").withAddress("little india").build();
+            ida = new TaskBuilder().withName("Ida Mueller").withPhone("8482131").withAddress("chicago ave").build();
+>>>>>>> remove-email-from-task
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

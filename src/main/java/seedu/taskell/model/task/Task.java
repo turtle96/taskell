@@ -11,18 +11,34 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
+<<<<<<< HEAD
     private Description description;
     private Email email;
+=======
+    private Name name;
+    private Phone phone;
+    
+    private Address address;
+>>>>>>> remove-email-from-task
 
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
+<<<<<<< HEAD
     public Task(Description description, Email email, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, email, tags);
         this.description= description;
         this.email = email;
+=======
+    public Task(Name name, Phone phone, Address address, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, phone, address, tags);
+        this.name = name;
+        this.phone = phone;
+        
+        this.address = address;
+>>>>>>> remove-email-from-task
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -30,7 +46,11 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
+<<<<<<< HEAD
         this(source.getDescription(), source.getEmail(), source.getTags());
+=======
+        this(source.getName(), source.getPhone(), source.getAddress(), source.getTags());
+>>>>>>> remove-email-from-task
     }
 
     @Override
@@ -38,10 +58,7 @@ public class Task implements ReadOnlyTask {
         return description;
     }
 
-    @Override
-    public Email getEmail() {
-        return email;
-    }
+    
 
     @Override
     public UniqueTagList getTags() {
@@ -65,7 +82,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
+<<<<<<< HEAD
         return Objects.hash(description, email, tags);
+=======
+        return Objects.hash(name, phone, address, tags);
+>>>>>>> remove-email-from-task
     }
 
     @Override

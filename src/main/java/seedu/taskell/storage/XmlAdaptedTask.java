@@ -35,8 +35,15 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
+<<<<<<< HEAD
         description = source.getDescription().description;
         email = source.getEmail().value;
+=======
+        name = source.getName().fullName;
+        phone = source.getPhone().value;
+        
+        address = source.getAddress().value;
+>>>>>>> remove-email-from-task
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -53,9 +60,18 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+<<<<<<< HEAD
         final Description description= new Description(this.description);
         final Email email = new Email(this.email);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(description, email, tags);
+=======
+        final Name name = new Name(this.name);
+        final Phone phone = new Phone(this.phone);
+        
+        final Address address = new Address(this.address);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
+        return new Task(name, phone, address, tags);
+>>>>>>> remove-email-from-task
     }
 }

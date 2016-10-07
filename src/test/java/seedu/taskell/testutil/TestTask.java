@@ -8,8 +8,15 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class TestTask implements ReadOnlyTask {
 
+<<<<<<< HEAD
     private Description description;
     private Email email;
+=======
+    private Name name;
+    private Address address;
+    
+    private Phone phone;
+>>>>>>> remove-email-from-task
     private UniqueTagList tags;
 
     public TestTask() {
@@ -20,19 +27,14 @@ public class TestTask implements ReadOnlyTask {
         this.description= description;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
-    }
+    
 
     @Override
     public Description getDescription() {
         return description;
     }
 
-    @Override
-    public Email getEmail() {
-        return email;
-    }
+    
 
     @Override
     public UniqueTagList getTags() {
@@ -46,8 +48,15 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
+<<<<<<< HEAD
         sb.append("add " + this.getDescription().description+ " ");
         sb.append("e/" + this.getEmail().value + " ");
+=======
+        sb.append("add " + this.getName().fullName + " ");
+        sb.append("p/" + this.getPhone().value + " ");
+        
+        sb.append("a/" + this.getAddress().value + " ");
+>>>>>>> remove-email-from-task
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
