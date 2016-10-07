@@ -39,13 +39,6 @@ public class TaskCard extends UiPart{
     public void initialize() {
         description.setText(task.getDescription().description);
         id.setText(displayedIndex + ". ");
-<<<<<<< HEAD
-        email.setText(task.getEmail().value);
-=======
-        phone.setText(task.getPhone().value);
-        address.setText(task.getAddress().value);
-        
->>>>>>> remove-email-from-task
         tags.setText(task.tagsString());
     }
 

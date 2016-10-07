@@ -8,15 +8,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
 
-<<<<<<< HEAD
     Description getDescription();
-    Email getEmail();
-=======
-    Name getName();
-    Phone getPhone();
-    
-    Address getAddress();
->>>>>>> remove-email-from-task
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -30,15 +22,7 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-<<<<<<< HEAD
-                && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getEmail().equals(this.getEmail()));
-=======
-                && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-                
-                && other.getAddress().equals(this.getAddress()));
->>>>>>> remove-email-from-task
+                && other.getDescription().equals(this.getDescription())); // state checks here onwards
     }
 
     /**
@@ -46,18 +30,7 @@ public interface ReadOnlyTask {
      */
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
-<<<<<<< HEAD
         builder.append(getDescription())
-                .append(" Email: ")
-                .append(getEmail())
-=======
-        builder.append(getName())
-                .append(" Phone: ")
-                .append(getPhone())
-                
-                .append(" Address: ")
-                .append(getAddress())
->>>>>>> remove-email-from-task
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

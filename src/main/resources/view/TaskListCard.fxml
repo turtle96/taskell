@@ -31,13 +31,6 @@
                                 <Label fx:id="tags" styleClass="cell_small_label" text="\$tags" />
                             </children>
                         </HBox>
-<<<<<<< HEAD
-                        <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
-=======
-                        <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-                        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
-                        
->>>>>>> remove-email-from-task
                     </children>
                 </VBox>
             </children>
