@@ -10,7 +10,6 @@ public interface ReadOnlyTask {
 
     Description getDescription();
     Email getEmail();
-    Address getAddress();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -24,9 +23,15 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
+<<<<<<< HEAD
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getEmail().equals(this.getEmail())
                 && other.getAddress().equals(this.getAddress()));
+=======
+                && other.getName().equals(this.getName()) // state checks here onwards
+                && other.getPhone().equals(this.getPhone())
+                && other.getEmail().equals(this.getEmail()));
+>>>>>>> remove-address-from-task
     }
 
     /**
@@ -37,8 +42,6 @@ public interface ReadOnlyTask {
         builder.append(getDescription())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

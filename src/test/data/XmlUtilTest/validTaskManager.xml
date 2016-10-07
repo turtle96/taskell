@@ -3,46 +3,37 @@
     <tasks>
         <description>Hans Muster</description>
         <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
         <description>Ruth Mueller</description>
         <email isPrivate="false">ruth@google.com</email>
-        <address isPrivate="false">81th street</address>
     </tasks>
     <tasks>
         <description>Heinz Kurz</description>
         <email isPrivate="false">heinz@yahoo.com</email>
-        <address isPrivate="false">wall street</address>
     </tasks>
     <tasks>
         <description>Cornelia Meier</description>
         <email isPrivate="false">cornelia@google.com</email>
-        <address isPrivate="false">10th street</address>
     </tasks>
     <tasks>
         <description>Werner Meyer</description>
         <email isPrivate="false">werner@gmail.com</email>
-        <address isPrivate="false">michegan ave</address>
     </tasks>
     <tasks>
         <description>Lydia Kunz</description>
         <email isPrivate="false">lydia@gmail.com</email>
-        <address isPrivate="false">little tokyo</address>
     </tasks>
     <tasks>
         <description>Anna Best</description>
         <email isPrivate="false">anna@google.com</email>
-        <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
         <description>Stefan Meier</description>
         <email isPrivate="false">stefan@mail.com</email>
-        <address isPrivate="false">little india</address>
     </tasks>
     <tasks>
         <description>Martin Mueller</description>
         <email isPrivate="false">hans@google.com</email>
-        <address isPrivate="false">chicago ave</address>
     </tasks>
 </taskmanager>

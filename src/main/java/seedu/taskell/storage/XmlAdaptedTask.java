@@ -39,7 +39,6 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         email = source.getEmail().value;
-        address = source.getAddress().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -58,8 +57,11 @@ public class XmlAdaptedTask {
         }
         final Description description= new Description(this.description);
         final Email email = new Email(this.email);
-        final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(taskTags);
+<<<<<<< HEAD
         return new Task(description, email, address, tags);
+=======
+        return new Task(name, phone, email, tags);
+>>>>>>> remove-address-from-task
     }
 }
