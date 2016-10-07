@@ -9,23 +9,23 @@ import seedu.taskell.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
+    public static TestTask archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform, holdMeeting, inspectWarehouse;
 
     public TypicalTestTasks() {
         try {
-            alice =  new TaskBuilder().withDescription("Archive past emails")
-                    .withTags("friends").build();
-            benson = new TaskBuilder().withDescription("Borrow books")
-                    .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withDescription("Collect parcel").build();
-            daniel = new TaskBuilder().withDescription("Discard books").build();
-            elle = new TaskBuilder().withDescription("Edit powerpoint").build();
-            fiona = new TaskBuilder().withDescription("Fix bugs").build();
-            george = new TaskBuilder().withDescription("Get new uniform").build();
+            archivePastEmails =  new TaskBuilder().withDescription("Archive past emails")
+                    .withTags("personal").build();
+            borrowBooks = new TaskBuilder().withDescription("Borrow books")
+                    .withTags("academic", "personal").build();
+            collectParcel = new TaskBuilder().withDescription("Collect parcel").build();
+            discardBooks = new TaskBuilder().withDescription("Discard books").build();
+            editPowerpoint = new TaskBuilder().withDescription("Edit powerpoint").build();
+            fixbugs = new TaskBuilder().withDescription("Fix bugs").build();
+            getNewUniform= new TaskBuilder().withDescription("Get new uniform").build();
 
             //Manually added
-            hoon = new TaskBuilder().withDescription("Hold meeting").build();
-            ida = new TaskBuilder().withDescription("Inspect warehouse").build();
+            holdMeeting = new TaskBuilder().withDescription("Hold meeting").build();
+            inspectWarehouse = new TaskBuilder().withDescription("Inspect warehouse").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -35,20 +35,20 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
 
         try {
-            ab.addTask(new Task(alice));
-            ab.addTask(new Task(benson));
-            ab.addTask(new Task(carl));
-            ab.addTask(new Task(daniel));
-            ab.addTask(new Task(elle));
-            ab.addTask(new Task(fiona));
-            ab.addTask(new Task(george));
+            ab.addTask(new Task(archivePastEmails));
+            ab.addTask(new Task(borrowBooks));
+            ab.addTask(new Task(collectParcel));
+            ab.addTask(new Task(discardBooks));
+            ab.addTask(new Task(editPowerpoint));
+            ab.addTask(new Task(fixbugs));
+            ab.addTask(new Task(getNewUniform));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "not possible";
         }
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
+        return new TestTask[]{archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform};
     }
 
     public TaskManager getTypicalTaskManager(){
