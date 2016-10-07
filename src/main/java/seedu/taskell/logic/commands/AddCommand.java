@@ -16,15 +16,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-<<<<<<< HEAD
-            + "Parameters: Description e/EMAIL a/ADDRESS  [t/TAG]...\n"
+            + "Parameters: Description e/EMAIL [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Jogging with Peter e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
-=======
-            + "Parameters: NAME p/PHONE e/EMAIL  [t/TAG]...\n"
-            + "Example: " + COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, t/friends t/owesMoney";
->>>>>>> remove-address-from-task
+            + " Jogging with Peter e/johnd@gmail.com t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -36,11 +30,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-<<<<<<< HEAD
-    public AddCommand(String description, String email, String address, Set<String> tags)
-=======
-    public AddCommand(String name, String phone, String email, Set<String> tags)
->>>>>>> remove-address-from-task
+    public AddCommand(String description, String email, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {

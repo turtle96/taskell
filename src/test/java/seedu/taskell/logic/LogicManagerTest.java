@@ -156,33 +156,17 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
-<<<<<<< HEAD
-                "add Valid Description valid@email.butNoPrefix a/valid, address", expectedMessage);
-        assertCommandBehavior(
-                "add Valid Description e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
-=======
-                "add Valid Name 12345 e/valid@email.butNoPhonePrefix", expectedMessage);
-        assertCommandBehavior(
-                "add Valid Name p/12345 valid@email.butNoPrefix", expectedMessage);
->>>>>>> remove-address-from-task
+                "add Valid Description valid@email.butNoPrefix", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-<<<<<<< HEAD
-                "add []\\[;] e/valid@e.mail a/valid, address", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add []\\[;] e/valid@e.mail", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
+                "add Valid Description e/notAnEmail", Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
-=======
-                "add []\\[;] p/12345 e/valid@e.mail", Name.MESSAGE_NAME_CONSTRAINTS);
-        assertCommandBehavior(
-                "add Valid Name p/not_numbers e/valid@e.mail", Phone.MESSAGE_PHONE_CONSTRAINTS);
-        assertCommandBehavior(
-                "add Valid Name p/12345 e/notAnEmail", Email.MESSAGE_EMAIL_CONSTRAINTS);
->>>>>>> remove-address-from-task
+                "add Valid Description e/valid@e.mail t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
@@ -401,11 +385,7 @@ public class LogicManagerTest {
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-<<<<<<< HEAD
-            return new Task(description, email, privateAddress, tags);
-=======
-            return new Task(name, privatePhone, email, tags);
->>>>>>> remove-address-from-task
+            return new Task(description, email, tags);
         }
 
         /**

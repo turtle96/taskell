@@ -19,16 +19,9 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-<<<<<<< HEAD
-    public Task(Description description, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, email, address, tags);
+    public Task(Description description, Email email, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, email, tags);
         this.description= description;
-=======
-    public Task(Name name, Phone phone, Email email, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, tags);
-        this.name = name;
-        this.phone = phone;
->>>>>>> remove-address-from-task
         this.email = email;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -37,11 +30,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-<<<<<<< HEAD
-        this(source.getDescription(), source.getEmail(), source.getAddress(), source.getTags());
-=======
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getTags());
->>>>>>> remove-address-from-task
+        this(source.getDescription(), source.getEmail(), source.getTags());
     }
 
     @Override
@@ -76,11 +65,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-<<<<<<< HEAD
-        return Objects.hash(description, email, address, tags);
-=======
-        return Objects.hash(name, phone, email, tags);
->>>>>>> remove-address-from-task
+        return Objects.hash(description, email, tags);
     }
 
     @Override

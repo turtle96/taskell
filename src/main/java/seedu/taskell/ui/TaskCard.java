@@ -17,12 +17,6 @@ public class TaskCard extends UiPart{
     @FXML
     private Label id;
     @FXML
-<<<<<<< HEAD
-    private Label address;
-=======
-    private Label phone;
->>>>>>> remove-address-from-task
-    @FXML
     private Label email;
     @FXML
     private Label tags;
@@ -45,11 +39,6 @@ public class TaskCard extends UiPart{
     public void initialize() {
         description.setText(task.getDescription().description);
         id.setText(displayedIndex + ". ");
-<<<<<<< HEAD
-        address.setText(task.getAddress().value);
-=======
-        phone.setText(task.getPhone().value);
->>>>>>> remove-address-from-task
         email.setText(task.getEmail().value);
         tags.setText(task.tagsString());
     }

@@ -8,12 +8,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class TestTask implements ReadOnlyTask {
 
-<<<<<<< HEAD
     private Description description;
-    private Address address;
-=======
-    private Name name;
->>>>>>> remove-address-from-task
     private Email email;
     private UniqueTagList tags;
 

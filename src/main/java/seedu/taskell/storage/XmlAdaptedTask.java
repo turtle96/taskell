@@ -19,8 +19,6 @@ public class XmlAdaptedTask {
     private String description;
     @XmlElement(required = true)
     private String email;
-    @XmlElement(required = true)
-    private String address;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -58,10 +56,6 @@ public class XmlAdaptedTask {
         final Description description= new Description(this.description);
         final Email email = new Email(this.email);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-<<<<<<< HEAD
-        return new Task(description, email, address, tags);
-=======
-        return new Task(name, phone, email, tags);
->>>>>>> remove-address-from-task
+        return new Task(description, email, tags);
     }
 }
