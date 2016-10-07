@@ -13,6 +13,7 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
+<<<<<<< HEAD
             alice =  new TaskBuilder().withDescription("Archive past emails").withAddress("123, Jurong West Ave 6, #08-111")
                     .withEmail("alice@gmail.com").withPhone("85355255")
                     .withTags("friends").build();
@@ -28,6 +29,23 @@ public class TypicalTestTasks {
             //Manually added
             hoon = new TaskBuilder().withDescription("Hold meeting").withPhone("8482424").withEmail("stefan@mail.com").withAddress("little india").build();
             ida = new TaskBuilder().withDescription("Inspect warehouse").withPhone("8482131").withEmail("hans@google.com").withAddress("chicago ave").build();
+=======
+            alice =  new TaskBuilder().withName("Alice Pauline").withAddress("123, Jurong West Ave 6, #08-111")
+                    .withEmail("alice@gmail.com")
+                    .withTags("friends").build();
+            benson = new TaskBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
+                    .withEmail("johnd@gmail.com")
+                    .withTags("owesMoney", "friends").build();
+            carl = new TaskBuilder().withName("Carl Kurz").withEmail("heinz@yahoo.com").withAddress("wall street").build();
+            daniel = new TaskBuilder().withName("Daniel Meier").withEmail("cornelia@google.com").withAddress("10th street").build();
+            elle = new TaskBuilder().withName("Elle Meyer").withEmail("werner@gmail.com").withAddress("michegan ave").build();
+            fiona = new TaskBuilder().withName("Fiona Kunz").withEmail("lydia@gmail.com").withAddress("little tokyo").build();
+            george = new TaskBuilder().withName("George Best").withEmail("anna@google.com").withAddress("4th street").build();
+
+            //Manually added
+            hoon = new TaskBuilder().withName("Hoon Meier").withEmail("stefan@mail.com").withAddress("little india").build();
+            ida = new TaskBuilder().withName("Ida Mueller").withEmail("hans@google.com").withAddress("chicago ave").build();
+>>>>>>> remove-phone-from-task
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";

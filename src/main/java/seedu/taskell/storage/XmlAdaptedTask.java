@@ -18,8 +18,6 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String description;
     @XmlElement(required = true)
-    private String phone;
-    @XmlElement(required = true)
     private String email;
     @XmlElement(required = true)
     private String address;
@@ -39,8 +37,12 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
+<<<<<<< HEAD
         description = source.getDescription().description;
         phone = source.getPhone().value;
+=======
+        name = source.getName().fullName;
+>>>>>>> remove-phone-from-task
         email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = new ArrayList<>();
@@ -59,11 +61,19 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
+<<<<<<< HEAD
         final Description description= new Description(this.description);
         final Phone phone = new Phone(this.phone);
         final Email email = new Email(this.email);
         final Address address = new Address(this.address);
         final UniqueTagList tags = new UniqueTagList(taskTags);
         return new Task(description, phone, email, address, tags);
+=======
+        final Name name = new Name(this.name);
+        final Email email = new Email(this.email);
+        final Address address = new Address(this.address);
+        final UniqueTagList tags = new UniqueTagList(taskTags);
+        return new Task(name, email, address, tags);
+>>>>>>> remove-phone-from-task
     }
 }

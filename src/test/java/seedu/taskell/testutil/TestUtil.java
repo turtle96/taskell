@@ -66,6 +66,7 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             return new Task[]{
+<<<<<<< HEAD
                     new Task(new Description("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
                     new Task(new Description("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
                     new Task(new Description("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
@@ -75,6 +76,17 @@ public class TestUtil {
                     new Task(new Description("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
                     new Task(new Description("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
                     new Task(new Description("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+=======
+                    new Task(new Name("Ali Muster"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
+                    new Task(new Name("Boris Mueller"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
+                    new Task(new Name("Carl Kurz"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
+                    new Task(new Name("Daniel Meier"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
+                    new Task(new Name("Elle Meyer"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
+                    new Task(new Name("Fiona Kunz"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
+                    new Task(new Name("George Best"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
+                    new Task(new Name("Hoon Meier"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
+                    new Task(new Name("Ida Mueller"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+>>>>>>> remove-phone-from-task
             };
         } catch (IllegalValueException e) {
             assert false;

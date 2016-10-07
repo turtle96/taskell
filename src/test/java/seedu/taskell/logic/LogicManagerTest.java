@@ -156,16 +156,23 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
+<<<<<<< HEAD
                 "add Valid Description 12345 e/valid@email.butNoPhonePrefix a/valid, address", expectedMessage);
         assertCommandBehavior(
                 "add Valid Description p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
         assertCommandBehavior(
                 "add Valid Description p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+=======
+                "add Valid Name valid@email.butNoPrefix a/valid, address", expectedMessage);
+        assertCommandBehavior(
+                "add Valid Name e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
+>>>>>>> remove-phone-from-task
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
+<<<<<<< HEAD
                 "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", Phone.MESSAGE_PHONE_CONSTRAINTS);
@@ -173,6 +180,13 @@ public class LogicManagerTest {
                 "add Valid Description p/12345 e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+=======
+                "add []\\[;] e/valid@e.mail a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Name e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Name e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+>>>>>>> remove-phone-from-task
 
     }
 
@@ -387,14 +401,22 @@ public class LogicManagerTest {
     class TestDataHelper{
 
         Task adam() throws Exception {
+<<<<<<< HEAD
             Description description= new Description("Adam Brown");
             Phone privatePhone = new Phone("111111");
+=======
+            Name name = new Name("Adam Brown");
+>>>>>>> remove-phone-from-task
             Email email = new Email("adam@gmail.com");
             Address privateAddress = new Address("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
+<<<<<<< HEAD
             return new Task(description, privatePhone, email, privateAddress, tags);
+=======
+            return new Task(name, email, privateAddress, tags);
+>>>>>>> remove-phone-from-task
         }
 
         /**
@@ -406,8 +428,12 @@ public class LogicManagerTest {
          */
         Task generateTask(int seed) throws Exception {
             return new Task(
+<<<<<<< HEAD
                     new Description("Task " + seed),
                     new Phone("" + Math.abs(seed)),
+=======
+                    new Name("Task " + seed),
+>>>>>>> remove-phone-from-task
                     new Email(seed + "@email"),
                     new Address("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -420,8 +446,12 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
+<<<<<<< HEAD
             cmd.append(p.getDescription().toString());
             cmd.append(" p/").append(p.getPhone());
+=======
+            cmd.append(p.getName().toString());
+>>>>>>> remove-phone-from-task
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" a/").append(p.getAddress());
 
@@ -505,8 +535,12 @@ public class LogicManagerTest {
          */
         Task generateTaskWithDescription(String description) throws Exception {
             return new Task(
+<<<<<<< HEAD
                     new Description(description),
                     new Phone("1"),
+=======
+                    new Name(name),
+>>>>>>> remove-phone-from-task
                     new Email("1@email"),
                     new Address("House of 1"),
                     new UniqueTagList(new Tag("tag"))

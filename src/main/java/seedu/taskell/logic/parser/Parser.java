@@ -27,8 +27,12 @@ public class Parser {
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+<<<<<<< HEAD
             Pattern.compile("(?<description>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
+=======
+            Pattern.compile("(?<name>[^/]+)"
+>>>>>>> remove-phone-from-task
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
@@ -94,8 +98,12 @@ public class Parser {
         }
         try {
             return new AddCommand(
+<<<<<<< HEAD
                     matcher.group("description"),
                     matcher.group("phone"),
+=======
+                    matcher.group("name"),
+>>>>>>> remove-phone-from-task
                     matcher.group("email"),
                     matcher.group("address"),
                     getTagsFromArgs(matcher.group("tagArguments"))

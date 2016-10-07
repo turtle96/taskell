@@ -1,56 +1,92 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <taskmanager>
     <tasks>
+<<<<<<< HEAD
         <description>Hans Muster</description>
         <phone isPrivate="false">9482424</phone>
+=======
+        <name>Hans Muster</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">hans@google.com</email>
         <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Ruth Mueller</description>
         <phone isPrivate="false">87249245</phone>
+=======
+        <name>Ruth Mueller</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">ruth@google.com</email>
         <address isPrivate="false">81th street</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Heinz Kurz</description>
         <phone isPrivate="false">95352563</phone>
+=======
+        <name>Heinz Kurz</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">heinz@yahoo.com</email>
         <address isPrivate="false">wall street</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Cornelia Meier</description>
         <phone isPrivate="false">87652533</phone>
+=======
+        <name>Cornelia Meier</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">cornelia@google.com</email>
         <address isPrivate="false">10th street</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Werner Meyer</description>
         <phone isPrivate="false">9482224</phone>
+=======
+        <name>Werner Meyer</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">werner@gmail.com</email>
         <address isPrivate="false">michegan ave</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Lydia Kunz</description>
         <phone isPrivate="false">9482427</phone>
+=======
+        <name>Lydia Kunz</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">lydia@gmail.com</email>
         <address isPrivate="false">little tokyo</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Anna Best</description>
         <phone isPrivate="false">9482442</phone>
+=======
+        <name>Anna Best</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">anna@google.com</email>
         <address isPrivate="false">4th street</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Stefan Meier</description>
         <phone isPrivate="false">8482424</phone>
+=======
+        <name>Stefan Meier</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">stefan@mail.com</email>
         <address isPrivate="false">little india</address>
     </tasks>
     <tasks>
+<<<<<<< HEAD
         <description>Martin Mueller</description>
         <phone isPrivate="false">8482131</phone>
+=======
+        <name>Martin Mueller</name>
+>>>>>>> remove-phone-from-task
         <email isPrivate="false">hans@google.com</email>
         <address isPrivate="false">chicago ave</address>
     </tasks>
