@@ -49,5 +49,21 @@ public interface ReadOnlyTask {
             return buffer.substring(0, buffer.length() - separator.length());
         }
     }
+    
+    /**
+     * 
+     * @return an unformatted string representation of this Task's tags
+     *          each tag is separated from the other by a whitespace
+     */
+    default String tagsSimpleString() {
+        final StringBuffer buffer = new StringBuffer();
+        final String separator = " ";
+        getTags().forEach(tag -> buffer.append(tag.toSimpleString()).append(separator));
+        if (buffer.length() == 0) {
+            return "";
+        } else {
+            return buffer.substring(0, buffer.length() - separator.length());
+        }
+    }
 
 }
