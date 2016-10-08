@@ -9,7 +9,6 @@
 Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
    > Having any Java 8 version is not enough. <br>
    This application will not work with earlier versions of Java 8.
-   
 Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
 	<br> <img src="images/Icon.png" width="100"></br>
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
@@ -54,7 +53,7 @@ This format can be used to add events held on a certain day.<br>
 This format can be used to add tasks with a stipulated deadline.<br>
 > Example: `add do lab homework on Friday 7pm` <br>
 -  `add TASK ITEM on [DATE]` <br>
-The use of word ï¿½onï¿½ gives more flexibility for you.<br>
+The use of word “on” gives more flexibility for you.<br>
 > Example: `add schedule meeting on Thursday` <br>
 - `add TASK ITEM on [DATE][TIME]` <br>
 > Example: `add meet teacher on Friday 7pm` <br>
@@ -74,7 +73,7 @@ Prints a list of all the completed tasks.<br>
 - `list DONE` <br>
 Prints a list of all the tasks due on the specific date.<br>
 <br><img src="images/ListToday.png" width="600"></br>
-Picture 2: List of tasks due today printed when ï¿½List todayï¿½ is keyed in.
+Picture 2: List of tasks due today printed when “List today” is keyed in.
    
 #### Finding tasks: `find`
 To view tasks with similar keyword, use the find command.<br>
@@ -89,7 +88,7 @@ Prints list of activities with the same tag.<br>
  <br><img src="images/findReport.png" width="600"></br>
  <br><img src="images/findReportResult.png" width="600"></br>
 
-Picture 3 and 4: Keying in ï¿½find reportï¿½ displays list of tasks with report as one of the keywords in task description
+Picture 3 and 4: Keying in “find report” displays list of tasks with report as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
