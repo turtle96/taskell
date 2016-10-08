@@ -21,6 +21,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void find_nonEmptyList_byTag() {
+        assertFindResult("find OWesMONEY", td.benson);  //check words with capitals
         assertFindResult("find friends", td.alice, td.benson); //multiple results
 
         //find after deleting one result
