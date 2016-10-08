@@ -43,6 +43,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getDescription() + " " + getDescription();
+        return getDescription();
     }
 }
