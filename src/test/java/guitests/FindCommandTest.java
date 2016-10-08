@@ -29,7 +29,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
 
     @Test
-    public void find_emptyList(){
+    public void find_emptyList() {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); //no results
     }
