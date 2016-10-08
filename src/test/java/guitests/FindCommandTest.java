@@ -3,7 +3,7 @@ package guitests;
 import org.junit.Test;
 
 import seedu.taskell.commons.core.Messages;
-import seedu.taskell.testutil.TestPerson;
+import seedu.taskell.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 
@@ -40,10 +40,10 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestPerson... expectedHits ) {
+    private void assertFindResult(String command, TestTask... expectedHits ) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " persons listed!");
-        assertTrue(personListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " tasks listed!");
+        assertTrue(taskListPanel.isListMatching(expectedHits));
     }
 }
