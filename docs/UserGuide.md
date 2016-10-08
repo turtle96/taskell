@@ -11,7 +11,7 @@
    > Having any Java 8 version is not enough. <br>
    This application will not work with earlier versions of Java 8.
    
-1. Download the latest `taskell.jar` from here.
+1. Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.
 2. Copy the file to the folder you want to use as the home folder for your task manager.
 3. Double-click the file to start the application. The GUI should appear in a few seconds. 
    > <img src="images/Ui.png" width="600">
