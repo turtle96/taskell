@@ -52,7 +52,7 @@ public interface ReadOnlyTask {
     
     /**
      * 
-     * @return an unformatted string representation of this Person's tags
+     * @return an unformatted string representation of this Task's tags
      *          each tag is separated from the other by a whitespace
      */
     default String tagsSimpleString() {
