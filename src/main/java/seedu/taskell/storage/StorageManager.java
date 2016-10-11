@@ -21,13 +21,13 @@ import java.util.logging.Logger;
 public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
-    private AddressBookStorage addressBookStorage;
+    private TaskManagerStorage taskManagerStorage;
     private UserPrefsStorage userPrefsStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(TaskManagerStorage taskManagerStorage, UserPrefsStorage userPrefsStorage) {
         super();
-        this.addressBookStorage = addressBookStorage;
+        this.taskManagerStorage = taskManagerStorage;
         this.userPrefsStorage = userPrefsStorage;
     }
 
@@ -52,29 +52,29 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Override
     public String getAddressBookFilePath() {
-        return addressBookStorage.getAddressBookFilePath();
+        return taskManagerStorage.getAddressBookFilePath();
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(addressBookStorage.getAddressBookFilePath());
+        return readAddressBook(taskManagerStorage.getAddressBookFilePath());
     }
 
     @Override
     public Optional<ReadOnlyTaskManager> readAddressBook(String filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return addressBookStorage.readAddressBook(filePath);
+        return taskManagerStorage.readAddressBook(filePath);
     }
 
     @Override
     public void saveAddressBook(ReadOnlyTaskManager addressBook) throws IOException {
-        saveAddressBook(addressBook, addressBookStorage.getAddressBookFilePath());
+        saveAddressBook(addressBook, taskManagerStorage.getAddressBookFilePath());
     }
 
     @Override
     public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        addressBookStorage.saveAddressBook(addressBook, filePath);
+        taskManagerStorage.saveAddressBook(addressBook, filePath);
     }
 
 

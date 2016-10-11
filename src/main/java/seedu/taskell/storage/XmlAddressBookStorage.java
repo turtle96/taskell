@@ -14,7 +14,7 @@ import seedu.taskell.model.ReadOnlyTaskManager;
 /**
  * A class to access TaskManager data stored as an xml file on the hard disk.
  */
-public class XmlAddressBookStorage implements AddressBookStorage {
+public class XmlAddressBookStorage implements TaskManagerStorage {
 
     private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
