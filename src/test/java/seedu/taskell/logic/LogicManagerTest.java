@@ -170,7 +170,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", TaskDate.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/12345 e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
+                "add Valid Description p/12345 e/notAnEmail a/valid, address", TaskTime.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
@@ -389,12 +389,12 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Description description = new Description("Adam Brown");
             TaskDate privatePhone = new TaskDate("111111");
-            Email email = new Email("adam@gmail.com");
+            TaskTime taskTime = new TaskTime("adam@gmail.com");
             TaskPriority privateAddress = new TaskPriority("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, privatePhone, email, privateAddress, tags);
+            return new Task(description, privatePhone, taskTime, privateAddress, tags);
         }
 
         /**
@@ -408,7 +408,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description("Task " + seed),
                     new TaskDate("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
+                    new TaskTime(seed + "@email"),
                     new TaskPriority("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -507,7 +507,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description(name),
                     new TaskDate("1"),
-                    new Email("1@email"),
+                    new TaskTime("1@email"),
                     new TaskPriority("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

@@ -61,9 +61,9 @@ public class XmlAdaptedPerson {
         }
         final Description description = new Description(this.name);
         final TaskDate taskDate = new TaskDate(this.phone);
-        final Email email = new Email(this.email);
+        final TaskTime taskTime = new TaskTime(this.email);
         final TaskPriority taskPriority = new TaskPriority(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(description, taskDate, email, taskPriority, tags);
+        return new Task(description, taskDate, taskTime, taskPriority, tags);
     }
 }

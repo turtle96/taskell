@@ -10,7 +10,7 @@ public interface ReadOnlyTask {
 
     Description getName();
     TaskDate getPhone();
-    Email getEmail();
+    TaskTime getEmail();
     TaskPriority getAddress();
 
     /**
@@ -39,7 +39,7 @@ public interface ReadOnlyTask {
         builder.append(getName())
                 .append(" TaskDate: ")
                 .append(getPhone())
-                .append(" Email: ")
+                .append(" TaskTime: ")
                 .append(getEmail())
                 .append(" TaskPriority: ")
                 .append(getAddress())

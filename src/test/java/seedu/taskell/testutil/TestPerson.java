@@ -10,7 +10,7 @@ public class TestPerson implements ReadOnlyTask {
 
     private Description description;
     private TaskPriority taskPriority;
-    private Email email;
+    private TaskTime taskTime;
     private TaskDate taskDate;
     private UniqueTagList tags;
 
@@ -26,8 +26,8 @@ public class TestPerson implements ReadOnlyTask {
         this.taskPriority = taskPriority;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+    public void setEmail(TaskTime taskTime) {
+        this.taskTime = taskTime;
     }
 
     public void setPhone(TaskDate taskDate) {
@@ -45,8 +45,8 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public TaskTime getEmail() {
+        return taskTime;
     }
 
     @Override
