@@ -14,7 +14,7 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.testutil.TestUtil;
-import seedu.taskell.testutil.TypicalTestTasks;
+import seedu.taskell.testutil.TypicalTestPersons;
 
 import java.util.concurrent.TimeoutException;
 
@@ -24,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * A GUI Test class for TaskManager.
  */
-public abstract class TaskManagerGuiTest {
+public abstract class AddressBookGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule
@@ -32,7 +32,7 @@ public abstract class TaskManagerGuiTest {
 
     TestApp testApp;
 
-    protected TypicalTestTasks td = new TypicalTestTasks();
+    protected TypicalTestPersons td = new TypicalTestPersons();
 
     /*
      *   Handles to GUI elements present at the start up are created in advance
@@ -40,7 +40,7 @@ public abstract class TaskManagerGuiTest {
      */
     protected MainGuiHandle mainGui;
     protected MainMenuHandle mainMenu;
-    protected TaskListPanelHandle taskListPanel;
+    protected PersonListPanelHandle personListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
     private Stage stage;
@@ -60,7 +60,7 @@ public abstract class TaskManagerGuiTest {
         FxToolkit.setupStage((stage) -> {
             mainGui = new MainGuiHandle(new GuiRobot(), stage);
             mainMenu = mainGui.getMainMenu();
-            taskListPanel = mainGui.getTaskListPanel();
+            personListPanel = mainGui.getPersonListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
             this.stage = stage;
@@ -77,8 +77,8 @@ public abstract class TaskManagerGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected TaskManager getInitialData() {
-        TaskManager ab = TestUtil.generateEmptyTaskManager();
-        TypicalTestTasks.loadTaskManagerWithSampleData(ab);
+        TaskManager ab = TestUtil.generateEmptyAddressBook();
+        TypicalTestPersons.loadAddressBookWithSampleData(ab);
         return ab;
     }
 
@@ -95,17 +95,17 @@ public abstract class TaskManagerGuiTest {
     }
 
     /**
-     * Asserts the task shown in the card is same as the given task
+     * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyTask task, TaskCardHandle card) {
-        assertTrue(TestUtil.compareCardAndTask(card, task));
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
+        assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 
     /**
-     * Asserts the size of the task list is equal to the given number.
+     * Asserts the size of the person list is equal to the given number.
      */
     protected void assertListSize(int size) {
-        int numberOfPeople = taskListPanel.getNumberOfPeople();
+        int numberOfPeople = personListPanel.getNumberOfPeople();
         assertEquals(size, numberOfPeople);
     }
 

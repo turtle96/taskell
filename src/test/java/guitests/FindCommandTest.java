@@ -3,34 +3,24 @@ package guitests;
 import org.junit.Test;
 
 import seedu.taskell.commons.core.Messages;
-import seedu.taskell.testutil.TestTask;
+import seedu.taskell.testutil.TestPerson;
 
 import static org.junit.Assert.assertTrue;
 
-public class FindCommandTest extends TaskManagerGuiTest {
+public class FindCommandTest extends AddressBookGuiTest {
 
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); //no results
-        assertFindResult("find books", td.borrowBooks, td.discardBooks); //multiple results
+        assertFindResult("find Meier", td.benson, td.daniel); //multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find books",td.discardBooks);
-    }
-    
-    @Test
-    public void find_nonEmptyList_byTag() {
-        assertFindResult("find ACADemic", td.borrowBooks);  //check words with capitals
-        assertFindResult("find personal", td.archivePastEmails, td.borrowBooks); //multiple results
-
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find personal", td.borrowBooks);
+        assertFindResult("find Meier",td.daniel);
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_emptyList(){
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); //no results
     }
@@ -41,10 +31,10 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
 
-    private void assertFindResult(String command, TestTask... expectedHits ) {
+    private void assertFindResult(String command, TestPerson... expectedHits ) {
         commandBox.runCommand(command);
         assertListSize(expectedHits.length);
-        assertResultMessage(expectedHits.length + " tasks listed!");
-        assertTrue(taskListPanel.isListMatching(expectedHits));
+        assertResultMessage(expectedHits.length + " persons listed!");
+        assertTrue(personListPanel.isListMatching(expectedHits));
     }
 }

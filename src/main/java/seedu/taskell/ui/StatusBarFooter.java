@@ -91,7 +91,7 @@ public class StatusBarFooter extends UiPart {
     }
 
     @Subscribe
-    public void handleTaskManagerChangedEvent(TaskManagerChangedEvent abce) {
+    public void handleAddressBookChangedEvent(TaskManagerChangedEvent abce) {
         String lastUpdated = (new Date()).toString();
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);

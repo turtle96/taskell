@@ -49,7 +49,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -70,14 +70,14 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> taskManagerOptional;
+        Optional<ReadOnlyTaskManager> addressBookOptional;
         ReadOnlyTaskManager initialData;
         try {
-            taskManagerOptional = storage.readTaskManager();
-            if(!taskManagerOptional.isPresent()){
+            addressBookOptional = storage.readAddressBook();
+            if(!addressBookOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty TaskManager");
             }
-            initialData = taskManagerOptional.orElse(new TaskManager());
+            initialData = addressBookOptional.orElse(new TaskManager());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();
@@ -165,7 +165,7 @@ public class MainApp extends Application {
 
     @Override
     public void stop() {
-        logger.info("============================ [ Stopping Address Book ] =============================");
+        logger.info("============================ [ Stopping TaskManager ] =============================");
         ui.stop();
         try {
             storage.saveUserPrefs(userPrefs);

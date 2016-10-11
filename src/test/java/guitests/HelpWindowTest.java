@@ -5,12 +5,12 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
 
-public class HelpWindowTest extends TaskManagerGuiTest {
+public class HelpWindowTest extends AddressBookGuiTest {
 
     @Test
     public void openHelpWindow() {
 
-        taskListPanel.clickOnListView();
+        personListPanel.clickOnListView();
 
         assertHelpWindowOpen(mainMenu.openHelpWindowUsingAccelerator());
 

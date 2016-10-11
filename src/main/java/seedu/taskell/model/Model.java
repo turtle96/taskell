@@ -15,21 +15,21 @@ public interface Model {
     void resetData(ReadOnlyTaskManager newData);
 
     /** Returns the TaskManager */
-    ReadOnlyTaskManager getTaskManager();
+    ReadOnlyTaskManager getAddressBook();
 
-    /** Deletes the given task. */
-    void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
+    /** Deletes the given person. */
+    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
-    /** Adds the given task */
-    void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    /** Adds the given person */
+    void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException;
 
-    /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
-    UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
+    /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
+    UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
 
-    /** Updates the filter of the filtered task list to show all tasks */
+    /** Updates the filter of the filtered person list to show all persons */
     void updateFilteredListToShowAll();
 
-    /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    /** Updates the filter of the filtered person list to filter by the given keywords*/
+    void updateFilteredPersonList(Set<String> keywords);
 
 }

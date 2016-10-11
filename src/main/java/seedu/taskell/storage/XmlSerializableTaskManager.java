@@ -5,10 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.ReadOnlyTaskManager;
-import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.UniqueTaskList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +40,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
      * Conversion
      */
     public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
-        tasks.addAll(src.getTaskList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
+        tasks.addAll(src.getPersonList().stream().map(XmlAdaptedTask::new).collect(Collectors.toList()));
         tags = src.getTagList();
     }
 
@@ -56,7 +56,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public UniqueTaskList getUniqueTaskList() {
+    public UniqueTaskList getUniquePersonList() {
         UniqueTaskList lists = new UniqueTaskList();
         for (XmlAdaptedTask p : tasks) {
             try {
@@ -69,7 +69,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public List<ReadOnlyTask> getTaskList() {
+    public List<ReadOnlyTask> getPersonList() {
         return tasks.stream().map(p -> {
             try {
                 return p.toModelType();

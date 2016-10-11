@@ -12,7 +12,7 @@ import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskell.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.taskell.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.Logic;
@@ -25,7 +25,7 @@ import java.util.logging.Logger;
  */
 public class UiManager extends ComponentManager implements Ui {
     private static final Logger logger = LogsCenter.getLogger(UiManager.class);
-    private static final String ICON_APPLICATION = "/images/task_manager_32.png";
+    private static final String ICON_APPLICATION = "/images/address_book_32.png";
 
     private Logic logic;
     private Config config;
@@ -114,13 +114,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
+        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
+    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+        mainWindow.loadPersonPage(event.getNewSelection());
     }
 
 }

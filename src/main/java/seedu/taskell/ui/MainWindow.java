@@ -21,7 +21,7 @@ import seedu.taskell.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart {
 
-    private static final String ICON = "/images/task_manager_32.png";
+    private static final String ICON = "/images/address_book_32.png";
     private static final String FXML = "MainWindow.fxml";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 450;
@@ -30,7 +30,7 @@ public class MainWindow extends UiPart {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private TaskListPanel taskListPanel;
+    private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -41,7 +41,7 @@ public class MainWindow extends UiPart {
     private VBox rootLayout;
     private Scene scene;
 
-    private String taskManagerName;
+    private String addressBookName;
 
     @FXML
     private AnchorPane browserPlaceholder;
@@ -53,7 +53,7 @@ public class MainWindow extends UiPart {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane taskListPanelPlaceholder;
+    private AnchorPane personListPanelPlaceholder;
 
     @FXML
     private AnchorPane resultDisplayPlaceholder;
@@ -79,16 +79,16 @@ public class MainWindow extends UiPart {
     public static MainWindow load(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
 
         MainWindow mainWindow = UiPartLoader.loadUiPart(primaryStage, new MainWindow());
-        mainWindow.configure(config.getAppTitle(), config.getTaskManagerName(), config, prefs, logic);
+        mainWindow.configure(config.getAppTitle(), config.getAddressBookName(), config, prefs, logic);
         return mainWindow;
     }
 
-    private void configure(String appTitle, String taskManagerName, Config config, UserPrefs prefs,
+    private void configure(String appTitle, String addressBookName, Config config, UserPrefs prefs,
                            Logic logic) {
 
         //Set dependencies
         this.logic = logic;
-        this.taskManagerName = taskManagerName;
+        this.addressBookName = addressBookName;
         this.config = config;
         this.userPrefs = prefs;
 
@@ -109,9 +109,9 @@ public class MainWindow extends UiPart {
 
     void fillInnerParts() {
         browserPanel = BrowserPanel.load(browserPlaceholder);
-        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
+        personListPanel = PersonListPanel.load(primaryStage, getPersonListPlaceholder(), logic.getFilteredPersonList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
-        statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskManagerFilePath());
+        statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getAddressBookFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
     }
 
@@ -127,8 +127,8 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
 
-    public AnchorPane getTaskListPlaceholder() {
-        return taskListPanelPlaceholder;
+    public AnchorPane getPersonListPlaceholder() {
+        return personListPanelPlaceholder;
     }
 
     public void hide() {
@@ -182,12 +182,12 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public TaskListPanel getTaskListPanel() {
-        return this.taskListPanel;
+    public PersonListPanel getPersonListPanel() {
+        return this.personListPanel;
     }
 
-    public void loadTaskPage(ReadOnlyTask task) {
-        browserPanel.loadTaskPage(task);
+    public void loadPersonPage(ReadOnlyTask person) {
+        browserPanel.loadPersonPage(person);
     }
 
     public void releaseResources() {

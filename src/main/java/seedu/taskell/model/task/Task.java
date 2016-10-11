@@ -12,14 +12,21 @@ import seedu.taskell.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Description description;
+    private TaskDate taskDate;
+    private TaskTime taskTime;
+    private TaskPriority taskPriority;
+
     private UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, tags);
+    public Task(Description description, TaskDate taskDate, TaskTime taskTime, TaskPriority taskPriority, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, taskDate, taskTime, taskPriority, tags);
         this.description = description;
+        this.taskDate = taskDate;
+        this.taskTime = taskTime;
+        this.taskPriority = taskPriority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -27,15 +34,28 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTags());
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
     @Override
-    public Description getDescription() {
+    public Description getName() {
         return description;
     }
 
-    
+    @Override
+    public TaskDate getPhone() {
+        return taskDate;
+    }
+
+    @Override
+    public TaskTime getEmail() {
+        return taskTime;
+    }
+
+    @Override
+    public TaskPriority getAddress() {
+        return taskPriority;
+    }
 
     @Override
     public UniqueTagList getTags() {
@@ -43,7 +63,7 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Replaces this task's tags with the tags in the argument tag list.
+     * Replaces this person's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);
@@ -59,7 +79,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, tags);
+        return Objects.hash(description, taskDate, taskTime, taskPriority, tags);
     }
 
     @Override

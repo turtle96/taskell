@@ -6,12 +6,12 @@ import seedu.taskell.model.task.ReadOnlyTask;
 /**
  * Represents a selection change in the Task List Panel
  */
-public class TaskPanelSelectionChangedEvent extends BaseEvent {
+public class PersonPanelSelectionChangedEvent extends BaseEvent {
 
 
     private final ReadOnlyTask newSelection;
 
-    public TaskPanelSelectionChangedEvent(ReadOnlyTask newSelection){
+    public PersonPanelSelectionChangedEvent(ReadOnlyTask newSelection){
         this.newSelection = newSelection;
     }
 

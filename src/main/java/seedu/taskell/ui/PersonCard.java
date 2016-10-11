@@ -6,38 +6,47 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.taskell.model.task.ReadOnlyTask;
 
-public class TaskCard extends UiPart{
+public class PersonCard extends UiPart{
 
-    private static final String FXML = "TaskListCard.fxml";
+    private static final String FXML = "PersonListCard.fxml";
 
     @FXML
     private HBox cardPane;
     @FXML
-    private Label description;
+    private Label name;
     @FXML
     private Label id;
     @FXML
+    private Label phone;
+    @FXML
+    private Label address;
+    @FXML
+    private Label email;
+    @FXML
     private Label tags;
 
-    private ReadOnlyTask task;
+    private ReadOnlyTask person;
     private int displayedIndex;
 
-    public TaskCard(){
+    public PersonCard(){
 
     }
 
-    public static TaskCard load(ReadOnlyTask task, int displayedIndex){
-        TaskCard card = new TaskCard();
-        card.task = task;
+    public static PersonCard load(ReadOnlyTask person, int displayedIndex){
+        PersonCard card = new PersonCard();
+        card.person = person;
         card.displayedIndex = displayedIndex;
         return UiPartLoader.loadUiPart(card);
     }
 
     @FXML
     public void initialize() {
-        description.setText(task.getDescription().description);
+        name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        tags.setText(task.tagsString());
+        phone.setText(person.getPhone().value);
+        address.setText(person.getAddress().value);
+        email.setText(person.getEmail().value);
+        tags.setText(person.tagsString());
     }
 
     public HBox getLayout() {

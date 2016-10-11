@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskmanager>
+    <tasks>
+        <description>Hans Muster</description>
+        <date isPrivate="false">9482424</date>
+        <time isPrivate="false">hans@google.com</time>
+        <priority isPrivate="false">4th street</priority>
+    </tasks>
+    <tasks>
+        <description>Ruth Mueller</description>
+        <date isPrivate="false">87249245</date>
+        <time isPrivate="false">ruth@google.com</time>
+        <priority isPrivate="false">81th street</priority>
+    </tasks>
+    <tasks>
+        <description>Heinz Kurz</description>
+        <date isPrivate="false">95352563</date>
+        <time isPrivate="false">heinz@yahoo.com</time>
+        <priority isPrivate="false">wall street</priority>
+    </tasks>
+    <tasks>
+        <description>Cornelia Meier</description>
+        <date isPrivate="false">87652533</date>
+        <time isPrivate="false">cornelia@google.com</time>
+        <priority isPrivate="false">10th street</priority>
+    </tasks>
+    <tasks>
+        <description>Werner Meyer</description>
+        <date isPrivate="false">9482224</date>
+        <time isPrivate="false">werner@gmail.com</time>
+        <priority isPrivate="false">michegan ave</priority>
+    </tasks>
+    <tasks>
+        <description>Lydia Kunz</description>
+        <date isPrivate="false">9482427</date>
+        <time isPrivate="false">lydia@gmail.com</time>
+        <priority isPrivate="false">little tokyo</priority>
+    </tasks>
+    <tasks>
+        <description>Anna Best</description>
+        <date isPrivate="false">9482442</date>
+        <time isPrivate="false">anna@google.com</time>
+        <priority isPrivate="false">4th street</priority>
+    </tasks>
+    <tasks>
+        <description>Stefan Meier</description>
+        <date isPrivate="false">8482424</date>
+        <time isPrivate="false">stefan@mail.com</time>
+        <priority isPrivate="false">little india</priority>
+    </tasks>
+    <tasks>
+        <description>Martin Mueller</description>
+        <date isPrivate="false">8482131</date>
+        <time isPrivate="false">hans@google.com</time>
+        <priority isPrivate="false">chicago ave</priority>
+    </tasks>
+</taskmanager>

@@ -3,24 +3,24 @@ package seedu.taskell.model;
 
 import java.util.List;
 
-import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.UniqueTaskList;
 
 /**
- * Unmodifiable view of an task manager
+ * Unmodifiable view of an address book
  */
 public interface ReadOnlyTaskManager {
 
     UniqueTagList getUniqueTagList();
 
-    UniqueTaskList getUniqueTaskList();
+    UniqueTaskList getUniquePersonList();
 
     /**
-     * Returns an unmodifiable view of tasks list
+     * Returns an unmodifiable view of persons list
      */
-    List<ReadOnlyTask> getTaskList();
+    List<ReadOnlyTask> getPersonList();
 
     /**
      * Returns an unmodifiable view of tags list

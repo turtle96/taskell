@@ -3,7 +3,7 @@ package seedu.taskell.commons.events.ui;
 import seedu.taskell.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of tasks
+ * Indicates a request to jump to the list of persons
  */
 public class JumpToListRequestEvent extends BaseEvent {
 
