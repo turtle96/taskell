@@ -13,7 +13,7 @@ import seedu.taskell.commons.core.GuiSettings;
 import seedu.taskell.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.model.UserPrefs;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 
 /**
  * The Main Window. Provides the basic application layout containing

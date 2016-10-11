@@ -7,8 +7,8 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.taskell.TestApp;
-import seedu.taskell.model.person.Person;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.ReadOnlyPerson;
 import seedu.taskell.testutil.TestUtil;
 
 import java.util.List;

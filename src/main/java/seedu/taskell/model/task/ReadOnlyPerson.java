@@ -1,4 +1,4 @@
-package seedu.taskell.model.person;
+package seedu.taskell.model.task;
 
 import seedu.taskell.model.tag.UniqueTagList;
 

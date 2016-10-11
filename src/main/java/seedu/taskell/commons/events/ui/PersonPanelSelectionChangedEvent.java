@@ -1,7 +1,7 @@
 package seedu.taskell.commons.events.ui;
 
 import seedu.taskell.commons.events.BaseEvent;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 
 /**
  * Represents a selection change in the Person List Panel

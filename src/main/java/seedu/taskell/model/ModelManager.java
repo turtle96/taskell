@@ -6,10 +6,10 @@ import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.events.model.AddressBookChangedEvent;
 import seedu.taskell.commons.util.StringUtil;
-import seedu.taskell.model.person.Person;
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
-import seedu.taskell.model.person.UniquePersonList.PersonNotFoundException;
+import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.UniquePersonList;
+import seedu.taskell.model.task.UniquePersonList.PersonNotFoundException;
 
 import java.util.Set;
 import java.util.logging.Logger;

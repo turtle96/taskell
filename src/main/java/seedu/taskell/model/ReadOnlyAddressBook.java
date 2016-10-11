@@ -3,10 +3,10 @@ package seedu.taskell.model;
 
 import java.util.List;
 
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.UniquePersonList;
 
 /**
  * Unmodifiable view of an address book

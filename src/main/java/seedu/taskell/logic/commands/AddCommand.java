@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.person.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 
 /**
  * Adds a person to the address book.

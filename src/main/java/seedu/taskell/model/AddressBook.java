@@ -1,11 +1,11 @@
 package seedu.taskell.model;
 
 import javafx.collections.ObservableList;
-import seedu.taskell.model.person.Person;
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.UniquePersonList;
 
 import java.util.*;
 import java.util.stream.Collectors;

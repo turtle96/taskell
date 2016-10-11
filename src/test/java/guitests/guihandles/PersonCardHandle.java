@@ -3,7 +3,7 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 
 /**
  * Provides a handle to a person card in the person list panel.

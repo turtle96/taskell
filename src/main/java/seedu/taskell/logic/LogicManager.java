@@ -7,7 +7,7 @@ import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
 import seedu.taskell.logic.parser.Parser;
 import seedu.taskell.model.Model;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 import seedu.taskell.storage.Storage;
 
 import java.util.logging.Logger;

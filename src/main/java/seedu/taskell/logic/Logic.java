@@ -2,7 +2,7 @@ package seedu.taskell.logic;
 
 import javafx.collections.ObservableList;
 import seedu.taskell.logic.commands.CommandResult;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 
 /**
  * API of the Logic component

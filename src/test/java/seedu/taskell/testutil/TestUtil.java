@@ -18,9 +18,9 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.commons.util.XmlUtil;
 import seedu.taskell.model.AddressBook;
-import seedu.taskell.model.person.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 import seedu.taskell.storage.XmlSerializableAddressBook;
 
 import java.io.File;

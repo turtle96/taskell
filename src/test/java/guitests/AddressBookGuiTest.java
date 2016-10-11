@@ -12,7 +12,7 @@ import org.testfx.api.FxToolkit;
 import seedu.taskell.TestApp;
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.model.AddressBook;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 import seedu.taskell.testutil.TestUtil;
 import seedu.taskell.testutil.TypicalTestPersons;
 

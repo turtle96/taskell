@@ -2,7 +2,7 @@ package seedu.taskell.testutil;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.AddressBook;
-import seedu.taskell.model.person.*;
+import seedu.taskell.model.task.*;
 
 /**
  *

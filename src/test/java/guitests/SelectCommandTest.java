@@ -2,7 +2,7 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 
 import static org.junit.Assert.assertEquals;
 

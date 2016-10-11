@@ -10,7 +10,7 @@ import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.model.AddressBook;
 import seedu.taskell.model.ReadOnlyAddressBook;
-import seedu.taskell.model.person.Person;
+import seedu.taskell.model.task.Person;
 import seedu.taskell.storage.XmlAddressBookStorage;
 import seedu.taskell.testutil.TypicalTestPersons;
 

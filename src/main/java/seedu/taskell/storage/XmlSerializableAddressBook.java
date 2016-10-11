@@ -5,10 +5,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.ReadOnlyAddressBook;
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.UniquePersonList;
 
 import java.util.ArrayList;
 import java.util.Collections;

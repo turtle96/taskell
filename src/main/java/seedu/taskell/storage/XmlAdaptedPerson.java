@@ -3,9 +3,9 @@ package seedu.taskell.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.person.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 
 import java.util.ArrayList;
 import java.util.List;

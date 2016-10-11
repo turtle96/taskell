@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.taskell.model.person.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyPerson;
 
 import java.util.logging.Logger;
 

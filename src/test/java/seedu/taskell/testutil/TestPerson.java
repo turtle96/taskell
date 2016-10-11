@@ -1,7 +1,7 @@
 package seedu.taskell.testutil;
 
-import seedu.taskell.model.person.*;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 
 /**
  * A mutable person object. For testing only.

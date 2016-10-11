@@ -13,9 +13,9 @@ import seedu.taskell.model.AddressBook;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.ModelManager;
 import seedu.taskell.model.ReadOnlyAddressBook;
-import seedu.taskell.model.person.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 import seedu.taskell.storage.StorageManager;
 
 import org.junit.After;

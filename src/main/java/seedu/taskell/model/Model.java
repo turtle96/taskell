@@ -3,9 +3,9 @@ package seedu.taskell.model;
 import java.util.Set;
 
 import seedu.taskell.commons.core.UnmodifiableObservableList;
-import seedu.taskell.model.person.Person;
-import seedu.taskell.model.person.ReadOnlyPerson;
-import seedu.taskell.model.person.UniquePersonList;
+import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.UniquePersonList;
 
 /**
  * The API of the Model component.
