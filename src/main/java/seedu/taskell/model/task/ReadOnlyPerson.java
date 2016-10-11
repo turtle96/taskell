@@ -8,7 +8,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public interface ReadOnlyPerson {
 
-    Name getName();
+    Description getName();
     Phone getPhone();
     Email getEmail();
     TaskPriority getAddress();

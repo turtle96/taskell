@@ -11,7 +11,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class Person implements ReadOnlyPerson {
 
-    private Name name;
+    private Description description;
     private Phone phone;
     private Email email;
     private TaskPriority taskPriority;
@@ -21,9 +21,9 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, TaskPriority taskPriority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, taskPriority, tags);
-        this.name = name;
+    public Person(Description description, Phone phone, Email email, TaskPriority taskPriority, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, phone, email, taskPriority, tags);
+        this.description = description;
         this.phone = phone;
         this.email = email;
         this.taskPriority = taskPriority;
@@ -38,8 +38,8 @@ public class Person implements ReadOnlyPerson {
     }
 
     @Override
-    public Name getName() {
-        return name;
+    public Description getName() {
+        return description;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Person implements ReadOnlyPerson {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, taskPriority, tags);
+        return Objects.hash(description, phone, email, taskPriority, tags);
     }
 
     @Override
