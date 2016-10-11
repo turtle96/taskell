@@ -21,7 +21,7 @@ import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
-import seedu.taskell.storage.XmlSerializableAddressBook;
+import seedu.taskell.storage.XmlSerializableTaskManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -139,8 +139,8 @@ public class TestUtil {
         return new TaskManager(new UniquePersonList(), new UniqueTagList());
     }
 
-    public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-        return new XmlSerializableAddressBook(generateEmptyAddressBook());
+    public static XmlSerializableTaskManager generateSampleStorageAddressBook() {
+        return new XmlSerializableTaskManager(generateEmptyAddressBook());
     }
 
     /**

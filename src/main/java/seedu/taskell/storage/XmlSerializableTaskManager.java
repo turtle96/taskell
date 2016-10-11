@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * An Immutable TaskManager that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
+public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -34,12 +34,12 @@ public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
     /**
      * Empty constructor required for marshalling
      */
-    public XmlSerializableAddressBook() {}
+    public XmlSerializableTaskManager() {}
 
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyTaskManager src) {
+    public XmlSerializableTaskManager(ReadOnlyTaskManager src) {
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags = src.getTagList();
     }

@@ -7,7 +7,7 @@ import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.GuiSettings;
 import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.UserPrefs;
-import seedu.taskell.storage.XmlSerializableAddressBook;
+import seedu.taskell.storage.XmlSerializableTaskManager;
 import seedu.taskell.testutil.TestUtil;
 
 import java.util.function.Supplier;
@@ -36,7 +36,7 @@ public class TestApp extends MainApp {
         // If some initial local data has been provided, write those to the file
         if (initialDataSupplier.get() != null) {
             TestUtil.createDataFileWithData(
-                    new XmlSerializableAddressBook(this.initialDataSupplier.get()),
+                    new XmlSerializableTaskManager(this.initialDataSupplier.get()),
                     this.saveFileLocation);
         }
     }
