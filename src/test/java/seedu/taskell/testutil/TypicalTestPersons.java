@@ -1,7 +1,7 @@
 package seedu.taskell.testutil;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.AddressBook;
+import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.*;
 
 /**
@@ -34,7 +34,7 @@ public class TypicalTestPersons {
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadAddressBookWithSampleData(TaskManager ab) {
 
         try {
             ab.addPerson(new Person(alice));
@@ -53,8 +53,8 @@ public class TypicalTestPersons {
         return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
-    public AddressBook getTypicalAddressBook(){
-        AddressBook ab = new AddressBook();
+    public TaskManager getTypicalAddressBook(){
+        TaskManager ab = new TaskManager();
         loadAddressBookWithSampleData(ab);
         return ab;
     }

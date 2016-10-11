@@ -3,7 +3,7 @@ package seedu.taskell.commons.events.model;
 import seedu.taskell.commons.events.BaseEvent;
 import seedu.taskell.model.ReadOnlyAddressBook;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates the TaskManager in the model has changed*/
 public class AddressBookChangedEvent extends BaseEvent {
 
     public final ReadOnlyAddressBook data;

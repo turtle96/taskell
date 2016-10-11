@@ -17,7 +17,7 @@ import seedu.taskell.TestApp;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.commons.util.XmlUtil;
-import seedu.taskell.model.AddressBook;
+import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
@@ -135,8 +135,8 @@ public class TestUtil {
         createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
     }
 
-    public static AddressBook generateEmptyAddressBook() {
-        return new AddressBook(new UniquePersonList(), new UniqueTagList());
+    public static TaskManager generateEmptyAddressBook() {
+        return new TaskManager(new UniquePersonList(), new UniqueTagList());
     }
 
     public static XmlSerializableAddressBook generateSampleStorageAddressBook() {

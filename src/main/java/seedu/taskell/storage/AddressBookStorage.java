@@ -7,7 +7,7 @@ import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.model.ReadOnlyAddressBook;
 
 /**
- * Represents a storage for {@link seedu.taskell.model.AddressBook}.
+ * Represents a storage for {@link seedu.taskell.model.TaskManager}.
  */
 public interface AddressBookStorage {
 
@@ -17,7 +17,7 @@ public interface AddressBookStorage {
     String getAddressBookFilePath();
 
     /**
-     * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
+     * Returns TaskManager data as a {@link ReadOnlyAddressBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.

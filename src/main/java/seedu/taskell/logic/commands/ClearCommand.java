@@ -1,6 +1,6 @@
 package seedu.taskell.logic.commands;
 
-import seedu.taskell.model.AddressBook;
+import seedu.taskell.model.TaskManager;
 
 /**
  * Clears the address book.
@@ -16,7 +16,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.resetData(AddressBook.getEmptyAddressBook());
+        model.resetData(TaskManager.getEmptyAddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
