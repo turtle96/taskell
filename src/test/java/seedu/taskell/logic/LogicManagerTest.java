@@ -168,7 +168,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Description.MESSAGE_NAME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", Phone.MESSAGE_PHONE_CONSTRAINTS);
+                "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", TaskDate.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/12345 e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandBehavior(
@@ -388,7 +388,7 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Description description = new Description("Adam Brown");
-            Phone privatePhone = new Phone("111111");
+            TaskDate privatePhone = new TaskDate("111111");
             Email email = new Email("adam@gmail.com");
             TaskPriority privateAddress = new TaskPriority("111, alpha street");
             Tag tag1 = new Tag("tag1");
@@ -407,7 +407,7 @@ public class LogicManagerTest {
         Task generatePerson(int seed) throws Exception {
             return new Task(
                     new Description("Task " + seed),
-                    new Phone("" + Math.abs(seed)),
+                    new TaskDate("" + Math.abs(seed)),
                     new Email(seed + "@email"),
                     new TaskPriority("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
@@ -506,7 +506,7 @@ public class LogicManagerTest {
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new Description(name),
-                    new Phone("1"),
+                    new TaskDate("1"),
                     new Email("1@email"),
                     new TaskPriority("House of 1"),
                     new UniqueTagList(new Tag("tag"))

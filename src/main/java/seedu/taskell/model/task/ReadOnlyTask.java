@@ -9,7 +9,7 @@ import seedu.taskell.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Description getName();
-    Phone getPhone();
+    TaskDate getPhone();
     Email getEmail();
     TaskPriority getAddress();
 
@@ -37,7 +37,7 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Phone: ")
+                .append(" TaskDate: ")
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())

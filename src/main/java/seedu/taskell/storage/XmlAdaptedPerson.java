@@ -60,10 +60,10 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Description description = new Description(this.name);
-        final Phone phone = new Phone(this.phone);
+        final TaskDate taskDate = new TaskDate(this.phone);
         final Email email = new Email(this.email);
         final TaskPriority taskPriority = new TaskPriority(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(description, phone, email, taskPriority, tags);
+        return new Task(description, taskDate, email, taskPriority, tags);
     }
 }

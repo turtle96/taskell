@@ -12,7 +12,7 @@ import seedu.taskell.model.tag.UniqueTagList;
 public class Task implements ReadOnlyTask {
 
     private Description description;
-    private Phone phone;
+    private TaskDate taskDate;
     private Email email;
     private TaskPriority taskPriority;
 
@@ -21,10 +21,10 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, Phone phone, Email email, TaskPriority taskPriority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, phone, email, taskPriority, tags);
+    public Task(Description description, TaskDate taskDate, Email email, TaskPriority taskPriority, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, taskDate, email, taskPriority, tags);
         this.description = description;
-        this.phone = phone;
+        this.taskDate = taskDate;
         this.email = email;
         this.taskPriority = taskPriority;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -43,8 +43,8 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public TaskDate getPhone() {
+        return taskDate;
     }
 
     @Override
@@ -79,7 +79,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, phone, email, taskPriority, tags);
+        return Objects.hash(description, taskDate, email, taskPriority, tags);
     }
 
     @Override
