@@ -12,7 +12,7 @@ import org.testfx.api.FxToolkit;
 import seedu.taskell.TestApp;
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.model.TaskManager;
-import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.testutil.TestUtil;
 import seedu.taskell.testutil.TypicalTestPersons;
 
@@ -97,7 +97,7 @@ public abstract class AddressBookGuiTest {
     /**
      * Asserts the person shown in the card is same as the given person
      */
-    public void assertMatching(ReadOnlyPerson person, PersonCardHandle card) {
+    public void assertMatching(ReadOnlyTask person, PersonCardHandle card) {
         assertTrue(TestUtil.compareCardAndPerson(card, person));
     }
 

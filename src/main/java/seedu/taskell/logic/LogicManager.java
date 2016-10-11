@@ -7,7 +7,7 @@ import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
 import seedu.taskell.logic.parser.Parser;
 import seedu.taskell.model.Model;
-import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.storage.Storage;
 
 import java.util.logging.Logger;
@@ -35,7 +35,7 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
-    public ObservableList<ReadOnlyPerson> getFilteredPersonList() {
+    public ObservableList<ReadOnlyTask> getFilteredPersonList() {
         return model.getFilteredPersonList();
     }
 }

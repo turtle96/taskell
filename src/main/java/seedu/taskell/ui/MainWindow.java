@@ -13,7 +13,7 @@ import seedu.taskell.commons.core.GuiSettings;
 import seedu.taskell.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.model.UserPrefs;
-import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyTask;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -186,7 +186,7 @@ public class MainWindow extends UiPart {
         return this.personListPanel;
     }
 
-    public void loadPersonPage(ReadOnlyPerson person) {
+    public void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadPersonPage(person);
     }
 

@@ -6,7 +6,7 @@ import seedu.taskell.model.task.*;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyPerson {
+public class TestPerson implements ReadOnlyTask {
 
     private Description description;
     private TaskPriority taskPriority;

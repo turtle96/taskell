@@ -7,7 +7,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
-import seedu.taskell.model.task.ReadOnlyPerson;
+import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.UniquePersonList;
 
 import java.util.ArrayList;
@@ -69,7 +69,7 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public List<ReadOnlyPerson> getPersonList() {
+    public List<ReadOnlyTask> getPersonList() {
         return persons.stream().map(p -> {
             try {
                 return p.toModelType();
