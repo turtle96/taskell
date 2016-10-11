@@ -3,7 +3,7 @@ package seedu.taskell.logic;
 import com.google.common.eventbus.Subscribe;
 
 import seedu.taskell.commons.core.EventsCenter;
-import seedu.taskell.commons.events.model.AddressBookChangedEvent;
+import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskell.logic.Logic;
@@ -50,7 +50,7 @@ public class LogicManagerTest {
     private int targetedJumpIndex;
 
     @Subscribe
-    private void handleLocalModelChangedEvent(AddressBookChangedEvent abce) {
+    private void handleLocalModelChangedEvent(TaskManagerChangedEvent abce) {
         latestSavedAddressBook = new TaskManager(abce.data);
     }
 

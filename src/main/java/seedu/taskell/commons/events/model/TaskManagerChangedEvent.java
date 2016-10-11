@@ -4,11 +4,11 @@ import seedu.taskell.commons.events.BaseEvent;
 import seedu.taskell.model.ReadOnlyTaskManager;
 
 /** Indicates the TaskManager in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+public class TaskManagerChangedEvent extends BaseEvent {
 
     public final ReadOnlyTaskManager data;
 
-    public AddressBookChangedEvent(ReadOnlyTaskManager data){
+    public TaskManagerChangedEvent(ReadOnlyTaskManager data){
         this.data = data;
     }
 

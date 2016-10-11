@@ -4,7 +4,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.taskell.commons.core.ComponentManager;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
-import seedu.taskell.commons.events.model.AddressBookChangedEvent;
+import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.model.task.Person;
 import seedu.taskell.model.task.ReadOnlyPerson;
@@ -61,7 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(taskManager));
+        raise(new TaskManagerChangedEvent(taskManager));
     }
 
     @Override
