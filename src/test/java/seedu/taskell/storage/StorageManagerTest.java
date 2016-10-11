@@ -9,7 +9,7 @@ import org.junit.rules.TemporaryFolder;
 import seedu.taskell.commons.events.model.AddressBookChangedEvent;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskell.model.TaskManager;
-import seedu.taskell.model.ReadOnlyAddressBook;
+import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.UserPrefs;
 import seedu.taskell.storage.JsonUserPrefsStorage;
 import seedu.taskell.storage.Storage;
@@ -62,7 +62,7 @@ public class StorageManagerTest {
     public void addressBookReadSave() throws Exception {
         TaskManager original = new TypicalTestPersons().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
-        ReadOnlyAddressBook retrieved = storageManager.readAddressBook().get();
+        ReadOnlyTaskManager retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new TaskManager(retrieved));
         //More extensive testing of TaskManager saving/reading is done in XmlAddressBookStorageTest
     }
@@ -92,7 +92,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyAddressBook addressBook, String filePath) throws IOException {
+        public void saveAddressBook(ReadOnlyTaskManager addressBook, String filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

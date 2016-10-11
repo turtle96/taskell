@@ -12,7 +12,7 @@ import seedu.taskell.logic.commands.*;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.ModelManager;
-import seedu.taskell.model.ReadOnlyAddressBook;
+import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
@@ -45,7 +45,7 @@ public class LogicManagerTest {
     private Logic logic;
 
     //These are for checking the correctness of the events raised
-    private ReadOnlyAddressBook latestSavedAddressBook;
+    private ReadOnlyTaskManager latestSavedAddressBook;
     private boolean helpShown;
     private int targetedJumpIndex;
 
@@ -92,7 +92,7 @@ public class LogicManagerTest {
     /**
      * Executes the command and confirms that the result message is correct.
      * Both the 'address book' and the 'last shown list' are expected to be empty.
-     * @see #assertCommandBehavior(String, String, ReadOnlyAddressBook, List)
+     * @see #assertCommandBehavior(String, String, ReadOnlyTaskManager, List)
      */
     private void assertCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
         assertCommandBehavior(inputCommand, expectedMessage, new TaskManager(), Collections.emptyList());
@@ -106,7 +106,7 @@ public class LogicManagerTest {
      *      - {@code expectedAddressBook} was saved to the storage file. <br>
      */
     private void assertCommandBehavior(String inputCommand, String expectedMessage,
-                                       ReadOnlyAddressBook expectedAddressBook,
+                                       ReadOnlyTaskManager expectedAddressBook,
                                        List<? extends ReadOnlyPerson> expectedShownList) throws Exception {
 
         //Execute the command

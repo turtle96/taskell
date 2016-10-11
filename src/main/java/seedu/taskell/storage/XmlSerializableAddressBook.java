@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.ReadOnlyAddressBook;
+import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.ReadOnlyPerson;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * An Immutable TaskManager that is serializable to XML format
  */
 @XmlRootElement(name = "addressbook")
-public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
+public class XmlSerializableAddressBook implements ReadOnlyTaskManager {
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
@@ -39,7 +39,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
     /**
      * Conversion
      */
-    public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
+    public XmlSerializableAddressBook(ReadOnlyTaskManager src) {
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         tags = src.getTagList();
     }
