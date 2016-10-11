@@ -14,7 +14,7 @@ import seedu.taskell.model.UserPrefs;
 import seedu.taskell.storage.JsonUserPrefsStorage;
 import seedu.taskell.storage.Storage;
 import seedu.taskell.storage.StorageManager;
-import seedu.taskell.storage.XmlAddressBookStorage;
+import seedu.taskell.storage.XmlTaskManagerStorage;
 import seedu.taskell.testutil.EventsCollector;
 import seedu.taskell.testutil.TypicalTestPersons;
 
@@ -85,7 +85,7 @@ public class StorageManagerTest {
     /**
      * A Stub class to throw an exception when the save method is called
      */
-    class XmlAddressBookStorageExceptionThrowingStub extends XmlAddressBookStorage{
+    class XmlAddressBookStorageExceptionThrowingStub extends XmlTaskManagerStorage{
 
         public XmlAddressBookStorageExceptionThrowingStub(String filePath) {
             super(filePath);
