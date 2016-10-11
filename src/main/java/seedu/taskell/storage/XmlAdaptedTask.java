@@ -13,16 +13,16 @@ import java.util.List;
 /**
  * JAXB-friendly version of the Task.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
-    private String name;
+    private String description;
     @XmlElement(required = true)
-    private String phone;
+    private String date;
     @XmlElement(required = true)
-    private String email;
+    private String time;
     @XmlElement(required = true)
-    private String address;
+    private String priority;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -30,19 +30,19 @@ public class XmlAdaptedPerson {
     /**
      * No-arg constructor for JAXB use.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
 
 
     /**
      * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedPerson(ReadOnlyTask source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+    public XmlAdaptedTask(ReadOnlyTask source) {
+        description = source.getName().fullName;
+        date = source.getPhone().value;
+        time = source.getEmail().value;
+        priority = source.getAddress().value;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -59,10 +59,10 @@ public class XmlAdaptedPerson {
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
         }
-        final Description description = new Description(this.name);
-        final TaskDate taskDate = new TaskDate(this.phone);
-        final TaskTime taskTime = new TaskTime(this.email);
-        final TaskPriority taskPriority = new TaskPriority(this.address);
+        final Description description = new Description(this.description);
+        final TaskDate taskDate = new TaskDate(this.date);
+        final TaskTime taskTime = new TaskTime(this.time);
+        final TaskPriority taskPriority = new TaskPriority(this.priority);
         final UniqueTagList tags = new UniqueTagList(personTags);
         return new Task(description, taskDate, taskTime, taskPriority, tags);
     }
