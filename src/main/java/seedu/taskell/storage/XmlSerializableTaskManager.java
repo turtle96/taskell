@@ -8,7 +8,7 @@ import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniquePersonList;
+import seedu.taskell.model.task.UniqueTaskList;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,8 +56,8 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
     }
 
     @Override
-    public UniquePersonList getUniquePersonList() {
-        UniquePersonList lists = new UniquePersonList();
+    public UniqueTaskList getUniquePersonList() {
+        UniqueTaskList lists = new UniqueTaskList();
         for (XmlAdaptedPerson p : persons) {
             try {
                 lists.add(p.toModelType());

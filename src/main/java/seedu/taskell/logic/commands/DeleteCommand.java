@@ -3,7 +3,7 @@ package seedu.taskell.logic.commands;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniquePersonList.PersonNotFoundException;
+import seedu.taskell.model.task.UniqueTaskList.PersonNotFoundException;
 
 /**
  * Deletes a person identified using it's last displayed index from the address book.

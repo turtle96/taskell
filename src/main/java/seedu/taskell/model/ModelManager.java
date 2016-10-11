@@ -8,8 +8,8 @@ import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniquePersonList;
-import seedu.taskell.model.task.UniquePersonList.PersonNotFoundException;
+import seedu.taskell.model.task.UniqueTaskList;
+import seedu.taskell.model.task.UniqueTaskList.PersonNotFoundException;
 
 import java.util.Set;
 import java.util.logging.Logger;
@@ -71,7 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addPerson(Task task) throws UniquePersonList.DuplicatePersonException {
+    public synchronized void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
         taskManager.addPerson(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();

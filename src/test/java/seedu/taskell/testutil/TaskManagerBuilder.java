@@ -4,7 +4,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Task;
-import seedu.taskell.model.task.UniquePersonList;
+import seedu.taskell.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building Addressbook objects.
@@ -19,7 +19,7 @@ public class TaskManagerBuilder {
         this.taskManager = taskManager;
     }
 
-    public TaskManagerBuilder withPerson(Task task) throws UniquePersonList.DuplicatePersonException {
+    public TaskManagerBuilder withPerson(Task task) throws UniqueTaskList.DuplicatePersonException {
         taskManager.addPerson(task);
         return this;
     }

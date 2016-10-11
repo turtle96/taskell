@@ -5,7 +5,7 @@ import java.util.Set;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniquePersonList;
+import seedu.taskell.model.task.UniqueTaskList;
 
 /**
  * The API of the Model component.
@@ -18,10 +18,10 @@ public interface Model {
     ReadOnlyTaskManager getAddressBook();
 
     /** Deletes the given person. */
-    void deletePerson(ReadOnlyTask target) throws UniquePersonList.PersonNotFoundException;
+    void deletePerson(ReadOnlyTask target) throws UniqueTaskList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Task task) throws UniquePersonList.DuplicatePersonException;
+    void addPerson(Task task) throws UniqueTaskList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredPersonList();
