@@ -74,10 +74,10 @@ allprojects {
     }
     
     shadowJar {
-        archiveName = "Taskell.jar"
+        archiveName = "addressbook.jar"
 
         manifest {
-            attributes "Main-Class": "seedu.taskell.MainApp"
+            attributes "Main-Class": "seedu.address.MainApp"
         }
 
         destinationDir = file("${buildDir}/jar/")
@@ -113,8 +113,8 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-class TaskManagerTest extends Test {
-    public TaskManagerTest() {
+class AddressBookTest extends Test {
+    public AddressBookTest() {
     	  forkEvery = 1
         systemProperty 'testfx.setup.timeout', '60000'
     }
@@ -128,7 +128,7 @@ class TaskManagerTest extends Test {
     }
 }
 
-task guiTests(type: TaskManagerTest) {
+task guiTests(type: AddressBookTest) {
     include 'guitests/**'
 
     jacoco {
@@ -137,8 +137,8 @@ task guiTests(type: TaskManagerTest) {
 }
 
 
-task nonGuiTests(type: TaskManagerTest) {
-    include 'seedu/taskell/**'
+task nonGuiTests(type: AddressBookTest) {
+    include 'seedu/address/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
@@ -146,7 +146,7 @@ task nonGuiTests(type: TaskManagerTest) {
 }
 
 // Test mode depends on whether headless task has been run
-task allTests(type: TaskManagerTest) {
+task allTests(type: AddressBookTest) {
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")
     }

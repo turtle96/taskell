@@ -1,4 +1,5 @@
 # User Guide
+
 * [Quick Start](#quick-start)
 * [Features](#features)
 * [FAQ](#faq)
@@ -6,156 +7,128 @@
 
 ## Quick Start
 
-Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+0. Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
    > Having any Java 8 version is not enough. <br>
-   This application will not work with earlier versions of Java 8.
-Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
-	<br> <img src="images/Icon.png" width="100"></br>
-Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
-Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
- <br><img src="images/GUI.png" width="600"><br>
-Picture 1: A screenshot of the Graphical User Interface (GUI)<br>
-<br>Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
-Step 6: Some example commands you can try:<br>
-   * **`list`** : `lists` all contacts
-   * **`add`**` buy MA1101R textbook today` : adds a task called buy MA1101R textbook to be done by today.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the application <br>
-Refer to the [Features](#features) section below for details of each command.<br>
+   This app will not work with earlier versions of Java 8.
+   
+1. Download the latest `addressbook.jar` from the [releases](../../../releases) tab.
+2. Copy the file to the folder you want to use as the home folder for your Address Book.
+3. Double-click the file to start the app. The GUI should appear in a few seconds. 
+   > <img src="images/Ui.png" width="600">
+
+4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
+   e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
+5. Some example commands you can try:
+   * **`list`** : lists all contacts
+   * **`add`**` John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01` : 
+     adds a contact named `John Doe` to the Address Book.
+   * **`delete`**` 3` : deletes the 3rd contact shown in the current list
+   * **`exit`** : exits the app
+6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
 ## Features
 
-**Command Format**
+> **Command Format**
 > * Words in `UPPER_CASE` are the parameters.
 > * Items in `SQUARE_BRACKETS` are optional.
-> * The parameters have to be in the given order below.
+> * Items with `...` after them can have multiple instances.
+> * The order of parameters is fixed.
 
-#### Viewing list of commands : `help`
+#### Viewing help : `help`
+Format: `help`
 
-When unsure of the available commands or command format, <kbd>Enter</kbd> help. 
-If you enter an incorrect command, eg. search, the instruction for using each command will be displayed as well.<br>
+> Help is also shown if you enter an incorrect command e.g. `abcd`
  
- Format: `help`
- 
-#### Adding a task: `add`
-To add a new task to Taskell, use the add command.<br>
-Formats: 
-- `add TASK ITEM` <br>
-This format can be used to add floating tasks without any deadlines.<br>
-> Example: `add read Harry Potter Book` <br>
-- `add TASK ITEM by [DATE]` <br>
-This format can be used to add events held on a certain day.<br>
-> Example: `add buy MA1101R textbook by today` <br>
-> Example: `add do CS2100 assignment by 10th August`<br>
-> Example: `add go shopping by tomorrow`<br>
-- `add TASK ITEM by [DATE][TIME]` <br>
-This format can be used to add tasks with a stipulated deadline.<br>
-> Example: `add do lab homework on Friday 7pm` <br>
--  `add TASK ITEM on [DATE]` <br>
-The use of word “on” gives more flexibility for you.<br>
-> Example: `add schedule meeting on Thursday` <br>
-- `add TASK ITEM on [DATE][TIME]` <br>
-> Example: `add meet teacher on Friday 7pm` <br>
+#### Adding a person: `add`
+Adds a person to the address book<br>
+Format: `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` 
 
-> Take Note! Dates need to refer to the current week dates the task was keyed in. Eg. 
-> "tomorrow" and "thursday" is valid but "next Saturday" is invalid. Only the words "on"
-> or "by" has to be used to distinguish between dateline and task description.<br>
+> Persons can have any number of tags (including 0)
 
-#### Listing all tasks : `list`
-To view a list of all the tasks, <kbd>Enter</kbd> list.<br>
-<br>
-Formats: 
-- `list` <br>
-Prints a list of all the uncompleted tasks.<br>
-- `list DATE` <br> 
-Prints a list of all the completed tasks.<br>
-- `list DONE` <br>
-Prints a list of all the tasks due on the specific date.<br>
-<br><img src="images/ListToday.png" width="600"></br>
-Picture 2: List of tasks due today printed when “List today” is keyed in.
-   
-#### Finding tasks: `find`
-To view tasks with similar keyword, use the find command.<br>
-Formats: <br>
--`find KEYWORD [MORE_KEYWORDS]`<br>
-Prints a list of activities that match the keywords.<br>
-Example: `find banana milk essay:`<br>
-This returns any task description having keywords banana, milk, essay. <br>
+Examples: 
+* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
+* `add Betsy Crowe p/1234567 e/betsycrowe@gmail.com a/Newgate Prison t/criminal t/friend`
 
--`find-tag KEYWORD `<br>
-Prints list of activities with the same tag.<br>
- <br><img src="images/findReport.png" width="600"></br>
- <br><img src="images/findReportResult.png" width="600"></br>
+#### Listing all persons : `list`
+Shows a list of all persons in the address book.<br>
+Format: `list`
 
-Picture 3 and 4: Keying in “find report” displays list of tasks with report as one of the keywords in task description
+#### Finding all persons containing any keyword in their name: `find`
+Finds persons whose names contain any of the given keywords.<br>
+Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> Take Note! <br>
-> * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
-> * Full words will be matched e.g. `chicken` will match `chickens`.
-> * Tasks matching at least one keyword will be returned (i.e. `OR` search).
-    e.g. `chicken` will match `chicken duck`
+> * The search is case sensitive. e.g `hans` will not match `Hans`
+> * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
+> * Only the name is searched.
+> * Only full words will be matched e.g. `Han` will not match `Hans`
+> * Persons matching at least one keyword will be returned (i.e. `OR` search).
+    e.g. `Hans` will match `Hans Bo`
 
-#### Reverting previous action : `undo`
-If you wish to undo your previous action, <kbd>Enter</kbd> undo.<br>
-Format: `undo`
+Examples: 
+* `find John`<br>
+  Returns `John Doe` but not `john`
+* `find Betsy Tim John`<br>
+  Returns Any person having names `Betsy`, `Tim`, or `John`
 
-#### Deleting a task : `delete`
-To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
-Format: `delete INDEX`<br>
- <br><img src="images/delete1.png" width="600"></br>
- <br><img src="images/delete1Result.png" width="600"></br>
-Picture 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
+#### Deleting a person : `delete`
+Deletes the specified person from the address book. Irreversible.<br>
+Format: `delete INDEX`
 
-Example: `find violin, then delete 1<br>
-This deletes the 1st task in the results of the find command.
+> Deletes the person at the specified `INDEX`. 
+  The index refers to the index number shown in the most recent listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
 
-> Take Note! This action can be reversed via undo, only if no new commands are entered 
-> after deleting.
+Examples: 
+* `list`<br>
+  `delete 2`<br>
+  Deletes the 2nd person in the address book.
+* `find Betsy`<br> 
+  `delete 1`<br>
+  Deletes the 1st person in the results of the `find` command.
 
-#### Editing a task : `edit`
-To edit a task, use the edit command. This command edits the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
-Format: `edit INDEX NEWTASK`<br>
- <br> <img src="images/editCmd.png" width="600"> </br>
-Picture 7: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
+#### Select a person : `select`
+Selects the person identified by the index number used in the last person listing.<br>
+Format: `select INDEX`
 
-#### Saving the information in Taskell
+> Selects the person and loads the Google search page the person at the specified `INDEX`. 
+  The index refers to the index number shown in the most recent listing.<br>
+  The index **must be a positive integer** 1, 2, 3, ...
 
-Specify the path of a new folder to store the data file of Taskell. The user should have permissions to access the folder.<br>
-Format: `save /FOLDERPATH`<br>
-Example: `save /Jim/Documents`
+Examples: 
+* `list`<br>
+  `select 2`<br>
+  Selects the 2nd person in the address book.
+* `find Betsy` <br> 
+  `select 1`<br>
+  Selects the 1st person in the results of the `find` command.
 
 #### Clearing all entries : `clear`
-To clear all tasks, <kbd>Enter</kbd> clear.<br>
+Clears all entries from the address book.<br>
 Format: `clear`  
 
 #### Exiting the program : `exit`
-To close Taskell, <kbd>Enter</kbd> exit.<br>
+Exits the program.<br>
 Format: `exit`  
 
->  Done already? So where are all these information saved? No need to worry, Taskell will 
->  have them saved it for you!
-<br>
+#### Saving the data 
+Address book data are saved in the hard disk automatically after any command that changes the data.<br>
+There is no need to save manually.
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the application in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Taskell folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with 
+       the file that contains the data of your previous Address Book folder.
        
 ## Command Summary
 
 Command | Format  
 -------- | :-------- 
-Add Floating Task | `add TASK ITEM `
-Add Event | `add TASK ITEM by [DATE]`
-Add Event | `add TASK ITEM by [TIME]`
-Add Event With Deadline | `add TASK ITEM by [DATE][TIME]`
+Add | `add NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
 Clear | `clear`
 Delete | `delete INDEX`
 Find | `find KEYWORD [MORE_KEYWORDS]`
-Find Tag | `find-tag KEYWORD`
 List | `list`
-List Given Day | `list [DATE]`
-List Tasks Done | `list [DONE]`
 Help | `help`
-Undo | `undo`
+Select | `select INDEX`
