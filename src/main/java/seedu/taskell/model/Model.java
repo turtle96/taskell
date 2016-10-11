@@ -3,7 +3,7 @@ package seedu.taskell.model;
 import java.util.Set;
 
 import seedu.taskell.commons.core.UnmodifiableObservableList;
-import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyPerson;
 import seedu.taskell.model.task.UniquePersonList;
 
@@ -21,7 +21,7 @@ public interface Model {
     void deletePerson(ReadOnlyPerson target) throws UniquePersonList.PersonNotFoundException;
 
     /** Adds the given person */
-    void addPerson(Person person) throws UniquePersonList.DuplicatePersonException;
+    void addPerson(Task task) throws UniquePersonList.DuplicatePersonException;
 
     /** Returns the filtered person list as an {@code UnmodifiableObservableList<ReadOnlyPerson>} */
     UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList();

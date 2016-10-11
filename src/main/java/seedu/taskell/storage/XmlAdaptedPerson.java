@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Task.
  */
 public class XmlAdaptedPerson {
 
@@ -34,7 +34,7 @@ public class XmlAdaptedPerson {
 
 
     /**
-     * Converts a given Person into this class for JAXB use.
+     * Converts a given Task into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedPerson
      */
@@ -50,11 +50,11 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted person object into the model's Task object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
-    public Person toModelType() throws IllegalValueException {
+    public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
         for (XmlAdaptedTag tag : tagged) {
             personTags.add(tag.toModelType());
@@ -64,6 +64,6 @@ public class XmlAdaptedPerson {
         final Email email = new Email(this.email);
         final TaskPriority taskPriority = new TaskPriority(this.address);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(description, phone, email, taskPriority, tags);
+        return new Task(description, phone, email, taskPriority, tags);
     }
 }

@@ -6,7 +6,7 @@ import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.util.StringUtil;
-import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyPerson;
 import seedu.taskell.model.task.UniquePersonList;
 import seedu.taskell.model.task.UniquePersonList.PersonNotFoundException;
@@ -22,7 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Task> filteredPersons;
 
     /**
      * Initializes a ModelManager with the given TaskManager
@@ -71,13 +71,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public synchronized void addPerson(Person person) throws UniquePersonList.DuplicatePersonException {
-        taskManager.addPerson(person);
+    public synchronized void addPerson(Task task) throws UniquePersonList.DuplicatePersonException {
+        taskManager.addPerson(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
 
-    //=========== Filtered Person List Accessors ===============================================================
+    //=========== Filtered Task List Accessors ===============================================================
 
     @Override
     public UnmodifiableObservableList<ReadOnlyPerson> getFilteredPersonList() {

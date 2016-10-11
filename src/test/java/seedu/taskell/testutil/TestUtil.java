@@ -61,20 +61,20 @@ public class TestUtil {
      */
     public static String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Person[] samplePersonData = getSamplePersonData();
+    public static final Task[] samplePersonData = getSamplePersonData();
 
-    private static Person[] getSamplePersonData() {
+    private static Task[] getSamplePersonData() {
         try {
-            return new Person[]{
-                    new Person(new Description("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new TaskPriority("4th street"), new UniqueTagList()),
-                    new Person(new Description("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new TaskPriority("81th street"), new UniqueTagList()),
-                    new Person(new Description("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new TaskPriority("wall street"), new UniqueTagList()),
-                    new Person(new Description("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new TaskPriority("10th street"), new UniqueTagList()),
-                    new Person(new Description("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new TaskPriority("michegan ave"), new UniqueTagList()),
-                    new Person(new Description("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new TaskPriority("little tokyo"), new UniqueTagList()),
-                    new Person(new Description("George Best"), new Phone("9482442"), new Email("anna@google.com"), new TaskPriority("4th street"), new UniqueTagList()),
-                    new Person(new Description("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new TaskPriority("little india"), new UniqueTagList()),
-                    new Person(new Description("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new TaskPriority("chicago ave"), new UniqueTagList())
+            return new Task[]{
+                    new Task(new Description("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new TaskPriority("4th street"), new UniqueTagList()),
+                    new Task(new Description("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new TaskPriority("81th street"), new UniqueTagList()),
+                    new Task(new Description("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new TaskPriority("wall street"), new UniqueTagList()),
+                    new Task(new Description("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new TaskPriority("10th street"), new UniqueTagList()),
+                    new Task(new Description("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new TaskPriority("michegan ave"), new UniqueTagList()),
+                    new Task(new Description("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new TaskPriority("little tokyo"), new UniqueTagList()),
+                    new Task(new Description("George Best"), new Phone("9482442"), new Email("anna@google.com"), new TaskPriority("4th street"), new UniqueTagList()),
+                    new Task(new Description("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new TaskPriority("little india"), new UniqueTagList()),
+                    new Task(new Description("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new TaskPriority("chicago ave"), new UniqueTagList())
             };
         } catch (IllegalValueException e) {
             assert false;
@@ -98,7 +98,7 @@ public class TestUtil {
         }
     }
 
-    public static List<Person> generateSamplePersonData() {
+    public static List<Task> generateSamplePersonData() {
         return Arrays.asList(samplePersonData);
     }
 

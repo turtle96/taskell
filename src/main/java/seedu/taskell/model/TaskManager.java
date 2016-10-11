@@ -3,7 +3,7 @@ package seedu.taskell.model;
 import javafx.collections.ObservableList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
-import seedu.taskell.model.task.Person;
+import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyPerson;
 import seedu.taskell.model.task.UniquePersonList;
 
@@ -46,12 +46,12 @@ public class TaskManager implements ReadOnlyTaskManager {
 
 //// list overwrite operations
 
-    public ObservableList<Person> getPersons() {
+    public ObservableList<Task> getPersons() {
         return persons.getInternalList();
     }
 
-    public void setPersons(List<Person> persons) {
-        this.persons.getInternalList().setAll(persons);
+    public void setPersons(List<Task> tasks) {
+        this.persons.getInternalList().setAll(tasks);
     }
 
     public void setTags(Collection<Tag> tags) {
@@ -59,7 +59,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     public void resetData(Collection<? extends ReadOnlyPerson> newPersons, Collection<Tag> newTags) {
-        setPersons(newPersons.stream().map(Person::new).collect(Collectors.toList()));
+        setPersons(newPersons.stream().map(Task::new).collect(Collectors.toList()));
         setTags(newTags);
     }
 
@@ -76,7 +76,7 @@ public class TaskManager implements ReadOnlyTaskManager {
      *
      * @throws UniquePersonList.DuplicatePersonException if an equivalent person already exists.
      */
-    public void addPerson(Person p) throws UniquePersonList.DuplicatePersonException {
+    public void addPerson(Task p) throws UniquePersonList.DuplicatePersonException {
         syncTagsWithMasterList(p);
         persons.add(p);
     }
@@ -86,8 +86,8 @@ public class TaskManager implements ReadOnlyTaskManager {
      *  - exists in the master list {@link #tags}
      *  - points to a Tag object in the master list
      */
-    private void syncTagsWithMasterList(Person person) {
-        final UniqueTagList personTags = person.getTags();
+    private void syncTagsWithMasterList(Task task) {
+        final UniqueTagList personTags = task.getTags();
         tags.mergeFrom(personTags);
 
         // Create map with values = tag object references in the master list
@@ -101,7 +101,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         for (Tag tag : personTags) {
             commonTagReferences.add(masterTagObjects.get(tag));
         }
-        person.setTags(new UniqueTagList(commonTagReferences));
+        task.setTags(new UniqueTagList(commonTagReferences));
     }
 
     public boolean removePerson(ReadOnlyPerson key) throws UniquePersonList.PersonNotFoundException {

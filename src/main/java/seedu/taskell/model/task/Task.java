@@ -6,10 +6,10 @@ import seedu.taskell.commons.util.CollectionUtil;
 import seedu.taskell.model.tag.UniqueTagList;
 
 /**
- * Represents a Person in the task manager.
+ * Represents a Task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
-public class Person implements ReadOnlyPerson {
+public class Task implements ReadOnlyPerson {
 
     private Description description;
     private Phone phone;
@@ -21,7 +21,7 @@ public class Person implements ReadOnlyPerson {
     /**
      * Every field must be present and not null.
      */
-    public Person(Description description, Phone phone, Email email, TaskPriority taskPriority, UniqueTagList tags) {
+    public Task(Description description, Phone phone, Email email, TaskPriority taskPriority, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, phone, email, taskPriority, tags);
         this.description = description;
         this.phone = phone;
@@ -33,7 +33,7 @@ public class Person implements ReadOnlyPerson {
     /**
      * Copy constructor.
      */
-    public Person(ReadOnlyPerson source) {
+    public Task(ReadOnlyPerson source) {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
