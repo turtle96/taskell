@@ -9,7 +9,7 @@ import seedu.taskell.model.task.*;
 public class TestPerson implements ReadOnlyPerson {
 
     private Name name;
-    private Address address;
+    private TaskPriority taskPriority;
     private Email email;
     private Phone phone;
     private UniqueTagList tags;
@@ -22,8 +22,8 @@ public class TestPerson implements ReadOnlyPerson {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setAddress(TaskPriority taskPriority) {
+        this.taskPriority = taskPriority;
     }
 
     public void setEmail(Email email) {
@@ -50,8 +50,8 @@ public class TestPerson implements ReadOnlyPerson {
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public TaskPriority getAddress() {
+        return taskPriority;
     }
 
     @Override

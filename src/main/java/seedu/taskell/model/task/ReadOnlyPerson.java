@@ -11,7 +11,7 @@ public interface ReadOnlyPerson {
     Name getName();
     Phone getPhone();
     Email getEmail();
-    Address getAddress();
+    TaskPriority getAddress();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -41,7 +41,7 @@ public interface ReadOnlyPerson {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail())
-                .append(" Address: ")
+                .append(" TaskPriority: ")
                 .append(getAddress())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
