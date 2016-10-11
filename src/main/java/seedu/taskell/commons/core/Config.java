@@ -14,7 +14,7 @@ public class Config {
     private String appTitle = "Taskell";
     private Level logLevel = Level.INFO;
     private String userPrefsFilePath = "preferences.json";
-    private String addressBookFilePath = "data/addressbook.xml";
+    private String addressBookFilePath = "data/taskmanager.xml";
     private String taskManagerName = "MyTaskManager";
 
 
