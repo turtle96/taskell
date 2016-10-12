@@ -4,7 +4,7 @@ package seedu.taskell.model.tag;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Tag in the address book.
+ * Represents a Tag in the task manager.
  * Guarantees: immutable; name is valid as declared in {@link #isValidTagName(String)}
  */
 public class Tag {
@@ -55,6 +55,10 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+    
+    public String toSimpleString() {
+        return tagName;
     }
 
 }

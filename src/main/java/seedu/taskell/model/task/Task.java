@@ -34,26 +34,26 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getDescription(), source.getDate(), source.getTime(), source.getPriority(), source.getTags());
     }
 
     @Override
-    public Description getName() {
+    public Description getDescription() {
         return description;
     }
 
     @Override
-    public TaskDate getPhone() {
+    public TaskDate getDate() {
         return taskDate;
     }
 
     @Override
-    public TaskTime getEmail() {
+    public TaskTime getTime() {
         return taskTime;
     }
 
     @Override
-    public TaskPriority getAddress() {
+    public TaskPriority getPriority() {
         return taskPriority;
     }
 
@@ -63,7 +63,7 @@ public class Task implements ReadOnlyTask {
     }
 
     /**
-     * Replaces this person's tags with the tags in the argument tag list.
+     * Replaces this task's tags with the tags in the argument tag list.
      */
     public void setTags(UniqueTagList replacement) {
         tags.setTags(replacement);

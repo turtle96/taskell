@@ -3,35 +3,35 @@ package seedu.taskell.model.task;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Task's date in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
  */
 public class TaskDate {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Task phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
-
-    public final String value;
+    public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates should only contain numbers";
+    public static final String DATE_VALIDATION_REGEX = "\\d+";
+    
+    public final String date;
 
     /**
-     * Validates given phone number.
+     * Validates given date number.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given date string is invalid.
      */
-    public TaskDate(String phone) throws IllegalValueException {
-        assert phone != null;
-        phone = phone.trim();
-        if (!isValidPhone(phone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+    public TaskDate(String date) throws IllegalValueException {
+        assert date != null;
+        date = date.trim();
+        if (!isValidPhone(date)) {
+            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = phone;
+        this.value = date;
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid task date.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidDate(String test) {
+        return test.matches(DATE_VALIDATION_REGEX);
     }
 
     @Override
