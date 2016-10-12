@@ -21,10 +21,10 @@ public class TaskDate {
     public TaskDate(String date) throws IllegalValueException {
         assert date != null;
         date = date.trim();
-        if (!isValidPhone(date)) {
+        if (!isValidDate(date)) {
             throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
         }
-        this.value = date;
+        this.date = date;
     }
 
     /**
@@ -36,19 +36,19 @@ public class TaskDate {
 
     @Override
     public String toString() {
-        return value;
+        return date;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && this.value.equals(((TaskDate) other).value)); // state check
+                && this.date.equals(((TaskDate) other).date)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return date.hashCode();
     }
 
 }

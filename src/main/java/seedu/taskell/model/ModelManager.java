@@ -139,7 +139,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String stringToCheck = task.getDescription() + " " + task.tagsSimpleString();
+            String stringToCheck = task.getDescription() + " " + task.tagsString();
             return nameKeyWords.stream()
                     .filter(keyword -> StringUtil.containsIgnoreCase(stringToCheck, keyword))
                     .findAny()
