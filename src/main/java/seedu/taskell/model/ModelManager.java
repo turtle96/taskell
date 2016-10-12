@@ -23,7 +23,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final TaskManager taskManager;
-    private final FilteredList<Task> filteredTaskss;
+    private final FilteredList<Task> filteredTasks;
 
     /**
      * Initializes a ModelManager with the given TaskManager
@@ -116,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean satisfies(ReadOnlyTask task) {
-            return qualifier.run(person);
+            return qualifier.run(task);
         }
 
         @Override
@@ -141,7 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
         public boolean run(ReadOnlyTask task) {
             String stringToCheck = task.getDescription() + " " + task.tagsSimpleString();
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+                    .filter(keyword -> StringUtil.containsIgnoreCase(stringToCheck, keyword))
                     .findAny()
                     .isPresent();
         }

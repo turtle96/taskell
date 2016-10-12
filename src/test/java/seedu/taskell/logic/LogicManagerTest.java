@@ -316,7 +316,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInDescription() throws Exception {
+    public void execute_find_onlyMatchesFullWordsInDescriptions() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
         Task pTarget2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
@@ -409,7 +409,7 @@ public class LogicManagerTest {
 
             UniqueTagList tags = p.getTags();
             for (Tag t : tags) {
-                cmd.append(" t/").append(t.tagDescription);
+                cmd.append(" t/").append(t.tagName);
             }
 
             return cmd.toString();

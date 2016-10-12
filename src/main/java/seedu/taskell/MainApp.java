@@ -70,14 +70,14 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskManager> TaskManagerOptional;
+        Optional<ReadOnlyTaskManager> taskManagerOptional;
         ReadOnlyTaskManager initialData;
         try {
-            TaskManagerOptional = storage.readTaskManager();
-            if(!TaskManagerOptional.isPresent()){
+            taskManagerOptional = storage.readTaskManager();
+            if(!taskManagerOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty TaskManager");
             }
-            initialData = TaskManagerOptional.orElse(new TaskManager());
+            initialData = taskManagerOptional.orElse(new TaskManager());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty TaskManager");
             initialData = new TaskManager();

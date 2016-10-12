@@ -7,55 +7,48 @@ import seedu.taskell.model.task.*;
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
-    public static TestPerson alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
-
-    public TypicalTestPersons() {
+    public static TestTask archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, holdMeeting, inspectWarehouse;
+    
+    public TypicalTestTasks() {
         try {
-            alice =  new PersonBuilder().withName("Alice Pauline").withAddress("123, Jurong West Ave 6, #08-111")
-                    .withEmail("alice@gmail.com").withPhone("85355255")
-                    .withTags("friends").build();
-            benson = new PersonBuilder().withName("Benson Meier").withAddress("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withPhone("98765432")
-                    .withTags("owesMoney", "friends").build();
-            carl = new PersonBuilder().withName("Carl Kurz").withPhone("95352563").withEmail("heinz@yahoo.com").withAddress("wall street").build();
-            daniel = new PersonBuilder().withName("Daniel Meier").withPhone("87652533").withEmail("cornelia@google.com").withAddress("10th street").build();
-            elle = new PersonBuilder().withName("Elle Meyer").withPhone("9482224").withEmail("werner@gmail.com").withAddress("michegan ave").build();
-            fiona = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427").withEmail("lydia@gmail.com").withAddress("little tokyo").build();
-            george = new PersonBuilder().withName("George Best").withPhone("9482442").withEmail("anna@google.com").withAddress("4th street").build();
-
+            archivePastEmails =  new TaskBuilder().withDescription("Archive past emails").withDate("8-8-16").withTime("12pm").withPriority("3").withTags("personal").build();
+            borrowBooks =  new TaskBuilder().withDescription("borrorBooks").withDate("9-8-16").withTime("12am").withPriority("1").withTags("friend").build();
+            collectParcel =  new TaskBuilder().withDescription("collectParcel").withDate("9-9-16").withTime("2am").withPriority("1").withTags("friend").build();
+            discardBooks =  new TaskBuilder().withDescription("discard old books").withDate("19-9-16").withTime("4am").withPriority("1").withTags("home").build();
+            editPowerpoint =  new TaskBuilder().withDescription("edit 2101 powerpoint").withDate("8-9-16").withTime("6am").withPriority("5").withTags("homework").build();
+            
             //Manually added
-            hoon = new PersonBuilder().withName("Hoon Meier").withPhone("8482424").withEmail("stefan@mail.com").withAddress("little india").build();
-            ida = new PersonBuilder().withName("Ida Mueller").withPhone("8482131").withEmail("hans@google.com").withAddress("chicago ave").build();
+            holdMeeting =  new TaskBuilder().withDescription("hold project meeting").withDate("8-10-16").withTime("11am").withPriority("5").withTags("homework").build();
+            inspectWarehouse =  new TaskBuilder().withDescription("inspect ware house").withDate("28-10-16").withTime("11am").withPriority("4").withTags("work").build();
+            
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(TaskManager ab) {
+    public static void loadTaskManagerWithSampleData(TaskManager ab) {
 
         try {
-            ab.addPerson(new Task(alice));
-            ab.addPerson(new Task(benson));
-            ab.addPerson(new Task(carl));
-            ab.addPerson(new Task(daniel));
-            ab.addPerson(new Task(elle));
-            ab.addPerson(new Task(fiona));
-            ab.addPerson(new Task(george));
-        } catch (UniqueTaskList.DuplicatePersonException e) {
+            ab.addTask(new Task(archivePastEmails));
+            ab.addTask(new Task(borrowBooks));
+            ab.addTask(new Task(collectParcel));
+            ab.addTask(new Task(discardBooks));
+            ab.addTask(new Task(editPowerpoint));
+        } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "not possible";
         }
     }
 
-    public TestPerson[] getTypicalPersons() {
-        return new TestPerson[]{alice, benson, carl, daniel, elle, fiona, george};
+    public TestTask[] getTypicalTasks() {
+        return new TestTask[]{archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint};
     }
 
-    public TaskManager getTypicalAddressBook(){
+    public TaskManager getTypicalTaskManager(){
         TaskManager ab = new TaskManager();
-        loadAddressBookWithSampleData(ab);
+        loadTaskManagerWithSampleData(ab);
         return ab;
     }
 }

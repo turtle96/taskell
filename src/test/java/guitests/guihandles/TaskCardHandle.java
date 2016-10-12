@@ -25,7 +25,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullDescription() {
+    public String getDescription() {
         return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
