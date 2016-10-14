@@ -7,14 +7,8 @@ import seedu.taskell.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
-
-<<<<<<< HEAD
     Description getDescription();
-    TaskDate getPhone();
-=======
-    Description getName();
     TaskDate getTaskDate();
->>>>>>> e6ab355e1524b899d613fc526a3bf4408cfee8b8
     TaskTime getEmail();
     TaskPriority getTaskPriority();
 
@@ -30,13 +24,8 @@ public interface ReadOnlyTask {
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-<<<<<<< HEAD
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
-=======
-                && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getTaskDate().equals(this.getTaskDate())
->>>>>>> e6ab355e1524b899d613fc526a3bf4408cfee8b8
                 && other.getEmail().equals(this.getEmail())
                 && other.getTaskPriority().equals(this.getTaskPriority()));
     }

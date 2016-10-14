@@ -166,11 +166,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() throws Exception {
         assertCommandBehavior(
-<<<<<<< HEAD
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-=======
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, taskPriority", Description.MESSAGE_NAME_CONSTRAINTS);
->>>>>>> e6ab355e1524b899d613fc526a3bf4408cfee8b8
+                "add []\\[;] p/12345 e/valid@e.mail a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/not_numbers e/valid@e.mail a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
@@ -424,13 +420,8 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-<<<<<<< HEAD
             cmd.append(p.getDescription().toString());
-            cmd.append(" p/").append(p.getPhone());
-=======
-            cmd.append(p.getName().toString());
             cmd.append(" p/").append(p.getTaskDate());
->>>>>>> e6ab355e1524b899d613fc526a3bf4408cfee8b8
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" a/").append(p.getTaskPriority());
 

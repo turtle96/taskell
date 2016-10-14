@@ -39,13 +39,8 @@ public class XmlAdaptedTask {
      * @param source future changes to this will not affect the created XmlAdaptedTask
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
-<<<<<<< HEAD
         description = source.getDescription().description;
-        date = source.getPhone().value;
-=======
-        description = source.getName().fullName;
         date = source.getTaskDate().value;
->>>>>>> e6ab355e1524b899d613fc526a3bf4408cfee8b8
         time = source.getEmail().value;
         taskPriority = source.getTaskPriority().value;
         tagged = new ArrayList<>();
