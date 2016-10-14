@@ -15,7 +15,7 @@ public interface Model {
     void resetData(ReadOnlyTaskManager newData);
 
     /** Returns the TaskManager */
-    ReadOnlyTaskManager getAddressBook();
+    ReadOnlyTaskManager getTaskManager();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;

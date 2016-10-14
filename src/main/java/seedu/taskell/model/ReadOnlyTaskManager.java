@@ -9,7 +9,7 @@ import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.UniqueTaskList;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an task manager
  */
 public interface ReadOnlyTaskManager {
 

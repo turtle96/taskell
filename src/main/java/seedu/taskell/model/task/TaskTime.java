@@ -4,7 +4,7 @@ package seedu.taskell.model.task;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's taskDate number in the address book.
+ * Represents a Task's taskDate number in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidEmail(String)}
  */
 public class TaskTime {
