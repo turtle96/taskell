@@ -16,7 +16,7 @@ import seedu.taskell.storage.Storage;
 import seedu.taskell.storage.StorageManager;
 import seedu.taskell.storage.XmlTaskManagerStorage;
 import seedu.taskell.testutil.EventsCollector;
-import seedu.taskell.testutil.TypicalTestPersons;
+import seedu.taskell.testutil.TypicalTestTasks;
 
 import java.io.IOException;
 
@@ -60,7 +60,7 @@ public class StorageManagerTest {
 
     @Test
     public void addressBookReadSave() throws Exception {
-        TaskManager original = new TypicalTestPersons().getTypicalAddressBook();
+        TaskManager original = new TypicalTestTasks().getTypicalAddressBook();
         storageManager.saveAddressBook(original);
         ReadOnlyTaskManager retrieved = storageManager.readAddressBook().get();
         assertEquals(original, new TaskManager(retrieved));

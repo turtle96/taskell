@@ -28,7 +28,7 @@ public class TaskDate {
     }
 
     /**
-     * Returns true if a given string is a valid person taskDate number.
+     * Returns true if a given string is a valid task taskDate number.
      */
     public static boolean isValidTaskDate(String test) {
         return test.matches(TASK_DATE_VALIDATION_REGEX);

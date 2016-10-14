@@ -6,9 +6,9 @@ import javafx.stage.Stage;
 import seedu.taskell.model.task.ReadOnlyTask;
 
 /**
- * Provides a handle to a person card in the person list panel.
+ * Provides a handle to a task card in the task list panel.
  */
-public class PersonCardHandle extends GuiHandle {
+public class TaskCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String TASK_PRIORITY_FIELD_ID = "#taskPriority";
     private static final String TASK_DATE_FIELD_ID = "#taskDate";
@@ -16,7 +16,7 @@ public class PersonCardHandle extends GuiHandle {
 
     private Node node;
 
-    public PersonCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node){
+    public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node){
         super(guiRobot, primaryStage, null);
         this.node = node;
     }
@@ -41,15 +41,15 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(EMAIL_FIELD_ID);
     }
 
-    public boolean isSamePerson(ReadOnlyTask person){
-        return getFullName().equals(person.getName().fullName) && getTaskDate().equals(person.getTaskDate().value)
-                && getEmail().equals(person.getEmail().value) && getTaskPriority().equals(person.getTaskPriority().value);
+    public boolean isSameTask(ReadOnlyTask task){
+        return getFullName().equals(task.getName().fullName) && getTaskDate().equals(task.getTaskDate().value)
+                && getEmail().equals(task.getEmail().value) && getTaskPriority().equals(task.getTaskPriority().value);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(obj instanceof PersonCardHandle) {
-            PersonCardHandle handle = (PersonCardHandle) obj;
+        if(obj instanceof TaskCardHandle) {
+            TaskCardHandle handle = (TaskCardHandle) obj;
             return getFullName().equals(handle.getFullName())
                     && getTaskPriority().equals(handle.getTaskPriority()); //TODO: compare the rest
         }
