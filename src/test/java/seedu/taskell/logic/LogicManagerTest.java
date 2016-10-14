@@ -501,11 +501,11 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given description. Other fields will have some dummy values.
          */
-        Task generatePersonWithName(String name) throws Exception {
+        Task generatePersonWithName(String description) throws Exception {
             return new Task(
-                    new Description(name),
+                    new Description(description),
                     new TaskDate("1"),
                     new TaskTime("1@email"),
                     new TaskPriority("House of 1"),

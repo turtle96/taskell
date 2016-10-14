@@ -14,21 +14,21 @@ public class Description {
     public final String description;
 
     /**
-     * Validates given name.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
-    public Description(String name) throws IllegalValueException {
-        assert name != null;
-        name = name.trim();
-        if (!isValidDescription(name)) {
+    public Description(String description) throws IllegalValueException {
+        assert description != null;
+        description = description.trim();
+        if (!isValidDescription(description)) {
             throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.description = name;
+        this.description = description;
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task description.
      */
     public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);

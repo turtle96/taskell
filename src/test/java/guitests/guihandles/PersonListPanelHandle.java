@@ -100,11 +100,11 @@ public class PersonListPanelHandle extends GuiHandle {
     }
 
 
-    public PersonCardHandle navigateToPerson(String name) {
+    public PersonCardHandle navigateToPerson(String description) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<ReadOnlyTask> person = getListView().getItems().stream().filter(p -> p.getDescription().description.equals(name)).findAny();
+        final Optional<ReadOnlyTask> person = getListView().getItems().stream().filter(p -> p.getDescription().description.equals(description)).findAny();
         if (!person.isPresent()) {
-            throw new IllegalStateException("Description not found: " + name);
+            throw new IllegalStateException("Description not found: " + description);
         }
 
         return navigateToPerson(person.get());
