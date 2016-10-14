@@ -18,7 +18,7 @@ public class TestTask implements ReadOnlyTask {
         tags = new UniqueTagList();
     }
 
-    public void setName(Description description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
@@ -35,7 +35,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public Description getName() {
+    public Description getDescription() {
         return description;
     }
 
@@ -66,7 +66,7 @@ public class TestTask implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().fullName + " ");
+        sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getTaskDate().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         sb.append("a/" + this.getTaskPriority().value + " ");

@@ -5,11 +5,9 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import seedu.taskell.model.task.ReadOnlyTask;
 
-/**
- * Provides a handle to a task card in the task list panel.
- */
 public class TaskCardHandle extends GuiHandle {
-    private static final String NAME_FIELD_ID = "#name";
+    private static final String DESCRIPTION_FIELD_ID = "#description";
+
     private static final String TASK_PRIORITY_FIELD_ID = "#taskPriority";
     private static final String TASK_DATE_FIELD_ID = "#taskDate";
     private static final String EMAIL_FIELD_ID = "#email";
@@ -25,8 +23,8 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(fieldId, node);
     }
 
-    public String getFullName() {
-        return getTextFromLabel(NAME_FIELD_ID);
+    public String getDescription() {
+        return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
     public String getTaskPriority() {
@@ -42,7 +40,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task){
-        return getFullName().equals(task.getName().fullName) && getTaskDate().equals(task.getTaskDate().value)
+        return getDescription().equals(task.getDescription().description) && getTaskDate().equals(task.getTaskDate().value)
                 && getEmail().equals(task.getEmail().value) && getTaskPriority().equals(task.getTaskPriority().value);
     }
 
@@ -50,7 +48,7 @@ public class TaskCardHandle extends GuiHandle {
     public boolean equals(Object obj) {
         if(obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getFullName().equals(handle.getFullName())
+            return getDescription().equals(handle.getDescription())
                     && getTaskPriority().equals(handle.getTaskPriority()); //TODO: compare the rest
         }
         return super.equals(obj);
@@ -58,6 +56,6 @@ public class TaskCardHandle extends GuiHandle {
 
     @Override
     public String toString() {
-        return getFullName() + " " + getTaskPriority();
+        return getDescription() + " " + getTaskPriority();
     }
 }

@@ -166,7 +166,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, taskPriority", Description.MESSAGE_NAME_CONSTRAINTS);
+                "add []\\[;] p/12345 e/valid@e.mail a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/not_numbers e/valid@e.mail a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
@@ -420,7 +420,7 @@ public class LogicManagerTest {
 
             cmd.append("add ");
 
-            cmd.append(p.getName().toString());
+            cmd.append(p.getDescription().toString());
             cmd.append(" p/").append(p.getTaskDate());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" a/").append(p.getTaskPriority());
@@ -501,11 +501,12 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given description. Other fields will have some dummy values.
          */
-        Task generateTaskWithName(String name) throws Exception {
+
+        Task generateTaskWithName(String description) throws Exception {
             return new Task(
-                    new Description(name),
+                    new Description(description),
                     new TaskDate("1"),
                     new TaskTime("1@email"),
                     new TaskPriority("House of 1"),
