@@ -3,53 +3,53 @@ package seedu.taskell.model.task;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's name in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Represents a Task's description in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
-    public static final String MESSAGE_NAME_CONSTRAINTS = "Task names should be spaces or alphanumeric characters";
-    public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum} ]+";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Task description should be spaces or alphanumeric characters";
+    public static final String DESCRIPTION_VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
-    public final String fullName;
+    public final String description;
 
     /**
-     * Validates given name.
+     * Validates given description.
      *
-     * @throws IllegalValueException if given name string is invalid.
+     * @throws IllegalValueException if given description string is invalid.
      */
-    public Description(String name) throws IllegalValueException {
-        assert name != null;
-        name = name.trim();
-        if (!isValidName(name)) {
-            throw new IllegalValueException(MESSAGE_NAME_CONSTRAINTS);
+    public Description(String description) throws IllegalValueException {
+        assert description != null;
+        description = description.trim();
+        if (!isValidDescription(description)) {
+            throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
-        this.fullName = name;
+        this.description = description;
     }
 
     /**
-     * Returns true if a given string is a valid person name.
+     * Returns true if a given string is a valid task description.
      */
-    public static boolean isValidName(String test) {
-        return test.matches(NAME_VALIDATION_REGEX);
+    public static boolean isValidDescription(String test) {
+        return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
 
     @Override
     public String toString() {
-        return fullName;
+        return description;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Description // instanceof handles nulls
-                && this.fullName.equals(((Description) other).fullName)); // state check
+                && this.description.equals(((Description) other).description)); // state check
     }
 
     @Override
     public int hashCode() {
-        return fullName.hashCode();
+        return description.hashCode();
     }
 
 }
