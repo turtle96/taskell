@@ -166,7 +166,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Description.MESSAGE_NAME_CONSTRAINTS);
+                "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", TaskDate.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandBehavior(
