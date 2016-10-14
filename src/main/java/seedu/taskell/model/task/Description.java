@@ -4,7 +4,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's description in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidDescription(String)}
  */
 public class Description {
 
