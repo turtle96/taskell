@@ -12,7 +12,7 @@ import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskell.commons.events.ui.PersonPanelSelectionChangedEvent;
+import seedu.taskell.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.Logic;
@@ -114,13 +114,13 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.getPersonListPanel().scrollTo(event.targetIndex);
+        mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
     @Subscribe
-    private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event){
+    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadPersonPage(event.getNewSelection());
+        mainWindow.loadTaskPage(event.getNewSelection());
     }
 
 }

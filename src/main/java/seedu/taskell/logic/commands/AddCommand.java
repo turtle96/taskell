@@ -9,19 +9,19 @@ import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
 
 /**
- * Adds a person to the address book.
+ * Adds a task to the task manager.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a person to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
             + "Parameters: NAME p/TASK_DATE e/EMAIL a/TASK_PRIORITY [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
-    public static final String MESSAGE_SUCCESS = "New person added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_SUCCESS = "New task added: %1$s";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
 
     private final Task toAdd;
 
@@ -50,10 +50,10 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         assert model != null;
         try {
-            model.addPerson(toAdd);
+            model.addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-        } catch (UniqueTaskList.DuplicatePersonException e) {
-            return new CommandResult(MESSAGE_DUPLICATE_PERSON);
+        } catch (UniqueTaskList.DuplicateTaskException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
 
     }

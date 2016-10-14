@@ -4,9 +4,9 @@ import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
 
 /**
- * A mutable person object. For testing only.
+ * A mutable task object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Description description;
     private TaskPriority taskPriority;
@@ -14,7 +14,7 @@ public class TestPerson implements ReadOnlyTask {
     private TaskDate taskDate;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
