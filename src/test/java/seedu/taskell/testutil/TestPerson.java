@@ -22,7 +22,7 @@ public class TestPerson implements ReadOnlyTask {
         this.description = description;
     }
 
-    public void setAddress(TaskPriority taskPriority) {
+    public void setTaskPriority(TaskPriority taskPriority) {
         this.taskPriority = taskPriority;
     }
 
@@ -40,7 +40,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getPhone() {
+    public TaskDate getTaskDate() {
         return taskDate;
     }
 
@@ -50,7 +50,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public TaskPriority getAddress() {
+    public TaskPriority getTaskPriority() {
         return taskPriority;
     }
 
@@ -67,9 +67,9 @@ public class TestPerson implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("p/" + this.getPhone().value + " ");
+        sb.append("p/" + this.getTaskDate().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("a/" + this.getTaskPriority().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

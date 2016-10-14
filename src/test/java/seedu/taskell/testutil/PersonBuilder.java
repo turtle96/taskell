@@ -27,13 +27,13 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new TaskPriority(address));
+    public PersonBuilder withTaskPriority(String taskPriority) throws IllegalValueException {
+        this.person.setTaskPriority(new TaskPriority(taskPriority));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new TaskDate(phone));
+    public PersonBuilder withTaskDate(String taskDate) throws IllegalValueException {
+        this.person.setPhone(new TaskDate(taskDate));
         return this;
     }
 
