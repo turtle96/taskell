@@ -166,13 +166,13 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add []\\[;] p/12345 e/valid@taskTime a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/not_numbers e/valid@e.mail a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description p/not_numbers e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/12345 e/notAnEmail a/valid, taskPriority", TaskTime.MESSAGE_EMAIL_CONSTRAINTS);
+                "add Valid Description p/12345 e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/12345 e/valid@e.mail a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Description p/12345 e/valid@taskTime a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 

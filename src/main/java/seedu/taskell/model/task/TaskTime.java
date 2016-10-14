@@ -4,14 +4,14 @@ package seedu.taskell.model.task;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's taskTime number in the task manager.
+ * Represents a Task's taskTime in the task manager.
  * Guarantees: immutable; is valid as declared in {@link #isValidTaskTime(String)}
  */
 public class TaskTime {
 
-    public static final String MESSAGE_EMAIL_CONSTRAINTS =
+    public static final String MESSAGE_TASK_TIME_CONSTRAINTS =
             "Task time should be 2 alphanumeric/period strings separated by '@'";
-    public static final String EMAIL_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String TASKTIME_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String taskTime;
 
@@ -23,8 +23,8 @@ public class TaskTime {
     public TaskTime(String taskTime) throws IllegalValueException {
         assert taskTime != null;
         taskTime = taskTime.trim();
-        if (!isValidEmail(taskTime)) {
-            throw new IllegalValueException(MESSAGE_EMAIL_CONSTRAINTS);
+        if (!isValidTaskTime(taskTime)) {
+            throw new IllegalValueException(MESSAGE_TASK_TIME_CONSTRAINTS);
         }
         this.taskTime = taskTime;
     }
@@ -32,8 +32,8 @@ public class TaskTime {
     /**
      * Returns if a given string is a valid task taskTime.
      */
-    public static boolean isValidEmail(String test) {
-        return test.matches(EMAIL_VALIDATION_REGEX);
+    public static boolean isValidTaskTime(String test) {
+        return test.matches(TASKTIME_VALIDATION_REGEX);
     }
 
     @Override
