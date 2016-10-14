@@ -10,7 +10,7 @@ import seedu.taskell.model.task.ReadOnlyTask;
  */
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
-    private static final String ADDRESS_FIELD_ID = "#address";
+    private static final String TASK_PRIORITY_FIELD_ID = "#taskPriority";
     private static final String PHONE_FIELD_ID = "#taskDate";
     private static final String EMAIL_FIELD_ID = "#email";
 
@@ -29,8 +29,8 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(NAME_FIELD_ID);
     }
 
-    public String getAddress() {
-        return getTextFromLabel(ADDRESS_FIELD_ID);
+    public String getTaskPriority() {
+        return getTextFromLabel(TASK_PRIORITY_FIELD_ID);
     }
 
     public String getTaskDate() {
@@ -43,7 +43,7 @@ public class PersonCardHandle extends GuiHandle {
 
     public boolean isSamePerson(ReadOnlyTask person){
         return getFullName().equals(person.getName().fullName) && getTaskDate().equals(person.getTaskDate().value)
-                && getEmail().equals(person.getEmail().value) && getAddress().equals(person.getAddress().value);
+                && getEmail().equals(person.getEmail().value) && getTaskPriority().equals(person.getTaskPriority().value);
     }
 
     @Override
@@ -51,13 +51,13 @@ public class PersonCardHandle extends GuiHandle {
         if(obj instanceof PersonCardHandle) {
             PersonCardHandle handle = (PersonCardHandle) obj;
             return getFullName().equals(handle.getFullName())
-                    && getAddress().equals(handle.getAddress()); //TODO: compare the rest
+                    && getTaskPriority().equals(handle.getTaskPriority()); //TODO: compare the rest
         }
         return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return getFullName() + " " + getAddress();
+        return getFullName() + " " + getTaskPriority();
     }
 }

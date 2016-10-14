@@ -27,8 +27,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new TaskPriority(address));
+    public PersonBuilder withTaskPriority(String taskPriority) throws IllegalValueException {
+        this.person.setTaskPriority(new TaskPriority(taskPriority));
         return this;
     }
 
