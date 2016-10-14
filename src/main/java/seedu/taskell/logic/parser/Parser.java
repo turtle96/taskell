@@ -30,7 +30,7 @@ public class Parser {
             Pattern.compile("(?<name>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<taskDate>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
-                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
+                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     public Parser() {}
@@ -97,7 +97,7 @@ public class Parser {
                     matcher.group("name"),
                     matcher.group("taskDate"),
                     matcher.group("email"),
-                    matcher.group("address"),
+                    matcher.group("taskPriority"),
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
         } catch (IllegalValueException ive) {

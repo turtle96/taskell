@@ -11,7 +11,7 @@ public interface ReadOnlyTask {
     Description getName();
     TaskDate getTaskDate();
     TaskTime getEmail();
-    TaskPriority getAddress();
+    TaskPriority getTaskPriority();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -28,7 +28,7 @@ public interface ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getTaskDate().equals(this.getTaskDate())
                 && other.getEmail().equals(this.getEmail())
-                && other.getAddress().equals(this.getAddress()));
+                && other.getTaskPriority().equals(this.getTaskPriority()));
     }
 
     /**
@@ -42,7 +42,7 @@ public interface ReadOnlyTask {
                 .append(" TaskTime: ")
                 .append(getEmail())
                 .append(" TaskPriority: ")
-                .append(getAddress())
+                .append(getTaskPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

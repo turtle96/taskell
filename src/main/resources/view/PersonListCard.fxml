@@ -32,7 +32,7 @@
                             </children>
                         </HBox>
                         <Label fx:id="taskDate" styleClass="cell_small_label" text="\$taskDate" />
-                        <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
+                        <Label fx:id="taskPriority" styleClass="cell_small_label" text="\$taskPriority" />
                         <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
                     </children>
                 </VBox>

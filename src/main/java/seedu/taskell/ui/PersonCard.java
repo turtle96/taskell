@@ -19,7 +19,7 @@ public class PersonCard extends UiPart{
     @FXML
     private Label taskDate;
     @FXML
-    private Label address;
+    private Label taskPriority;
     @FXML
     private Label email;
     @FXML
@@ -44,7 +44,7 @@ public class PersonCard extends UiPart{
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
         taskDate.setText(person.getTaskDate().value);
-        address.setText(person.getAddress().value);
+        taskPriority.setText(person.getTaskPriority().value);
         email.setText(person.getEmail().value);
         tags.setText(person.tagsString());
     }
