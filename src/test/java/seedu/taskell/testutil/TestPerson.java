@@ -35,7 +35,7 @@ public class TestPerson implements ReadOnlyTask {
     }
 
     @Override
-    public Description getName() {
+    public Description getDescription() {
         return description;
     }
 
@@ -66,7 +66,7 @@ public class TestPerson implements ReadOnlyTask {
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
-        sb.append("add " + this.getName().description + " ");
+        sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getPhone().value + " ");
         sb.append("e/" + this.getEmail().value + " ");
         sb.append("a/" + this.getAddress().value + " ");
