@@ -8,7 +8,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
  */
 public class Description {
 
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Task names should be spaces or alphanumeric characters";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Task description should be spaces or alphanumeric characters";
     public static final String DESCRIPTION_VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public final String description;
@@ -21,7 +21,7 @@ public class Description {
     public Description(String name) throws IllegalValueException {
         assert name != null;
         name = name.trim();
-        if (!isValidName(name)) {
+        if (!isValidDescription(name)) {
             throw new IllegalValueException(MESSAGE_DESCRIPTION_CONSTRAINTS);
         }
         this.description = name;
@@ -30,7 +30,7 @@ public class Description {
     /**
      * Returns true if a given string is a valid person name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidDescription(String test) {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
