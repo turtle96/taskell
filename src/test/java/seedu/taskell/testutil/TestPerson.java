@@ -18,7 +18,7 @@ public class TestPerson implements ReadOnlyTask {
         tags = new UniqueTagList();
     }
 
-    public void setName(Description description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 
