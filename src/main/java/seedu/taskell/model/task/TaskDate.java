@@ -3,35 +3,35 @@ package seedu.taskell.model.task;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's phone number in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
+ * Represents a Task's date in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskDate(String)}
  */
 public class TaskDate {
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS = "Task phone numbers should only contain numbers";
-    public static final String PHONE_VALIDATION_REGEX = "\\d+";
+    public static final String MESSAGE_TASK_DATE_CONSTRAINTS = "Task dates should only contain numbers";
+    public static final String TASK_DATE_VALIDATION_REGEX = "\\d+";
 
     public final String value;
 
     /**
-     * Validates given phone number.
+     * Validates given task date.
      *
-     * @throws IllegalValueException if given phone string is invalid.
+     * @throws IllegalValueException if given task date string is invalid.
      */
-    public TaskDate(String phone) throws IllegalValueException {
-        assert phone != null;
-        phone = phone.trim();
-        if (!isValidPhone(phone)) {
-            throw new IllegalValueException(MESSAGE_PHONE_CONSTRAINTS);
+    public TaskDate(String taskDate) throws IllegalValueException {
+        assert taskDate != null;
+        taskDate = taskDate.trim();
+        if (!isValidTaskDate(taskDate)) {
+            throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
         }
-        this.value = phone;
+        this.value = taskDate;
     }
 
     /**
-     * Returns true if a given string is a valid person phone number.
+     * Returns true if a given string is a valid person taskDate number.
      */
-    public static boolean isValidPhone(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+    public static boolean isValidTaskDate(String test) {
+        return test.matches(TASK_DATE_VALIDATION_REGEX);
     }
 
     @Override
