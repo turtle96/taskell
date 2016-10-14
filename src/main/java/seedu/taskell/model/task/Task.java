@@ -34,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTaskDate(), source.getEmail(), source.getTaskPriority(), source.getTags());
+        this(source.getDescription(), source.getTaskDate(), source.getTaskTime(), source.getTaskPriority(), source.getTags());
     }
 
     @Override
@@ -48,7 +48,7 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskTime getEmail() {
+    public TaskTime getTaskTime() {
         return taskTime;
     }
 

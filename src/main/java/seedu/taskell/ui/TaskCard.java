@@ -45,7 +45,7 @@ public class TaskCard extends UiPart{
         id.setText(displayedIndex + ". ");
         taskDate.setText(task.getTaskDate().value);
         taskPriority.setText(task.getTaskPriority().value);
-        taskTime.setText(task.getEmail().taskTime);
+        taskTime.setText(task.getTaskTime().taskTime);
         tags.setText(task.tagsString());
     }
 

@@ -422,7 +422,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getDescription().toString());
             cmd.append(" p/").append(p.getTaskDate());
-            cmd.append(" e/").append(p.getEmail());
+            cmd.append(" e/").append(p.getTaskTime());
             cmd.append(" a/").append(p.getTaskPriority());
 
             UniqueTagList tags = p.getTags();

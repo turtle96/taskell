@@ -38,7 +38,7 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withEmail(String taskTime) throws IllegalValueException {
-        this.task.setEmail(new TaskTime(taskTime));
+        this.task.setTaskTime(new TaskTime(taskTime));
         return this;
     }
 
