@@ -17,7 +17,8 @@ public class TypicalTestPersons {
                     .withEmail("alice@gmail.com").withTaskDate("85355255")
                     .withTags("friends").build();
             benson = new PersonBuilder().withDescription("Benson Meier").withTaskPriority("311, Clementi Ave 2, #02-25")
-                    .withEmail("johnd@gmail.com").withTaskDate("98765432").withTags("owesMoney", "friends").build();
+                    .withEmail("johnd@gmail.com").withTaskDate("98765432")
+                    .withTags("owesMoney", "friends").build();
             carl = new PersonBuilder().withDescription("Carl Kurz").withTaskDate("95352563").withEmail("heinz@yahoo.com").withTaskPriority("wall street").build();
             daniel = new PersonBuilder().withDescription("Daniel Meier").withTaskDate("87652533").withEmail("cornelia@google.com").withTaskPriority("10th street").build();
             elle = new PersonBuilder().withDescription("Elle Meyer").withTaskDate("9482224").withEmail("werner@gmail.com").withTaskPriority("michegan ave").build();
