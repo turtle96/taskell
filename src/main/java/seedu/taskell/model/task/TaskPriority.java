@@ -28,7 +28,7 @@ public class TaskPriority {
     }
 
     /**
-     * Returns true if a given string is a valid task email.
+     * Returns true if a given string is a valid task taskTime.
      */
     public static boolean isValidPriority(String test) {
         return test.matches(TASK_PRIORITY_VALIDATION_REGEX);

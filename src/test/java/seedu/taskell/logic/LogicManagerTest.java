@@ -156,23 +156,23 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description 12345 e/valid@email.butNoPhonePrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description 12345 e/valid@taskTime.butNoPhonePrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description p/12345 valid@email.butNoPrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description p/12345 valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description p/12345 e/valid@email.butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
+                "add Valid Description p/12345 e/valid@taskTime.butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add []\\[;] p/12345 e/valid@taskTime a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/not_numbers e/valid@e.mail a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description p/not_numbers e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/12345 e/notAnEmail a/valid, taskPriority", TaskTime.MESSAGE_EMAIL_CONSTRAINTS);
+                "add Valid Description p/12345 e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/12345 e/valid@e.mail a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Description p/12345 e/valid@taskTime a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -408,7 +408,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description("Task " + seed),
                     new TaskDate("" + Math.abs(seed)),
-                    new TaskTime(seed + "@email"),
+                    new TaskTime(seed + "@taskTime"),
                     new TaskPriority("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -422,7 +422,7 @@ public class LogicManagerTest {
 
             cmd.append(p.getDescription().toString());
             cmd.append(" p/").append(p.getTaskDate());
-            cmd.append(" e/").append(p.getEmail());
+            cmd.append(" e/").append(p.getTaskTime());
             cmd.append(" a/").append(p.getTaskPriority());
 
             UniqueTagList tags = p.getTags();
@@ -508,7 +508,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description(description),
                     new TaskDate("1"),
-                    new TaskTime("1@email"),
+                    new TaskTime("1@taskTime"),
                     new TaskPriority("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

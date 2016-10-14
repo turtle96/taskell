@@ -26,7 +26,7 @@ public class TestTask implements ReadOnlyTask {
         this.taskPriority = taskPriority;
     }
 
-    public void setEmail(TaskTime taskTime) {
+    public void setTaskTime(TaskTime taskTime) {
         this.taskTime = taskTime;
     }
 
@@ -45,7 +45,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskTime getEmail() {
+    public TaskTime getTaskTime() {
         return taskTime;
     }
 
@@ -68,7 +68,7 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getTaskDate().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
+        sb.append("e/" + this.getTaskTime().taskTime + " ");
         sb.append("a/" + this.getTaskPriority().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
