@@ -11,7 +11,7 @@ import seedu.taskell.model.task.ReadOnlyTask;
 public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
-    private static final String PHONE_FIELD_ID = "#phone";
+    private static final String PHONE_FIELD_ID = "#taskDate";
     private static final String EMAIL_FIELD_ID = "#email";
 
     private Node node;
@@ -33,7 +33,7 @@ public class PersonCardHandle extends GuiHandle {
         return getTextFromLabel(ADDRESS_FIELD_ID);
     }
 
-    public String getPhone() {
+    public String getTaskDate() {
         return getTextFromLabel(PHONE_FIELD_ID);
     }
 
@@ -42,7 +42,7 @@ public class PersonCardHandle extends GuiHandle {
     }
 
     public boolean isSamePerson(ReadOnlyTask person){
-        return getFullName().equals(person.getName().fullName) && getPhone().equals(person.getPhone().value)
+        return getFullName().equals(person.getName().fullName) && getTaskDate().equals(person.getTaskDate().value)
                 && getEmail().equals(person.getEmail().value) && getAddress().equals(person.getAddress().value);
     }
 

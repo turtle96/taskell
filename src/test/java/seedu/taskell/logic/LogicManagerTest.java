@@ -168,7 +168,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Description.MESSAGE_NAME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", TaskDate.MESSAGE_PHONE_CONSTRAINTS);
+                "add Valid Description p/not_numbers e/valid@e.mail a/valid, address", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/12345 e/notAnEmail a/valid, address", TaskTime.MESSAGE_EMAIL_CONSTRAINTS);
         assertCommandBehavior(
@@ -421,7 +421,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" p/").append(p.getPhone());
+            cmd.append(" p/").append(p.getTaskDate());
             cmd.append(" e/").append(p.getEmail());
             cmd.append(" a/").append(p.getAddress());
 

@@ -9,7 +9,7 @@ import seedu.taskell.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
 
     Description getName();
-    TaskDate getPhone();
+    TaskDate getTaskDate();
     TaskTime getEmail();
     TaskPriority getAddress();
 
@@ -26,7 +26,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getName().equals(this.getName()) // state checks here onwards
-                && other.getPhone().equals(this.getPhone())
+                && other.getTaskDate().equals(this.getTaskDate())
                 && other.getEmail().equals(this.getEmail())
                 && other.getAddress().equals(this.getAddress()));
     }
@@ -38,7 +38,7 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" TaskDate: ")
-                .append(getPhone())
+                .append(getTaskDate())
                 .append(" TaskTime: ")
                 .append(getEmail())
                 .append(" TaskPriority: ")

@@ -40,7 +40,7 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getName().fullName;
-        date = source.getPhone().value;
+        date = source.getTaskDate().value;
         time = source.getEmail().value;
         priority = source.getAddress().value;
         tagged = new ArrayList<>();

@@ -32,8 +32,8 @@ public class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new TaskDate(phone));
+    public PersonBuilder withTaskDate(String taskDate) throws IllegalValueException {
+        this.person.setPhone(new TaskDate(taskDate));
         return this;
     }
 
