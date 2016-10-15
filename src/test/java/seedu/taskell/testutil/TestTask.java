@@ -22,15 +22,15 @@ public class TestTask implements ReadOnlyTask {
         this.description = description;
     }
 
-    public void setPriority(TaskPriority taskPriority) {
+    public void setTaskPriority(TaskPriority taskPriority) {
         this.taskPriority = taskPriority;
     }
 
-    public void setTime(TaskTime taskTime) {
+    public void setTaskTime(TaskTime taskTime) {
         this.taskTime = taskTime;
     }
 
-    public void setDate(TaskDate taskDate) {
+    public void setTaskDate(TaskDate taskDate) {
         this.taskDate = taskDate;
     }
 
@@ -40,17 +40,17 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getDate() {
+    public TaskDate getTaskDate() {
         return taskDate;
     }
 
     @Override
-    public TaskTime getTime() {
+    public TaskTime getTaskTime() {
         return taskTime;
     }
 
     @Override
-    public TaskPriority getPriority() {
+    public TaskPriority getTaskPriority() {
         return taskPriority;
     }
 
@@ -67,9 +67,9 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("p/" + this.getDate().date + " ");
-        sb.append("e/" + this.getTime().time + " ");
-        sb.append("a/" + this.getPriority().priority + " ");
+        sb.append("p/" + this.getTaskDate().value + " ");
+        sb.append("e/" + this.getTaskTime().taskTime + " ");
+        sb.append("a/" + this.getTaskPriority().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }

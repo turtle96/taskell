@@ -5,14 +5,12 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import seedu.taskell.model.task.ReadOnlyTask;
 
-/**
- * Provides a handle to a task card in the task list panel.
- */
 public class TaskCardHandle extends GuiHandle {
     private static final String DESCRIPTION_FIELD_ID = "#description";
-    private static final String DATE_FIELD_ID = "#date";
-    private static final String TIME_FIELD_ID = "#time";
-    private static final String PRIORITY_FIELD_ID = "#priority";
+
+    private static final String TASK_PRIORITY_FIELD_ID = "#taskPriority";
+    private static final String TASK_DATE_FIELD_ID = "#taskDate";
+    private static final String TASK_TIME_FIELD_ID = "#taskTime";
 
     private Node node;
 
@@ -29,21 +27,21 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
-    public String getDate() {
-        return getTextFromLabel(DATE_FIELD_ID);
+    public String getTaskPriority() {
+        return getTextFromLabel(TASK_PRIORITY_FIELD_ID);
     }
 
-    public String getTime() {
-        return getTextFromLabel(TIME_FIELD_ID);
+    public String getTaskDate() {
+        return getTextFromLabel(TASK_DATE_FIELD_ID);
     }
 
-    public String getPriority() {
-        return getTextFromLabel(PRIORITY_FIELD_ID);
+    public String getTaskTime() {
+        return getTextFromLabel(TASK_TIME_FIELD_ID);
     }
 
     public boolean isSameTask(ReadOnlyTask task){
-        return getDescription().equals(task.getDescription().description) && getTime().equals(task.getTime().time)
-                && getPriority().equals(task.getPriority().priority) && getDate().equals(task.getDate().date);
+        return getDescription().equals(task.getDescription().description) && getTaskDate().equals(task.getTaskDate().value)
+                && getTaskTime().equals(task.getTaskTime().taskTime) && getTaskPriority().equals(task.getTaskPriority().value);
     }
 
     @Override
@@ -51,13 +49,13 @@ public class TaskCardHandle extends GuiHandle {
         if(obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
             return getDescription().equals(handle.getDescription())
-                    && getDate().equals(handle.getDate()); //TODO: compare the rest
+                    && getTaskPriority().equals(handle.getTaskPriority()); //TODO: compare the rest
         }
         return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return getDescription() + " " + getDate() + " " + getTime()+ " " + getPriority();
+        return getDescription() + " " + getTaskPriority();
     }
 }

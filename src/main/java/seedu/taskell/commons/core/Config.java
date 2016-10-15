@@ -57,8 +57,8 @@ public class Config {
         return taskManagerName;
     }
 
-    public void setTaskManagerName(String TaskManagerName) {
-        this.taskManagerName = TaskManagerName;
+    public void setTaskManagerName(String taskManagerName) {
+        this.taskManagerName = taskManagerName;
     }
 
 

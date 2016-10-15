@@ -56,9 +56,5 @@ public class Tag {
     public String toString() {
         return '[' + tagName + ']';
     }
-    
-    public String toSimpleString() {
-        return tagName;
-    }
 
 }

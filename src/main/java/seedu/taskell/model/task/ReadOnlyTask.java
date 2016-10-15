@@ -7,11 +7,10 @@ import seedu.taskell.model.tag.UniqueTagList;
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyTask {
-
     Description getDescription();
-    TaskDate getDate();
-    TaskTime getTime();
-    TaskPriority getPriority();
+    TaskDate getTaskDate();
+    TaskTime getTaskTime();
+    TaskPriority getTaskPriority();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -26,9 +25,9 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
-                && other.getDate().equals(this.getDate())
-                && other.getTime().equals(this.getTime())
-                && other.getPriority().equals(this.getPriority()));
+                && other.getTaskDate().equals(this.getTaskDate())
+                && other.getTaskTime().equals(this.getTaskTime())
+                && other.getTaskPriority().equals(this.getTaskPriority()));
     }
 
     /**
@@ -38,11 +37,11 @@ public interface ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" TaskDate: ")
-                .append(getDate())
+                .append(getTaskDate())
                 .append(" TaskTime: ")
-                .append(getTime())
+                .append(getTaskTime())
                 .append(" TaskPriority: ")
-                .append(getPriority())
+                .append(getTaskPriority())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

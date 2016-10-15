@@ -138,7 +138,7 @@ task guiTests(type: TaskManagerTest) {
 
 
 task nonGuiTests(type: TaskManagerTest) {
-    include 'seedu/taskell/**'
+    include 'seedu/address/**'
 
     jacoco {
         destinationFile = new File("${buildDir}/jacoco/test.exec")

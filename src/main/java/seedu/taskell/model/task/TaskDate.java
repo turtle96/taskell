@@ -4,51 +4,51 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's date in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidDate(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskDate(String)}
  */
 public class TaskDate {
 
-    public static final String MESSAGE_DATE_CONSTRAINTS = "Task dates should only contain numbers";
-    public static final String DATE_VALIDATION_REGEX = "\\d+";
-    
-    public final String date;
+    public static final String MESSAGE_TASK_DATE_CONSTRAINTS = "Task dates should only contain numbers";
+    public static final String TASK_DATE_VALIDATION_REGEX = "\\d+";
+
+    public final String value;
 
     /**
-     * Validates given date number.
+     * Validates given task date.
      *
-     * @throws IllegalValueException if given date string is invalid.
+     * @throws IllegalValueException if given task date string is invalid.
      */
-    public TaskDate(String date) throws IllegalValueException {
-        assert date != null;
-        date = date.trim();
-        if (!isValidDate(date)) {
-            throw new IllegalValueException(MESSAGE_DATE_CONSTRAINTS);
+    public TaskDate(String taskDate) throws IllegalValueException {
+        assert taskDate != null;
+        taskDate = taskDate.trim();
+        if (!isValidTaskDate(taskDate)) {
+            throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
         }
-        this.date = date;
+        this.value = taskDate;
     }
 
     /**
-     * Returns true if a given string is a valid task date.
+     * Returns true if a given string is a valid task taskDate number.
      */
-    public static boolean isValidDate(String test) {
-        return test.matches(DATE_VALIDATION_REGEX);
+    public static boolean isValidTaskDate(String test) {
+        return test.matches(TASK_DATE_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return date;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && this.date.equals(((TaskDate) other).date)); // state check
+                && this.value.equals(((TaskDate) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return date.hashCode();
+        return value.hashCode();
     }
 
 }

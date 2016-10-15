@@ -7,7 +7,7 @@
     <stylesheets>
         <URL value="@DarkTheme.css" />
         <URL value="@Extensions.css" />
-    </stylesheets "src/main/resources/view/TaskListPanel.fxml">
+    </stylesheets>
     <children>
         <ListView fx:id="taskListView" VBox.vgrow="ALWAYS" />
     </children>

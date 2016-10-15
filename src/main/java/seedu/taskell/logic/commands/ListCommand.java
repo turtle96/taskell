@@ -2,7 +2,7 @@ package seedu.taskell.logic.commands;
 
 
 /**
- * Lists all tasks in the task manager to the user.
+ * Lists all tasks in the task managerto the user.
  */
 public class ListCommand extends Command {
 

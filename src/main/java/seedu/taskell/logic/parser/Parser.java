@@ -27,10 +27,10 @@ public class Parser {
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<description>[^/]+)"
-                    + " (?<isDatePrivate>p?)p/(?<date>[^/]+)"
-                    + " (?<isTimePrivate>p?)e/(?<time>[^/]+)"
-                    + " (?<isPriorityPrivate>p?)a/(?<priority>[^/]+)"
+            Pattern.compile("(?<name>[^/]+)"
+                    + " (?<isTaskDatePrivate>p?)p/(?<taskDate>[^/]+)"
+                    + " (?<isEmailPrivate>p?)e/(?<taskTime>[^/]+)"
+                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
     public Parser() {}
@@ -94,10 +94,10 @@ public class Parser {
         }
         try {
             return new AddCommand(
-                    matcher.group("description"),
-                    matcher.group("date"),
-                    matcher.group("time"),
-                    matcher.group("priority"),
+                    matcher.group("name"),
+                    matcher.group("taskDate"),
+                    matcher.group("taskTime"),
+                    matcher.group("taskPriority"),
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
         } catch (IllegalValueException ive) {

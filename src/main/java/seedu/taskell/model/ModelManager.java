@@ -13,7 +13,6 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
 import java.util.logging.Logger;
-import java.util.logging.Level;
 
 /**
  * Represents the in-memory model of the task manager data.
@@ -139,9 +138,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String stringToCheck = task.getDescription() + " " + task.tagsString();
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(stringToCheck, keyword))
+                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getDescription().description, keyword))
+
                     .findAny()
                     .isPresent();
         }

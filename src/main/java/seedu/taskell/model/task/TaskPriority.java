@@ -5,14 +5,14 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 
 /**
  * Represents a Task's priority in the task manager.
- * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidPriority(String)}
  */
 public class TaskPriority {
     
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority must be an intger from 1 to 5";
-    public static final String PRIORITY_VALIDATION_REGEX = ".+";
+    public static final String MESSAGE_TASK_PRIORITY_CONSTRAINTS = "Task priority can be in any format";
+    public static final String TASK_PRIORITY_VALIDATION_REGEX = ".+";
 
-    public final String priority;
+    public final String value;
 
     /**
      * Validates given priority.
@@ -21,34 +21,34 @@ public class TaskPriority {
      */
     public TaskPriority(String priority) throws IllegalValueException {
         assert priority != null;
-        if (!isValidAddress(priority)) {
-            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
+        if (!isValidPriority(priority)) {
+            throw new IllegalValueException(MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         }
-        this.priority = priority;
+        this.value = priority;
     }
 
     /**
-     * Returns true if a given string is a valid person email.
+     * Returns true if a given string is a valid task taskTime.
      */
-    public static boolean isValidAddress(String test) {
-        return test.matches(PRIORITY_VALIDATION_REGEX);
+    public static boolean isValidPriority(String test) {
+        return test.matches(TASK_PRIORITY_VALIDATION_REGEX);
     }
 
     @Override
     public String toString() {
-        return priority;
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskPriority // instanceof handles nulls
-                && this.priority.equals(((TaskPriority) other).priority)); // state check
+                && this.value.equals(((TaskPriority) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return priority.hashCode();
+        return value.hashCode();
     }
 
 }
