@@ -30,7 +30,7 @@ public class TestTask implements ReadOnlyTask {
         this.taskTime = taskTime;
     }
 
-    public void setPhone(TaskDate taskDate) {
+    public void setTaskDate(TaskDate taskDate) {
         this.taskDate = taskDate;
     }
 
