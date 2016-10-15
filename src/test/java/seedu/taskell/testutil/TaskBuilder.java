@@ -33,11 +33,11 @@ public class TaskBuilder {
     }
 
     public TaskBuilder withTaskDate(String taskDate) throws IllegalValueException {
-        this.task.setPhone(new TaskDate(taskDate));
+        this.task.setTaskDate(new TaskDate(taskDate));
         return this;
     }
 
-    public TaskBuilder withEmail(String taskTime) throws IllegalValueException {
+    public TaskBuilder withTaskTime(String taskTime) throws IllegalValueException {
         this.task.setTaskTime(new TaskTime(taskTime));
         return this;
     }
