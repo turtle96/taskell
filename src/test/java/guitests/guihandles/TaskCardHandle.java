@@ -35,13 +35,13 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(TASK_DATE_FIELD_ID);
     }
 
-    public String getEmail() {
+    public String getTaskTime() {
         return getTextFromLabel(TASK_TIME_FIELD_ID);
     }
 
     public boolean isSameTask(ReadOnlyTask task){
         return getDescription().equals(task.getDescription().description) && getTaskDate().equals(task.getTaskDate().value)
-                && getEmail().equals(task.getTaskTime().taskTime) && getTaskPriority().equals(task.getTaskPriority().value);
+                && getTaskTime().equals(task.getTaskTime().taskTime) && getTaskPriority().equals(task.getTaskPriority().value);
     }
 
     @Override
