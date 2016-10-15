@@ -11,7 +11,7 @@ public class TaskTime {
 
     public static final String MESSAGE_TASK_TIME_CONSTRAINTS =
             "Task time should be 2 alphanumeric/period strings separated by '@'";
-    public static final String TASKTIME_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
+    public static final String TASK_TIME_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
 
     public final String taskTime;
 
@@ -33,7 +33,7 @@ public class TaskTime {
      * Returns if a given string is a valid task taskTime.
      */
     public static boolean isValidTaskTime(String test) {
-        return test.matches(TASKTIME_VALIDATION_REGEX);
+        return test.matches(TASK_TIME_VALIDATION_REGEX);
     }
 
     @Override
