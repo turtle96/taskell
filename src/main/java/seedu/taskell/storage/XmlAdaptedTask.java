@@ -42,7 +42,7 @@ public class XmlAdaptedTask {
         description = source.getDescription().description;
         date = source.getTaskDate().taskDate;
         time = source.getTaskTime().taskTime;
-        taskPriority = source.getTaskPriority().value;
+        taskPriority = source.getTaskPriority().taskPriority;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));

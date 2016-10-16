@@ -12,7 +12,7 @@ public class TaskPriority {
     public static final String MESSAGE_TASK_PRIORITY_CONSTRAINTS = "Task priority can be in any format";
     public static final String TASK_PRIORITY_VALIDATION_REGEX = ".+";
 
-    public final String value;
+    public final String taskPriority;
 
     /**
      * Validates given priority.
@@ -24,7 +24,7 @@ public class TaskPriority {
         if (!isValidPriority(priority)) {
             throw new IllegalValueException(MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         }
-        this.value = priority;
+        this.taskPriority = priority;
     }
 
     /**
@@ -36,19 +36,19 @@ public class TaskPriority {
 
     @Override
     public String toString() {
-        return value;
+        return taskPriority;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskPriority // instanceof handles nulls
-                && this.value.equals(((TaskPriority) other).value)); // state check
+                && this.taskPriority.equals(((TaskPriority) other).taskPriority)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return taskPriority.hashCode();
     }
 
 }

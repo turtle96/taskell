@@ -69,7 +69,7 @@ public class TestTask implements ReadOnlyTask {
         sb.append("add " + this.getDescription().description + " ");
         sb.append("p/" + this.getTaskDate().taskDate + " ");
         sb.append("e/" + this.getTaskTime().taskTime + " ");
-        sb.append("a/" + this.getTaskPriority().value + " ");
+        sb.append("a/" + this.getTaskPriority().taskPriority + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
