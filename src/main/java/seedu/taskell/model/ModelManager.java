@@ -141,9 +141,7 @@ public class ModelManager extends ComponentManager implements Model {
             String searchString = task.getDescription().description
                     + " " + task.tagsSimpleString();
             return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(searchString, keyword))
-                    .findAny()
-                    .isPresent();
+                    .allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
 
         @Override
