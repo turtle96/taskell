@@ -18,9 +18,9 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.FileUtil;
 import seedu.taskell.commons.util.XmlUtil;
 import seedu.taskell.model.TaskManager;
-import seedu.taskell.model.task.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 import seedu.taskell.storage.XmlSerializableTaskManager;
 
 import java.io.File;
@@ -66,15 +66,15 @@ public class TestUtil {
     private static Task[] getSampleTaskData() {
         try {
             return new Task[]{
-                    new Task(new Description("Ali Muster"), new UniqueTagList()),
-                    new Task(new Description("Boris Mueller"), new UniqueTagList()),
-                    new Task(new Description("Carl Kurz"), new UniqueTagList()),
-                    new Task(new Description("Daniel Meier"), new UniqueTagList()),
-                    new Task(new Description("Elle Meyer"), new UniqueTagList()),
-                    new Task(new Description("Fiona Kunz"), new UniqueTagList()),
-                    new Task(new Description("George Best"), new UniqueTagList()),
-                    new Task(new Description("Hoon Meier"), new UniqueTagList()),
-                    new Task(new Description("Ida Mueller"), new UniqueTagList())
+                    new Task(new Description("Ali Muster"), new TaskDate("9482424"), new TaskTime("hans@google.com"), new TaskPriority("4th street"), new UniqueTagList()),
+                    new Task(new Description("Boris Mueller"), new TaskDate("87249245"), new TaskTime("ruth@google.com"), new TaskPriority("81th street"), new UniqueTagList()),
+                    new Task(new Description("Carl Kurz"), new TaskDate("95352563"), new TaskTime("heinz@yahoo.com"), new TaskPriority("wall street"), new UniqueTagList()),
+                    new Task(new Description("Daniel Meier"), new TaskDate("87652533"), new TaskTime("cornelia@google.com"), new TaskPriority("10th street"), new UniqueTagList()),
+                    new Task(new Description("Elle Meyer"), new TaskDate("9482224"), new TaskTime("werner@gmail.com"), new TaskPriority("michegan ave"), new UniqueTagList()),
+                    new Task(new Description("Fiona Kunz"), new TaskDate("9482427"), new TaskTime("lydia@gmail.com"), new TaskPriority("little tokyo"), new UniqueTagList()),
+                    new Task(new Description("George Best"), new TaskDate("9482442"), new TaskTime("anna@google.com"), new TaskPriority("4th street"), new UniqueTagList()),
+                    new Task(new Description("Hoon Meier"), new TaskDate("8482424"), new TaskTime("stefan@mail.com"), new TaskPriority("little india"), new UniqueTagList()),
+                    new Task(new Description("Ida Mueller"), new TaskDate("8482131"), new TaskTime("hans@google.com"), new TaskPriority("chicago ave"), new UniqueTagList())
             };
         } catch (IllegalValueException e) {
             assert false;

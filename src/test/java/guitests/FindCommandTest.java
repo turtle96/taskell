@@ -12,25 +12,15 @@ public class FindCommandTest extends TaskManagerGuiTest {
     @Test
     public void find_nonEmptyList() {
         assertFindResult("find Mark"); //no results
-        assertFindResult("find books", td.borrowBooks, td.discardBooks); //multiple results
+        assertFindResult("find Meier", td.benson, td.daniel); //multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find books",td.discardBooks);
-    }
-    
-    @Test
-    public void find_nonEmptyList_byTag() {
-        assertFindResult("find ACADemic", td.borrowBooks);  //check words with capitals
-        assertFindResult("find personal", td.archivePastEmails, td.borrowBooks); //multiple results
-
-        //find after deleting one result
-        commandBox.runCommand("delete 1");
-        assertFindResult("find personal", td.borrowBooks);
+        assertFindResult("find Meier",td.daniel);
     }
 
     @Test
-    public void find_emptyList() {
+    public void find_emptyList(){
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); //no results
     }

@@ -9,13 +9,13 @@ import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.*;
+import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.ModelManager;
 import seedu.taskell.model.ReadOnlyTaskManager;
-import seedu.taskell.model.TaskManager;
-import seedu.taskell.model.task.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 import seedu.taskell.storage.StorageManager;
 
 import org.junit.After;
@@ -150,19 +150,30 @@ public class LogicManagerTest {
     }
 
 
-    /*@Test
+    @Test
     public void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
-    }*/
+        assertCommandBehavior(
+                "add Valid Description 12345 e/valid@taskTime.butNoPhonePrefix a/valid, taskPriority", expectedMessage);
+        assertCommandBehavior(
+                "add Valid Description p/12345 valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
+        assertCommandBehavior(
+                "add Valid Description p/12345 e/valid@taskTime.butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
+    }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;]", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add []\\[;] p/12345 e/valid@taskTime a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Description p/not_numbers e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description p/12345 e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description p/12345 e/valid@taskTime a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+
     }
 
     @Test
@@ -313,12 +324,12 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_find_onlyMatchesFullWordsInDescriptions() throws Exception {
+    public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
-        Task p1 = helper.generateTaskWithDescription("KE Y");
-        Task p2 = helper.generateTaskWithDescription("KEYKEYKEY sduauo");
+        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task p1 = helper.generateTaskWithName("KE Y");
+        Task p2 = helper.generateTaskWithName("KEYKEYKEY sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p1, pTarget1, p2, pTarget2);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
@@ -334,10 +345,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_isNotCaseSensitive() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task p1 = helper.generateTaskWithDescription("bla bla KEY bla");
-        Task p2 = helper.generateTaskWithDescription("bla KEY bla bceofeia");
-        Task p3 = helper.generateTaskWithDescription("key key");
-        Task p4 = helper.generateTaskWithDescription("KEy sduauo");
+        Task p1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task p2 = helper.generateTaskWithName("bla KEY bla bceofeia");
+        Task p3 = helper.generateTaskWithName("key key");
+        Task p4 = helper.generateTaskWithName("KEy sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(p3, p1, p4, p2);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
@@ -353,10 +364,10 @@ public class LogicManagerTest {
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Task pTarget1 = helper.generateTaskWithDescription("bla bla KEY bla");
-        Task pTarget2 = helper.generateTaskWithDescription("bla rAnDoM bla bceofeia");
-        Task pTarget3 = helper.generateTaskWithDescription("key key");
-        Task p1 = helper.generateTaskWithDescription("sduauo");
+        Task pTarget1 = helper.generateTaskWithName("bla bla KEY bla");
+        Task pTarget2 = helper.generateTaskWithName("bla rAnDoM bla bceofeia");
+        Task pTarget3 = helper.generateTaskWithName("key key");
+        Task p1 = helper.generateTaskWithName("sduauo");
 
         List<Task> fourTasks = helper.generateTaskList(pTarget1, p1, pTarget2, pTarget3);
         TaskManager expectedAB = helper.generateTaskManager(fourTasks);
@@ -376,11 +387,14 @@ public class LogicManagerTest {
     class TestDataHelper{
 
         Task adam() throws Exception {
-            Description description= new Description("Adam Brown");
+            Description description = new Description("Adam Brown");
+            TaskDate privatePhone = new TaskDate("111111");
+            TaskTime taskTime = new TaskTime("adam@gmail.com");
+            TaskPriority privatetaskPriority = new TaskPriority("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, tags);
+            return new Task(description, privatePhone, taskTime, privatetaskPriority, tags);
         }
 
         /**
@@ -393,6 +407,9 @@ public class LogicManagerTest {
         Task generateTask(int seed) throws Exception {
             return new Task(
                     new Description("Task " + seed),
+                    new TaskDate("" + Math.abs(seed)),
+                    new TaskTime(seed + "@taskTime"),
+                    new TaskPriority("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -404,6 +421,9 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
+            cmd.append(" p/").append(p.getTaskDate());
+            cmd.append(" e/").append(p.getTaskTime());
+            cmd.append(" a/").append(p.getTaskPriority());
 
             UniqueTagList tags = p.getTags();
             for(Tag t: tags){
@@ -481,11 +501,15 @@ public class LogicManagerTest {
         }
 
         /**
-         * Generates a Task object with given name. Other fields will have some dummy values.
+         * Generates a Task object with given description. Other fields will have some dummy values.
          */
-        Task generateTaskWithDescription(String description) throws Exception {
+
+        Task generateTaskWithName(String description) throws Exception {
             return new Task(
                     new Description(description),
+                    new TaskDate("1"),
+                    new TaskTime("1@taskTime"),
+                    new TaskPriority("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

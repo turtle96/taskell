@@ -8,7 +8,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
  */
 public class Description {
 
-    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Task descriptions should be spaces or alphanumeric characters";
+    public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Task description should be spaces or alphanumeric characters";
     public static final String DESCRIPTION_VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public final String description;
@@ -51,4 +51,5 @@ public class Description {
     public int hashCode() {
         return description.hashCode();
     }
+
 }

@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.task.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 
 /**
  * Adds a task to the task manager.
@@ -16,9 +16,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: Description [t/TAG]...\n"
+            + "Parameters: NAME p/TASK_DATE e/EMAIL a/TASK_PRIORITY [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Jogging with Peter t/friends t/owesMoney";
+            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -30,7 +30,8 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-    public AddCommand(String description, Set<String> tags)
+
+    public AddCommand(String description, String taskDate, String taskTime, String taskPriority, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -38,6 +39,9 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Description(description),
+                new TaskDate(taskDate),
+                new TaskTime(taskTime),
+                new TaskPriority(taskPriority),
                 new UniqueTagList(tagSet)
         );
     }

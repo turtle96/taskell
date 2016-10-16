@@ -3,10 +3,10 @@ package seedu.taskell.model;
 
 import java.util.List;
 
-import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.UniqueTaskList;
 
 /**
  * Unmodifiable view of an task manager

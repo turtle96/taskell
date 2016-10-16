@@ -2,12 +2,12 @@ package seedu.taskell.testutil;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.TaskManager;
+import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList;
-import seedu.taskell.model.tag.Tag;
 
 /**
- * A utility class to help with building TaskManager objects.
+ * A utility class to help with building Taskmanager objects.
  * Example usage: <br>
  *     {@code TaskManager ab = new TaskManagerBuilder().withTask("John", "Doe").withTag("Friend").build();}
  */

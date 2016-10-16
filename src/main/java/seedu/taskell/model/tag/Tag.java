@@ -57,8 +57,4 @@ public class Tag {
         return '[' + tagName + ']';
     }
 
-    //returns tag as non-formatted string
-    public String toSimpleString() {
-        return tagName;
-    }
 }
