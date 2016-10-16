@@ -173,6 +173,10 @@
     -fx-opacity: 0.9;
 }
 
+.menu-item:focused {
+    -fx-background-color: black;
+}
+
 .menu .left-container {
     -fx-background-color: black;
 }
