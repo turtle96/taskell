@@ -156,7 +156,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description 1-1-2015 e/valid@taskTime.butNoPhonePrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description 1-1-2015 e/valid@taskTime.butNotaskDatePrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
                 "add Valid Description p/1-1-2015 valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
@@ -168,7 +168,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add []\\[;] p/1-1-2015 e/valid@taskTime a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/not_numbers e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description p/not_valid_date e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/1-1-2015 e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
         assertCommandBehavior(
@@ -388,13 +388,13 @@ public class LogicManagerTest {
 
         Task adam() throws Exception {
             Description description = new Description("Adam Brown");
-            TaskDate privatePhone = new TaskDate("1-jan-2015");
+            TaskDate taskDate = new TaskDate("1-1-2015");
             TaskTime taskTime = new TaskTime("adam@gmail.com");
             TaskPriority privatetaskPriority = new TaskPriority("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, privatePhone, taskTime, privatetaskPriority, tags);
+            return new Task(description, taskDate, taskTime, privatetaskPriority, tags);
         }
 
         /**
