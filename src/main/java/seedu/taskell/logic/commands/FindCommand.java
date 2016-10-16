@@ -3,7 +3,7 @@ package seedu.taskell.logic.commands;
 import java.util.Set;
 
 /**
- * Finds and lists all tasks in task manager whose description and tags contains any of the argument keywords.
+ * Finds and lists all tasks in task manager whose description and tags contains all of the argument keywords.
  * Keyword matching is not case sensitive.
  */
 public class FindCommand extends Command {
