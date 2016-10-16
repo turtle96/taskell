@@ -11,7 +11,7 @@ public class TaskDate {
     public static final String MESSAGE_TASK_DATE_CONSTRAINTS = "Task dates should only contain numbers";
     public static final String TASK_DATE_VALIDATION_REGEX = "\\d+";
 
-    public final String value;
+    public final String taskDate;
 
     /**
      * Validates given task date.
@@ -24,7 +24,7 @@ public class TaskDate {
         if (!isValidTaskDate(taskDate)) {
             throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
         }
-        this.value = taskDate;
+        this.taskDate = taskDate;
     }
 
     /**
@@ -36,19 +36,19 @@ public class TaskDate {
 
     @Override
     public String toString() {
-        return value;
+        return taskDate;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && this.value.equals(((TaskDate) other).value)); // state check
+                && this.taskDate.equals(((TaskDate) other).taskDate)); // state check
     }
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return taskDate.hashCode();
     }
 
 }
