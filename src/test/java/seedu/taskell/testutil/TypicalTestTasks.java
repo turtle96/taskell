@@ -9,23 +9,25 @@ import seedu.taskell.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform, holdMeeting, inspectWarehouse;
+    public static TestTask alice, benson, carl, daniel, elle, fiona, george, hoon, ida;
 
     public TypicalTestTasks() {
         try {
-            archivePastEmails =  new TaskBuilder().withDescription("Archive past emails")
-                    .withTags("personal").build();
-            borrowBooks = new TaskBuilder().withDescription("Borrow books")
-                    .withTags("academic", "personal").build();
-            collectParcel = new TaskBuilder().withDescription("Collect parcel").build();
-            discardBooks = new TaskBuilder().withDescription("Discard books").build();
-            editPowerpoint = new TaskBuilder().withDescription("Edit powerpoint").build();
-            fixbugs = new TaskBuilder().withDescription("Fix bugs").build();
-            getNewUniform= new TaskBuilder().withDescription("Get new uniform").build();
+            alice =  new TaskBuilder().withDescription("Alice Pauline").withTaskPriority("123, Jurong West Ave 6, #08-111")
+                    .withTaskTime("alice@gmail.com").withTaskDate("85355255")
+                    .withTags("friends").build();
+            benson = new TaskBuilder().withDescription("Benson Meier").withTaskPriority("311, Clementi Ave 2, #02-25")
+                    .withTaskTime("johnd@gmail.com").withTaskDate("98765432")
+                    .withTags("owesMoney", "friends").build();
+            carl = new TaskBuilder().withDescription("Carl Kurz").withTaskDate("95352563").withTaskTime("heinz@yahoo.com").withTaskPriority("wall street").build();
+            daniel = new TaskBuilder().withDescription("Daniel Meier").withTaskDate("87652533").withTaskTime("cornelia@google.com").withTaskPriority("10th street").build();
+            elle = new TaskBuilder().withDescription("Elle Meyer").withTaskDate("9482224").withTaskTime("werner@gmail.com").withTaskPriority("michegan ave").build();
+            fiona = new TaskBuilder().withDescription("Fiona Kunz").withTaskDate("9482427").withTaskTime("lydia@gmail.com").withTaskPriority("little tokyo").build();
+            george = new TaskBuilder().withDescription("George Best").withTaskDate("9482442").withTaskTime("anna@google.com").withTaskPriority("4th street").build();
 
             //Manually added
-            holdMeeting = new TaskBuilder().withDescription("Hold meeting").build();
-            inspectWarehouse = new TaskBuilder().withDescription("Inspect warehouse").build();
+            hoon = new TaskBuilder().withDescription("Hoon Meier").withTaskDate("8482424").withTaskTime("stefan@mail.com").withTaskPriority("little india").build();
+            ida = new TaskBuilder().withDescription("Ida Mueller").withTaskDate("8482131").withTaskTime("hans@google.com").withTaskPriority("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -35,20 +37,20 @@ public class TypicalTestTasks {
     public static void loadTaskManagerWithSampleData(TaskManager ab) {
 
         try {
-            ab.addTask(new Task(archivePastEmails));
-            ab.addTask(new Task(borrowBooks));
-            ab.addTask(new Task(collectParcel));
-            ab.addTask(new Task(discardBooks));
-            ab.addTask(new Task(editPowerpoint));
-            ab.addTask(new Task(fixbugs));
-            ab.addTask(new Task(getNewUniform));
+            ab.addTask(new Task(alice));
+            ab.addTask(new Task(benson));
+            ab.addTask(new Task(carl));
+            ab.addTask(new Task(daniel));
+            ab.addTask(new Task(elle));
+            ab.addTask(new Task(fiona));
+            ab.addTask(new Task(george));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             assert false : "not possible";
         }
     }
 
     public TestTask[] getTypicalTasks() {
-        return new TestTask[]{archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform};
+        return new TestTask[]{alice, benson, carl, daniel, elle, fiona, george};
     }
 
     public TaskManager getTypicalTaskManager(){

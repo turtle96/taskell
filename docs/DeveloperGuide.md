@@ -330,4 +330,3 @@ Use case ends.
 ## Appendix E : Product Survey
 
 {TODO: Add a summary of competing products}
-

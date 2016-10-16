@@ -3,9 +3,9 @@ package seedu.taskell.storage;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.task.*;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
+import seedu.taskell.model.task.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +17,12 @@ public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String description;
+    @XmlElement(required = true)
+    private String date;
+    @XmlElement(required = true)
+    private String time;
+    @XmlElement(required = true)
+    private String taskPriority;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -34,6 +40,9 @@ public class XmlAdaptedTask {
      */
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
+        date = source.getTaskDate().taskDate;
+        time = source.getTaskTime().taskTime;
+        taskPriority = source.getTaskPriority().taskPriority;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
@@ -50,8 +59,11 @@ public class XmlAdaptedTask {
         for (XmlAdaptedTag tag : tagged) {
             taskTags.add(tag.toModelType());
         }
-        final Description description= new Description(this.description);
+        final Description description = new Description(this.description);
+        final TaskDate taskDate = new TaskDate(this.date);
+        final TaskTime taskTime = new TaskTime(this.time);
+        final TaskPriority taskPriority = new TaskPriority(this.taskPriority);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, tags);
+        return new Task(description, taskDate, taskTime, taskPriority, tags);
     }
 }
