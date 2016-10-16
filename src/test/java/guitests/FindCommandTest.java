@@ -18,6 +18,16 @@ public class FindCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("delete 1");
         assertFindResult("find Meier",td.daniel);
     }
+    
+    @Test
+    public void find_nonEmptyList_byTag() {
+        assertFindResult("find chicken"); //no results
+        assertFindResult("find friends", td.alice, td.benson); //multiple results
+
+        //find after deleting one result
+        commandBox.runCommand("delete 1");
+        assertFindResult("find friends", td.benson);
+    }
 
     @Test
     public void find_emptyList(){
