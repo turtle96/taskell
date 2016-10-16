@@ -10,7 +10,7 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose description contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose description contains all of "
             + "the specified keywords (not case-sensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
             + "Example: " + COMMAND_WORD + " milk bananas chicken";
