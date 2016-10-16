@@ -28,6 +28,11 @@ public class FindCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("delete 1");
         assertFindResult("find friends", td.benson);
     }
+    
+    @Test
+    public void find_byMoreThanOneTags() {
+        assertFindResult("find friends owesMoney", td.benson);
+    }
 
     @Test
     public void find_emptyList(){
