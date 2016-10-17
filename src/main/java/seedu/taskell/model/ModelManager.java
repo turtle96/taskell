@@ -93,6 +93,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
+    
+    @Override
+    public void updateFilteredTaskListByAnyKeyword(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new TagsQualifier(keywords)));
+    }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -148,6 +153,27 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class TagsQualifier implements Qualifier {
+        private Set<String> tagsKeyWords;
+
+        TagsQualifier(Set<String> keyWords) {
+            this.tagsKeyWords = keyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return tagsKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsIgnoreCase(task.tagsSimpleString(), keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", tagsKeyWords);
         }
     }
 
