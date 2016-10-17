@@ -21,7 +21,9 @@ public class TaskCard extends UiPart{
     @FXML
     private Label taskPriority;
     @FXML
-    private Label taskTime;
+    private Label startTime;
+    @FXML
+    private Label endTime;
     @FXML
     private Label tags;
 
@@ -45,7 +47,8 @@ public class TaskCard extends UiPart{
         id.setText(displayedIndex + ". ");
         taskDate.setText(task.getTaskDate().taskDate);
         taskPriority.setText(task.getTaskPriority().taskPriority);
-        taskTime.setText(task.getTaskTime().taskTime);
+        startTime.setText(task.getStartTime().taskTime);
+        endTime.setText(task.getEndTime().taskTime);
         tags.setText(task.tagsString());
     }
 
