@@ -8,6 +8,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public interface ReadOnlyTask {
     Description getDescription();
+    String getTaskType();
     TaskDate getTaskDate();
     TaskTime getStartTime();
     TaskTime getEndTime();
@@ -26,6 +27,7 @@ public interface ReadOnlyTask {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
+                && other.getTaskType().equals(this.getTaskType())
                 && other.getTaskDate().equals(this.getTaskDate())
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())

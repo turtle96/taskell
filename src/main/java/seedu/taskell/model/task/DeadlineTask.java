@@ -14,8 +14,8 @@ public class DeadlineTask extends Task {
     /**
      * Every field must be present and not null.
      */
-    public DeadlineTask(Description description, TaskDate taskDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
-        super(description, taskDate, startTime, endTime, taskPriority, tags);
+    public DeadlineTask(Description description, String taskType, TaskDate taskDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
+        super(description, taskType, taskDate, startTime, endTime, taskPriority, tags);
     }
 
     @Override

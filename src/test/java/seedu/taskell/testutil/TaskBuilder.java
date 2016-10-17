@@ -19,6 +19,11 @@ public class TaskBuilder {
         this.task.setDescription(new Description(name));
         return this;
     }
+    
+    public TaskBuilder withTaskType(String taskType) throws IllegalValueException {
+        this.task.setTaskType(taskType);
+        return this;
+    }
 
     public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         for (String tag: tags) {

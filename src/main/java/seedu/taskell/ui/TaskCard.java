@@ -5,15 +5,19 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.Task;
 
 public class TaskCard extends UiPart{
 
     private static final String FXML = "TaskListCard.fxml";
+    private static final String WHITESPACE = " ";
 
     @FXML
     private HBox cardPane;
     @FXML
     private Label description;
+    @FXML
+    private Label taskType;
     @FXML
     private Label id;
     @FXML
@@ -43,13 +47,23 @@ public class TaskCard extends UiPart{
 
     @FXML
     public void initialize() {
-        description.setText(task.getDescription().description);
+        taskType.setText(WHITESPACE);
         id.setText(displayedIndex + ". ");
-        taskDate.setText(task.getTaskDate().taskDate);
+        description.setText(task.getDescription().description);
         taskPriority.setText(task.getTaskPriority().taskPriority);
-        startTime.setText(task.getStartTime().taskTime);
-        endTime.setText(task.getEndTime().taskTime);
         tags.setText(task.tagsString());
+        
+        if (task.getTaskType().equals(Task.FLOATING_TASK)) {
+            tags.setText(task.tagsString());
+        } else if (task.getTaskType().equals(Task.DEADLINE_TASK)) {
+            taskDate.setText(task.getTaskDate().taskDate);
+            endTime.setText(task.getEndTime().taskTime);
+        } else {
+            taskDate.setText(task.getTaskDate().taskDate);
+            startTime.setText(task.getStartTime().taskTime);
+            endTime.setText(task.getEndTime().taskTime);
+        }
+        
     }
 
     public HBox getLayout() {

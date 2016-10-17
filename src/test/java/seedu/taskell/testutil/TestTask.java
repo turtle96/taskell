@@ -9,6 +9,7 @@ import seedu.taskell.model.task.*;
 public class TestTask implements ReadOnlyTask {
 
     private Description description;
+    private String taskType;
     private TaskPriority taskPriority;
     private TaskTime startTime;
     private TaskTime endTime;
@@ -21,6 +22,10 @@ public class TestTask implements ReadOnlyTask {
 
     public void setDescription(Description description) {
         this.description = description;
+    }
+    
+    public void setTaskType(String taskType) {
+        this.taskType = taskType;
     }
 
     public void setTaskPriority(TaskPriority taskPriority) {
@@ -42,6 +47,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public Description getDescription() {
         return description;
+    }
+    
+    @Override
+    public String getTaskType() {
+        return taskType;
     }
 
     @Override
@@ -77,6 +87,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
+        sb.append("p/" + this.getTaskType() + " ");
         sb.append("p/" + this.getTaskDate().taskDate + " ");
         sb.append("e/" + this.getStartTime().taskTime + " ");
         sb.append("e/" + this.getEndTime().taskTime + " ");
