@@ -34,9 +34,6 @@ public class TaskDate {
     public static final int NOVEMBER = 11;
     public static final int DECEMBER = 12;
 
-    public static final int NOT_A_VALID_MONTH = 0;
-    public static final int NOT_A_VALID_DAY_OF_THE_WEEK = 0;
-
     public static final int MONDAY = 1;
     public static final int TUESDAY = 2;
     public static final int WEDNESDAY = 3;
@@ -45,22 +42,17 @@ public class TaskDate {
     public static final int SATURDAY = 6;
     public static final int SUNDAY = 7;
 
-    public static final int TODAY = 1;
-    public static final int TOMORROW = 2;
-    public static final int ONLY_CONTAIN_DAY_NAME_IN_WEEK = 3;
-    public static final int ONLY_CONTAIN_MONTH = 4;             
-    public static final int ONLY_CONTAIN_DAY_AND_MONTH = 5;     
-    public static final int ONLY_CONTAIN_MONTH_AND_YEAR = 6;    
-    public static final int FULL_DATE_DISPLAY = 7;              //NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
-
     public static final int NUM_DAYS_IN_A_WEEK = 7;
     public static final int NUM_MONTHS_IN_A_YEAR = 12;
+    
+    public static final int NOT_A_VALID_MONTH = 0;
+    public static final int NOT_A_VALID_DAY_OF_THE_WEEK = 0;
 
     public static final int FIRST_DAY_OF_THE_MONTH = 1;
     
     public static final String DATE_DELIMITER = " .-/";
     
-    public static final int LENGTH_OF_KEYWORD_BY = 2+1;
+    public static final String DEFAULT_DATE = getDefaultDate();
 
     public static final Pattern TASK_DATE_ARGS_FORMAT = Pattern
             .compile("(?<day>(3[0-1]|2[0-9]|1[0-9]|[1-9]))" + "(-)(?<month>(1[0-2]|[1-9]))" + "(-)(?<year>([0-9]{4}))");
@@ -234,7 +226,7 @@ public class TaskDate {
      * Convert this TaskDate to the format of
      * DAY_MONTH-YEAR
      */
-    public String convertToStandardFormat(int day, int month, int year) {
+    public static String convertToStandardFormat(int day, int month, int year) {
         return day + "-" + month + "-" + year;
     }
 
@@ -539,6 +531,13 @@ public class TaskDate {
         return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
     }
 
+    public static String getDefaultDate() {
+        int day = LocalDate.now().getDayOfMonth();
+        int month = LocalDate.now().getMonthValue();
+        int year = LocalDate.now().getYear();
+        return convertToStandardFormat(day, month, year);
+    }
+    
     /**
      * Returns a string with the format of
      * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
