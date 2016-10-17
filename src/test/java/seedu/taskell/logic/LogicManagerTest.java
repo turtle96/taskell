@@ -156,23 +156,23 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description 1-1-2015 p/EVENT e/valid@taskTime.butNoPhonePrefix e/valid@taskTime.butNoPhonePrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description 1-1-2015 p/EVENT e/12:30AM e/12:45AM a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/1-1-2015 valid@taskTime.butNoPrefix valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description p/EVENT p/1-1-2015 12:30AM 12:45AM valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/1-1-2015 e/valid@taskTime.butNoTaskPriorityPrefix e/valid@taskTime.butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
+                "add Valid Description p/EVENT p/1-1-2015 e/12:30AM e/12:30AM butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/EVENT p/1-1-2015 e/valid@taskTime e/valid@taskTime a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add []\\[;] p/EVENT p/1-1-2015 e/12:30AM e/12:45AM a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/not_numbers e/valid@taskTime e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description p/EVENT p/not_numbers e/12:30AM e/12:45AM a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/EVENT p/1-1-2015 e/notATaskTime e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/12345 e/valid@taskTime e/valid@taskTime a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Description p/EVENT p/12345 e/12:30AM e/12:45AM a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
@@ -389,8 +389,8 @@ public class LogicManagerTest {
             Description description = new Description("Adam Brown");
             String taskType = Task.EVENT_TASK;
             TaskDate taskDate = new TaskDate("1-1-2015");
-            TaskTime startTime = new TaskTime("start@time.com");
-            TaskTime endTime = new TaskTime("end@time.com");
+            TaskTime startTime = new TaskTime("12:30AM");
+            TaskTime endTime = new TaskTime("12:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
@@ -410,8 +410,8 @@ public class LogicManagerTest {
                     new Description("Task " + seed),
                     Task.EVENT_TASK,
                     new TaskDate("1-1-2015"),
-                    new TaskTime(seed + "@startTime"),
-                    new TaskTime(seed + "@endTime"),
+                    new TaskTime("12:30AM"),
+                    new TaskTime("12:45AM"),
                     new TaskPriority("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -514,8 +514,8 @@ public class LogicManagerTest {
                     new Description(description),
                     Task.EVENT_TASK,
                     new TaskDate("1-1-2015"),
-                    new TaskTime("1@startTime"),
-                    new TaskTime("1@endTime"),
+                    new TaskTime("12:30AM"),
+                    new TaskTime("12:45AM"),
                     new TaskPriority("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

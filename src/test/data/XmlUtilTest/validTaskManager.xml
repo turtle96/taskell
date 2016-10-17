@@ -4,72 +4,72 @@
         <description>Hans Muster</description>
         <taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">4th street</taskPriority>
     </tasks>
     <tasks>
         <description>Ruth Mueller</description>
         <taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">81th street</taskPriority>
     </tasks>
     <tasks>
         <description>Heinz Kurz</description>
         <taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
-        <taskPriority isPrivate="false">wall street</taskPriority>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
+        <taskPriority isPrivate="false">ddd</taskPriority>
     </tasks>
     <tasks>
         <description>Cornelia Meier</description>
         <taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
-        <taskPriority isPrivate="false">10th street</taskPriority>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
+        <taskPriority isPrivate="false">wall street</taskPriority>
     </tasks>
     <tasks>
         <description>Werner Meyer</description>
-        <taskType>EVENT</taskType>
+		<taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">michegan ave</taskPriority>
     </tasks>
     <tasks>
         <description>Lydia Kunz</description>
-        <taskType>EVENT</taskType>
+		<taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">little tokyo</taskPriority>
     </tasks>
     <tasks>
         <description>Anna Best</description>
-        <taskType>EVENT</taskType>
+		<taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">4th street</taskPriority>
     </tasks>
     <tasks>
         <description>Stefan Meier</description>
-        <taskType>EVENT</taskType>
+		<taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">little india</taskPriority>
     </tasks>
     <tasks>
         <description>Martin Mueller</description>
-        <taskType>EVENT</taskType>
+		<taskType>EVENT</taskType>
         <date isPrivate="false">1-1-2015</date>
-        <startTime isPrivate="false">start@time.com</startTime>
-        <endTime isPrivate="false">end@time.com</endTime>
+        <startTime isPrivate="false">12:30AM</startTime>
+        <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">chicago ave</taskPriority>
     </tasks>
 </taskmanager>
