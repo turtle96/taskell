@@ -37,15 +37,41 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        this.toAdd = new Task(
-                new Description(description),
-                new String(taskType),
-                new TaskDate(taskDate),
-                new TaskTime(startTime),
-                new TaskTime(endTime),
-                new TaskPriority(taskPriority),
-                new UniqueTagList(tagSet)
-        );
+        
+        switch (taskType) {
+        case Task.FLOATING_TASK: 
+            this.toAdd = new FloatingTask(
+                    new Description(description), 
+                    Task.FLOATING_TASK, 
+                    new TaskDate(TaskDate.DEFAULT_DATE), 
+                    new TaskTime(TaskTime.DEFAULT_START_TIME), 
+                    new TaskTime(TaskTime.DEFAULT_END_TIME), 
+                    new TaskPriority(taskPriority),
+                    new UniqueTagList(tagSet));
+            break;
+        case Task.DEADLINE_TASK:
+            this.toAdd = new DeadlineTask(
+                    new Description(description),
+                    Task.DEADLINE_TASK,
+                    new TaskDate(taskDate),
+                    new TaskTime(TaskTime.DEFAULT_START_TIME),
+                    new TaskTime(endTime),
+                    new TaskPriority(taskPriority),
+                    new UniqueTagList(tagSet));
+            break;
+        case Task.EVENT_TASK:
+            this.toAdd = new EventTask(
+                    new Description(description),
+                    Task.EVENT_TASK,
+                    new TaskDate(taskDate),
+                    new TaskTime(startTime),
+                    new TaskTime(endTime),
+                    new TaskPriority(taskPriority),
+                    new UniqueTagList(tagSet));
+            break;
+        default:
+            toAdd = null;
+        }
     }
 
     @Override
