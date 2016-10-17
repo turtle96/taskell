@@ -13,9 +13,14 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
  */
 public class TaskTime {
 
-    private static final String ZERO_MINUTE = "00";
-
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
+    public static final String ZERO_MINUTE = "00";
+    public static final String NOON = "12:00PM";
+    public static final String MIDNIGHT = "12:00AM";
+    
+    public static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
+    
+    public static final String DEFAULT_START_TIME = LocalTime.now().format(dtf);
+    public static final String DEFAULT_END_TIME = "11:59PM";
 
     public static final Pattern TASK_TIME_ARGS_FORMAT = Pattern
             .compile("(?<hour>(1[0-2]|[1-9]))" + "(.|-|:)(?<minute>([0-5][0-9]))" + "(?<antePost>(am|pm|AM|PM|Am|Pm|aM|pM))");
@@ -107,7 +112,6 @@ public class TaskTime {
         return "";
     }
     
-
     @Override
     public String toString() {
         return taskTime;
