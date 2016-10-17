@@ -50,14 +50,17 @@ public class TaskCard extends UiPart{
         taskType.setText(WHITESPACE);
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
-        taskPriority.setText(task.getTaskPriority().taskPriority);
+        taskPriority.setText(WHITESPACE);
         tags.setText(task.tagsString());
         
         if (task.getTaskType().equals(Task.FLOATING_TASK)) {
-            tags.setText(task.tagsString());
+            taskDate.setText(WHITESPACE);
+            startTime.setText(WHITESPACE);
+            endTime.setText(WHITESPACE);
         } else if (task.getTaskType().equals(Task.DEADLINE_TASK)) {
             taskDate.setText(task.getTaskDate().taskDate);
-            endTime.setText(task.getEndTime().taskTime);
+            startTime.setText(task.getEndTime().taskTime);  //To accustomed to display format on UI
+            endTime.setText(WHITESPACE);
         } else {
             taskDate.setText(task.getTaskDate().taskDate);
             startTime.setText(task.getStartTime().taskTime);
