@@ -10,7 +10,6 @@ import seedu.taskell.model.task.Task;
 public class TaskCard extends UiPart{
 
     private static final String FXML = "TaskListCard.fxml";
-    private static final String WHITESPACE = " ";
 
     @FXML
     private HBox cardPane;
@@ -47,26 +46,14 @@ public class TaskCard extends UiPart{
 
     @FXML
     public void initialize() {
-        taskType.setText(WHITESPACE);
+        taskType.setText(task.getTaskType());
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
-        taskPriority.setText(WHITESPACE);
+        taskPriority.setText(task.getTaskPriority().taskPriority);
         tags.setText(task.tagsString());
-        
-        if (task.getTaskType().equals(Task.FLOATING_TASK)) {
-            taskDate.setText(WHITESPACE);
-            startTime.setText(WHITESPACE);
-            endTime.setText(WHITESPACE);
-        } else if (task.getTaskType().equals(Task.DEADLINE_TASK)) {
-            taskDate.setText(task.getTaskDate().taskDate);
-            startTime.setText(task.getEndTime().taskTime);  //To accustomed to display format on UI
-            endTime.setText(WHITESPACE);
-        } else {
-            taskDate.setText(task.getTaskDate().taskDate);
-            startTime.setText(task.getStartTime().taskTime);
-            endTime.setText(task.getEndTime().taskTime);
-        }
-        
+        taskDate.setText(task.getTaskDate().taskDate);
+        startTime.setText(task.getStartTime().taskTime);
+        endTime.setText(task.getEndTime().taskTime);
     }
 
     public HBox getLayout() {
