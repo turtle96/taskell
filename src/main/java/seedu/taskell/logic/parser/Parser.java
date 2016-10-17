@@ -65,6 +65,9 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+            
+        case FindTagCommand.COMMAND_WORD:
+            return prepareFindByTag(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -79,6 +82,7 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
 
     /**
      * Parses arguments in the context of the add task command.
@@ -187,6 +191,25 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+    }
+    
+    /**
+     * Parses arguments in the context of the find task by tags command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareFindByTag(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindTagCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindTagCommand(keywordSet);
     }
 
 }
