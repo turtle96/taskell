@@ -156,23 +156,23 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description 1-1-2015 e/valid@taskTime.butNotaskDatePrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description 1-1-2015 e/12:30AM.butNotaskDatePrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description p/1-1-2015 valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
+                "add Valid Description p/1-1-2015 12:30AM.butNoPrefix a/valid, taskPriority", expectedMessage);
         assertCommandBehavior(
-                "add Valid Description p/1-1-2015 e/valid@taskTime.butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
+                "add Valid Description p/1-1-2015 e/12:30AM.butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/1-1-2015 e/valid@taskTime a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add []\\[;] p/1-1-2015 e/12:30AM a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/not_valid_date e/valid@taskTime a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description p/not_valid_date e/12:30AM a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/1-1-2015 e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
+                "add Valid Description p/1-1-2015 e/not_valid_task_time a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/1-1-2015 e/valid@taskTime a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Description p/1-1-2015 e/12:30AM a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
@@ -389,7 +389,7 @@ public class LogicManagerTest {
         Task adam() throws Exception {
             Description description = new Description("Adam Brown");
             TaskDate taskDate = new TaskDate("1-1-2015");
-            TaskTime taskTime = new TaskTime("adam@gmail.com");
+            TaskTime taskTime = new TaskTime("12:30AM");
             TaskPriority privatetaskPriority = new TaskPriority("111, alpha street");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
@@ -408,7 +408,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description("Task " + seed),
                     new TaskDate("1-1-2015"),
-                    new TaskTime(seed + "@taskTime"),
+                    new TaskTime("12:30AM"),
                     new TaskPriority("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
@@ -508,7 +508,7 @@ public class LogicManagerTest {
             return new Task(
                     new Description(description),
                     new TaskDate("1-1-2015"),
-                    new TaskTime("1@taskTime"),
+                    new TaskTime("12:30AM"),
                     new TaskPriority("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );

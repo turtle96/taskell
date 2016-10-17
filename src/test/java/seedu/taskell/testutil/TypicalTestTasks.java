@@ -14,20 +14,20 @@ public class TypicalTestTasks {
     public TypicalTestTasks() {
         try {
             alice =  new TaskBuilder().withDescription("Alice Pauline").withTaskPriority("123, Jurong West Ave 6, #08-111")
-                    .withTaskTime("alice@gmail.com").withTaskDate("1-1-2015")
+                    .withTaskTime("12:30AM").withTaskDate("1-1-2015")
                     .withTags("friends").build();
             benson = new TaskBuilder().withDescription("Benson Meier").withTaskPriority("311, Clementi Ave 2, #02-25")
-                    .withTaskTime("johnd@gmail.com").withTaskDate("1-1-2015")
+                    .withTaskTime("12:30AM").withTaskDate("1-1-2015")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withDescription("Carl Kurz").withTaskDate("1-1-2015").withTaskTime("heinz@yahoo.com").withTaskPriority("wall street").build();
-            daniel = new TaskBuilder().withDescription("Daniel Meier").withTaskDate("1-1-2015").withTaskTime("cornelia@google.com").withTaskPriority("10th street").build();
-            elle = new TaskBuilder().withDescription("Elle Meyer").withTaskDate("1-1-2015").withTaskTime("werner@gmail.com").withTaskPriority("michegan ave").build();
-            fiona = new TaskBuilder().withDescription("Fiona Kunz").withTaskDate("1-1-2015").withTaskTime("lydia@gmail.com").withTaskPriority("little tokyo").build();
-            george = new TaskBuilder().withDescription("George Best").withTaskDate("1-1-2015").withTaskTime("anna@google.com").withTaskPriority("4th street").build();
+            carl = new TaskBuilder().withDescription("Carl Kurz").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("wall street").build();
+            daniel = new TaskBuilder().withDescription("Daniel Meier").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("10th street").build();
+            elle = new TaskBuilder().withDescription("Elle Meyer").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("michegan ave").build();
+            fiona = new TaskBuilder().withDescription("Fiona Kunz").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("little tokyo").build();
+            george = new TaskBuilder().withDescription("George Best").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("4th street").build();
 
             //Manually added
-            hoon = new TaskBuilder().withDescription("Hoon Meier").withTaskDate("1-1-2015").withTaskTime("stefan@mail.com").withTaskPriority("little india").build();
-            ida = new TaskBuilder().withDescription("Ida Mueller").withTaskDate("1-1-2015").withTaskTime("hans@google.com").withTaskPriority("chicago ave").build();
+            hoon = new TaskBuilder().withDescription("Hoon Meier").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("little india").build();
+            ida = new TaskBuilder().withDescription("Ida Mueller").withTaskDate("1-1-2015").withTaskTime("12:30AM").withTaskPriority("chicago ave").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
