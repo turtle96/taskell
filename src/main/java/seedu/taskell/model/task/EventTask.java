@@ -6,7 +6,7 @@ import seedu.taskell.commons.util.CollectionUtil;
 import seedu.taskell.model.tag.UniqueTagList;
 
 /**
- * Represents a Task in the task manager.
+ * Represents an Event task in the task manager.
  * Guarantees: details are present and not null, field values are validated.
  */
 public class EventTask extends Task {
