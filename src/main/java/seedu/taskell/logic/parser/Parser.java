@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.commands.*;
+import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskPriority;
@@ -128,7 +129,7 @@ public class Parser {
             if(!token.equals(BY) &&!token.equals(ON) &&!token.equals(AT)
                     && !token.equals(STARTAT) && !token.equals(ENDAT)
                     && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
-                    && !token.startsWith("t/") && !token.startsWith(TaskPriority.PRIORITY_PREFIX)) {
+                    && !token.startsWith(Tag.PREFIX) && !token.startsWith(TaskPriority.PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
@@ -170,14 +171,14 @@ public class Parser {
                 }
                 endatQueue.offer(token);
                 continue;
-            } else if (token.startsWith("t/")) {
+            } else if (token.startsWith(Tag.PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
                 tagString += " " + token;
                 continue;
-            } else if (token.startsWith(TaskPriority.PRIORITY_PREFIX)) {
+            } else if (token.startsWith(TaskPriority.PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
@@ -185,7 +186,7 @@ public class Parser {
                 if (priorityCount > 0) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-                    taskPriority = token.substring(token.indexOf(TaskPriority.PRIORITY_PREFIX)+2);
+                    taskPriority = token.substring(token.indexOf(TaskPriority.PREFIX)+2);
                     priorityCount++;
                 }
                 continue;
@@ -388,7 +389,7 @@ public class Parser {
             return Collections.emptySet();
         }
         // replace first delimiter prefix, then split
-        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
+        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" " + Tag.PREFIX, "").split(" " + Tag.PREFIX));
         return new HashSet<>(tagStrings);
     }
 
