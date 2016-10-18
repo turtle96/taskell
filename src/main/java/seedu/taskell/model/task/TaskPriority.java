@@ -13,6 +13,8 @@ public class TaskPriority {
             + "\nThere should not be more than 1 priority level for a task";
     public static final String TASK_PRIORITY_VALIDATION_REGEX = ".+";
     
+    public static final String PREFIX = "p/";
+    
     public static final String NO_PRIORITY = "0";
     public static final String LOW_PRIORITY = "1";
     public static final String MEDIUM_PRIORITY = "2";
@@ -38,8 +40,11 @@ public class TaskPriority {
     /**
      * Returns true if a given string is a valid task taskTime.
      */
-    public static boolean isValidPriority(String test) {
-        return test.matches(TASK_PRIORITY_VALIDATION_REGEX);
+    public static boolean isValidPriority(String priority) {
+        return priority.equals(NO_PRIORITY)
+                || priority.equals(LOW_PRIORITY) 
+                || priority.equals(MEDIUM_PRIORITY)
+                || priority.equals(HIGH_PRIORITY);
     }
 
     @Override

@@ -11,6 +11,7 @@ public class Tag {
 
     public static final String MESSAGE_TAG_CONSTRAINTS = "Tags names should be alphanumeric";
     public static final String TAG_VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final String PREFIX = "#";
 
     public String tagName;
 
@@ -55,6 +56,10 @@ public class Tag {
      */
     public String toString() {
         return '[' + tagName + ']';
+    }
+    
+    public String toSimpleString() {
+        return tagName;
     }
 
 }
