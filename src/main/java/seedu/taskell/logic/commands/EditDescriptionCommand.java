@@ -29,7 +29,6 @@ public class EditDescriptionCommand extends Command {
 
     public final int targetIndex;
     public final Description description;
-    //private final Task newTask;
     
     public EditDescriptionCommand(int targetIndex, String newDescription) throws IllegalValueException {
         this.targetIndex = targetIndex;
