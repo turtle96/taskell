@@ -87,6 +87,9 @@ public class Parser {
         
         case EditEndTimeCommand.COMMAND_WORD:
             return prepareEditEnd(arguments);
+            
+        case EditPriorityCommand.COMMAND_WORD:
+            return prepareEditPriority(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -154,7 +157,7 @@ public class Parser {
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
-        
+        arguments = arguments.trim();
         try{
         return new EditDescriptionCommand(targetIdx, arguments);
         }catch (IllegalValueException ive) {
@@ -217,6 +220,36 @@ public class Parser {
         
         try{
         return new EditEndTimeCommand(targetIdx, arguments);
+        }catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the edit task priority command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEditPriority(String args) {
+        String arguments = "";
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        int targetIdx = Integer.valueOf(st.nextToken());
+        while (st.hasMoreTokens()) {
+            arguments += st.nextToken() + " ";
+        }
+        arguments = arguments.trim();
+        if (!TaskPriority.isValidPriority(arguments)) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
+        }
+        
+        try{
+        return new EditPriorityCommand(targetIdx, arguments);
         }catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
