@@ -6,7 +6,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">4th street</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Ruth Mueller</description>
@@ -14,7 +14,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">81th street</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Heinz Kurz</description>
@@ -22,7 +22,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">ddd</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Cornelia Meier</description>
@@ -30,7 +30,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">wall street</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Werner Meyer</description>
@@ -38,7 +38,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">michegan ave</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Lydia Kunz</description>
@@ -46,7 +46,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">little tokyo</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Anna Best</description>
@@ -54,7 +54,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">4th street</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Stefan Meier</description>
@@ -62,7 +62,7 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">little india</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
     <tasks>
         <description>Martin Mueller</description>
@@ -70,6 +70,6 @@
         <date isPrivate="false">1-1-2015</date>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
-        <taskPriority isPrivate="false">chicago ave</taskPriority>
+        <taskPriority isPrivate="false">0</taskPriority>
     </tasks>
 </taskmanager>

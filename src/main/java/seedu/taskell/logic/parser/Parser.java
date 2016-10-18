@@ -91,6 +91,10 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAdd(String args){
+        if (args.isEmpty()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+        
         ArrayList<String> argsList = tokenizeArguments(args);
         Queue<String> initialQueue = initialiseArgQueue(argsList);
         Queue<String> descriptionQueue = new LinkedList<String>();

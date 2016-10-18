@@ -1,5 +1,6 @@
 package seedu.taskell.testutil;
 
+import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
 
@@ -87,12 +88,12 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("p/" + this.getTaskType() + " ");
-        sb.append("p/" + this.getTaskDate().taskDate + " ");
-        sb.append("e/" + this.getStartTime().taskTime + " ");
-        sb.append("e/" + this.getEndTime().taskTime + " ");
-        sb.append("a/" + this.getTaskPriority().taskPriority + " ");
-        this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
+//        sb.append("p/" + this.getTaskType() + " ");
+        sb.append("on " + this.getTaskDate().taskDate + " ");
+        sb.append("startat " + this.getStartTime().taskTime + " ");
+        sb.append("endat " + this.getEndTime().taskTime + " ");
+        sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");
+        this.getTags().getInternalList().stream().forEach(s -> sb.append(Tag.PREFIX + s.tagName + " "));
         return sb.toString();
     }
 }

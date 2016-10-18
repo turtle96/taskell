@@ -154,32 +154,26 @@ public class LogicManagerTest {
     public void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         assertCommandBehavior(
-                "add wrong args wrong args", expectedMessage);
-        assertCommandBehavior(
-                "add Valid Description 1-1-2015 p/EVENT e/12:30AM e/12:45AM a/valid, taskPriority", expectedMessage);
-        assertCommandBehavior(
-                "add Valid Description p/EVENT p/1-1-2015 12:30AM 12:45AM valid@taskTime.butNoPrefix a/valid, taskPriority", expectedMessage);
-        assertCommandBehavior(
-                "add Valid Description p/EVENT p/1-1-2015 e/12:30AM e/12:30AM butNoTaskPriorityPrefix valid, taskPriority", expectedMessage);
+                "add", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/EVENT p/1-1-2015 e/12:30AM e/12:45AM a/valid, taskPriority", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
+                "add #descriptionIsEmpty", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/not_numbers e/12:30AM e/12:45AM a/valid, taskPriority", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description with invalid date format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/1-1-2015 e/notATaskTime e/notATaskTime a/valid, taskPriority", TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS);
+                "add Valid Description p/invalidPriority ", TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description p/EVENT p/12345 e/12:30AM e/12:45AM a/valid, taskPriority t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add Valid Description #invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.askBoon();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
@@ -188,14 +182,13 @@ public class LogicManagerTest {
                 String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
                 expectedAB,
                 expectedAB.getTaskList());
-
     }
 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
-        Task toBeAdded = helper.adam();
+        Task toBeAdded = helper.askBoon();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
@@ -385,13 +378,13 @@ public class LogicManagerTest {
      */
     class TestDataHelper{
 
-        Task adam() throws Exception {
-            Description description = new Description("Adam Brown");
+        Task askBoon() throws Exception {
+            Description description = new Description("Ask boon for tax rebate");
             String taskType = Task.EVENT_TASK;
             TaskDate taskDate = new TaskDate("1-1-2015");
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
-            TaskPriority privatetaskPriority = new TaskPriority("111, alpha street");
+            TaskPriority privatetaskPriority = new TaskPriority("0");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -412,7 +405,7 @@ public class LogicManagerTest {
                     new TaskDate("1-1-2015"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
-                    new TaskPriority("House of " + seed),
+                    new TaskPriority((seed % 4) + ""),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -424,15 +417,14 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            cmd.append(" p/").append(p.getTaskType());
-            cmd.append(" p/").append(p.getTaskDate());
-            cmd.append(" e/").append(p.getStartTime());
-            cmd.append(" e/").append(p.getEndTime());
-            cmd.append(" a/").append(p.getTaskPriority());
+            cmd.append(" on ").append(p.getTaskDate());
+            cmd.append(" startat ").append(p.getStartTime());
+            cmd.append(" endat ").append(p.getEndTime());
+            cmd.append(" " + TaskPriority.PREFIX).append(p.getTaskPriority());
 
             UniqueTagList tags = p.getTags();
             for(Tag t: tags){
-                cmd.append(" t/").append(t.tagName);
+                cmd.append(" " + Tag.PREFIX).append(t.tagName);
             }
 
             return cmd.toString();
@@ -516,7 +508,7 @@ public class LogicManagerTest {
                     new TaskDate("1-1-2015"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
-                    new TaskPriority("House of 1"),
+                    new TaskPriority(TaskPriority.NO_PRIORITY),
                     new UniqueTagList(new Tag("tag"))
             );
         }
