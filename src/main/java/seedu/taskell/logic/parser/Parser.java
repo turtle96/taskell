@@ -30,15 +30,6 @@ public class Parser {
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<description>[^/]+)"
-                    + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
-                    + " (?<isTaskDatePrivate>p?)p/(?<taskDate>[^/]+)"
-                    + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
-                    + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
-                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
     private static final String BY = "by";
     private static final String ON = "on";
     private static final String AT = "at";
@@ -137,7 +128,7 @@ public class Parser {
             if(!token.equals(BY) &&!token.equals(ON) &&!token.equals(AT)
                     && !token.equals(STARTAT) && !token.equals(ENDAT)
                     && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
-                    && !token.startsWith("t/") && !token.startsWith("p/")) {
+                    && !token.startsWith("t/") && !token.startsWith(TaskPriority.PRIORITY_PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
@@ -184,9 +175,9 @@ public class Parser {
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
-                tagString = " " + token;
+                tagString += " " + token;
                 continue;
-            } else if (token.startsWith("p/")) {
+            } else if (token.startsWith(TaskPriority.PRIORITY_PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
@@ -194,7 +185,7 @@ public class Parser {
                 if (priorityCount > 0) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-                    taskPriority = token;
+                    taskPriority = token.substring(token.indexOf(TaskPriority.PRIORITY_PREFIX)+2);
                     priorityCount++;
                 }
                 continue;
