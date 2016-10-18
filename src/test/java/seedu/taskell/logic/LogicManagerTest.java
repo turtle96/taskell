@@ -30,6 +30,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskell.commons.core.Messages.*;
 
@@ -371,7 +372,47 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedList);
     }
+    
+    @Test
+    public void assertValidFormatBehaviourForDate() {
+        assertTrue(TaskDate.isValidDate(TaskDate.DEFAULT_DATE));
+        assertTrue(TaskDate.isValidDate("8.DeCeMbEr.2016"));
+        assertTrue(TaskDate.isValidDate("8/jan/2016"));
+        assertTrue(TaskDate.isValidDate("1.jan"));
+        assertTrue(TaskDate.isValidDate("may-2016"));
+        assertTrue(TaskDate.isValidDate("sept"));
+        assertTrue(TaskDate.isValidDate("tdy"));
+        assertTrue(TaskDate.isValidDate("thurs"));
+    }
+    
+    @Test
+    public void assertInvalidFormatBehaviourForDate() {
+        assertFalse(TaskDate.isValidDate("1st January"));
+        assertFalse(TaskDate.isValidDate("1/2"));
+        assertFalse(TaskDate.isValidDate("01022016"));
+        assertFalse(TaskDate.isValidDate("2016"));
+        assertFalse(TaskDate.isValidDate("NotAValidDate"));
+    }
+    
+    @Test
+    public void assertValidFormatBehaviourForTime() {
+        assertTrue(TaskTime.isValidTime(TaskTime.DEFAULT_START_TIME));
+        assertTrue(TaskTime.isValidTime(TaskTime.DEFAULT_END_TIME));
+        assertTrue(TaskTime.isValidTime("12am"));
+        assertTrue(TaskTime.isValidTime("1.30pm"));
+        assertTrue(TaskTime.isValidTime("1:40pm"));
+        assertTrue(TaskTime.isValidTime("1-30am"));
+        assertTrue(TaskTime.isValidTime("2:30Am"));
+    }
 
+    @Test
+    public void assertInvalidFormatBehaviourForTime() {
+        assertFalse(TaskTime.isValidTime("1.3am"));
+        assertFalse(TaskTime.isValidTime("2"));
+        assertFalse(TaskTime.isValidTime("13pm"));
+        assertFalse(TaskTime.isValidTime("2359"));
+        assertFalse(TaskTime.isValidTime("NotAValidTime"));
+    }
 
     /**
      * A utility class to generate test data.
@@ -390,6 +431,7 @@ public class LogicManagerTest {
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Task(description, taskType, taskDate, startTime, endTime, privatetaskPriority, tags);
         }
+        
 
         /**
          * Generates a valid task using the given seed.
