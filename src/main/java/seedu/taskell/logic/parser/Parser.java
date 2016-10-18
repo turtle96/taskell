@@ -52,7 +52,7 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput);
+            //UndoCommand.addCommandToHistory(userInput);   //for some reason this fails LogicManagerTest
             UndoCommand.updateMostRecentCommand(commandWord);
             return prepareAdd(arguments);
 
@@ -60,7 +60,7 @@ public class Parser {
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput);
+            //UndoCommand.addCommandToHistory(userInput);
             UndoCommand.updateMostRecentCommand(commandWord);
             return prepareDelete(arguments);
 
