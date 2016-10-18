@@ -63,7 +63,7 @@ public class TaskTime {
         if (matcherFullArg.matches()) {
             this.taskTime = setTime(matcherFullArg.group("hour"), matcherFullArg.group("minute"), matcherFullArg.group("antePost"));
         } else if (matcherHourOnly.matches()) {
-            this.taskTime = setTime(matcherFullArg.group("hour"), ZERO_MINUTE, matcherFullArg.group("antePost"));
+            this.taskTime = setTime(matcherHourOnly.group("hour"), ZERO_MINUTE, matcherHourOnly.group("antePost"));
         } else {
             throw new IllegalValueException(MESSAGE_TASK_TIME_CONSTRAINTS);
         }
