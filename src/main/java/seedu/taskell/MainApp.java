@@ -14,6 +14,7 @@ import seedu.taskell.commons.util.ConfigUtil;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
+import seedu.taskell.logic.commands.UndoCommand;
 import seedu.taskell.model.*;
 import seedu.taskell.storage.Storage;
 import seedu.taskell.storage.StorageManager;
@@ -62,6 +63,8 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+        
+        UndoCommand.initializeCommandHistory();
     }
 
     private String getApplicationParameter(String parameterName){
