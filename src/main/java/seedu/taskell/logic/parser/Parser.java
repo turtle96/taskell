@@ -68,6 +68,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case UndoCommand.COMMAND_WORD:
+            return prepareUndo(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -187,6 +190,23 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+    }
+    
+    /**
+     * Parses arguments in the context of undo command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareUndo(String args) {
+        Optional<Integer> index = parseIndex(args);
+        if(!index.isPresent()){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+        }
+
+        //return new UndoCommand(index.get());
+        return new UndoCommand();
     }
 
 }
