@@ -76,8 +76,11 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
             
+        case EditDateCommand.COMMAND_WORD:
+            return prepareEditDate(arguments);
+            
         case EditDescriptionCommand.COMMAND_WORD:
-            return prepareEdit(arguments);
+            return prepareEditDescription(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -100,29 +103,54 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the edit task command.
+     * Parses arguments in the context of the edit task date command.
      *
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareEdit(String args) {
+    private Command prepareEditDate(String args) {
+        //System.out.println("Args are "+args);
+        String arguments = "";
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        int targetIdx = Integer.valueOf(st.nextToken());
+        while (st.hasMoreTokens()) {
+            arguments += st.nextToken() + " ";
+        }
+        if (!TaskDate.isValidDate(arguments)) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+        }
+        
+        try{
+        return new EditDateCommand(targetIdx, arguments);
+        }catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the edit task description command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEditDescription(String args) {
         //System.out.println("Args are "+args);
         String arguments = "";
         if (args.isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
         }
-//        String idx = args.trim().substring(0, 2);
-//        int targetIdx =Integer.valueOf(idx.trim());
-//        args = args.trim();
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         int targetIdx = Integer.valueOf(st.nextToken());
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
         
-        //args = st.toString();
-        //System.out.println("Args are "+arguments+ "and idx is "+targetIdx);
         try{
         return new EditDescriptionCommand(targetIdx, arguments);
         }catch (IllegalValueException ive) {

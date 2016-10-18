@@ -32,20 +32,8 @@ public class EditDescriptionCommand extends Command {
     //private final Task newTask;
     
     public EditDescriptionCommand(int targetIndex, String newDescription) throws IllegalValueException {
-        System.out.println("Yay i am here inside edit description constructor");
         this.targetIndex = targetIndex;
         this.description = new Description(newDescription);
-//        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-//
-//        if (lastShownList.size() < targetIndex) {
-//            indicateAttemptToExecuteIncorrectCommand();
-//        }
-//
-//        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-//        this.newTask = new Task(
-//                new Description(newDescription),taskToEdit.getTaskType(),taskToEdit.getTaskDate(), taskToEdit.getStartTime(),taskToEdit.getEndTime(),
-//                taskToEdit.getTaskPriority(),taskToEdit.getTags()
-//        );
     }
     
     @Override
