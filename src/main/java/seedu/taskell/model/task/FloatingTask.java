@@ -13,7 +13,7 @@ import seedu.taskell.model.tag.UniqueTagList;
 public class FloatingTask extends Task {
 
     public FloatingTask(Description description, String taskType, TaskDate taskDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
-        super(description, taskType, null, null, null, taskPriority, tags);
+        super(description, Task.FLOATING_TASK, taskDate, startTime, endTime, taskPriority, tags);
     }
 
     @Override
@@ -21,11 +21,6 @@ public class FloatingTask extends Task {
         return other == this // short circuit if same object
                 || (other instanceof ReadOnlyTask // instanceof handles nulls
                 && this.isSameStateAs((ReadOnlyTask) other));
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Floating Task [Description: %s] [Priority: %s] [Tags: %s] ", this.getDescription(),this.getTaskPriority(),this.getTags());
     }
 
 }
