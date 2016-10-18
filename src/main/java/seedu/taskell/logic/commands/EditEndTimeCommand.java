@@ -14,24 +14,24 @@ import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Edits a task start time identified using it's last displayed index from the task manager.
+ * Edits a task end time identified using it's last displayed index from the task manager.
  */
-public class EditStartTimeCommand extends Command {
-    public static final String COMMAND_WORD = "edit-startat";
+public class EditEndTimeCommand extends Command {
+    public static final String COMMAND_WORD = "edit-endat";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the start time of a task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) NEW_START_TIME\n"
-            + "Example: " + COMMAND_WORD + " 1 2pm ";
+            + ": Edits the end time of a task identified by the index number used in the last task listing.\n"
+            + "Parameters: INDEX (must be a positive integer) NEW_END_TIME\n"
+            + "Example: " + COMMAND_WORD + " 1 9pm ";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \n\nNewTask: %2$s";
 
     public final int targetIndex;
-    public final TaskTime startTime;
+    public final TaskTime endTime;
     
-    public EditStartTimeCommand(int targetIndex, String newTime) throws IllegalValueException {
+    public EditEndTimeCommand(int targetIndex, String newTime) throws IllegalValueException {
         this.targetIndex = targetIndex;
-        this.startTime = new TaskTime(newTime);
+        this.endTime = new TaskTime(newTime);
     }
     
     @Override
@@ -45,7 +45,7 @@ public class EditStartTimeCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getTaskDate(), startTime,taskToEdit.getEndTime(),
+        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getTaskDate(), taskToEdit.getStartTime(),endTime,
                 taskToEdit.getTaskPriority(),taskToEdit.getTags()
         );
         try {

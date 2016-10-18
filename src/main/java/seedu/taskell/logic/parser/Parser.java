@@ -84,6 +84,9 @@ public class Parser {
             
         case EditStartTimeCommand.COMMAND_WORD:
             return prepareEditStart(arguments);
+        
+        case EditEndTimeCommand.COMMAND_WORD:
+            return prepareEditEnd(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -160,7 +163,7 @@ public class Parser {
     }
     
     /**
-     * Parses arguments in the context of the edit task date command.
+     * Parses arguments in the context of the edit start time command.
      *
      * @param args full command args string
      * @return the prepared command
@@ -173,7 +176,6 @@ public class Parser {
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         int targetIdx = Integer.valueOf(st.nextToken());
-        System.out.println("The index is "+targetIdx);
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
@@ -189,6 +191,37 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    
+    /**
+     * Parses arguments in the context of the edit task end time command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEditEnd(String args) {
+        String arguments = "";
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        int targetIdx = Integer.valueOf(st.nextToken());
+        while (st.hasMoreTokens()) {
+            arguments += st.nextToken() + " ";
+        }
+        arguments = arguments.trim();
+        if (!TaskTime.isValidTime(arguments)) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
+        }
+        
+        try{
+        return new EditEndTimeCommand(targetIdx, arguments);
+        }catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
     /**
      * Parses arguments in the context of the add task command.
      *
