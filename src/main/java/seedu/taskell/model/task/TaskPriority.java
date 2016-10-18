@@ -13,7 +13,7 @@ public class TaskPriority {
             + "\nThere should not be more than 1 priority level for a task";
     public static final String TASK_PRIORITY_VALIDATION_REGEX = ".+";
     
-    public static final String PRIORITY_PREFIX = "p/";
+    public static final String PREFIX = "p/";
     
     public static final String NO_PRIORITY = "0";
     public static final String LOW_PRIORITY = "1";
