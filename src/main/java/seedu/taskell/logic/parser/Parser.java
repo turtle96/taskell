@@ -53,6 +53,7 @@ public class Parser {
 
         case AddCommand.COMMAND_WORD:
             UndoCommand.addCommandToHistory(userInput);
+            UndoCommand.updateMostRecentCommand(commandWord);
             return prepareAdd(arguments);
 
         case SelectCommand.COMMAND_WORD:
@@ -60,6 +61,7 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             UndoCommand.addCommandToHistory(userInput);
+            UndoCommand.updateMostRecentCommand(commandWord);
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -201,13 +203,6 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareUndo(String args) {
-        Optional<Integer> index = parseIndex(args);
-        if(!index.isPresent()){
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
-        }
-
-        //return new UndoCommand(index.get());
         return new UndoCommand();
     }
 
