@@ -25,7 +25,7 @@ public class EditDescriptionCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) NEW_DESCRIPTION\n"
             + "Example: " + COMMAND_WORD + " 1 buy cake ";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \nNewTask: %2$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \n\nNewTask: %2$s";
 
     public final int targetIndex;
     public final Description description;
