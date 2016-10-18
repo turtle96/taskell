@@ -52,12 +52,14 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput);
             return prepareAdd(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput);
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
