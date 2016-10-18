@@ -9,8 +9,16 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
  */
 public class TaskPriority {
     
-    public static final String MESSAGE_TASK_PRIORITY_CONSTRAINTS = "Task priority can be in any format";
+    public static final String MESSAGE_TASK_PRIORITY_CONSTRAINTS = "Task priority should range from 0-3"
+            + "\nThere should not be more than 1 priority level for a task";
     public static final String TASK_PRIORITY_VALIDATION_REGEX = ".+";
+    
+    public static final String NO_PRIORITY = "0";
+    public static final String LOW_PRIORITY = "1";
+    public static final String MEDIUM_PRIORITY = "2";
+    public static final String HIGH_PRIORITY = "3";
+    
+    public static final String DEFAULT_PRIORITY = NO_PRIORITY;
 
     public final String taskPriority;
 
