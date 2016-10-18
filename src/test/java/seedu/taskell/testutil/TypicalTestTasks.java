@@ -19,7 +19,8 @@ public class TypicalTestTasks {
             benson = new TaskBuilder().withDescription("Benson Meier").withTaskPriority("311, Clementi Ave 2, #02-25")
                     .withTaskTime("johnd@gmail.com").withTaskDate("98765432")
                     .withTags("owesMoney", "friends").build();
-            carl = new TaskBuilder().withDescription("Carl Kurz").withTaskDate("95352563").withTaskTime("heinz@yahoo.com").withTaskPriority("wall street").build();
+            carl = new TaskBuilder().withDescription("Carl Kurz").withTaskDate("95352563").withTaskTime("heinz@yahoo.com").withTaskPriority("wall street")
+                    .withTags("owesMoney").build();
             daniel = new TaskBuilder().withDescription("Daniel Meier").withTaskDate("87652533").withTaskTime("cornelia@google.com").withTaskPriority("10th street").build();
             elle = new TaskBuilder().withDescription("Elle Meyer").withTaskDate("9482224").withTaskTime("werner@gmail.com").withTaskPriority("michegan ave").build();
             fiona = new TaskBuilder().withDescription("Fiona Kunz").withTaskDate("9482427").withTaskTime("lydia@gmail.com").withTaskPriority("little tokyo").build();
