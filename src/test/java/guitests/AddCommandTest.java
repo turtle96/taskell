@@ -5,10 +5,12 @@ import org.junit.Test;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.HelpCommand;
 import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
@@ -37,6 +39,17 @@ public class AddCommandTest extends TaskManagerGuiTest {
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        
+       //add valid floating task
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.floatingTask_Valid);
+        
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.floatingTask_NonIntuitiveDescription);
+        
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.deadlineTask_Valid);
+        
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {

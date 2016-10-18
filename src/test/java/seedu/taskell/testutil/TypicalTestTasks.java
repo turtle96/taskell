@@ -9,7 +9,9 @@ import seedu.taskell.model.task.*;
  */
 public class TypicalTestTasks {
 
-    public static TestTask archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform, holdMeeting, inspectWarehouse;
+    public static TestTask archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform, holdMeeting, inspectWarehouse, 
+            floatingTask_Valid, floatingTask_NonIntuitiveDescription,
+            deadlineTask_Valid;
 
     public TypicalTestTasks() {
         try {
@@ -28,6 +30,9 @@ public class TypicalTestTasks {
             //Manually added
             holdMeeting = new TaskBuilder().withDescription("Hold meeting").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").build();
             inspectWarehouse = new TaskBuilder().withDescription("Inspect warehouse").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").build();
+            floatingTask_Valid = new TaskBuilder().withDescription("floating task").withTaskType(Task.FLOATING_TASK).withTaskDate(TaskDate.DEFAULT_DATE).withStartTime(TaskTime.DEFAULT_START_TIME).withEndTime(TaskTime.DEFAULT_END_TIME).withTaskPriority(TaskPriority.DEFAULT_PRIORITY).build();
+            floatingTask_NonIntuitiveDescription = new TaskBuilder().withDescription("76@#$5632 on by at on").withTaskType(Task.FLOATING_TASK).withTaskDate(TaskDate.DEFAULT_DATE).withStartTime(TaskTime.DEFAULT_START_TIME).withEndTime(TaskTime.DEFAULT_END_TIME).withTaskPriority(TaskPriority.DEFAULT_PRIORITY).build();
+            deadlineTask_Valid = new TaskBuilder().withDescription("deadline task").withTaskType(Task.DEADLINE_TASK).withTaskDate(TaskDate.DEFAULT_DATE).withStartTime(TaskTime.DEFAULT_START_TIME).withEndTime(TaskTime.DEFAULT_END_TIME).withTaskPriority(TaskPriority.LOW_PRIORITY).build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
