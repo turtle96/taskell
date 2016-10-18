@@ -41,22 +41,30 @@ public class UndoCommand extends Command {
         }
         switch (mostRecentCommand) {
         case AddCommand.COMMAND_WORD:
-            try {
-                model.deleteTask(mostRecentAddedTask);
-            } catch (TaskNotFoundException e) {
-                assert false : "The target task cannot be missing";
-            }
-            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, mostRecentAddedTask));
+            return undoAdd();
         case DeleteCommand.COMMAND_WORD:
-            try {
-                model.addTask(mostRecentDeletedTask);
-                return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, mostRecentDeletedTask));
-            } catch (DuplicateTaskException e) {
-                return new CommandResult(MESSAGE_DUPLICATE_TASK);
-            }
+            return undoDelete();
         default:
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
+    }
+
+    private CommandResult undoDelete() {
+        try {
+            model.addTask(mostRecentDeletedTask);
+            return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, mostRecentDeletedTask));
+        } catch (DuplicateTaskException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+        }
+    }
+
+    private CommandResult undoAdd() {
+        try {
+            model.deleteTask(mostRecentAddedTask);
+        } catch (TaskNotFoundException e) {
+            assert false : "The target task cannot be missing";
+        }
+        return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, mostRecentAddedTask));
     }
     
     public static void updateMostRecentCommand(String commandWord) {
