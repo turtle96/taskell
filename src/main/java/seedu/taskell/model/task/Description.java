@@ -11,7 +11,7 @@ public class Description {
     public static final String MESSAGE_DESCRIPTION_CONSTRAINTS = "Task description should be spaces or alphanumeric characters";
     public static final String DESCRIPTION_VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
-    public final String description;
+    public String description;
 
     /**
      * Validates given description.
@@ -34,7 +34,10 @@ public class Description {
         return test.matches(DESCRIPTION_VALIDATION_REGEX);
     }
 
-
+    public void setDescription(String description){
+        this.description = description;
+    }
+    
     @Override
     public String toString() {
         return description;

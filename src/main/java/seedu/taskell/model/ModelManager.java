@@ -9,6 +9,7 @@ import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.UniqueTaskList;
+import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
@@ -62,6 +63,12 @@ public class ModelManager extends ComponentManager implements Model {
     /** Raises an event to indicate the model has changed */
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
+    }
+    
+    @Override
+    public synchronized void editTask(ReadOnlyTask old, Task toEdit) throws DuplicateTaskException, TaskNotFoundException {
+        taskManager.editTask(old,toEdit);
+        indicateTaskManagerChanged();
     }
 
     @Override

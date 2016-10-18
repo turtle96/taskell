@@ -7,9 +7,13 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import seedu.taskell.commons.core.Messages;
+import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.commands.*;
+import seedu.taskell.model.Model;
+import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskPriority;
@@ -29,7 +33,7 @@ public class Parser {
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
+    
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<description>[^/]+)"
                     + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
@@ -71,6 +75,9 @@ public class Parser {
 
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
+            
+        case EditDescriptionCommand.COMMAND_WORD:
+            return prepareEdit(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -89,6 +96,37 @@ public class Parser {
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the edit task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        //System.out.println("Args are "+args);
+        String arguments = "";
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
+        }
+//        String idx = args.trim().substring(0, 2);
+//        int targetIdx =Integer.valueOf(idx.trim());
+//        args = args.trim();
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        int targetIdx = Integer.valueOf(st.nextToken());
+        while (st.hasMoreTokens()) {
+            arguments += st.nextToken() + " ";
+        }
+        
+        //args = st.toString();
+        //System.out.println("Args are "+arguments+ "and idx is "+targetIdx);
+        try{
+        return new EditDescriptionCommand(targetIdx, arguments);
+        }catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
         }
     }
 
