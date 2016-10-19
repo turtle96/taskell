@@ -32,30 +32,39 @@ public class Parser {
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
-    private static final Pattern KEYWORDS_ARGS_FORMAT =
-            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-    
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<description>[^/]+)"
-                    + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
-                    + " (?<isTaskDatePrivate>p?)p/(?<taskDate>[^/]+)"
-                    + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
+    private static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
+                                                                                                           // or
+                                                                                                           // more
+                                                                                                           // keywords
+                                                                                                           // separated
+                                                                                                           // by
+                                                                                                           // whitespace
+
+    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes
+                                                         // are reserved for
+                                                         // delimiter prefixes
+            Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
+                    + " (?<isTaskDatePrivate>p?)p/(?<taskDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
                     + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
-                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
+                                                                                                                   // number
+                                                                                                                   // of
+                                                                                                                   // tags
 
     private static final String BY = "by";
     private static final String ON = "on";
     private static final String AT = "at";
     private static final String STARTAT = "startat";
     private static final String ENDAT = "endat";
-    
-    public Parser() {}
+
+    public Parser() {
+    }
 
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput full user input string
+     * @param userInput
+     *            full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -69,26 +78,31 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
+            // UndoCommand.addCommandToHistory(userInput); //for some reason
+            // this fails LogicManagerTest
+            UndoCommand.updateMostRecentCommand(commandWord);
             return prepareAdd(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
+            // UndoCommand.addCommandToHistory(userInput);
+            UndoCommand.updateMostRecentCommand(commandWord);
             return prepareDelete(arguments);
-            
+
         case EditDateCommand.COMMAND_WORD:
             return prepareEditDate(arguments);
-            
+
         case EditDescriptionCommand.COMMAND_WORD:
             return prepareEditDescription(arguments);
-            
+
         case EditStartTimeCommand.COMMAND_WORD:
             return prepareEditStart(arguments);
-        
+
         case EditEndTimeCommand.COMMAND_WORD:
             return prepareEditEnd(arguments);
-            
+
         case EditPriorityCommand.COMMAND_WORD:
             return prepareEditPriority(arguments);
 
@@ -97,12 +111,15 @@ public class Parser {
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
-            
+
         case FindTagCommand.COMMAND_WORD:
             return prepareFindByTag(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case UndoCommand.COMMAND_WORD:
+            return prepareUndo(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -115,18 +132,17 @@ public class Parser {
         }
     }
 
-
     /**
      * Parses arguments in the context of the edit task date command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareEditDate(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         int targetIdx = Integer.valueOf(st.nextToken());
@@ -134,21 +150,21 @@ public class Parser {
             arguments += st.nextToken() + " ";
         }
         if (!TaskDate.isValidDate(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
         }
-        
-        try{
-        return new EditDateCommand(targetIdx, arguments);
-        }catch (IllegalValueException ive) {
+
+        try {
+            return new EditDateCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     /**
      * Parses arguments in the context of the edit task description command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareEditDescription(String args) {
@@ -163,17 +179,18 @@ public class Parser {
             arguments += st.nextToken() + " ";
         }
         arguments = arguments.trim();
-        try{
-        return new EditDescriptionCommand(targetIdx, arguments);
-        }catch (IllegalValueException ive) {
+        try {
+            return new EditDescriptionCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     /**
      * Parses arguments in the context of the edit start time command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareEditStart(String args) {
@@ -192,18 +209,19 @@ public class Parser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
-        
-        try{
-        return new EditStartTimeCommand(targetIdx, arguments);
-        }catch (IllegalValueException ive) {
+
+        try {
+            return new EditStartTimeCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     /**
      * Parses arguments in the context of the edit task end time command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareEditEnd(String args) {
@@ -222,18 +240,19 @@ public class Parser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
-        
-        try{
-        return new EditEndTimeCommand(targetIdx, arguments);
-        }catch (IllegalValueException ive) {
+
+        try {
+            return new EditEndTimeCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     /**
      * Parses arguments in the context of the edit task priority command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareEditPriority(String args) {
@@ -252,25 +271,26 @@ public class Parser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
-        
-        try{
-        return new EditPriorityCommand(targetIdx, arguments);
-        }catch (IllegalValueException ive) {
+
+        try {
+            return new EditPriorityCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+
     /**
      * Parses arguments in the context of the add task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
-    private Command prepareAdd(String args){
+    private Command prepareAdd(String args) {
         if (args.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        
+
         ArrayList<String> argsList = tokenizeArguments(args);
         Queue<String> initialQueue = initialiseArgQueue(argsList);
         Queue<String> descriptionQueue = new LinkedList<String>();
@@ -280,7 +300,7 @@ public class Parser {
         Queue<String> startatQueue = new LinkedList<String>();
         Queue<String> endatQueue = new LinkedList<String>();
         Queue<String> dateTimeQueue = new LinkedList<String>();
-        
+
         String description = "";
         String date = TaskDate.DEFAULT_DATE;
         String startTime = TaskTime.DEFAULT_START_TIME;
@@ -288,7 +308,7 @@ public class Parser {
         String token = "";
         String taskPriority = TaskPriority.DEFAULT_PRIORITY;
         String tagString = "";
-        
+
         int priorityCount = 0;
         int byCount = 0;
         int onCount = 0;
@@ -297,18 +317,17 @@ public class Parser {
         int endatCount = 0;
         int dateCount = 0;
         int timeCount = 0;
-        
+
         boolean isFloating = false;
         boolean isDeadline = false;
         boolean isEvent = false;
-        
+
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
             String tempToken = "";
-            
-            if(!token.equals(BY) &&!token.equals(ON) &&!token.equals(AT)
-                    && !token.equals(STARTAT) && !token.equals(ENDAT)
-                    && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
+
+            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(STARTAT)
+                    && !token.equals(ENDAT) && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
                     && !token.startsWith(Tag.PREFIX) && !token.startsWith(TaskPriority.PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
                 if (!tempToken.isEmpty()) {
@@ -364,16 +383,20 @@ public class Parser {
                     descriptionQueue.offer(tempToken);
                 }
                 if (priorityCount > 0) {
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-                    taskPriority = token.substring(token.indexOf(TaskPriority.PREFIX)+2);
+                    taskPriority = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
                     priorityCount++;
                 }
                 continue;
             } else if (TaskDate.isValidDate(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty()
-                        && startatQueue.isEmpty() && endatQueue.isEmpty()) {
-                    descriptionQueue.offer(token);  //because maybe people wants to add task with serial number that has format date
+                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && startatQueue.isEmpty()
+                        && endatQueue.isEmpty()) {
+                    descriptionQueue.offer(token); // because maybe people wants
+                                                   // to add task with serial
+                                                   // number that has format
+                                                   // date
                 } else if (!onQueue.isEmpty()) {
                     dateTimeQueue.offer(onQueue.poll());
                     dateTimeQueue.offer(token);
@@ -391,9 +414,12 @@ public class Parser {
                     descriptionQueue.offer(token);
                 }
             } else if (TaskTime.isValidTime(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty()
-                        && startatQueue.isEmpty() && endatQueue.isEmpty()) {
-                    descriptionQueue.offer(token);  //because maybe people wants to add task with serial number that has format date
+                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && startatQueue.isEmpty()
+                        && endatQueue.isEmpty()) {
+                    descriptionQueue.offer(token); // because maybe people wants
+                                                   // to add task with serial
+                                                   // number that has format
+                                                   // date
                 } else if (!byQueue.isEmpty()) {
                     dateTimeQueue.offer(byQueue.poll());
                     dateTimeQueue.offer(token);
@@ -412,46 +438,42 @@ public class Parser {
                 }
             }
         }
-        
-        //Takes care of trailing keywords at end of input not accompanied by date/time
+
+        // Takes care of trailing keywords at end of input not accompanied by
+        // date/time
         if (!byQueue.isEmpty()) {
             descriptionQueue.offer(byQueue.poll());
         }
-        if(!onQueue.isEmpty()) {
+        if (!onQueue.isEmpty()) {
             descriptionQueue.offer(onQueue.poll());
         }
-        if(!startatQueue.isEmpty()) {
+        if (!startatQueue.isEmpty()) {
             descriptionQueue.offer(startatQueue.poll());
         }
-        if(!endatQueue.isEmpty()) {
+        if (!endatQueue.isEmpty()) {
             descriptionQueue.offer(endatQueue.poll());
         }
-        
+
         while (!descriptionQueue.isEmpty()) {
             description += descriptionQueue.poll() + " ";
         }
         description.trim();
-        
+
         if (dateTimeQueue.isEmpty()) {
             isFloating = true;
             try {
-                return new AddCommand(
-                        description,
-                        Task.FLOATING_TASK,
-                        TaskDate.DEFAULT_DATE,
-                        TaskTime.DEFAULT_START_TIME,
-                        TaskTime.DEFAULT_END_TIME,
-                        taskPriority,
+                return new AddCommand(description, Task.FLOATING_TASK, TaskDate.DEFAULT_DATE,
+                        TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         }
-        
+
         String dateTimeDelimiter = "";
         while (!dateTimeQueue.isEmpty()) {
             String tempToken = dateTimeQueue.poll();
-            
+
             if (tempToken.equals(BY)) {
                 byCount++;
                 dateTimeDelimiter = BY;
@@ -472,7 +494,7 @@ public class Parser {
                 date = tempToken;
             } else if (TaskTime.isValidTime(tempToken)) {
                 timeCount++;
-                
+
                 if (dateTimeDelimiter.equals(BY)) {
                     endTime = tempToken;
                 } else if (dateTimeDelimiter.equals(AT)) {
@@ -484,22 +506,16 @@ public class Parser {
                 }
             }
         }
-        
+
         if (onCount > 1 || atCount > 1 || startatCount > 1 || endatCount > 1 || dateCount > 1 || timeCount > 2
-                || (byCount > 0 && timeCount >1)) {
+                || (byCount > 0 && timeCount > 1)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-        
+
         if (startatCount == 1 || endatCount == 1) {
             isEvent = true;
             try {
-                return new AddCommand(
-                        description,
-                        Task.EVENT_TASK,
-                        date,
-                        startTime,
-                        endTime,
-                        taskPriority,
+                return new AddCommand(description, Task.EVENT_TASK, date, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
@@ -507,26 +523,20 @@ public class Parser {
         } else {
             isDeadline = true;
             try {
-                return new AddCommand(
-                        description,
-                        Task.DEADLINE_TASK,
-                        date,
-                        startTime,
-                        endTime,
-                        taskPriority,
+                return new AddCommand(description, Task.DEADLINE_TASK, date, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         }
     }
-    
-    //At any one point, at most one of these queue can have at most one token
-    //Flush to descriptionQueue
+
+    // At any one point, at most one of these queue can have at most one token
+    // Flush to descriptionQueue
     private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
             Queue<String> startatQueue, Queue<String> endatQueue) {
         String token = "";
-        
+
         if (!byQueue.isEmpty()) {
             token = byQueue.poll();
         } else if (!onQueue.isEmpty()) {
@@ -538,18 +548,18 @@ public class Parser {
         } else if (!endatQueue.isEmpty()) {
             token = endatQueue.poll();
         }
-        
+
         return token;
     }
-    
+
     private Queue<String> initialiseArgQueue(ArrayList<String> argsList) {
         Queue<String> argsQueue = new LinkedList<String>();
-        for (String arg: argsList) {
+        for (String arg : argsList) {
             argsQueue.offer(arg);
         }
         return argsQueue;
     }
-    
+
     private ArrayList<String> tokenizeArguments(String args) {
         ArrayList<String> argsList = new ArrayList<String>();
         StringTokenizer st = new StringTokenizer(args, " ");
@@ -558,7 +568,7 @@ public class Parser {
         }
         return argsList;
     }
-    
+
     /**
      * Extracts the new task's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
@@ -569,22 +579,23 @@ public class Parser {
             return Collections.emptySet();
         }
         // replace first delimiter prefix, then split
-        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" " + Tag.PREFIX, "").split(" " + Tag.PREFIX));
+        final Collection<String> tagStrings = Arrays
+                .asList(tagArguments.replaceFirst(" " + Tag.PREFIX, "").split(" " + Tag.PREFIX));
         return new HashSet<>(tagStrings);
     }
 
     /**
      * Parses arguments in the context of the delete task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
 
         Optional<Integer> index = parseIndex(args);
-        if(!index.isPresent()){
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
         return new DeleteCommand(index.get());
@@ -593,22 +604,23 @@ public class Parser {
     /**
      * Parses arguments in the context of the select task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareSelect(String args) {
         Optional<Integer> index = parseIndex(args);
-        if(!index.isPresent()){
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
 
         return new SelectCommand(index.get());
     }
 
     /**
-     * Returns the specified index in the {@code command} IF a positive unsigned integer is given as the index.
-     *   Returns an {@code Optional.empty()} otherwise.
+     * Returns the specified index in the {@code command} IF a positive unsigned
+     * integer is given as the index. Returns an {@code Optional.empty()}
+     * otherwise.
      */
     private Optional<Integer> parseIndex(String command) {
         final Matcher matcher = TASK_INDEX_ARGS_FORMAT.matcher(command.trim());
@@ -617,7 +629,7 @@ public class Parser {
         }
 
         String index = matcher.group("targetIndex");
-        if(!StringUtil.isUnsignedInteger(index)){
+        if (!StringUtil.isUnsignedInteger(index)) {
             return Optional.empty();
         }
         return Optional.of(Integer.parseInt(index));
@@ -627,14 +639,14 @@ public class Parser {
     /**
      * Parses arguments in the context of the find task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareFind(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
@@ -642,24 +654,35 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
     }
-    
+
+    /**
+     * Parses arguments in the context of undo command.
+     * 
+     */
+
+    private Command prepareUndo(String args) {
+        return new UndoCommand();
+    }
+
     /**
      * Parses arguments in the context of the find task by tags command.
      *
-     * @param args full command args string
+     * 
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareFindByTag(String args) {
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindTagCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindTagCommand.MESSAGE_USAGE));
         }
 
         // keywords delimited by whitespace
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindTagCommand(keywordSet);
+
     }
 
 }
