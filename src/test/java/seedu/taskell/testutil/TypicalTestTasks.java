@@ -21,7 +21,7 @@ public class TypicalTestTasks {
             borrowBooks = new TaskBuilder().withDescription("Borrow books").withTaskType(Task.EVENT_TASK).withTaskPriority("0")
                     .withStartTime("12:30AM").withEndTime("12:45AM").withTaskDate("1-1-2015")
                     .withTags("owesMoney", "friends").build();
-            collectParcel = new TaskBuilder().withDescription("Collect parcel").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").build();
+            collectParcel = new TaskBuilder().withDescription("Collect parcel").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").withTags("owesMoney").build();
             discardBooks = new TaskBuilder().withDescription("Discard books").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").build();
             editPowerpoint = new TaskBuilder().withDescription("Edit powerpoint").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").build();
             fixbugs = new TaskBuilder().withDescription("Fix bugs").withTaskType(Task.EVENT_TASK).withTaskDate("1-1-2015").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").build();
