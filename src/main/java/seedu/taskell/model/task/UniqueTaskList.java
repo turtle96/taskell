@@ -90,6 +90,21 @@ public class UniqueTaskList implements Iterable<Task> {
                 && this.internalList.equals(
                 ((UniqueTaskList) other).internalList));
     }
+    
+    /**
+     * Edits the equivalent task from the list.
+     *
+     * @throws TaskNotFoundException if no such task could be found in the list.
+     */
+    public boolean edit(ReadOnlyTask old, Task edit) throws TaskNotFoundException {
+        assert old != null;
+        final boolean taskFoundAndUpdated = internalList.contains(old);
+        if (!taskFoundAndUpdated) {
+            throw new TaskNotFoundException();
+        }
+        internalList.set(internalList.indexOf(old), edit);
+        return taskFoundAndUpdated;
+    }
 
     @Override
     public int hashCode() {

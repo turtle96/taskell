@@ -10,6 +10,7 @@ import seedu.taskell.logic.commands.UndoCommand;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.UniqueTaskList;
+import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.Set;
@@ -64,6 +65,12 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
+    
+    @Override
+    public synchronized void editTask(ReadOnlyTask old, Task toEdit) throws DuplicateTaskException, TaskNotFoundException {
+        taskManager.editTask(old,toEdit);
+        indicateTaskManagerChanged();
+    }
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -95,6 +102,11 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void updateFilteredTaskList(Set<String> keywords){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    }
+    
+    @Override
+    public void updateFilteredTaskListByAnyKeyword(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new TagsQualifier(keywords)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -150,6 +162,27 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
+        }
+    }
+    
+    private class TagsQualifier implements Qualifier {
+        private Set<String> tagsKeyWords;
+
+        TagsQualifier(Set<String> keyWords) {
+            this.tagsKeyWords = keyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return tagsKeyWords.stream()
+                    .filter(keyword -> StringUtil.containsIgnoreCase(task.tagsSimpleString(), keyword))
+                    .findAny()
+                    .isPresent();
+        }
+
+        @Override
+        public String toString() {
+            return "name=" + String.join(", ", tagsKeyWords);
         }
     }
 
