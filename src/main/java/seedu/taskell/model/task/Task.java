@@ -2,6 +2,7 @@ package seedu.taskell.model.task;
 
 import java.util.Objects;
 
+import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.CollectionUtil;
 import seedu.taskell.model.tag.UniqueTagList;
 
@@ -37,6 +38,9 @@ public class Task implements ReadOnlyTask {
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
+    public Task(String description) throws IllegalValueException{
+        this.description = new Description(description);
+    }
     /**
      * Copy constructor.
      */
@@ -78,7 +82,7 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-
+   
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */

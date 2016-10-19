@@ -6,13 +6,14 @@ import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.UniqueTaskList;
+import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Wraps all data at the task-manager level
- * Duplicates are not allowed (by .equals comparison)
+ * Wraps all data at the task-manager level Duplicates are not allowed (by
+ * .equals comparison)
  */
 public class TaskManager implements ReadOnlyTaskManager {
 
@@ -24,7 +25,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         tags = new UniqueTagList();
     }
 
-    public TaskManager() {}
+    public TaskManager() {
+    }
 
     /**
      * Tasks and Tags are copied into this taskmanager
@@ -44,7 +46,7 @@ public class TaskManager implements ReadOnlyTaskManager {
         return new TaskManager();
     }
 
-//// list overwrite operations
+    //// list overwrite operations
 
     public ObservableList<Task> getTasks() {
         return tasks.getInternalList();
@@ -67,14 +69,15 @@ public class TaskManager implements ReadOnlyTaskManager {
         resetData(newData.getTaskList(), newData.getTagList());
     }
 
-//// task-level operations
+    //// task-level operations
 
     /**
-     * Adds a task to the task manager.
-     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
-     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     * Adds a task to the task manager. Also checks the new task's tags and
+     * updates {@link #tags} with any new tags found, and updates the Tag
+     * objects in the task to point to those in {@link #tags}.
      *
-     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     * @throws UniqueTaskList.DuplicateTaskException
+     *             if an equivalent task already exists.
      */
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncTagsWithMasterList(p);
@@ -82,9 +85,23 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
 
     /**
-     * Ensures that every tag in this task:
-     *  - exists in the master list {@link #tags}
-     *  - points to a Tag object in the master list
+     * Edits a task in task manager.
+     *
+     * @throws UniqueTaskList.DuplicateTaskException
+     *             if an equivalent task already exists.
+     * @throws TaskNotFoundException 
+     */
+    public boolean editTask(ReadOnlyTask old, Task p) throws UniqueTaskList.DuplicateTaskException, TaskNotFoundException {
+        if (tasks.edit(old, p)) {
+            return true;
+        } else {
+            throw new UniqueTaskList.TaskNotFoundException();
+        }
+    }
+
+    /**
+     * Ensures that every tag in this task: - exists in the master list
+     * {@link #tags} - points to a Tag object in the master list
      */
     private void syncTagsWithMasterList(Task task) {
         final UniqueTagList taskTags = task.getTags();
@@ -112,17 +129,17 @@ public class TaskManager implements ReadOnlyTaskManager {
         }
     }
 
-//// tag-level operations
+    //// tag-level operations
 
     public void addTag(Tag t) throws UniqueTagList.DuplicateTagException {
         tags.add(t);
     }
 
-//// util methods
+    //// util methods
 
     @Override
     public String toString() {
-        return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() +  " tags";
+        return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() + " tags";
         // TODO: refine later
     }
 
@@ -146,18 +163,18 @@ public class TaskManager implements ReadOnlyTaskManager {
         return this.tags;
     }
 
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskManager // instanceof handles nulls
-                && this.tasks.equals(((TaskManager) other).tasks)
-                && this.tags.equals(((TaskManager) other).tags));
+                        && this.tasks.equals(((TaskManager) other).tasks)
+                        && this.tags.equals(((TaskManager) other).tags));
     }
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
+        // use this method for custom fields hashing instead of implementing
+        // your own
         return Objects.hash(tasks, tags);
     }
 }
