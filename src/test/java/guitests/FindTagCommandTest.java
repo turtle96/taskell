@@ -11,16 +11,16 @@ public class FindTagCommandTest extends TaskManagerGuiTest {
     @Test
     public void findTag_nonEmptyList() {
         assertFindResult("find-tag chicken"); //no results
-        assertFindResult("find-tag friends", td.alice, td.benson); //multiple results
+        assertFindResult("find-tag friends", td.archivePastEmails, td.borrowBooks); //multiple results
 
         //find after deleting one result
         commandBox.runCommand("delete 1");
-        assertFindResult("find-tag friends",td.benson);
+        assertFindResult("find-tag friends",td.borrowBooks);
     }
     
     @Test
     public void findTag_MulitpleKeywords() {
-        assertFindResult("find-tag friends owesMoney", td.alice, td.benson, td.carl); //multiple results
+        assertFindResult("find-tag friends owesMoney", td.archivePastEmails, td.borrowBooks, td.collectParcel); //multiple results
     } 
 
     @Test

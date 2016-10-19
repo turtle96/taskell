@@ -5,10 +5,12 @@ import org.junit.Test;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.HelpCommand;
 import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 public class AddCommandTest extends TaskManagerGuiTest {
 
@@ -16,27 +18,38 @@ public class AddCommandTest extends TaskManagerGuiTest {
     public void add() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.hoon;
+        TestTask taskToAdd = td.holdMeeting;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add another task
-        taskToAdd = td.ida;
+        taskToAdd = td.inspectWarehouse;
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
 
         //add duplicate task
-        commandBox.runCommand(td.hoon.getAddCommand());
+        commandBox.runCommand(td.holdMeeting.getAddCommand());
         assertResultMessage(AddCommand.MESSAGE_DUPLICATE_TASK);
         assertTrue(taskListPanel.isListMatching(currentList));
 
         //add to empty list
         commandBox.runCommand("clear");
-        assertAddSuccess(td.alice);
+        assertAddSuccess(td.archivePastEmails);
 
         //invalid command
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
+        
+       //add valid floating task
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.floatingTask_Valid);
+        
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.floatingTask_NonIntuitiveDescription);
+        
+        commandBox.runCommand("clear");
+        assertAddSuccess(td.deadlineTask_Valid);
+        
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
