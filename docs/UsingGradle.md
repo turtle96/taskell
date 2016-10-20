@@ -38,7 +38,7 @@ Gradle commands look like this:
   Creates the `taskell.jar` file in the `build/jar` folder, _if the current file is outdated_.<br>
   e.g. `./gradlew shadowJar`
 
-  > To force Gradle to create the JAR file even if the current one is up-to-date, you can '`clean`' first. <br>
+  > To force Gradle to create the JAR file even if the current one is up-to-startDate, you can '`clean`' first. <br>
     e.g. `./gradlew clean shadowJar` 
 
 **Note: Why do we create a fat JAR?**

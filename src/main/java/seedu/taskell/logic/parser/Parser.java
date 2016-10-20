@@ -44,7 +44,7 @@ public class Parser {
                                                          // are reserved for
                                                          // delimiter prefixes
             Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
-                    + " (?<isTaskDatePrivate>p?)p/(?<taskDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
+                    + " (?<isTaskDatePrivate>p?)p/(?<startDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
                     + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
                     + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
                                                                                                                    // number
@@ -133,7 +133,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the edit task date command.
+     * Parses arguments in the context of the edit task startDate command.
      *
      * @param args
      *            full command args string
@@ -302,7 +302,7 @@ public class Parser {
         Queue<String> dateTimeQueue = new LinkedList<String>();
 
         String description = "";
-        String date = TaskDate.DEFAULT_DATE;
+        String startDate = TaskDate.DEFAULT_DATE;
         String startTime = TaskTime.DEFAULT_START_TIME;
         String endTime = TaskTime.DEFAULT_END_TIME;
         String token = "";
@@ -396,7 +396,7 @@ public class Parser {
                     descriptionQueue.offer(token); // because maybe people wants
                                                    // to add task with serial
                                                    // number that has format
-                                                   // date
+                                                   // startDate
                 } else if (!onQueue.isEmpty()) {
                     dateTimeQueue.offer(onQueue.poll());
                     dateTimeQueue.offer(token);
@@ -419,7 +419,7 @@ public class Parser {
                     descriptionQueue.offer(token); // because maybe people wants
                                                    // to add task with serial
                                                    // number that has format
-                                                   // date
+                                                   // startDate
                 } else if (!byQueue.isEmpty()) {
                     dateTimeQueue.offer(byQueue.poll());
                     dateTimeQueue.offer(token);
@@ -440,7 +440,7 @@ public class Parser {
         }
 
         // Takes care of trailing keywords at end of input not accompanied by
-        // date/time
+        // startDate/time
         if (!byQueue.isEmpty()) {
             descriptionQueue.offer(byQueue.poll());
         }
@@ -491,7 +491,7 @@ public class Parser {
                 dateTimeDelimiter = ENDAT;
             } else if (TaskDate.isValidDate(tempToken)) {
                 dateCount++;
-                date = tempToken;
+                startDate = tempToken;
             } else if (TaskTime.isValidTime(tempToken)) {
                 timeCount++;
 
@@ -515,7 +515,7 @@ public class Parser {
         if (startatCount == 1 || endatCount == 1) {
             isEvent = true;
             try {
-                return new AddCommand(description, Task.EVENT_TASK, date, startTime, endTime, taskPriority,
+                return new AddCommand(description, Task.EVENT_TASK, startDate, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
@@ -523,7 +523,7 @@ public class Parser {
         } else {
             isDeadline = true;
             try {
-                return new AddCommand(description, Task.DEADLINE_TASK, date, startTime, endTime, taskPriority,
+                return new AddCommand(description, Task.DEADLINE_TASK, startDate, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());

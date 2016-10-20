@@ -73,7 +73,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date before.
+        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to startDate before.
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -163,7 +163,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add #descriptionIsEmpty", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description with invalid date format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description with invalid startDate format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/invalidPriority ", TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         assertCommandBehavior(
@@ -423,14 +423,14 @@ public class LogicManagerTest {
         Task askBoon() throws Exception {
             Description description = new Description("Ask boon for tax rebate");
             String taskType = Task.EVENT_TASK;
-            TaskDate taskDate = new TaskDate("1-1-2015");
+            TaskDate startDate = new TaskDate("1-1-2015");
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, taskType, taskDate, startTime, endTime, privatetaskPriority, tags);
+            return new Task(description, taskType, startDate, startTime, endTime, privatetaskPriority, tags);
         }
         
 

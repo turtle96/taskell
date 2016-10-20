@@ -31,7 +31,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
 
-    public AddCommand(String description, String taskType, String taskDate, String startTime, String endTime, String taskPriority, Set<String> tags)
+    public AddCommand(String description, String taskType, String startDate, String startTime, String endTime, String taskPriority, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -53,7 +53,7 @@ public class AddCommand extends Command {
             this.toAdd = new DeadlineTask(
                     new Description(description),
                     Task.DEADLINE_TASK,
-                    new TaskDate(taskDate),
+                    new TaskDate(startDate),
                     new TaskTime(TaskTime.DEFAULT_START_TIME),
                     new TaskTime(endTime),
                     new TaskPriority(taskPriority),
@@ -63,7 +63,7 @@ public class AddCommand extends Command {
             this.toAdd = new EventTask(
                     new Description(description),
                     Task.EVENT_TASK,
-                    new TaskDate(taskDate),
+                    new TaskDate(startDate),
                     new TaskTime(startTime),
                     new TaskTime(endTime),
                     new TaskPriority(taskPriority),

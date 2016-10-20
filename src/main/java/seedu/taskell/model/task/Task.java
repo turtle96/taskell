@@ -17,7 +17,7 @@ public class Task implements ReadOnlyTask {
 
     private Description description;
     private String taskType;
-    private TaskDate taskDate;
+    private TaskDate startDate;
     private TaskTime startTime;
     private TaskTime endTime;
     private TaskPriority taskPriority;
@@ -27,11 +27,11 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, String taskType, TaskDate taskDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, taskType, taskDate, startTime, endTime, taskPriority, tags);
+    public Task(Description description, String taskType, TaskDate startDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, tags);
         this.description = description;
         this.taskType = taskType;
-        this.taskDate = taskDate;
+        this.startDate = startDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
@@ -60,7 +60,7 @@ public class Task implements ReadOnlyTask {
 
     @Override
     public TaskDate getTaskDate() {
-        return taskDate;
+        return startDate;
     }
 
     @Override
@@ -100,7 +100,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, taskDate, startTime, endTime, taskPriority, tags);
+        return Objects.hash(description, startDate, startTime, endTime, taskPriority, tags);
     }
 
     @Override

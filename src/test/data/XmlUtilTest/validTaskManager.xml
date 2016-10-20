@@ -3,7 +3,7 @@
     <tasks>
         <description>Hans Muster</description>
         <taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -11,7 +11,7 @@
     <tasks>
         <description>Ruth Mueller</description>
         <taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -19,7 +19,7 @@
     <tasks>
         <description>Heinz Kurz</description>
         <taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -27,7 +27,7 @@
     <tasks>
         <description>Cornelia Meier</description>
         <taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -35,7 +35,7 @@
     <tasks>
         <description>Werner Meyer</description>
 		<taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -43,7 +43,7 @@
     <tasks>
         <description>Lydia Kunz</description>
 		<taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -51,7 +51,7 @@
     <tasks>
         <description>Anna Best</description>
 		<taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -59,7 +59,7 @@
     <tasks>
         <description>Stefan Meier</description>
 		<taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
@@ -67,7 +67,7 @@
     <tasks>
         <description>Martin Mueller</description>
 		<taskType>EVENT</taskType>
-        <date isPrivate="false">1-1-2015</date>
+        <startDate isPrivate="false">1-1-2015</startDate>
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
