@@ -24,7 +24,7 @@ public class TaskTime {
     
     public static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
     
-    public static final String DEFAULT_START_TIME = LocalTime.now().format(dtf);
+    public static final String DEFAULT_START_TIME = MIDNIGHT;
     public static final String DEFAULT_END_TIME = "11:59PM";
 
     public static final Pattern TASK_TIME_ARGS_FORMAT = Pattern
