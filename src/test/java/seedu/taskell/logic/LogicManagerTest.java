@@ -6,6 +6,7 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.*;
@@ -413,6 +414,32 @@ public class LogicManagerTest {
         assertFalse(TaskTime.isValidTime("13pm"));
         assertFalse(TaskTime.isValidTime("2359"));
         assertFalse(TaskTime.isValidTime("NotAValidTime"));
+    }
+    
+    @Test
+    public void assertTimeIfBeforeBehaviour() {
+        try {
+            TaskTime startTime = new TaskTime("9am");
+            TaskTime endTime = new TaskTime("10pm");
+            
+            assertTrue(startTime.isBefore(endTime));
+            assertFalse(endTime.isBefore(startTime));
+        } catch (IllegalValueException e) {
+            assert false;
+        }
+    }
+    
+    @Test
+    public void assertTimeIfAfterBehaviour() {
+        try {
+            TaskTime startTime = new TaskTime("9am");
+            TaskTime endTime = new TaskTime("10pm");
+            
+            assertFalse(startTime.isAfter(endTime));
+            assertTrue(endTime.isAfter(startTime));
+        } catch (IllegalValueException e) {
+            assert false;
+        }
     }
 
     /**
