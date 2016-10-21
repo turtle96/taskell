@@ -1,6 +1,5 @@
 package seedu.taskell.logic.commands;
 
-import seedu.taskell.commons.core.ComponentManager;
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.events.ui.IncorrectCommandAttemptedEvent;
@@ -9,7 +8,7 @@ import seedu.taskell.model.Model;
 /**
  * Represents a command with hidden internal logic and the ability to be executed.
  */
-public abstract class Command extends ComponentManager {
+public abstract class Command {
     protected Model model;
 
     /**
