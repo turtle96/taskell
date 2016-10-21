@@ -45,7 +45,7 @@ public class XmlAdaptedTask {
     public XmlAdaptedTask(ReadOnlyTask source) {
         description = source.getDescription().description;
         taskType = source.getTaskType();
-        startDate = source.getTaskDate().startDate;
+        startDate = source.getStartDate().startDate;
         startTime = source.getStartTime().taskTime;
         endTime = source.getEndTime().taskTime;
         taskPriority = source.getTaskPriority().taskPriority;

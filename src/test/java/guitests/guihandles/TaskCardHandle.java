@@ -32,7 +32,7 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(TASK_PRIORITY_FIELD_ID);
     }
 
-    public String getTaskDate() {
+    public String getStartDate() {
         return getTextFromLabel(TASK_DATE_FIELD_ID);
     }
 
@@ -45,7 +45,7 @@ public class TaskCardHandle extends GuiHandle {
     }
 
     public boolean isSameTask(ReadOnlyTask task){
-        return getDescription().equals(task.getDescription().description) && getTaskDate().equals(task.getTaskDate().startDate)
+        return getDescription().equals(task.getDescription().description) && getStartDate().equals(task.getStartDate().startDate)
                 && getStartTime().equals(task.getStartTime().taskTime) && getEndTime().equals(task.getEndTime().taskTime) 
                 && getTaskPriority().equals(task.getTaskPriority().taskPriority);
     }

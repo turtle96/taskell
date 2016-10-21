@@ -487,7 +487,7 @@ public class LogicManagerTest {
             cmd.append("add ");
 
             cmd.append(p.getDescription().toString());
-            cmd.append(" on ").append(p.getTaskDate());
+            cmd.append(" on ").append(p.getStartDate());
             cmd.append(" startat ").append(p.getStartTime());
             cmd.append(" endat ").append(p.getEndTime());
             cmd.append(" " + TaskPriority.PREFIX).append(p.getTaskPriority());

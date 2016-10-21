@@ -41,7 +41,7 @@ public class TestTask implements ReadOnlyTask {
         this.endTime = endTime;
     }
 
-    public void setTaskDate(TaskDate startDate) {
+    public void setStartDate(TaskDate startDate) {
         this.startDate = startDate;
     }
 
@@ -56,7 +56,7 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getTaskDate() {
+    public TaskDate getStartDate() {
         return startDate;
     }
 
@@ -88,7 +88,7 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("on " + this.getTaskDate().startDate + " ");
+        sb.append("on " + this.getStartDate().startDate + " ");
         sb.append("startat " + this.getStartTime().taskTime + " ");
         sb.append("endat " + this.getEndTime().taskTime + " ");
         sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");

@@ -46,7 +46,7 @@ public class EditDescriptionCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        Task newTask = new Task(description,taskToEdit.getTaskType(),taskToEdit.getTaskDate(), taskToEdit.getStartTime(),taskToEdit.getEndTime(),
+        Task newTask = new Task(description,taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getStartTime(),taskToEdit.getEndTime(),
                 taskToEdit.getTaskPriority(),taskToEdit.getTags()
         );
         try {

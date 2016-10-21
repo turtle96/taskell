@@ -45,7 +45,7 @@ public class EditEndTimeCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getTaskDate(), taskToEdit.getStartTime(),endTime,
+        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getStartTime(),endTime,
                 taskToEdit.getTaskPriority(),taskToEdit.getTags()
         );
         try {

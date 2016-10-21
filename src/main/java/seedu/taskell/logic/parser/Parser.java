@@ -33,12 +33,6 @@ public class Parser {
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
-                                                                                                           // or
-                                                                                                           // more
-                                                                                                           // keywords
-                                                                                                           // separated
-                                                                                                           // by
-                                                                                                           // whitespace
 
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes
                                                          // are reserved for
@@ -48,9 +42,6 @@ public class Parser {
                     + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
                     + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
                                                                                                                    // number
-                                                                                                                   // of
-                                                                                                                   // tags
-
     private static final String BY = "by";
     private static final String ON = "on";
     private static final String AT = "at";
