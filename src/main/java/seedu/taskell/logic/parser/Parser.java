@@ -120,6 +120,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
+            
+        case SaveStorageLocationCommand.COMMAND_WORD:
+            return new SaveStorageLocationCommand(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
