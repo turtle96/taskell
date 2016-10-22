@@ -1,6 +1,9 @@
 package guitests;
 
+import static org.junit.Assert.assertTrue;
+
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +15,12 @@ import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.logic.commands.SaveStorageLocationCommand;
+import seedu.taskell.model.ReadOnlyTaskManager;
+import seedu.taskell.model.TaskManager;
+import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.storage.JsonConfigStorage;
+import seedu.taskell.testutil.TestTask;
+import seedu.taskell.testutil.TestUtil;
 
 public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
     
@@ -22,11 +30,13 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
     private static final String CONFIG_LOCATION = "./src/test/data/SaveLocationCommandTest";
     
     private static final String DEFAULT_SAVE_LOCATION = TestApp.SAVE_LOCATION_FOR_TESTING;
-    
+
     @Test
-    public void saveToValidFilePath() throws DataConversionException {
-        commandBox.runCommand("save ./src/test/data/SaveLocationCommandTest/newStorageLocation/");
+    public void saveToValidFilePath() throws DataConversionException, IOException, DuplicateTaskException {
+        String testFilePath = "./src/test/data/SaveLocationCommandTest/newStorageLocation/";
+        commandBox.runCommand("save " + testFilePath);
         assertWriteToJsonSuccess();
+        assertWriteToXmlSuccess();
     }
     
     @Test
@@ -36,10 +46,8 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("save E:");   
         
         Optional<Config> newConfig = jsonConfigStorage.readConfig(CONFIG_JSON);
-        
         String newFilePath = newConfig.get().getTaskManagerFilePath();
-
-        logger.severe("New path: " + newFilePath);
+        logger.info("New path: " + newFilePath);
         
         assert(newFilePath.equals(DEFAULT_SAVE_LOCATION));
     }
@@ -67,6 +75,11 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
         Optional<Config> config = jsonConfigStorage.readConfig(CONFIG_JSON);
         assert(config.isPresent());
     } 
+    
+    private void assertWriteToXmlSuccess() {
+        TestTask[] currentList = td.getTypicalTasks();
+        assertTrue(taskListPanel.isListMatching(currentList));
+    }
     
 
 }
