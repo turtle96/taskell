@@ -163,8 +163,14 @@ public class LogicManagerTest {
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
                 "add #descriptionIsEmpty", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
-//        assertCommandBehavior(
-//                "add Valid Description with invalid startDate format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with invalid startDate format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with dates before today's date on 1-jan-2000", EventTask.MESSAGE_EVENT_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with startDate after endDate from 1-jan-2200 to 1-jan-2100", EventTask.MESSAGE_EVENT_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with same date but startTime after endTime from 9pm to 2am", EventTask.MESSAGE_EVENT_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/invalidPriority ", TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         assertCommandBehavior(
@@ -176,6 +182,21 @@ public class LogicManagerTest {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.askBoon();
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventDuration_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.validEventDuration();
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
 
@@ -445,10 +466,10 @@ public class LogicManagerTest {
     @Test
     public void assertDateisBeforeBehaviour() {
         try {
-            TaskDate startDate = new TaskDate("1-1-2015");
-            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2015");
-            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2015");
-            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2016");
+            TaskDate startDate = new TaskDate("1-1-2100");
+            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
+            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
+            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
             
             assertTrue(startDate.isBefore(endDateDiffDaySameMonthSameYear));
             assertTrue(startDate.isBefore(endDateSameDayDiffMonthSameYear));
@@ -465,10 +486,10 @@ public class LogicManagerTest {
     @Test
     public void assertDateisAfterBehaviour() {
         try {
-            TaskDate startDate = new TaskDate("1-1-2015");
-            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2015");
-            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2015");
-            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2016");
+            TaskDate startDate = new TaskDate("1-1-2100");
+            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
+            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
+            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
             
             assertTrue(endDateDiffDaySameMonthSameYear.isAfter(startDate));
             assertTrue(endDateSameDayDiffMonthSameYear.isAfter(startDate));
@@ -490,10 +511,24 @@ public class LogicManagerTest {
         Task askBoon() throws Exception {
             Description description = new Description("Ask boon for tax rebate");
             String taskType = Task.EVENT_TASK;
-            TaskDate startDate = new TaskDate("1-1-2015");
-            TaskDate endDate = new TaskDate("1-1-2016");
+            TaskDate startDate = new TaskDate("1-1-2100");
+            TaskDate endDate = new TaskDate("1-12-2100");
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
+            TaskPriority privatetaskPriority = new TaskPriority("0");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("tag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(description, taskType, startDate, endDate, startTime, endTime, privatetaskPriority, tags);
+        }
+        
+        Task validEventDuration() throws Exception {
+            Description description = new Description("StartDate is before EndDate but startTime is afterEndTime");
+            String taskType = Task.EVENT_TASK;
+            TaskDate startDate = new TaskDate("1-1-2100");
+            TaskDate endDate = new TaskDate("1-12-2100");
+            TaskTime startTime = new TaskTime("2:30pm");
+            TaskTime endTime = new TaskTime("3:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
@@ -513,8 +548,8 @@ public class LogicManagerTest {
             return new Task(
                     new Description("Task " + seed),
                     Task.EVENT_TASK,
-                    new TaskDate("1-1-2015"),
-                    new TaskDate("1-1-2016"),
+                    new TaskDate("1-1-2100"),
+                    new TaskDate("1-12-2100"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority((seed % 4) + ""),
@@ -617,8 +652,8 @@ public class LogicManagerTest {
             return new Task(
                     new Description(description),
                     Task.EVENT_TASK,
-                    new TaskDate("1-1-2015"),
-                    new TaskDate("1-1-2016"),
+                    new TaskDate("1-1-2100"),
+                    new TaskDate("1-12-2100"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority(TaskPriority.NO_PRIORITY),
