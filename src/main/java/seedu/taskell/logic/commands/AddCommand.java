@@ -42,17 +42,6 @@ public class AddCommand extends Command {
         case Task.FLOATING_TASK: 
             this.toAdd = new FloatingTask(description, taskPriority, new UniqueTagList(tagSet));
             break;
-        case Task.DEADLINE_TASK:
-            this.toAdd = new DeadlineTask(
-                    new Description(description),
-                    Task.DEADLINE_TASK,
-                    new TaskDate(startDate),
-                    new TaskDate(endDate),
-                    new TaskTime(TaskTime.DEFAULT_START_TIME),
-                    new TaskTime(endTime),
-                    new TaskPriority(taskPriority),
-                    new UniqueTagList(tagSet));
-            break;
         case Task.EVENT_TASK:
             this.toAdd = new EventTask(description, startDate, endDate, startTime, endTime, taskPriority, new UniqueTagList(tagSet));
             break;

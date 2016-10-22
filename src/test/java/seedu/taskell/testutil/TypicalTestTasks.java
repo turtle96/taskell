@@ -10,8 +10,7 @@ import seedu.taskell.model.task.*;
 public class TypicalTestTasks {
 
     public static TestTask archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform, holdMeeting, inspectWarehouse, 
-            floatingTask_Valid, floatingTask_NonIntuitiveDescription,
-            deadlineTask_Valid;
+            floatingTask_Valid, floatingTask_NonIntuitiveDescription;
 
     public TypicalTestTasks() {
         try {

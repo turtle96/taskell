@@ -12,7 +12,6 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
     public static final String FLOATING_TASK = "FLOATING";
-    public static final String DEADLINE_TASK = "DEADLINE";
     public static final String EVENT_TASK = "EVENT";
 
     protected Description description;
