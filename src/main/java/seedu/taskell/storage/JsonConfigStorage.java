@@ -20,7 +20,7 @@ public class JsonConfigStorage implements ConfigStorage {
     
     private String filePath;
     
-    public JsonConfigStorage(String filePath){
+    public JsonConfigStorage(String filePath) {
         this.filePath = filePath;
     }
     

@@ -63,10 +63,10 @@ public class Config {
 
     @Override
     public boolean equals(Object other) {
-        if (other == this){
+        if (other == this) {
             return true;
         }
-        if (!(other instanceof Config)){ //this handles null as well.
+        if (!(other instanceof Config)) { //this handles null as well.
             return false;
         }
 
@@ -85,7 +85,7 @@ public class Config {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("App title : " + appTitle);
         sb.append("\nCurrent log level : " + logLevel);
