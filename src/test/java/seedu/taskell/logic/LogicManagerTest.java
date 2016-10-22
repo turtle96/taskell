@@ -206,7 +206,161 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getTaskList());
     }
+    
+    @Test
+    public void execute_add_ValidFullDate_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid full day DAY-MONTH-YEAR", 
+                Task.EVENT_TASK, 
+                "1-1-2100", 
+                "1-1-2100", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
 
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
+    @Test
+    public void execute_add_ValidDayAndMonth_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid date DAY-MONTH", 
+                Task.EVENT_TASK, 
+                "31-dec", 
+                "31-dec", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
+    @Test
+    public void execute_add_ValidMonthAndYear_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid date MONTH-YEAR", 
+                Task.EVENT_TASK, 
+                "may-2200", 
+                "may-2200", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
+    @Test
+    public void execute_add_ValidMonth_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid date with MONTH only", 
+                Task.EVENT_TASK, 
+                "dec", 
+                "dec", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
+    @Test
+    public void execute_add_ValidDayOfWeek_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid date with name of day of the week", 
+                Task.EVENT_TASK, 
+                "sun", 
+                "sun", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
+    @Test
+    public void execute_add_ValidToday_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid today", 
+                Task.EVENT_TASK, 
+                "today", 
+                "tdy", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
+    @Test
+    public void execute_add_ValidTomorrow_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateTask("Valid tomorrow", 
+                Task.EVENT_TASK, 
+                "tomorrow", 
+                "tmr", 
+                "12am", 
+                "11.59pm", 
+                "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+        
+    }
+    
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
@@ -397,27 +551,6 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void assertValidFormatBehaviourForDate() {
-        assertTrue(TaskDate.isValidDate(TaskDate.DEFAULT_DATE));
-        assertTrue(TaskDate.isValidDate("8.DeCeMbEr.2016"));
-        assertTrue(TaskDate.isValidDate("8/jan/2016"));
-        assertTrue(TaskDate.isValidDate("1.jan"));
-        assertTrue(TaskDate.isValidDate("may-2016"));
-        assertTrue(TaskDate.isValidDate("sept"));
-        assertTrue(TaskDate.isValidDate("tdy"));
-        assertTrue(TaskDate.isValidDate("thurs"));
-    }
-    
-    @Test
-    public void assertInvalidFormatBehaviourForDate() {
-        assertFalse(TaskDate.isValidDate("1st January"));
-        assertFalse(TaskDate.isValidDate("1/2"));
-        assertFalse(TaskDate.isValidDate("01022016"));
-        assertFalse(TaskDate.isValidDate("2016"));
-        assertFalse(TaskDate.isValidDate("NotAValidDate"));
-    }
-    
-    @Test
     public void assertValidFormatBehaviourForTime() {
         assertTrue(TaskTime.isValidTime(TaskTime.DEFAULT_START_TIME));
         assertTrue(TaskTime.isValidTime(TaskTime.DEFAULT_END_TIME));
@@ -463,45 +596,7 @@ public class LogicManagerTest {
         }
     }
     
-    @Test
-    public void assertDateisBeforeBehaviour() {
-        try {
-            TaskDate startDate = new TaskDate("1-1-2100");
-            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
-            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
-            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
-            
-            assertTrue(startDate.isBefore(endDateDiffDaySameMonthSameYear));
-            assertTrue(startDate.isBefore(endDateSameDayDiffMonthSameYear));
-            assertTrue(startDate.isBefore(endDateSameDaySameMonthDiffYear));
-            
-            assertFalse(endDateDiffDaySameMonthSameYear.isBefore(startDate));
-            assertFalse(endDateSameDayDiffMonthSameYear.isBefore(startDate));
-            assertFalse(endDateSameDaySameMonthDiffYear.isBefore(startDate));
-        } catch (IllegalValueException e) {
-            assert false;
-        }
-    }
     
-    @Test
-    public void assertDateisAfterBehaviour() {
-        try {
-            TaskDate startDate = new TaskDate("1-1-2100");
-            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
-            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
-            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
-            
-            assertTrue(endDateDiffDaySameMonthSameYear.isAfter(startDate));
-            assertTrue(endDateSameDayDiffMonthSameYear.isAfter(startDate));
-            assertTrue(endDateSameDaySameMonthDiffYear.isAfter(startDate));
-            
-            assertFalse(startDate.isAfter(endDateDiffDaySameMonthSameYear));
-            assertFalse(startDate.isAfter(endDateSameDayDiffMonthSameYear));
-            assertFalse(startDate.isAfter(endDateSameDaySameMonthDiffYear));
-        } catch (IllegalValueException e) {
-            assert false;
-        }
-    }
 
     /**
      * A utility class to generate test data.
@@ -554,6 +649,22 @@ public class LogicManagerTest {
                     new TaskTime("12:45AM"),
                     new TaskPriority((seed % 4) + ""),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+            );
+        }
+        
+        /**
+         * Generate task with the given parameters
+         */
+        Task generateTask(String description, String taskType, String startDate, String endDate, String startTime, String endTime, String taskPriority) throws Exception{
+            return new Task(
+                    new Description(description),
+                    taskType,
+                    new TaskDate(startDate),
+                    new TaskDate(endDate),
+                    new TaskTime(startTime),
+                    new TaskTime(endTime),
+                    new TaskPriority(taskPriority),
+                    new UniqueTagList(new Tag("tag" + Math.abs(1)), new Tag("tag" + Math.abs(2)))
             );
         }
 
@@ -660,5 +771,6 @@ public class LogicManagerTest {
                     new UniqueTagList(new Tag("tag"))
             );
         }
+        
     }
 }
