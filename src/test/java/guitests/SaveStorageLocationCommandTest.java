@@ -52,6 +52,24 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
         assert(newFilePath.equals(DEFAULT_SAVE_LOCATION));
     }
     
+    /** NOTE: because of the way SaveStorageLocationCommand works, after running this command
+     *          config.json in Taskell saves the test data so this method is necessary to reset
+     *          config.json to default data
+     * */
+    @Test
+    public void resetConfigFile() throws IOException {
+        Config config = new Config();
+        config.setAppTitle("Taskell");
+        config.setLogLevel(Level.INFO);
+        config.setUserPrefsFilePath("preferences.json");
+        config.setTaskManagerFilePath("data/taskmanager.xml");
+        config.setTaskManagerName("MyTaskManager");
+        SaveStorageLocationCommand.setConfig(config);
+        
+        JsonConfigStorage jsonConfigStorage = new JsonConfigStorage(CONFIG_JSON);
+        jsonConfigStorage.saveConfigFile(config);
+    }
+    
     private void assertWriteToJsonSuccess() throws DataConversionException {
         JsonConfigStorage jsonConfigStorage = new JsonConfigStorage(CONFIG_LOCATION);
         Optional<Config> config = jsonConfigStorage.readConfig(CONFIG_JSON);
