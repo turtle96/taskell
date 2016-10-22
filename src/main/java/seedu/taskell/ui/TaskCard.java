@@ -47,17 +47,16 @@ public class TaskCard extends UiPart{
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
         tags.setText(task.tagsString());
+        startDate.setText(task.getStartDate().getDisplayDate());
+        endDate.setText(task.getEndDate().getDisplayDate());
+        startTime.setText(task.getStartTime().taskTime);
+        endTime.setText(task.getEndTime().taskTime);
         
         if (task.getTaskType().equals(Task.FLOATING_TASK)) {
             startDate.setVisible(false);
             endDate.setVisible(false);
             startTime.setVisible(false);
             endTime.setVisible(false);
-        } else {
-            startDate.setText(task.getStartDate().getDisplayDate());
-            endDate.setText(task.getEndDate().getDisplayDate());
-            startTime.setText(task.getStartTime().taskTime);
-            endTime.setText(task.getEndTime().taskTime);
         }
     }
 
