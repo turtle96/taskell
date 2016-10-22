@@ -56,6 +56,7 @@ public class TaskDate {
     public static final Pattern TASK_DATE_ARGS_FORMAT = Pattern
             .compile("(?<day>(3[0-1]|2[0-9]|1[0-9]|[1-9]))" + "(-)(?<month>(1[0-2]|[1-9]))" + "(-)(?<year>([0-9]{4}))");
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy");
+    private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
     SimpleDateFormat sdf = new SimpleDateFormat("d M yyyy");
     
     public static final String MESSAGE_TASK_DATE_CONSTRAINTS =
@@ -452,18 +453,18 @@ public class TaskDate {
 
     /**
      * Get today's taskDate in the format of
-     * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
+     * DAY-MONTH-YEAR
      */
     public static String getTodayDate() {
-        return LocalDate.now().format(dtf);
+        return LocalDate.now().format(standardFormat);
     }
 
     /**
      * Get tomorrow's taskDate in the format of
-     * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
+     * DAY-MONTH-YEAR
      */
     public static String getTomorrowDate() {
-        return LocalDate.now().plusDays(1).format(dtf);
+        return LocalDate.now().plusDays(1).format(standardFormat);
     }
 
     /**
@@ -559,7 +560,7 @@ public class TaskDate {
     
     /**
      * Returns a string with the format of
-     * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
+     * DAY-MONTH-YEAR
      */
     @Override
     public String toString() {
