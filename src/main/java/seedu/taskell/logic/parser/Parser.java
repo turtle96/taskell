@@ -122,7 +122,7 @@ public class Parser {
             return prepareUndo(arguments);
             
         case SaveStorageLocationCommand.COMMAND_WORD:
-            return new SaveStorageLocationCommand(arguments);
+            return prepareSaveStorageLocation(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -590,8 +590,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the delete task command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
@@ -607,8 +606,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the select task command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareSelect(String args) {
@@ -642,8 +640,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the find task command.
      *
-     * @param args
-     *            full command args string
+     * @param args string
      * @return the prepared command
      */
     private Command prepareFind(String args) {
@@ -662,17 +659,14 @@ public class Parser {
      * Parses arguments in the context of undo command.
      * 
      */
-
     private Command prepareUndo(String args) {
         return new UndoCommand();
     }
 
     /**
      * Parses arguments in the context of the find task by tags command.
-     *
      * 
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareFindByTag(String args) {
@@ -686,6 +680,20 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindTagCommand(keywordSet);
 
+    }
+    
+    /**
+     * Parses arguments in the context of the save storage location command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareSaveStorageLocation(String args) {
+        if (args.isEmpty()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                    SaveStorageLocationCommand.MESSAGE_USAGE));
+        }
+        return new SaveStorageLocationCommand(args);
     }
 
 }
