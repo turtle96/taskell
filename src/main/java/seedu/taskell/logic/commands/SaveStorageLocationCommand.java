@@ -68,6 +68,7 @@ public class SaveStorageLocationCommand extends Command {
         }
         
         saveToConfigJson();
+        model.updateFilteredListToShowAll();
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
