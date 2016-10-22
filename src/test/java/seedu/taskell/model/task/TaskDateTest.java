@@ -1,42 +1,15 @@
-package seedu.taskell.model;
+package seedu.taskell.model.task;
 
-import com.google.common.eventbus.Subscribe;
-
-import seedu.taskell.commons.core.EventsCenter;
-import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
-import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.logic.Logic;
-import seedu.taskell.logic.LogicManager;
-import seedu.taskell.logic.commands.*;
-import seedu.taskell.model.TaskManager;
-import seedu.taskell.model.Model;
-import seedu.taskell.model.ModelManager;
-import seedu.taskell.model.ReadOnlyTaskManager;
-import seedu.taskell.model.tag.Tag;
-import seedu.taskell.model.tag.UniqueTagList;
-import seedu.taskell.model.task.*;
-import seedu.taskell.storage.StorageManager;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.TemporaryFolder;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertTrue;
-import static seedu.taskell.commons.core.Messages.*;
 
 public class TaskDateTest {
     
