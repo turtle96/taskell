@@ -15,7 +15,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 
-
 /**
  * Represents a Task's taskDate in the task manager.
  * Guarantees: is valid as declared in {@link #isValidDate(String)}
@@ -536,6 +535,26 @@ public class TaskDate {
         int month = LocalDate.now().getMonthValue();
         int year = LocalDate.now().getYear();
         return convertToStandardFormat(day, month, year);
+    }
+    
+    public boolean isBefore(TaskDate date) {
+        try {
+            LocalDate thisDate = LocalDate.of(Integer.valueOf(this.getYear()), Integer.valueOf(this.getMonth()), Integer.valueOf(this.getDay()));
+            LocalDate dateToComapare = LocalDate.of(Integer.valueOf(date.getYear()), Integer.valueOf(date.getMonth()), Integer.valueOf(date.getDay()));
+            return thisDate.isBefore(dateToComapare);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean isAfter(TaskDate date) {
+        try {
+            LocalDate thisDate = LocalDate.of(Integer.valueOf(this.getYear()), Integer.valueOf(this.getMonth()), Integer.valueOf(this.getDay()));
+            LocalDate dateToComapare = LocalDate.of(Integer.valueOf(date.getYear()), Integer.valueOf(date.getMonth()), Integer.valueOf(date.getDay()));
+            return thisDate.isAfter(dateToComapare);
+        } catch (Exception e) {
+            return false;
+        }
     }
     
     /**
