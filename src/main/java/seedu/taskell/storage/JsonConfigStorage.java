@@ -42,19 +42,19 @@ public class JsonConfigStorage implements ConfigStorage {
     public Optional<Config> readConfig(String configFilePath) throws DataConversionException {
         assert configFilePath != null;
 
-        File prefsFile = new File(configFilePath);
+        File configFile = new File(configFilePath);
 
-        if (!prefsFile.exists()) {
-            logger.info("Prefs file "  + prefsFile + " not found");
+        if (!configFile.exists()) {
+            logger.info("Config file "  + configFile + " not found");
             return Optional.empty();
         }
 
         Config config;
 
         try {
-            config = FileUtil.deserializeObjectFromJsonFile(prefsFile, Config.class);
+            config = FileUtil.deserializeObjectFromJsonFile(configFile, Config.class);
         } catch (IOException e) {
-            logger.warning("Error reading from prefs file " + prefsFile + ": " + e);
+            logger.warning("Error reading from config file " + configFile + ": " + e);
             throw new DataConversionException(e);
         }
 
@@ -62,7 +62,7 @@ public class JsonConfigStorage implements ConfigStorage {
     }
 
     /**
-     * Similar to {@link #saveConfigFile(UserPrefs)}
+     * Similar to {@link #saveConfigFile(Config)}
      * @param configFilePath location of the data. Cannot be null.
      */
     private void saveConfig(Config config, String configFilePath) throws IOException {
