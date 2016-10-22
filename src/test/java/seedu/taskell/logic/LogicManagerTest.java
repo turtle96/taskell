@@ -417,7 +417,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void assertTimeIfBeforeBehaviour() {
+    public void assertTimeIsBeforeBehaviour() {
         try {
             TaskTime startTime = new TaskTime("9am");
             TaskTime endTime = new TaskTime("10pm");
@@ -430,13 +430,53 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void assertTimeIfAfterBehaviour() {
+    public void assertTimeIsAfterBehaviour() {
         try {
             TaskTime startTime = new TaskTime("9am");
             TaskTime endTime = new TaskTime("10pm");
             
             assertFalse(startTime.isAfter(endTime));
             assertTrue(endTime.isAfter(startTime));
+        } catch (IllegalValueException e) {
+            assert false;
+        }
+    }
+    
+    @Test
+    public void assertDateisBeforeBehaviour() {
+        try {
+            TaskDate startDate = new TaskDate("1-1-2015");
+            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2015");
+            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2015");
+            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2016");
+            
+            assertTrue(startDate.isBefore(endDateDiffDaySameMonthSameYear));
+            assertTrue(startDate.isBefore(endDateSameDayDiffMonthSameYear));
+            assertTrue(startDate.isBefore(endDateSameDaySameMonthDiffYear));
+            
+            assertFalse(endDateDiffDaySameMonthSameYear.isBefore(startDate));
+            assertFalse(endDateSameDayDiffMonthSameYear.isBefore(startDate));
+            assertFalse(endDateSameDaySameMonthDiffYear.isBefore(startDate));
+        } catch (IllegalValueException e) {
+            assert false;
+        }
+    }
+    
+    @Test
+    public void assertDateisAfterBehaviour() {
+        try {
+            TaskDate startDate = new TaskDate("1-1-2015");
+            TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2015");
+            TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2015");
+            TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2016");
+            
+            assertTrue(endDateDiffDaySameMonthSameYear.isAfter(startDate));
+            assertTrue(endDateSameDayDiffMonthSameYear.isAfter(startDate));
+            assertTrue(endDateSameDaySameMonthDiffYear.isAfter(startDate));
+            
+            assertFalse(startDate.isAfter(endDateDiffDaySameMonthSameYear));
+            assertFalse(startDate.isAfter(endDateSameDayDiffMonthSameYear));
+            assertFalse(startDate.isAfter(endDateSameDaySameMonthDiffYear));
         } catch (IllegalValueException e) {
             assert false;
         }
