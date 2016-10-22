@@ -106,4 +106,12 @@ public class TestTask implements ReadOnlyTask {
         this.getTags().getInternalList().stream().forEach(s -> sb.append(Tag.PREFIX + s.tagName + " "));
         return sb.toString();
     }
+    
+    public String getAddFloatingCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getDescription().description + " ");
+        sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");
+        this.getTags().getInternalList().stream().forEach(s -> sb.append(Tag.PREFIX + s.tagName + " "));
+        return sb.toString();
+    }
 }

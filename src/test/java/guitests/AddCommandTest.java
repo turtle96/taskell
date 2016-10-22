@@ -42,15 +42,27 @@ public class AddCommandTest extends TaskManagerGuiTest {
         
        //add valid floating task
         commandBox.runCommand("clear");
-        assertAddSuccess(td.floatingTask_Valid);
+        assertAddFloatingSuccess(td.floatingTask_Valid);
         
         commandBox.runCommand("clear");
-        assertAddSuccess(td.floatingTask_NonIntuitiveDescription);
+        assertAddFloatingSuccess(td.floatingTask_NonIntuitiveDescription);
         
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         commandBox.runCommand(taskToAdd.getAddCommand());
+
+        //confirm the new card contains the right data
+        TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
+        assertMatching(taskToAdd, addedCard);
+
+        //confirm the list now contains all previous tasks plus the new task
+        TestTask[] expectedList = TestUtil.addTasksToList(currentList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
+    }
+    
+    private void assertAddFloatingSuccess(TestTask taskToAdd, TestTask... currentList) {
+        commandBox.runCommand(taskToAdd.getAddFloatingCommand());
 
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
