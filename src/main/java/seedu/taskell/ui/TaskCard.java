@@ -54,8 +54,8 @@ public class TaskCard extends UiPart{
             startTime.setVisible(false);
             endTime.setVisible(false);
         } else {
-            startDate.setText(task.getStartDate().taskDate);
-            endDate.setText(task.getEndDate().taskDate);
+            startDate.setText(task.getStartDate().getDisplayDate());
+            endDate.setText(task.getEndDate().getDisplayDate());
             startTime.setText(task.getStartTime().taskTime);
             endTime.setText(task.getEndTime().taskTime);
         }
