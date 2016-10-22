@@ -484,7 +484,7 @@ Use case ends
 > 2a1. Taskell shows an error message <br>
   Use case resumes at step 2
   
-#### Use case: Store data in cloud syncing folder
+#### Use case: Save data to specified folder
 
 **MSS**
 
@@ -494,9 +494,9 @@ Use case ends
 
 **Extensions**
 
-2a. The requested folder does not exist
+2a. Data cannot be written to the requested folder (invalid directory or access prohibited)
 
-> 2a1. Taskell shows an error message <br>
+> 2a1. Taskell shows an error message and still saves data in previous old location.<br>
 
 #### Use case: Clear task
 
