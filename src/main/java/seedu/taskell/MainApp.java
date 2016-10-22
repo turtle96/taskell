@@ -68,6 +68,7 @@ public class MainApp extends Application {
         
         UndoCommand.initializeCommandHistory();
         SaveStorageLocationCommand.setConfig(config);
+        SaveStorageLocationCommand.setStorage(storage);
     }
 
     private String getApplicationParameter(String parameterName){
