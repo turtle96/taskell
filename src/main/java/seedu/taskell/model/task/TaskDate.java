@@ -196,7 +196,7 @@ public class TaskDate {
         String todayDayNameInWeek = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
         int todayDayInWeek = convertDayOfWeekIntoInteger(todayDayNameInWeek);
         int daysToAdd = day - todayDayInWeek;
-        if (daysToAdd < 0) {
+        if (daysToAdd <= 0) {
             daysToAdd += NUM_DAYS_IN_A_WEEK;
         }
         LocalDate finalDate = today.plusDays(daysToAdd);
