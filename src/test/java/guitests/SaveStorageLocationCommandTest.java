@@ -1,16 +1,17 @@
 package guitests;
 
+import java.io.IOException;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
 import seedu.taskell.TestApp;
 import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.exceptions.DataConversionException;
+import seedu.taskell.logic.commands.SaveStorageLocationCommand;
 import seedu.taskell.storage.JsonConfigStorage;
 
 public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
@@ -24,7 +25,7 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void saveToValidFilePath() throws DataConversionException {
-        commandBox.runCommand("save cat/");
+        commandBox.runCommand("save ./src/test/data/SaveLocationCommandTest/newStorageLocation/");
         assertWriteToJsonSuccess();
     }
     
@@ -41,6 +42,24 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
         logger.severe("New path: " + newFilePath);
         
         assert(newFilePath.equals(DEFAULT_SAVE_LOCATION));
+    }
+    
+    /** NOTE: because of the way SaveStorageLocationCommand works after running this command
+     *          config.json in Taskell saves the test data so this method is necessary to reset
+     *          config.json to default data
+     * */
+    @Test
+    public void resetConfigFile() throws IOException {
+        Config config = new Config();
+        config.setAppTitle("Taskell");
+        config.setLogLevel(Level.INFO);
+        config.setUserPrefsFilePath("preferences.json");
+        config.setTaskManagerFilePath("data/taskmanager.xml");
+        config.setTaskManagerName("MyTaskManager");
+        SaveStorageLocationCommand.setConfig(config);
+        
+        JsonConfigStorage jsonConfigStorage = new JsonConfigStorage(CONFIG_JSON);
+        jsonConfigStorage.saveConfigFile(config);
     }
     
     private void assertWriteToJsonSuccess() throws DataConversionException {
