@@ -418,20 +418,14 @@ Use case ends
 
 **MSS**
 
-1. User requests to list tasks
-2. Taskell shows a list of uncompleted tasks
-3. User requests to find tasks with specific keywords
-4. Taskell displays the relevant task <br>
+1. User requests to find tasks with specific keywords
+2. Taskell displays the tasks with all matching keywords <br>
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
-
-3a. The given index is invalid
-
-> 3a1. Taskell shows an error message <br>
-  Use case resumes at step 2
+1a. No keyword is given
+> 1a1. Taskell shows an error message <br>
 
 #### Use case: Edit task
 
