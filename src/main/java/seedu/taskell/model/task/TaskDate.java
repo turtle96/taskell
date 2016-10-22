@@ -15,9 +15,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 
-
 /**
- * Represents a Task's date in the task manager.
+ * Represents a Task's taskDate in the task manager.
  * Guarantees: is valid as declared in {@link #isValidDate(String)}
  */
 public class TaskDate {
@@ -57,6 +56,7 @@ public class TaskDate {
     public static final Pattern TASK_DATE_ARGS_FORMAT = Pattern
             .compile("(?<day>(3[0-1]|2[0-9]|1[0-9]|[1-9]))" + "(-)(?<month>(1[0-2]|[1-9]))" + "(-)(?<year>([0-9]{4}))");
     private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy");
+    private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
     SimpleDateFormat sdf = new SimpleDateFormat("d M yyyy");
     
     public static final String MESSAGE_TASK_DATE_CONSTRAINTS =
@@ -67,7 +67,7 @@ public class TaskDate {
     public String taskDate;
     
     /**
-     * Initialize the different fields given date in the format of 
+     * Initialize the different fields given taskDate in the format of 
      * DAY-MONTH-YEAR, separated by DATE_DELIMITER
      * @throws IllegalValueException 
      */
@@ -92,7 +92,7 @@ public class TaskDate {
     }
     
     /**
-     * Extract the different fields from date having the format of
+     * Extract the different fields from taskDate having the format of
      * DAY-MONTH-YEAR, separated by DATE_DELIMITER
      * @throws DateTimeException
      * @throws IllegalValueException 
@@ -196,26 +196,26 @@ public class TaskDate {
         String todayDayNameInWeek = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
         int todayDayInWeek = convertDayOfWeekIntoInteger(todayDayNameInWeek);
         int daysToAdd = day - todayDayInWeek;
-        if (daysToAdd < 0) {
+        if (daysToAdd <= 0) {
             daysToAdd += NUM_DAYS_IN_A_WEEK;
         }
         LocalDate finalDate = today.plusDays(daysToAdd);
         setDate(finalDate.getDayOfMonth(), finalDate.getMonthValue(), finalDate.getYear());
     }
     
-    private void setDateGivenToday(String date) {
+    private void setDateGivenToday(String taskDate) {
         LocalDate today = LocalDate.now();
         setDate(today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     }
     
-    private void setDateGivenTomorrow(String date) {
+    private void setDateGivenTomorrow(String taskDate) {
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plusDays(1);
         setDate(tomorrow.getDayOfMonth(), tomorrow.getMonthValue(), tomorrow.getYear());
     }
     
     /**
-     * Extract the different fields of a given valid date
+     * Extract the different fields of a given valid taskDate
      * @throws DateTimeException
      */
     public void setDate(int day, int month, int year) {
@@ -231,7 +231,7 @@ public class TaskDate {
     }
 
     /**
-     * Returns true if a given string is a valid task date.
+     * Returns true if a given string is a valid task taskDate.
      */
     public static boolean isValidDate(String dateToValidate) {
         if (dateToValidate == null || dateToValidate.isEmpty()) {
@@ -297,7 +297,7 @@ public class TaskDate {
 
         try {
             // if not valid, it will throw ParseException
-            Date date = sdf.parse(dateToValidate);
+            Date taskDate = sdf.parse(dateToValidate);
         } catch (ParseException e) {
             return false;
         }
@@ -452,19 +452,19 @@ public class TaskDate {
     }
 
     /**
-     * Get today's date in the format of
-     * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
+     * Get today's taskDate in the format of
+     * DAY-MONTH-YEAR
      */
     public static String getTodayDate() {
-        return LocalDate.now().format(dtf);
+        return LocalDate.now().format(standardFormat);
     }
 
     /**
-     * Get tomorrow's date in the format of
-     * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
+     * Get tomorrow's taskDate in the format of
+     * DAY-MONTH-YEAR
      */
     public static String getTomorrowDate() {
-        return LocalDate.now().plusDays(1).format(dtf);
+        return LocalDate.now().plusDays(1).format(standardFormat);
     }
 
     /**
@@ -527,8 +527,12 @@ public class TaskDate {
         }
     }
     
-    public String getDisplayDate() throws IllegalValueException {
-        return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
+    public String getDisplayDate() {
+        try {
+            return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
+        } catch (IllegalValueException e) {
+            return "";
+        }
     }
 
     public static String getDefaultDate() {
@@ -538,9 +542,29 @@ public class TaskDate {
         return convertToStandardFormat(day, month, year);
     }
     
+    public boolean isBefore(TaskDate date) {
+        try {
+            LocalDate thisDate = LocalDate.of(Integer.valueOf(this.getYear()), Integer.valueOf(this.getMonth()), Integer.valueOf(this.getDay()));
+            LocalDate dateToComapare = LocalDate.of(Integer.valueOf(date.getYear()), Integer.valueOf(date.getMonth()), Integer.valueOf(date.getDay()));
+            return thisDate.isBefore(dateToComapare);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
+    public boolean isAfter(TaskDate date) {
+        try {
+            LocalDate thisDate = LocalDate.of(Integer.valueOf(this.getYear()), Integer.valueOf(this.getMonth()), Integer.valueOf(this.getDay()));
+            LocalDate dateToComapare = LocalDate.of(Integer.valueOf(date.getYear()), Integer.valueOf(date.getMonth()), Integer.valueOf(date.getDay()));
+            return thisDate.isAfter(dateToComapare);
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     /**
      * Returns a string with the format of
-     * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
+     * DAY-MONTH-YEAR
      */
     @Override
     public String toString() {

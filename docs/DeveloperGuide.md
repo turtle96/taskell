@@ -551,7 +551,7 @@ NIL
 #### Remember the Milk
 **Pros:**<br>
 1. Can Use offline and sync once internet connection is established<br>
-2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework by tomorrow: Saves task with deadline set to date of tomorrow)<br>
+2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework by tomorrow: Saves task with deadline set to startDate of tomorrow)<br>
 3. Can Undo operation when marking tasks as done (recover from accidentally clicking done)<br>
 4. Can set priority with some form of order<br>
 5. Can set recursive tasks<br>

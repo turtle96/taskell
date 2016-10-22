@@ -9,7 +9,8 @@ import seedu.taskell.model.tag.UniqueTagList;
 public interface ReadOnlyTask {
     Description getDescription();
     String getTaskType();
-    TaskDate getTaskDate();
+    TaskDate getStartDate();
+    TaskDate getEndDate();
     TaskTime getStartTime();
     TaskTime getEndTime();
     TaskPriority getTaskPriority();
@@ -28,7 +29,8 @@ public interface ReadOnlyTask {
                 || (other != null // this is first to avoid NPE below
                 && other.getDescription().equals(this.getDescription()) // state checks here onwards
                 && other.getTaskType().equals(this.getTaskType())
-                && other.getTaskDate().equals(this.getTaskDate())
+                && other.getStartDate().equals(this.getStartDate())
+                && other.getEndDate().equals(this.getEndDate())
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())
                 && other.getTaskPriority().equals(this.getTaskPriority()));
@@ -40,8 +42,10 @@ public interface ReadOnlyTask {
     default String getAsText() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
-                .append(" TaskDate: ")
-                .append(getTaskDate())
+                .append(" StartDate: ")
+                .append(getStartDate())
+                .append(" EndDate: ")
+                .append(getEndDate())
                 .append(" StartTime: ")
                 .append(getStartTime())
                 .append(" EndTime: ")

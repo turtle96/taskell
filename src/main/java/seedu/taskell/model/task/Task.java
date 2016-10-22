@@ -12,26 +12,28 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
     public static final String FLOATING_TASK = "FLOATING";
-    public static final String DEADLINE_TASK = "DEADLINE";
     public static final String EVENT_TASK = "EVENT";
 
-    private Description description;
-    private String taskType;
-    private TaskDate taskDate;
-    private TaskTime startTime;
-    private TaskTime endTime;
-    private TaskPriority taskPriority;
+    protected Description description;
+    protected String taskType;
+    protected TaskDate startDate;
+    protected TaskDate endDate;
+    protected TaskTime startTime;
+    protected TaskTime endTime;
+    protected TaskPriority taskPriority;
 
-    private UniqueTagList tags;
+    protected UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, String taskType, TaskDate taskDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, taskType, taskDate, startTime, endTime, taskPriority, tags);
+    public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, tags);
         this.description = description;
         this.taskType = taskType;
-        this.taskDate = taskDate;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
@@ -45,7 +47,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTaskType(), source.getTaskDate(), source.getStartTime(), source.getEndTime(), source.getTaskPriority(), source.getTags());
+        this(source.getDescription(), source.getTaskType(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(), source.getTaskPriority(), source.getTags());
     }
 
     @Override
@@ -59,8 +61,13 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getTaskDate() {
-        return taskDate;
+    public TaskDate getStartDate() {
+        return startDate;
+    }
+    
+    @Override
+    public TaskDate getEndDate() {
+        return endDate;
     }
 
     @Override
@@ -100,7 +107,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, taskDate, startTime, endTime, taskPriority, tags);
+        return Objects.hash(description, startDate, startTime, endTime, taskPriority, tags);
     }
 
     @Override

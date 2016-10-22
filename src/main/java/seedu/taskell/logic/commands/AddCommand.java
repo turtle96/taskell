@@ -16,9 +16,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: DESCRIPTION by/on[DATE] startat[START_TIME] endat[END_TIME] [p/PRIORITY] [#TAG]...\n"
+            + "Parameters: DESCRIPTION by/on[DATE] from[START_TIME] to[END_TIME] [p/PRIORITY] [#TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " go for meeting on 1-1-2015 startat 12.30AM endat 12.45AM p/3 #work";
+            + " go for meeting on 1-1-2100 from 12.30AM to 12.45AM p/3 #work";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
 
-    public AddCommand(String description, String taskType, String taskDate, String startTime, String endTime, String taskPriority, Set<String> tags)
+    public AddCommand(String description, String taskType, String startDate, String endDate, String startTime, String endTime, String taskPriority, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -40,34 +40,10 @@ public class AddCommand extends Command {
         
         switch (taskType) {
         case Task.FLOATING_TASK: 
-            this.toAdd = new FloatingTask(
-                    new Description(description), 
-                    Task.FLOATING_TASK, 
-                    new TaskDate(TaskDate.DEFAULT_DATE), 
-                    new TaskTime(TaskTime.DEFAULT_START_TIME), 
-                    new TaskTime(TaskTime.DEFAULT_END_TIME), 
-                    new TaskPriority(taskPriority),
-                    new UniqueTagList(tagSet));
-            break;
-        case Task.DEADLINE_TASK:
-            this.toAdd = new DeadlineTask(
-                    new Description(description),
-                    Task.DEADLINE_TASK,
-                    new TaskDate(taskDate),
-                    new TaskTime(TaskTime.DEFAULT_START_TIME),
-                    new TaskTime(endTime),
-                    new TaskPriority(taskPriority),
-                    new UniqueTagList(tagSet));
+            this.toAdd = new FloatingTask(description, taskPriority, new UniqueTagList(tagSet));
             break;
         case Task.EVENT_TASK:
-            this.toAdd = new EventTask(
-                    new Description(description),
-                    Task.EVENT_TASK,
-                    new TaskDate(taskDate),
-                    new TaskTime(startTime),
-                    new TaskTime(endTime),
-                    new TaskPriority(taskPriority),
-                    new UniqueTagList(tagSet));
+            this.toAdd = new EventTask(description, startDate, endDate, startTime, endTime, taskPriority, new UniqueTagList(tagSet));
             break;
         default:
             toAdd = null;

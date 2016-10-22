@@ -14,24 +14,24 @@ import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Edits a task date identified using it's last displayed index from the task
+ * Edits a task startDate identified using it's last displayed index from the task
  * manager.
  */
 public class EditDateCommand extends Command {
-    public static final String COMMAND_WORD = "edit-date";
+    public static final String COMMAND_WORD = "edit-startDate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the date of a task identified by the index number used in the last task listing.\n"
+            + ": Edits the startDate of a task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer) NEW_DATE\n" + "Example: " + COMMAND_WORD + " 1 8-8-2016 ";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \n\nNewTask: %2$s";
 
     public final int targetIndex;
-    public final TaskDate taskDate;
+    public final TaskDate startDate;
 
-    public EditDateCommand(int targetIndex, String taskDate) throws IllegalValueException {
+    public EditDateCommand(int targetIndex, String startDate) throws IllegalValueException {
         this.targetIndex = targetIndex;
-        this.taskDate = new TaskDate(taskDate);
+        this.startDate = new TaskDate(startDate);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class EditDateCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskDate,
+        Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), startDate, taskToEdit.getEndDate(),
                 taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTags());
         try {
             model.editTask(taskToEdit, newTask);
