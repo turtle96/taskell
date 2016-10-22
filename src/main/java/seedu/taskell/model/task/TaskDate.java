@@ -527,8 +527,12 @@ public class TaskDate {
         }
     }
     
-    public String getDisplayDate() throws IllegalValueException {
-        return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
+    public String getDisplayDate() {
+        try {
+            return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
+        } catch (IllegalValueException e) {
+            return "";
+        }
     }
 
     public static String getDefaultDate() {
