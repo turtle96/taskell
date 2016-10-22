@@ -95,6 +95,35 @@ public class TaskDateTest {
     }
     
     @Test
+    public void assertNewTaskDateBehaviour() throws IllegalValueException {
+        TaskDate validMonth = new TaskDate("september");
+        assertEquals("1-9-2016", validMonth.toString());
+        
+        TaskDate validMonthAndYear = new TaskDate("dec-2016");
+        assertEquals("1-12-2016", validMonthAndYear.toString());
+        
+        TaskDate validDayAndMonth = new TaskDate("1-jan");
+        assertEquals("1-1-2016", validDayAndMonth.toString());
+        
+        TaskDate validFullDate = new TaskDate("1-1-2011");
+        assertEquals("1-1-2011", validFullDate.toString());
+        
+        TaskDate validToday = new TaskDate("today");
+        DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        assertEquals(LocalDate.now().format(standardFormat), validToday.toString());
+        
+        TaskDate validTomorrow = new TaskDate("tmr");
+        standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
+        assertEquals(LocalDate.now().plusDays(1).format(standardFormat), validTomorrow.toString());
+        
+        try {
+            TaskDate invalidDate = new TaskDate("NOT-A-VALID-DATE");
+        } catch (IllegalValueException ive) {
+            assertEquals(TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS, ive.getMessage());
+        }
+    }
+    
+    @Test
     public void assertCorrectTodayDate() {
         DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
         assertEquals(LocalDate.now().format(standardFormat), TaskDate.getTodayDate());
