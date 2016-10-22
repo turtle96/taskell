@@ -8,7 +8,7 @@ import seedu.taskell.model.task.ReadOnlyTask;
 public class TaskCardHandle extends GuiHandle {
     private static final String DESCRIPTION_FIELD_ID = "#description";
 
-    private static final String TASK_PRIORITY_FIELD_ID = "#taskPriority";
+//    private static final String TASK_PRIORITY_FIELD_ID = "#taskPriority";
     private static final String START_DATE_FIELD_ID = "#startDate";
     private static final String END_DATE_FIELD_ID = "#endDate";
     private static final String TASK_START_TIME_FIELD_ID = "#startTime";
@@ -29,9 +29,9 @@ public class TaskCardHandle extends GuiHandle {
         return getTextFromLabel(DESCRIPTION_FIELD_ID);
     }
 
-    public String getTaskPriority() {
-        return getTextFromLabel(TASK_PRIORITY_FIELD_ID);
-    }
+//    public String getTaskPriority() {
+//        return getTextFromLabel(TASK_PRIORITY_FIELD_ID);
+//    }
 
     public String getStartDate() {
         return getTextFromLabel(START_DATE_FIELD_ID);
@@ -51,23 +51,23 @@ public class TaskCardHandle extends GuiHandle {
 
     public boolean isSameTask(ReadOnlyTask task){
         return getDescription().equals(task.getDescription().description) 
-                && getStartDate().equals(task.getStartDate().taskDate) && getEndDate().equals(task.getEndDate().taskDate)
-                && getStartTime().equals(task.getStartTime().taskTime) && getEndTime().equals(task.getEndTime().taskTime) 
-                && getTaskPriority().equals(task.getTaskPriority().taskPriority);
+                && getStartDate().equals(task.getStartDate().getDisplayDate()) 
+                && getEndDate().equals(task.getEndDate().getDisplayDate())
+                && getStartTime().equals(task.getStartTime().taskTime) 
+                && getEndTime().equals(task.getEndTime().taskTime); 
     }
 
     @Override
     public boolean equals(Object obj) {
         if(obj instanceof TaskCardHandle) {
             TaskCardHandle handle = (TaskCardHandle) obj;
-            return getDescription().equals(handle.getDescription())
-                    && getTaskPriority().equals(handle.getTaskPriority()); //TODO: compare the rest
+            return getDescription().equals(handle.getDescription());
         }
         return super.equals(obj);
     }
 
     @Override
     public String toString() {
-        return getDescription() + " " + getTaskPriority();
+        return getDescription();
     }
 }
