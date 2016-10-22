@@ -68,6 +68,7 @@ public class JsonConfigStorage implements ConfigStorage {
     private void saveConfig(Config config, String configFilePath) throws IOException {
         assert config != null;
         assert configFilePath != null;
+        assert !configFilePath.isEmpty();
 
         FileUtil.serializeObjectToJsonFile(new File(configFilePath), config);
     }
