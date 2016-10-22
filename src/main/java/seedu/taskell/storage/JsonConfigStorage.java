@@ -39,7 +39,7 @@ public class JsonConfigStorage implements ConfigStorage {
      * @param configFilePath location of the data. Cannot be null.
      * @throws DataConversionException if the file format is not as expected.
      */
-    private Optional<Config> readConfig(String configFilePath) throws DataConversionException {
+    public Optional<Config> readConfig(String configFilePath) throws DataConversionException {
         assert configFilePath != null;
 
         File prefsFile = new File(configFilePath);
