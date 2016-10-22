@@ -44,7 +44,7 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
         assert(newFilePath.equals(DEFAULT_SAVE_LOCATION));
     }
     
-    /** NOTE: because of the way SaveStorageLocationCommand works after running this command
+    /** NOTE: because of the way SaveStorageLocationCommand works, after running this command
      *          config.json in Taskell saves the test data so this method is necessary to reset
      *          config.json to default data
      * */
