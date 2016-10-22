@@ -15,15 +15,15 @@ public class Task implements ReadOnlyTask {
     public static final String DEADLINE_TASK = "DEADLINE";
     public static final String EVENT_TASK = "EVENT";
 
-    private Description description;
-    private String taskType;
-    private TaskDate startDate;
-    private TaskDate endDate;
-    private TaskTime startTime;
-    private TaskTime endTime;
-    private TaskPriority taskPriority;
+    protected Description description;
+    protected String taskType;
+    protected TaskDate startDate;
+    protected TaskDate endDate;
+    protected TaskTime startTime;
+    protected TaskTime endTime;
+    protected TaskPriority taskPriority;
 
-    private UniqueTagList tags;
+    protected UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
