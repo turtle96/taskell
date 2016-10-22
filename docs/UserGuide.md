@@ -121,9 +121,9 @@ Picture 7: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell 
 
 #### Saving the information in Taskell : `save`
 
-Specify the path of a new folder to store the data file of Taskell. The user should have permissions to access the folder. <br>
-If directory is valid but file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
-but `chicken` file is not created, Taskell will create the file.<br>
+You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
+If the specified directory is valid but the file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
+but `chicken` file is not created, Taskell will create the file for you.<br>
 Format: `save FOLDERPATH`<br>
 Example: `save C:/Users/Jim/Documents`
 
