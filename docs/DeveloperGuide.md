@@ -489,7 +489,7 @@ Use case ends
 **MSS**
 
 1. User requests to save all tasks
-2. Taskell saves all tasks in the requested folder
+2. Taskell saves all tasks in the requested folder <br>
 Use case ends
 
 **Extensions**
