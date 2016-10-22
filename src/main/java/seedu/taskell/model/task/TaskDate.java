@@ -17,7 +17,7 @@ import java.time.format.TextStyle;
 
 
 /**
- * Represents a Task's startDate in the task manager.
+ * Represents a Task's taskDate in the task manager.
  * Guarantees: is valid as declared in {@link #isValidDate(String)}
  */
 public class TaskDate {
@@ -64,10 +64,10 @@ public class TaskDate {
             + "\nSpelling of month should be in full or 3-letters"
             + "\nYear should only be 4-digits";
 
-    public String startDate;
+    public String taskDate;
     
     /**
-     * Initialize the different fields given startDate in the format of 
+     * Initialize the different fields given taskDate in the format of 
      * DAY-MONTH-YEAR, separated by DATE_DELIMITER
      * @throws IllegalValueException 
      */
@@ -92,7 +92,7 @@ public class TaskDate {
     }
     
     /**
-     * Extract the different fields from startDate having the format of
+     * Extract the different fields from taskDate having the format of
      * DAY-MONTH-YEAR, separated by DATE_DELIMITER
      * @throws DateTimeException
      * @throws IllegalValueException 
@@ -203,23 +203,23 @@ public class TaskDate {
         setDate(finalDate.getDayOfMonth(), finalDate.getMonthValue(), finalDate.getYear());
     }
     
-    private void setDateGivenToday(String startDate) {
+    private void setDateGivenToday(String taskDate) {
         LocalDate today = LocalDate.now();
         setDate(today.getDayOfMonth(), today.getMonthValue(), today.getYear());
     }
     
-    private void setDateGivenTomorrow(String startDate) {
+    private void setDateGivenTomorrow(String taskDate) {
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plusDays(1);
         setDate(tomorrow.getDayOfMonth(), tomorrow.getMonthValue(), tomorrow.getYear());
     }
     
     /**
-     * Extract the different fields of a given valid startDate
+     * Extract the different fields of a given valid taskDate
      * @throws DateTimeException
      */
     public void setDate(int day, int month, int year) {
-        this.startDate = convertToStandardFormat(day, month, year);
+        this.taskDate = convertToStandardFormat(day, month, year);
     }
     
     /**
@@ -231,7 +231,7 @@ public class TaskDate {
     }
 
     /**
-     * Returns true if a given string is a valid task startDate.
+     * Returns true if a given string is a valid task taskDate.
      */
     public static boolean isValidDate(String dateToValidate) {
         if (dateToValidate == null || dateToValidate.isEmpty()) {
@@ -297,7 +297,7 @@ public class TaskDate {
 
         try {
             // if not valid, it will throw ParseException
-            Date startDate = sdf.parse(dateToValidate);
+            Date taskDate = sdf.parse(dateToValidate);
         } catch (ParseException e) {
             return false;
         }
@@ -452,7 +452,7 @@ public class TaskDate {
     }
 
     /**
-     * Get today's startDate in the format of
+     * Get today's taskDate in the format of
      * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
      */
     public static String getTodayDate() {
@@ -460,7 +460,7 @@ public class TaskDate {
     }
 
     /**
-     * Get tomorrow's startDate in the format of
+     * Get tomorrow's taskDate in the format of
      * NAME_OF_DAY_IN_WEEK, DAY MONTH YEAR
      */
     public static String getTomorrowDate() {
@@ -475,9 +475,9 @@ public class TaskDate {
     }
     
     public String getDay() throws IllegalValueException {
-        assert startDate != null;
+        assert taskDate != null;
         
-        final Matcher matcherFullArg = TASK_DATE_ARGS_FORMAT.matcher(startDate.trim());
+        final Matcher matcherFullArg = TASK_DATE_ARGS_FORMAT.matcher(taskDate.trim());
         if (matcherFullArg.matches()) {
             return matcherFullArg.group("day");
         } else {
@@ -486,9 +486,9 @@ public class TaskDate {
     }
     
     public String getMonth() throws IllegalValueException {
-        assert startDate != null;
+        assert taskDate != null;
         
-        final Matcher matcherFullArg = TASK_DATE_ARGS_FORMAT.matcher(startDate.trim());
+        final Matcher matcherFullArg = TASK_DATE_ARGS_FORMAT.matcher(taskDate.trim());
         if (matcherFullArg.matches()) {
             return matcherFullArg.group("month");
         } else {
@@ -497,9 +497,9 @@ public class TaskDate {
     }
     
     public String getYear() throws IllegalValueException {
-        assert startDate != null;
+        assert taskDate != null;
         
-        final Matcher matcherFullArg = TASK_DATE_ARGS_FORMAT.matcher(startDate.trim());
+        final Matcher matcherFullArg = TASK_DATE_ARGS_FORMAT.matcher(taskDate.trim());
         if (matcherFullArg.matches()) {
             return matcherFullArg.group("year");
         } else {
@@ -544,19 +544,19 @@ public class TaskDate {
      */
     @Override
     public String toString() {
-        return startDate;
+        return taskDate;
     }
     
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof TaskDate // instanceof handles nulls
-                && this.startDate.equals(((TaskDate)other).startDate));
+                && this.taskDate.equals(((TaskDate)other).taskDate));
     }
 
     @Override
     public int hashCode() {
-        return startDate.hashCode();
+        return taskDate.hashCode();
     }
 
 }

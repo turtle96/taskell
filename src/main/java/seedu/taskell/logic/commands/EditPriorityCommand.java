@@ -46,7 +46,7 @@ public class EditPriorityCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getStartTime(),taskToEdit.getEndTime(),
+        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getStartTime(),taskToEdit.getEndTime(),
                 taskPriority,taskToEdit.getTags()
         );
         try {

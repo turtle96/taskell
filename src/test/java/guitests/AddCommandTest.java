@@ -47,9 +47,6 @@ public class AddCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("clear");
         assertAddSuccess(td.floatingTask_NonIntuitiveDescription);
         
-        commandBox.runCommand("clear");
-        assertAddSuccess(td.deadlineTask_Valid);
-        
     }
 
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {

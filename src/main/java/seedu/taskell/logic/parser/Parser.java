@@ -499,7 +499,7 @@ public class Parser {
         
         if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
             try {
-                return new AddCommand(description, Task.EVENT_TASK, startDate, startTime, endTime, taskPriority,
+                return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
@@ -507,7 +507,7 @@ public class Parser {
         } else {
             try {
               return new AddCommand(description, Task.FLOATING_TASK, TaskDate.DEFAULT_DATE,
-                      TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, taskPriority,
+                      TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, taskPriority,
                       getTagsFromArgs(tagString));
           } catch (IllegalValueException ive) {
               return new IncorrectCommand(ive.getMessage());

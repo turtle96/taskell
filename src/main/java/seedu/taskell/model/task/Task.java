@@ -18,6 +18,7 @@ public class Task implements ReadOnlyTask {
     private Description description;
     private String taskType;
     private TaskDate startDate;
+    private TaskDate endDate;
     private TaskTime startTime;
     private TaskTime endTime;
     private TaskPriority taskPriority;
@@ -27,11 +28,13 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, String taskType, TaskDate startDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
+    public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, tags);
         this.description = description;
         this.taskType = taskType;
         this.startDate = startDate;
+        this.endDate = endDate;
+        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
@@ -45,7 +48,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTaskType(), source.getStartDate(), source.getStartTime(), source.getEndTime(), source.getTaskPriority(), source.getTags());
+        this(source.getDescription(), source.getTaskType(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(), source.getTaskPriority(), source.getTags());
     }
 
     @Override
@@ -61,6 +64,11 @@ public class Task implements ReadOnlyTask {
     @Override
     public TaskDate getStartDate() {
         return startDate;
+    }
+    
+    @Override
+    public TaskDate getEndDate() {
+        return endDate;
     }
 
     @Override

@@ -15,6 +15,7 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime startTime;
     private TaskTime endTime;
     private TaskDate startDate;
+    private TaskDate endDate;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -44,6 +45,10 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(TaskDate startDate) {
         this.startDate = startDate;
     }
+    
+    public void setEndDate(TaskDate endDate) {
+        this.endDate = endDate;
+    }
 
     @Override
     public Description getDescription() {
@@ -60,6 +65,11 @@ public class TestTask implements ReadOnlyTask {
         return startDate;
     }
 
+    @Override
+    public TaskDate getEndDate() {
+        return startDate;
+    }
+    
     @Override
     public TaskTime getStartTime() {
         return startTime;
@@ -88,7 +98,8 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("on " + this.getStartDate().startDate + " ");
+        sb.append("from " + this.getStartDate().taskDate + " ");
+        sb.append("to " + this.getEndDate().taskDate + " "); 
         sb.append("from " + this.getStartTime().taskTime + " ");
         sb.append("to " + this.getEndTime().taskTime + " ");
         sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");

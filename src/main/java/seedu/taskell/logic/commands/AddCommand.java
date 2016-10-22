@@ -16,9 +16,9 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task manager. "
-            + "Parameters: DESCRIPTION by/on[DATE] startat[START_TIME] endat[END_TIME] [p/PRIORITY] [#TAG]...\n"
+            + "Parameters: DESCRIPTION by/on[DATE] from[START_TIME] to[END_TIME] [p/PRIORITY] [#TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " go for meeting on 1-1-2015 startat 12.30AM endat 12.45AM p/3 #work";
+            + " go for meeting on 1-1-2015 from 12.30AM to 12.45AM p/3 #work";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
@@ -31,7 +31,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
 
-    public AddCommand(String description, String taskType, String startDate, String startTime, String endTime, String taskPriority, Set<String> tags)
+    public AddCommand(String description, String taskType, String startDate, String endDate, String startTime, String endTime, String taskPriority, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -44,6 +44,7 @@ public class AddCommand extends Command {
                     new Description(description), 
                     Task.FLOATING_TASK, 
                     new TaskDate(TaskDate.DEFAULT_DATE), 
+                    new TaskDate(TaskDate.DEFAULT_DATE),
                     new TaskTime(TaskTime.DEFAULT_START_TIME), 
                     new TaskTime(TaskTime.DEFAULT_END_TIME), 
                     new TaskPriority(taskPriority),
@@ -54,6 +55,7 @@ public class AddCommand extends Command {
                     new Description(description),
                     Task.DEADLINE_TASK,
                     new TaskDate(startDate),
+                    new TaskDate(endDate),
                     new TaskTime(TaskTime.DEFAULT_START_TIME),
                     new TaskTime(endTime),
                     new TaskPriority(taskPriority),
@@ -64,6 +66,7 @@ public class AddCommand extends Command {
                     new Description(description),
                     Task.EVENT_TASK,
                     new TaskDate(startDate),
+                    new TaskDate(endDate),
                     new TaskTime(startTime),
                     new TaskTime(endTime),
                     new TaskPriority(taskPriority),

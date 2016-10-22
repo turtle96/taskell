@@ -451,13 +451,14 @@ public class LogicManagerTest {
             Description description = new Description("Ask boon for tax rebate");
             String taskType = Task.EVENT_TASK;
             TaskDate startDate = new TaskDate("1-1-2015");
+            TaskDate endDate = new TaskDate("1-1-2016");
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, taskType, startDate, startTime, endTime, privatetaskPriority, tags);
+            return new Task(description, taskType, startDate, endDate, startTime, endTime, privatetaskPriority, tags);
         }
         
 
@@ -473,6 +474,7 @@ public class LogicManagerTest {
                     new Description("Task " + seed),
                     Task.EVENT_TASK,
                     new TaskDate("1-1-2015"),
+                    new TaskDate("1-1-2016"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority((seed % 4) + ""),
@@ -485,9 +487,9 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
-
             cmd.append(p.getDescription().toString());
-            cmd.append(" on ").append(p.getStartDate());
+            cmd.append(" from ").append(p.getStartDate());
+            cmd.append(" to ").append(p.getEndDate());
             cmd.append(" from ").append(p.getStartTime());
             cmd.append(" to ").append(p.getEndTime());
             cmd.append(" " + TaskPriority.PREFIX).append(p.getTaskPriority());
@@ -576,6 +578,7 @@ public class LogicManagerTest {
                     new Description(description),
                     Task.EVENT_TASK,
                     new TaskDate("1-1-2015"),
+                    new TaskDate("1-1-2016"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority(TaskPriority.NO_PRIORITY),
