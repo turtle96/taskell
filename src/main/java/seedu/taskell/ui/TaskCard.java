@@ -16,15 +16,11 @@ public class TaskCard extends UiPart{
     @FXML
     private Label description;
     @FXML
-    private Label taskType;
-    @FXML
     private Label id;
     @FXML
     private Label startDate;
     @FXML
     private Label endDate;
-    @FXML
-    private Label taskPriority;
     @FXML
     private Label startTime;
     @FXML
@@ -48,15 +44,21 @@ public class TaskCard extends UiPart{
 
     @FXML
     public void initialize() {
-        taskType.setText(task.getTaskType());
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
-        taskPriority.setText(task.getTaskPriority().taskPriority);
         tags.setText(task.tagsString());
-        startDate.setText(task.getStartDate().taskDate);
-        endDate.setText(task.getEndDate().taskDate);
-        startTime.setText(task.getStartTime().taskTime);
-        endTime.setText(task.getEndTime().taskTime);
+        
+        if (task.getTaskType().equals(Task.FLOATING_TASK)) {
+            startDate.setVisible(false);
+            endDate.setVisible(false);
+            startTime.setVisible(false);
+            endTime.setVisible(false);
+        } else {
+            startDate.setText(task.getStartDate().taskDate);
+            endDate.setText(task.getEndDate().taskDate);
+            startTime.setText(task.getStartTime().taskTime);
+            endTime.setText(task.getEndTime().taskTime);
+        }
     }
 
     public HBox getLayout() {
