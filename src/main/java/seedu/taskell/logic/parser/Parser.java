@@ -374,10 +374,7 @@ public class Parser {
             } else if (TaskDate.isValidDate(token)) {
                 if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
                         && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token); // because maybe people wants
-                                                   // to add task with serial
-                                                   // number that has format
-                                                   // startDate
+                    descriptionQueue.offer(token); 
                 } else if (!onQueue.isEmpty()) {
                     if (!hasStartDate) {
                         onQueue.poll();
@@ -421,7 +418,7 @@ public class Parser {
             } else if (TaskTime.isValidTime(token)) {
                 if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
                         && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token); // because maybe people wants to add task with serial number that has format startDate
+                    descriptionQueue.offer(token); 
                 } else if (!byQueue.isEmpty()) {
                     if (!hasEndTime) {
                         byQueue.poll();
@@ -458,8 +455,6 @@ public class Parser {
                         descriptionQueue.offer(toQueue.poll());
                         descriptionQueue.offer(token);
                     }
-//                    dateTimeQueue.offer(toQueue.poll());
-//                    dateTimeQueue.offer(token);
                 } else if (!onQueue.isEmpty()) {
                     descriptionQueue.offer(onQueue.poll());
                     descriptionQueue.offer(token);
@@ -467,19 +462,9 @@ public class Parser {
             }
         }
 
-        // Takes care of trailing keywords at end of input not accompanied by
-        // startDate/time
-        if (!byQueue.isEmpty()) {
-            descriptionQueue.offer(byQueue.poll());
-        }
-        if (!onQueue.isEmpty()) {
-            descriptionQueue.offer(onQueue.poll());
-        }
-        if (!fromQueue.isEmpty()) {
-            descriptionQueue.offer(fromQueue.poll());
-        }
-        if (!toQueue.isEmpty()) {
-            descriptionQueue.offer(toQueue.poll());
+        String tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
+        if (!tempToken.isEmpty()) {
+            descriptionQueue.offer(tempToken);
         }
 
         while (!descriptionQueue.isEmpty()) {
@@ -490,13 +475,11 @@ public class Parser {
         if (!hasEndDate) {
             endDate = startDate;
         }
-
-        System.out.println(description);
-        System.out.println("START DATE: " + startDate);
-        System.out.println("END DATE: " + endDate);
-        System.out.println("START TIME: " + startTime);
-        System.out.println("END TIME: " + endTime);
         
+        if (TaskDate.isValidToday(startDate) && !hasStartTime) {
+            startTime = TaskTime.getTimeNow();
+        }
+
         if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
             try {
                 return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime, taskPriority,
@@ -506,8 +489,7 @@ public class Parser {
             }
         } else {
             try {
-              return new AddCommand(description, Task.FLOATING_TASK, TaskDate.DEFAULT_DATE,
-                      TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, taskPriority,
+              return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime, taskPriority,
                       getTagsFromArgs(tagString));
           } catch (IllegalValueException ive) {
               return new IncorrectCommand(ive.getMessage());
@@ -516,8 +498,6 @@ public class Parser {
         
     }
 
-    // At any one point, at most one of these queue can have at most one token
-    // Flush to descriptionQueue
     private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
             Queue<String> fromQueue, Queue<String> toQueue) {
         String token = "";
