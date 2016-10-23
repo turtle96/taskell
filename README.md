@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/CS2103AUG2016-W15-C3/main.svg?branch=master)](https://travis-ci.org/CS2103AUG2016-W15-C3/main)
-[![Coverage Status](https://coveralls.io/repos/github/CS2103AUG2016-W15-C3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103AUG2016-W15-C3/main?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/CS2103AUG2016-W15-C3/main/badge.svg)](https://coveralls.io/github/CS2103AUG2016-W15-C3/main)
 
 # Taskell
 
@@ -23,8 +23,9 @@
 
 #### Acknowledgement
 
-* Some parts of this sample application were inspired by the excellent 
+* Some parts of this application were inspired by the excellent 
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*. 
+* Some parts of this application were adapted from [Address Book 4](https://github.com/nus-cs2103-AY1617S1/addressbook-level4) by *Damith C. Rajapakse* and his team
 
 
 #### License : [MIT](LICENSE)
