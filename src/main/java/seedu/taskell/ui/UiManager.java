@@ -127,7 +127,7 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleDisplayList(DisplayListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        logger.info("Displaying");
+        logger.info("Displaying list...");
         mainWindow.loadList(event.getList());
     }
 
