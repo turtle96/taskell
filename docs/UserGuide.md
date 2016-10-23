@@ -121,11 +121,13 @@ Format: `edit INDEX NEWTASK`<br>
  <br> <img src="images/editCmd.png" width="600"> </br>
 Picture 7: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
 
-#### Saving the information in Taskell
+#### Saving the information in Taskell : `save`
 
-Specify the path of a new folder to store the data file of Taskell. The user should have permissions to access the folder.<br>
-Format: `save /FOLDERPATH`<br>
-Example: `save /Jim/Documents`
+You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
+If the specified directory is valid but the file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
+but `chicken` file is not created, Taskell will create the file for you.<br>
+Format: `save FOLDERPATH`<br>
+Example: `save C:/Users/Jim/Documents`
 
 #### Clearing all entries : `clear`
 To clear all tasks, <kbd>Enter</kbd> clear.<br>
