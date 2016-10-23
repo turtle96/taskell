@@ -37,10 +37,22 @@ public class UndoCommand extends Command {
         this.index = index;
     }
     
+    public static ArrayList<String> getListOfCommandHistoryText() {
+        assert commandHistoryList != null;
+        assert !commandHistoryList.isEmpty();
+        
+        ArrayList<String> list = new ArrayList<>();
+        for (CommandHistory history: commandHistoryList) {
+            list.add(history.getCommandText());
+        }
+        
+        return list;
+    }
+    
     @Override
     public CommandResult execute() {
         
-        if (commandHistoryList.size() == 0) {
+        if (commandHistoryList.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_COMMAND_HISTORY_EMPTY));
         }
         else if (index > commandHistoryList.size()) {
@@ -101,6 +113,10 @@ public class UndoCommand extends Command {
     public static void addTaskToCommandHistory(Task task) {
         logger.info("Adding task to history");
         commandHistoryList.get(commandHistoryList.size()-1).setTask(task);
+    }
+
+    public static void deletePreviousCommand() {
+        commandHistoryList.remove(commandHistoryList.size()-1);
     }
 
 }
