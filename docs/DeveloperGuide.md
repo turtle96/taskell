@@ -540,36 +540,36 @@ NIL
 #### WunderList
 **Pros:**<br>
 1. Has support for cross-platform operations<br>
-2. Can Share tasks with other people and manage them<br> 
+2. Can share tasks with other people and manage them<br> 
 3. Can categorize tasks into different categories<br>
 4. Can attach different types of file inside the task, such as photos, PDF and PowerPoint<br>
 
 **Cons:**<br>
-1. Has limited priority level<br>
+1. Has limited number ofpriority levels<br>
 2. Has no undo operation<br>
 
 #### Remember the Milk
 **Pros:**<br>
-1. Can Use offline and sync once internet connection is established<br>
-2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework by tomorrow: Saves task with deadline set to startDate of tomorrow)<br>
-3. Can Undo operation when marking tasks as done (recover from accidentally clicking done)<br>
-4. Can set priority with some form of order<br>
+1. Can be used offline and syncs once internet connection is established<br>
+2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework tomorrow: Saves task with deadline set to tomorrow)<br>
+3. Can undo when marking tasks as done (recover from accidentally marking a task as done)<br>
+4. Can set priority, and will list tasks by priority<br>
 5. Can set recursive tasks<br>
 
 **Cons:**<br>
-1. Need to click frequently to enter a task (if using desktop, not application) <br>
+1. Need to click frequently to enter or edit a task<br>
 2. Need to remember lots of shortcuts, so user is less likely to use them<br>
-3. Has a cluttered interface, thus not intuitive<br>
-4. Does not support calendar view in-house, but there are plugins that display calendar views<br>
+3. Has a cluttered interface, which is not intuitive<br>
+4. Does not support calendar view in-house<br>
 
 #### Google Calendar
 **Pros:**<br>
-1. Able to add in public holidays <br>
+1. Can add in public holidays <br>
 2. Can update in terms of time zone<br>
 3. Can customize background picture<br>
 
 **Cons:**<br>
-1. Does not have flexibility to view the calendar<br>
+1. Does not have flexibility in viewing the calendar<br>
 2. Has too much information in 1 page in application<br>
 
 #### Any.do
@@ -577,9 +577,8 @@ NIL
 1. Displays a reminder when the task is almost due (set in advance)<br>
 2. Able to clear all tasks in one go<br>
 3. Do a daily review at the start/end of day<br>
-4. Arrange tasks by Today, Tomorrow, someday<br>
-
+4. Arranges tasks by today, tomorrow, someday<br>
 
 **Cons:**<br>
-1. Require internet connection<br>
+1. Requires internet connection<br>
 2. Has no support for recurring tasks<br>
