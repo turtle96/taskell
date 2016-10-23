@@ -10,7 +10,8 @@ import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Undo most recent executed command (add or delete only for now)
+ * Undo previously executed command (add or delete only for now)
+ * Note: only for current session only (meaning after app is closed, history will be cleared)
  */
 public class UndoCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(UndoCommand.class.getName());
