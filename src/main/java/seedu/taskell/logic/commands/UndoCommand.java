@@ -112,10 +112,20 @@ public class UndoCommand extends Command {
     
     public static void addTaskToCommandHistory(Task task) {
         logger.info("Adding task to history");
+        if (commandHistoryList.isEmpty()) {
+            logger.warning("No command history to add task to");
+            return;
+        }
+        
         commandHistoryList.get(commandHistoryList.size()-1).setTask(task);
     }
 
     public static void deletePreviousCommand() {
+        logger.info("Command unsuccessfully executed. Deleting command history.");
+        if (commandHistoryList.isEmpty()) {
+            logger.warning("No command history to delete");
+            return;
+        }
         commandHistoryList.remove(commandHistoryList.size()-1);
     }
 
