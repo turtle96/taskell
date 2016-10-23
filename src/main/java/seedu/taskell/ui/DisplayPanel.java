@@ -18,6 +18,10 @@ import java.util.logging.Logger;
 public class DisplayPanel extends UiPart{
 
     private static Logger logger = LogsCenter.getLogger(DisplayPanel.class);
+    
+    public static final String RESULT_DISPLAY_ID = "resultDisplay";
+    private static final String STATUS_BAR_STYLE_SHEET = "result-display";
+    
     private TextArea display;
 
     /**
@@ -47,14 +51,15 @@ public class DisplayPanel extends UiPart{
         DisplayPanel displayPanel = new DisplayPanel();
         displayPanel.display = new TextArea();
         displayPanel.display.setEditable(false);
-        
-        //displayPanel.browser = new WebView();
-        //placeholder.setOnKeyPressed(Event::consume); // To prevent triggering events for typing inside the loaded Web page.
+        displayPanel.display.setId(RESULT_DISPLAY_ID);
+        displayPanel.display.getStyleClass().removeAll();
+        displayPanel.display.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
         
         FxViewUtil.applyAnchorBoundaryParameters(displayPanel.display, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(displayPanel.display);
         
-        displayPanel.display.setText("hello");
+        displayPanel.display.setText("Welcome to Taskell!");
+       
         return displayPanel;
     }
     
