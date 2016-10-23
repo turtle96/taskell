@@ -17,15 +17,16 @@ public class UndoCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(UndoCommand.class.getName());
     
     public static final String COMMAND_WORD = "undo";
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo most recent command.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo a previously executed command.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 3";
     
     private static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
     private static final String MESSAGE_ADD_TASK_SUCCESS = "Task added back: %1$s";
     
     private static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     private static final String MESSAGE_NO_TASK_TO_UNDO = "No add or delete commands available to undo.";
-    private static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available.";
+    private static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
     
     private static ArrayList<CommandHistory> commandHistoryList;
