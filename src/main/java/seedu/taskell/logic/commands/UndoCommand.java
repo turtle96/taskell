@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 import seedu.taskell.commons.core.LogsCenter;
+import seedu.taskell.model.CommandHistory;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
@@ -21,10 +22,11 @@ public class UndoCommand extends Command {
     
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
     public static final String MESSAGE_ADD_TASK_SUCCESS = "Task added back: %1$s";
+    
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     public static final String MESSAGE_NO_TASK_TO_UNDO = "No add or delete commands available to undo.";
 
-    private static ArrayList<String> commandHistory;
+    private static ArrayList<CommandHistory> commandHistory;
     
     private static String mostRecentCommand;
     private static Task mostRecentAddedTask;
@@ -85,8 +87,9 @@ public class UndoCommand extends Command {
         }
     }
     
-    public static void addCommandToHistory(String command) {
-        commandHistory.add(command.trim());
+    public static void addCommandToHistory(String commandText, 
+            String commandType, Task task) {
+        commandHistory.add(new CommandHistory(commandText, commandType, task));
     }
 
 }
