@@ -14,9 +14,9 @@
 
 ##Introduction
 
-Taskell is a simple software for users to keep track of their daily tasks and manage their busy schedule. Key board lovers reap the full benefit of Taskell as it implements a command-line interface.
+Taskell is a simple software for users to keep track of their daily tasks and manage their busy schedule. Keyboard lovers will be able to experience the full benefit of Taskell as it implements a command-line interface.
 
-This guide will help you understand the design and implementation of Taskell. It helps you understand how Taskell works and how you can contribute for further development. This guide follows a top-down approach by giving an overview of the essential components first followed by thorough explanation later.
+This developer guide will help you understand the design and implementation of Taskell. It helps you understand how Taskell works and how you can contribute for further development. This guide follows a top-down approach by giving an overview of the essential components first, followed by thorough explanation subsequently.
 
 ## Setting Up
 
