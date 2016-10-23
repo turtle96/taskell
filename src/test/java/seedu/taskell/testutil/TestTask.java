@@ -14,7 +14,8 @@ public class TestTask implements ReadOnlyTask {
     private TaskPriority taskPriority;
     private TaskTime startTime;
     private TaskTime endTime;
-    private TaskDate taskDate;
+    private TaskDate startDate;
+    private TaskDate endDate;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -41,8 +42,12 @@ public class TestTask implements ReadOnlyTask {
         this.endTime = endTime;
     }
 
-    public void setTaskDate(TaskDate taskDate) {
-        this.taskDate = taskDate;
+    public void setStartDate(TaskDate startDate) {
+        this.startDate = startDate;
+    }
+    
+    public void setEndDate(TaskDate endDate) {
+        this.endDate = endDate;
     }
 
     @Override
@@ -56,10 +61,15 @@ public class TestTask implements ReadOnlyTask {
     }
 
     @Override
-    public TaskDate getTaskDate() {
-        return taskDate;
+    public TaskDate getStartDate() {
+        return startDate;
     }
 
+    @Override
+    public TaskDate getEndDate() {
+        return startDate;
+    }
+    
     @Override
     public TaskTime getStartTime() {
         return startTime;
@@ -88,9 +98,18 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
-        sb.append("on " + this.getTaskDate().taskDate + " ");
-        sb.append("startat " + this.getStartTime().taskTime + " ");
-        sb.append("endat " + this.getEndTime().taskTime + " ");
+        sb.append("from " + this.getStartDate().taskDate + " ");
+        sb.append("to " + this.getEndDate().taskDate + " "); 
+        sb.append("from " + this.getStartTime().taskTime + " ");
+        sb.append("to " + this.getEndTime().taskTime + " ");
+        sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");
+        this.getTags().getInternalList().stream().forEach(s -> sb.append(Tag.PREFIX + s.tagName + " "));
+        return sb.toString();
+    }
+    
+    public String getAddFloatingCommand() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("add " + this.getDescription().description + " ");
         sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append(Tag.PREFIX + s.tagName + " "));
         return sb.toString();

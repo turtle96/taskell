@@ -7,13 +7,9 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.taskell.commons.core.Messages;
-import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.commands.*;
-import seedu.taskell.model.Model;
-import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
@@ -33,29 +29,20 @@ public class Parser {
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
-                                                                                                           // or
-                                                                                                           // more
-                                                                                                           // keywords
-                                                                                                           // separated
-                                                                                                           // by
-                                                                                                           // whitespace
 
     private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes
                                                          // are reserved for
                                                          // delimiter prefixes
             Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
-                    + " (?<isTaskDatePrivate>p?)p/(?<taskDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
+                    + " (?<isTaskDatePrivate>p?)p/(?<startDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
                     + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
                     + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
                                                                                                                    // number
-                                                                                                                   // of
-                                                                                                                   // tags
-
     private static final String BY = "by";
     private static final String ON = "on";
     private static final String AT = "at";
-    private static final String STARTAT = "startat";
-    private static final String ENDAT = "endat";
+    private static final String FROM = "from";
+    private static final String TO = "to";
 
     public Parser() {
     }
@@ -120,6 +107,9 @@ public class Parser {
 
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
+            
+        case SaveStorageLocationCommand.COMMAND_WORD:
+            return prepareSaveStorageLocation(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -133,7 +123,7 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the edit task date command.
+     * Parses arguments in the context of the edit task startDate command.
      *
      * @param args
      *            full command args string
@@ -297,12 +287,12 @@ public class Parser {
         Queue<String> byQueue = new LinkedList<String>();
         Queue<String> onQueue = new LinkedList<String>();
         Queue<String> atQueue = new LinkedList<String>();
-        Queue<String> startatQueue = new LinkedList<String>();
-        Queue<String> endatQueue = new LinkedList<String>();
-        Queue<String> dateTimeQueue = new LinkedList<String>();
+        Queue<String> fromQueue = new LinkedList<String>();
+        Queue<String> toQueue = new LinkedList<String>();
 
         String description = "";
-        String date = TaskDate.DEFAULT_DATE;
+        String startDate = TaskDate.DEFAULT_DATE;
+        String endDate = startDate;
         String startTime = TaskTime.DEFAULT_START_TIME;
         String endTime = TaskTime.DEFAULT_END_TIME;
         String token = "";
@@ -310,75 +300,69 @@ public class Parser {
         String tagString = "";
 
         int priorityCount = 0;
-        int byCount = 0;
-        int onCount = 0;
-        int atCount = 0;
-        int startatCount = 0;
-        int endatCount = 0;
-        int dateCount = 0;
-        int timeCount = 0;
 
-        boolean isFloating = false;
-        boolean isDeadline = false;
-        boolean isEvent = false;
-
+        boolean hasStartDate = false;
+        boolean hasEndDate = false;
+        boolean hasStartTime = false;
+        boolean hasEndTime = false;
+        
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
             String tempToken = "";
 
-            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(STARTAT)
-                    && !token.equals(ENDAT) && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
+            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(FROM)
+                    && !token.equals(TO) && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
                     && !token.startsWith(Tag.PREFIX) && !token.startsWith(TaskPriority.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
                 descriptionQueue.offer(token);
                 continue;
             } else if (token.equals(BY)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
                 byQueue.offer(token);
                 continue;
             } else if (token.equals(ON)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
                 onQueue.offer(token);
                 continue;
             } else if (token.equals(AT)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
                 atQueue.offer(token);
                 continue;
-            } else if (token.equals(STARTAT)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+            } else if (token.equals(FROM)) {
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
-                startatQueue.offer(token);
+                fromQueue.offer(token);
                 continue;
-            } else if (token.equals(ENDAT)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+            } else if (token.equals(TO)) {
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
-                endatQueue.offer(token);
+                toQueue.offer(token);
                 continue;
             } else if (token.startsWith(Tag.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
                 tagString += " " + token;
                 continue;
             } else if (token.startsWith(TaskPriority.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, startatQueue, endatQueue);
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
                 }
@@ -391,47 +375,89 @@ public class Parser {
                 }
                 continue;
             } else if (TaskDate.isValidDate(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && startatQueue.isEmpty()
-                        && endatQueue.isEmpty()) {
-                    descriptionQueue.offer(token); // because maybe people wants
-                                                   // to add task with serial
-                                                   // number that has format
-                                                   // date
+                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
+                        && toQueue.isEmpty()) {
+                    descriptionQueue.offer(token); 
                 } else if (!onQueue.isEmpty()) {
-                    dateTimeQueue.offer(onQueue.poll());
-                    dateTimeQueue.offer(token);
+                    if (!hasStartDate) {
+                        onQueue.poll();
+                        startDate = token;
+                        hasStartDate = true;
+                    } else {
+                        descriptionQueue.offer(onQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
                 } else if (!byQueue.isEmpty()) {
-                    dateTimeQueue.offer(byQueue.poll());
-                    dateTimeQueue.offer(token);
+                    if (!hasEndDate) {
+                        byQueue.poll();
+                        endDate = token;
+                        hasEndDate = true;
+                    } else {
+                        descriptionQueue.offer(byQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
                 } else if (!atQueue.isEmpty()) {
                     descriptionQueue.offer(atQueue.poll());
                     descriptionQueue.offer(token);
-                } else if (!startatQueue.isEmpty()) {
-                    descriptionQueue.offer(startatQueue.poll());
-                    descriptionQueue.offer(token);
-                } else if (!endatQueue.isEmpty()) {
-                    descriptionQueue.offer(startatQueue.poll());
-                    descriptionQueue.offer(token);
-                }
+                } else if (!fromQueue.isEmpty()) {
+                    if (!hasStartDate) {
+                        fromQueue.poll();
+                        startDate = token;
+                        hasStartDate = true;
+                    } else {
+                        descriptionQueue.offer(fromQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
+                } else if (!toQueue.isEmpty()) {
+                    if (!hasEndDate) {
+                        toQueue.poll();
+                        endDate = token;
+                        hasEndDate = true;
+                    } else {
+                        descriptionQueue.offer(toQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
+                } 
             } else if (TaskTime.isValidTime(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && startatQueue.isEmpty()
-                        && endatQueue.isEmpty()) {
-                    descriptionQueue.offer(token); // because maybe people wants
-                                                   // to add task with serial
-                                                   // number that has format
-                                                   // date
+                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
+                        && toQueue.isEmpty()) {
+                    descriptionQueue.offer(token); 
                 } else if (!byQueue.isEmpty()) {
-                    dateTimeQueue.offer(byQueue.poll());
-                    dateTimeQueue.offer(token);
+                    if (!hasEndTime) {
+                        byQueue.poll();
+                        endTime = token;
+                        hasEndTime = true;
+                    } else {
+                        descriptionQueue.offer(byQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
                 } else if (!atQueue.isEmpty()) {
-                    dateTimeQueue.offer(atQueue.poll());
-                    dateTimeQueue.offer(token);
-                } else if (!startatQueue.isEmpty()) {
-                    dateTimeQueue.offer(startatQueue.poll());
-                    dateTimeQueue.offer(token);
-                } else if (!endatQueue.isEmpty()) {
-                    dateTimeQueue.offer(endatQueue.poll());
-                    dateTimeQueue.offer(token);
+                    if (!hasStartTime) {
+                        atQueue.poll();
+                        startTime = token;
+                        hasStartTime = true;
+                    } else {
+                        descriptionQueue.offer(atQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
+                } else if (!fromQueue.isEmpty()) {
+                    if (!hasStartTime) {
+                        fromQueue.poll();
+                        startTime = token;
+                        hasStartTime = true;
+                    } else {
+                        descriptionQueue.offer(fromQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
+                } else if (!toQueue.isEmpty()) {
+                    if (!hasEndTime) {
+                        toQueue.poll();
+                        endTime = token;
+                        hasEndTime = true;
+                    } else {
+                        descriptionQueue.offer(toQueue.poll());
+                        descriptionQueue.offer(token);
+                    }
                 } else if (!onQueue.isEmpty()) {
                     descriptionQueue.offer(onQueue.poll());
                     descriptionQueue.offer(token);
@@ -439,102 +465,44 @@ public class Parser {
             }
         }
 
-        // Takes care of trailing keywords at end of input not accompanied by
-        // date/time
-        if (!byQueue.isEmpty()) {
-            descriptionQueue.offer(byQueue.poll());
-        }
-        if (!onQueue.isEmpty()) {
-            descriptionQueue.offer(onQueue.poll());
-        }
-        if (!startatQueue.isEmpty()) {
-            descriptionQueue.offer(startatQueue.poll());
-        }
-        if (!endatQueue.isEmpty()) {
-            descriptionQueue.offer(endatQueue.poll());
+        String tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
+        if (!tempToken.isEmpty()) {
+            descriptionQueue.offer(tempToken);
         }
 
         while (!descriptionQueue.isEmpty()) {
             description += descriptionQueue.poll() + " ";
         }
         description.trim();
+        
+        if (!hasEndDate) {
+            endDate = startDate;
+        }
+        
+        if ((TaskDate.isValidToday(startDate) && !hasStartTime) || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
+            startTime = TaskTime.getTimeNow();
+        }
 
-        if (dateTimeQueue.isEmpty()) {
-            isFloating = true;
+        if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
             try {
-                return new AddCommand(description, Task.FLOATING_TASK, TaskDate.DEFAULT_DATE,
-                        TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, taskPriority,
-                        getTagsFromArgs(tagString));
-            } catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
-            }
-        }
-
-        String dateTimeDelimiter = "";
-        while (!dateTimeQueue.isEmpty()) {
-            String tempToken = dateTimeQueue.poll();
-
-            if (tempToken.equals(BY)) {
-                byCount++;
-                dateTimeDelimiter = BY;
-            } else if (tempToken.equals(ON)) {
-                onCount++;
-                dateTimeDelimiter = ON;
-            } else if (tempToken.equals(AT)) {
-                atCount++;
-                dateTimeDelimiter = AT;
-            } else if (tempToken.equals(STARTAT)) {
-                startatCount++;
-                dateTimeDelimiter = STARTAT;
-            } else if (tempToken.equals(ENDAT)) {
-                endatCount++;
-                dateTimeDelimiter = ENDAT;
-            } else if (TaskDate.isValidDate(tempToken)) {
-                dateCount++;
-                date = tempToken;
-            } else if (TaskTime.isValidTime(tempToken)) {
-                timeCount++;
-
-                if (dateTimeDelimiter.equals(BY)) {
-                    endTime = tempToken;
-                } else if (dateTimeDelimiter.equals(AT)) {
-                    endTime = tempToken;
-                } else if (dateTimeDelimiter.equals(STARTAT)) {
-                    startTime = tempToken;
-                } else if (dateTimeDelimiter.equals(ENDAT)) {
-                    endTime = tempToken;
-                }
-            }
-        }
-
-        if (onCount > 1 || atCount > 1 || startatCount > 1 || endatCount > 1 || dateCount > 1 || timeCount > 2
-                || (byCount > 0 && timeCount > 1)) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-        }
-
-        if (startatCount == 1 || endatCount == 1) {
-            isEvent = true;
-            try {
-                return new AddCommand(description, Task.EVENT_TASK, date, startTime, endTime, taskPriority,
+                return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
-            isDeadline = true;
             try {
-                return new AddCommand(description, Task.DEADLINE_TASK, date, startTime, endTime, taskPriority,
-                        getTagsFromArgs(tagString));
-            } catch (IllegalValueException ive) {
-                return new IncorrectCommand(ive.getMessage());
-            }
+              return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime, taskPriority,
+                      getTagsFromArgs(tagString));
+          } catch (IllegalValueException ive) {
+              return new IncorrectCommand(ive.getMessage());
+          }
         }
+        
     }
 
-    // At any one point, at most one of these queue can have at most one token
-    // Flush to descriptionQueue
     private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
-            Queue<String> startatQueue, Queue<String> endatQueue) {
+            Queue<String> fromQueue, Queue<String> toQueue) {
         String token = "";
 
         if (!byQueue.isEmpty()) {
@@ -543,10 +511,10 @@ public class Parser {
             token = onQueue.poll();
         } else if (!atQueue.isEmpty()) {
             token = atQueue.poll();
-        } else if (!startatQueue.isEmpty()) {
-            token = startatQueue.poll();
-        } else if (!endatQueue.isEmpty()) {
-            token = endatQueue.poll();
+        } else if (!fromQueue.isEmpty()) {
+            token = fromQueue.poll();
+        } else if (!toQueue.isEmpty()) {
+            token = toQueue.poll();
         }
 
         return token;
@@ -587,8 +555,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the delete task command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
@@ -604,8 +571,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the select task command.
      *
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareSelect(String args) {
@@ -639,8 +605,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the find task command.
      *
-     * @param args
-     *            full command args string
+     * @param args string
      * @return the prepared command
      */
     private Command prepareFind(String args) {
@@ -659,17 +624,14 @@ public class Parser {
      * Parses arguments in the context of undo command.
      * 
      */
-
     private Command prepareUndo(String args) {
         return new UndoCommand();
     }
 
     /**
      * Parses arguments in the context of the find task by tags command.
-     *
      * 
-     * @param args
-     *            full command args string
+     * @param args full command args string
      * @return the prepared command
      */
     private Command prepareFindByTag(String args) {
@@ -683,6 +645,20 @@ public class Parser {
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindTagCommand(keywordSet);
 
+    }
+    
+    /**
+     * Parses arguments in the context of the save storage location command.
+     * 
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareSaveStorageLocation(String args) {
+        if (args.isEmpty()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                    SaveStorageLocationCommand.MESSAGE_USAGE));
+        }
+        return new SaveStorageLocationCommand(args);
     }
 
 }

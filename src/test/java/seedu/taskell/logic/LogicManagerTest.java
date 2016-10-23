@@ -6,6 +6,7 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
+import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.*;
@@ -73,7 +74,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
 
-        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to date before.
+        latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to startDate before.
         helpShown = false;
         targetedJumpIndex = -1; // non yet
     }
@@ -163,9 +164,17 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add #descriptionIsEmpty", Description.MESSAGE_DESCRIPTION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description with invalid date format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+                "add Valid Description with invalid startDate format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with dates before today's date on 1-jan-2000", EventTask.MESSAGE_EVENT_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with startDate after endDate from 1-jan-2200 to 1-jan-2100", EventTask.MESSAGE_EVENT_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with same date but startTime after endTime from 9pm to 2am", EventTask.MESSAGE_EVENT_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/invalidPriority ", TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description p/0 p/1 ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         assertCommandBehavior(
                 "add Valid Description #invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
@@ -184,7 +193,255 @@ public class LogicManagerTest {
                 expectedAB,
                 expectedAB.getTaskList());
     }
+    
+    @Test
+    public void execute_add_ValidFloatingTaskWithKeywords() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateFloatingTask("on by on at from to", "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
 
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddFloatingTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidFloatingTaskWithKeywordsButNoValidDateTime() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateFloatingTask("sleep by the seaside", "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddFloatingTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithImproperUsageOfAt() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateFloatingTask("go shopping at monday", "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddFloatingTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithValidDateButNoPreFix() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateFloatingTask("go shopping today", "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddFloatingTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithValidTimeButNoPreFix() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateFloatingTask("go shopping 7pm", "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddFloatingTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithImproperUsageOfOn() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.generateFloatingTask("go shopping on 7pm", "0");
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddFloatingTaskCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleOn() throws Exception {
+        String description = "add go shopping on 2-2-2222 on 3-3-3333";
+        Task toBeAdded = new EventTask("go shopping on 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleAt() throws Exception {
+        String description = "add go shopping at 11.58pm at 11.59pm";
+        Task toBeAdded = new EventTask("go shopping at 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleByDate() throws Exception {
+        String description = "add go shopping by 2-2-2222 by 3-3-3333";
+        Task toBeAdded = new EventTask("go shopping by 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleByTime() throws Exception {
+        String description = "add go shopping by 11.58pm by 11.59pm";
+        Task toBeAdded = new EventTask("go shopping by 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleFromDate() throws Exception {
+        String description = "add go shopping from 2-2-2222 from 3-3-3333";
+        Task toBeAdded = new EventTask("go shopping from 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+
+    @Test
+    public void execute_add_ValidTaskWithMultipleFromTime() throws Exception {
+        String description = "add go shopping from 11.58pm from 11.59pm";
+        Task toBeAdded = new EventTask("go shopping from 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleToDate() throws Exception {
+        String description = "add go shopping to 2-2-2222 to 3-3-3333";
+        Task toBeAdded = new EventTask("go shopping to 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidTaskWithMultipleToTime() throws Exception {
+        String description = "add go shopping to 11.58pm to 11.59pm";
+        Task toBeAdded = new EventTask("go shopping to 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventWithByTime() throws Exception {
+        String description = "add go shopping by 11:59pm";
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), TaskTime.getTimeNow(), "11:59pm", "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventWithAtTime() throws Exception {
+        String description = "add go shopping at 11:59pm";
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "11:59pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventWithTagNotAtTheEnd() throws Exception {
+        String description = "add go to #girlfriend Mavis's house at 10:00am";
+        Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "10:00am", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList(new Tag("girlfriend")));
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventDuration_successful() throws Exception {
+     // setup expectations
+        TestDataHelper helper = new TestDataHelper();
+        Task toBeAdded = helper.validEventDuration();
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+
+        // execute command and verify result
+        assertCommandBehavior(helper.generateAddCommand(toBeAdded),
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
@@ -374,46 +631,6 @@ public class LogicManagerTest {
                 expectedList);
     }
     
-    @Test
-    public void assertValidFormatBehaviourForDate() {
-        assertTrue(TaskDate.isValidDate(TaskDate.DEFAULT_DATE));
-        assertTrue(TaskDate.isValidDate("8.DeCeMbEr.2016"));
-        assertTrue(TaskDate.isValidDate("8/jan/2016"));
-        assertTrue(TaskDate.isValidDate("1.jan"));
-        assertTrue(TaskDate.isValidDate("may-2016"));
-        assertTrue(TaskDate.isValidDate("sept"));
-        assertTrue(TaskDate.isValidDate("tdy"));
-        assertTrue(TaskDate.isValidDate("thurs"));
-    }
-    
-    @Test
-    public void assertInvalidFormatBehaviourForDate() {
-        assertFalse(TaskDate.isValidDate("1st January"));
-        assertFalse(TaskDate.isValidDate("1/2"));
-        assertFalse(TaskDate.isValidDate("01022016"));
-        assertFalse(TaskDate.isValidDate("2016"));
-        assertFalse(TaskDate.isValidDate("NotAValidDate"));
-    }
-    
-    @Test
-    public void assertValidFormatBehaviourForTime() {
-        assertTrue(TaskTime.isValidTime(TaskTime.DEFAULT_START_TIME));
-        assertTrue(TaskTime.isValidTime(TaskTime.DEFAULT_END_TIME));
-        assertTrue(TaskTime.isValidTime("12am"));
-        assertTrue(TaskTime.isValidTime("1.30pm"));
-        assertTrue(TaskTime.isValidTime("1:40pm"));
-        assertTrue(TaskTime.isValidTime("1-30am"));
-        assertTrue(TaskTime.isValidTime("2:30Am"));
-    }
-
-    @Test
-    public void assertInvalidFormatBehaviourForTime() {
-        assertFalse(TaskTime.isValidTime("1.3am"));
-        assertFalse(TaskTime.isValidTime("2"));
-        assertFalse(TaskTime.isValidTime("13pm"));
-        assertFalse(TaskTime.isValidTime("2359"));
-        assertFalse(TaskTime.isValidTime("NotAValidTime"));
-    }
 
     /**
      * A utility class to generate test data.
@@ -423,14 +640,29 @@ public class LogicManagerTest {
         Task askBoon() throws Exception {
             Description description = new Description("Ask boon for tax rebate");
             String taskType = Task.EVENT_TASK;
-            TaskDate taskDate = new TaskDate("1-1-2015");
+            TaskDate startDate = new TaskDate("1-1-2100");
+            TaskDate endDate = new TaskDate("1-12-2100");
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(description, taskType, taskDate, startTime, endTime, privatetaskPriority, tags);
+            return new Task(description, taskType, startDate, endDate, startTime, endTime, privatetaskPriority, tags);
+        }
+        
+        Task validEventDuration() throws Exception {
+            Description description = new Description("StartDate is before EndDate but startTime is afterEndTime");
+            String taskType = Task.EVENT_TASK;
+            TaskDate startDate = new TaskDate("1-1-2100");
+            TaskDate endDate = new TaskDate("1-12-2100");
+            TaskTime startTime = new TaskTime("2:30pm");
+            TaskTime endTime = new TaskTime("3:45AM");
+            TaskPriority privatetaskPriority = new TaskPriority("0");
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("tag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Task(description, taskType, startDate, endDate, startTime, endTime, privatetaskPriority, tags);
         }
         
 
@@ -445,11 +677,44 @@ public class LogicManagerTest {
             return new Task(
                     new Description("Task " + seed),
                     Task.EVENT_TASK,
-                    new TaskDate("1-1-2015"),
+                    new TaskDate("1-1-2100"),
+                    new TaskDate("1-12-2100"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority((seed % 4) + ""),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+            );
+        }
+        
+        /**
+         * Generate event task with the given parameters
+         */
+        Task generateEventTask(String description, String startDate, String endDate, String startTime, String endTime, String taskPriority) throws Exception{
+            return new Task(
+                    new Description(description),
+                    Task.EVENT_TASK,
+                    new TaskDate(startDate),
+                    new TaskDate(endDate),
+                    new TaskTime(startTime),
+                    new TaskTime(endTime),
+                    new TaskPriority(taskPriority),
+                    new UniqueTagList(new Tag("tag" + Math.abs(1)), new Tag("tag" + Math.abs(2)))
+            );
+        }
+        
+        /**
+         * Generate floating task with the given parameters
+         */
+        Task generateFloatingTask(String description, String taskPriority) throws Exception{
+            return new Task(
+                    new Description(description),
+                    Task.FLOATING_TASK,
+                    new TaskDate(TaskDate.DEFAULT_DATE),
+                    new TaskDate(TaskDate.DEFAULT_DATE),
+                    new TaskTime(TaskTime.DEFAULT_START_TIME),
+                    new TaskTime(TaskTime.DEFAULT_END_TIME),
+                    new TaskPriority(taskPriority),
+                    new UniqueTagList(new Tag("tag" + Math.abs(1)), new Tag("tag" + Math.abs(2)))
             );
         }
 
@@ -458,11 +723,27 @@ public class LogicManagerTest {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
-
             cmd.append(p.getDescription().toString());
-            cmd.append(" on ").append(p.getTaskDate());
-            cmd.append(" startat ").append(p.getStartTime());
-            cmd.append(" endat ").append(p.getEndTime());
+            cmd.append(" from ").append(p.getStartDate());
+            cmd.append(" to ").append(p.getEndDate());
+            cmd.append(" from ").append(p.getStartTime());
+            cmd.append(" to ").append(p.getEndTime());
+            cmd.append(" " + TaskPriority.PREFIX).append(p.getTaskPriority());
+
+            UniqueTagList tags = p.getTags();
+            for(Tag t: tags){
+                cmd.append(" " + Tag.PREFIX).append(t.tagName);
+            }
+
+            return cmd.toString();
+        }
+        
+        /** Generates the correct add command based on the floating task given */
+        String generateAddFloatingTaskCommand(Task p) {
+            StringBuffer cmd = new StringBuffer();
+
+            cmd.append("add ");
+            cmd.append(p.getDescription().toString());
             cmd.append(" " + TaskPriority.PREFIX).append(p.getTaskPriority());
 
             UniqueTagList tags = p.getTags();
@@ -548,12 +829,14 @@ public class LogicManagerTest {
             return new Task(
                     new Description(description),
                     Task.EVENT_TASK,
-                    new TaskDate("1-1-2015"),
+                    new TaskDate("1-1-2100"),
+                    new TaskDate("1-12-2100"),
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority(TaskPriority.NO_PRIORITY),
                     new UniqueTagList(new Tag("tag"))
             );
         }
+        
     }
 }

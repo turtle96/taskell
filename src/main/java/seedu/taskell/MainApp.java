@@ -8,12 +8,14 @@ import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.Version;
+import seedu.taskell.commons.events.storage.StorageLocationChangedEvent;
 import seedu.taskell.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.commons.util.ConfigUtil;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
+import seedu.taskell.logic.commands.SaveStorageLocationCommand;
 import seedu.taskell.logic.commands.UndoCommand;
 import seedu.taskell.model.*;
 import seedu.taskell.storage.Storage;
@@ -65,6 +67,8 @@ public class MainApp extends Application {
         initEventsCenter();
         
         UndoCommand.initializeCommandHistory();
+        SaveStorageLocationCommand.setConfig(config);
+        SaveStorageLocationCommand.setStorage(storage);
     }
 
     private String getApplicationParameter(String parameterName){
@@ -183,6 +187,12 @@ public class MainApp extends Application {
     public void handleExitAppRequestEvent(ExitAppRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         this.stop();
+    }
+    
+    @Subscribe
+    private void handleStorageLocationChangedEvent(StorageLocationChangedEvent event) {
+        config = event.getConfig();
+        storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
     }
 
     public static void main(String[] args) {

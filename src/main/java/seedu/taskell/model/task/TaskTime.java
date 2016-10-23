@@ -17,9 +17,14 @@ public class TaskTime {
     public static final String NOON = "12:00PM";
     public static final String MIDNIGHT = "12:00AM";
     
+    public static final String AM = "AM";
+    public static final String PM = "PM";
+    
+    public static final int TIME_OFFSET = 12;
+    
     public static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
     
-    public static final String DEFAULT_START_TIME = LocalTime.now().format(dtf);
+    public static final String DEFAULT_START_TIME = MIDNIGHT;
     public static final String DEFAULT_END_TIME = "11:59PM";
 
     public static final Pattern TASK_TIME_ARGS_FORMAT = Pattern
@@ -56,7 +61,53 @@ public class TaskTime {
 
         return false;
     }
+    
+    /**
+     * Checks if this time is before the specified time
+     */
+    public boolean isBefore(TaskTime time) {
+        int timeHour = Integer.valueOf(time.getHour());
+        if (time.getAntePost().equals(PM) && (timeHour != TIME_OFFSET)) {
+            timeHour += TIME_OFFSET;
+        } else if (time.getAntePost().equals(AM) && (timeHour == TIME_OFFSET)) {
+            timeHour -= TIME_OFFSET;
+        }
+        LocalTime timeToCompare = LocalTime.of(timeHour, Integer.valueOf(time.getMinute()));
+        
+        //TaskTime thisTimeTaskTime = new TaskTime(this.taskTime);
+        int thisTimeHour = Integer.valueOf(this.getHour());
+        if (this.getAntePost().equals(PM) && (thisTimeHour != TIME_OFFSET)) {
+            thisTimeHour += TIME_OFFSET;
+        } else if (this.getAntePost().equals(AM) && (thisTimeHour == TIME_OFFSET)) {
+            thisTimeHour -= TIME_OFFSET;
+        }
+        LocalTime thisTimeLocalTime = LocalTime.of(thisTimeHour, Integer.valueOf(this.getMinute()));
+        return thisTimeLocalTime.isBefore(timeToCompare);
+    }
 
+    /**
+     * Checks if this time is after the specified time
+     */
+    public boolean isAfter(TaskTime time) {
+        int timeHour = Integer.valueOf(time.getHour());
+        if (time.getAntePost().equals(PM) && (timeHour != TIME_OFFSET)) {
+            timeHour += TIME_OFFSET;
+        } else if (time.getAntePost().equals(AM) && (timeHour == TIME_OFFSET)) {
+            timeHour -= TIME_OFFSET;
+        }
+        LocalTime timeToCompare = LocalTime.of(timeHour, Integer.valueOf(time.getMinute()));
+        
+        //TaskTime thisTimeTaskTime = new TaskTime(this.taskTime);
+        int thisTimeHour = Integer.valueOf(this.getHour());
+        if (this.getAntePost().equals(PM) && (thisTimeHour != TIME_OFFSET)) {
+            thisTimeHour += TIME_OFFSET;
+        } else if (this.getAntePost().equals(AM) && (thisTimeHour == TIME_OFFSET)) {
+            thisTimeHour -= TIME_OFFSET;
+        }
+        LocalTime thisTimeLocalTime = LocalTime.of(thisTimeHour, Integer.valueOf(this.getMinute()));
+        return thisTimeLocalTime.isAfter(timeToCompare);
+    }
+    
     public void setTime(String time) throws IllegalValueException {
         final Matcher matcherFullArg = TASK_TIME_ARGS_FORMAT.matcher(time.trim());
         final Matcher matcherHourOnly = TASK_TIME_HOUR_ONLY_FORMAT.matcher(time.trim());

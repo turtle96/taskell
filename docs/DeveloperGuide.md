@@ -418,20 +418,14 @@ Use case ends
 
 **MSS**
 
-1. User requests to list tasks
-2. Taskell shows a list of uncompleted tasks
-3. User requests to find tasks with specific keywords
-4. Taskell displays the relevant task <br>
+1. User requests to find tasks with specific keywords
+2. Taskell displays the tasks with all matching keywords <br>
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
-
-3a. The given index is invalid
-
-> 3a1. Taskell shows an error message <br>
-  Use case resumes at step 2
+1a. No keyword is given
+> 1a1. Taskell shows an error message <br>
 
 #### Use case: Edit task
 
@@ -484,19 +478,19 @@ Use case ends
 > 2a1. Taskell shows an error message <br>
   Use case resumes at step 2
   
-#### Use case: Store data in cloud syncing folder
+#### Use case: Save data to specified folder
 
 **MSS**
 
 1. User requests to save all tasks
-2. Taskell saves all tasks in the requested folder
+2. Taskell saves all tasks in the requested folder <br>
 Use case ends
 
 **Extensions**
 
-2a. The requested folder does not exist
+2a. Data cannot be written to the requested folder (invalid directory or access prohibited)
 
-> 2a1. Taskell shows an error message <br>
+> 2a1. Taskell shows an error message and still saves data in previous old location.<br>
 
 #### Use case: Clear task
 
@@ -557,7 +551,7 @@ NIL
 #### Remember the Milk
 **Pros:**<br>
 1. Can Use offline and sync once internet connection is established<br>
-2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework by tomorrow: Saves task with deadline set to date of tomorrow)<br>
+2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework by tomorrow: Saves task with deadline set to startDate of tomorrow)<br>
 3. Can Undo operation when marking tasks as done (recover from accidentally clicking done)<br>
 4. Can set priority with some form of order<br>
 5. Can set recursive tasks<br>
