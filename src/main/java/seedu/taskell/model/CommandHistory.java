@@ -1,10 +1,10 @@
 package seedu.taskell.model;
 
-import com.google.common.eventbus.Subscribe;
-
 import seedu.taskell.model.task.Task;
 
 /** Stores the relevant details of a command so it can be undone via UndoCommand
+ *  each Add/Delete/Edit Command executed should correspond to a CommandHistory 
+ *  stored in UndoCommand
  * */
 public class CommandHistory {
     private final String commandText, commandType;
