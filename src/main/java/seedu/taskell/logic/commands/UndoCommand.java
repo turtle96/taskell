@@ -72,7 +72,7 @@ public class UndoCommand extends Command {
         }
     }
     
-    private int getOffset(int index) {
+    private static int getOffset(int index) {
         return index - 1;
     }
 
@@ -119,7 +119,7 @@ public class UndoCommand extends Command {
             return;
         }
         
-        commandHistoryList.get(commandHistoryList.size()-1).setTask(task);
+        commandHistoryList.get(getOffset(commandHistoryList.size())).setTask(task);
     }
 
     public static void deletePreviousCommand() {
@@ -128,7 +128,7 @@ public class UndoCommand extends Command {
             logger.warning("No command history to delete");
             return;
         }
-        commandHistoryList.remove(commandHistoryList.size()-1);
+        commandHistoryList.remove(getOffset(commandHistoryList.size()));
     }
 
 }
