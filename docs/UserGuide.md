@@ -1,5 +1,5 @@
 # User Guide
-* [Introduction] (#introduction)
+* [Introduction](#introduction)
 * [Quick Start](#quick-start)
 * [Features](#features)
 * [FAQ](#faq)
