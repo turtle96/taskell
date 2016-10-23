@@ -1,12 +1,14 @@
 package seedu.taskell.model;
 
+import com.google.common.eventbus.Subscribe;
+
 import seedu.taskell.model.task.Task;
 
 /** Stores the relevant details of a command so it can be undone via UndoCommand
  * */
 public class CommandHistory {
     private final String commandText, commandType;
-    private final Task task;  //relevent task to be added, deleted or edited
+    private Task task;  //relevent task to be added, deleted or edited
     private boolean toRedo;
     
     public CommandHistory() {
@@ -21,8 +23,8 @@ public class CommandHistory {
         assert !commandText.trim().isEmpty();
         assert !commandType.trim().isEmpty();
         
-        this.commandText = commandText;
-        this.commandType = commandType;
+        this.commandText = commandText.trim();
+        this.commandType = commandType.trim();
         this.task = task;
     }
     
@@ -38,7 +40,13 @@ public class CommandHistory {
         return task;
     }
     
+    public void setTask(Task task) {
+        assert task != null;
+        this.task = task;
+    }
+    
     public void setToRedoToTrue() {
         toRedo = true;
     }
+    
 }
