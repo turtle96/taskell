@@ -10,6 +10,7 @@ import seedu.taskell.MainApp;
 import seedu.taskell.commons.core.ComponentManager;
 import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
+import seedu.taskell.commons.events.model.DisplayListChangedEvent;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.TaskPanelSelectionChangedEvent;
@@ -62,7 +63,7 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        mainWindow.releaseResources();
+        //mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -120,7 +121,14 @@ public class UiManager extends ComponentManager implements Ui {
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        mainWindow.loadTaskPage(event.getNewSelection());
+        //mainWindow.loadTaskPage(event.getNewSelection());
+    }
+    
+    @Subscribe
+    private void handleDisplayList(DisplayListChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logger.info("Displaying");
+        mainWindow.loadList(event.getList());
     }
 
 }
