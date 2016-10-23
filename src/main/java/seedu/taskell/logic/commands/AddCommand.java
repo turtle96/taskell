@@ -58,6 +58,7 @@ public class AddCommand extends Command {
             UndoCommand.addTaskToCommandHistory(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            UndoCommand.deletePreviousCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
 
