@@ -108,6 +108,7 @@ public class UndoCommand extends Command {
     
     public static void addCommandToHistory(String commandText, 
             String commandType, Task task) {
+        assert commandHistoryList != null;
         commandHistoryList.add(new CommandHistory(commandText, commandType, task));
     }
     
