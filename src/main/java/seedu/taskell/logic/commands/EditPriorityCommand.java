@@ -25,7 +25,7 @@ public class EditPriorityCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) NEW_PRIORITY(must be between 0 to 3)\n"
             + "Example: " + COMMAND_WORD + " 1 3 ";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \n\nNewTask: %2$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nNewTask: %2$s";
 
     public final int targetIndex;
     public final TaskPriority taskPriority;
