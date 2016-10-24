@@ -451,17 +451,22 @@ Use case ends
 
 **MSS**
 
-1. User enters a wrong command
-2. Taskell executed it
-3. User requests to undo the wrong command
-4. Taskell undo the previous command <br>
+1. User enters a command
+2. Taskell executes it
+3. User requests to list commands history
+4. User requests to undo command at specific index
+5. Taskell undoes the previous command <br>
 Use case ends
 
 **Extensions**
 
-2a. The user did not enter any previous command
+3a. The user did not enter any previous command
 
-> 2a1. Taskell shows an error message <br>
+> 3a1. Taskell shows a message indicating no commands available for undo<br>
+
+4a. The user enters invalid index
+
+> 4a1. Taskell shows error message indicating index is invalid<br>
 
 #### Use case: List task
 
