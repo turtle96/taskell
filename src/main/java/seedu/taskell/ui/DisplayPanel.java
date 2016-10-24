@@ -57,7 +57,10 @@ public class DisplayPanel extends UiPart{
         FxViewUtil.applyAnchorBoundaryParameters(displayPanel.display, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(displayPanel.display);
         
-        displayPanel.display.setText("Welcome to Taskell!");
+        displayPanel.display.setText("Welcome to Taskell!\n"
+                + "Enter 'add' in command box to add a task.\n"
+                + "Enter 'list-undo' for list of commands to undo.\n"
+                + "Enter 'help' in for more information about commands.\n");
        
         return displayPanel;
     }
