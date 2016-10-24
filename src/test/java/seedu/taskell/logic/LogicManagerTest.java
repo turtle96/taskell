@@ -441,6 +441,23 @@ public class LogicManagerTest {
     }
     
     @Test
+    public void execute_add_ValidEventWithSameDayNameInWeekAsToday() throws Exception {
+        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        TaskDate tomorrow = new TaskDate(TaskDate.getTomorrowDate());
+        String todayNameInWeek = today.getDayNameInWeek();
+        String tomorrowNameInWeek = tomorrow.getDayNameInWeek();
+        String description = "add go school from " + todayNameInWeek + " to " + tomorrowNameInWeek ;
+        Task toBeAdded = new EventTask("go school", today.getNextWeek().toString(), tomorrow.toString(), TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
     public void execute_add_ValidEventDuration_successful() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
