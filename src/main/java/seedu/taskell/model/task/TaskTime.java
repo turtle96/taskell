@@ -61,6 +61,8 @@ public class TaskTime {
             return true;
         } else if (isValidNoon(time)) {
             return true;
+        } else if (isValidMidnight(time)) {
+            return true;
         } else {
             return false;
         }
@@ -86,6 +88,27 @@ public class TaskTime {
         case "12noon":
             //Fallthrough
         case "12-noon":
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    private static boolean isValidMidnight(String time) {
+        time = time.toLowerCase();
+        switch (time) {
+        case "midnight":
+            //Fallthrough
+        case "mid-night":
+            //Fallthrough
+        case "12midnight":
+            //Fallthrough
+        case "12-midnight":
+            //Fallthrough
+        case "12mid-night":
+            //Fallthrough
+        case "12-mid-night":
+            //Fallthrough
             return true;
         default:
             return false;
@@ -149,6 +172,8 @@ public class TaskTime {
             this.taskTime = getTimeNow();
         } else if (isValidNoon(time)) {
             this.taskTime = NOON;
+        } else if (isValidMidnight(time)) {
+            this.taskTime = MIDNIGHT;
         } else {
             throw new IllegalValueException(MESSAGE_TASK_TIME_CONSTRAINTS);
         }
