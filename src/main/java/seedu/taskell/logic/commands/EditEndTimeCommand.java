@@ -17,7 +17,7 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * Edits a task end time identified using it's last displayed index from the task manager.
  */
 public class EditEndTimeCommand extends Command {
-    public static final String COMMAND_WORD = "edit-endat";
+    public static final String COMMAND_WORD = "edit-endTime";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the end time of a task identified by the index number used in the last task listing.\n"

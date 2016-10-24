@@ -187,14 +187,20 @@ public class TestUtil {
     }
 
     public static TestTask editTaskDescription(TestTask taskToEdit, String newDescription) throws IllegalValueException{
-        TestTask newTask = new TestTask();
-        newTask.setDescription(new Description(newDescription));
-        newTask.setEndTime(taskToEdit.getEndTime());
-        newTask.setStartTime(taskToEdit.getStartTime());
-        newTask.setStartDate(taskToEdit.getStartDate());
-        newTask.setTaskPriority(taskToEdit.getTaskPriority());
-        newTask.setTaskPriority(taskToEdit.getTaskPriority());
-        newTask.setTags(taskToEdit.getTags());
+        TestTask newTask = new TestTask(new Description(newDescription), taskToEdit.getTaskType(), taskToEdit.getTaskPriority(),
+                taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getStartDate(), taskToEdit.getEndDate() , taskToEdit.getTags());
+        return newTask;
+    }
+    
+    public static TestTask editTaskStartTime(TestTask taskToEdit, String newStartTime) throws IllegalValueException{
+        TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskToEdit.getTaskPriority(),
+                new TaskTime(newStartTime), taskToEdit.getEndTime(), taskToEdit.getStartDate(), taskToEdit.getEndDate() , taskToEdit.getTags());
+        return newTask;
+    }
+    
+    public static TestTask editTaskEndTime(TestTask taskToEdit, String newEndTime) throws IllegalValueException{
+        TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskToEdit.getTaskPriority(),
+                taskToEdit.getStartTime(), new TaskTime(newEndTime), taskToEdit.getStartDate(), taskToEdit.getEndDate() , taskToEdit.getTags());
         return newTask;
     }
 

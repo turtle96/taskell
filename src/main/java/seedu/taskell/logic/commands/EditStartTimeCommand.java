@@ -17,7 +17,7 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * Edits a task start time identified using it's last displayed index from the task manager.
  */
 public class EditStartTimeCommand extends Command {
-    public static final String COMMAND_WORD = "edit-startat";
+    public static final String COMMAND_WORD = "edit-startTime";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the start time of a task identified by the index number used in the last task listing.\n"

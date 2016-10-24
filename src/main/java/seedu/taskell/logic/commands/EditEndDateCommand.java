@@ -18,7 +18,7 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * manager.
  */
 public class EditEndDateCommand extends Command {
-    public static final String COMMAND_WORD = "edit-EndDate";
+    public static final String COMMAND_WORD = "edit-endDate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the EndDate of a task identified by the index number used in the last task listing.\n"
