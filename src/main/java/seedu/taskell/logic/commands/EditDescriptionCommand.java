@@ -25,8 +25,8 @@ public class EditDescriptionCommand extends Command {
             + "/"+ COMMAND_WORD_2
             + ": Edits the description task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer) NEW_DESCRIPTION\n"
-            + "Example: " + COMMAND_WORD_1 + " 1 buy cake\n "
-            + "Example: " + COMMAND_WORD_2 + " 2 do 2103t\n ";
+            + "Example: " + COMMAND_WORD_1 + " 1 buy cake\n"
+            + "Example: " + COMMAND_WORD_2 + " 2 do 2103t\n";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nUpdated Task: %2$s";
 
