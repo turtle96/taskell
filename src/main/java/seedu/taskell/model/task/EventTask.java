@@ -49,7 +49,7 @@ public class EventTask extends Task {
             } else {
                 return true;
             }
-        } catch (IllegalValueException e) {
+        } catch (IllegalValueException ive) {
             return false;
         }
     }
