@@ -563,6 +563,7 @@ public class Parser {
 
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
