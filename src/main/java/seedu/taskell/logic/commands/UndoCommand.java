@@ -192,6 +192,10 @@ public class UndoCommand extends Command {
         }
     }
     
+    public static void clearCommandHistory() {
+        commandHistoryList.clear();
+    }
+    
     private static int getOffset(int index) {
         return index - 1;
     }
