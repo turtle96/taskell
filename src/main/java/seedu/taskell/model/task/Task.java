@@ -23,6 +23,10 @@ public class Task implements ReadOnlyTask {
     protected TaskPriority taskPriority;
 
     protected UniqueTagList tags;
+    
+    public Task() { 
+        //Not applicable
+    }
 
     /**
      * Every field must be present and not null.
