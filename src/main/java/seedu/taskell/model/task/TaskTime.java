@@ -59,6 +59,8 @@ public class TaskTime {
             return true;
         } else if (isValidNow(time)) {
             return true;
+        } else if (isValidNoon(time)) {
+            return true;
         } else {
             return false;
         }
@@ -76,6 +78,22 @@ public class TaskTime {
             default:
                 return false;
             }
+        }
+    }
+    
+    private static boolean isValidNoon(String time) {
+        time = time.toLowerCase();
+        switch (time) {
+        case "afternoon":
+            //Fallthrough
+        case "noon":
+            //Fallthrough
+        case "12noon":
+            //Fallthrough
+        case "12-noon":
+            return true;
+        default:
+            return false;
         }
     }
     
@@ -134,6 +152,8 @@ public class TaskTime {
             this.taskTime = setTime(matcherHourOnly.group("hour"), ZERO_MINUTE, matcherHourOnly.group("antePost"));
         } else if (isValidNow(time)) {
             this.taskTime = getTimeNow();
+        } else if (isValidNoon(time)) {
+            this.taskTime = NOON;
         } else {
             throw new IllegalValueException(MESSAGE_TASK_TIME_CONSTRAINTS);
         }
