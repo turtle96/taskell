@@ -75,15 +75,12 @@ public class UndoCommand extends Command {
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
     }
-    
-    private static int getOffset(int index) {
-        return index - 1;
-    }
 
     private CommandResult undoDelete() {
         try {
             model.addTask(commandHistory.getTask());
             deleteCommandHistory();
+            addUndoCommand(commandHistory);
             indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
@@ -95,6 +92,7 @@ public class UndoCommand extends Command {
         try {
             model.deleteTask(commandHistory.getTask());
             deleteCommandHistory();
+            addUndoCommand(commandHistory);
             indicateDisplayListChanged();
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
@@ -106,10 +104,22 @@ public class UndoCommand extends Command {
         commandHistoryList.remove(commandHistory);
     }
     
+    private void addUndoCommand(CommandHistory commandHistory) {
+        commandHistory.setCommandText("undo " + commandHistory.getCommandText());
+        commandHistory.setToRedoToTrue();
+        commandHistoryList.add(commandHistory);
+    }
+    
+    /******** static methods *********/
+    
     public static void initializeCommandHistory() {
         if (commandHistoryList==null) {
             commandHistoryList = new ArrayList<>();
         }
+    }
+    
+    private static int getOffset(int index) {
+        return index - 1;
     }
     
     public static void addCommandToHistory(String commandText, 
@@ -137,6 +147,7 @@ public class UndoCommand extends Command {
         commandHistoryList.remove(getOffset(commandHistoryList.size()));
     }
 
+    /****** Event ******/
     public void indicateDisplayListChanged() {
         EventsCenter.getInstance().post(
                 new DisplayListChangedEvent(getListOfCommandHistoryText()));
