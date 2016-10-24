@@ -22,6 +22,21 @@ public class TaskTimeTest {
         assertTrue(TaskTime.isValidTime("1:40pm"));
         assertTrue(TaskTime.isValidTime("1-30am"));
         assertTrue(TaskTime.isValidTime("2:30Am"));
+        assertTrue(TaskTime.isValidTime("noW"));
+        
+        //Valid Noon
+        assertTrue(TaskTime.isValidTime("noon"));
+        assertTrue(TaskTime.isValidTime("afterNoon"));
+        assertTrue(TaskTime.isValidTime("12noon"));
+        assertTrue(TaskTime.isValidTime("12-noon"));
+        
+        //Valid Midnight
+        assertTrue(TaskTime.isValidTime("midnight"));
+        assertTrue(TaskTime.isValidTime("Mid-Night"));
+        assertTrue(TaskTime.isValidTime("12MidnIght"));
+        assertTrue(TaskTime.isValidTime("12-miDnight"));
+        assertTrue(TaskTime.isValidTime("12mid-night"));
+        assertTrue(TaskTime.isValidTime("12-mid-nighT"));
     }
 
     @Test
@@ -35,7 +50,26 @@ public class TaskTimeTest {
     }
     
     @Test
-    public void assertNewTaskTimeBehaviour() {
+    public void assertValidNewTaskTimeBehaviour() {
+        try {
+            TaskTime time = new TaskTime("now");
+            TaskTime expected = new TaskTime(TaskTime.getTimeNow());
+            assertEquals(expected, time);
+            
+            time = new TaskTime("12Noon");
+            expected = new TaskTime(TaskTime.NOON);
+            assertEquals(expected, time);
+            
+            time = new TaskTime("midNiGht");
+            expected = new TaskTime(TaskTime.MIDNIGHT);
+            assertEquals(expected, time);
+        } catch (IllegalValueException ive) {
+            assert false;
+        }
+    }
+    
+    @Test
+    public void assertInvalidNewTaskTimeBehaviour() {
         try {
             TaskTime time = new TaskTime("NOT A VALID TIME");
         } catch (IllegalValueException ive) {
@@ -98,7 +132,6 @@ public class TaskTimeTest {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
         LocalTime currTime = LocalTime.now();
         assertEquals(LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf), TaskTime.getTimeNow());
-        
     }
     
     @Test

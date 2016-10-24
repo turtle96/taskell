@@ -96,6 +96,10 @@ public class TaskDateTest {
     
     @Test
     public void assertNewTaskDateBehaviour() throws IllegalValueException {
+        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        TaskDate validDayOfWeek = new TaskDate(today.getDayNameInWeek());
+        assertEquals(today.getNextWeek(), validDayOfWeek);
+        
         TaskDate validMonth = new TaskDate("september");
         assertEquals("1-9-2016", validMonth.toString());
         
@@ -138,6 +142,20 @@ public class TaskDateTest {
     @Test
     public void assertCorrectThisYear() {
         assertEquals(LocalDate.now().getYear() + "", TaskDate.getThisYear());
+    }
+    
+    @Test
+    public void assertCorrectGetNextDay() throws IllegalValueException {
+        TaskDate today = new TaskDate("1-1-2016");
+        TaskDate nextDay = new TaskDate("2-1-2016");
+        assertEquals(nextDay, today.getNextDay());
+    }
+    
+    @Test
+    public void assertCorrectGetNextWeek() throws IllegalValueException {
+        TaskDate today = new TaskDate("1-1-2016");
+        TaskDate nextWeek = new TaskDate("8-1-2016");
+        assertEquals(nextWeek, today.getNextWeek());
     }
     
     @Test

@@ -57,9 +57,62 @@ public class TaskTime {
 
         if (time.matches(HOUR_ONLY_TIME_REGEX) || time.matches(FULL_TIME_REGEX)) {
             return true;
+        } else if (isValidNow(time)) {
+            return true;
+        } else if (isValidNoon(time)) {
+            return true;
+        } else if (isValidMidnight(time)) {
+            return true;
+        } else {
+            return false;
         }
-
-        return false;
+    }
+    
+    private static boolean isValidNow(String time) {
+        time = time.toLowerCase();
+        switch (time) {
+        case "now":
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    private static boolean isValidNoon(String time) {
+        time = time.toLowerCase();
+        switch (time) {
+        case "afternoon":
+            //Fallthrough
+        case "noon":
+            //Fallthrough
+        case "12noon":
+            //Fallthrough
+        case "12-noon":
+            return true;
+        default:
+            return false;
+        }
+    }
+    
+    private static boolean isValidMidnight(String time) {
+        time = time.toLowerCase();
+        switch (time) {
+        case "midnight":
+            //Fallthrough
+        case "mid-night":
+            //Fallthrough
+        case "12midnight":
+            //Fallthrough
+        case "12-midnight":
+            //Fallthrough
+        case "12mid-night":
+            //Fallthrough
+        case "12-mid-night":
+            //Fallthrough
+            return true;
+        default:
+            return false;
+        }
     }
     
     /**
@@ -115,6 +168,12 @@ public class TaskTime {
             this.taskTime = setTime(matcherFullArg.group("hour"), matcherFullArg.group("minute"), matcherFullArg.group("antePost"));
         } else if (matcherHourOnly.matches()) {
             this.taskTime = setTime(matcherHourOnly.group("hour"), ZERO_MINUTE, matcherHourOnly.group("antePost"));
+        } else if (isValidNow(time)) {
+            this.taskTime = getTimeNow();
+        } else if (isValidNoon(time)) {
+            this.taskTime = NOON;
+        } else if (isValidMidnight(time)) {
+            this.taskTime = MIDNIGHT;
         } else {
             throw new IllegalValueException(MESSAGE_TASK_TIME_CONSTRAINTS);
         }
