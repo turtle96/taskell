@@ -5,7 +5,7 @@ import seedu.taskell.model.task.Task;
 
 /** Stores the relevant details of a command so it can be undone via UndoCommand
  *  each Add/Delete/Edit Command executed should correspond to a CommandHistory 
- *  stored in UndoCommand
+ *  stored in UndoCommand's list of CommandHistory
  * */
 public class CommandHistory {
     private final String commandText, commandType;
