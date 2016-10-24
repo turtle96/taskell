@@ -76,7 +76,13 @@ public class UndoCommand extends Command {
             return undoAdd();
         case DeleteCommand.COMMAND_WORD:
             return undoDelete();
-        case EditDateCommand.COMMAND_WORD:
+        case EditDateCommand.COMMAND_WORD: 
+            return undoEdit();
+        case EditDescriptionCommand.COMMAND_WORD:
+            return undoEdit();
+        case EditEndTimeCommand.COMMAND_WORD:
+            return undoEdit();
+        case EditPriorityCommand.COMMAND_WORD:
             return undoEdit();
         default:
             logger.severe("CommandHistory is invalid");
@@ -91,6 +97,12 @@ public class UndoCommand extends Command {
         case DeleteCommand.COMMAND_WORD:
             return undoAdd();
         case EditDateCommand.COMMAND_WORD:
+            return redoEdit();
+        case EditDescriptionCommand.COMMAND_WORD:
+            return redoEdit();
+        case EditEndTimeCommand.COMMAND_WORD:
+            return redoEdit();
+        case EditPriorityCommand.COMMAND_WORD:
             return redoEdit();
         default:
             logger.severe("CommandHistory is invalid");
