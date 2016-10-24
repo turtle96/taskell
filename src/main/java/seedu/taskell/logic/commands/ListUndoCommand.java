@@ -1,3 +1,4 @@
+/** @@author A0142130A **/
 package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.EventsCenter;
@@ -13,9 +14,13 @@ public class ListUndoCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        indicateDisplayListChanged();
+        return new CommandResult(MESSAGE_SUCCESS);
+    }
+
+    public void indicateDisplayListChanged() {
         EventsCenter.getInstance().post(
                 new DisplayListChangedEvent(UndoCommand.getListOfCommandHistoryText()));
-        return new CommandResult(MESSAGE_SUCCESS);
     }
 
 }
