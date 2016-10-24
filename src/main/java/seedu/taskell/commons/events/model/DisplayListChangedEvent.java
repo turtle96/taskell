@@ -1,9 +1,12 @@
+/** @@author A0142130A **/
 package seedu.taskell.commons.events.model;
 
 import java.util.ArrayList;
 
 import seedu.taskell.commons.events.BaseEvent;
 
+/** Indicates a list needs to be displayed on Display Panel
+ * */
 public class DisplayListChangedEvent extends BaseEvent {
     
     private ArrayList<String> list;
