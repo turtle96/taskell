@@ -45,6 +45,9 @@ public class EditEndTimeCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+        if (taskToEdit.getTaskType().equals("FLOATING")) {
+            return new CommandResult("Unable to edit time of floating task");
+        }
         Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getStartTime(),endTime,
                 taskToEdit.getTaskPriority(),taskToEdit.getTags()
         );

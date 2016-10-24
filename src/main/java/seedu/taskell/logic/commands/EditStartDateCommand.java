@@ -45,6 +45,9 @@ public class EditStartDateCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+        if (taskToEdit.getTaskType().equals("FLOATING")) {
+            return new CommandResult("Unable to edit date of floating task");
+        }
         Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), startDate, taskToEdit.getEndDate(),
                 taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTags());
         try {

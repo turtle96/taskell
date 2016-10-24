@@ -43,8 +43,12 @@ public class EditStartTimeCommand extends Command {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
+        
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+
+        if (taskToEdit.getTaskType().equals("FLOATING")) {
+            return new CommandResult("Unable to edit time of floating task");
+        }
         Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), startTime,taskToEdit.getEndTime(),
                 taskToEdit.getTaskPriority(),taskToEdit.getTags()
         );

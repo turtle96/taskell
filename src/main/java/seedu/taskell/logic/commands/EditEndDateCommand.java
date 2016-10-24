@@ -45,8 +45,12 @@ public class EditEndDateCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
-        Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskToEdit.getStartDate(),endDate, 
-                taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTags());
+        if (taskToEdit.getTaskType().equals("FLOATING")) {
+            return new CommandResult("Unable to edit date of floating task");
+        }
+        Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskToEdit.getStartDate(),
+                endDate, taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(),
+                taskToEdit.getTags());
         try {
             model.editTask(taskToEdit, newTask);
         } catch (TaskNotFoundException pnfe) {
