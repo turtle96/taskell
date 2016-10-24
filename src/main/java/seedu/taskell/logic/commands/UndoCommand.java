@@ -60,8 +60,7 @@ public class UndoCommand extends Command {
         
         if (commandHistoryList.isEmpty()) {
             return new CommandResult(String.format(MESSAGE_COMMAND_HISTORY_EMPTY));
-        }
-        else if (index > commandHistoryList.size()) {
+        } else if (index > commandHistoryList.size()) {
             return new CommandResult(String.format(MESSAGE_INVALID_INDEX));
         }
         
@@ -187,7 +186,7 @@ public class UndoCommand extends Command {
     /******** static methods *********/
     
     public static void initializeCommandHistory() {
-        if (commandHistoryList==null) {
+        if (commandHistoryList == null) {
             commandHistoryList = new ArrayList<>();
         }
     }
