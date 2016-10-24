@@ -67,17 +67,12 @@ public class TaskTime {
     }
     
     private static boolean isValidNow(String time) {
-        try {
-            Integer.valueOf(time);
+        time = time.toLowerCase();
+        switch (time) {
+        case "now":
+            return true;
+        default:
             return false;
-        } catch (NumberFormatException nfe) {
-            time = time.toLowerCase();
-            switch (time) {
-            case "now":
-                return true;
-            default:
-                return false;
-            }
         }
     }
     
