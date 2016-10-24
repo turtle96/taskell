@@ -104,6 +104,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case ListDateCommand.COMMAND_WORD:
+            return prepareListDate(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
@@ -120,6 +123,20 @@ public class Parser {
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    private Command prepareListDate(String arguments) {
+        if (arguments.isEmpty()) {
+            return new IncorrectCommand(String.format("Please enter a date", EditDateCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(arguments.trim(), " ");
+        String date = st.nextToken();
+        System.out.println("Date is "+date);
+        if (!TaskDate.isValidDate(date)) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+        }
+
+        return new ListDateCommand(date);
     }
 
     /**
