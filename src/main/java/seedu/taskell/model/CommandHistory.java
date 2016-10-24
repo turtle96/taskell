@@ -9,16 +9,18 @@ import seedu.taskell.model.task.Task;
  * */
 public class CommandHistory {
     private String commandText, commandType;
-    private Task task;  //relevent task to be added, deleted or edited
+    private Task task;      //relevent task to be added, deleted or edited
+    private Task oldTask;   //oldTask needed for EditCommands
     private boolean toRedo;
     
     public CommandHistory() {
         commandText = "default command text";
         commandType = "default command type";
         task = null;
+        toRedo = false;
     }
     
-    public CommandHistory(String commandText, String commandType, Task task) {
+    public CommandHistory(String commandText, String commandType) {
         assert commandText != null;
         assert commandType != null;
         assert !commandText.trim().isEmpty();
@@ -26,7 +28,8 @@ public class CommandHistory {
         
         this.commandText = commandText.trim();
         this.commandType = commandType.trim();
-        this.task = task;
+        this.task = null;
+        toRedo = false;
     }
     
     public String getCommandText() {
@@ -41,9 +44,15 @@ public class CommandHistory {
         return task;
     }
     
+    public Task getOldTask() {
+        return oldTask;
+    }
+    
     public boolean isRedoTrue() {
         return toRedo;
     }
+    
+    /**** Setter methods ****/
     
     public void setCommandText(String text) {
         this.commandText = text;
@@ -52,6 +61,10 @@ public class CommandHistory {
     public void setTask(Task task) {
         assert task != null;
         this.task = task;
+    }
+    
+    public void setOldTask(Task task) {
+        this.oldTask = task;
     }
     
     public void setToRedoToTrue() {
