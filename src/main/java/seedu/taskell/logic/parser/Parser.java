@@ -66,29 +66,34 @@ public class Parser {
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord, null);
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareAdd(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord, null);
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareDelete(arguments);
 
         case EditDateCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditDate(arguments);
 
         case EditDescriptionCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditDescription(arguments);
 
         case EditStartTimeCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditStart(arguments);
 
         case EditEndTimeCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditEnd(arguments);
 
         case EditPriorityCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditPriority(arguments);
 
         case ClearCommand.COMMAND_WORD:
