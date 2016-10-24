@@ -84,6 +84,8 @@ public class UndoCommand extends Command {
             return undoEdit();
         case EditPriorityCommand.COMMAND_WORD:
             return undoEdit();
+        case EditStartTimeCommand.COMMAND_WORD:
+            return undoEdit();
         default:
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
@@ -103,6 +105,8 @@ public class UndoCommand extends Command {
         case EditEndTimeCommand.COMMAND_WORD:
             return redoEdit();
         case EditPriorityCommand.COMMAND_WORD:
+            return redoEdit();
+        case EditStartTimeCommand.COMMAND_WORD:
             return redoEdit();
         default:
             logger.severe("CommandHistory is invalid");
