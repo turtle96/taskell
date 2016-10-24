@@ -61,6 +61,9 @@ public class CommandHistory {
     public void setTask(Task task) {
         assert task != null;
         this.task = task;
+        if (commandType.equals("delete")) {
+            commandText = "delete " + this.task.getAsText();
+        }
     }
     
     public void setOldTask(Task task) {
