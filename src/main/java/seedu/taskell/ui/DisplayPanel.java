@@ -37,6 +37,8 @@ public class DisplayPanel extends UiPart{
     public String getFxmlPath() {
         return null; //not applicable
     }
+    
+    /** @@author A0142130A **/
 
     /**
      * Factory method for creating a Display Panel.
@@ -71,5 +73,7 @@ public class DisplayPanel extends UiPart{
             }
         }
     }
+    
+    /** @@author **/
 
 }
