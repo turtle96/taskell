@@ -24,7 +24,7 @@ public class EditStartTimeCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) NEW_START_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 2pm ";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nNewTask: %2$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nUpdatedTask: %2$s";
 
     public final int targetIndex;
     public final TaskTime startTime;
