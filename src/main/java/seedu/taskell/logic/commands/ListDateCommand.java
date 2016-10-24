@@ -13,7 +13,7 @@ public class ListDateCommand extends Command {
     private Set<String> keywordSet;
 
     public ListDateCommand(String date) {
-       keywordSet = new HashSet<>(Arrays.asList(date));
+       keywordSet = new HashSet<>(Arrays.asList(date, "EVENT"));
     }
 
     @Override

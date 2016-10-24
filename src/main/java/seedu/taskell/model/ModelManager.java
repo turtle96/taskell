@@ -202,7 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String searchString = task.getStartDate().taskDate;
+            String searchString = task.getStartDate().taskDate + " "+ task.getTaskType();
             return DateKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
