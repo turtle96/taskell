@@ -4,7 +4,9 @@ package seedu.taskell.logic.commands;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
+import seedu.taskell.commons.events.model.DisplayListChangedEvent;
 import seedu.taskell.model.CommandHistory;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
@@ -82,6 +84,7 @@ public class UndoCommand extends Command {
         try {
             model.addTask(commandHistory.getTask());
             deleteCommandHistory();
+            indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
@@ -92,6 +95,7 @@ public class UndoCommand extends Command {
         try {
             model.deleteTask(commandHistory.getTask());
             deleteCommandHistory();
+            indicateDisplayListChanged();
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         }
@@ -133,4 +137,8 @@ public class UndoCommand extends Command {
         commandHistoryList.remove(getOffset(commandHistoryList.size()));
     }
 
+    public void indicateDisplayListChanged() {
+        EventsCenter.getInstance().post(
+                new DisplayListChangedEvent(getListOfCommandHistoryText()));
+    }
 }
