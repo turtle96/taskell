@@ -26,6 +26,7 @@ public class UndoCommand extends Command {
     
     private static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
     private static final String MESSAGE_ADD_TASK_SUCCESS = "Task added back: %1$s";
+    private static final String MESSAGE_EDIT_TASK_SUCCESS = "Task edited back to old version: %1$s";
     
     private static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
     private static final String MESSAGE_NO_TASK_TO_UNDO = "No add or delete commands available to undo.";
@@ -75,6 +76,8 @@ public class UndoCommand extends Command {
             return undoAdd();
         case DeleteCommand.COMMAND_WORD:
             return undoDelete();
+        case EditDateCommand.COMMAND_WORD:
+            return undoEdit();
         default:
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
@@ -87,10 +90,45 @@ public class UndoCommand extends Command {
             return undoDelete();
         case DeleteCommand.COMMAND_WORD:
             return undoAdd();
+        case EditDateCommand.COMMAND_WORD:
+            return redoEdit();
         default:
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
+    }
+
+    private CommandResult undoEdit() {
+        try {
+            model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
+            deleteCommandHistory();
+            addUndoCommand(commandHistory);
+            indicateDisplayListChanged();
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getOldTask()));
+        } catch (DuplicateTaskException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException e) {
+            assert false : "The target task cannot be missing";
+        }
+        
+        assert false: "Undo edit should return a command result";
+        return null;
+    }
+    
+    private CommandResult redoEdit() {
+        try {
+            model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
+            deleteCommandHistory();
+            indicateDisplayListChanged();
+            return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getTask()));
+        } catch (DuplicateTaskException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException e) {
+            assert false : "The target task cannot be missing";
+        }
+        
+        assert false: "Redo edit should return a command result";
+        return null;
     }
 
     private CommandResult undoDelete() {
@@ -143,9 +181,9 @@ public class UndoCommand extends Command {
     }
     
     public static void addCommandToHistory(String commandText, 
-            String commandType, Task task) {
+            String commandType) {
         assert commandHistoryList != null;
-        commandHistoryList.add(new CommandHistory(commandText, commandType, task));
+        commandHistoryList.add(new CommandHistory(commandText, commandType));
     }
     
     public static void addTaskToCommandHistory(Task task) {
@@ -156,6 +194,16 @@ public class UndoCommand extends Command {
         }
         
         commandHistoryList.get(getOffset(commandHistoryList.size())).setTask(task);
+    }
+    
+    public static void addOldTaskToCommandHistory(Task task) {
+        logger.info("Adding old task to history");
+        if (commandHistoryList.isEmpty()) {
+            logger.warning("No command history to add task to");
+            return;
+        }
+        
+        commandHistoryList.get(getOffset(commandHistoryList.size())).setOldTask(task);
     }
 
     public static void deletePreviousCommand() {
