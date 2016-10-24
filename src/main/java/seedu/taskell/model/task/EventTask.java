@@ -29,11 +29,7 @@ public class EventTask extends Task {
      * @throws IllegalValueException 
      */
     public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) throws IllegalValueException {
-        if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
-            endDate = endDate.getNextDay();
-        } else if (startDate.getDayNameInWeek().equals(new TaskDate(TaskDate.getTodayDate()).getDayNameInWeek())) {
-            endDate = endDate.getNextWeek();
-        }
+        endDate = autoAdjustEndDate(startDate, endDate, startTime, endTime);
         
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
@@ -63,6 +59,21 @@ public class EventTask extends Task {
         } catch (IllegalValueException ive) {
             return false;
         }
+    }
+    
+    /**
+     * Adjust the endDate such that it fits into the real-world context
+     * @throws IllegalValueException
+     */
+    private TaskDate autoAdjustEndDate(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) throws IllegalValueException {
+        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
+            endDate = endDate.getNextDay();
+        } else if (startDate.getDayNameInWeek().equals(today.getDayNameInWeek())
+                && !endDate.getDayNameInWeek().equals(today.getDayNameInWeek())) {
+            endDate = endDate.getNextWeek();
+        }
+        return endDate;
     }
 
     @Override
