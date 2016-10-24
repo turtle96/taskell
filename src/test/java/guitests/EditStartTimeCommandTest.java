@@ -17,13 +17,13 @@ public class EditStartTimeCommandTest extends TaskManagerGuiTest {
         // edit the first in the list
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
-        String newDate = "5am";
-        asserteditSuccess(targetIndex, currentList, newDate);
+        String newTime = "5am";
+        asserteditSuccess(targetIndex, currentList, newTime);
 
         // edit the last in the list
         targetIndex = currentList.length;
-        newDate = "12.35pm";
-        asserteditSuccess(targetIndex, currentList, newDate);
+        newTime = "12.35pm";
+        asserteditSuccess(targetIndex, currentList, newTime);
 
         // invalid index
         commandBox.runCommand("edit-startTime " + currentList.length + 1 + " 1am");
