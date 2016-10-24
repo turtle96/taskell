@@ -186,6 +186,18 @@ public class TestUtil {
                 .collect(Collectors.joining("\n"));
     }
 
+    public static TestTask editTaskDescription(TestTask taskToEdit, String newDescription) throws IllegalValueException{
+        TestTask newTask = new TestTask();
+        newTask.setDescription(new Description(newDescription));
+        newTask.setEndTime(taskToEdit.getEndTime());
+        newTask.setStartTime(taskToEdit.getStartTime());
+        newTask.setStartDate(taskToEdit.getStartDate());
+        newTask.setTaskPriority(taskToEdit.getTaskPriority());
+        newTask.setTaskPriority(taskToEdit.getTaskPriority());
+        newTask.setTags(taskToEdit.getTags());
+        return newTask;
+    }
+
     public static void setFinalStatic(Field field, Object newValue) throws NoSuchFieldException, IllegalAccessException{
         field.setAccessible(true);
         // remove final modifier from field
