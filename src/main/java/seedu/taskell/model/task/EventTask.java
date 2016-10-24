@@ -31,6 +31,8 @@ public class EventTask extends Task {
     public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) throws IllegalValueException {
         if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
             endDate = endDate.getNextDay();
+        } else if (startDate.getDayNameInWeek().equals(new TaskDate(TaskDate.getTodayDate()).getDayNameInWeek())) {
+            endDate = endDate.getNextWeek();
         }
         
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
