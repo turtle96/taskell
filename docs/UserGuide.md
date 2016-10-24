@@ -99,8 +99,11 @@ Picture 3 and 4: Keying in “find report” displays list of tasks with report as o
     e.g. `chicken` will match `chicken duck`
 
 #### Reverting previous action : `undo`
-If you wish to undo your previous action, <kbd>Enter</kbd> undo.<br>
-Format: `undo`
+If you wish to undo your previous actions, <kbd>Enter</kbd> list-undo to see a list of 
+previous commands that can be undone.<br>
+Then use undo command at the specified INDEX in the list.<br>
+Format: `undo INDEX`<br> 
+Example: `list-undo`, then `undo 3`, will undo third command in command history.
 
 #### Deleting a task : `delete`
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
