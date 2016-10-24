@@ -138,6 +138,7 @@ public class Parser {
     private Command prepareEditDate(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
@@ -166,6 +167,7 @@ public class Parser {
     private Command prepareEditDescription(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
         }
@@ -178,6 +180,7 @@ public class Parser {
         try {
             return new EditDescriptionCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -192,6 +195,7 @@ public class Parser {
     private Command prepareEditStart(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
@@ -202,6 +206,7 @@ public class Parser {
         }
         arguments = arguments.trim();
         if (!TaskTime.isValidTime(arguments)) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
@@ -209,6 +214,7 @@ public class Parser {
         try {
             return new EditStartTimeCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -223,6 +229,7 @@ public class Parser {
     private Command prepareEditEnd(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
@@ -233,6 +240,7 @@ public class Parser {
         }
         arguments = arguments.trim();
         if (!TaskTime.isValidTime(arguments)) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
@@ -240,6 +248,7 @@ public class Parser {
         try {
             return new EditEndTimeCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -254,6 +263,7 @@ public class Parser {
     private Command prepareEditPriority(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
@@ -264,6 +274,7 @@ public class Parser {
         }
         arguments = arguments.trim();
         if (!TaskPriority.isValidPriority(arguments)) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
@@ -271,6 +282,7 @@ public class Parser {
         try {
             return new EditPriorityCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -284,6 +296,7 @@ public class Parser {
      */
     private Command prepareAdd(String args) {
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -494,6 +507,7 @@ public class Parser {
                 return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime, taskPriority,
                         getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
+                UndoCommand.deletePreviousCommand();
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
@@ -501,6 +515,7 @@ public class Parser {
               return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime, taskPriority,
                       getTagsFromArgs(tagString));
           } catch (IllegalValueException ive) {
+              UndoCommand.deletePreviousCommand();
               return new IncorrectCommand(ive.getMessage());
           }
         }
