@@ -1,7 +1,6 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.taskell.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
 
 import org.junit.Test;
 
@@ -106,6 +105,6 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         //confirm the list now contains all previous tasks except the deleted task
-        assertTrue(taskListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder)); 
     }
 }
