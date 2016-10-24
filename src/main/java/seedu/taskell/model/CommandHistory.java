@@ -8,7 +8,7 @@ import seedu.taskell.model.task.Task;
  *  stored in UndoCommand's list of CommandHistory
  * */
 public class CommandHistory {
-    private final String commandText, commandType;
+    private String commandText, commandType;
     private Task task;  //relevent task to be added, deleted or edited
     private boolean toRedo;
     
@@ -39,6 +39,14 @@ public class CommandHistory {
     
     public Task getTask() {
         return task;
+    }
+    
+    public boolean isRedoTrue() {
+        return toRedo;
+    }
+    
+    public void setCommandText(String text) {
+        this.commandText = text;
     }
     
     public void setTask(Task task) {

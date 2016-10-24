@@ -66,12 +66,29 @@ public class UndoCommand extends Command {
         
         commandHistory = commandHistoryList.get(getOffset(index));
         
+        if (commandHistory.isRedoTrue()) {
+            return redoUndo();
+        }
+        
         switch (commandHistory.getCommandType()) {
         case AddCommand.COMMAND_WORD:
             return undoAdd();
         case DeleteCommand.COMMAND_WORD:
             return undoDelete();
         default:
+            logger.severe("CommandHistory is invalid");
+            return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
+        }
+    }
+
+    private CommandResult redoUndo() {
+        switch (commandHistory.getCommandType()) {
+        case AddCommand.COMMAND_WORD:
+            return undoDelete();
+        case DeleteCommand.COMMAND_WORD:
+            return undoAdd();
+        default:
+            logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
     }
@@ -105,6 +122,9 @@ public class UndoCommand extends Command {
     }
     
     private void addUndoCommand(CommandHistory commandHistory) {
+        if (commandHistory.isRedoTrue()) {
+            return;
+        }
         commandHistory.setCommandText("undo " + commandHistory.getCommandText());
         commandHistory.setToRedoToTrue();
         commandHistoryList.add(commandHistory);
