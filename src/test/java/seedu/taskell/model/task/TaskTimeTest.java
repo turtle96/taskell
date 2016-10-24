@@ -22,6 +22,7 @@ public class TaskTimeTest {
         assertTrue(TaskTime.isValidTime("1:40pm"));
         assertTrue(TaskTime.isValidTime("1-30am"));
         assertTrue(TaskTime.isValidTime("2:30Am"));
+        assertTrue(TaskTime.isValidTime("noW"));
     }
 
     @Test
@@ -35,7 +36,12 @@ public class TaskTimeTest {
     }
     
     @Test
-    public void assertNewTaskTimeBehaviour() {
+    public void assertValidNewTaskTimeBehaviour() throws IllegalValueException{
+        TaskTime time = new TaskTime("now");
+    }
+    
+    @Test
+    public void assertInvalidNewTaskTimeBehaviour() {
         try {
             TaskTime time = new TaskTime("NOT A VALID TIME");
         } catch (IllegalValueException ive) {
@@ -98,7 +104,6 @@ public class TaskTimeTest {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
         LocalTime currTime = LocalTime.now();
         assertEquals(LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf), TaskTime.getTimeNow());
-        
     }
     
     @Test

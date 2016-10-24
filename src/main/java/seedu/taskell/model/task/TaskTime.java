@@ -57,9 +57,26 @@ public class TaskTime {
 
         if (time.matches(HOUR_ONLY_TIME_REGEX) || time.matches(FULL_TIME_REGEX)) {
             return true;
+        } else if (isValidNow(time)) {
+            return true;
+        } else {
+            return false;
         }
-
-        return false;
+    }
+    
+    private static boolean isValidNow(String time) {
+        try {
+            Integer.valueOf(time);
+            return false;
+        } catch (NumberFormatException nfe) {
+            time = time.toLowerCase();
+            switch (time) {
+            case "now":
+                return true;
+            default:
+                return false;
+            }
+        }
     }
     
     /**
@@ -115,6 +132,8 @@ public class TaskTime {
             this.taskTime = setTime(matcherFullArg.group("hour"), matcherFullArg.group("minute"), matcherFullArg.group("antePost"));
         } else if (matcherHourOnly.matches()) {
             this.taskTime = setTime(matcherHourOnly.group("hour"), ZERO_MINUTE, matcherHourOnly.group("antePost"));
+        } else if (isValidNow(time)) {
+            this.taskTime = getTimeNow();
         } else {
             throw new IllegalValueException(MESSAGE_TASK_TIME_CONSTRAINTS);
         }
