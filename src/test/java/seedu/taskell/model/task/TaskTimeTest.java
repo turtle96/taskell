@@ -29,6 +29,14 @@ public class TaskTimeTest {
         assertTrue(TaskTime.isValidTime("afterNoon"));
         assertTrue(TaskTime.isValidTime("12noon"));
         assertTrue(TaskTime.isValidTime("12-noon"));
+        
+        //Valid Midnight
+        assertTrue(TaskTime.isValidTime("midnight"));
+        assertTrue(TaskTime.isValidTime("Mid-Night"));
+        assertTrue(TaskTime.isValidTime("12MidnIght"));
+        assertTrue(TaskTime.isValidTime("12-miDnight"));
+        assertTrue(TaskTime.isValidTime("12mid-night"));
+        assertTrue(TaskTime.isValidTime("12-mid-nighT"));
     }
 
     @Test
