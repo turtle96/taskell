@@ -1,13 +1,10 @@
 package seedu.taskell.ui;
 
-import javafx.event.Event;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.web.WebView;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.util.FxViewUtil;
-import seedu.taskell.model.task.ReadOnlyTask;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -42,7 +39,7 @@ public class DisplayPanel extends UiPart{
     }
 
     /**
-     * Factory method for creating a Browser Panel.
+     * Factory method for creating a Display Panel.
      * This method should be called after the FX runtime is initialized and in FX application thread.
      * @param placeholder The AnchorPane where the DisplayPanel must be inserted
      */
