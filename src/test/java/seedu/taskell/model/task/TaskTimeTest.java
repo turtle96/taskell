@@ -53,7 +53,16 @@ public class TaskTimeTest {
     public void assertValidNewTaskTimeBehaviour() {
         try {
             TaskTime time = new TaskTime("now");
+            TaskTime expected = new TaskTime(TaskTime.getTimeNow());
+            assertEquals(expected, time);
+            
             time = new TaskTime("12Noon");
+            expected = new TaskTime(TaskTime.NOON);
+            assertEquals(expected, time);
+            
+            time = new TaskTime("midNiGht");
+            expected = new TaskTime(TaskTime.MIDNIGHT);
+            assertEquals(expected, time);
         } catch (IllegalValueException ive) {
             assert false;
         }
