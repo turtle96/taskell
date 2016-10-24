@@ -476,6 +476,16 @@ public class TaskDate {
             throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
         }
     }
+    
+    public TaskDate getNextWeek() throws IllegalValueException {
+        try {
+            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate nextWeek = localDate.plusWeeks(1);
+            return new TaskDate(nextWeek.format(standardFormat));
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
+        }
+    }
 
     /**
      * Returns a string representing the integer value of this year
