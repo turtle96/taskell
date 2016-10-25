@@ -13,7 +13,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String END_DATE_FIELD_ID = "#endDate";
     private static final String TASK_START_TIME_FIELD_ID = "#startTime";
     private static final String TASK_END_TIME_FIELD_ID = "#endTime";
-
+    private static final String TASK_COMPLETE_FIELD_ID = "#taskComplete";
     private Node node;
 
     public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node){
@@ -48,13 +48,18 @@ public class TaskCardHandle extends GuiHandle {
     public String getEndTime() {
         return getTextFromLabel(TASK_END_TIME_FIELD_ID);
     }
-
+    
+    public String getTaskComplete() {
+        return getTextFromLabel(TASK_COMPLETE_FIELD_ID);
+    }
+    
     public boolean isSameTask(ReadOnlyTask task){
         return getDescription().equals(task.getDescription().description) 
                 && getStartDate().equals(task.getStartDate().getDisplayDate()) 
                 && getEndDate().equals(task.getEndDate().getDisplayDate())
                 && getStartTime().equals(task.getStartTime().taskTime) 
-                && getEndTime().equals(task.getEndTime().taskTime); 
+                && getEndTime().equals(task.getEndTime().taskTime)
+                && getTaskComplete().equals(task.getTaskStatus().taskStatus); 
     }
 
     @Override

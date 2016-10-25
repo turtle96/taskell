@@ -47,7 +47,7 @@ public class EditDescriptionCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         Task newTask = new Task(description,taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getStartTime(),taskToEdit.getEndTime(),
-                taskToEdit.getTaskPriority(),taskToEdit.getTags()
+                taskToEdit.getTaskPriority(),taskToEdit.getTaskStatus(), taskToEdit.getTags()
         );
         try {
             model.editTask(taskToEdit,newTask);

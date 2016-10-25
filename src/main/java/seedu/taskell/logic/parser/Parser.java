@@ -36,7 +36,9 @@ public class Parser {
             Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
                     + " (?<isTaskDatePrivate>p?)p/(?<startDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
                     + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
-                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
+                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" 
+                    + " (?<isTaskCompletePrivate>p?)a/(?<taskComplete>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
                                                                                                                    // number
     private static final String BY = "by";
     private static final String ON = "on";
@@ -104,6 +106,12 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case ListAllCommand.COMMAND_WORD:
+            return new ListAllCommand();
+            
+        case ListDoneCommand.COMMAND_WORD:
+            return new ListDoneCommand();
 
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
@@ -116,6 +124,9 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+            
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(arguments);
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
@@ -660,5 +671,20 @@ public class Parser {
         }
         return new SaveStorageLocationCommand(args);
     }
+    
+    /**
+     * Parses arguments in the context of the done task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDone(String args){
+        Optional<Integer> index = parseIndex(args);
+        if(!index.isPresent()){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+        }
 
+        return new DoneCommand(index.get());
+    }
 }

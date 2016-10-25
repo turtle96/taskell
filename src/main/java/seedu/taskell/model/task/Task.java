@@ -21,6 +21,7 @@ public class Task implements ReadOnlyTask {
     protected TaskTime startTime;
     protected TaskTime endTime;
     protected TaskPriority taskPriority;
+    protected TaskComplete taskStatus;
 
     protected UniqueTagList tags;
     
@@ -31,7 +32,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) {
+    public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskComplete taskStatus, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, tags);
         this.description = description;
         this.taskType = taskType;
@@ -41,6 +42,7 @@ public class Task implements ReadOnlyTask {
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
+        this.taskStatus = taskStatus;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -51,7 +53,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getDescription(), source.getTaskType(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(), source.getTaskPriority(), source.getTags());
+        this(source.getDescription(), source.getTaskType(), source.getStartDate(), source.getEndDate(), source.getStartTime(), source.getEndTime(), source.getTaskPriority(), source.getTaskStatus(), source.getTags());
     }
 
     @Override
@@ -88,7 +90,12 @@ public class Task implements ReadOnlyTask {
     public TaskPriority getTaskPriority() {
         return taskPriority;
     }
-
+    
+    @Override
+    public TaskComplete getTaskStatus() {
+        return taskStatus;
+    }
+    
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -111,7 +118,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(description, startDate, startTime, endTime, taskPriority, tags);
+        return Objects.hash(description, startDate, startTime, endTime, taskPriority, taskStatus, tags);
     }
 
     @Override

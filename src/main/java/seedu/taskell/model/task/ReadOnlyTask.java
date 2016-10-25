@@ -14,6 +14,7 @@ public interface ReadOnlyTask {
     TaskTime getStartTime();
     TaskTime getEndTime();
     TaskPriority getTaskPriority();
+    TaskComplete getTaskStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
@@ -33,7 +34,8 @@ public interface ReadOnlyTask {
                 && other.getEndDate().equals(this.getEndDate())
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())
-                && other.getTaskPriority().equals(this.getTaskPriority()));
+                && other.getTaskPriority().equals(this.getTaskPriority())
+                && other.getTaskStatus().equals(this.getTaskStatus()));
     }
 
     /**
@@ -52,6 +54,8 @@ public interface ReadOnlyTask {
                 .append(getEndTime())
                 .append(" TaskPriority: ")
                 .append(getTaskPriority())
+                .append(" TaskComplete: ")
+                .append(getTaskStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();

@@ -56,7 +56,12 @@ public class TaskBuilder {
         this.task.setEndTime(new TaskTime(endTime));
         return this;
     }
-
+    
+    public TaskBuilder withTaskComplete(String taskStatus) throws IllegalValueException {
+        this.task.setTaskComplete(new TaskComplete(taskStatus));
+        return this;
+    }
+    
     public TestTask build() {
         return this.task;
     }

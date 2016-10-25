@@ -26,6 +26,8 @@ public class TaskCard extends UiPart{
     @FXML
     private Label endTime;
     @FXML
+    private Label taskStatus;
+    @FXML
     private Label tags;
 
     private ReadOnlyTask task;
@@ -51,13 +53,18 @@ public class TaskCard extends UiPart{
         endDate.setText(task.getEndDate().getDisplayDate());
         startTime.setText(task.getStartTime().taskTime);
         endTime.setText(task.getEndTime().taskTime);
+        taskStatus.setText(task.getTaskStatus().taskStatus);
         
         if (task.getTaskType().equals(Task.FLOATING_TASK)) {
             startDate.setVisible(false);
             endDate.setVisible(false);
             startTime.setVisible(false);
             endTime.setVisible(false);
+            taskStatus.setVisible(false);
         }
+        
+        System.out.println("TT: " + taskStatus);
+        System.out.println("TASKCARD: " + task.getTaskStatus().taskStatus);
     }
 
     public HBox getLayout() {

@@ -14,7 +14,7 @@ public class EventTask extends Task {
     public static final String MESSAGE_EVENT_CONSTRAINTS = "Start date and time must be before end date and time"
             + "\nAll date and time should not before current time";
 
-    public EventTask(String description, String startDate, String endDate, String startTime, String endTime, String taskPriority, UniqueTagList tags) throws IllegalValueException {
+    public EventTask(String description, String startDate, String endDate, String startTime, String endTime, String taskPriority, String taskStatus, UniqueTagList tags) throws IllegalValueException {
         this(new Description(description),
                 EVENT_TASK,
                 new TaskDate(startDate),
@@ -22,13 +22,14 @@ public class EventTask extends Task {
                 new TaskTime(startTime),
                 new TaskTime(endTime),
                 new TaskPriority(taskPriority),
+                new TaskComplete(taskStatus),
                 tags);
     }
     /**
      * Every field must be present and not null.
      * @throws IllegalValueException 
      */
-    public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) throws IllegalValueException {
+    public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskComplete taskStatus, UniqueTagList tags) throws IllegalValueException {
         endDate = autoAdjustEndDate(startDate, endDate, startTime, endTime);
         
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
@@ -42,6 +43,7 @@ public class EventTask extends Task {
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
+        this.taskStatus = taskStatus;
         this.tags = tags;
     }
     

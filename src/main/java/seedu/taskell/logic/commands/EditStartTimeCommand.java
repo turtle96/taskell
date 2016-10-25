@@ -46,7 +46,7 @@ public class EditStartTimeCommand extends Command {
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), startTime,taskToEdit.getEndTime(),
-                taskToEdit.getTaskPriority(),taskToEdit.getTags()
+                taskToEdit.getTaskPriority(),taskToEdit.getTaskStatus(), taskToEdit.getTags()
         );
         try {
             model.editTask(taskToEdit,newTask);

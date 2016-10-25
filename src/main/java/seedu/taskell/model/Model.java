@@ -39,4 +39,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the any of given keywords (OR operation)*/
     void updateFilteredTaskListByAnyKeyword(Set<String> keywords);
+    
+    /** Updates the filter of the filtered task list to filter by the given taskStatus keywords*/
+    void updateFilteredtaskListCompleted(Set<String> keywords);
 }
