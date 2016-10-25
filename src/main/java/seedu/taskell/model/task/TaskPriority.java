@@ -21,6 +21,10 @@ public class TaskPriority {
     public static final String HIGH_PRIORITY = "3";
     
     public static final String DEFAULT_PRIORITY = NO_PRIORITY;
+    
+    public static final String LOW_PRIORITY_BACKGROUND = "-fx-background-color:#4ca64c";
+    public static final String MEDIUM_PRIORITY_BACKGROUND = "-fx-background-color:#ffff4c";
+    public static final String HIGH_PRIORITY_BACKGROUND = "-fx-background-color:#ff4c4c";
 
     public final String taskPriority;
 
