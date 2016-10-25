@@ -62,8 +62,6 @@ public class TaskCard extends UiPart{
             endTime.setVisible(false);
         }
         
-        System.out.println("TT: " + taskStatus);
-        System.out.println("TASKCARD: " + task.getTaskStatus().taskStatus);
     }
 
     public HBox getLayout() {
