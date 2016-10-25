@@ -13,7 +13,7 @@ public class TaskCardHandle extends GuiHandle {
     private static final String END_DATE_FIELD_ID = "#endDate";
     private static final String TASK_START_TIME_FIELD_ID = "#startTime";
     private static final String TASK_END_TIME_FIELD_ID = "#endTime";
-    private static final String TASK_COMPLETE_FIELD_ID = "#taskComplete";
+    private static final String TASK_COMPLETE_FIELD_ID = "#taskStatus";
     private Node node;
 
     public TaskCardHandle(GuiRobot guiRobot, Stage primaryStage, Node node){
