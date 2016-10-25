@@ -53,7 +53,7 @@ public class TaskTimeTest {
     public void assertValidNewTaskTimeBehaviour() {
         try {
             TaskTime time = new TaskTime("now");
-            TaskTime expected = new TaskTime(TaskTime.getTimeNow());
+            TaskTime expected = new TaskTime(TaskTime.getTimeNow().toString());
             assertEquals(expected, time);
             
             time = new TaskTime("12Noon");
@@ -131,7 +131,7 @@ public class TaskTimeTest {
     public void assertCorrectCurrentTime() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
         LocalTime currTime = LocalTime.now();
-        assertEquals(LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf), TaskTime.getTimeNow());
+        assertEquals(LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf), TaskTime.getTimeNow().toString());
     }
     
     @Test

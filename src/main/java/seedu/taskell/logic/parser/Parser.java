@@ -480,7 +480,7 @@ public class Parser {
         }
         
         if ((TaskDate.isValidToday(startDate) && !hasStartTime) || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
-            startTime = TaskTime.getTimeNow();
+            startTime = TaskTime.getTimeNow().toString().toString();
         }
 
         if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
