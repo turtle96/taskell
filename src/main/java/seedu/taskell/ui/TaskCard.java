@@ -43,6 +43,7 @@ public class TaskCard extends UiPart{
         return UiPartLoader.loadUiPart(card);
     }
 
+//@@author A0139257X
     @FXML
     public void initialize() {
         id.setText(displayedIndex + ". ");
@@ -75,7 +76,8 @@ public class TaskCard extends UiPart{
             cardPane.setStyle(TaskPriority.LOW_PRIORITY_BACKGROUND);
         }
     }
-
+//@@author
+    
     public HBox getLayout() {
         return cardPane;
     }
