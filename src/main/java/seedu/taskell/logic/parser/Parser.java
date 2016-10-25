@@ -122,6 +122,9 @@ public class Parser {
             
         case ListUndoCommand.COMMAND_WORD:
             return new ListUndoCommand();
+            
+        case ViewCalendarCommand.COMMAND_WORD:
+            return new ViewCalendarCommand();
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
