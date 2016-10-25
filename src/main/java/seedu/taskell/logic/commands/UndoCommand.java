@@ -72,7 +72,7 @@ public class UndoCommand extends Command {
             logger.severe("model is null");
         }
         for (CommandHistory commandHistory: commandHistoryList) {
-            if (checkCommandType(commandHistory)) {
+            if (isCommandTypeAddOrEdit(commandHistory)) {
                 if (!model.isTaskPresent(commandHistory.getTask())) {
                     commandHistoryList.remove(commandHistory);
                 }
@@ -81,7 +81,7 @@ public class UndoCommand extends Command {
         
     }
 
-    private boolean checkCommandType(CommandHistory commandHistory) {
+    private boolean isCommandTypeAddOrEdit(CommandHistory commandHistory) {
         return (commandHistory.getCommandType().contains(AddCommand.COMMAND_WORD) 
                 || commandHistory.getCommandType().contains("edit")) 
                 && !commandHistory.isRedoTrue();
