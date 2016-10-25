@@ -46,7 +46,7 @@ public class MainWindow extends UiPart {
     private String taskManagerName;
 
     @FXML
-    private AnchorPane browserPlaceholder;
+    private AnchorPane displayPanelPlaceholder;
 
     @FXML
     private AnchorPane commandBoxPlaceholder;
@@ -114,7 +114,7 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        displayPanel = DisplayPanel.load(browserPlaceholder);
+        displayPanel = DisplayPanel.load(displayPanelPlaceholder);
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskManagerFilePath());
@@ -194,5 +194,9 @@ public class MainWindow extends UiPart {
     
     public void loadList(ArrayList<String> list) {
         displayPanel.loadList(list);
+    }
+    
+    public void loadCalendarView() {
+        displayPanel = DisplayPanel.loadCalendar(displayPanelPlaceholder);
     }
 }
