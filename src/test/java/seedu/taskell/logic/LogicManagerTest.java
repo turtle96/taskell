@@ -287,7 +287,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleOn() throws Exception {
         String description = "add go shopping on 2-2-2222 on 3-3-3333";
-        Task toBeAdded = new EventTask("go shopping on 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping on 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -300,7 +300,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleAt() throws Exception {
         String description = "add go shopping at 11.58pm at 11.59pm";
-        Task toBeAdded = new EventTask("go shopping at 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping at 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -313,7 +313,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleByDate() throws Exception {
         String description = "add go shopping by 2-2-2222 by 3-3-3333";
-        Task toBeAdded = new EventTask("go shopping by 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping by 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -326,7 +326,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleByTime() throws Exception {
         String description = "add go shopping by 11.58pm by 11.59pm";
-        Task toBeAdded = new EventTask("go shopping by 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping by 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -339,7 +339,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleFromDate() throws Exception {
         String description = "add go shopping from 2-2-2222 from 3-3-3333";
-        Task toBeAdded = new EventTask("go shopping from 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping from 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -352,7 +352,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleFromTime() throws Exception {
         String description = "add go shopping from 11.58pm from 11.59pm";
-        Task toBeAdded = new EventTask("go shopping from 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping from 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -365,7 +365,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleToDate() throws Exception {
         String description = "add go shopping to 2-2-2222 to 3-3-3333";
-        Task toBeAdded = new EventTask("go shopping to 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping to 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -378,7 +378,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleToTime() throws Exception {
         String description = "add go shopping to 11.58pm to 11.59pm";
-        Task toBeAdded = new EventTask("go shopping to 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping to 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -391,7 +391,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithByTime() throws Exception {
         String description = "add go shopping by 11:59pm";
-        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), TaskTime.getTimeNow(), "11:59pm", "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), TaskTime.getTimeNow(), "11:59pm", "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -404,7 +404,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithAtTime() throws Exception {
         String description = "add go shopping at 11:59pm";
-        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "11:59pm", TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "11:59pm", TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -417,7 +417,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithTagNotAtTheEnd() throws Exception {
         String description = "add go to #girlfriend Mavis's house at 10:00am";
-        Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "10:00am", TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList(new Tag("girlfriend")));
+        Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "10:00am", TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList(new Tag("girlfriend")));
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -430,7 +430,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithEndTimeBeforeStartTime() throws Exception {
         String description = "add stayover at Juliet's house from 7pm to 10am";
-        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "7:00pm", "10:00am", "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "7:00pm", "10:00am", "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -447,7 +447,7 @@ public class LogicManagerTest {
         String todayNameInWeek = today.getDayNameInWeek();
         String tomorrowNameInWeek = tomorrow.getDayNameInWeek();
         String description = "add go school from " + todayNameInWeek + " to " + tomorrowNameInWeek ;
-        Task toBeAdded = new EventTask("go school", today.getNextWeek().toString(), tomorrow.toString(), TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", "not complete", new UniqueTagList());
+        Task toBeAdded = new EventTask("go school", today.getNextWeek().toString(), tomorrow.toString(), TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", "not completed", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -675,7 +675,7 @@ public class LogicManagerTest {
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
-            TaskComplete initialStatus = new TaskComplete("not complete");
+            TaskComplete initialStatus = new TaskComplete("not completed");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -690,7 +690,7 @@ public class LogicManagerTest {
             TaskTime startTime = new TaskTime("2:30pm");
             TaskTime endTime = new TaskTime("3:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
-            TaskComplete initialStatus = new TaskComplete("not complete");
+            TaskComplete initialStatus = new TaskComplete("not completed");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -714,7 +714,7 @@ public class LogicManagerTest {
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority((seed % 4) + ""),
-                    new TaskComplete("not complete"),
+                    new TaskComplete("not completed"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -748,7 +748,7 @@ public class LogicManagerTest {
                     new TaskTime(TaskTime.DEFAULT_START_TIME),
                     new TaskTime(TaskTime.DEFAULT_END_TIME),
                     new TaskPriority(taskPriority),
-                    new TaskComplete("no complete"),
+                    new TaskComplete("not completed"),
                     new UniqueTagList(new Tag("tag" + Math.abs(1)), new Tag("tag" + Math.abs(2)))
             );
         }
@@ -869,7 +869,7 @@ public class LogicManagerTest {
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority(TaskPriority.NO_PRIORITY),
-                    new TaskComplete("not complete"),
+                    new TaskComplete("not completed"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
