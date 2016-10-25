@@ -545,15 +545,15 @@ NIL
 4. Can attach different types of file inside the task, such as photos, PDF and PowerPoint<br>
 
 **Cons:**<br>
-1. Has limited number ofpriority levels<br>
+1. Has limited number of priority levels<br>
 2. Has no undo operation<br>
 
 #### Remember the Milk
 **Pros:**<br>
-1. Can be used offline and syncs once internet connection is established<br>
+1. Can be used offline and tasks are synced once internet connection is established<br>
 2. Can handle some natural language processing by saving deadlines from task information itself (e.g. Do math homework tomorrow: Saves task with deadline set to tomorrow)<br>
 3. Can undo when marking tasks as done (recover from accidentally marking a task as done)<br>
-4. Can set priority, and will list tasks by priority<br>
+4. Can set priority, and list tasks by priority<br>
 5. Can set recursive tasks<br>
 
 **Cons:**<br>
