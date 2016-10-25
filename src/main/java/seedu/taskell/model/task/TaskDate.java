@@ -455,16 +455,24 @@ public class TaskDate {
      * Get today's taskDate in the format of
      * DAY-MONTH-YEAR
      */
-    public static String getTodayDate() {
-        return LocalDate.now().format(standardFormat);
+    public static TaskDate getTodayDate() {
+        try {
+            return new TaskDate(LocalDate.now().format(standardFormat));
+        } catch (IllegalValueException e) {
+            return null;
+        }
     }
 
     /**
      * Get tomorrow's taskDate in the format of
      * DAY-MONTH-YEAR
      */
-    public static String getTomorrowDate() {
-        return LocalDate.now().plusDays(1).format(standardFormat);
+    public static TaskDate getTomorrowDate() {
+        try {
+            return new TaskDate(LocalDate.now().plusDays(1).format(standardFormat));
+        } catch (IllegalValueException e) {
+            return null;
+        }
     }
     
     public TaskDate getNextDay() throws IllegalValueException {
