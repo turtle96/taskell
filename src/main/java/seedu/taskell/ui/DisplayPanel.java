@@ -1,3 +1,4 @@
+/** @@author A0142130A **/
 package seedu.taskell.ui;
 
 import javafx.scene.Node;
@@ -37,11 +38,8 @@ public class DisplayPanel extends UiPart{
     public String getFxmlPath() {
         return null; //not applicable
     }
-    
-    /** @@author A0142130A **/
 
     /**
-     * Factory method for creating a Display Panel.
      * This method should be called after the FX runtime is initialized and in FX application thread.
      * @param placeholder The AnchorPane where the DisplayPanel must be inserted
      */
@@ -60,7 +58,7 @@ public class DisplayPanel extends UiPart{
         displayPanel.display.setText("Welcome to Taskell!\n"
                 + "Enter 'add' in command box to add a task.\n"
                 + "Enter 'list-undo' for list of commands to undo.\n"
-                + "Enter 'help' in for more information about commands.\n");
+                + "Enter 'help' for more information about commands.\n");
        
         return displayPanel;
     }
@@ -75,6 +73,10 @@ public class DisplayPanel extends UiPart{
                 display.appendText(i+1 + ". " + list.get(i) + "\n");
             }
         }
+    }
+    
+    public void loadCalendar() {
+        
     }
     
     /** @@author **/
