@@ -4,6 +4,7 @@ package seedu.taskell.ui;
 import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import jfxtras.scene.control.agenda.Agenda;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.util.FxViewUtil;
 
@@ -75,8 +76,17 @@ public class DisplayPanel extends UiPart{
         }
     }
     
-    public void loadCalendar() {
+    public static DisplayPanel loadCalendar(AnchorPane placeholder) {
+        //CalendarView calendarView = new CalendarView();
+        //calendarView.load();
         
+        DisplayPanel displayPanel = new DisplayPanel();
+        Agenda agenda = new Agenda();
+        
+        FxViewUtil.applyAnchorBoundaryParameters(agenda, 0.0, 0.0, 0.0, 0.0);
+        placeholder.getChildren().add(agenda);
+        
+        return displayPanel;
     }
     
     /** @@author **/
