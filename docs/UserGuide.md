@@ -140,7 +140,6 @@ To save time, Taskell has a short form command `cal`. <br>
 Format: `calendar`<br>
 
 #### Saving the information in Taskell : `save`
-
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
 If the specified directory is valid but the file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
