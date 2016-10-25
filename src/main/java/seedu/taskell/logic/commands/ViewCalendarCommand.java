@@ -3,12 +3,12 @@ package seedu.taskell.logic.commands;
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.events.ui.DisplayCalendarViewEvent;
 
+/** Shows calendar view on right panel
+ * */
 public class ViewCalendarCommand extends Command {
     
-    public static final String COMMAND_WORD = "calendar";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows calendar view on right panel.\n"
-            + "Example: " + COMMAND_WORD;
+    public static final String COMMAND_WORD_1 = "calendar";
+    public static final String COMMAND_WORD_2 = "cal";
     
     private static final String MESSAGE_SUCCESS = "Displayed calendar.";
 
