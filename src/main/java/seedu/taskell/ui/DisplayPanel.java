@@ -86,11 +86,12 @@ public class DisplayPanel extends UiPart{
     }
     
     public void loadCalendar(AnchorPane placeholder) {
+        placeholder.getChildren().clear();
         
         Agenda agenda = calendarView.getAgenda();
         
         FxViewUtil.applyAnchorBoundaryParameters(agenda, 0.0, 0.0, 0.0, 0.0);
-        placeholder.getChildren().clear();
+        
         placeholder.getChildren().add(agenda);
     }
     
