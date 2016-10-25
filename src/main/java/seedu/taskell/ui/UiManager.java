@@ -64,7 +64,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        //mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -119,6 +118,8 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
     
+    /** @@author A0142130A **/
+    
     @Subscribe
     private void handleDisplayList(DisplayListChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -132,5 +133,7 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Displaying calendar view...");
         mainWindow.loadCalendarView();
     }
+    
+    /** @@author **/
 
 }

@@ -192,6 +192,8 @@ public class MainWindow extends UiPart {
         return this.taskListPanel;
     }
     
+    /** @@author A0142130A **/
+    
     public void loadList(ArrayList<String> list) {
         displayPanel.loadList(displayPanelPlaceholder, list);
     }
@@ -199,4 +201,7 @@ public class MainWindow extends UiPart {
     public void loadCalendarView() {
         displayPanel.loadCalendar(displayPanelPlaceholder);
     }
+    
+    /** @@author **/
+    
 }
