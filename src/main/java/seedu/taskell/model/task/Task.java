@@ -33,7 +33,7 @@ public class Task implements ReadOnlyTask {
      * Every field must be present and not null.
      */
     public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskComplete taskStatus, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, tags);
+        assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, taskStatus, tags);
         this.description = description;
         this.taskType = taskType;
         this.startDate = startDate;
