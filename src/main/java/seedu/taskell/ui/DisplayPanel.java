@@ -11,6 +11,8 @@ import seedu.taskell.commons.util.FxViewUtil;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+import javax.swing.text.AsyncBoxView.ChildLocator;
+
 /**
  * The Display Panel of the App.
  */
@@ -22,12 +24,14 @@ public class DisplayPanel extends UiPart{
     private static final String STATUS_BAR_STYLE_SHEET = "result-display";
     
     private TextArea display;
+    private CalendarView calendarView;
 
     /**
      * Constructor is kept private as {@link #load(AnchorPane)} is the only way to create a DisplayPanel.
      */
     private DisplayPanel() {
-
+        calendarView = new CalendarView();
+        display = new TextArea();
     }
 
     @Override
@@ -47,7 +51,8 @@ public class DisplayPanel extends UiPart{
     public static DisplayPanel load(AnchorPane placeholder){
         logger.info("Initializing display panel");
         DisplayPanel displayPanel = new DisplayPanel();
-        displayPanel.display = new TextArea();
+        
+        //displayPanel.display = new TextArea();
         displayPanel.display.setEditable(false);
         displayPanel.display.setId(RESULT_DISPLAY_ID);
         displayPanel.display.getStyleClass().removeAll();
@@ -59,12 +64,16 @@ public class DisplayPanel extends UiPart{
         displayPanel.display.setText("Welcome to Taskell!\n"
                 + "Enter 'add' in command box to add a task.\n"
                 + "Enter 'list-undo' for list of commands to undo.\n"
-                + "Enter 'help' for more information about commands.\n");
+                + "Enter 'help' for more information about commands.\n"
+                + "Enter 'calendar' to view calendar.");
        
         return displayPanel;
     }
     
-    public void loadList(ArrayList<String> list) {
+    public void loadList(AnchorPane placeholder, ArrayList<String> list) {
+        placeholder.getChildren().clear();
+        placeholder.getChildren().add(display);
+        
         display.setText("");
         if (list.isEmpty()) {
             display.setText("No commands available for undo.");
@@ -76,16 +85,13 @@ public class DisplayPanel extends UiPart{
         }
     }
     
-    public static DisplayPanel loadCalendar(AnchorPane placeholder) {
-        CalendarView calendarView = new CalendarView();
+    public void loadCalendar(AnchorPane placeholder) {
         
-        DisplayPanel displayPanel = new DisplayPanel();
         Agenda agenda = calendarView.getAgenda();
         
         FxViewUtil.applyAnchorBoundaryParameters(agenda, 0.0, 0.0, 0.0, 0.0);
+        placeholder.getChildren().clear();
         placeholder.getChildren().add(agenda);
-        
-        return displayPanel;
     }
     
     /** @@author **/
