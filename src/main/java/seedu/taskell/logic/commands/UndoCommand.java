@@ -8,6 +8,7 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.model.DisplayListChangedEvent;
 import seedu.taskell.model.CommandHistory;
+import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
@@ -34,6 +35,7 @@ public class UndoCommand extends Command {
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
     
     private static ArrayList<CommandHistory> commandHistoryList;
+    private static UndoCommand self;
     
     private int index;
     private CommandHistory commandHistory;
@@ -43,8 +45,18 @@ public class UndoCommand extends Command {
         this.index = index;
     }
     
+    public static UndoCommand getInstance() {
+        if (self == null) {
+            self = new UndoCommand(0);
+        }
+        
+        return self;
+    }
+
     public static ArrayList<String> getListOfCommandHistoryText() {
         assert commandHistoryList != null;
+        
+        UndoCommand.getInstance().updateCommandList();
         
         ArrayList<String> list = new ArrayList<>();
         for (CommandHistory history: commandHistoryList) {
@@ -53,7 +65,28 @@ public class UndoCommand extends Command {
         
         return list;
     }
-    
+
+    //removes commandHistory with tasks not present in system
+    private void updateCommandList() {
+        if (model == null) {
+            logger.severe("model is null");
+        }
+        for (CommandHistory commandHistory: commandHistoryList) {
+            if (checkCommandType(commandHistory)) {
+                if (!model.isTaskPresent(commandHistory.getTask())) {
+                    commandHistoryList.remove(commandHistory);
+                }
+            }
+        }
+        
+    }
+
+    private boolean checkCommandType(CommandHistory commandHistory) {
+        return (commandHistory.getCommandType().contains(AddCommand.COMMAND_WORD) 
+                || commandHistory.getCommandType().contains("edit")) 
+                && !commandHistory.isRedoTrue();
+    }
+
     @Override
     public CommandResult execute() {
         
