@@ -193,10 +193,10 @@ public class MainWindow extends UiPart {
     }
     
     public void loadList(ArrayList<String> list) {
-        displayPanel.loadList(list);
+        displayPanel.loadList(displayPanelPlaceholder, list);
     }
     
     public void loadCalendarView() {
-        displayPanel = DisplayPanel.loadCalendar(displayPanelPlaceholder);
+        displayPanel.loadCalendar(displayPanelPlaceholder);
     }
 }
