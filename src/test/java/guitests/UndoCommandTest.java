@@ -14,6 +14,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void undoAdd() {
+        UndoCommand.clearCommandHistory();
+        
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.holdMeeting;
         
@@ -30,6 +32,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void undoDelete() {
+        UndoCommand.clearCommandHistory();
+        
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToDelete = currentList[0];
         int target = 1;
@@ -47,6 +51,8 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void undoAndRedoAdd() {
+        UndoCommand.clearCommandHistory();
+        
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.holdMeeting;
         
@@ -61,11 +67,14 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         
         commandBox.runCommand("undo 1");
         assertAddSuccess(taskToAdd, currentList);
+        
         UndoCommand.clearCommandHistory();
     }
     
     @Test
     public void undoAndRedoDelete() {
+        UndoCommand.clearCommandHistory();
+        
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToDelete = currentList[0];
         int target = 1;
