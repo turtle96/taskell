@@ -125,6 +125,12 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Displaying list...");
         mainWindow.loadList(event.getList());
     }
-
+    
+    @Subscribe
+    private void handleShowCalendarView(DisplayCalendarViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logger.info("Displaying calendar view...");
+        mainWindow.loadCalendarView();
+    }
 
 }
