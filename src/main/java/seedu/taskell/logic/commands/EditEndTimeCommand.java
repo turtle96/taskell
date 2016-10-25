@@ -17,14 +17,14 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * Edits a task end time identified using it's last displayed index from the task manager.
  */
 public class EditEndTimeCommand extends Command {
-    public static final String COMMAND_WORD = "edit-endat";
+    public static final String COMMAND_WORD = "edit-endTime";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the end time of a task identified by the index number used in the last task listing.\n"
             + "Parameters: INDEX (must be a positive integer) NEW_END_TIME\n"
             + "Example: " + COMMAND_WORD + " 1 9pm ";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \n\nNewTask: %2$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nUpdatedTask: %2$s";
 
     public final int targetIndex;
     public final TaskTime endTime;
@@ -45,6 +45,9 @@ public class EditEndTimeCommand extends Command {
         }
 
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+        if (taskToEdit.getTaskType().equals("FLOATING")) {
+            return new CommandResult("Unable to edit time of floating task");
+        }
         Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getStartTime(),endTime,
                 taskToEdit.getTaskPriority(),taskToEdit.getTags()
         );
