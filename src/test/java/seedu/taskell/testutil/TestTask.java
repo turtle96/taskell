@@ -24,7 +24,7 @@ public class TestTask implements ReadOnlyTask {
     }
     
     public TestTask(Description description, String taskType, TaskPriority taskPriority, TaskTime startTime, 
-              TaskTime endTime, TaskDate startDate, TaskDate endDate, TaskStatus taskStatus, UniqueTagList tags){
+              TaskTime endTime, TaskDate startDate, TaskDate endDate, TaskStatus taskStatus, UniqueTagList tags) {
         this.description = description;
         this.taskType = taskType;
         this.startDate = startDate;
