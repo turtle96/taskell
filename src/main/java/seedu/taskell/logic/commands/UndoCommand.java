@@ -45,7 +45,6 @@ public class UndoCommand extends Command {
     
     public static ArrayList<String> getListOfCommandHistoryText() {
         assert commandHistoryList != null;
-        assert !commandHistoryList.isEmpty();
         
         ArrayList<String> list = new ArrayList<>();
         for (CommandHistory history: commandHistoryList) {
