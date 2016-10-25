@@ -1,27 +1,20 @@
 package seedu.taskell.ui;
 
-import javafx.scene.Node;
 import jfxtras.scene.control.agenda.Agenda;
 
-public class CalendarView extends UiPart {
+/** This class holds the necessary elements to display calendar UI via Agenda API from jfxtras
+ * */
+
+public class CalendarView {
     
-    public void load() {
-        // create Agenda
-        Agenda agenda = new Agenda();
-
-        // add an appointment
-        agenda.appointments().addAll();
-
+    private Agenda agenda;
+    
+    public CalendarView() {
+        agenda = new Agenda();
     }
-
-    @Override
-    public void setNode(Node node) {
-        //not applicable
-    }
-
-    @Override
-    public String getFxmlPath() {
-        return null;    //not applicable
+    
+    public Agenda getAgenda() {
+        return agenda;
     }
 
 }
