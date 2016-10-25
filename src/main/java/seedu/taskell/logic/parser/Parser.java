@@ -62,35 +62,46 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            // UndoCommand.addCommandToHistory(userInput); //for some reason
-            // this fails LogicManagerTest
-            UndoCommand.updateMostRecentCommand(commandWord);
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareAdd(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            // UndoCommand.addCommandToHistory(userInput);
-            UndoCommand.updateMostRecentCommand(commandWord);
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareDelete(arguments);
 
-        case EditDateCommand.COMMAND_WORD:
-            return prepareEditDate(arguments);
+        case EditStartDateCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
+            return prepareEditStartDate(arguments);
 
-        case EditDescriptionCommand.COMMAND_WORD:
+        case EditEndDateCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
+            return prepareEditEndDate(arguments);
+
+        case EditDescriptionCommand.COMMAND_WORD_1:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
+            return prepareEditDescription(arguments);
+
+        case EditDescriptionCommand.COMMAND_WORD_2:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditDescription(arguments);
 
         case EditStartTimeCommand.COMMAND_WORD:
-            return prepareEditStart(arguments);
+            UndoCommand.addCommandToHistory(userInput, commandWord);
+            return prepareEditStartTime(arguments);
 
         case EditEndTimeCommand.COMMAND_WORD:
-            return prepareEditEnd(arguments);
+            UndoCommand.addCommandToHistory(userInput, commandWord);
+            return prepareEditEndTime(arguments);
 
         case EditPriorityCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditPriority(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -120,6 +131,9 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case ListUndoCommand.COMMAND_WORD:
+            return new ListUndoCommand();
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -136,8 +150,7 @@ public class Parser {
         if (targetIdx < 0 || targetIdx > 3) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
-        }
-        else
+        } else
             return new ListPriorityCommand(intValue);
     }
 
@@ -148,23 +161,33 @@ public class Parser {
      *            full command args string
      * @return the prepared command
      */
-    private Command prepareEditDate(String args) {
+    private Command prepareEditStartDate(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        int targetIdx = Integer.valueOf(st.nextToken());
+        String intValue = st.nextToken();
+        if (!isInt(intValue)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
         if (!TaskDate.isValidDate(arguments)) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDateCommand.MESSAGE_USAGE));
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
         }
 
         try {
-            return new EditDateCommand(targetIdx, arguments);
+            return new EditStartDateCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -179,11 +202,17 @@ public class Parser {
     private Command prepareEditDescription(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        int targetIdx = Integer.valueOf(st.nextToken());
+        String intValue = st.nextToken();
+        if (!isInt(intValue)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
@@ -191,6 +220,7 @@ public class Parser {
         try {
             return new EditDescriptionCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -202,19 +232,26 @@ public class Parser {
      *            full command args string
      * @return the prepared command
      */
-    private Command prepareEditStart(String args) {
+    private Command prepareEditStartTime(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        int targetIdx = Integer.valueOf(st.nextToken());
+        String intValue = st.nextToken();
+        if (!isInt(intValue)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
         arguments = arguments.trim();
         if (!TaskTime.isValidTime(arguments)) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
@@ -222,6 +259,46 @@ public class Parser {
         try {
             return new EditStartTimeCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+
+    /**
+     * Parses arguments in the context of the edit task endDate command.
+     *
+     * @param args
+     *            full command args string
+     * @return the prepared command
+     */
+    private Command prepareEditEndDate(String args) {
+        String arguments = "";
+        if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        String intValue = st.nextToken();
+        if (!isInt(intValue)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
+
+        while (st.hasMoreTokens()) {
+            arguments += st.nextToken() + " ";
+        }
+        if (!TaskDate.isValidDate(arguments)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
+        }
+
+        try {
+            return new EditEndDateCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -233,19 +310,26 @@ public class Parser {
      *            full command args string
      * @return the prepared command
      */
-    private Command prepareEditEnd(String args) {
+    private Command prepareEditEndTime(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        int targetIdx = Integer.valueOf(st.nextToken());
+        String intValue = st.nextToken();
+        if (!isInt(intValue)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
         while (st.hasMoreTokens()) {
             arguments += st.nextToken() + " ";
         }
         arguments = arguments.trim();
         if (!TaskTime.isValidTime(arguments)) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
@@ -253,6 +337,7 @@ public class Parser {
         try {
             return new EditEndTimeCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -267,6 +352,7 @@ public class Parser {
     private Command prepareEditPriority(String args) {
         String arguments = "";
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
@@ -277,6 +363,7 @@ public class Parser {
         }
         arguments = arguments.trim();
         if (!TaskPriority.isValidPriority(arguments)) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
@@ -284,6 +371,7 @@ public class Parser {
         try {
             return new EditPriorityCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -297,6 +385,7 @@ public class Parser {
      */
     private Command prepareAdd(String args) {
         if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -508,6 +597,7 @@ public class Parser {
                 return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime,
                         taskPriority, getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
+                UndoCommand.deletePreviousCommand();
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
@@ -515,6 +605,7 @@ public class Parser {
                 return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
                         taskPriority, getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
+                UndoCommand.deletePreviousCommand();
                 return new IncorrectCommand(ive.getMessage());
             }
         }
@@ -583,6 +674,7 @@ public class Parser {
 
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
+            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
@@ -643,12 +735,18 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
+    /** @@author A0142130A **/
+
     /**
      * Parses arguments in the context of undo command.
      * 
      */
     private Command prepareUndo(String args) {
-        return new UndoCommand();
+        Optional<Integer> index = parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
+        }
+        return new UndoCommand(index.get());
     }
 
     /**
@@ -686,4 +784,16 @@ public class Parser {
         return new SaveStorageLocationCommand(args);
     }
 
+    /** @@author **/
+
+    private static boolean isInt(String s) {
+        try {
+            int i = Integer.parseInt(s);
+            return true;
+        }
+
+        catch (NumberFormatException er) {
+            return false;
+        }
+    }
 }

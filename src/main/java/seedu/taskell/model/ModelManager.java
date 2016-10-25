@@ -79,14 +79,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        UndoCommand.updateMostRecentDeletedTask(target);
+        // UndoCommand.updateMostRecentDeletedTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        UndoCommand.updateMostRecentAddedTask(task);
+        // UndoCommand.updateMostRecentAddedTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -109,13 +109,19 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    public void updateFilteredTaskListPriority(Set<String> keywords){
+    // @@ author A0142073R
+    public void updateFilteredTaskListPriority(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
     }
+    // @@ author
+
+    /** @@author A0142130A **/
     @Override
     public void updateFilteredTaskListByAnyKeyword(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagsQualifier(keywords)));
     }
+
+    /** @@author **/
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
@@ -162,11 +168,14 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        /** @@author A0142130A **/
         @Override
         public boolean run(ReadOnlyTask task) {
             String searchString = task.getDescription().description + " " + task.tagsSimpleString();
             return nameKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
+
+        /** @@author **/
 
         @Override
         public String toString() {
@@ -174,6 +183,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /** @@author A0142130A **/
     private class TagsQualifier implements Qualifier {
         private Set<String> tagsKeyWords;
 
@@ -194,6 +204,9 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /** @@author **/
+
+    // @@author A0142073R
     private class PriorityQualifier implements Qualifier {
         private Set<String> PriorityKeyWords;
 
@@ -212,5 +225,5 @@ public class ModelManager extends ComponentManager implements Model {
             return "priority=" + String.join(", ", PriorityKeyWords) + "\n";
         }
     }
-
+    // @@ author
 }
