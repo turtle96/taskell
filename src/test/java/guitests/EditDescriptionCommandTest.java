@@ -35,8 +35,8 @@ public class EditDescriptionCommandTest extends TaskManagerGuiTest {
                 + "/"+ "edit-name"
                 + ": Edits the description task identified by the index number used in the last task listing.\n"
                 + "Parameters: INDEX (must be a positive integer) NEW_DESCRIPTION\n"
-                + "Example: " + "edit-desc" + " 1 buy cake\n "
-                + "Example: " + "edit-name" + " 2 do 2103t\n ");
+                + "Example: " + "edit-desc" + " 1 buy cake\n"
+                + "Example: " + "edit-name" + " 2 do 2103t\n");
 
     }
 
