@@ -315,7 +315,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleByDate() throws Exception {
         String description = "add go shopping by 2-2-2222 by 3-3-3333";
-        Task toBeAdded = new EventTask("go shopping by 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping by 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow().toString().toString(), TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -328,7 +328,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleByTime() throws Exception {
         String description = "add go shopping by 11.58pm by 11.59pm";
-        Task toBeAdded = new EventTask("go shopping by 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping by 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow().toString().toString(), "11.58pm", "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -367,7 +367,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleToDate() throws Exception {
         String description = "add go shopping to 2-2-2222 to 3-3-3333";
-        Task toBeAdded = new EventTask("go shopping to 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow(), TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping to 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -380,7 +380,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidTaskWithMultipleToTime() throws Exception {
         String description = "add go shopping to 11.58pm to 11.59pm";
-        Task toBeAdded = new EventTask("go shopping to 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow(), "11.58pm", "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping to 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow().toString(), "11.58pm", "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -393,7 +393,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithByTime() throws Exception {
         String description = "add go shopping by 11:59pm";
-        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), TaskTime.getTimeNow(), "11:59pm", "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), TaskTime.getTimeNow().toString().toString(), "11:59pm", "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
