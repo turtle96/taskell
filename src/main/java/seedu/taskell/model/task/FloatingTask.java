@@ -21,11 +21,11 @@ public class FloatingTask extends Task {
                 new TaskTime(TaskTime.DEFAULT_START_TIME),
                 new TaskTime(TaskTime.DEFAULT_END_TIME),
                 new TaskPriority(taskPriority),
-                new TaskComplete(taskStatus),
+                new TaskStatus(taskStatus),
                 tags);
     }
     
-    public FloatingTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskComplete taskStatus, UniqueTagList tags) {
+    public FloatingTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskStatus taskStatus, UniqueTagList tags) {
         super(description, taskType, startDate, endDate, startTime, endTime, taskPriority, taskStatus, tags);
     }
 

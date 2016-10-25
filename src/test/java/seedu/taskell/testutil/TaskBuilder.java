@@ -58,7 +58,7 @@ public class TaskBuilder {
     }
     
     public TaskBuilder withTaskComplete(String taskStatus) throws IllegalValueException {
-        this.task.setTaskComplete(new TaskComplete(taskStatus));
+        this.task.setTaskComplete(new TaskStatus(taskStatus));
         return this;
     }
     

@@ -22,14 +22,14 @@ public class EventTask extends Task {
                 new TaskTime(startTime),
                 new TaskTime(endTime),
                 new TaskPriority(taskPriority),
-                new TaskComplete(taskStatus),
+                new TaskStatus(taskStatus),
                 tags);
     }
     /**
      * Every field must be present and not null.
      * @throws IllegalValueException 
      */
-    public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskComplete taskStatus, UniqueTagList tags) throws IllegalValueException {
+    public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskStatus taskStatus, UniqueTagList tags) throws IllegalValueException {
         endDate = autoAdjustEndDate(startDate, endDate, startTime, endTime);
         
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {

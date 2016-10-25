@@ -21,7 +21,7 @@ public class Task implements ReadOnlyTask {
     protected TaskTime startTime;
     protected TaskTime endTime;
     protected TaskPriority taskPriority;
-    protected TaskComplete taskStatus;
+    protected TaskStatus taskStatus;
 
     protected UniqueTagList tags;
     
@@ -32,7 +32,7 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskComplete taskStatus, UniqueTagList tags) {
+    public Task(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskStatus taskStatus, UniqueTagList tags) {
         assert !CollectionUtil.isAnyNull(description, taskType, startDate, startTime, endTime, taskPriority, taskStatus, tags);
         this.description = description;
         this.taskType = taskType;
@@ -92,7 +92,7 @@ public class Task implements ReadOnlyTask {
     }
     
     @Override
-    public TaskComplete getTaskStatus() {
+    public TaskStatus getTaskStatus() {
         return taskStatus;
     }
     

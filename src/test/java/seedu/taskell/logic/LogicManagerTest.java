@@ -677,7 +677,7 @@ public class LogicManagerTest {
             TaskTime startTime = new TaskTime("12:30AM");
             TaskTime endTime = new TaskTime("12:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
-            TaskComplete initialStatus = new TaskComplete("incomplete");
+            TaskStatus initialStatus = new TaskStatus("incomplete");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -692,7 +692,7 @@ public class LogicManagerTest {
             TaskTime startTime = new TaskTime("2:30pm");
             TaskTime endTime = new TaskTime("3:45AM");
             TaskPriority privatetaskPriority = new TaskPriority("0");
-            TaskComplete initialStatus = new TaskComplete("incomplete");
+            TaskStatus initialStatus = new TaskStatus("incomplete");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
@@ -716,7 +716,7 @@ public class LogicManagerTest {
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority((seed % 4) + ""),
-                    new TaskComplete("incomplete"),
+                    new TaskStatus("incomplete"),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
@@ -733,7 +733,7 @@ public class LogicManagerTest {
                     new TaskTime(startTime),
                     new TaskTime(endTime),
                     new TaskPriority(taskPriority),
-                    new TaskComplete(taskStatus),
+                    new TaskStatus(taskStatus),
                     new UniqueTagList(new Tag("tag" + Math.abs(1)), new Tag("tag" + Math.abs(2)))
             );
         }
@@ -750,7 +750,7 @@ public class LogicManagerTest {
                     new TaskTime(TaskTime.DEFAULT_START_TIME),
                     new TaskTime(TaskTime.DEFAULT_END_TIME),
                     new TaskPriority(taskPriority),
-                    new TaskComplete("incomplete"),
+                    new TaskStatus("incomplete"),
                     new UniqueTagList(new Tag("tag" + Math.abs(1)), new Tag("tag" + Math.abs(2)))
             );
         }
@@ -871,7 +871,7 @@ public class LogicManagerTest {
                     new TaskTime("12:30AM"),
                     new TaskTime("12:45AM"),
                     new TaskPriority(TaskPriority.NO_PRIORITY),
-                    new TaskComplete("incomplete"),
+                    new TaskStatus("incomplete"),
                     new UniqueTagList(new Tag("tag"))
             );
         }

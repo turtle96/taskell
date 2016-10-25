@@ -16,7 +16,7 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime endTime;
     private TaskDate startDate;
     private TaskDate endDate;
-    private TaskComplete taskStatus;
+    private TaskStatus taskStatus;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -24,7 +24,7 @@ public class TestTask implements ReadOnlyTask {
     }
     
     public TestTask(Description description, String taskType, TaskPriority taskPriority, TaskTime startTime, 
-              TaskTime endTime, TaskDate startDate, TaskDate endDate, TaskComplete taskStatus, UniqueTagList tags){
+              TaskTime endTime, TaskDate startDate, TaskDate endDate, TaskStatus taskStatus, UniqueTagList tags){
         this.description = description;
         this.taskType = taskType;
         this.startDate = startDate;
@@ -66,7 +66,7 @@ public class TestTask implements ReadOnlyTask {
     }
     
 
-    public void setTaskComplete(TaskComplete taskStatus){
+    public void setTaskComplete(TaskStatus taskStatus){
         this.taskStatus = taskStatus;
     }
 
@@ -74,7 +74,7 @@ public class TestTask implements ReadOnlyTask {
         this.tags = tags;
     }
 
-    public void setTaskStatus(TaskComplete taskStatus) {
+    public void setTaskStatus(TaskStatus taskStatus) {
         this.taskStatus = taskStatus;
     }
 
@@ -114,7 +114,7 @@ public class TestTask implements ReadOnlyTask {
     }
     
     @Override
-    public TaskComplete getTaskStatus() {
+    public TaskStatus getTaskStatus() {
         return taskStatus;
     }
 

@@ -2,12 +2,12 @@ package seedu.taskell.model.task;
 
 import java.util.Objects;
 
-public class TaskComplete {
+public class TaskStatus {
     public static final String FINISHED = "finished";
     public static final String INCOMPLETE = "incomplete";
     public final String taskStatus;
     
-    public TaskComplete(String taskStatus) {
+    public TaskStatus(String taskStatus) {
         this.taskStatus = taskStatus;
     }
     
@@ -27,8 +27,8 @@ public class TaskComplete {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof TaskComplete // instanceof handles nulls
-                        && this.taskStatus.equals(((TaskComplete)other).taskStatus)); // state check
+                || (other instanceof TaskStatus // instanceof handles nulls
+                        && this.taskStatus.equals(((TaskStatus)other).taskStatus)); // state check
     }
     @Override
     public int hashCode() {

@@ -4,7 +4,7 @@ import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
-import seedu.taskell.model.task.TaskComplete;
+import seedu.taskell.model.task.TaskStatus;
 import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         
-        TaskComplete finsihedStatus = new TaskComplete("finished");
+        TaskStatus finsihedStatus = new TaskStatus("finished");
         
         ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
         

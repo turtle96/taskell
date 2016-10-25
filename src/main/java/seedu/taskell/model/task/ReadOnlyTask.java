@@ -14,7 +14,7 @@ public interface ReadOnlyTask {
     TaskTime getStartTime();
     TaskTime getEndTime();
     TaskPriority getTaskPriority();
-    TaskComplete getTaskStatus();
+    TaskStatus getTaskStatus();
 
     /**
      * The returned TagList is a deep copy of the internal TagList,
