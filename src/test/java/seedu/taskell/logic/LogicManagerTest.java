@@ -73,6 +73,8 @@ public class LogicManagerTest {
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
+        
+        UndoCommand.initializeCommandHistory();
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to startDate before.
         helpShown = false;
@@ -431,8 +433,8 @@ public class LogicManagerTest {
     
     @Test
     public void execute_add_ValidEventWithEndTimeBeforeStartTime() throws Exception {
-        String description = "add stayover at Juliet's house from 7pm to 10am";
-        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "7:00pm", "10:00am", "0", new UniqueTagList());
+        String description = "add stayover at Juliet's house from 11.58pm to 10am";
+        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "11:58pm", "10:00am", "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
