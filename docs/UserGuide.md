@@ -134,6 +134,11 @@ Picture 7: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell 
 
 <!--- @@author A0142130A ---> 
 
+#### Showing calendar view : `calendar` or `cal`
+You can view the calendar for the week on right panel to refer to the dates when adding tasks and scheduling events.<br>
+To save time, Taskell has a short form command `cal`. <br>
+Format: `calendar`<br>
+
 #### Saving the information in Taskell : `save`
 
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
@@ -179,3 +184,4 @@ List Tasks Done | `list [DONE]`
 List Undo | `list-undo`
 Help | `help`
 Undo | `undo INDEX`
+Calendar View | `calendar` or `cal`
