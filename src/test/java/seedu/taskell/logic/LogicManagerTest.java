@@ -393,7 +393,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithByTime() throws Exception {
         String description = "add go shopping by 11:59pm";
-        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), TaskTime.getTimeNow().toString().toString(), "11:59pm", "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate().toString().toString(), TaskDate.getTodayDate().toString().toString(), TaskTime.getTimeNow().toString().toString(), "11:59pm", "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -406,7 +406,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithAtTime() throws Exception {
         String description = "add go shopping at 11:59pm";
-        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "11:59pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
+        Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), "11:59pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -419,7 +419,7 @@ public class LogicManagerTest {
     @Test
     public void execute_add_ValidEventWithTagNotAtTheEnd() throws Exception {
         String description = "add go to #girlfriend Mavis's house at 11:58pm";
-        Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "11:58pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList(new Tag("girlfriend")));
+        Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), "11:58pm", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList(new Tag("girlfriend")));
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -431,8 +431,8 @@ public class LogicManagerTest {
     
     @Test
     public void execute_add_ValidEventWithEndTimeBeforeStartTime() throws Exception {
-        String description = "add stayover at Juliet's house from 7pm to 10am";
-        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "7:00pm", "10:00am", "0", new UniqueTagList());
+        String description = "add stayover at Juliet's house from 11.58pm to 10am";
+        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), "11:58pm", "10:00am", "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -444,8 +444,8 @@ public class LogicManagerTest {
     
     @Test
     public void execute_add_ValidEventWithSameDayNameInWeekAsToday() throws Exception {
-        TaskDate today = new TaskDate(TaskDate.getTodayDate());
-        TaskDate tomorrow = new TaskDate(TaskDate.getTomorrowDate());
+        TaskDate today = new TaskDate(TaskDate.getTodayDate().toString());
+        TaskDate tomorrow = new TaskDate(TaskDate.getTomorrowDate().toString());
         String todayNameInWeek = today.getDayNameInWeek();
         String tomorrowNameInWeek = tomorrow.getDayNameInWeek();
         String description = "add go school from " + todayNameInWeek + " to " + tomorrowNameInWeek ;

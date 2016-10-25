@@ -96,7 +96,7 @@ public class TaskDateTest {
     
     @Test
     public void assertNewTaskDateBehaviour() throws IllegalValueException {
-        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        TaskDate today = TaskDate.getTodayDate();
         TaskDate validDayOfWeek = new TaskDate(today.getDayNameInWeek());
         assertEquals(today.getNextWeek(), validDayOfWeek);
         
@@ -130,13 +130,13 @@ public class TaskDateTest {
     @Test
     public void assertCorrectTodayDate() {
         DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
-        assertEquals(LocalDate.now().format(standardFormat), TaskDate.getTodayDate());
+        assertEquals(LocalDate.now().format(standardFormat), TaskDate.getTodayDate().toString());
     }
     
     @Test
     public void assertCorrectTomorrowDate() {
         DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
-        assertEquals(LocalDate.now().plusDays(1).format(standardFormat), TaskDate.getTomorrowDate());
+        assertEquals(LocalDate.now().plusDays(1).format(standardFormat), TaskDate.getTomorrowDate().toString());
     }
     
     @Test
