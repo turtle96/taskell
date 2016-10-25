@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class TaskComplete {
     public static final String COMPLETED_INFO = "completed";
-    public static final String NOT_COMPLETED_INFO = "not completed";
+    public static final String NOT_COMPLETED_INFO = "incomplete";
     public final String taskStatus;
     
     public TaskComplete(String taskStatus) {
@@ -16,7 +16,7 @@ public class TaskComplete {
     }
     
     public static boolean isValidTaskComplete(String TaskToValidate) {
-        return TaskToValidate.equals("finished")  || TaskToValidate.equals("not completed");           
+        return TaskToValidate.equals("finished")  || TaskToValidate.equals("incomplete");           
     }
     
     @Override

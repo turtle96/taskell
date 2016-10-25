@@ -40,10 +40,10 @@ public class AddCommand extends Command {
         
         switch (taskType) {
         case Task.FLOATING_TASK: 
-            this.toAdd = new FloatingTask(description, taskPriority, "not completed", new UniqueTagList(tagSet));
+            this.toAdd = new FloatingTask(description, taskPriority, "incomplete", new UniqueTagList(tagSet));
             break;
         case Task.EVENT_TASK:
-            this.toAdd = new EventTask(description, startDate, endDate, startTime, endTime, taskPriority, "not completed", new UniqueTagList(tagSet));
+            this.toAdd = new EventTask(description, startDate, endDate, startTime, endTime, taskPriority, "incomplete", new UniqueTagList(tagSet));
             break;
         default:
             toAdd = null;
