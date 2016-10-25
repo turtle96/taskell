@@ -78,7 +78,8 @@ public class DisplayPanel extends UiPart{
         }
         else {
             for (int i=0; i<list.size(); i++) {
-                display.appendText(i+1 + ". " + list.get(i) + "\n");
+                int index = i+1;
+                display.appendText(index + ". " + list.get(i) + "\n");
             }
         }
     }
