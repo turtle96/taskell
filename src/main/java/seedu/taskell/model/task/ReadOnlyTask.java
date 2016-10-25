@@ -42,6 +42,30 @@ public interface ReadOnlyTask {
      * Formats the task as text, showing all contact details.
      */
     default String getAsText() {
+        if (getTaskType().equals(Task.FLOATING_TASK)) {
+            return getAsTextFloatingTask();
+        } else {
+            return getAsTextEventTask();
+        }
+    }
+    
+    /**
+     * Formats the floating task as text, showing all contact details.
+     */
+    default String getAsTextFloatingTask() {
+        final StringBuilder builder = new StringBuilder();
+        builder.append(getDescription())
+                .append(" TaskPriority: ")
+                .append(getTaskPriority())
+                .append(" Tags: ");
+        getTags().forEach(builder::append);
+        return builder.toString();
+    }
+    
+    /**
+     * Formats the event task as text, showing all contact details.
+     */
+    default String getAsTextEventTask() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getDescription())
                 .append(" StartDate: ")
@@ -66,7 +90,7 @@ public interface ReadOnlyTask {
      */
     default String tagsString() {
         final StringBuffer buffer = new StringBuffer();
-        final String separator = ", ";
+        final String separator = " ";
         getTags().forEach(tag -> buffer.append(tag).append(separator));
         if (buffer.length() == 0) {
             return "";

@@ -75,14 +75,14 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        UndoCommand.updateMostRecentDeletedTask(target);
+        //UndoCommand.updateMostRecentDeletedTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        UndoCommand.updateMostRecentAddedTask(task);
+        //UndoCommand.updateMostRecentAddedTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -104,10 +104,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
     
+    /** @@author A0142130A **/
     @Override
     public void updateFilteredTaskListByAnyKeyword(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagsQualifier(keywords)));
     }
+    /** @@author **/
 
     @Override
     public void updateFilteredtaskListCompleted(Set<String> keywords) {
@@ -157,6 +159,7 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        /** @@author A0142130A **/
         @Override
         public boolean run(ReadOnlyTask task) {
             String searchString = task.getDescription().description
@@ -164,6 +167,7 @@ public class ModelManager extends ComponentManager implements Model {
             return nameKeyWords.stream()
                     .allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
+        /** @@author **/
 
         @Override
         public String toString() {
@@ -171,6 +175,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
     
+    /** @@author A0142130A **/
     private class TagsQualifier implements Qualifier {
         private Set<String> tagsKeyWords;
 
@@ -191,6 +196,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", tagsKeyWords);
         }
     }
+
     
     private class CompleteQualifier implements Qualifier {
         private Set<String> CompleteKeyWords;
@@ -212,5 +218,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "complete=" + String.join(", ", CompleteKeyWords);
         }
     }
+
+    
+
 
 }

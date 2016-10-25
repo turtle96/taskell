@@ -14,26 +14,26 @@ import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Edits a task start time identified using it's last displayed index from the task manager.
+ * Edits a task EndDate identified using it's last displayed index from the task
+ * manager.
  */
-public class EditStartTimeCommand extends Command {
-    public static final String COMMAND_WORD = "edit-startTime";
+public class EditEndDateCommand extends Command {
+    public static final String COMMAND_WORD = "edit-endDate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the start time of a task identified by the index number used in the last task listing.\n"
-            + "Parameters: INDEX (must be a positive integer) NEW_START_TIME\n"
-            + "Example: " + COMMAND_WORD + " 1 2pm ";
+            + ": Edits the EndDate of a task identified by the index number used in the last task listing.\n"
+            + "Parameters: INDEX (must be a positive integer) NEW_DATE\n" + "Example: " + COMMAND_WORD + " 1 8-8-2016 ";
 
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nUpdatedTask: %2$s";
 
     public final int targetIndex;
-    public final TaskTime startTime;
-    
-    public EditStartTimeCommand(int targetIndex, String newTime) throws IllegalValueException {
+    public final TaskDate endDate;
+
+    public EditEndDateCommand(int targetIndex, String EndDate) throws IllegalValueException {
         this.targetIndex = targetIndex;
-        this.startTime = new TaskTime(newTime);
+        this.endDate = new TaskDate(EndDate);
     }
-    
+
     @Override
     public CommandResult execute() {
 
@@ -43,23 +43,19 @@ public class EditStartTimeCommand extends Command {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-        
-        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
 
+        ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         if (taskToEdit.getTaskType().equals("FLOATING")) {
-            return new CommandResult("Unable to edit time of floating task");
+            return new CommandResult("Unable to edit date of floating task");
         }
-        Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), startTime,taskToEdit.getEndTime(),
-                taskToEdit.getTaskPriority(),taskToEdit.getTaskStatus(), taskToEdit.getTags()
-        );
+        Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskToEdit.getStartDate(),
+                endDate, taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTaskStatus(),
+                taskToEdit.getTags());
         try {
-            model.editTask(taskToEdit,newTask);
-            UndoCommand.addTaskToCommandHistory(newTask);
-            UndoCommand.addOldTaskToCommandHistory((Task) taskToEdit);
+            model.editTask(taskToEdit, newTask);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            UndoCommand.deletePreviousCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         }
 

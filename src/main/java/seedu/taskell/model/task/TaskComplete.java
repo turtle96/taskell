@@ -3,8 +3,8 @@ package seedu.taskell.model.task;
 import java.util.Objects;
 
 public class TaskComplete {
-    public static final String COMPLETED_INFO = "completed";
-    public static final String NOT_COMPLETED_INFO = "incomplete";
+    public static final String FINISHED = "finished";
+    public static final String INCOMPLETE = "incomplete";
     public final String taskStatus;
     
     public TaskComplete(String taskStatus) {
@@ -16,7 +16,7 @@ public class TaskComplete {
     }
     
     public static boolean isValidTaskComplete(String TaskToValidate) {
-        return TaskToValidate.equals("finished")  || TaskToValidate.equals("incomplete");           
+        return TaskToValidate.equals(FINISHED)  || TaskToValidate.equals(INCOMPLETE);           
     }
     
     @Override

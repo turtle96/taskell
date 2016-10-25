@@ -25,7 +25,7 @@ public class EditPriorityCommand extends Command {
             + "Parameters: INDEX (must be a positive integer) NEW_PRIORITY(must be between 0 to 3)\n"
             + "Example: " + COMMAND_WORD + " 1 3 ";
 
-    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Old Task: %1$s \n\nNewTask: %2$s";
+    public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nUpdatedTask: %2$s";
 
     public final int targetIndex;
     public final TaskPriority taskPriority;
@@ -51,9 +51,12 @@ public class EditPriorityCommand extends Command {
         );
         try {
             model.editTask(taskToEdit,newTask);
+            UndoCommand.addTaskToCommandHistory(newTask);
+            UndoCommand.addOldTaskToCommandHistory((Task) taskToEdit);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            UndoCommand.deletePreviousCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         }
 
