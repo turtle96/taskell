@@ -105,9 +105,12 @@ public class Parser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListPriorityCommand.COMMAND_WORD:
+            return prepareListPriority(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
-            
+
         case SaveStorageLocationCommand.COMMAND_WORD:
             return prepareSaveStorageLocation(arguments);
 
@@ -120,6 +123,22 @@ public class Parser {
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+
+    private Command prepareListPriority(String args) {
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        String intValue = st.nextToken();
+        int targetIdx = Integer.valueOf(intValue);
+        if (targetIdx < 0 || targetIdx > 3) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
+        }
+        else
+            return new ListPriorityCommand(intValue);
     }
 
     /**
@@ -305,14 +324,14 @@ public class Parser {
         boolean hasEndDate = false;
         boolean hasStartTime = false;
         boolean hasEndTime = false;
-        
+
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
             String tempToken = "";
 
-            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(FROM)
-                    && !token.equals(TO) && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token)
-                    && !token.startsWith(Tag.PREFIX) && !token.startsWith(TaskPriority.PREFIX)) {
+            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(FROM) && !token.equals(TO)
+                    && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token) && !token.startsWith(Tag.PREFIX)
+                    && !token.startsWith(TaskPriority.PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
@@ -377,7 +396,7 @@ public class Parser {
             } else if (TaskDate.isValidDate(token)) {
                 if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
                         && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token); 
+                    descriptionQueue.offer(token);
                 } else if (!onQueue.isEmpty()) {
                     if (!hasStartDate) {
                         onQueue.poll();
@@ -417,11 +436,11 @@ public class Parser {
                         descriptionQueue.offer(toQueue.poll());
                         descriptionQueue.offer(token);
                     }
-                } 
+                }
             } else if (TaskTime.isValidTime(token)) {
                 if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
                         && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token); 
+                    descriptionQueue.offer(token);
                 } else if (!byQueue.isEmpty()) {
                     if (!hasEndTime) {
                         byQueue.poll();
@@ -474,31 +493,32 @@ public class Parser {
             description += descriptionQueue.poll() + " ";
         }
         description.trim();
-        
+
         if (!hasEndDate) {
             endDate = startDate;
         }
-        
-        if ((TaskDate.isValidToday(startDate) && !hasStartTime) || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
+
+        if ((TaskDate.isValidToday(startDate) && !hasStartTime)
+                || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
             startTime = TaskTime.getTimeNow();
         }
 
         if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
             try {
-                return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime, taskPriority,
-                        getTagsFromArgs(tagString));
+                return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime,
+                        taskPriority, getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
             try {
-              return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime, taskPriority,
-                      getTagsFromArgs(tagString));
-          } catch (IllegalValueException ive) {
-              return new IncorrectCommand(ive.getMessage());
-          }
+                return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
+                        taskPriority, getTagsFromArgs(tagString));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
         }
-        
+
     }
 
     private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
@@ -555,7 +575,8 @@ public class Parser {
     /**
      * Parses arguments in the context of the delete task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareDelete(String args) {
@@ -571,7 +592,8 @@ public class Parser {
     /**
      * Parses arguments in the context of the select task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareSelect(String args) {
@@ -605,7 +627,8 @@ public class Parser {
     /**
      * Parses arguments in the context of the find task command.
      *
-     * @param args string
+     * @param args
+     *            string
      * @return the prepared command
      */
     private Command prepareFind(String args) {
@@ -631,7 +654,8 @@ public class Parser {
     /**
      * Parses arguments in the context of the find task by tags command.
      * 
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareFindByTag(String args) {
@@ -646,17 +670,18 @@ public class Parser {
         return new FindTagCommand(keywordSet);
 
     }
-    
+
     /**
      * Parses arguments in the context of the save storage location command.
      * 
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
     private Command prepareSaveStorageLocation(String args) {
         if (args.isEmpty()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
-                    SaveStorageLocationCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SaveStorageLocationCommand.MESSAGE_USAGE));
         }
         return new SaveStorageLocationCommand(args);
     }
