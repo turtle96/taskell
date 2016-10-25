@@ -1,3 +1,4 @@
+/** @@author A0142130A **/
 package guitests;
 
 import static org.junit.Assert.assertTrue;

@@ -51,9 +51,12 @@ public class EditPriorityCommand extends Command {
         );
         try {
             model.editTask(taskToEdit,newTask);
+            UndoCommand.addTaskToCommandHistory(newTask);
+            UndoCommand.addOldTaskToCommandHistory((Task) taskToEdit);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            UndoCommand.deletePreviousCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         }
 
