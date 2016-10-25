@@ -73,6 +73,8 @@ public class LogicManagerTest {
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
+        
+        UndoCommand.initializeCommandHistory();
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to startDate before.
         helpShown = false;
@@ -166,11 +168,11 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add Valid Description with invalid startDate format by 1-jan-16", TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description with dates before today's date on 1-jan-2000", EventTask.MESSAGE_EVENT_CONSTRAINTS);
+                "add Valid Description with start date before today's date on 1-jan-2000", EventTask.MESSAGE_EVENT_CONSTRAINTS);
+        assertCommandBehavior(
+                "add Valid Description with end date before today's date by 1-jan-2000", EventTask.MESSAGE_EVENT_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description with startDate after endDate from 1-jan-2200 to 1-jan-2100", EventTask.MESSAGE_EVENT_CONSTRAINTS);
-        assertCommandBehavior(
-                "add Valid Description with same date but startTime after endTime from 9pm to 2am", EventTask.MESSAGE_EVENT_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/invalidPriority ", TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         assertCommandBehavior(
@@ -418,6 +420,36 @@ public class LogicManagerTest {
     public void execute_add_ValidEventWithTagNotAtTheEnd() throws Exception {
         String description = "add go to #girlfriend Mavis's house at 10:00am";
         Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "10:00am", TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList(new Tag("girlfriend")));
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventWithEndTimeBeforeStartTime() throws Exception {
+        String description = "add stayover at Juliet's house from 7pm to 10am";
+        Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate(), TaskDate.getTodayDate(), "7:00pm", "10:00am", "0", new UniqueTagList());
+        TaskManager expectedAB = new TaskManager();
+        expectedAB.addTask(toBeAdded);
+        // execute command and verify result
+        assertCommandBehavior(description,
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                expectedAB.getTaskList());
+    }
+    
+    @Test
+    public void execute_add_ValidEventWithSameDayNameInWeekAsToday() throws Exception {
+        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        TaskDate tomorrow = new TaskDate(TaskDate.getTomorrowDate());
+        String todayNameInWeek = today.getDayNameInWeek();
+        String tomorrowNameInWeek = tomorrow.getDayNameInWeek();
+        String description = "add go school from " + todayNameInWeek + " to " + tomorrowNameInWeek ;
+        Task toBeAdded = new EventTask("go school", today.getNextWeek().toString(), tomorrow.toString(), TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, "0", new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result

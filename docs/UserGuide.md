@@ -75,6 +75,8 @@ Prints a list of all the tasks due on the specific startDate.<br>
 <br><img src="images/ListToday.png" width="600"></br>
 Picture 2: List of tasks due today printed when “List today” is keyed in.
    
+<!--- @@author A0142130A --->  
+
 #### Finding tasks: `find`
 You can use the find command to view tasks with specific keywords.<br>
 Formats: <br>
@@ -89,6 +91,8 @@ Example: `find homework essay cs2103`<br>
 This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  <br><img src="images/findReport.png" width="600"></br>
  <br><img src="images/findReportResult.png" width="600"></br>
+ 
+ <!--- @@author ---> 
 
 Picture 3 and 4: Keying in “find report” displays list of tasks with report as one of the keywords in task description
 
@@ -98,9 +102,16 @@ Picture 3 and 4: Keying in “find report” displays list of tasks with report as o
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `chicken` will match `chicken duck`
 
+<!--- @@author A0142130A ---> 
+
 #### Reverting previous action : `undo`
-If you wish to undo your previous action, <kbd>Enter</kbd> undo.<br>
-Format: `undo`
+If you wish to undo your previous actions, <kbd>Enter</kbd> list-undo to see a list of 
+previous commands that can be undone.<br>
+Then use undo command at the specified INDEX in the list.<br>
+Format: `undo INDEX`<br> 
+Example: `list-undo`, then `undo 3`, will undo third command in command history.
+
+<!--- @@author ---> 
 
 #### Deleting a task : `delete`
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
@@ -121,6 +132,8 @@ Format: `edit INDEX NEWTASK`<br>
  <br> <img src="images/editCmd.png" width="600"> </br>
 Picture 7: `edit 2 schedule meeting on wednesday: edits the 2nd task in Taskell to "schedule meeting on wednesday."`
 
+<!--- @@author A0142130A ---> 
+
 #### Saving the information in Taskell : `save`
 
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
@@ -128,6 +141,8 @@ If the specified directory is valid but the file is missing, for example if comm
 but `chicken` file is not created, Taskell will create the file for you.<br>
 Format: `save FOLDERPATH`<br>
 Example: `save C:/Users/Jim/Documents`
+
+<!--- @@author ---> 
 
 #### Clearing all entries : `clear`
 To clear all tasks, <kbd>Enter</kbd> clear.<br>
@@ -137,8 +152,8 @@ Format: `clear`
 To close Taskell, <kbd>Enter</kbd> exit.<br>
 Format: `exit`  
 
->  Done already? So where are all these information saved? No need to worry, Taskell will 
->  have them saved it for you!
+>  Done already? So are all these information saved? No need to worry, Taskell will 
+>  have them saved for you!
 <br>
 
 ## FAQ
@@ -157,9 +172,10 @@ Add Event With Deadline | `add TASK ITEM by [DATE][TIME]`
 Clear | `clear`
 Delete | `delete INDEX`
 Find | `find KEYWORD [MORE_KEYWORDS]`
-Find Tag | `find-tag KEYWORD`
+Find Tag | `find-tag KEYWORD [MORE_KEYWORDS]`
 List | `list`
 List Given Day | `list [DATE]`
 List Tasks Done | `list [DONE]`
+List Undo | `list-undo`
 Help | `help`
-Undo | `undo`
+Undo | `undo INDEX`

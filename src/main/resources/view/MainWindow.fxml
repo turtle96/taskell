@@ -14,7 +14,7 @@
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+                  <MenuItem fx:id="exitMenuItem" mnemonicParsing="false" onAction="#handleExit" text="Exit" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
@@ -34,7 +34,7 @@
                <Insets top="5.0" bottom="5.0" left="10.0" right="10.0"/>
            </padding>
        </AnchorPane>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="1" VBox.vgrow="ALWAYS">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.6" VBox.vgrow="ALWAYS">
          <items>
             <VBox fx:id="taskList" minWidth="340" prefWidth="340">
                 <padding>

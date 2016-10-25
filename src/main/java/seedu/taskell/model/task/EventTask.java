@@ -29,11 +29,20 @@ public class EventTask extends Task {
      * @throws IllegalValueException 
      */
     public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, UniqueTagList tags) throws IllegalValueException {
-        super(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime, taskPriority, tags);
+        endDate = autoAdjustEndDate(startDate, endDate, startTime, endTime);
         
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         }
+        
+        this.description = description;
+        this.taskType = EVENT_TASK;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.taskPriority = taskPriority;
+        this.tags = tags;
     }
     
     private boolean isValidEventDuration(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) {
@@ -44,14 +53,27 @@ public class EventTask extends Task {
                 return false;
             } else if (startDate.isAfter(endDate)) {
                 return false;
-            } else if (startDate.equals(endDate)) {
-                return !startTime.isAfter(endTime);
             } else {
                 return true;
             }
-        } catch (IllegalValueException e) {
+        } catch (IllegalValueException ive) {
             return false;
         }
+    }
+    
+    /**
+     * Adjust the endDate such that it fits into the real-world context
+     * @throws IllegalValueException
+     */
+    private TaskDate autoAdjustEndDate(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) throws IllegalValueException {
+        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
+            endDate = endDate.getNextDay();
+        } else if (startDate.getDayNameInWeek().equals(today.getDayNameInWeek())
+                && !endDate.getDayNameInWeek().equals(today.getDayNameInWeek())) {
+            endDate = endDate.getNextWeek();
+        }
+        return endDate;
     }
 
     @Override
