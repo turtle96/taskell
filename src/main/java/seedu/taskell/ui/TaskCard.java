@@ -60,7 +60,6 @@ public class TaskCard extends UiPart{
             endDate.setVisible(false);
             startTime.setVisible(false);
             endTime.setVisible(false);
-            taskStatus.setVisible(false);
         }
         
         System.out.println("TT: " + taskStatus);

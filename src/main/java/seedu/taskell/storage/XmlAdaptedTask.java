@@ -60,7 +60,6 @@ public class XmlAdaptedTask {
             tagged.add(new XmlAdaptedTag(tag));
         }
         
-        System.out.println(taskStatus);
     }
 
     /**
