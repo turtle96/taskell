@@ -49,13 +49,17 @@ public class TaskCard extends UiPart{
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
         tags.setText(task.tagsString());
+        
+        setDateTime();
+        setDateTimeVisibility();
+        setCardPaneBackground();
+    }
+    
+    private void setDateTime() {
         startDate.setText(task.getStartDate().getDisplayDate());
         endDate.setText(task.getEndDate().getDisplayDate());
         startTime.setText(task.getStartTime().taskTime);
         endTime.setText(task.getEndTime().taskTime);
-        
-        setCardPaneBackground();
-        setDateTimeVisibility();
     }
     
     private void setDateTimeVisibility() {
