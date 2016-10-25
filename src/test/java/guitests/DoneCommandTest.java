@@ -7,6 +7,7 @@ import static seedu.taskell.logic.commands.DoneCommand.MESSAGE_DONE_TASK_SUCCESS
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.taskell.model.task.TaskStatus;
 import seedu.taskell.testutil.TestTask;
 
 public class DoneCommandTest extends TaskManagerGuiTest {
@@ -32,7 +33,7 @@ public class DoneCommandTest extends TaskManagerGuiTest {
         //confirm the new card contains the right data
         TaskCardHandle updatedCard = taskListPanel.navigateToTask(taskToFinish.getDescription().description);
         
-        assertEquals("finished", updatedCard.getTaskComplete());
+        assertEquals(TaskStatus.FINISHED, updatedCard.getTaskComplete());
         
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToFinish));

@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         
-        TaskStatus finsihedStatus = new TaskStatus("finished");
+        TaskStatus finsihedStatus = new TaskStatus(TaskStatus.FINISHED);
         
         ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
         

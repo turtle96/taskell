@@ -15,8 +15,8 @@ public class TaskStatus {
         return taskStatus;
     }
     
-    public static boolean isValidTaskComplete(String TaskToValidate) {
-        return TaskToValidate.equals(FINISHED)  || TaskToValidate.equals(INCOMPLETE);           
+    public static boolean isValidTaskComplete(String taskToValidate) {
+        return taskToValidate.equals(FINISHED)  || taskToValidate.equals(INCOMPLETE);           
     }
     
     @Override

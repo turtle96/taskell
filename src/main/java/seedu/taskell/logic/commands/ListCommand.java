@@ -8,13 +8,15 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.taskell.model.task.TaskStatus;
+
 public class ListCommand extends Command {
     
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks need to be done";
 
-    private Set<String> keywordSet = new HashSet<>(Arrays.asList("incomplete"));
+    private Set<String> keywordSet = new HashSet<>(Arrays.asList(TaskStatus.INCOMPLETE));
 
     public ListCommand() {
        
