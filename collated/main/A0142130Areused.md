@@ -1,4 +1,6 @@
-/** @@author A0142130A-reused**/
+# A0142130Areused
+###### \java\seedu\taskell\storage\ConfigStorage.java
+``` java
 package seedu.taskell.storage;
 
 import java.io.IOException;
@@ -26,3 +28,4 @@ public interface ConfigStorage {
      */
     void saveConfigFile(Config config) throws IOException;
 }
+```
