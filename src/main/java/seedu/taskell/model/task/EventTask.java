@@ -48,10 +48,13 @@ public class EventTask extends Task {
     private boolean isValidEventDuration(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) {
         try {
             TaskDate today = new TaskDate(TaskDate.getTodayDate());
+            TaskTime currentTime = new TaskTime(TaskTime.getTimeNow());
             
             if (startDate.isBefore(today) || endDate.isBefore(today)) {
                 return false;
             } else if (startDate.isAfter(endDate)) {
+                return false;
+            } if (startDate.equals(today) && startTime.isBefore(currentTime)) { 
                 return false;
             } else {
                 return true;
