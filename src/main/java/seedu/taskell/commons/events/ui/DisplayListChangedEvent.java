@@ -1,5 +1,5 @@
 /** @@author A0142130A **/
-package seedu.taskell.commons.events.model;
+package seedu.taskell.commons.events.ui;
 
 import java.util.ArrayList;
 

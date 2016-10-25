@@ -10,8 +10,9 @@ import seedu.taskell.MainApp;
 import seedu.taskell.commons.core.ComponentManager;
 import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
-import seedu.taskell.commons.events.model.DisplayListChangedEvent;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
+import seedu.taskell.commons.events.ui.DisplayCalendarViewEvent;
+import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
@@ -124,5 +125,6 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Displaying list...");
         mainWindow.loadList(event.getList());
     }
+
 
 }
