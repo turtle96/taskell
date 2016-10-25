@@ -11,8 +11,6 @@ import seedu.taskell.commons.util.FxViewUtil;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
-import javax.swing.text.AsyncBoxView.ChildLocator;
-
 /**
  * The Display Panel of the App.
  */
