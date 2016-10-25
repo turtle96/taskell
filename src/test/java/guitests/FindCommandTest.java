@@ -19,6 +19,8 @@ public class FindCommandTest extends TaskManagerGuiTest {
         assertFindResult("find Books",td.discardBooks);
     }
     
+    /** @@author A0142130A **/
+    
     @Test
     public void find_nonEmptyList_byTag() {
         assertFindResult("find chicken"); //no results
@@ -33,6 +35,8 @@ public class FindCommandTest extends TaskManagerGuiTest {
     public void find_byMoreThanOneTags() {
         assertFindResult("find friends owesMoney", td.borrowBooks);
     }
+    
+    /** @@author **/
 
     @Test
     public void find_emptyList(){

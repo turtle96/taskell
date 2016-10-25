@@ -66,24 +66,26 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
+    // @@author A0142073R
     @Override
     public synchronized void editTask(ReadOnlyTask old, Task toEdit)
             throws DuplicateTaskException, TaskNotFoundException {
         taskManager.editTask(old, toEdit);
         indicateTaskManagerChanged();
     }
+    // @@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        UndoCommand.updateMostRecentDeletedTask(target);
+        // UndoCommand.updateMostRecentDeletedTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        UndoCommand.updateMostRecentAddedTask(task);
+        // UndoCommand.updateMostRecentAddedTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -106,16 +108,20 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
+    // @@author A0142073R
     @Override
     public void updateFilteredtaskListDate(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(keywords)));
     }
+    // @@author
 
+    /** @@author A0142130A **/
     @Override
     public void updateFilteredTaskListByAnyKeyword(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new TagsQualifier(keywords)));
     }
 
+    /** @@author **/
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
@@ -161,11 +167,14 @@ public class ModelManager extends ComponentManager implements Model {
             this.nameKeyWords = nameKeyWords;
         }
 
+        /** @@author A0142130A **/
         @Override
         public boolean run(ReadOnlyTask task) {
             String searchString = task.getDescription().description + " " + task.tagsSimpleString();
             return nameKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
+
+        /** @@author **/
 
         @Override
         public String toString() {
@@ -173,6 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /** @@author A0142130A **/
     private class TagsQualifier implements Qualifier {
         private Set<String> tagsKeyWords;
 
@@ -192,7 +202,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", tagsKeyWords);
         }
     }
-    
+
+    // @@author A0142073R
     private class DateQualifier implements Qualifier {
         private Set<String> DateKeyWords;
 
@@ -202,14 +213,14 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String searchString = task.getStartDate().taskDate + " "+ task.getTaskType();
-            return DateKeyWords.stream()
-                    .allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
+            String searchString = task.getStartDate().taskDate + " " + task.getTaskType();
+            return DateKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
 
         @Override
         public String toString() {
-            return "complete=" + String.join(", ", DateKeyWords);
+            return "date=" + String.join(", ", DateKeyWords);
         }
     }
+    // @@author
 }
