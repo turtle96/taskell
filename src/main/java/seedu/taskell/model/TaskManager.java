@@ -177,4 +177,8 @@ public class TaskManager implements ReadOnlyTaskManager {
         // your own
         return Objects.hash(tasks, tags);
     }
+    
+    public boolean isTaskPresent(Task task) {
+        return tasks.contains(task);
+    }
 }

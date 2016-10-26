@@ -49,7 +49,7 @@ public class EditStartDateCommand extends Command {
             return new CommandResult("Unable to edit date of floating task");
         }
         Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), startDate, taskToEdit.getEndDate(),
-                taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTags());
+                taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         try {
             model.editTask(taskToEdit, newTask);
             UndoCommand.addTaskToCommandHistory(newTask);
