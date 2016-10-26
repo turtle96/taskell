@@ -1,3 +1,4 @@
+//@@author A0148004R
 package seedu.taskell.logic.commands;
 
 public class ListAllCommand extends Command {
@@ -14,3 +15,4 @@ public class ListAllCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
+//@@author

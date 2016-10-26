@@ -68,14 +68,14 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateTaskManagerChanged() {
         raise(new TaskManagerChangedEvent(taskManager));
     }
-
+    //@@author A0142073R
     @Override
     public synchronized void editTask(ReadOnlyTask old, Task toEdit)
             throws DuplicateTaskException, TaskNotFoundException {
         taskManager.editTask(old, toEdit);
         indicateTaskManagerChanged();
     }
-    // @@author
+    //@@author
 
     @Override
     public void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -116,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    // @@author A0142073R
+    //@@author A0142073R
 
     @Override
     public void updateFilteredtaskListDate(Set<String> keywords) {
@@ -126,8 +126,8 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredTaskListPriority(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
 
-    }
-
+    } 
+    //@@author 
     /** @@author A0142130A **/
     @Override
     public void updateFilteredTaskListByAnyKeyword(Set<String> keywords) {
@@ -222,7 +222,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** @@author **/
-
+    //@@author A0148004R
     private class CompleteQualifier implements Qualifier {
         private Set<String> CompleteKeyWords;
 
@@ -241,8 +241,8 @@ public class ModelManager extends ComponentManager implements Model {
             return "complete=" + String.join(", ", CompleteKeyWords);
         }
     }
-
-    // @@author A0142073R
+    //@@author
+    //@@author A0142073R
     private class DateQualifier implements Qualifier {
         private Set<String> DateKeyWords;
 
@@ -282,5 +282,5 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-    // @@author
+    //@@author
 }

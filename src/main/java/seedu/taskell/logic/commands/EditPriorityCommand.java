@@ -1,3 +1,4 @@
+//@@author A0142073R
 package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.Messages;
@@ -63,3 +64,4 @@ public class EditPriorityCommand extends Command {
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
     }
 }
+//@@author
