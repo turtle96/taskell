@@ -4,6 +4,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.*;
 
+//@@author A0139257X
 /**
  *
  */
@@ -14,8 +15,9 @@ public class TypicalTestTasks {
 
     public TypicalTestTasks() {
         try {
-            archivePastEmails =  new TaskBuilder().withDescription("Archieve past emails").withTaskType(Task.EVENT_TASK).withTaskPriority("0")
+            archivePastEmails =  new TaskBuilder().withDescription("Archive past emails").withTaskType(Task.EVENT_TASK).withTaskPriority("0")
                     .withStartTime("12:30AM").withEndTime("12:45AM").withStartDate("1-1-2100").withEndDate("1-12-2100")
+
                     .withTags("friends").withTaskComplete(TaskStatus.INCOMPLETE).build();
             borrowBooks = new TaskBuilder().withDescription("Borrow books").withTaskType(Task.EVENT_TASK).withTaskPriority("0")
                     .withStartTime("12:30AM").withEndTime("12:45AM").withStartDate("1-1-2100").withEndDate("1-12-2100")
@@ -29,6 +31,7 @@ public class TypicalTestTasks {
             //Manually added
             holdMeeting = new TaskBuilder().withDescription("Hold meeting").withTaskType(Task.EVENT_TASK).withStartDate("1-1-2100").withEndDate("1-12-2100").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").withTaskComplete(TaskStatus.INCOMPLETE).build();
             inspectWarehouse = new TaskBuilder().withDescription("Inspect warehouse").withTaskType(Task.EVENT_TASK).withStartDate("1-1-2100").withEndDate("1-12-2100").withStartTime("12:30AM").withEndTime("12:45AM").withTaskPriority("0").withTaskComplete(TaskStatus.INCOMPLETE).build();
+
             
             floatingTask_Valid = new TaskBuilder().withDescription("floating task").withTaskType(Task.FLOATING_TASK).withStartDate(TaskDate.DEFAULT_DATE).withEndDate(TaskDate.DEFAULT_DATE).withStartTime(TaskTime.DEFAULT_START_TIME).withEndTime(TaskTime.DEFAULT_END_TIME).withTaskPriority(TaskPriority.DEFAULT_PRIORITY).withTaskComplete(TaskStatus.INCOMPLETE).build();
             floatingTask_NonIntuitiveDescription = new TaskBuilder().withDescription("76@#$5632 on by at on").withTaskType(Task.FLOATING_TASK).withStartDate(TaskDate.DEFAULT_DATE).withEndDate(TaskDate.DEFAULT_DATE).withStartTime(TaskTime.DEFAULT_START_TIME).withEndTime(TaskTime.DEFAULT_END_TIME).withTaskPriority(TaskPriority.DEFAULT_PRIORITY).withTaskComplete(TaskStatus.INCOMPLETE).build();
@@ -56,7 +59,8 @@ public class TypicalTestTasks {
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform};
     }
-
+//@@author
+    
     public TaskManager getTypicalTaskManager(){
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);

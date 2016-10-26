@@ -200,6 +200,7 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", tagsKeyWords);
         }
     }
+    /** @@author **/
 
     
     private class CompleteQualifier implements Qualifier {
