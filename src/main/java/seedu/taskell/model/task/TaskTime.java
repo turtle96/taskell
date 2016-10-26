@@ -169,7 +169,7 @@ public class TaskTime {
         } else if (matcherHourOnly.matches()) {
             this.taskTime = setTime(matcherHourOnly.group("hour"), ZERO_MINUTE, matcherHourOnly.group("antePost"));
         } else if (isValidNow(time)) {
-            this.taskTime = getTimeNow();
+            this.taskTime = getTimeNow().toString();
         } else if (isValidNoon(time)) {
             this.taskTime = NOON;
         } else if (isValidMidnight(time)) {
@@ -184,9 +184,13 @@ public class TaskTime {
         return taskTime;
     }
 
-    public static String getTimeNow() {
+    public static TaskTime getTimeNow() {
         LocalTime currTime = LocalTime.now();
-        return LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf);
+        try {
+            return new TaskTime(LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf));
+        } catch (IllegalValueException e) {
+            return null;
+        }
     }
     
     public String getHour() {

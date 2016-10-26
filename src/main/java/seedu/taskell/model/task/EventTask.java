@@ -48,18 +48,17 @@ public class EventTask extends Task {
     }
     
     private boolean isValidEventDuration(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) {
-        try {
-            TaskDate today = new TaskDate(TaskDate.getTodayDate());
-            
-            if (startDate.isBefore(today) || endDate.isBefore(today)) {
-                return false;
-            } else if (startDate.isAfter(endDate)) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (IllegalValueException ive) {
+        TaskDate today = TaskDate.getTodayDate();
+        TaskTime currentTime = TaskTime.getTimeNow();
+        
+        if (startDate.isBefore(today) || endDate.isBefore(today)) {
             return false;
+        } else if (startDate.isAfter(endDate)) {
+            return false;
+        } if (startDate.equals(today) && startTime.isBefore(currentTime)) { 
+            return false;
+        } else {
+            return true;
         }
     }
     
@@ -68,7 +67,7 @@ public class EventTask extends Task {
      * @throws IllegalValueException
      */
     private TaskDate autoAdjustEndDate(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) throws IllegalValueException {
-        TaskDate today = new TaskDate(TaskDate.getTodayDate());
+        TaskDate today = TaskDate.getTodayDate();
         if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
             endDate = endDate.getNextDay();
         } else if (startDate.getDayNameInWeek().equals(today.getDayNameInWeek())
