@@ -109,11 +109,11 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
     }
 
-    // @@ author A0142073R
+    // @@author A0142073R
     public void updateFilteredTaskListPriority(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
     }
-    // @@ author
+    // @@author
 
     /** @@author A0142130A **/
     @Override
