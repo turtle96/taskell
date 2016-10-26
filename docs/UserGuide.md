@@ -86,6 +86,8 @@ Example: `add ` netball training <i>endat</i> 7pm<br>
 Formats: 
 - `list` <br>
 Displays a list of uncompleted tasks.<br>
+- `list-all` <br>
+Displays a list of all tasks.<br>
 - `list-date` DATE <br> 
 Displays a list of all the tasks due on the specific date..<br>
 - `list-done` <br>
@@ -112,7 +114,7 @@ This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  
  <!--- @@author ---> 
 
-Diagram 3 and 4: Keying in “find report” displays list of tasks with report as one of the keywords in task description
+Diagram 3 and 4: Keying in ï¿½find reportï¿½ displays list of tasks with report as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
@@ -184,12 +186,14 @@ Add Event | `add` TASK ITEM <strong>by</strong> [TIME]
 Add Event With Deadline | `add` TASK ITEM <strong>by</strong> [DATE][TIME]
 Calendar View | `calendar` or `cal`
 Clear | `clear`
+Complete | `done` INDEX
 Delete | `delete` INDEX
 Edit | `edit` INDEX NEWTASK
 Find | `find` KEYWORD [MORE_KEYWORDS]
 Find Tag | `find-tag` KEYWORD [MORE_KEYWORDS]
 Help | `help`
-List | `list`
+List Incomplete Tasks| `list`
+List All Tasks | `list-all`
 List Given Day | `list-date` [DATE]
 List Tasks Done | `list-done` [DONE]
 List Undo | `list-undo`
