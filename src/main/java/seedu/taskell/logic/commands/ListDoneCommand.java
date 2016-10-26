@@ -1,24 +1,20 @@
 package seedu.taskell.logic.commands;
 
-
-/**
- * Lists all tasks in the task manager to the user.
- */
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
 import seedu.taskell.model.task.TaskStatus;
 
-public class ListCommand extends Command {
+public class ListDoneCommand extends Command {
     
-    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_WORD = "list-done";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks need to be done";
+    public static final String MESSAGE_SUCCESS = "Listed all completed tasks";
 
-    private Set<String> keywordSet = new HashSet<>(Arrays.asList(TaskStatus.INCOMPLETE));
+    private Set<String> keywordSet = new HashSet<>(Arrays.asList(TaskStatus.FINISHED));
 
-    public ListCommand() {
+    public ListDoneCommand() {
        
     }
 

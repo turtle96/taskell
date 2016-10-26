@@ -27,6 +27,8 @@ public class TaskCard extends UiPart{
     @FXML
     private Label endTime;
     @FXML
+    private Label taskStatus;
+    @FXML
     private Label tags;
 
     private ReadOnlyTask task;
@@ -49,6 +51,7 @@ public class TaskCard extends UiPart{
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
         tags.setText(task.tagsString());
+        taskStatus.setText(task.getTaskStatus().taskStatus);
         
         setDateTime();
         setDateTimeVisibility();
@@ -60,6 +63,7 @@ public class TaskCard extends UiPart{
         endDate.setText(task.getEndDate().getDisplayDate());
         startTime.setText(task.getStartTime().taskTime);
         endTime.setText(task.getEndTime().taskTime);
+
     }
     
     private void setDateTimeVisibility() {
@@ -69,6 +73,7 @@ public class TaskCard extends UiPart{
             startTime.setVisible(false);
             endTime.setVisible(false);
         }
+        
     }
     
     private void setCardPaneBackground() {
