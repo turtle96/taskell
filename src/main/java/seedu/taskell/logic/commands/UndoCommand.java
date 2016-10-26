@@ -8,6 +8,7 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.model.DisplayListChangedEvent;
 import seedu.taskell.model.CommandHistory;
+import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
@@ -20,6 +21,7 @@ public class UndoCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(UndoCommand.class.getName());
     
     public static final String COMMAND_WORD = "undo";
+    public static final String EDIT = "edit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo a previously executed command.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 3";
@@ -34,6 +36,7 @@ public class UndoCommand extends Command {
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
     
     private static ArrayList<CommandHistory> commandHistoryList;
+    private static UndoCommand self;
     
     private int index;
     private CommandHistory commandHistory;
@@ -43,9 +46,18 @@ public class UndoCommand extends Command {
         this.index = index;
     }
     
+    public static UndoCommand getInstance() {
+        if (self == null) {
+            self = new UndoCommand(0);
+        }
+        
+        return self;
+    }
+
     public static ArrayList<String> getListOfCommandHistoryText() {
         assert commandHistoryList != null;
-        assert !commandHistoryList.isEmpty();
+        
+        UndoCommand.getInstance().updateCommandList();
         
         ArrayList<String> list = new ArrayList<>();
         for (CommandHistory history: commandHistoryList) {
@@ -54,7 +66,35 @@ public class UndoCommand extends Command {
         
         return list;
     }
+
+    //removes commandHistory with tasks not present in system
+    private void updateCommandList() {
+        if (model == null) {
+            logger.severe("model is null");
+        }
+        for (CommandHistory commandHistory: commandHistoryList) {
+            if (isCommandTypeAddOrEdit(commandHistory) 
+                    && !model.isTaskPresent(commandHistory.getTask())) {
+                commandHistoryList.remove(commandHistory);
+            } else if (isUndoEditCommand(commandHistory) 
+                    && !model.isTaskPresent(commandHistory.getOldTask())) {
+                commandHistoryList.remove(commandHistory);
+            }
+        }
+        
+    }
+
+    private boolean isCommandTypeAddOrEdit(CommandHistory commandHistory) {
+        return (commandHistory.getCommandType().contains(AddCommand.COMMAND_WORD) 
+                || commandHistory.getCommandType().contains(EDIT)) 
+                && !commandHistory.isRedoTrue();
+    }
     
+    private boolean isUndoEditCommand(CommandHistory commandHistory) {
+        return commandHistory.isRedoTrue() 
+                && commandHistory.getCommandType().contains(EDIT);
+    }
+
     @Override
     public CommandResult execute() {
         
