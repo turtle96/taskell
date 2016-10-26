@@ -71,6 +71,7 @@ public class UndoCommand extends Command {
     private void updateCommandList() {
         if (model == null) {
             logger.severe("model is null");
+            return;
         }
         for (CommandHistory commandHistory: commandHistoryList) {
             if (isCommandTypeAddOrEdit(commandHistory) 
