@@ -4,6 +4,7 @@ package guitests;
 import org.junit.Test;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.model.task.TaskPriority;
 import seedu.taskell.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
@@ -15,11 +16,11 @@ public class ListPriorityCommandTest extends TaskManagerGuiTest {
 
         // list 2 tasks in the list
         TestTask[] currentList = td.getTypicalTasks();
-        String priority = "1";
+        String priority = TaskPriority.LOW_PRIORITY;
         assertlistPrioritySuccess(currentList, priority, td.archivePastEmails, td.borrowBooks, td.collectParcel, td.discardBooks,td.editPowerpoint);
 
          //no tasks to list
-         priority = "0";
+         priority = TaskPriority.NO_PRIORITY;
          assertlistPrioritySuccess(currentList, priority);
         
          // invalid command format
