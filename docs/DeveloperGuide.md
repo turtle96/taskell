@@ -171,9 +171,9 @@ The `Logic` component,
 * Executes the necessary command and the result is encapsulated as a  `CommandResult` to be passed back to the `UI`.
 
 <p align="center">
-<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
+<img src="images/AddTaskSdForLogic.png" width="800"><br>
   
-<em>Diagram 7: Delete Task Sequence Diagram For Logic</em>
+<em>Diagram 7: Add Task Sequence Diagram For Logic</em>
 </p>
 
 The diagram above shows the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -263,7 +263,7 @@ We have two types of tests:
   
 2. **Non-GUI Tests** - These are tests not involving the GUI. They include,
    1. _Unit tests_ targeting the lowest level methods/classes. <br>
-      e.g. `seedu.taskell.commons.UrlUtilTest`
+      e.g. `seedu.taskell.model.task.TaskDateTest`
    2. _Integration tests_ that are checking the integration of multiple code units 
      (those code units are assumed to be working).<br>
       e.g. `seedu.taskell.storage.StorageManagerTest`
@@ -350,15 +350,16 @@ Priority | As a ... | I want to ... | So that I can...
 
 **MSS**
 
-1. User requests to add tasks either with or without deadline
+1. User requests to add tasks
+
 2. Taskell adds the task<br>
 Use case ends
 
 **Extensions**
 
-2a. The user did not follow the given format to add a task or deadline
+2a. The user did not follow the given format to add the task
 
-> 2a1. Taskell shows the help website<br>
+> 2a1. Taskell displays invalid command format warning<br>
   Use case resumes at step 1
 
 #### Use case: Delete task
@@ -387,17 +388,19 @@ Use case ends
 1. User requests to list tasks
 2. Taskell shows a list of uncompleted tasks
 3. User requests to mark a specific task in the list as completed
-4. Taskell adds the task in completed tasks<br>
+4. Taskell marks the task as completed<br>
 Use case ends
 
 **Extensions**
 
-2a. The list is empty<br>
-3a. The given index is invalid<br>
-4a. User tries to mark a completed task as completed
+2a. The list is empty
+
+3a. The given index is invalid
 
 > 3a1. Taskell shows an error message <br>
   Use case resumes at step 2
+
+4a. User tries to mark a completed task as completed
   
 #### Use case: Help task
 
@@ -425,6 +428,7 @@ Use case ends
 **Extensions**
 
 1a. No keyword is given
+
 > 1a1. Taskell shows an error message <br>
 
 #### Use case: Edit task
@@ -433,8 +437,9 @@ Use case ends
 
 1. User requests to list tasks
 2. Taskell shows a list of tasks
-3. User requests to edit the task in the list
-4. Taskell edits the user's task, including its' deadline <br>
+3. User requests to edit either the description, date, time or priority of a task
+4. Taskell edits the respective field
+5. Taskell displays the both the old and updated version of the task <br>
 Use case ends
 
 **Extensions**
@@ -442,9 +447,10 @@ Use case ends
 2a. The list is empty
 
 3a. The given index is invalid
-3b. The user did not key in the new task
+3b. The user did not key in the new field of the task
+3c. The user did not key in a valid parameter
 
-> 3a1 and 3b1. Taskell shows an error message <br>
+> 3a1, 3b1 and 3c1. Taskell shows an error message <br>
   Use case resumes at step 2
 
 #### Use case: Undo task
@@ -453,9 +459,9 @@ Use case ends
 
 1. User enters a command
 2. Taskell executes it
-3. User requests to list commands history
+3. User requests to list undo commands history
 4. User requests to undo command at specific index
-5. Taskell undoes the previous command <br>
+5. Taskell revert the command <br>
 Use case ends
 
 **Extensions**
@@ -472,8 +478,8 @@ Use case ends
 
 **MSS**
 
-1. User requests to list tasks
-2. Taskell shows a list of tasks
+1. User requests to list either all tasks, incomplete tasks, completed tasks, task with specific start date or task with specific priority
+2. Taskell shows a list of tasks accordingly
 Use case ends
 
 **Extensions**
@@ -529,7 +535,7 @@ NIL
 2. Should be able to hold up to 1000 tasks.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
-5. Should execute under 5 seconds.
+5. Should execute commands under 5 seconds.
 
 ## Appendix D : Glossary
 
