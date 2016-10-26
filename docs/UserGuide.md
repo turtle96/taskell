@@ -89,9 +89,11 @@ Displays a list of uncompleted tasks.<br>
 - `list-all` <br>
 Displays a list of all tasks.<br>
 - `list-date` DATE <br> 
-Displays a list of all the tasks due on the specific date..<br>
+Displays a list of all the tasks due on the specific date.<br>
 - `list-done` <br>
 Displays a list of completed tasks.<br>
+- `list-priority` PRIORITY<br>
+Displays a list of tasks with given priority.<br>
 <br><img src="images/ListToday.png" width="600"></br>
 Diagram 2: Displays all the tasks to be done by today after typing list-date.
    
@@ -144,9 +146,26 @@ Example: `done` 1<br>
 This adds the 1st task as completed and moves it to the completed list.<br>
 
 #### Editing a task : `edit`
-Format: `edit` INDEX NEWTASK<br>
+To edit the description of a task<br>
+Formats: 
+- `edit-desc` INDEX NEWDESCRIPTION<br>
+- `edit-name` INDEX NEWDESCRIPTION<br>
  <br> <img src="images/editCmd.png" width="600"> </br>
 Diagram 5: Edits the 2nd task on the list<br>
+
+To edit the time of a task<br>
+Formats: 
+- `edit-startTime` INDEX NEWTIME<br>
+- `edit-endTime` INDEX NEWTIME<br>
+
+To edit the date of a task<br>
+Formats: 
+- `edit-startDate` INDEX NEWDATE<br>
+- `edit-endDate` INDEX NEWDATE<br>
+
+To edit the priority of a task<br>
+Formats: 
+- `edit-priority` INDEX NEWDATE<br>
 
 <!--- @@author A0142130A ---> 
 
