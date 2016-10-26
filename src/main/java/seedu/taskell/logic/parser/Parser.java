@@ -153,7 +153,7 @@ public class Parser {
         }
         if (!isInt(intValue)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditEndDateCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         if (targetIdx < 0 || targetIdx > 3) {
