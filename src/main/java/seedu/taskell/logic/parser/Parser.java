@@ -2,6 +2,7 @@ package seedu.taskell.logic.parser;
 
 import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.taskell.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -64,7 +65,7 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
-        
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -124,6 +125,9 @@ public class Parser {
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
 
+        case ListPriorityCommand.COMMAND_WORD:
+            return prepareListPriority(arguments);
+
         case UndoCommand.COMMAND_WORD:
             return prepareUndo(arguments);
 
@@ -150,6 +154,29 @@ public class Parser {
         }
     }
 
+    private Command prepareListPriority(String args) {
+        if (args.isEmpty()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        String intValue = st.nextToken();
+        if (st.hasMoreTokens()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
+        }
+        if (!isInt(intValue)) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
+        if (targetIdx < 0 || targetIdx > 3) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, ListPriorityCommand.MESSAGE_USAGE));
+        } else
+            return new ListPriorityCommand(intValue);
+    }
+
     /**
      * Parses arguments in the context of the edit task startDate command.
      *
@@ -168,11 +195,14 @@ public class Parser {
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditEndDateCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
-        while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
+        arguments = st.nextToken();
+        if (st.hasMoreTokens()) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
         }
         if (!TaskDate.isValidDate(arguments)) {
             UndoCommand.deletePreviousCommand();
@@ -206,7 +236,8 @@ public class Parser {
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditDescriptionCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         while (st.hasMoreTokens()) {
@@ -239,13 +270,18 @@ public class Parser {
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditStartTimeCommand.MESSAGE_USAGE));
         }
+
         int targetIdx = Integer.valueOf(intValue);
-        while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
+        arguments = st.nextToken();
+        if (st.hasMoreTokens()) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
-        arguments = arguments.trim();
+
         if (!TaskTime.isValidTime(arguments)) {
             UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
@@ -278,14 +314,12 @@ public class Parser {
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
-
-        while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
-        }
-        if (!TaskDate.isValidDate(arguments)) {
+        arguments = st.nextToken();
+        if (st.hasMoreTokens() || !TaskDate.isValidDate(arguments)) {
             UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
@@ -317,14 +351,11 @@ public class Parser {
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(String.format("Please enter a valid index", EditEndDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
-        while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
-        }
-        arguments = arguments.trim();
-        if (!TaskTime.isValidTime(arguments)) {
+        arguments = st.nextToken();
+        if (st.hasMoreTokens() || !TaskTime.isValidTime(arguments)) {
             UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
@@ -354,16 +385,12 @@ public class Parser {
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         int targetIdx = Integer.valueOf(st.nextToken());
-        while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
-        }
-        arguments = arguments.trim();
-        if (!TaskPriority.isValidPriority(arguments)) {
+        arguments = st.nextToken();
+        if (st.hasMoreTokens() || !TaskPriority.isValidPriority(arguments)) {
             UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
-
         try {
             return new EditPriorityCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
@@ -732,7 +759,7 @@ public class Parser {
     }
 
     /** @@author A0142130A **/
-    
+
     /**
      * Parses arguments in the context of undo command.
      * 
@@ -740,8 +767,7 @@ public class Parser {
     private Command prepareUndo(String args) {
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
-                    UndoCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
         }
         return new UndoCommand(index.get());
     }
@@ -780,7 +806,6 @@ public class Parser {
         }
         return new SaveStorageLocationCommand(args);
     }
-    
 
 
     /**
@@ -798,6 +823,7 @@ public class Parser {
 
         return new DoneCommand(index.get());
     }
+    
     /** @@author **/
 
 
