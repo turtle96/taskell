@@ -78,7 +78,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author
 
     @Override
-    public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
+    public void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
         // UndoCommand.updateMostRecentDeletedTask(target);
         indicateTaskManagerChanged();

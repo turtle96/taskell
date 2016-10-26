@@ -11,6 +11,16 @@ public class ListUndoCommand extends Command {
     public static final String COMMAND_WORD = "list-undo";
 
     public static final String MESSAGE_SUCCESS = "Listed all commands available for undo.";
+    
+    private static ListUndoCommand self;
+    
+    public static ListUndoCommand getInstance() {
+    	if (self == null) {
+    		self = new ListUndoCommand();
+    	}
+    	
+    	return self;
+    }
 
     @Override
     public CommandResult execute() {
