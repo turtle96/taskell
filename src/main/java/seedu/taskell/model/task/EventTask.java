@@ -6,6 +6,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.CollectionUtil;
 import seedu.taskell.model.tag.UniqueTagList;
 
+//@@author A0139257X
 /**
  * Represents an Event task in the task manager.
  * Guarantees: details are present and not null, field values are validated.

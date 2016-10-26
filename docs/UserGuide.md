@@ -43,6 +43,7 @@ This section shows the different commands that you can use in Taskell. Words tha
 To open the help window<br>
  Format: `help`
  
+ <!-- @@author A0139257X -->
 #### Adding a task: `add`
 To add a floating task<br>
 Format: 
@@ -96,8 +97,9 @@ Displays a list of completed tasks.<br>
 Displays a list of tasks with given priority.<br>
 <br><img src="images/ListToday.png" width="600"></br>
 Diagram 2: Displays all the tasks to be done by today after typing list-date.
+<!-- @@author -->
    
-<!--- @@author A0142130A --->  
+<!- @@author A0142130A --->  
 
 #### Finding tasks: `find`
 You can use the find command to view tasks with specific keywords.<br>
@@ -114,7 +116,7 @@ This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  <br><img src="images/findReport.png" width="600"></br>
  <br><img src="images/findReportResult.png" width="600"></br>
  
- <!--- @@author ---> 
+ <!-- @@author --> 
 
 Diagram 3 and 4: Keying in �find report� displays list of tasks with report as one of the keywords in task description
 
@@ -124,7 +126,7 @@ Diagram 3 and 4: Keying in �find report� displays list of tasks with report 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `chicken` will match `chicken duck`
 
-<!--- @@author A0142130A ---> 
+<!-- @@author A0142130A ---> 
 
 #### Reverting previous action : `undo`
 If you wish to undo your previous actions, <kbd>Enter</kbd> list-undo to see a list of 
@@ -133,7 +135,7 @@ Then use undo command at the specified INDEX in the list.<br>
 Format: `undo INDEX`<br> 
 Example: `list-undo`, then `undo 3`, will undo third command in command history.
 
-<!--- @@author ---> 
+<!-- @@author ---> 
 
 #### Deleting a task : `delete`
 <<<<<<< HEAD
