@@ -10,8 +10,9 @@ import seedu.taskell.MainApp;
 import seedu.taskell.commons.core.ComponentManager;
 import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
-import seedu.taskell.commons.events.model.DisplayListChangedEvent;
 import seedu.taskell.commons.events.storage.DataSavingExceptionEvent;
+import seedu.taskell.commons.events.ui.DisplayCalendarViewEvent;
+import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
@@ -63,7 +64,6 @@ public class UiManager extends ComponentManager implements Ui {
     public void stop() {
         prefs.updateLastUsedGuiSetting(mainWindow.getCurrentGuiSetting());
         mainWindow.hide();
-        //mainWindow.releaseResources();
     }
 
     private void showFileOperationAlertAndWait(String description, String details, Throwable cause) {
@@ -117,12 +117,8 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
-
-    @Subscribe
-    private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        //mainWindow.loadTaskPage(event.getNewSelection());
-    }
+    
+    /** @@author A0142130A **/
     
     @Subscribe
     private void handleDisplayList(DisplayListChangedEvent event) {
@@ -130,5 +126,14 @@ public class UiManager extends ComponentManager implements Ui {
         logger.info("Displaying list...");
         mainWindow.loadList(event.getList());
     }
+    
+    @Subscribe
+    private void handleShowCalendarView(DisplayCalendarViewEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        logger.info("Displaying calendar view...");
+        mainWindow.loadCalendarView();
+    }
+    
+    /** @@author **/
 
 }

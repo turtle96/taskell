@@ -2,7 +2,7 @@
 package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.EventsCenter;
-import seedu.taskell.commons.events.model.DisplayListChangedEvent;
+import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 
 /** Lists a list of previous commands available for Undo operation
  * */

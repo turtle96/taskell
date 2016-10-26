@@ -179,13 +179,12 @@ Formats:
 
 <!--- @@author A0142130A ---> 
 
-#### Showing calendar view : `calendar` or `cal`<br>
- You can view the calendar for the week on right panel to refer to the dates when adding tasks and scheduling events.<br>
- To save time, Taskell has a short form command `cal`. <br>
- Format: `calendar`<br>
- 
-#### Saving the information in Taskell : `save`
+#### Showing calendar view : `calendar` or `cal`
+You can view the calendar for the week on right panel to refer to the dates when adding tasks and scheduling events.<br>
+To save time, Taskell has a short form command `cal`. <br>
+Format: `calendar`<br>
 
+#### Saving the information in Taskell : `save`
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
 If the specified directory is valid but the file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
@@ -227,6 +226,7 @@ List Given Day | `list-date` [DATE]
 List Tasks Done | `list-done` [DONE]
 List Undo | `list-undo`
 Undo | `undo INDEX`
+Calendar View | `calendar` or `cal`
 
 ## Appendix A
 
