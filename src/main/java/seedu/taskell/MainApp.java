@@ -67,6 +67,7 @@ public class MainApp extends Application {
         initEventsCenter();
         
         UndoCommand.initializeCommandHistory();
+        UndoCommand.getInstance().setData(model);
         SaveStorageLocationCommand.setConfig(config);
         SaveStorageLocationCommand.setStorage(storage);
     }
@@ -189,11 +190,13 @@ public class MainApp extends Application {
         this.stop();
     }
     
+    /** @@author A0142130A **/
     @Subscribe
     private void handleStorageLocationChangedEvent(StorageLocationChangedEvent event) {
         config = event.getConfig();
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
     }
+    /** @@author **/
 
     public static void main(String[] args) {
         launch(args);

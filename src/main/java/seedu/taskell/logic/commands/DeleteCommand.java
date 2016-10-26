@@ -3,6 +3,7 @@ package seedu.taskell.logic.commands;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
@@ -33,6 +34,7 @@ public class DeleteCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
+            UndoCommand.deletePreviousCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -40,7 +42,8 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
-        } catch (TaskNotFoundException pnfe) {
+            UndoCommand.addTaskToCommandHistory((Task) taskToDelete);
+        } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
 

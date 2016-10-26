@@ -1,9 +1,10 @@
 [![Build Status](https://travis-ci.org/CS2103AUG2016-W15-C3/main.svg?branch=master)](https://travis-ci.org/CS2103AUG2016-W15-C3/main)
 [![Coverage Status](https://coveralls.io/repos/github/CS2103AUG2016-W15-C3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2103AUG2016-W15-C3/main?branch=master)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c82c9523e1474a039d2e30e6d34a2da0)](https://www.codacy.com/app/marcusngwj/main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103AUG2016-W15-C3/main&amp;utm_campaign=Badge_Grade)
 
 # Taskell
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/screenshot.PNG" width="600"><br>
 
 * This is a desktop task manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).
