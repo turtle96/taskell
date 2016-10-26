@@ -37,9 +37,8 @@ public class Parser {
             Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
                     + " (?<isTaskDatePrivate>p?)p/(?<startDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
                     + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
-                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)" 
-                    + " (?<isTaskCompletePrivate>p?)a/(?<taskComplete>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
+                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
+                    + " (?<isTaskCompletePrivate>p?)a/(?<taskComplete>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
                                                                                                                    // number
     private static final String BY = "by";
     private static final String ON = "on";
@@ -125,6 +124,9 @@ public class Parser {
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
 
+        case ListDateCommand.COMMAND_WORD:
+            return prepareListDate(arguments);
+            
         case ListPriorityCommand.COMMAND_WORD:
             return prepareListPriority(arguments);
 
@@ -154,6 +156,21 @@ public class Parser {
         }
     }
 
+    // @@author A0142073R
+    private Command prepareListDate(String arguments) {
+        if (arguments.isEmpty()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(arguments.trim(), " ");
+        String date = st.nextToken();
+        if (!TaskDate.isValidDate(date)) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
+        }
+
+        return new ListDateCommand(date);
+    }
+
+    // @@author A0142073R
     private Command prepareListPriority(String args) {
         if (args.isEmpty()) {
             return new IncorrectCommand(
@@ -218,6 +235,7 @@ public class Parser {
         }
     }
 
+    // @@author A0142073R
     /**
      * Parses arguments in the context of the edit task description command.
      *
@@ -252,6 +270,7 @@ public class Parser {
         }
     }
 
+    // @@author A0142073R
     /**
      * Parses arguments in the context of the edit start time command.
      *
@@ -333,6 +352,7 @@ public class Parser {
         }
     }
 
+    // @@author A0142073R
     /**
      * Parses arguments in the context of the edit task end time command.
      *
@@ -351,7 +371,8 @@ public class Parser {
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         arguments = st.nextToken();
@@ -369,6 +390,7 @@ public class Parser {
         }
     }
 
+    // @@author A0142073R
     /**
      * Parses arguments in the context of the edit task priority command.
      *
@@ -806,25 +828,23 @@ public class Parser {
         return new SaveStorageLocationCommand(args);
     }
 
-
     /**
      * Parses arguments in the context of the done task command.
      *
-     * @param args full command args string
+     * @param args
+     *            full command args string
      * @return the prepared command
      */
-    private Command prepareDone(String args){
+    private Command prepareDone(String args) {
         Optional<Integer> index = parseIndex(args);
-        if(!index.isPresent()){
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DoneCommand.MESSAGE_USAGE));
         }
 
         return new DoneCommand(index.get());
     }
-    
-    /** @@author **/
 
+    /** @@author **/
 
     private static boolean isInt(String s) {
         try {

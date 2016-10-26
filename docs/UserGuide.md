@@ -136,9 +136,19 @@ Example: `list-undo`, then `undo 3`, will undo third command in command history.
 <!--- @@author ---> 
 
 #### Deleting a task : `delete`
+<<<<<<< HEAD
+To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
+Format: `delete INDEX`<br>
+ <br><img src="images/delete1.png" width="600"></br>
+Picture 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
+
+Example: `find violin, then delete 1<br>
+This deletes the 1st task in the results of the find command.
+=======
 Format: `delete` INDEX<br>
  <br><img src="images/delete1.png" width="800"></br>
 Diagram 4: Deletes the first task in the list.<br>
+>>>>>>> 9d3e940bc97dc4a324dca16582e28cdbfc8c5ebc
 
 #### Marking a task as completed: `done`
 Format: `done` INDEX<br>

@@ -75,6 +75,7 @@ public class ModelManager extends ComponentManager implements Model {
         taskManager.editTask(old, toEdit);
         indicateTaskManagerChanged();
     }
+    // @@author
 
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -90,7 +91,7 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
-    
+
     @Override
     public boolean isTaskPresent(Task task) {
         assert task != null;
@@ -116,10 +117,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142073R
+
+    @Override
+    public void updateFilteredtaskListDate(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new DateQualifier(keywords)));
+    }
+
     public void updateFilteredTaskListPriority(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
+
     }
-    // @@author
 
     /** @@author A0142130A **/
     @Override
@@ -128,16 +135,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /** @@author **/
-
     @Override
     public void updateFilteredtaskListCompleted(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(keywords)));       
+        updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(keywords)));
     }
-    
+
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-      
 
     // ========== Inner classes/interfaces used for filtering
     // ==================================================
@@ -215,8 +220,9 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", tagsKeyWords);
         }
     }
+
     /** @@author **/
-    
+
     private class CompleteQualifier implements Qualifier {
         private Set<String> CompleteKeyWords;
 
@@ -226,10 +232,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public boolean run(ReadOnlyTask task) {
-            String searchString = task.getTaskStatus().taskStatus
-                    + " " + task.tagsSimpleString();
-            return CompleteKeyWords.stream()
-                    .allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
+            String searchString = task.getTaskStatus().taskStatus + " " + task.tagsSimpleString();
+            return CompleteKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
 
         @Override
@@ -239,23 +243,44 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142073R
+    private class DateQualifier implements Qualifier {
+        private Set<String> DateKeyWords;
+
+        DateQualifier(Set<String> dateKeyWords) {
+            this.DateKeyWords = dateKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            String searchString = task.getStartDate().taskDate + " " + task.getTaskType();
+            return DateKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
+        }
+
+        @Override
+        public String toString() {
+            return "date=" + String.join(", ", DateKeyWords);
+        }
+    }
+
     private class PriorityQualifier implements Qualifier {
         private Set<String> PriorityKeyWords;
 
         PriorityQualifier(Set<String> keyWords) {
             this.PriorityKeyWords = keyWords;
         }
-
+        
         @Override
         public boolean run(ReadOnlyTask task) {
             String searchString = task.getTaskPriority().taskPriority;
             return PriorityKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
         }
 
+
         @Override
         public String toString() {
-            return "priority=" + String.join(", ", PriorityKeyWords) + "\n";
+            return "prioritye=" + String.join(", ", PriorityKeyWords);
         }
+
     }
-    // @@ author
+    // @@author
 }
