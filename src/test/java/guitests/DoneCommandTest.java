@@ -19,6 +19,9 @@ public class DoneCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         assertDoneSuccess(targetIndex, currentList);
+        
+        commandBox.runCommand("done " + currentList.length + 1);
+        assertResultMessage("The task index provided is invalid");
     }
     
     /**
