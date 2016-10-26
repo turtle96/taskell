@@ -17,7 +17,7 @@ public class ListPriorityCommandTest extends TaskManagerGuiTest {
         // list 2 tasks in the list
         TestTask[] currentList = td.getTypicalTasks();
         String priority = TaskPriority.LOW_PRIORITY;
-        assertlistPrioritySuccess(currentList, priority, td.archivePastEmails, td.borrowBooks, td.collectParcel, td.discardBooks,td.editPowerpoint);
+        assertlistPrioritySuccess(currentList, priority, td.archivePastEmails, td.borrowBooks, td.collectParcel, td.discardBooks,td.editPowerpoint, td.fixbugs, td.getNewUniform);
 
          //no tasks to list
          priority = TaskPriority.NO_PRIORITY;

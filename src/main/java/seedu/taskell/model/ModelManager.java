@@ -90,6 +90,12 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
+    
+    @Override
+    public boolean isTaskPresent(Task task) {
+        assert task != null;
+        return taskManager.isTaskPresent(task);
+    }
 
     // =========== Filtered Task List Accessors
     // ===============================================================
@@ -123,9 +129,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** @@author **/
 
+    @Override
+    public void updateFilteredtaskListCompleted(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new CompleteQualifier(keywords)));       
+    }
+    
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+      
 
     // ========== Inner classes/interfaces used for filtering
     // ==================================================
@@ -203,8 +215,28 @@ public class ModelManager extends ComponentManager implements Model {
             return "name=" + String.join(", ", tagsKeyWords);
         }
     }
-
     /** @@author **/
+    
+    private class CompleteQualifier implements Qualifier {
+        private Set<String> CompleteKeyWords;
+
+        CompleteQualifier(Set<String> CompleteKeyWords) {
+            this.CompleteKeyWords = CompleteKeyWords;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            String searchString = task.getTaskStatus().taskStatus
+                    + " " + task.tagsSimpleString();
+            return CompleteKeyWords.stream()
+                    .allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
+        }
+
+        @Override
+        public String toString() {
+            return "complete=" + String.join(", ", CompleteKeyWords);
+        }
+    }
 
     // @@author A0142073R
     private class PriorityQualifier implements Qualifier {

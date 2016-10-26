@@ -16,14 +16,15 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime endTime;
     private TaskDate startDate;
     private TaskDate endDate;
+    private TaskStatus taskStatus;
     private UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();
     }
-    
-    public TestTask(Description description, String taskType, TaskPriority taskPriority, TaskTime startTime, 
-              TaskTime endTime, TaskDate startDate, TaskDate endDate, UniqueTagList tags){
+
+    public TestTask(Description description, String taskType, TaskPriority taskPriority, TaskTime startTime,
+            TaskTime endTime, TaskDate startDate, TaskDate endDate, TaskStatus taskStatus, UniqueTagList tags) {
         this.description = description;
         this.taskType = taskType;
         this.startDate = startDate;
@@ -32,13 +33,14 @@ public class TestTask implements ReadOnlyTask {
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
+        this.taskStatus = taskStatus;
         this.tags = new UniqueTagList(tags);
     }
 
     public void setDescription(Description description) {
         this.description = description;
     }
-    
+
     public void setTaskType(String taskType) {
         this.taskType = taskType;
     }
@@ -50,7 +52,7 @@ public class TestTask implements ReadOnlyTask {
     public void setStartTime(TaskTime startTime) {
         this.startTime = startTime;
     }
-    
+
     public void setEndTime(TaskTime endTime) {
         this.endTime = endTime;
     }
@@ -58,21 +60,28 @@ public class TestTask implements ReadOnlyTask {
     public void setStartDate(TaskDate startDate) {
         this.startDate = startDate;
     }
-    
+
     public void setEndDate(TaskDate endDate) {
         this.endDate = endDate;
     }
-    
+
+    public void setTaskComplete(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
+
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
 
+    public void setTaskStatus(TaskStatus taskStatus) {
+        this.taskStatus = taskStatus;
+    }
 
     @Override
     public Description getDescription() {
         return description;
     }
-    
+
     @Override
     public String getTaskType() {
         return taskType;
@@ -87,12 +96,12 @@ public class TestTask implements ReadOnlyTask {
     public TaskDate getEndDate() {
         return startDate;
     }
-    
+
     @Override
     public TaskTime getStartTime() {
         return startTime;
     }
-    
+
     @Override
     public TaskTime getEndTime() {
         return endTime;
@@ -101,6 +110,11 @@ public class TestTask implements ReadOnlyTask {
     @Override
     public TaskPriority getTaskPriority() {
         return taskPriority;
+    }
+
+    @Override
+    public TaskStatus getTaskStatus() {
+        return taskStatus;
     }
 
     @Override
@@ -117,14 +131,14 @@ public class TestTask implements ReadOnlyTask {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
         sb.append("from " + this.getStartDate().taskDate + " ");
-        sb.append("to " + this.getEndDate().taskDate + " "); 
+        sb.append("to " + this.getEndDate().taskDate + " ");
         sb.append("from " + this.getStartTime().taskTime + " ");
         sb.append("to " + this.getEndTime().taskTime + " ");
         sb.append(TaskPriority.PREFIX + this.getTaskPriority().taskPriority + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append(Tag.PREFIX + s.tagName + " "));
         return sb.toString();
     }
-    
+
     public String getAddFloatingCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getDescription().description + " ");
