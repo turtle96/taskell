@@ -161,6 +161,7 @@ public class LogicManagerTest {
                 "add", expectedMessage);
     }
 
+   //@@author A0139257X-reused
     @Test
     public void execute_add_invalidTaskData() throws Exception {
         assertCommandBehavior(
@@ -198,6 +199,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
     }
     
+    //@@author A0139257X
     @Test
     public void execute_add_ValidFloatingTaskWithKeywords() throws Exception {
      // setup expectations
@@ -476,6 +478,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
     }
     
+    //@@author A0139257X-reused
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
@@ -495,7 +498,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
 
     }
-
+    //@@author
 
     @Test
     public void execute_list_showsAllTasks() throws Exception {
