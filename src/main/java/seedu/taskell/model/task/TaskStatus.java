@@ -1,3 +1,4 @@
+//@@author A0148004R
 package seedu.taskell.model.task;
 
 import java.util.Objects;
@@ -35,3 +36,4 @@ public class TaskStatus {
         return taskStatus.hashCode();
     }
 }
+//@@author

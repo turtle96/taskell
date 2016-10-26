@@ -90,7 +90,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 && this.internalList.equals(
                 ((UniqueTaskList) other).internalList));
     }
-    
+    //@@author A0142073R
     /**
      * Edits the equivalent task from the list.
      *
@@ -105,7 +105,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.set(internalList.indexOf(old), edit);
         return taskFoundAndUpdated;
     }
-
+    //@@author
     @Override
     public int hashCode() {
         return internalList.hashCode();
