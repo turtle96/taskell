@@ -13,7 +13,10 @@ public class ListPriorityCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed all completed tasks in descending priority";
 
-    public static final String MESSAGE_USAGE = "List a valid priority value from 0 to 3";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List the task with the specified priority. "
+            + "Parameters: INDEX (must be between 0 and 3 inclusive).\n"
+            + "Example: " + COMMAND_WORD + " 1";
     
     private Set<String> mostImportant = new HashSet<>(Arrays.asList(TaskPriority.HIGH_PRIORITY));
     private Set<String> important = new HashSet<>(Arrays.asList(TaskPriority.MEDIUM_PRIORITY));

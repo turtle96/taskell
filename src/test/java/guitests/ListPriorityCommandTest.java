@@ -24,7 +24,9 @@ public class ListPriorityCommandTest extends TaskManagerGuiTest {
         
          // invalid command format
          commandBox.runCommand("list-priority");
-         assertResultMessage("Invalid command format! \n" + "List a valid priority value from 0 to 3");
+         assertResultMessage("Invalid command format! \n" + "list-priority" + ": List the task with the specified priority. "
+                 + "Parameters: INDEX (must be between 0 and 3 inclusive).\n"
+                 + "Example: list-priority 1");
 
     }
 
