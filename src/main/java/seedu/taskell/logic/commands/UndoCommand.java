@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
-import seedu.taskell.commons.events.model.DisplayListChangedEvent;
+import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 import seedu.taskell.model.CommandHistory;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;

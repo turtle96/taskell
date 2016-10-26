@@ -489,6 +489,13 @@ Use case ends
 > 2a1. Taskell shows an error message <br>
   Use case resumes at step 2
   
+#### Use case: View calendar for the week
+
+**MSS**
+
+1. User requests to view calendar
+2. Taskell displays calendar
+  
 #### Use case: Save data to specified folder
 
 **MSS**
