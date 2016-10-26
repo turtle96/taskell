@@ -7,11 +7,13 @@
 * [Appendix A](#appendix-a)
 * [Appendix B](#appendix-b)
 
+//@@author A0142073R
 ## Introduction
 Are you having a hard time remembering all the work you have to do? Do you have trouble finding a task manager that suits your preference for keyboard input? Well, worry no more, Taskell is here for you! <br>
 Taskell will be your personal secretary. It will keep track of your daily tasks and remind you of any important dates and deadlines. What distinguishes Taskell from other task managers is that Taskell only requires a single line of command for every task input. This means that you can record each one of your tasks with just a single statement. You will no longer have to use a mouse if you do not wish to. <br>
 Ready to begin life anew with a more efficient task manager? Read on to find out more!
- 
+//@@author
+
 ## Quick Start
 
 Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
@@ -43,7 +45,8 @@ This section shows the different commands that you can use in Taskell. Words tha
 To open the help window<br>
  Format: `help`
  
- <!-- @@author A0139257X -->
+
+//@@ author A0139257X
 #### Adding a task: `add`
 To add a floating task<br>
 Format: 
@@ -82,7 +85,8 @@ Example: `add ` concert by 2am band <i>startat</i> 7pm<br>
 
 - `add ` TASK <i>endat</i>  [TIME]<br>
 Example: `add ` netball training <i>endat</i> 7pm<br>
-
+//@@ author
+//@@ author A0148004Rz
 #### Listing tasks : `list`
 Formats: 
 - `list` <br>
@@ -97,10 +101,9 @@ Displays a list of completed tasks.<br>
 Displays a list of tasks with given priority.<br>
 <br><img src="images/ListToday.png" width="600"></br>
 Diagram 2: Displays all the tasks to be done by today after typing list-date.
-<!-- @@author -->
+//@@ author
    
 <!- @@author A0142130A --->  
-
 #### Finding tasks: `find`
 You can use the find command to view tasks with specific keywords.<br>
 Formats: <br>
@@ -138,7 +141,6 @@ Example: `list-undo`, then `undo 3`, will undo third command in command history.
 <!-- @@author ---> 
 
 #### Deleting a task : `delete`
-<<<<<<< HEAD
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
  <br><img src="images/delete1.png" width="600"></br>
