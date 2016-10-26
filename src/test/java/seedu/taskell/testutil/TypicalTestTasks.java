@@ -4,6 +4,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.*;
 
+//@@author A0139257X
 /**
  *
  */
@@ -16,6 +17,7 @@ public class TypicalTestTasks {
         try {
             archivePastEmails =  new TaskBuilder().withDescription("Archieve past emails").withTaskType(Task.EVENT_TASK).withTaskPriority(TaskPriority.LOW_PRIORITY)
                     .withStartTime("12:30AM").withEndTime("12:45AM").withStartDate("1-1-2100").withEndDate("1-12-2100")
+
                     .withTags("friends").withTaskComplete(TaskStatus.INCOMPLETE).build();
             borrowBooks = new TaskBuilder().withDescription("Borrow books").withTaskType(Task.EVENT_TASK).withTaskPriority(TaskPriority.LOW_PRIORITY)
                     .withStartTime("12:30AM").withEndTime("12:45AM").withStartDate("1-1-2100").withEndDate("1-12-2100")
@@ -56,7 +58,8 @@ public class TypicalTestTasks {
     public TestTask[] getTypicalTasks() {
         return new TestTask[]{archivePastEmails, borrowBooks, collectParcel, discardBooks, editPowerpoint, fixbugs, getNewUniform};
     }
-
+//@@author
+    
     public TaskManager getTypicalTaskManager(){
         TaskManager ab = new TaskManager();
         loadTaskManagerWithSampleData(ab);
