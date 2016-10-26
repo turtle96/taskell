@@ -13,6 +13,9 @@ import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -66,7 +69,6 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TaskManagerChangedEvent(taskManager));
     }
 
-    // @@author A0142073R
     @Override
     public synchronized void editTask(ReadOnlyTask old, Task toEdit)
             throws DuplicateTaskException, TaskNotFoundException {
@@ -115,11 +117,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     // @@author A0142073R
+
     @Override
     public void updateFilteredtaskListDate(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new DateQualifier(keywords)));
     }
-    // @@author
+
+    public void updateFilteredTaskListPriority(Set<String> keywords) {
+        updateFilteredTaskList(new PredicateExpression(new PriorityQualifier(keywords)));
+
+    }
 
     /** @@author A0142130A **/
     @Override
@@ -214,6 +221,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
     }
 
+    /** @@author **/
+
     private class CompleteQualifier implements Qualifier {
         private Set<String> CompleteKeyWords;
 
@@ -251,6 +260,27 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "date=" + String.join(", ", DateKeyWords);
         }
+    }
+
+    private class PriorityQualifier implements Qualifier {
+        private Set<String> PriorityKeyWords;
+
+        PriorityQualifier(Set<String> keyWords) {
+            this.PriorityKeyWords = keyWords;
+        }
+        
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            String searchString = task.getTaskPriority().taskPriority;
+            return PriorityKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
+        }
+
+
+        @Override
+        public String toString() {
+            return "prioritye=" + String.join(", ", PriorityKeyWords);
+        }
+
     }
     // @@author
 }
