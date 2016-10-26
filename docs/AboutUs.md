@@ -8,6 +8,11 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/Marcus.png" width="150"><br>
 **Role**: Team Leader <br>
 **Responsibilities**: Code Quality Control, Logic <br>
+**Features implemented**: 
+* Add Command
+* TaskDate
+* TaskTime
+* Priority Colour
 
 As a Team Leader, I will
 * Be responsible for the overall project coordination
@@ -28,6 +33,11 @@ As a Code Quality Surveyor, I will
 <img src="images/Jazlyn.png" width="150"><br>
 **Role**: Developer <br>
 **Responsibilities**: UI, Testing and Integrating of codes <br>
+**Features implemented**: 
+* Save Location
+* Undo Command
+* Find Tag
+* UI
 
 As a Code Integrator, I will
 * Make sure code works well when integrating a new feature to system (by liaising with those in-charge of Documentation, Code Quality and Testing)
@@ -46,6 +56,9 @@ As a Testing Leader, I will
 <img src="images/Mamtha.png" width="150"><br>
 **Role**: Developer <br>
 **Responsibilities**: Data, Documentation, Scheduling and Tracking of deadlines <br>
+**Features implemented**: 
+* Edit Command
+* List Command
 
 As a Documentation Leader, I will
 * Be well-organised
@@ -65,6 +78,9 @@ As a Scheduling Deputy Leader, I will
 <img src="images/ZhuoLin.png" width="150"><br>
 **Role**: Developer <br>
 **Responsibilities**: Development and Operations, Testing, Scheduling and Tracking of deadlines <br>
+**Features implemented**: 
+* Done Command
+* List Command
 
 As a Scheduling Leader, I will
 * Set realistic deadline for different milestones of the project
