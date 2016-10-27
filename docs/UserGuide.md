@@ -102,8 +102,8 @@ Displays a list of tasks with given priority.<br>
 <br><img src="images/ListToday.png" width="600"></br>
 Diagram 2: Displays all the tasks to be done by today after typing list-date.
 <!-- @@author -->
-
-<!- @@author A0142130A --->  
+   
+<!--- @@author A0142130A --->  
 #### Finding tasks: `find`
 You can use the find command to view tasks with specific keywords.<br>
 Formats: <br>
@@ -119,9 +119,9 @@ This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  <br><img src="images/findReport.png" width="600"></br>
  <br><img src="images/findReportResult.png" width="600"></br>
  
- <!-- @@author --> 
+ <!--- @@author ---> 
 
-Diagram 3 and 4: Keying in �find report� displays list of tasks with report as one of the keywords in task description
+Diagram 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
