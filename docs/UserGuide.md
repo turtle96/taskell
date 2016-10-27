@@ -104,6 +104,7 @@ Diagram 2: Displays all the tasks to be done by today after typing list-date.
 //@@ author
    
 <!- @@author A0142130A --->  
+
 #### Finding tasks: `find`
 You can use the find command to view tasks with specific keywords.<br>
 Formats: <br>
@@ -152,7 +153,6 @@ This deletes the 1st task in the results of the find command.
 Format: `delete` INDEX<br>
  <br><img src="images/delete1.png" width="800"></br>
 Diagram 4: Deletes the first task in the list.<br>
->>>>>>> 9d3e940bc97dc4a324dca16582e28cdbfc8c5ebc
 
 #### Marking a task as completed: `done`
 Format: `done` INDEX<br>
