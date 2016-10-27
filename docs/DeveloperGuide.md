@@ -464,15 +464,9 @@ Use case ends
 
 1. User enters a command
 2. Taskell executes it
-<<<<<<< HEAD
-3. User requests to list commands history
-4. User requests to undo command at specific index
-5. Taskell undoes the previous command <br>
-=======
 3. User requests to list undo commands history
 4. User requests to undo command at specific index
 5. Taskell revert the command <br>
->>>>>>> 9d3e940bc97dc4a324dca16582e28cdbfc8c5ebc
 Use case ends
 
 **Extensions**
