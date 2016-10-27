@@ -120,9 +120,9 @@ This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  <br><img src="images/findReport.png" width="600"></br>
  <br><img src="images/findReportResult.png" width="600"></br>
  
- <!-- @@author --> 
+ <!--- @@author ---> 
 
-Diagram 3 and 4: Keying in �find report� displays list of tasks with report as one of the keywords in task description
+Diagram 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
