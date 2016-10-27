@@ -12,11 +12,13 @@
 * [Appendix D: Glossary](#appendix-d--glossary)
 * [Appendix E : Product Survey](#appendix-e-product-survey)
 
+<!- @@author A0142073R --->
 ##Introduction
 
 Taskell is a simple software for users to keep track of their daily tasks and manage their busy schedule. Keyboard lovers will be able to experience the full benefit of Taskell as it implements a command-line interface.
 
 This developer guide will help you understand the design and implementation of Taskell. It helps you understand how Taskell works and how you can contribute for further development. This guide follows a top-down approach by giving an overview of the essential components first, followed by thorough explanation subsequently.
+<!-- @@author -->
 
 ## Setting Up
 
@@ -315,6 +317,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repository (this bloats the repository size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+<!- @@author A0142073R --->
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
@@ -343,7 +346,9 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | edit my notification time period | customise if I wanted to be reminded earlier or later.
 `*` | user |  use the history command | saves time typing repeated commands.
 `*` | user |  view the task in either calendar form or list form |  switch between the two display format.
+<!-- @@author -->
 
+<!- @@author A0139257X --->
 ## Appendix B : Use Cases
 
 #### Use case: Add task
@@ -459,15 +464,9 @@ Use case ends
 
 1. User enters a command
 2. Taskell executes it
-<<<<<<< HEAD
-3. User requests to list commands history
-4. User requests to undo command at specific index
-5. Taskell undoes the previous command <br>
-=======
 3. User requests to list undo commands history
 4. User requests to undo command at specific index
 5. Taskell revert the command <br>
->>>>>>> 9d3e940bc97dc4a324dca16582e28cdbfc8c5ebc
 Use case ends
 
 **Extensions**
@@ -541,7 +540,7 @@ Use case ends
 **Extensions**
 
 NIL
-
+<!-- @@author -->
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
