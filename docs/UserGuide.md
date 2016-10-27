@@ -103,7 +103,7 @@ Displays a list of tasks with given priority.<br>
 Diagram 2: Displays all the tasks to be done by today after typing list-date.
 //@@ author
    
-<!- @@author A0142130A --->  
+<!--- @@author A0142130A --->  
 
 #### Finding tasks: `find`
 You can use the find command to view tasks with specific keywords.<br>
