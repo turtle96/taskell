@@ -20,6 +20,7 @@ import seedu.taskell.logic.commands.edit.EditStartTimeCommand;
 import seedu.taskell.logic.commands.list.ListAllCommand;
 import seedu.taskell.logic.commands.list.ListCommand;
 import seedu.taskell.logic.commands.list.ListDateCommand;
+import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
