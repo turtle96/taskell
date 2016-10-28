@@ -8,7 +8,7 @@ import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.taskell.logic.commands.EditEndTimeCommand.MESSAGE_EDIT_TASK_SUCCESS;
+import static seedu.taskell.logic.commands.edit.EditEndTimeCommand.MESSAGE_EDIT_TASK_SUCCESS;
 
 public class EditEndTimeCommandTest extends TaskManagerGuiTest {
 
