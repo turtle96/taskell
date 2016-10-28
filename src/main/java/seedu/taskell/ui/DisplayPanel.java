@@ -77,6 +77,7 @@ public class DisplayPanel extends UiPart{
             display.setText("No commands available for undo.");
         }
         else {
+            display.setText("List of command history available for undo:\n");
             for (int i=0; i<list.size(); i++) {
                 int index = i+1;
                 display.appendText(index + ". " + list.get(i) + "\n");
