@@ -6,17 +6,17 @@ import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 
 /** Lists a list of previous commands available for Undo operation
  * */
-public class ListUndoCommand extends Command {
+public class ViewHistoryCommand extends Command {
     
-    public static final String COMMAND_WORD = "list-undo";
+    public static final String COMMAND_WORD = "history";
 
     public static final String MESSAGE_SUCCESS = "Listed all commands available for undo.";
     
-    private static ListUndoCommand self;
+    private static ViewHistoryCommand self;
     
-    public static ListUndoCommand getInstance() {
+    public static ViewHistoryCommand getInstance() {
     	if (self == null) {
-    		self = new ListUndoCommand();
+    		self = new ViewHistoryCommand();
     	}
     	
     	return self;
