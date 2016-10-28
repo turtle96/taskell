@@ -6,6 +6,7 @@ package seedu.taskell.logic.commands;
  */
 public class IncorrectCommand extends Command {
 
+    private static boolean isAddEditDeleteCommand;
     public final String feedbackToUser;
 
     public IncorrectCommand(String feedbackToUser){
@@ -16,6 +17,14 @@ public class IncorrectCommand extends Command {
     public CommandResult execute() {
         indicateAttemptToExecuteIncorrectCommand();
         return new CommandResult(feedbackToUser);
+    }
+    
+    public void setIsUndoableCommand(boolean value) {
+        isAddEditDeleteCommand = value;
+    }
+    
+    public boolean isUndoableCommand() {
+        return isAddEditDeleteCommand;
     }
 
 }
