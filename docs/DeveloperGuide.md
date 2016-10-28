@@ -20,7 +20,7 @@ Taskell is a simple software for users to keep track of their daily tasks and ma
 
 This developer guide will help you understand the design and implementation of Taskell. It helps you understand how Taskell works and how you can contribute for further development. This guide follows a top-down approach by giving an overview of the essential components first, followed by thorough explanation subsequently.
 
-<!-- @@author -->
+<!--- @@author --->
 
 ## Setting Up
 
@@ -319,7 +319,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repository (this bloats the repository size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-<!- @@author A0142073R --->
+<!--- @@author A0142073R --->
 
 ## Appendix A : User Stories
 
@@ -350,9 +350,9 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user |  use the history command | saves time typing repeated commands.
 `*` | user |  view the task in either calendar form or list form |  switch between the two display format.
 
-<!-- @@author -->
+<!--- @@author -->
 
-<!- @@author A0139257X --->
+<!--- @@author A0139257X --->
 
 ## Appendix B : Use Cases
 
@@ -545,7 +545,7 @@ Use case ends
 **Extensions**
 NIL
 
-<!-- @@author -->
+<!--- @@author --->
 
 ## Appendix C : Non Functional Requirements
 
