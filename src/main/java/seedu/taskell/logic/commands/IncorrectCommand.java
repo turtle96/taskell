@@ -1,5 +1,7 @@
 package seedu.taskell.logic.commands;
 
+import seedu.taskell.commons.core.EventsCenter;
+import seedu.taskell.commons.events.undo.ExecutedIncorrectCommandEvent;
 
 /**
  * Represents an incorrect command. Upon execution, produces some feedback to the user.
@@ -16,15 +18,20 @@ public class IncorrectCommand extends Command {
     @Override
     public CommandResult execute() {
         indicateAttemptToExecuteIncorrectCommand();
+        indicateExecutedIncorrectCommand();
         return new CommandResult(feedbackToUser);
     }
-    
-    public void setIsUndoableCommand(boolean value) {
+
+    public static void setIsUndoableCommand(boolean value) {
         isAddEditDeleteCommand = value;
     }
     
-    public boolean isUndoableCommand() {
+    public static boolean isUndoableCommand() {
         return isAddEditDeleteCommand;
+    }
+    
+    private void indicateExecutedIncorrectCommand() {
+        EventsCenter.getInstance().post(new ExecutedIncorrectCommandEvent(isAddEditDeleteCommand));
     }
 
 }
