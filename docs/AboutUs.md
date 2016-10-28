@@ -31,24 +31,20 @@ As a Code Quality Surveyor, I will
 
 #### [Jazlyn Ang Chue Ching](https://github.com/turtle96)
 <img src="images/Jazlyn.png" width="150"><br>
-**Role**: Developer <br>
-**Responsibilities**: UI, Testing and Integrating of codes <br>
-**Features implemented**: 
-* Save Location
-* Undo Command
-* Find Tag
-* UI
 
-As a Code Integrator, I will
-* Make sure code works well when integrating a new feature to system (by liaising with those in-charge of Documentation, Code Quality and Testing)
-* Make sure any new code follows software design principles for easier maintenance
-* Look after the Github repository
-* Ensure that branches and PRs are well-labeled and specific for easier tracking
-<br>
-
-As a Testing Leader, I will
-* Ensure tests cover all the bases required for regression testing (e.g. error handling, nullpointers etc)
-* Ensure testing is done regularly and on schedule
+* Components in charge of: [Storage](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#storage-component)
+[UI](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#ui-component)
+* Aspects/tools in charge of: Testing, Integration, Git
+* Features implemented:
+   * [Save Location](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#saving-the-information-in-taskell--save)
+   * [Undo Command & Command History](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#reverting-previous-action--undo)
+   * [Find Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#finding-tasks-find)
+   * [Calendar View](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#showing-calendar-view--calendar-or-cal)
+* Code written: [[functional code](A0142130A.md)][[test code](A0142130A.md)][[docs](A0142130A.md)]
+* Other major contributions:
+  * Contributed to second round refactoring from AddressBook Level 4 to Taskell [[#64](https://github.com/CS2103AUG2016-W15-C3/main/pull/64) ]
+  * Set up Travis and Coveralls 
+  * Designed UI theme
 
 -----
 
