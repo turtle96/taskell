@@ -40,7 +40,7 @@ As a Code Quality Surveyor, I will
    * [Undo Command & Command History](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#reverting-previous-action--undo)
    * [Find Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#finding-tasks-find)
    * [Calendar View](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#showing-calendar-view--calendar-or-cal)
-* Code written: [[functional code](collated/main/A0142130A.md)][[test code](collated/test/A0142130A.md)][[docs](collated/docs/A0142130A.md)]
+* Code written: [[functional code](https://github.com/CS2103AUG2016-W15-C3/main/tree/master/collated/main/A0142130A.md)][[test code](https://github.com/CS2103AUG2016-W15-C3/main/tree/master/collated/test/A0142130A.md)][[docs](https://github.com/CS2103AUG2016-W15-C3/main/tree/master/collated/docs/A0142130A.md)]
 * Other major contributions:
   * Contributed to second round refactoring from AddressBook Level 4 to Taskell [[#64](https://github.com/CS2103AUG2016-W15-C3/main/pull/64) ]
   * Set up Travis and Coveralls 
