@@ -16,6 +16,7 @@ import seedu.taskell.logic.commands.edit.EditEndDateCommand;
 import seedu.taskell.logic.commands.edit.EditEndTimeCommand;
 import seedu.taskell.logic.commands.edit.EditPriorityCommand;
 import seedu.taskell.logic.commands.edit.EditStartDateCommand;
+import seedu.taskell.logic.commands.edit.EditStartTimeCommand;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
