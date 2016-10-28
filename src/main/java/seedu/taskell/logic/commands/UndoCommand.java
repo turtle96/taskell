@@ -10,6 +10,7 @@ import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 import seedu.taskell.logic.commands.edit.EditDescriptionCommand;
 import seedu.taskell.logic.commands.edit.EditEndDateCommand;
 import seedu.taskell.logic.commands.edit.EditEndTimeCommand;
+import seedu.taskell.logic.commands.edit.EditPriorityCommand;
 import seedu.taskell.model.CommandHistory;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;
