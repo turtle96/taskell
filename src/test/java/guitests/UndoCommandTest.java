@@ -7,14 +7,18 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.model.History;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 public class UndoCommandTest extends TaskManagerGuiTest {
     
+    private History history = HistoryManager.getInstance();
+    
     @Test
     public void undoAdd() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.holdMeeting;
@@ -27,12 +31,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("undo 1");
         assertDeleteSuccess(currentList.length, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     @Test
     public void undoDelete() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToDelete = currentList[0];
@@ -46,12 +50,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("undo 1");
         assertAddSuccess(taskToDelete, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     @Test
     public void undoAndRedoAdd() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.holdMeeting;
@@ -68,12 +72,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("undo 1");
         assertAddSuccess(taskToAdd, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     @Test
     public void undoAndRedoDelete() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToDelete = currentList[0];
@@ -92,7 +96,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("undo 1");
         assertDeleteSuccess(target, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
