@@ -26,9 +26,12 @@ public class HistoryManager implements History {
     public static History getInstance() {
         if (self == null) {
             self = new HistoryManager();
-        }
-        
+        }    
         return self;
+    }
+    
+    public static void setModel(Model m) {
+        model = m;
     }
     
     @Override
@@ -50,9 +53,8 @@ public class HistoryManager implements History {
         return list;
     }
     
-    /** removes Tasks no longer in system (i.e. manually deleted/cleared)
-     * */
-    private void updateList() {
+    @Override
+    public void updateList() {
         if (model == null) {
             logger.severe("Model is null");
             return;

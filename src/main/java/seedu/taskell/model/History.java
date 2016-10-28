@@ -35,5 +35,7 @@ public interface History {
     /** Deletes a given CommandHistory */
     void deleteCommandHistory(CommandHistory commandHistory);
 
+    /** removes Tasks no longer in system (i.e. manually deleted/cleared) */
+    void updateList();
     
 }
