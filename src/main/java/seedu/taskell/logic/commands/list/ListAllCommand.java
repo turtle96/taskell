@@ -1,5 +1,8 @@
 //@@author A0148004R
-package seedu.taskell.logic.commands;
+package seedu.taskell.logic.commands.list;
+
+import seedu.taskell.logic.commands.Command;
+import seedu.taskell.logic.commands.CommandResult;
 
 public class ListAllCommand extends Command {
 

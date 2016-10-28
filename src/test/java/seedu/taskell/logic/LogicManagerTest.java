@@ -10,6 +10,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.*;
+import seedu.taskell.logic.commands.list.ListAllCommand;
 import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.ModelManager;
