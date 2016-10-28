@@ -1,9 +1,13 @@
 //@@author A0142073R
-package seedu.taskell.logic.commands;
+package seedu.taskell.logic.commands.edit;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.Command;
+import seedu.taskell.logic.commands.CommandResult;
+import seedu.taskell.logic.commands.UndoCommand;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.Description;

@@ -8,7 +8,7 @@ import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.taskell.logic.commands.EditDescriptionCommand.MESSAGE_EDIT_TASK_SUCCESS;
+import static seedu.taskell.logic.commands.edit.EditDescriptionCommand.MESSAGE_EDIT_TASK_SUCCESS;
 
 public class EditDescriptionCommandTest extends TaskManagerGuiTest {
 
