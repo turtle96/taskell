@@ -156,7 +156,10 @@ public class Parser {
         case DoneCommand.COMMAND_WORD:
             return prepareDone(arguments);
 
-        case ViewHistoryCommand.COMMAND_WORD:
+        case ViewHistoryCommand.COMMAND_WORD_1:
+            return new ViewHistoryCommand();
+            
+        case ViewHistoryCommand.COMMAND_WORD_2:
             return new ViewHistoryCommand();
             
         case ViewCalendarCommand.COMMAND_WORD_1:

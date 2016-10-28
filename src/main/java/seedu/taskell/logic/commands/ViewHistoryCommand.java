@@ -8,7 +8,8 @@ import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
  * */
 public class ViewHistoryCommand extends Command {
     
-    public static final String COMMAND_WORD = "history";
+    public static final String COMMAND_WORD_1 = "history";
+    public static final String COMMAND_WORD_2 = "hist";
 
     public static final String MESSAGE_SUCCESS = "Listed all commands available for undo.";
     
