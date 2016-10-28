@@ -17,6 +17,7 @@ import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.SaveStorageLocationCommand;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.logic.commands.ViewHistoryCommand;
 import seedu.taskell.model.*;
 import seedu.taskell.storage.Storage;
 import seedu.taskell.storage.StorageManager;
@@ -68,6 +69,7 @@ public class MainApp extends Application {
         
         UndoCommand.initializeCommandHistory();
         UndoCommand.getInstance().setData(model);
+        ViewHistoryCommand.getInstance().setData(model);
         SaveStorageLocationCommand.setConfig(config);
         SaveStorageLocationCommand.setStorage(storage);
     }
