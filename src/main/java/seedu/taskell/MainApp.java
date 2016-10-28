@@ -67,8 +67,7 @@ public class MainApp extends Application {
 
         initEventsCenter();
         
-        UndoCommand.initializeCommandHistory();
-        UndoCommand.getInstance().setData(model);
+        HistoryManager.setModel(model);
         ViewHistoryCommand.getInstance().setData(model);
         SaveStorageLocationCommand.setConfig(config);
         SaveStorageLocationCommand.setStorage(storage);
