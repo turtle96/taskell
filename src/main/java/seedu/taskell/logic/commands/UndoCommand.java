@@ -57,6 +57,14 @@ public class UndoCommand extends Command {
         this.index = index;
     }
 
+    public UndoCommand() {
+        logger.info("Creating UndoCommand without index");
+        
+        history = HistoryManager.getInstance();
+        commandHistoryList = history.getList();
+        this.index = commandHistoryList.size(); //offset will be done in execute()
+    }
+
     @Override
     public CommandResult execute() {
         

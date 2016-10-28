@@ -789,6 +789,10 @@ public class Parser {
      * 
      */
     private Command prepareUndo(String args) {
+        if (args.isEmpty()) {
+            return new UndoCommand();
+        }
+        
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
