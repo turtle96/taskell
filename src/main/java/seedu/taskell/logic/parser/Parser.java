@@ -23,6 +23,7 @@ import seedu.taskell.logic.commands.list.ListDateCommand;
 import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
 import seedu.taskell.model.tag.Tag;
+import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskPriority;
@@ -56,7 +57,14 @@ public class Parser {
     private static final String AT = "at";
     private static final String FROM = "from";
     private static final String TO = "to";
-
+    
+    private boolean hasChangedDescription = false;
+    private boolean hasChangedStartDate = false;
+    private boolean hasChangedEndDate = false;
+    private boolean hasChangedStartTime = false;
+    private boolean hasChangedEndTime = false;
+    private boolean hasChangedPriority = false;
+    
     public Parser() {
     }
 
@@ -88,6 +96,10 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareDelete(arguments);
+            
+        case EditCommand.COMMAND_WORD:
+            UndoCommand.addCommandToHistory(userInput, commandWord);
+            return prepareEdit(arguments);
 
         case EditStartDateCommand.COMMAND_WORD:
             UndoCommand.addCommandToHistory(userInput, commandWord);
@@ -209,7 +221,51 @@ public class Parser {
         } else
             return new ListPriorityCommand(intValue);
     }
+    
+    /**
+     * Parses arguments in the context of the edit command.
+     *
+     * @param args
+     *            full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        String arguments = "";
+        Description description;
+        TaskDate startDate;
+        TaskDate endDate;
+        TaskTime startTime;
+        TaskTime endTime;
+        TaskPriority taskPriority;
+        
+        if (args.isEmpty()) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+        StringTokenizer st = new StringTokenizer(args.trim(), " ");
+        String intValue = st.nextToken();
+        if (!isInt(intValue)) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
+        }
+        int targetIdx = Integer.valueOf(intValue);
+        arguments = st.nextToken();
+        while(st.hasMoreTokens()){
+            String parts = st.nextToken();
+            if(parts.substring(0,5).equals("desc-")){
+                
+            }
+        }
 
+        try {
+            return new EditCommand(targetIdx, arguments);
+        } catch (IllegalValueException ive) {
+            UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
     /**
      * Parses arguments in the context of the edit task startDate command.
      *
