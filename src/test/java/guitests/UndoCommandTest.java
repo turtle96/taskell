@@ -28,7 +28,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand("undo");
         assertDeleteSuccess(currentList.length, currentList);
         
         history.clear();
@@ -47,7 +47,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand("undo");
         assertAddSuccess(taskToDelete, currentList);
         
         history.clear();
@@ -65,11 +65,11 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand("undo");
         assertDeleteSuccess(currentList.length, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, currentList.length);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand("undo");
         assertAddSuccess(taskToAdd, currentList);
         
         history.clear();
@@ -88,12 +88,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand("undo");
         assertAddSuccess(taskToDelete, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToDelete);
         
         target = currentList.length;
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand("undo");
         assertDeleteSuccess(target, currentList);
         
         history.clear();
