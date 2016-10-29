@@ -20,6 +20,9 @@ import java.util.logging.Logger;
  */
 public class DisplayPanel extends UiPart{
 
+    public static final String MESSAGE_NO_HISTORY = "No commands available for undo.";
+    public static final String MESSAGE_DISPLAY_HISTORY = "List of command history available for undo:\n";
+
     private static final String WELCOME_MESSAGE = "Welcome to Taskell!\n"
             + "Enter '" + AddCommand.COMMAND_WORD + "' in command box to add a task.\n"
             + "Enter '" + ViewHistoryCommand.COMMAND_WORD_1 + "' for a list of commands to undo.\n"
@@ -28,7 +31,7 @@ public class DisplayPanel extends UiPart{
 
     private static Logger logger = LogsCenter.getLogger(DisplayPanel.class);
     
-    public static final String RESULT_DISPLAY_ID = "resultDisplay";
+    public static final String DISPLAY_PANEL_ID = "displayPanel";
     private static final String STATUS_BAR_STYLE_SHEET = "result-display";
     
     private TextArea display;
@@ -61,7 +64,7 @@ public class DisplayPanel extends UiPart{
         DisplayPanel displayPanel = new DisplayPanel();
         
         displayPanel.display.setEditable(false);
-        displayPanel.display.setId(RESULT_DISPLAY_ID);
+        displayPanel.display.setId(DISPLAY_PANEL_ID);
         displayPanel.display.getStyleClass().removeAll();
         displayPanel.display.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
         
@@ -79,10 +82,10 @@ public class DisplayPanel extends UiPart{
         
         display.setText("");
         if (list.isEmpty()) {
-            display.setText("No commands available for undo.");
+            display.setText(MESSAGE_NO_HISTORY);
         }
         else {
-            display.setText("List of command history available for undo:\n");
+            display.setText(MESSAGE_DISPLAY_HISTORY);
             for (int i=0; i<list.size(); i++) {
                 int index = i+1;
                 display.appendText(index + ". " + list.get(i) + "\n");
