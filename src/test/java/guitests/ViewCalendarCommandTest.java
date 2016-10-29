@@ -3,11 +3,13 @@ package guitests;
 
 import org.junit.Test;
 
+import seedu.taskell.logic.commands.ViewCalendarCommand;
+
 public class ViewCalendarCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void viewCal() {
-        String expected = "Displayed calendar.";
+        String expected = ViewCalendarCommand.MESSAGE_SUCCESS;
         
         commandBox.runCommand("calendar");
         assertResultMessage(expected);
