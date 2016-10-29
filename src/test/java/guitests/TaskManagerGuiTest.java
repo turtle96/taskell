@@ -15,6 +15,7 @@ import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.testutil.TestUtil;
 import seedu.taskell.testutil.TypicalTestTasks;
+import seedu.taskell.ui.DisplayPanel;
 
 import java.util.concurrent.TimeoutException;
 
@@ -43,6 +44,7 @@ public abstract class TaskManagerGuiTest {
     protected TaskListPanelHandle taskListPanel;
     protected ResultDisplayHandle resultDisplay;
     protected CommandBoxHandle commandBox;
+    protected DisplayPanelHandle displayPanel;
     private Stage stage;
 
     @BeforeClass
@@ -63,6 +65,7 @@ public abstract class TaskManagerGuiTest {
             taskListPanel = mainGui.getTaskListPanel();
             resultDisplay = mainGui.getResultDisplay();
             commandBox = mainGui.getCommandBox();
+            displayPanel = mainGui.getDisplayPanel();
             this.stage = stage;
         });
         EventsCenter.clearSubscribers();
