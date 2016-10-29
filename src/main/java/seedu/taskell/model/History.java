@@ -1,3 +1,4 @@
+/** @@author A0142130A **/
 package seedu.taskell.model;
 
 import java.util.ArrayList;

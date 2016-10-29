@@ -22,6 +22,8 @@ public class IncorrectCommand extends Command {
         return new CommandResult(feedbackToUser);
     }
 
+    /** @@author A0142130A **/
+    
     public static void setIsUndoableCommand(boolean value) {
         isAddEditDeleteCommand = value;
     }
@@ -34,5 +36,6 @@ public class IncorrectCommand extends Command {
         EventsCenter.getInstance().post(new ExecutedIncorrectCommandEvent(isAddEditDeleteCommand));
     }
 
+    /** @@author **/
 }
 
