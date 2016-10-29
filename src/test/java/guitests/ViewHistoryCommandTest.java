@@ -12,6 +12,8 @@ public class ViewHistoryCommandTest extends TaskManagerGuiTest {
     
     @Test
     public void viewHistory() {
+        HistoryManager.getInstance().clear();
+        
         String expectedMessage = ViewHistoryCommand.MESSAGE_SUCCESS;
         
         commandBox.runCommand("add smth by tmr");
@@ -25,6 +27,8 @@ public class ViewHistoryCommandTest extends TaskManagerGuiTest {
         assertResultMessage(expectedMessage);
         text = displayPanel.getText();
         assertListMatch(text, HistoryManager.getInstance().getListCommandText());
+        
+        HistoryManager.getInstance().clear();
     }
 
     private void assertListMatch(String result, ArrayList<String> list) {
