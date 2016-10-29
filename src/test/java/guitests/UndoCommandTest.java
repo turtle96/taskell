@@ -14,6 +14,7 @@ import seedu.taskell.testutil.TestUtil;
 
 public class UndoCommandTest extends TaskManagerGuiTest {
     
+    private static final String UNDO = "undo";
     private History history = HistoryManager.getInstance();
     
     @Test
@@ -28,7 +29,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO);
         assertDeleteSuccess(currentList.length, currentList);
         
         history.clear();
@@ -47,7 +48,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO);
         assertAddSuccess(taskToDelete, currentList);
         
         history.clear();
@@ -65,11 +66,11 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO);
         assertDeleteSuccess(currentList.length, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, currentList.length);
         
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO);
         assertAddSuccess(taskToAdd, currentList);
         
         history.clear();
@@ -88,12 +89,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO);
         assertAddSuccess(taskToDelete, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToDelete);
         
         target = currentList.length;
-        commandBox.runCommand("undo");
+        commandBox.runCommand(UNDO);
         assertDeleteSuccess(target, currentList);
         
         history.clear();
