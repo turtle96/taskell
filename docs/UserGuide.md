@@ -139,11 +139,20 @@ Diagram 3 and 4: Keying in `find report` displays list of tasks with report as o
 <!--- @@author A0142130A ---> 
 
 #### Reverting previous action : `undo`
-If you wish to undo your previous actions, <kbd>Enter</kbd> list-undo to see a list of 
+If you wish to undo your most recent action, you can do so by using the undo command.<br>
+You can also undo previous commands, <kbd>Enter</kbd> `hist` to see a list of 
 previous commands that can be undone.<br>
-Then use undo command at the specified INDEX in the list.<br>
-Format: `undo INDEX`<br> 
-Example: `list-undo`, then `undo 3`, will undo third command in command history.
+Then use undo command with specified INDEX from the list of command history.<br>
+Formats: <br>
+-`undo`<br> 
+Undo most recent command executed.<br>
+-`undo INDEX`<br> 
+Undo by index of command history.<br>
+Example: `hist`, then `undo 3`, will undo third command in command history.<br>
+
+> Take Note! <br>
+> * Undo command only supports add, edit, delete, and undo commands.
+> * Clear commands are irreversible!
 
 <!--- @@author ---> 
 
