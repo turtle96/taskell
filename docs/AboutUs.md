@@ -33,7 +33,7 @@ As a Code Quality Surveyor, I will
 <img src="images/Jazlyn.png" width="150"><br>
 
 Role: Developer 
-* Components in charge of: [Storage](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#storage-component)
+* Components in charge of: [Storage](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#storage-component), 
 [UI](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#ui-component)
 * Aspects/tools in charge of: Testing, Integration, Git
 * Features implemented:
