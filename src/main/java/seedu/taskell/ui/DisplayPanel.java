@@ -7,6 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import jfxtras.scene.control.agenda.Agenda;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.util.FxViewUtil;
+import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.HelpCommand;
+import seedu.taskell.logic.commands.ViewCalendarCommand;
+import seedu.taskell.logic.commands.ViewHistoryCommand;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -15,6 +19,12 @@ import java.util.logging.Logger;
  * The Display Panel of the App.
  */
 public class DisplayPanel extends UiPart{
+
+    private static final String WELCOME_MESSAGE = "Welcome to Taskell!\n"
+            + "Enter '" + AddCommand.COMMAND_WORD + "' in command box to add a task.\n"
+            + "Enter '" + ViewHistoryCommand.COMMAND_WORD_1 + "' for a list of commands to undo.\n"
+            + "Enter '" + ViewCalendarCommand.COMMAND_WORD_1 + "' to view calendar.\n"
+            + "Enter '" + HelpCommand.COMMAND_WORD + "' for more information about commands.";
 
     private static Logger logger = LogsCenter.getLogger(DisplayPanel.class);
     
@@ -50,7 +60,6 @@ public class DisplayPanel extends UiPart{
         logger.info("Initializing display panel");
         DisplayPanel displayPanel = new DisplayPanel();
         
-        //displayPanel.display = new TextArea();
         displayPanel.display.setEditable(false);
         displayPanel.display.setId(RESULT_DISPLAY_ID);
         displayPanel.display.getStyleClass().removeAll();
@@ -59,11 +68,7 @@ public class DisplayPanel extends UiPart{
         FxViewUtil.applyAnchorBoundaryParameters(displayPanel.display, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(displayPanel.display);
         
-        displayPanel.display.setText("Welcome to Taskell!\n"
-                + "Enter 'add' in command box to add a task.\n"
-                + "Enter 'list-undo' for list of commands to undo.\n"
-                + "Enter 'help' for more information about commands.\n"
-                + "Enter 'calendar' to view calendar.");
+        displayPanel.display.setText(WELCOME_MESSAGE);
        
         return displayPanel;
     }
