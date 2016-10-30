@@ -69,31 +69,31 @@ public class TestUtil {
             return new Task[] {
                     new Task(new Description("Ali Muster"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Boris Mueller"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Carl Kurz"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Daniel Meier"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Elle Meyer"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Fiona Kunz"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("George Best"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Hoon Meier"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()),
                     new Task(new Description("Ida Mueller"), Task.EVENT_TASK, new TaskDate("1-1-2100"),
                             new TaskDate("1-12-2100"), new TaskTime("12:30AM"), new TaskTime("12:45AM"),
-                            new TaskPriority("0"), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()) };
+                            new TaskPriority("0"), new RecurringType(RecurringType.NO_RECURRING), new TaskStatus(TaskStatus.INCOMPLETE), new UniqueTagList()) };
         } catch (IllegalValueException e) {
             assert false;
             // not possible
@@ -206,28 +206,28 @@ public class TestUtil {
             throws IllegalValueException {
         TestTask newTask = new TestTask(new Description(newDescription), taskToEdit.getTaskType(),
                 taskToEdit.getTaskPriority(), taskToEdit.getStartTime(), taskToEdit.getEndTime(),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         return newTask;
     }
 
     public static TestTask editTaskStartTime(TestTask taskToEdit, String newStartTime) throws IllegalValueException {
         TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(),
                 taskToEdit.getTaskPriority(), new TaskTime(newStartTime), taskToEdit.getEndTime(),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         return newTask;
     }
 
     public static TestTask editTaskEndTime(TestTask taskToEdit, String newEndTime) throws IllegalValueException {
         TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(),
                 taskToEdit.getTaskPriority(), taskToEdit.getStartTime(), new TaskTime(newEndTime),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         return newTask;
     }
 
     public static TestTask editTaskPriority(TestTask taskToEdit, String newPriority) throws IllegalValueException {
         TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(),
                 new TaskPriority(newPriority), taskToEdit.getStartTime(), taskToEdit.getEndTime(),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         return newTask;
     }
     // @@author

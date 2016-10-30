@@ -8,7 +8,8 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
-        <taskComplete isPrivate="false">incomplete</taskComplete>
+        <recurringType isPrivate="false">neverRecur</recurringType>
+        <taskComplete isPrivate="false">incomplete</taskComplete>        
     </tasks>
     <tasks>
         <description>Ruth Mueller</description>
@@ -18,6 +19,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -28,6 +30,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -38,6 +41,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -48,6 +52,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -58,6 +63,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -68,6 +74,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -78,6 +85,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
     <tasks>
@@ -88,6 +96,7 @@
         <startTime isPrivate="false">12:30AM</startTime>
         <endTime isPrivate="false">12:45AM</endTime>
         <taskPriority isPrivate="false">0</taskPriority>
+        <recurringType isPrivate="false">neverRecur</recurringType>
         <taskComplete isPrivate="false">incomplete</taskComplete>
     </tasks>
 </taskmanager>
