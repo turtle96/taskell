@@ -58,6 +58,7 @@ public class Parser {
     private static final String FROM = "from";
     private static final String TO = "to";
 
+    private boolean hasChangedDescription = false;
     private boolean hasChangedStartDate = false;
     private boolean hasChangedEndDate = false;
     private boolean hasChangedStartTime = false;
@@ -226,94 +227,151 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareEdit(String args) {
-        String startDate = TaskDate.DEFAULT_DATE, endDate = TaskDate.DEFAULT_DATE, startTime = TaskTime.DEFAULT_START_TIME, 
-                endTime = TaskTime.DEFAULT_END_TIME, taskPriority = TaskPriority.DEFAULT_PRIORITY;
+        String description = "default", startDate = TaskDate.DEFAULT_DATE, endDate = TaskDate.DEFAULT_DATE,
+                startTime = TaskTime.DEFAULT_START_TIME, endTime = TaskTime.DEFAULT_END_TIME,
+                taskPriority = TaskPriority.DEFAULT_PRIORITY;
 
         if (args.isEmpty()) {
-            //UndoCommand.deletePreviousCommand();
+            // UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            //UndoCommand.deletePreviousCommand();
+            // UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
+        hasChangedDescription = false;
+        hasChangedStartDate = false;
+        hasChangedEndDate = false;
+        hasChangedStartTime = false;
+        hasChangedEndTime = false;
+        hasChangedPriority = false;
         while (st.hasMoreTokens()) {
             String parts = st.nextToken();
-            System.out.println("Parts is "+parts);
-
-            if (parts.equals("st:")) {
-                String startT = st.nextToken();
-                if (TaskTime.isValidTime(startT)) {
-                    startTime = startT.trim();
-                    hasChangedStartTime = true;
-                } 
-                else {
+            System.out.println("Parts is " + parts);
+            if (parts.equals("desc:")) {
+                if (hasChangedDescription == true) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-                System.out.println("Start time is "+startTime);
+                System.out.println("I am inside desc");
+                String desc = " ";
+                while (!(parts.equals("st:") || parts.equals("et:") || parts.equals("sd:")
+                        || parts.equals("ed") | parts.equals("p:")) && st.hasMoreTokens()) {
+                    desc += (parts + " ");
+                    parts = st.nextToken();
+                    hasChangedDescription = true;
+                }
+                if (!(parts.equals("st:") || parts.equals("et:") || parts.equals("sd:")
+                        || parts.equals("ed") | parts.equals("p:"))) {
+                    desc += parts;
+                }
+                desc = desc.trim();
+                if (Description.isValidDescription(desc)) {
+                    System.out.println("The new desc is valid");
+                    description = desc.substring(5);
+                    hasChangedDescription = true;
+                }
+                System.out.println("Description End: " + desc);
+            }
+            if (parts.equals("st:")) {
+                if (hasChangedStartTime == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                System.out.println("I am inside start time");
+                if (st.hasMoreTokens()) {
+                    String startT = st.nextToken();
+                    if (TaskTime.isValidTime(startT)) {
+                        startTime = startT.trim();
+                        hasChangedStartTime = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                    }
+                }
+                System.out.println("Start time is " + startTime);
             }
             if (parts.equals("et:")) {
-                String endT = st.nextToken();
-                if (TaskTime.isValidTime(endT)) {
-                    endTime = endT.trim();
-                    hasChangedEndTime = true;
-                } 
-                else {
+                if (hasChangedEndTime == true) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-                System.out.println("End time is "+endTime);
+                if (st.hasMoreTokens()) {
+                    String endT = st.nextToken();
+                    if (TaskTime.isValidTime(endT)) {
+                        endTime = endT.trim();
+                        hasChangedEndTime = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                    }
+                }
+                System.out.println("End time is " + endTime);
             }
             if (parts.equals("sd:")) {
-                String startD = st.nextToken();
-                if (TaskDate.isValidDate(startD)) {
-                    startDate = startD.trim();
-                    hasChangedStartDate = true;
-                } 
-                else {
+                if (hasChangedStartDate == true) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-                System.out.println("Start Date is "+startDate);
+                if (st.hasMoreTokens()) {
+                    String startD = st.nextToken();
+                    if (TaskDate.isValidDate(startD)) {
+                        startDate = startD.trim();
+                        hasChangedStartDate = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                    }
+                }
+                System.out.println("Start Date is " + startDate);
             }
             if (parts.equals("ed:")) {
-                String endD = st.nextToken();
-                if (TaskDate.isValidDate(endD)) {
-                    endDate = endD.trim();
-                    hasChangedEndDate = true;
-                } 
-                else {
+                if (hasChangedEndDate == true) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-                System.out.println("End Date is "+ endDate);
+                if (st.hasMoreTokens()) {
+                    String endD = st.nextToken();
+                    if (TaskDate.isValidDate(endD)) {
+                        endDate = endD.trim();
+                        hasChangedEndDate = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                    }
+                }
+                System.out.println("End Date is " + endDate);
             }
             if (parts.equals("p:")) {
-                String p = st.nextToken();
-                if (TaskPriority.isValidPriority(p)) {
-                    taskPriority = p.trim();
-                    hasChangedPriority = true;
-                } 
-                else {
+                if (hasChangedPriority == true) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-                System.out.println("Priority is "+ taskPriority);
-            }
-            if(!(parts.equals("st:") || parts.equals("et:") || parts.equals("sd:") || parts.equals("ed:")
-                    || parts.equals("p:")) ) {
-                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                if (st.hasMoreTokens()) {
+                    String p = st.nextToken();
+                    if (TaskPriority.isValidPriority(p)) {
+                        taskPriority = p.trim();
+                        hasChangedPriority = true;
+                    } else {
+                        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
+                    }
+                }
+                System.out.println("Priority is " + taskPriority);
             }
         }
-
+        System.out
+                .println("Desc: " + hasChangedDescription + " st: " + hasChangedStartTime + " et: " + hasChangedEndTime
+                        + " sd: " + hasChangedStartDate + " ed: " + hasChangedEndDate + " p: " + hasChangedPriority);
         try {
             System.out.println("I am here to exectue edit command");
-            return new EditCommand(targetIdx,new TaskDate(startDate), hasChangedStartDate, new TaskDate(endDate),
-                    hasChangedEndDate,new TaskTime(startTime), hasChangedStartTime, new TaskTime(endTime), hasChangedEndTime, new TaskPriority(taskPriority), hasChangedPriority);
+            return new EditCommand(targetIdx, new Description(description), hasChangedDescription,
+                    new TaskDate(startDate), hasChangedStartDate, new TaskDate(endDate), hasChangedEndDate,
+                    new TaskTime(startTime), hasChangedStartTime, new TaskTime(endTime), hasChangedEndTime,
+                    new TaskPriority(taskPriority), hasChangedPriority);
         } catch (IllegalValueException ive) {
             UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());

@@ -34,24 +34,28 @@ public class EditCommand extends Command {
     public static final String MESSAGE_EDIT_TASK_SUCCESS = "Original Task: %1$s \n\nUpdated Task: %2$s";
 
     private final int targetIndex;
-
+    
+    private Description description;
     private TaskDate startDate;
     private TaskDate endDate;
     private TaskTime startTime;
     private TaskTime endTime;
     private TaskPriority taskPriority;
 
+    private boolean hasChangedDescription = false;
     private boolean hasChangedStartDate = false;
     private boolean hasChangedEndDate = false;
     private boolean hasChangedStartTime = false;
     private boolean hasChangedEndTime = false;
     private boolean hasChangedPriority = false;
     
-    public EditCommand(int targetIndex, TaskDate newStartDate, boolean hasChangedStartDate, TaskDate newEndDate,
+    public EditCommand(int targetIndex, Description newDescription, boolean hasChangedDescription, TaskDate newStartDate, boolean hasChangedStartDate, TaskDate newEndDate,
             boolean hasChangedEndDate, TaskTime newStartTime, boolean hasChangedStartTime, TaskTime newEndTime,
             boolean hasChangedEndTime, TaskPriority newPriority, boolean hasChangedPriority)
             throws IllegalValueException {
         this.targetIndex = targetIndex;
+        description = newDescription;
+        this.hasChangedDescription = hasChangedDescription;
         startTime = newStartTime;
         this.hasChangedStartTime = hasChangedStartTime;
         endTime = newEndTime;
@@ -62,10 +66,6 @@ public class EditCommand extends Command {
         this.hasChangedEndDate = hasChangedEndDate;
         taskPriority = newPriority;
         this.hasChangedPriority = hasChangedPriority;
-    }
-    
-    public void getTaskEdit(){
-        
     }
 
     @Override
@@ -79,6 +79,9 @@ public class EditCommand extends Command {
         }
         
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
+        if(hasChangedDescription == false){
+            description = taskToEdit.getDescription();
+        }
         if(hasChangedStartTime == false){
             startTime = taskToEdit.getStartTime();
         }
@@ -95,7 +98,7 @@ public class EditCommand extends Command {
             taskPriority = taskToEdit.getTaskPriority();
         }
         
-        Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), startDate, endDate, startTime,
+        Task newTask = new Task(description, taskToEdit.getTaskType(), startDate, endDate, startTime,
                 endTime, taskPriority, taskToEdit.getTaskStatus(), taskToEdit.getTags());
 
         try {
