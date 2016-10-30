@@ -4,6 +4,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -133,6 +134,44 @@ public class TaskTimeTest {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("h:mma");
         LocalTime currTime = LocalTime.now();
         assertEquals(LocalTime.of(currTime.getHour(), currTime.getMinute()).format(dtf), TaskTime.getTimeNow().toString());
+    }
+    
+    @Test
+    public void assertCorrectLocalTime() throws IllegalValueException {
+        //Valid hour in the morning
+        TaskTime time = new TaskTime("3am");
+        LocalTime actual = time.getLocalTime();
+        LocalTime expected = LocalTime.of(3, 0);
+        assertEquals(expected, actual);
+        
+        //Valid time in the morning
+        time = new TaskTime("5.23am");
+        actual = time.getLocalTime();
+        expected = LocalTime.of(5, 23);
+        assertEquals(expected, actual);
+        
+        //Valid hour in the afternoon
+        time = new TaskTime("3pm");
+        actual = time.getLocalTime();
+        expected = LocalTime.of(15, 0);
+        assertEquals(expected, actual);
+        
+        //Valid time in the afternoon
+        time = new TaskTime("5.23pm");
+        actual = time.getLocalTime();
+        expected = LocalTime.of(17, 23);
+        assertEquals(expected, actual);
+    }
+    
+    @Test 
+    public void assertCorrectLocalDateTime() throws IllegalValueException {
+        TaskDate givenDate = new TaskDate("1-1-2100");
+        TaskTime time = new TaskTime("3am");
+
+        LocalDateTime actual = time.toLocalDateTime(givenDate);
+        LocalDateTime expected = LocalDateTime.of(2100, 1, 1, 3, 0);
+        
+        assertEquals(expected, actual);
     }
     
     @Test
