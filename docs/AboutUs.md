@@ -45,23 +45,19 @@ Role: Developer
 <!-- @@author A0142073R -->
 #### [Madasamy Ravi Nadar Mamtha](https://github.com/Mamtha3005) 
 <img src="images/Mamtha.png" width="150"><br>
-**Role**: Developer <br>
-**Responsibilities**: Data, Documentation, Scheduling and Tracking of deadlines <br>
-**Features implemented**: 
-* Edit Command
-* List Command
 
-As a Documentation Leader, I will
-* Be well-organised
-* Be responsible for the quality of documents submitted by the team.
-* Ensure that documents follow the format provided, if applicable. 
-* Ensure that sentences in the document are grammatically correct, points are clear, concise, well-analysed and explained in a way everyone can understand
-<br>
-
-As a Scheduling Deputy Leader, I will
-* Provide realistic deadlines for my team mates so that they can finish their part with good quality
-* Remind them when deadlines are nearing, giving them enough time to prepare 
-* Remind them on a regular basis, giving them suggested timeline so that they can gauge their working pace and better manage their time
+Role: Developer
+* Components in charge of: [Logic](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#logic-component)
+* Aspects/tools in charge of: Documentation, Scheduling
+* Features implemented:
+	* [Edit Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
+* Code Written:
+[[functional code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/main/A0142073R.md)]
+[[test code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/test/A0142073R.md)]
+[[docs](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/docs/A0142073R.md)]
+* Other major contributions:
+	* Contributed to second round refactoring from AddressBook Level 4 to Taskell [[#64](https://github.com/CS2103AUG2016-W15-C3/main/pull/64)]
+	* Copy-editing of documentation
 
 -----
 <!-- @@author A0148004R -->
