@@ -42,12 +42,13 @@ public class CalendarView {
         agenda.setAllowDragging(false);
         agenda.setAllowResize(false);
         agenda.setFocusTraversable(false);
-        //agenda.setOnScroll(value);
         
         agenda.setStyle("-fx-font-size: 12pt");
     }
     
     public void loadTasks() {
+        agenda.appointments().clear();
+        
         ReadOnlyTaskManager taskManager = model.getTaskManager();
         UniqueTaskList taskList = taskManager.getUniqueTaskList();
         
