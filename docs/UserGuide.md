@@ -139,7 +139,7 @@ Diagram 3 and 4: Keying in `find report` displays list of tasks with report as o
 <!--- @@author A0142130A ---> 
 
 #### Showing history : `history` or `hist`
-You can view the command history available for undo on right panel to refer to when undoing previous commands.<br>
+You can view the command history available for undo on the right panel to refer to when undoing previous commands.<br>
 To save your time, Taskell has a short form command `hist`. <br>
 Format: `history`<br>
 
@@ -216,7 +216,7 @@ Formats:
 <!--- @@author A0142130A ---> 
 
 #### Showing calendar view : `calendar` or `cal`
-You can view the calendar for the week on right panel to refer to the dates when adding tasks and scheduling events.<br>
+You can view the calendar for the week on the right panel to refer to the dates when adding tasks and scheduling events.<br>
 To save your time, Taskell has a short form command `cal`. <br>
 Format: `calendar`<br>
 
