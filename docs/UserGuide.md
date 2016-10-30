@@ -128,7 +128,7 @@ This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  
  <!--- @@author ---> 
 
-Diagram 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
+Diagrams 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
@@ -169,7 +169,7 @@ Example: `hist`, then `undo 3`, will undo third command in command history.<br>
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
  <br><img src="images/delete1.png" width="600"></br>
-Picture 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
+Diagrams 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
 Example: `find violin, then delete 1<br>
 This deletes the 1st task in the results of the find command.
@@ -240,7 +240,7 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the application in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Taskell folder.
 
-<!- @@author A0142073R ---> 
+<!--- @@author A0142073R ---> 
      
 ## Command Summary
 
@@ -258,13 +258,12 @@ Edit | `edit` INDEX NEWTASK
 Find | `find` KEYWORD [MORE_KEYWORDS]
 Find Tag | `find-tag` KEYWORD [MORE_KEYWORDS]
 Help | `help`
+History | `history` or `hist`
 List Incomplete Tasks| `list`
 List All Tasks | `list-all`
 List Given Day | `list-date` [DATE]
 List Tasks Done | `list-done` [DONE]
-List Undo | `list-undo`
 Undo | `undo INDEX`
-Calendar View | `calendar` or `cal`
 
 ## Appendix A
 
@@ -290,6 +289,6 @@ Supported Time Format |   Example
 -------- | :-------- 
 12hour |1pm
 12hour |12am
-12hour |111.45pm
+12hour |11.45pm
 
 <!-- @@author -->
