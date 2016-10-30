@@ -8,8 +8,9 @@ import jfxtras.scene.control.agenda.Agenda;
 import jfxtras.scene.control.agenda.Agenda.Appointment;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.ReadOnlyTaskManager;
-import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.Task;
+import seedu.taskell.model.task.TaskStatus;
 import seedu.taskell.model.task.UniqueTaskList;
 
 /** This class holds the necessary elements to display calendar UI via Agenda API from jfxtras
@@ -32,6 +33,8 @@ public class CalendarView {
     }
     
     public Agenda getAgenda() {
+        agenda.appointments().clear();
+        loadTasks();
         return agenda;
     }
     
@@ -39,6 +42,7 @@ public class CalendarView {
         agenda.setAllowDragging(false);
         agenda.setAllowResize(false);
         agenda.setFocusTraversable(false);
+        //agenda.setOnScroll(value);
         
         agenda.setStyle("-fx-font-size: 12pt");
     }
@@ -48,25 +52,30 @@ public class CalendarView {
         UniqueTaskList taskList = taskManager.getUniqueTaskList();
         
         ArrayList<Appointment> appointments = new ArrayList<>();
-        int i=0;
+        int i=1;
         
         for (ReadOnlyTask task: taskList) {
-            appointments.add(new Agenda.AppointmentImplLocal()
-                    .withStartLocalDateTime(LocalDateTime.now().plusDays(i))
-                    .withEndLocalDateTime(LocalDateTime.now().plusDays(i).plusHours(4).plusMinutes(30))
-                    .withSummary(task.getDescription().description)
-                    .withAppointmentGroup(
-                            new Agenda.AppointmentGroupImpl().withStyleClass("group"+i)));
+            
+            if (isValidEventTask(task)) {
+                appointments.add(new Agenda.AppointmentImplLocal()
+                        .withStartLocalDateTime(task.getStartDate().toLocalDateTime(task.getStartTime()))
+                        .withEndLocalDateTime(task.getEndDate().toLocalDateTime(task.getEndTime()))
+                        .withSummary(task.getDescription().description)
+                        .withAppointmentGroup(
+                                new Agenda.AppointmentGroupImpl().withStyleClass("group"+i)));
+            }
+            
             i++;
         }
         
-        
-        
-        
-
         agenda.appointments().addAll(appointments);
         
         //"-fx-background-color: #EC407A; -fx-fill: #EC407A;"
+    }
+
+    private boolean isValidEventTask(ReadOnlyTask task) {
+        return task.getTaskStatus().toString().equals(TaskStatus.INCOMPLETE) 
+                && task.getTaskType().equals(Task.EVENT_TASK);
     }
 
 }
