@@ -67,20 +67,19 @@ As a Scheduling Deputy Leader, I will
 <!-- @@author A0148004R -->
 #### [Zuo ZhuoLin](https://github.com/ZuoZhuolin)
 <img src="images/ZhuoLin.png" width="150"><br>
-**Role**: Developer <br>
-**Responsibilities**: Development and Operations, Testing, Scheduling and Tracking of deadlines <br>
-**Features implemented**: 
-* Done Command
-* List Command
+Role: Developer
+* Components in charge of: [Model](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#model-component)
+* Aspects/tools in charge of: Testing
+* Features implemented:
+	* [Done Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#marking-a-task-as-completed-done)
+	* [List Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
+* Code written:
+[[functional code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/main/A0148004R.md)]
+[[test code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/test/A0148004R.md)]
+[[docs](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/docs/A0148004R.md)]
+* Other major contributions:
+	* Contributed to second round refactoring from AddressBook Level 4 to Taskell
 
-As a Scheduling Leader, I will
-* Set realistic deadline for different milestones of the project
-* Remind team mates when deadlines are nearing
-<br>
-
-As Testing Deputy Leader, I will
-* Double check tests cover all the bases required for regression testing
-* Ensures the testing of project is done properly and on time
 
 -----
 
