@@ -226,6 +226,16 @@ public class TaskTime {
         return "";
     }
     
+    public LocalTime getLocalTime() {
+        int timeHour = Integer.valueOf(this.getHour());
+        if (this.getAntePost().equals(PM) && (timeHour != TIME_OFFSET)) {
+            timeHour += TIME_OFFSET;
+        } else if (this.getAntePost().equals(AM) && (timeHour == TIME_OFFSET)) {
+            timeHour -= TIME_OFFSET;
+        }
+        return LocalTime.of(timeHour, Integer.valueOf(this.getMinute()));
+    }
+    
     @Override
     public String toString() {
         return taskTime;
