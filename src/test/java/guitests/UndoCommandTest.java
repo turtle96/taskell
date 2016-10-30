@@ -7,14 +7,19 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.model.History;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 public class UndoCommandTest extends TaskManagerGuiTest {
     
+    private static final String UNDO = "undo";
+    private History history = HistoryManager.getInstance();
+    
     @Test
     public void undoAdd() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.holdMeeting;
@@ -24,15 +29,15 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand(UNDO);
         assertDeleteSuccess(currentList.length, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     @Test
     public void undoDelete() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToDelete = currentList[0];
@@ -43,15 +48,15 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand(UNDO);
         assertAddSuccess(taskToDelete, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     @Test
     public void undoAndRedoAdd() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.holdMeeting;
@@ -61,19 +66,19 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand(UNDO);
         assertDeleteSuccess(currentList.length, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, currentList.length);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand(UNDO);
         assertAddSuccess(taskToAdd, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     @Test
     public void undoAndRedoDelete() {
-        UndoCommand.clearCommandHistory();
+        history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToDelete = currentList[0];
@@ -84,15 +89,15 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand(UNDO);
         assertAddSuccess(taskToDelete, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToDelete);
         
         target = currentList.length;
-        commandBox.runCommand("undo 1");
+        commandBox.runCommand(UNDO);
         assertDeleteSuccess(target, currentList);
         
-        UndoCommand.clearCommandHistory();
+        history.clear();
     }
     
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {

@@ -6,16 +6,12 @@ import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.util.StringUtil;
-import seedu.taskell.logic.commands.UndoCommand;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -80,14 +76,12 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         taskManager.removeTask(target);
-        // UndoCommand.updateMostRecentDeletedTask(target);
         indicateTaskManagerChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         taskManager.addTask(task);
-        // UndoCommand.updateMostRecentAddedTask(task);
         updateFilteredListToShowAll();
         indicateTaskManagerChanged();
     }
@@ -113,7 +107,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void updateFilteredTaskList(Set<String> keywords) {
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+        updateFilteredTaskList(new PredicateExpression(new DescriptionAndTagsQualifier(keywords)));
     }
 
     //@@author A0142073R
@@ -178,10 +172,10 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
 
-    private class NameQualifier implements Qualifier {
+    private class DescriptionAndTagsQualifier implements Qualifier {
         private Set<String> nameKeyWords;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        DescriptionAndTagsQualifier(Set<String> nameKeyWords) {
             this.nameKeyWords = nameKeyWords;
         }
 
