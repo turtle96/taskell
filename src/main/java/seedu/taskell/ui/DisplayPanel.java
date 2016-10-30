@@ -36,6 +36,7 @@ public class DisplayPanel extends UiPart {
     
     private TextArea displayTextArea;
     private CalendarView calendarView;
+    private Agenda agenda;
 
     /**
      * Constructor is kept private as {@link #load(AnchorPane)} is the only way to create a DisplayPanel.
@@ -43,6 +44,7 @@ public class DisplayPanel extends UiPart {
     private DisplayPanel() {
         calendarView = new CalendarView();
         displayTextArea = new TextArea();
+        agenda = calendarView.getAgenda();
     }
 
     @Override
@@ -95,17 +97,14 @@ public class DisplayPanel extends UiPart {
     
     public void loadCalendar(AnchorPane placeholder) {
         
-        if (placeholder.getChildren().contains(calendarView.getAgenda())) {
-            return;
+        if (!placeholder.getChildren().contains(agenda)) {
+            placeholder.getChildren().remove(displayTextArea);
+            FxViewUtil.applyAnchorBoundaryParameters(agenda, 0.0, 0.0, 0.0, 0.0);
+            placeholder.getChildren().add(agenda);
         }
         
-        placeholder.getChildren().clear();
-        
-        Agenda agenda = calendarView.getAgenda();
-        
-        FxViewUtil.applyAnchorBoundaryParameters(agenda, 0.0, 0.0, 0.0, 0.0);
-        
-        placeholder.getChildren().add(agenda);
+        agenda.refresh();
+             
     }
     
     /** @@author **/
