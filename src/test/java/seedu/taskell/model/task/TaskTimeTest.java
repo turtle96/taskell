@@ -166,10 +166,11 @@ public class TaskTimeTest {
     @Test 
     public void assertCorrectLocalDateTime() throws IllegalValueException {
         TaskDate givenDate = new TaskDate("1-1-2100");
-        
         TaskTime time = new TaskTime("3am");
+
         LocalDateTime actual = time.toLocalDateTime(givenDate);
         LocalDateTime expected = LocalDateTime.of(2100, 1, 1, 3, 0);
+        
         assertEquals(expected, actual);
     }
     
