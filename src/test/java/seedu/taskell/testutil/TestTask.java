@@ -29,7 +29,6 @@ public class TestTask implements ReadOnlyTask {
         this.taskType = taskType;
         this.startDate = startDate;
         this.endDate = endDate;
-        this.endDate = endDate;
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;

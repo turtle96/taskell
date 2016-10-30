@@ -201,7 +201,14 @@ public class TestUtil {
     }
 
     // @@author A0142073R
-
+    public static TestTask editTask(TestTask taskToEdit, String newDescription)
+            throws IllegalValueException {
+        TestTask newTask = new TestTask(new Description(newDescription), taskToEdit.getTaskType(),
+                taskToEdit.getTaskPriority(), taskToEdit.getStartTime(), taskToEdit.getEndTime(),
+                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
+        return newTask;
+    }
+    
     public static TestTask editTaskDescription(TestTask taskToEdit, String newDescription)
             throws IllegalValueException {
         TestTask newTask = new TestTask(new Description(newDescription), taskToEdit.getTaskType(),
