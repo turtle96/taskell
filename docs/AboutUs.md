@@ -3,32 +3,26 @@
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
-
+<!-- @@author A0139257X -->
 #### [Marcus Ng Wen Jian](https://github.com/marcusngwj) <br>
 <img src="images/Marcus.png" width="150"><br>
-**Role**: Team Leader <br>
-**Responsibilities**: Code Quality Control, Logic <br>
-**Features implemented**: 
-* Add Command
-* TaskDate
-* TaskTime
-* Priority Colour
 
-As a Team Leader, I will
-* Be responsible for the overall project coordination
-* Be the main point of contact for the group
-* Liaise with Professor and Tutorial Assistants
-* Ensure that each member of the team performs his/her roles dutifully
-* Be responsible in creating a comfortable workflow structure for the team
-<br>
-
-As a Code Quality Surveyor, I will
-* Look after the code quality
-* Ensure that the team adhere to the Java coding standards
-* Ensure that code follows software design principles
+Role: Team Leader
+* Components in charge of: [Logic](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#logic-component)
+* Aspects/tools in charge of: Overall Project Management, Code Quality
+* Features implemented:
+	* [Add Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#adding-a-task-add)
+* Code written: 
+[[functional code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/main/A0139257X.md)]
+[[test code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/test/A0139257X.md)]
+[[docs](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/docs/A0139257X.md)]
+* Other major contributions:
+	* Contributed to first round refactoring from AddressBook Level 4 to TaskManager [[#11](https://github.com/CS2103AUG2016-W15-C3/main/pull/11)]
+	* Contributed to second round refactoring from AddressBook Level 4 to Taskell [[#64](https://github.com/CS2103AUG2016-W15-C3/main/pull/64)]
+	* Set up Codacy [[#113](https://github.com/CS2103AUG2016-W15-C3/main/pull/113)]
 
 -----
-
+<!-- @@author A0142130A -->
 #### [Jazlyn Ang Chue Ching](https://github.com/turtle96)
 <img src="images/Jazlyn.png" width="150"><br>
 
@@ -48,7 +42,7 @@ Role: Developer
   * Designed UI theme
 
 -----
-
+<!-- @@author A0142073R -->
 #### [Madasamy Ravi Nadar Mamtha](https://github.com/Mamtha3005) 
 <img src="images/Mamtha.png" width="150"><br>
 **Role**: Developer <br>
@@ -70,7 +64,7 @@ As a Scheduling Deputy Leader, I will
 * Remind them on a regular basis, giving them suggested timeline so that they can gauge their working pace and better manage their time
 
 -----
-
+<!-- @@author A0148004R -->
 #### [Zuo ZhuoLin](https://github.com/ZuoZhuolin)
 <img src="images/ZhuoLin.png" width="150"><br>
 **Role**: Developer <br>
