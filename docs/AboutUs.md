@@ -51,13 +51,17 @@ Role: Developer
 * Aspects/tools in charge of: Documentation, Scheduling
 * Features implemented:
 	* [Edit Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#editing-a-task--edit)
+	* [List-date Command]
+	(https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-a-task--list)
+	* [List-priority Command]
+	(https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-a-task--list)
 * Code Written:
 [[functional code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/main/A0142073R.md)]
 [[test code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/test/A0142073R.md)]
 [[docs](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/docs/A0142073R.md)]
 * Other major contributions:
 	* Contributed to second round refactoring from AddressBook Level 4 to Taskell [[#64](https://github.com/CS2103AUG2016-W15-C3/main/pull/64)]
-	* Copy-editing of documentation
+	* Copy, editing and revising of documentation
 
 -----
 <!-- @@author A0148004R -->
@@ -69,6 +73,8 @@ Role: Developer
 * Features implemented:
 	* [Done Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#marking-a-task-as-completed-done)
 	* [List Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
+	* [List-all Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
+	* [List-done Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
 * Code written:
 [[functional code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/main/A0148004R.md)]
 [[test code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/test/A0148004R.md)]
