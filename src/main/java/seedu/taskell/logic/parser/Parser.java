@@ -23,6 +23,7 @@ import seedu.taskell.logic.commands.list.ListDateCommand;
 import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
 import seedu.taskell.model.tag.Tag;
+import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
@@ -481,7 +482,7 @@ public class Parser {
         boolean hasEndDate = false;
         boolean hasStartTime = false;
         boolean hasEndTime = false;
-
+        boolean hasRecurring = false;
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
             String tempToken = "";
@@ -559,10 +560,12 @@ public class Parser {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-                    System.out.println(token);
+                    
                     recurringType = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
+                    hasRecurring = true;
                     recurrenceCount++;
                 }
+                
             } else if (TaskDate.isValidDate(token)) {
                 if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
                         && toQueue.isEmpty()) {
@@ -681,12 +684,16 @@ public class Parser {
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
-            try {
-                return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
-                        taskPriority, recurringType, getTagsFromArgs(tagString));
-            } catch (IllegalValueException ive) {
-                UndoCommand.deletePreviousCommand();
-                return new IncorrectCommand(ive.getMessage());
+            if(hasRecurring){
+                return new IncorrectCommand(FloatingTask.RECURRING_TYPE_NOT_ALLOWED);
+            }else{
+                try {
+                    return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
+                            taskPriority, recurringType, getTagsFromArgs(tagString));
+                } catch (IllegalValueException ive) {
+                    UndoCommand.deletePreviousCommand();
+                    return new IncorrectCommand(ive.getMessage());
+                }
             }
         }
 

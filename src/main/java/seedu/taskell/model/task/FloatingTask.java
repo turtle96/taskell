@@ -13,7 +13,9 @@ import seedu.taskell.model.tag.UniqueTagList;
  * Guarantees: details are present and not null, field values are validated.
  */
 public class FloatingTask extends Task {
-
+    
+    public static final String RECURRING_TYPE_NOT_ALLOWED = "Floating task cannot be recurring";
+    
     public FloatingTask(String description, String taskPriority, String recurringType, String taskStatus, UniqueTagList tags) throws IllegalValueException {
         this(new Description(description),
                 FLOATING_TASK,

@@ -5,6 +5,7 @@ import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskStatus;
@@ -44,20 +45,21 @@ public class DoneCommand extends Command {
         ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
         Task newTask = null;
         
-        try {
-            if(taskToDone.getRecurringType().equals("daily")){
+        try {        
+            
+            if (taskToDone.getRecurringType().recurringType.equals(RecurringType.DAILY_RECURRING)) {
                 newTask = new Task(taskToDone.getDescription(), taskToDone.getTaskType(), taskToDone.getStartDate().getNextDay(), taskToDone.getEndDate().getNextDay(),                
                         taskToDone.getStartTime(), taskToDone.getEndTime(), taskToDone.getTaskPriority(), taskToDone.getRecurringType(), taskToDone.getTaskStatus(), taskToDone.getTags());
                 
-            }else if(taskToDone.getRecurringType().equals("weekly")){
+            } else if (taskToDone.getRecurringType().recurringType.equals(RecurringType.WEEKLY_RECURRING)) {
                 newTask = new Task(taskToDone.getDescription(), taskToDone.getTaskType(), taskToDone.getStartDate().getNextWeek(), taskToDone.getEndDate().getNextWeek(),                
                         taskToDone.getStartTime(), taskToDone.getEndTime(), taskToDone.getTaskPriority(), taskToDone.getRecurringType(), taskToDone.getTaskStatus(), taskToDone.getTags());
                 
-            }else if(taskToDone.getRecurringType().equals("monthly")){
+            } else if (taskToDone.getRecurringType().recurringType.equals(RecurringType.MONTHLY_RECURRING)) {
                 newTask = new Task(taskToDone.getDescription(), taskToDone.getTaskType(), taskToDone.getStartDate().getNextMonth(), taskToDone.getEndDate().getNextMonth(),                
                         taskToDone.getStartTime(), taskToDone.getEndTime(), taskToDone.getTaskPriority(), taskToDone.getRecurringType(), taskToDone.getTaskStatus(), taskToDone.getTags());
                 
-            }else if(taskToDone.getRecurringType().equals("neverRecur")){
+            } else if (taskToDone.getRecurringType().recurringType.equals(RecurringType.DEFAULT_RECURRING)) {
                 newTask = new Task(taskToDone.getDescription(), taskToDone.getTaskType(), taskToDone.getStartDate(), taskToDone.getEndDate(),                
                         taskToDone.getStartTime(), taskToDone.getEndTime(), taskToDone.getTaskPriority(), taskToDone.getRecurringType(), finsihedStatus, taskToDone.getTags());
             }
