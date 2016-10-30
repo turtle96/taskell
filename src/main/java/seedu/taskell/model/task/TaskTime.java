@@ -119,22 +119,8 @@ public class TaskTime {
      * Checks if this time is before the specified time
      */
     public boolean isBefore(TaskTime time) {
-        int timeHour = Integer.valueOf(time.getHour());
-        if (time.getAntePost().equals(PM) && (timeHour != TIME_OFFSET)) {
-            timeHour += TIME_OFFSET;
-        } else if (time.getAntePost().equals(AM) && (timeHour == TIME_OFFSET)) {
-            timeHour -= TIME_OFFSET;
-        }
-        LocalTime timeToCompare = LocalTime.of(timeHour, Integer.valueOf(time.getMinute()));
-        
-        //TaskTime thisTimeTaskTime = new TaskTime(this.taskTime);
-        int thisTimeHour = Integer.valueOf(this.getHour());
-        if (this.getAntePost().equals(PM) && (thisTimeHour != TIME_OFFSET)) {
-            thisTimeHour += TIME_OFFSET;
-        } else if (this.getAntePost().equals(AM) && (thisTimeHour == TIME_OFFSET)) {
-            thisTimeHour -= TIME_OFFSET;
-        }
-        LocalTime thisTimeLocalTime = LocalTime.of(thisTimeHour, Integer.valueOf(this.getMinute()));
+        LocalTime timeToCompare = time.getLocalTime();
+        LocalTime thisTimeLocalTime = this.getLocalTime();
         return thisTimeLocalTime.isBefore(timeToCompare);
     }
 
@@ -142,22 +128,8 @@ public class TaskTime {
      * Checks if this time is after the specified time
      */
     public boolean isAfter(TaskTime time) {
-        int timeHour = Integer.valueOf(time.getHour());
-        if (time.getAntePost().equals(PM) && (timeHour != TIME_OFFSET)) {
-            timeHour += TIME_OFFSET;
-        } else if (time.getAntePost().equals(AM) && (timeHour == TIME_OFFSET)) {
-            timeHour -= TIME_OFFSET;
-        }
-        LocalTime timeToCompare = LocalTime.of(timeHour, Integer.valueOf(time.getMinute()));
-        
-        //TaskTime thisTimeTaskTime = new TaskTime(this.taskTime);
-        int thisTimeHour = Integer.valueOf(this.getHour());
-        if (this.getAntePost().equals(PM) && (thisTimeHour != TIME_OFFSET)) {
-            thisTimeHour += TIME_OFFSET;
-        } else if (this.getAntePost().equals(AM) && (thisTimeHour == TIME_OFFSET)) {
-            thisTimeHour -= TIME_OFFSET;
-        }
-        LocalTime thisTimeLocalTime = LocalTime.of(thisTimeHour, Integer.valueOf(this.getMinute()));
+        LocalTime timeToCompare = time.getLocalTime();
+        LocalTime thisTimeLocalTime = this.getLocalTime();
         return thisTimeLocalTime.isAfter(timeToCompare);
     }
     
