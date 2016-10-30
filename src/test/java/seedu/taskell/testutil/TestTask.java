@@ -16,6 +16,7 @@ public class TestTask implements ReadOnlyTask {
     private TaskTime endTime;
     private TaskDate startDate;
     private TaskDate endDate;
+    private RecurringType recurringType;
     private TaskStatus taskStatus;
     private UniqueTagList tags;
 
@@ -23,21 +24,9 @@ public class TestTask implements ReadOnlyTask {
         tags = new UniqueTagList();
     }
     
-    public TestTask(Description description, String taskType, TaskPriority taskPriority, TaskTime startTime, 
-              TaskTime endTime, TaskDate startDate, TaskDate endDate, UniqueTagList tags){
-        this.description = description;
-        this.taskType = taskType;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.taskPriority = taskPriority;
-        this.tags = new UniqueTagList(tags);
-    }
 
     public TestTask(Description description, String taskType, TaskPriority taskPriority, TaskTime startTime,
-            TaskTime endTime, TaskDate startDate, TaskDate endDate, TaskStatus taskStatus, UniqueTagList tags) {
+            TaskTime endTime, TaskDate startDate, TaskDate endDate, RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) {
         this.description = description;
         this.taskType = taskType;
         this.startDate = startDate;
@@ -46,6 +35,7 @@ public class TestTask implements ReadOnlyTask {
         this.startTime = startTime;
         this.endTime = endTime;
         this.taskPriority = taskPriority;
+        this.recurringType = recurringType;
         this.taskStatus = taskStatus;
         this.tags = new UniqueTagList(tags);
     }
@@ -85,6 +75,10 @@ public class TestTask implements ReadOnlyTask {
         this.taskStatus = taskStatus;
     }
 
+    public void setRecurringType(RecurringType recurringType) {
+        this.recurringType = recurringType;
+    }
+    
     public void setTags(UniqueTagList tags) {
         this.tags = tags;
     }
@@ -127,7 +121,12 @@ public class TestTask implements ReadOnlyTask {
     public TaskPriority getTaskPriority() {
         return taskPriority;
     }
-
+    
+    @Override
+    public RecurringType getRecurringType() {
+        return recurringType;
+    }
+    
     @Override
     public TaskStatus getTaskStatus() {
         return taskStatus;

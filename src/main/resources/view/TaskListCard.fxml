@@ -55,13 +55,20 @@
       <Pane fx:id="priorityColour" prefHeight="115.0" prefWidth="110.0" >
       <VBox alignment="CENTER_LEFT">
           <padding>
-              <Insets bottom="5" left="25" right="5" top="28" />
+              <Insets bottom="5" left="25" right="5" top="37" />
           </padding>
           <children>
-          <HBox>
+	          <HBox>
+	              <children>
+	                  <HBox>
+	                      <Label fx:id="taskStatus" styleClass="cell_small_label" text="\$taskStatus" />
+	                   </HBox>
+	              </children>
+	         </HBox>
+	         <HBox>
               <children>
                   <HBox>
-                      <Label fx:id="taskStatus" styleClass="cell_small_label" text="\$taskStatus" />
+                      <Label fx:id="recurringType" styleClass="cell_small_label" text="\$recurringType" />
                    </HBox>
               </children>
          </HBox>
