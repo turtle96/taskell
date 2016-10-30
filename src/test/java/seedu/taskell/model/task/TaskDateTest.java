@@ -4,6 +4,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import org.junit.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertEquals;
@@ -203,6 +204,17 @@ public class TaskDateTest {
     public void assertCorrectDisplayDate() throws IllegalValueException {
         TaskDate date = new TaskDate("22-10-2016");
         assertEquals("Saturday, 22 October 2016", date.getDisplayDate());
+    }
+    
+    @Test
+    public void assertCorrectLocalDateTime() throws IllegalValueException {
+        TaskTime givenTime = new TaskTime("3am");
+        TaskDate date = new TaskDate("1-1-2100");
+
+        LocalDateTime actual = date.toLocalDateTime(givenTime);
+        LocalDateTime expected = LocalDateTime.of(2100, 1, 1, 3, 0);
+        
+        assertEquals(expected, actual);
     }
     
     @Test
