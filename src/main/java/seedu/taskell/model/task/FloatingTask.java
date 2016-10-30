@@ -14,7 +14,7 @@ import seedu.taskell.model.tag.UniqueTagList;
  */
 public class FloatingTask extends Task {
 
-    public FloatingTask(String description, String taskPriority, String taskStatus, UniqueTagList tags) throws IllegalValueException {
+    public FloatingTask(String description, String taskPriority, String recurringType, String taskStatus, UniqueTagList tags) throws IllegalValueException {
         this(new Description(description),
                 FLOATING_TASK,
                 new TaskDate(TaskDate.DEFAULT_DATE),
@@ -22,12 +22,13 @@ public class FloatingTask extends Task {
                 new TaskTime(TaskTime.DEFAULT_START_TIME),
                 new TaskTime(TaskTime.DEFAULT_END_TIME),
                 new TaskPriority(taskPriority),
+                new RecurringType(recurringType),
                 new TaskStatus(taskStatus),
                 tags);
     }
     
-    public FloatingTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, TaskStatus taskStatus, UniqueTagList tags) {
-        super(description, taskType, startDate, endDate, startTime, endTime, taskPriority, taskStatus, tags);
+    public FloatingTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) {
+        super(description, taskType, startDate, endDate, startTime, endTime, taskPriority, recurringType, taskStatus, tags);
     }
 
     @Override

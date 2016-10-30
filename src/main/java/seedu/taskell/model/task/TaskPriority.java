@@ -42,7 +42,7 @@ public class TaskPriority {
     }
 
     /**
-     * Returns true if a given string is a valid task taskTime.
+     * Returns true if a given string is a valid task taskPriority.
      */
     public static boolean isValidPriority(String priority) {
         return priority.equals(NO_PRIORITY)
