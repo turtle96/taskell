@@ -57,6 +57,13 @@ public class Parser {
     private static final String AT = "at";
     private static final String FROM = "from";
     private static final String TO = "to";
+    
+    private static final String ST = "st:";
+    private static final String ET = "et:";
+    private static final String SD = "sd:";
+    private static final String ED = "ed:";
+    private static final String DESC = "desc:";
+    private static final String P = "p:";
 
     private boolean hasChangedDescription = false;
     private boolean hasChangedStartDate = false;
@@ -233,6 +240,7 @@ public class Parser {
         String startTime = TaskTime.DEFAULT_START_TIME;
         String endTime = TaskTime.DEFAULT_END_TIME;
         String taskPriority = TaskPriority.DEFAULT_PRIORITY;
+        
 
         if (args.isEmpty()) {
             // UndoCommand.deletePreviousCommand();
@@ -258,21 +266,21 @@ public class Parser {
         while (st.hasMoreTokens()) {
             String parts = st.nextToken();
             // System.out.println("Parts is " + parts);
-            if (parts.equals("desc:")) {
+            if (parts.equals(DESC)) {
                 if (hasChangedDescription == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
                 // System.out.println("I am inside desc");
                 String desc = " ";
-                while (!(parts.equals("st:") || parts.equals("et:") || parts.equals("sd:")
-                        || parts.equals("ed") | parts.equals("p:")) && st.hasMoreTokens()) {
+                while (!(parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
+                        || parts.equals("ed") | parts.equals(P)) && st.hasMoreTokens()) {
                     desc += (parts + " ");
                     parts = st.nextToken();
                     hasChangedDescription = true;
                 }
-                if (!(parts.equals("st:") || parts.equals("et:") || parts.equals("sd:")
-                        || parts.equals("ed") | parts.equals("p:"))) {
+                if (!(parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
+                        || parts.equals("ed") | parts.equals(P))) {
                     // System.out.println("I am here to add the last is
                     // "+parts);
                     desc += parts;
@@ -286,7 +294,7 @@ public class Parser {
                 }
                 // System.out.println("Description End: " + desc);
             }
-            if (parts.equals("st:")) {
+            if (parts.equals(ST)) {
                 if (hasChangedStartTime == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -307,7 +315,7 @@ public class Parser {
                 }
                 // System.out.println("Start time is " + startTime);
             }
-            if (parts.equals("et:")) {
+            if (parts.equals(ET)) {
                 if (hasChangedEndTime == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -327,7 +335,7 @@ public class Parser {
                 }
                 // System.out.println("End time is " + endTime);
             }
-            if (parts.equals("sd:")) {
+            if (parts.equals(SD)) {
                 if (hasChangedStartDate == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -347,7 +355,7 @@ public class Parser {
                 }
                 // System.out.println("Start Date is " + startDate);
             }
-            if (parts.equals("ed:")) {
+            if (parts.equals(ED)) {
                 if (hasChangedEndDate == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -367,7 +375,7 @@ public class Parser {
                 }
                 // System.out.println("End Date is " + endDate);
             }
-            if (parts.equals("p:")) {
+            if (parts.equals(P)) {
                 if (hasChangedPriority == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -387,8 +395,8 @@ public class Parser {
                 }
                 // System.out.println("Priority is " + taskPriority);
             }
-            if (!(parts.equals("desc:") || parts.equals("st:") || parts.equals("et:") || parts.equals("sd:")
-                    || parts.equals("ed") || parts.equals("p:")) && lastChar == false) {
+            if (!(parts.equals(DESC) || parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
+                    || parts.equals("ed") || parts.equals(P)) && lastChar == false) {
                 // System.out.println("I am here as incrct because of parts
                 // "+parts);
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
