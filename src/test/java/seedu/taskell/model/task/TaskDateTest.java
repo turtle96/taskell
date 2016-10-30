@@ -160,6 +160,14 @@ public class TaskDateTest {
     }
     
     @Test
+    public void assertCorrectLocalDate() throws IllegalValueException {
+        TaskDate date = new TaskDate("1-1-2100");
+        LocalDate actual = date.getLocalDate();
+        LocalDate expected = LocalDate.of(2100, 1, 1);
+        assertEquals(expected, actual);
+    }
+    
+    @Test
     public void assertDateisBeforeBehaviour() throws IllegalValueException {
             TaskDate startDate = new TaskDate("1-1-2100");
             TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
