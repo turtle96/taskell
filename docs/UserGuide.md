@@ -172,26 +172,11 @@ This adds the 1st task as completed and moves it to the completed list.<br>
 <!--- @@author A0142073R --->
 
 #### Editing a task : `edit`
-To edit the description of a task<br>
+To edit a task<br>
 Formats: 
-- `edit-desc` INDEX NEWDESCRIPTION<br>
-- `edit-name` INDEX NEWDESCRIPTION<br>
+- `edit ` INDEX `st: `[NEWSTARTTIME] `et: `[NEWENDTIME] `desc: `[NEWDESCRIPTION] `sd: `[NEWSTARTDATE] `ed: `[NEWENDDATE] `p: `[NEWPRIORITY]<br>
  <br> <img src="images/editCmd.png" width="600"> </br>
-Diagram 5: Edits the 2nd task on the list<br>
-
-To edit the time of a task<br>
-Formats: 
-- `edit-startTime` INDEX NEWTIME<br>
-- `edit-endTime` INDEX NEWTIME<br>
-
-To edit the date of a task<br>
-Formats: 
-- `edit-startDate` INDEX NEWDATE<br>
-- `edit-endDate` INDEX NEWDATE<br>
-
-To edit the priority of a task<br>
-Formats: 
-- `edit-priority` INDEX NEWDATE<br>
+Diagram 5: Edits the 1st task on the list. Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3" updates description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
 
 <!--- @@author --->
 
