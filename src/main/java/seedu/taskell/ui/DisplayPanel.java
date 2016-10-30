@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 /**
  * The Display Panel of the App.
  */
-public class DisplayPanel extends UiPart{
+public class DisplayPanel extends UiPart {
 
     public static final String MESSAGE_NO_HISTORY = "No commands available for undo.";
     public static final String MESSAGE_DISPLAY_HISTORY = "List of command history available for undo:\n";
