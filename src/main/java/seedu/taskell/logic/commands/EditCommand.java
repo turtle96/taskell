@@ -1,8 +1,6 @@
 //@@author A0142073R
 package seedu.taskell.logic.commands;
 
-import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;

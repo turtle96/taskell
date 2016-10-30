@@ -227,9 +227,12 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareEdit(String args) {
-        String description = "default", startDate = TaskDate.DEFAULT_DATE, endDate = TaskDate.DEFAULT_DATE,
-                startTime = TaskTime.DEFAULT_START_TIME, endTime = TaskTime.DEFAULT_END_TIME,
-                taskPriority = TaskPriority.DEFAULT_PRIORITY;
+        String description = "default";
+        String startDate = TaskDate.DEFAULT_DATE;
+        String endDate = TaskDate.DEFAULT_DATE;
+        String startTime = TaskTime.DEFAULT_START_TIME;
+        String endTime = TaskTime.DEFAULT_END_TIME;
+        String taskPriority = TaskPriority.DEFAULT_PRIORITY;
 
         if (args.isEmpty()) {
             // UndoCommand.deletePreviousCommand();
