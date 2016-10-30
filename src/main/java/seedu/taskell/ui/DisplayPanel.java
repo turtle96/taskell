@@ -34,7 +34,7 @@ public class DisplayPanel extends UiPart {
     public static final String DISPLAY_PANEL_ID = "displayPanel";
     private static final String STATUS_BAR_STYLE_SHEET = "result-display";
     
-    private TextArea display;
+    private TextArea displayTextArea;
     private CalendarView calendarView;
 
     /**
@@ -42,7 +42,7 @@ public class DisplayPanel extends UiPart {
      */
     private DisplayPanel() {
         calendarView = new CalendarView();
-        display = new TextArea();
+        displayTextArea = new TextArea();
     }
 
     @Override
@@ -60,44 +60,40 @@ public class DisplayPanel extends UiPart {
      * @param placeholder The AnchorPane where the DisplayPanel must be inserted
      */
     public static DisplayPanel load(AnchorPane placeholder){
-        logger.info("Initializing display panel");
+        logger.info("Initializing displayTextArea panel");
         DisplayPanel displayPanel = new DisplayPanel();
         
-        displayPanel.display.setEditable(false);
-        displayPanel.display.setId(DISPLAY_PANEL_ID);
-        displayPanel.display.getStyleClass().removeAll();
-        displayPanel.display.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
+        displayPanel.displayTextArea.setEditable(false);
+        displayPanel.displayTextArea.setId(DISPLAY_PANEL_ID);
+        displayPanel.displayTextArea.getStyleClass().removeAll();
+        displayPanel.displayTextArea.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
         
-        FxViewUtil.applyAnchorBoundaryParameters(displayPanel.display, 0.0, 0.0, 0.0, 0.0);
-        placeholder.getChildren().add(displayPanel.display);
+        FxViewUtil.applyAnchorBoundaryParameters(displayPanel.displayTextArea, 0.0, 0.0, 0.0, 0.0);
+        placeholder.getChildren().add(displayPanel.displayTextArea);
         
-        displayPanel.display.setText(WELCOME_MESSAGE);
+        displayPanel.displayTextArea.setText(WELCOME_MESSAGE);
        
         return displayPanel;
     }
     
     public void loadList(AnchorPane placeholder, ArrayList<String> list) {
         placeholder.getChildren().clear();
-        placeholder.getChildren().add(display);
+        placeholder.getChildren().add(displayTextArea);
         
-        display.setText("");
+        displayTextArea.setText("");
         if (list.isEmpty()) {
-            display.setText(MESSAGE_NO_HISTORY);
+            displayTextArea.setText(MESSAGE_NO_HISTORY);
         }
         else {
-            display.setText(MESSAGE_DISPLAY_HISTORY);
+            displayTextArea.setText(MESSAGE_DISPLAY_HISTORY);
             for (int i=0; i<list.size(); i++) {
                 int index = i+1;
-                display.appendText(index + ". " + list.get(i) + "\n");
+                displayTextArea.appendText(index + ". " + list.get(i) + "\n");
             }
         }
     }
     
     public void loadCalendar(AnchorPane placeholder) {
-        if (placeholder.getChildren().contains(calendarView.getAgenda())) {
-            calendarView.getAgenda().refresh();
-            return;
-        }
         
         placeholder.getChildren().clear();
         
