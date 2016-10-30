@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 
@@ -589,6 +590,10 @@ public class TaskDate {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    public LocalDateTime toLocalDateTime(TaskTime time) {
+        return LocalDateTime.of(this.getLocalDate(), time.getLocalTime());
     }
     
     /**
