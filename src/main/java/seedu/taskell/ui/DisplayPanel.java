@@ -94,6 +94,11 @@ public class DisplayPanel extends UiPart {
     }
     
     public void loadCalendar(AnchorPane placeholder) {
+        if (placeholder.getChildren().contains(calendarView.getAgenda())) {
+            calendarView.getAgenda().refresh();
+            return;
+        }
+        
         placeholder.getChildren().clear();
         
         Agenda agenda = calendarView.getAgenda();
