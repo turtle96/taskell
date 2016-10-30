@@ -56,7 +56,7 @@ public class EditStartTimeCommand extends Command {
             return new CommandResult("Unable to edit time of floating task");
         }
         Task newTask = new Task(taskToEdit.getDescription(),taskToEdit.getTaskType(),taskToEdit.getStartDate(), taskToEdit.getEndDate(), startTime,taskToEdit.getEndTime(),
-                taskToEdit.getTaskPriority(),taskToEdit.getTaskStatus(), taskToEdit.getTags()
+                taskToEdit.getTaskPriority(),taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags()
         );
         try {
             model.editTask(taskToEdit,newTask);
