@@ -478,7 +478,7 @@ public class TaskDate {
     
     public TaskDate getNextDay() throws IllegalValueException {
         try {
-            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate localDate = this.getLocalDate();
             LocalDate nextDay = localDate.plusDays(1);
             return new TaskDate(nextDay.format(standardFormat));
         } catch (IllegalValueException e) {
@@ -488,7 +488,7 @@ public class TaskDate {
     
     public TaskDate getNextWeek() throws IllegalValueException {
         try {
-            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate localDate = this.getLocalDate();
             LocalDate nextWeek = localDate.plusWeeks(1);
             return new TaskDate(nextWeek.format(standardFormat));
         } catch (IllegalValueException e) {
@@ -537,23 +537,15 @@ public class TaskDate {
     }
     
     public String getDayNameInWeek() throws IllegalValueException {
-        try {
-            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
-            String dayNameInWeek = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
-            return dayNameInWeek;
-        } catch (IllegalValueException ive) {
-            throw ive;
-        }
+        LocalDate localDate = this.getLocalDate();
+        String dayNameInWeek = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
+        return dayNameInWeek;
     }
     
-    public String getMonthName() throws IllegalValueException {
-        try {
-            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
-            String month = localDate.getMonth().getDisplayName(TextStyle.FULL, Locale.US);
-            return month;
-        } catch (IllegalValueException ive) {
-            throw ive;
-        }
+    public String getMonthName() {
+        LocalDate localDate = this.getLocalDate();
+        String month = localDate.getMonth().getDisplayName(TextStyle.FULL, Locale.US);
+        return month;
     }
     
     public String getDisplayDate() {
@@ -561,6 +553,14 @@ public class TaskDate {
             return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
         } catch (IllegalValueException e) {
             return "";
+        }
+    }
+    
+    public LocalDate getLocalDate() {
+        try {
+            return LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+        } catch (NumberFormatException | IllegalValueException e) {
+            return null;
         }
     }
 
@@ -573,8 +573,8 @@ public class TaskDate {
     
     public boolean isBefore(TaskDate date) {
         try {
-            LocalDate thisDate = LocalDate.of(Integer.valueOf(this.getYear()), Integer.valueOf(this.getMonth()), Integer.valueOf(this.getDay()));
-            LocalDate dateToComapare = LocalDate.of(Integer.valueOf(date.getYear()), Integer.valueOf(date.getMonth()), Integer.valueOf(date.getDay()));
+            LocalDate thisDate = this.getLocalDate();
+            LocalDate dateToComapare = date.getLocalDate();
             return thisDate.isBefore(dateToComapare);
         } catch (Exception e) {
             return false;
@@ -583,8 +583,8 @@ public class TaskDate {
     
     public boolean isAfter(TaskDate date) {
         try {
-            LocalDate thisDate = LocalDate.of(Integer.valueOf(this.getYear()), Integer.valueOf(this.getMonth()), Integer.valueOf(this.getDay()));
-            LocalDate dateToComapare = LocalDate.of(Integer.valueOf(date.getYear()), Integer.valueOf(date.getMonth()), Integer.valueOf(date.getDay()));
+            LocalDate thisDate = this.getLocalDate();
+            LocalDate dateToComapare = date.getLocalDate();
             return thisDate.isAfter(dateToComapare);
         } catch (Exception e) {
             return false;
