@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             model.deleteTask(taskToDelete);
             UndoCommand.addTaskToCommandHistory((Task) taskToDelete);
             ListUndoCommand.getInstance().setData(model);
-            ListUndoCommand.getInstance().indicateDisplayListChanged();
+            //ListUndoCommand.getInstance().indicateDisplayListChanged();
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
