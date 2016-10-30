@@ -8,6 +8,7 @@ import seedu.taskell.logic.commands.AddCommand;
 import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.ReadOnlyTask;
@@ -57,12 +58,12 @@ public class EditStartDateCommand extends Command {
                 taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         try {
             model.editTask(taskToEdit, newTask);
-            UndoCommand.addTaskToCommandHistory(newTask);
-            UndoCommand.addOldTaskToCommandHistory((Task) taskToEdit);
+            HistoryManager.getInstance().addTask(newTask);
+            HistoryManager.getInstance().addOldTask((Task) taskToEdit);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            UndoCommand.deletePreviousCommand();
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         }
 

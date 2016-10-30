@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
 import seedu.taskell.model.task.*;
@@ -57,10 +58,10 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            UndoCommand.addTaskToCommandHistory(toAdd);
+            HistoryManager.getInstance().addTask(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            UndoCommand.deletePreviousCommand();
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
 

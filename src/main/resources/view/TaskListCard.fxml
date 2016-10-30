@@ -41,5 +41,6 @@
                 </VBox>
             </children>
         </GridPane>
+      <Pane fx:id="priorityColour" prefHeight="115.0" prefWidth="40.0" />
     </children>
 </HBox>

@@ -22,6 +22,8 @@ import seedu.taskell.logic.commands.list.ListCommand;
 import seedu.taskell.logic.commands.list.ListDateCommand;
 import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
+import seedu.taskell.model.History;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.RecurringType;
@@ -58,8 +60,11 @@ public class Parser {
     private static final String AT = "at";
     private static final String FROM = "from";
     private static final String TO = "to";
+    
+    private static History history;
 
     public Parser() {
+        history = HistoryManager.getInstance();
     }
 
     /**
@@ -77,46 +82,46 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        
+        if (commandWord.equals(AddCommand.COMMAND_WORD) 
+                || commandWord.equals(DeleteCommand.COMMAND_WORD)
+                || commandWord.contains(UndoCommand.EDIT)) {
+            IncorrectCommand.setIsUndoableCommand(true);
+            history.addCommand(userInput, commandWord);
+        } else {
+            IncorrectCommand.setIsUndoableCommand(false);
+        }
 
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareAdd(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
 
         case DeleteCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareDelete(arguments);
 
         case EditStartDateCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditStartDate(arguments);
 
         case EditEndDateCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditEndDate(arguments);
 
         case EditDescriptionCommand.COMMAND_WORD_1:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditDescription(arguments);
 
         case EditDescriptionCommand.COMMAND_WORD_2:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditDescription(arguments);
 
         case EditStartTimeCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditStartTime(arguments);
 
         case EditEndTimeCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditEndTime(arguments);
 
         case EditPriorityCommand.COMMAND_WORD:
-            UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEditPriority(arguments);
 
         case ClearCommand.COMMAND_WORD:
@@ -158,8 +163,11 @@ public class Parser {
         case DoneCommand.COMMAND_WORD:
             return prepareDone(arguments);
 
-        case ListUndoCommand.COMMAND_WORD:
-            return new ListUndoCommand();
+        case ViewHistoryCommand.COMMAND_WORD_1:
+            return new ViewHistoryCommand();
+            
+        case ViewHistoryCommand.COMMAND_WORD_2:
+            return new ViewHistoryCommand();
             
         case ViewCalendarCommand.COMMAND_WORD_1:
             return new ViewCalendarCommand();
@@ -222,14 +230,12 @@ public class Parser {
     private Command prepareEditStartDate(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditEndDateCommand.MESSAGE_USAGE));
         }
@@ -240,7 +246,6 @@ public class Parser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
         }
         if (!TaskDate.isValidDate(arguments)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
         }
@@ -248,7 +253,6 @@ public class Parser {
         try {
             return new EditStartDateCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -264,14 +268,12 @@ public class Parser {
     private Command prepareEditDescription(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditDescriptionCommand.MESSAGE_USAGE));
         }
@@ -283,7 +285,6 @@ public class Parser {
         try {
             return new EditDescriptionCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -299,14 +300,12 @@ public class Parser {
     private Command prepareEditStartTime(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditStartTimeCommand.MESSAGE_USAGE));
         }
@@ -314,13 +313,11 @@ public class Parser {
         int targetIdx = Integer.valueOf(intValue);
         arguments = st.nextToken();
         if (st.hasMoreTokens()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
 
         if (!TaskTime.isValidTime(arguments)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
         }
@@ -328,7 +325,6 @@ public class Parser {
         try {
             return new EditStartTimeCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -343,21 +339,18 @@ public class Parser {
     private Command prepareEditEndDate(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         arguments = st.nextToken();
         if (st.hasMoreTokens() || !TaskDate.isValidDate(arguments)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
         }
@@ -365,7 +358,6 @@ public class Parser {
         try {
             return new EditEndDateCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -381,21 +373,18 @@ public class Parser {
     private Command prepareEditEndTime(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         arguments = st.nextToken();
         if (st.hasMoreTokens() || !TaskTime.isValidTime(arguments)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
         }
@@ -403,7 +392,6 @@ public class Parser {
         try {
             return new EditEndTimeCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -419,7 +407,6 @@ public class Parser {
     private Command prepareEditPriority(String args) {
         String arguments = "";
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
@@ -427,14 +414,12 @@ public class Parser {
         int targetIdx = Integer.valueOf(st.nextToken());
         arguments = st.nextToken();
         if (st.hasMoreTokens() || !TaskPriority.isValidPriority(arguments)) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
         }
         try {
             return new EditPriorityCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -453,7 +438,6 @@ public class Parser {
      */
     private Command prepareAdd(String args) {
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
@@ -680,23 +664,21 @@ public class Parser {
                 return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime,
                         taskPriority, recurringType, getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
-                UndoCommand.deletePreviousCommand();
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
+
             if(hasRecurring){
                 return new IncorrectCommand(FloatingTask.RECURRING_TYPE_NOT_ALLOWED);
             }else{
                 try {
                     return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
                             taskPriority, recurringType, getTagsFromArgs(tagString));
-                } catch (IllegalValueException ive) {
-                    UndoCommand.deletePreviousCommand();
+                } catch (IllegalValueException ive) {                    
                     return new IncorrectCommand(ive.getMessage());
                 }
             }
         }
-
     }
 
     private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
@@ -762,7 +744,6 @@ public class Parser {
 
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
-            UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
         }
 
@@ -830,6 +811,10 @@ public class Parser {
      * 
      */
     private Command prepareUndo(String args) {
+        if (args.isEmpty()) {
+            return new UndoCommand();
+        }
+        
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));

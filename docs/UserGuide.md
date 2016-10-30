@@ -128,7 +128,7 @@ This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  
  <!--- @@author ---> 
 
-Diagram 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
+Diagrams 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
@@ -138,12 +138,30 @@ Diagram 3 and 4: Keying in `find report` displays list of tasks with report as o
 
 <!--- @@author A0142130A ---> 
 
+#### Showing history : `history` or `hist`
+You can view the command history available for undo on the right panel to refer to when undoing previous commands.<br>
+To save your time, Taskell has a short form command `hist`. <br>
+Format: `history`<br>
+
+> Take Note! <br>
+> * Only commands available for undo are shown here. 
+> * Refer to undo section for more information about what commands undo supports.
+
 #### Reverting previous action : `undo`
-If you wish to undo your previous actions, <kbd>Enter</kbd> list-undo to see a list of 
+If you wish to undo your most recent action, you can do so by using the undo command.<br>
+You can also undo previous commands, <kbd>Enter</kbd> `hist` to see a list of 
 previous commands that can be undone.<br>
-Then use undo command at the specified INDEX in the list.<br>
-Format: `undo INDEX`<br> 
-Example: `list-undo`, then `undo 3`, will undo third command in command history.
+Then use undo command with specified INDEX from the list of command history.<br>
+Formats: <br>
+-`undo`<br> 
+Undo most recent command executed.<br>
+-`undo INDEX`<br> 
+Undo by index of command history.<br>
+Example: `hist`, then `undo 3`, will undo third command in command history.<br>
+
+> Take Note! <br>
+> * Undo command only supports add, edit, delete, and undo commands.
+> * Clear commands are irreversible!
 
 <!--- @@author ---> 
 
@@ -151,7 +169,7 @@ Example: `list-undo`, then `undo 3`, will undo third command in command history.
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
  <br><img src="images/delete1.png" width="600"></br>
-Picture 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
+Diagrams 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
 Example: `find violin, then delete 1<br>
 This deletes the 1st task in the results of the find command.
@@ -198,8 +216,8 @@ Formats:
 <!--- @@author A0142130A ---> 
 
 #### Showing calendar view : `calendar` or `cal`
-You can view the calendar for the week on right panel to refer to the dates when adding tasks and scheduling events.<br>
-To save time, Taskell has a short form command `cal`. <br>
+You can view the calendar for the week on the right panel to refer to the dates when adding tasks and scheduling events.<br>
+To save your time, Taskell has a short form command `cal`. <br>
 Format: `calendar`<br>
 
 #### Saving the information in Taskell : `save`
@@ -222,7 +240,7 @@ Format: `exit`
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the application in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Taskell folder.
 
-<!- @@author A0142073R ---> 
+<!--- @@author A0142073R ---> 
      
 ## Command Summary
 
@@ -240,13 +258,12 @@ Edit | `edit` INDEX NEWTASK
 Find | `find` KEYWORD [MORE_KEYWORDS]
 Find Tag | `find-tag` KEYWORD [MORE_KEYWORDS]
 Help | `help`
+History | `history` or `hist`
 List Incomplete Tasks| `list`
 List All Tasks | `list-all`
 List Given Day | `list-date` [DATE]
 List Tasks Done | `list-done` [DONE]
-List Undo | `list-undo`
 Undo | `undo INDEX`
-Calendar View | `calendar` or `cal`
 
 ## Appendix A
 
@@ -272,6 +289,6 @@ Supported Time Format |   Example
 -------- | :-------- 
 12hour |1pm
 12hour |12am
-12hour |111.45pm
+12hour |11.45pm
 
 <!-- @@author -->

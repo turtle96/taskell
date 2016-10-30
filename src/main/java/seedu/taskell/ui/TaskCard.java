@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskPriority;
@@ -32,6 +33,8 @@ public class TaskCard extends UiPart{
     private Label taskStatus;   
     @FXML
     private Label tags;
+    @FXML
+    private Pane priorityColour;
 
     private ReadOnlyTask task;
     private int displayedIndex;
@@ -81,11 +84,11 @@ public class TaskCard extends UiPart{
     
     private void setCardPaneBackground() {
         if (task.getTaskPriority().taskPriority.equals(TaskPriority.HIGH_PRIORITY)) {
-            cardPane.setStyle(TaskPriority.HIGH_PRIORITY_BACKGROUND);
+            priorityColour.setStyle(TaskPriority.HIGH_PRIORITY_BACKGROUND);
         } else if (task.getTaskPriority().taskPriority.equals(TaskPriority.MEDIUM_PRIORITY)) {
-            cardPane.setStyle(TaskPriority.MEDIUM_PRIORITY_BACKGROUND);
+            priorityColour.setStyle(TaskPriority.MEDIUM_PRIORITY_BACKGROUND);
         } else if (task.getTaskPriority().taskPriority.equals(TaskPriority.LOW_PRIORITY)) {
-            cardPane.setStyle(TaskPriority.LOW_PRIORITY_BACKGROUND);
+            priorityColour.setStyle(TaskPriority.LOW_PRIORITY_BACKGROUND);
         }
     }
 //@@author

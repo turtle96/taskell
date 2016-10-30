@@ -14,6 +14,8 @@ import seedu.taskell.logic.commands.edit.EditPriorityCommand;
 import seedu.taskell.logic.commands.edit.EditStartDateCommand;
 import seedu.taskell.logic.commands.edit.EditStartTimeCommand;
 import seedu.taskell.model.CommandHistory;
+import seedu.taskell.model.History;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
@@ -41,65 +43,26 @@ public class UndoCommand extends Command {
     private static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
     
-    private static ArrayList<CommandHistory> commandHistoryList;
-    private static UndoCommand self;
+    private ArrayList<CommandHistory> commandHistoryList;
+    private History history;
     
     private int index;
     private CommandHistory commandHistory;
     
     public UndoCommand(int index) {
         logger.info("Creating UndoCommand with index: " + index);
+        
+        history = HistoryManager.getInstance();
+        commandHistoryList = history.getList();
         this.index = index;
     }
-    
-    public static UndoCommand getInstance() {
-        if (self == null) {
-            self = new UndoCommand(0);
-        }
-        
-        return self;
-    }
 
-    public static ArrayList<String> getListOfCommandHistoryText() {
-        assert commandHistoryList != null;
+    public UndoCommand() {
+        logger.info("Creating UndoCommand without index");
         
-        UndoCommand.getInstance().updateCommandList();
-        
-        ArrayList<String> list = new ArrayList<>();
-        for (CommandHistory history: commandHistoryList) {
-            list.add(history.getCommandText());
-        }
-        
-        return list;
-    }
-
-    //removes commandHistory with tasks not present in system
-    private void updateCommandList() {
-        if (model == null) {
-            logger.severe("model is null");
-            return;
-        }
-        for (CommandHistory commandHistory: commandHistoryList) {
-            if (isCommandTypeAddOrEdit(commandHistory) 
-                    && !model.isTaskPresent(commandHistory.getTask())) {
-                commandHistoryList.remove(commandHistory);
-            } else if (isUndoEditCommand(commandHistory) 
-                    && !model.isTaskPresent(commandHistory.getOldTask())) {
-                commandHistoryList.remove(commandHistory);
-            }
-        }
-        
-    }
-
-    private boolean isCommandTypeAddOrEdit(CommandHistory commandHistory) {
-        return (commandHistory.getCommandType().contains(AddCommand.COMMAND_WORD) 
-                || commandHistory.getCommandType().contains(EDIT)) 
-                && !commandHistory.isRedoTrue();
-    }
-    
-    private boolean isUndoEditCommand(CommandHistory commandHistory) {
-        return commandHistory.isRedoTrue() 
-                && commandHistory.getCommandType().contains(EDIT);
+        history = HistoryManager.getInstance();
+        commandHistoryList = history.getList();
+        this.index = commandHistoryList.size(); //offset will be done in execute()
     }
 
     @Override
@@ -117,61 +80,40 @@ public class UndoCommand extends Command {
             return redoUndo();
         }
         
-        switch (commandHistory.getCommandType()) {
-        case AddCommand.COMMAND_WORD:
+        String commandType = commandHistory.getCommandType();
+        if (commandType.equals(AddCommand.COMMAND_WORD)) {
             return undoAdd();
-        case DeleteCommand.COMMAND_WORD:
+        } else if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
             return undoDelete();
-        case EditStartDateCommand.COMMAND_WORD: 
+        } else if (commandType.contains(EDIT)) {
             return undoEdit();
-        case EditEndDateCommand.COMMAND_WORD: 
-            return undoEdit();
-        case EditDescriptionCommand.COMMAND_WORD_1:
-            return undoEdit();
-        case EditDescriptionCommand.COMMAND_WORD_2:
-            return undoEdit();
-        case EditStartTimeCommand.COMMAND_WORD:
-            return undoEdit();
-        case EditEndTimeCommand.COMMAND_WORD:
-            return undoEdit();
-        case EditPriorityCommand.COMMAND_WORD:
-            return undoEdit();
-        default:
+        } else {
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
+        
     }
 
     private CommandResult redoUndo() {
-        switch (commandHistory.getCommandType()) {
-        case AddCommand.COMMAND_WORD:
+        
+        String commandType = commandHistory.getCommandType();
+        if (commandType.equals(AddCommand.COMMAND_WORD)) {
             return undoDelete();
-        case DeleteCommand.COMMAND_WORD:
+        } else if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
             return undoAdd();
-        case EditStartDateCommand.COMMAND_WORD: 
+        } else if (commandType.contains(EDIT)) {
             return redoEdit();
-        case EditEndDateCommand.COMMAND_WORD: 
-            return redoEdit();
-        case EditDescriptionCommand.COMMAND_WORD_1:
-            return redoEdit();
-        case EditDescriptionCommand.COMMAND_WORD_2:
-            return redoEdit();
-        case EditStartTimeCommand.COMMAND_WORD:
-            return redoEdit();
-        case EditEndTimeCommand.COMMAND_WORD:
-            return redoEdit();
-        case EditPriorityCommand.COMMAND_WORD:
-            return redoEdit();
-        default:
+        } else {
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
+        
     }
 
     private CommandResult undoEdit() {
         try {
             model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
-            deleteCommandHistory();
+            history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
             indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getOldTask()));
@@ -188,7 +130,7 @@ public class UndoCommand extends Command {
     private CommandResult redoEdit() {
         try {
             model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
-            deleteCommandHistory();
+            history.deleteCommandHistory(commandHistory);
             indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
@@ -204,7 +146,7 @@ public class UndoCommand extends Command {
     private CommandResult undoDelete() {
         try {
             model.addTask(commandHistory.getTask());
-            deleteCommandHistory();
+            history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
             indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, commandHistory.getTask()));
@@ -216,17 +158,13 @@ public class UndoCommand extends Command {
     private CommandResult undoAdd() {
         try {
             model.deleteTask(commandHistory.getTask());
-            deleteCommandHistory();
+            history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
             indicateDisplayListChanged();
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         }
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, commandHistory.getTask()));
-    }
-
-    private void deleteCommandHistory() {
-        commandHistoryList.remove(commandHistory);
     }
     
     private void addUndoCommand(CommandHistory commandHistory) {
@@ -240,58 +178,13 @@ public class UndoCommand extends Command {
     
     /******** static methods *********/
     
-    public static void initializeCommandHistory() {
-        if (commandHistoryList == null) {
-            commandHistoryList = new ArrayList<>();
-        }
-    }
-    
-    public static void clearCommandHistory() {
-        commandHistoryList.clear();
-    }
-    
     private static int getOffset(int index) {
         return index - 1;
-    }
-    
-    public static void addCommandToHistory(String commandText, 
-            String commandType) {
-        assert commandHistoryList != null;
-        commandHistoryList.add(new CommandHistory(commandText, commandType));
-    }
-    
-    public static void addTaskToCommandHistory(Task task) {
-        logger.info("Adding task to history");
-        if (commandHistoryList.isEmpty()) {
-            logger.warning("No command history to add task to");
-            return;
-        }
-        
-        commandHistoryList.get(getOffset(commandHistoryList.size())).setTask(task);
-    }
-    
-    public static void addOldTaskToCommandHistory(Task task) {
-        logger.info("Adding old task to history");
-        if (commandHistoryList.isEmpty()) {
-            logger.warning("No command history to add task to");
-            return;
-        }
-        
-        commandHistoryList.get(getOffset(commandHistoryList.size())).setOldTask(task);
-    }
-
-    public static void deletePreviousCommand() {
-        logger.info("Command unsuccessfully executed. Deleting command history.");
-        if (commandHistoryList.isEmpty()) {
-            logger.warning("No command history to delete");
-            return;
-        }
-        commandHistoryList.remove(getOffset(commandHistoryList.size()));
     }
 
     /****** Event ******/
     public void indicateDisplayListChanged() {
         EventsCenter.getInstance().post(
-                new DisplayListChangedEvent(getListOfCommandHistoryText()));
+                new DisplayListChangedEvent(history.getListCommandText()));
     }
 }

@@ -11,7 +11,7 @@ public class ViewCalendarCommand extends Command {
     public static final String COMMAND_WORD_1 = "calendar";
     public static final String COMMAND_WORD_2 = "cal";
     
-    private static final String MESSAGE_SUCCESS = "Displayed calendar.";
+    public static final String MESSAGE_SUCCESS = "Displayed calendar.";
 
     @Override
     public CommandResult execute() {
