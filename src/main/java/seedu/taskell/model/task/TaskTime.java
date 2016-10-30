@@ -1,5 +1,6 @@
 package seedu.taskell.model.task;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -206,6 +207,10 @@ public class TaskTime {
             timeHour -= TIME_OFFSET;
         }
         return LocalTime.of(timeHour, Integer.valueOf(this.getMinute()));
+    }
+    
+    public LocalDateTime toLocalDateTime(TaskDate date) {
+        return LocalDateTime.of(date.getLocalDate(), this.getLocalTime());
     }
     
     @Override
