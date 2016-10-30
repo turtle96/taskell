@@ -27,7 +27,9 @@ public class TaskCard extends UiPart{
     @FXML
     private Label endTime;
     @FXML
-    private Label taskStatus;
+    private Label recurringType;
+    @FXML
+    private Label taskStatus;   
     @FXML
     private Label tags;
 
@@ -51,6 +53,7 @@ public class TaskCard extends UiPart{
         id.setText(displayedIndex + ". ");
         description.setText(task.getDescription().description);
         tags.setText(task.tagsString());
+        recurringType.setText(task.getRecurringType().recurringType);
         taskStatus.setText(task.getTaskStatus().taskStatus);
         
         setDateTime();

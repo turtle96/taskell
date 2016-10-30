@@ -23,6 +23,7 @@ import seedu.taskell.logic.commands.list.ListDateCommand;
 import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
 import seedu.taskell.model.tag.Tag;
+import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskPriority;
@@ -471,10 +472,11 @@ public class Parser {
         String endTime = TaskTime.DEFAULT_END_TIME;
         String token = "";
         String taskPriority = TaskPriority.DEFAULT_PRIORITY;
+        String recurringType = RecurringType.DEFAULT_RECURRING;
         String tagString = "";
 
         int priorityCount = 0;
-
+        int recurrenceCount = 0;
         boolean hasStartDate = false;
         boolean hasEndDate = false;
         boolean hasStartTime = false;
@@ -486,7 +488,7 @@ public class Parser {
 
             if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(FROM) && !token.equals(TO)
                     && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token) && !token.startsWith(Tag.PREFIX)
-                    && !token.startsWith(TaskPriority.PREFIX)) {
+                    && !token.startsWith(TaskPriority.PREFIX) && !token.startsWith(RecurringType.PREFIX)) {
                 tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
                 if (!tempToken.isEmpty()) {
                     descriptionQueue.offer(tempToken);
@@ -548,6 +550,19 @@ public class Parser {
                     priorityCount++;
                 }
                 continue;
+            } else if(token.startsWith(RecurringType.PREFIX)){
+                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
+                if (!tempToken.isEmpty()) {
+                    descriptionQueue.offer(tempToken);
+                }
+                if (recurrenceCount > 0) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                } else {
+                    System.out.println(token);
+                    recurringType = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
+                    recurrenceCount++;
+                }
             } else if (TaskDate.isValidDate(token)) {
                 if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
                         && toQueue.isEmpty()) {
@@ -660,7 +675,7 @@ public class Parser {
         if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
             try {
                 return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime,
-                        taskPriority, getTagsFromArgs(tagString));
+                        taskPriority, recurringType, getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 UndoCommand.deletePreviousCommand();
                 return new IncorrectCommand(ive.getMessage());
@@ -668,7 +683,7 @@ public class Parser {
         } else {
             try {
                 return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
-                        taskPriority, getTagsFromArgs(tagString));
+                        taskPriority, recurringType, getTagsFromArgs(tagString));
             } catch (IllegalValueException ive) {
                 UndoCommand.deletePreviousCommand();
                 return new IncorrectCommand(ive.getMessage());

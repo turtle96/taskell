@@ -495,7 +495,20 @@ public class TaskDate {
             throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
         }
     }
-
+    
+    //@@author A0148004R-reused
+    public TaskDate getNextMonth() throws IllegalValueException {
+        try {
+            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate nextMonth = localDate.plusMonths(1);
+            return new TaskDate(nextMonth.format(standardFormat));
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
+        }
+    }
+    //@@author
+    
+    //@@author A0139257X
     /**
      * Returns a string representing the integer value of this year
      */
