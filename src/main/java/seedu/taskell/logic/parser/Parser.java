@@ -57,14 +57,13 @@ public class Parser {
     private static final String AT = "at";
     private static final String FROM = "from";
     private static final String TO = "to";
-    
-    private boolean hasChangedDescription = false;
+
     private boolean hasChangedStartDate = false;
     private boolean hasChangedEndDate = false;
     private boolean hasChangedStartTime = false;
     private boolean hasChangedEndTime = false;
     private boolean hasChangedPriority = false;
-    
+
     public Parser() {
     }
 
@@ -96,7 +95,7 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareDelete(arguments);
-            
+
         case EditCommand.COMMAND_WORD:
             UndoCommand.addCommandToHistory(userInput, commandWord);
             return prepareEdit(arguments);
@@ -140,16 +139,16 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListAllCommand.COMMAND_WORD:
             return new ListAllCommand();
-            
+
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
 
         case ListDateCommand.COMMAND_WORD:
             return prepareListDate(arguments);
-            
+
         case ListPriorityCommand.COMMAND_WORD:
             return prepareListPriority(arguments);
 
@@ -164,27 +163,25 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case DoneCommand.COMMAND_WORD:
             return prepareDone(arguments);
 
         case ListUndoCommand.COMMAND_WORD:
             return new ListUndoCommand();
-            
+
         case ViewCalendarCommand.COMMAND_WORD_1:
             return new ViewCalendarCommand();
-            
+
         case ViewCalendarCommand.COMMAND_WORD_2:
             return new ViewCalendarCommand();
-
-
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
-    //@@author A0142073R
+    // @@author A0142073R
     private Command prepareListDate(String arguments) {
         if (arguments.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
@@ -198,7 +195,6 @@ public class Parser {
         return new ListDateCommand(date);
     }
 
-    
     private Command prepareListPriority(String args) {
         if (args.isEmpty()) {
             return new IncorrectCommand(
@@ -221,7 +217,7 @@ public class Parser {
         } else
             return new ListPriorityCommand(intValue);
     }
-    
+
     /**
      * Parses arguments in the context of the edit command.
      *
@@ -230,42 +226,100 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareEdit(String args) {
-        String arguments = "";
-        Description description;
-        TaskDate startDate;
-        TaskDate endDate;
-        TaskTime startTime;
-        TaskTime endTime;
-        TaskPriority taskPriority;
-        
+        String startDate = TaskDate.DEFAULT_DATE, endDate = TaskDate.DEFAULT_DATE, startTime = TaskTime.DEFAULT_START_TIME, 
+                endTime = TaskTime.DEFAULT_END_TIME, taskPriority = TaskPriority.DEFAULT_PRIORITY;
+
         if (args.isEmpty()) {
-            UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            //UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            UndoCommand.deletePreviousCommand();
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
+            //UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        while(st.hasMoreTokens()){
+        while (st.hasMoreTokens()) {
             String parts = st.nextToken();
-            if(parts.substring(0,5).equals("desc-")){
-                
+            System.out.println("Parts is "+parts);
+
+            if (parts.equals("st:")) {
+                String startT = st.nextToken();
+                if (TaskTime.isValidTime(startT)) {
+                    startTime = startT.trim();
+                    hasChangedStartTime = true;
+                } 
+                else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                }
+                System.out.println("Start time is "+startTime);
+            }
+            if (parts.equals("et:")) {
+                String endT = st.nextToken();
+                if (TaskTime.isValidTime(endT)) {
+                    endTime = endT.trim();
+                    hasChangedEndTime = true;
+                } 
+                else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                }
+                System.out.println("End time is "+endTime);
+            }
+            if (parts.equals("sd:")) {
+                String startD = st.nextToken();
+                if (TaskDate.isValidDate(startD)) {
+                    startDate = startD.trim();
+                    hasChangedStartDate = true;
+                } 
+                else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                }
+                System.out.println("Start Date is "+startDate);
+            }
+            if (parts.equals("ed:")) {
+                String endD = st.nextToken();
+                if (TaskDate.isValidDate(endD)) {
+                    endDate = endD.trim();
+                    hasChangedEndDate = true;
+                } 
+                else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                }
+                System.out.println("End Date is "+ endDate);
+            }
+            if (parts.equals("p:")) {
+                String p = st.nextToken();
+                if (TaskPriority.isValidPriority(p)) {
+                    taskPriority = p.trim();
+                    hasChangedPriority = true;
+                } 
+                else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
+                }
+                System.out.println("Priority is "+ taskPriority);
+            }
+            if(!(parts.equals("st:") || parts.equals("et:") || parts.equals("sd:") || parts.equals("ed:")
+                    || parts.equals("p:")) ) {
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
         }
 
         try {
-            return new EditCommand(targetIdx, arguments);
+            System.out.println("I am here to exectue edit command");
+            return new EditCommand(targetIdx,new TaskDate(startDate), hasChangedStartDate, new TaskDate(endDate),
+                    hasChangedEndDate,new TaskTime(startTime), hasChangedStartTime, new TaskTime(endTime), hasChangedEndTime, new TaskPriority(taskPriority), hasChangedPriority);
         } catch (IllegalValueException ive) {
             UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(ive.getMessage());
         }
     }
+
     /**
      * Parses arguments in the context of the edit task startDate command.
      *
@@ -307,7 +361,6 @@ public class Parser {
         }
     }
 
-    
     /**
      * Parses arguments in the context of the edit task description command.
      *
@@ -342,7 +395,6 @@ public class Parser {
         }
     }
 
-    
     /**
      * Parses arguments in the context of the edit start time command.
      *
@@ -424,7 +476,6 @@ public class Parser {
         }
     }
 
-    
     /**
      * Parses arguments in the context of the edit task end time command.
      *
@@ -462,7 +513,6 @@ public class Parser {
         }
     }
 
-    
     /**
      * Parses arguments in the context of the edit task priority command.
      *
@@ -493,10 +543,9 @@ public class Parser {
         }
     }
 
-    //@@author
+    // @@author
 
-
-    //@@author A0139257X
+    // @@author A0139257X
 
     /**
      * Parses arguments in the context of the add task command.
@@ -708,8 +757,9 @@ public class Parser {
         if (!hasEndDate) {
             endDate = startDate;
         }
-        
-        if ((TaskDate.isValidToday(startDate) && !hasStartTime) || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
+
+        if ((TaskDate.isValidToday(startDate) && !hasStartTime)
+                || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
             startTime = TaskTime.getTimeNow().toString();
         }
 
@@ -768,7 +818,7 @@ public class Parser {
         }
         return argsList;
     }
-  //@@author
+    // @@author
 
     /**
      * Extracts the new task's tags from the add command's tag arguments string.
@@ -906,8 +956,8 @@ public class Parser {
         return new SaveStorageLocationCommand(args);
     }
     /** @@author **/
-    
-    //@@author A0148004R
+
+    // @@author A0148004R
     /**
      * Parses arguments in the context of the done task command.
      *
@@ -923,9 +973,9 @@ public class Parser {
 
         return new DoneCommand(index.get());
     }
-    //@@author
-    
-    //@@author A0142073R
+    // @@author
+
+    // @@author A0142073R
     private static boolean isInt(String s) {
         try {
             int i = Integer.parseInt(s);
@@ -936,5 +986,5 @@ public class Parser {
             return false;
         }
     }
-    //@@author
+    // @@author
 }
