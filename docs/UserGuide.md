@@ -169,14 +169,14 @@ Example: `hist`, then `undo 3`, will undo third command in command history.<br>
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
  <br><img src="images/delete1.png" width="600"></br>
-Diagrams 5 and 6: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
+Diagrams 5: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
 
 Example: `find violin, then delete 1<br>
 This deletes the 1st task in the results of the find command.
 
 Format: `delete` INDEX<br>
  <br><img src="images/delete1.png" width="800"></br>
-Diagram 4: Deletes the first task in the list.<br>
+Diagram 6: Deletes the first task in the list.<br>
 
 <!--- @@author A0148004Rz --->
 
@@ -195,7 +195,7 @@ Formats:
 - `edit-desc` INDEX NEWDESCRIPTION<br>
 - `edit-name` INDEX NEWDESCRIPTION<br>
  <br> <img src="images/editCmd.png" width="600"> </br>
-Diagram 5: Edits the 2nd task on the list<br>
+Diagram 7: Edits the 2nd task on the list<br>
 
 To edit the time of a task<br>
 Formats: 
@@ -216,7 +216,8 @@ Formats:
 <!--- @@author A0142130A ---> 
 
 #### Showing calendar view : `calendar` or `cal`
-You can view the calendar for the week on the right panel to refer to the dates when adding tasks and scheduling events.<br>
+You can view the calendar for the week on the right panel to refer to the dates and any events scheduled 
+when adding tasks and scheduling events.<br>
 To save your time, Taskell has a short form command `cal`. <br>
 Format: `calendar`<br>
 
@@ -263,7 +264,7 @@ List Incomplete Tasks| `list`
 List All Tasks | `list-all`
 List Given Day | `list-date` [DATE]
 List Tasks Done | `list-done` [DONE]
-Undo | `undo INDEX`
+Undo | `undo` or `undo` INDEX
 
 ## Appendix A
 
