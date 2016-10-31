@@ -33,7 +33,7 @@ public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
     private static final String DEFAULT_SAVE_LOCATION = TestApp.SAVE_LOCATION_FOR_TESTING;
 
     @Test
-    public void saveToValidFilePath() throws DataConversionException, IOException, DuplicateTaskException {
+    public void saveToValidFilePath_success() throws DataConversionException, IOException, DuplicateTaskException {
         String testFilePath = "./src/test/data/SaveLocationCommandTest/newStorageLocation/";
         commandBox.runCommand("save " + testFilePath);
         assertWriteToJsonSuccess();

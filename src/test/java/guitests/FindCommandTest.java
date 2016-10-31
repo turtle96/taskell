@@ -22,7 +22,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     /** @@author A0142130A **/
     
     @Test
-    public void find_nonEmptyList_byTag() {
+    public void find_nonEmptyList_byTag_success() {
         assertFindResult("find chicken"); //no results
         assertFindResult("find friends", td.archivePastEmails, td.borrowBooks); //multiple results
 
@@ -32,7 +32,7 @@ public class FindCommandTest extends TaskManagerGuiTest {
     }
     
     @Test
-    public void find_byMoreThanOneTags() {
+    public void find_byMoreThanOneTags_success() {
         assertFindResult("find friends owesMoney", td.borrowBooks);
     }
     

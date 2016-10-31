@@ -7,6 +7,10 @@ import javafx.scene.layout.AnchorPane;
 import jfxtras.scene.control.agenda.Agenda;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.util.FxViewUtil;
+import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.HelpCommand;
+import seedu.taskell.logic.commands.ViewCalendarCommand;
+import seedu.taskell.logic.commands.ViewHistoryCommand;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -14,11 +18,20 @@ import java.util.logging.Logger;
 /**
  * The Display Panel of the App.
  */
-public class DisplayPanel extends UiPart{
+public class DisplayPanel extends UiPart {
+
+    public static final String MESSAGE_NO_HISTORY = "No commands available for undo.";
+    public static final String MESSAGE_DISPLAY_HISTORY = "List of command history available for undo:\n";
+
+    private static final String WELCOME_MESSAGE = "Welcome to Taskell!\n"
+            + "Enter '" + AddCommand.COMMAND_WORD + "' in command box to add a task.\n"
+            + "Enter '" + ViewHistoryCommand.COMMAND_WORD_1 + "' for a list of commands to undo.\n"
+            + "Enter '" + ViewCalendarCommand.COMMAND_WORD_1 + "' to view calendar.\n"
+            + "Enter '" + HelpCommand.COMMAND_WORD + "' for more information about commands.";
 
     private static Logger logger = LogsCenter.getLogger(DisplayPanel.class);
     
-    public static final String RESULT_DISPLAY_ID = "resultDisplay";
+    public static final String DISPLAY_PANEL_ID = "displayPanel";
     private static final String STATUS_BAR_STYLE_SHEET = "result-display";
     
     private TextArea display;
@@ -50,20 +63,15 @@ public class DisplayPanel extends UiPart{
         logger.info("Initializing display panel");
         DisplayPanel displayPanel = new DisplayPanel();
         
-        //displayPanel.display = new TextArea();
         displayPanel.display.setEditable(false);
-        displayPanel.display.setId(RESULT_DISPLAY_ID);
+        displayPanel.display.setId(DISPLAY_PANEL_ID);
         displayPanel.display.getStyleClass().removeAll();
         displayPanel.display.getStyleClass().add(STATUS_BAR_STYLE_SHEET);
         
         FxViewUtil.applyAnchorBoundaryParameters(displayPanel.display, 0.0, 0.0, 0.0, 0.0);
         placeholder.getChildren().add(displayPanel.display);
         
-        displayPanel.display.setText("Welcome to Taskell!\n"
-                + "Enter 'add' in command box to add a task.\n"
-                + "Enter 'list-undo' for list of commands to undo.\n"
-                + "Enter 'help' for more information about commands.\n"
-                + "Enter 'calendar' to view calendar.");
+        displayPanel.display.setText(WELCOME_MESSAGE);
        
         return displayPanel;
     }
@@ -74,9 +82,9 @@ public class DisplayPanel extends UiPart{
         
         display.setText("");
         if (list.isEmpty()) {
-            display.setText("No commands available for undo.");
-        }
-        else {
+            display.setText(MESSAGE_NO_HISTORY);
+        } else {
+            display.setText(MESSAGE_DISPLAY_HISTORY);
             for (int i=0; i<list.size(); i++) {
                 int index = i+1;
                 display.appendText(index + ". " + list.get(i) + "\n");

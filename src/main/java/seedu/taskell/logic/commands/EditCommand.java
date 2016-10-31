@@ -100,8 +100,6 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
-            UndoCommand.addTaskToCommandHistory(newTask);
-            UndoCommand.addOldTaskToCommandHistory((Task) taskToEdit);
         } catch (TaskNotFoundException | DuplicateTaskException pnfe) {
             assert false : "The target task cannot be missing";
         } 

@@ -74,8 +74,6 @@ public class LogicManagerTest {
         String tempPreferencesFile = saveFolder.getRoot().getPath() + "TempPreferences.json";
         logic = new LogicManager(model, new StorageManager(tempTaskManagerFile, tempPreferencesFile));
         EventsCenter.getInstance().registerHandler(this);
-        
-        UndoCommand.initializeCommandHistory();
 
         latestSavedTaskManager = new TaskManager(model.getTaskManager()); // last saved assumed to be up to startDate before.
         helpShown = false;
@@ -185,7 +183,7 @@ public class LogicManagerTest {
                 "add Valid Description #invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
     }
 
-    //@Test
+    @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
@@ -464,7 +462,7 @@ public class LogicManagerTest {
                 expectedAB.getTaskList());
     }
     
-    //@Test
+    @Test
     public void execute_add_ValidEventDuration_successful() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
@@ -480,7 +478,7 @@ public class LogicManagerTest {
     }
     
     //@@author A0139257X-reused
-    //@Test
+    @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
         TestDataHelper helper = new TestDataHelper();
