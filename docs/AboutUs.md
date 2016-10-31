@@ -69,12 +69,13 @@ Role: Developer
 <img src="images/ZhuoLin.png" width="150"><br>
 Role: Developer
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#model-component)
-* Aspects/tools in charge of: Testing
+* Aspects/tools in charge of: Testing, Scheduling
 * Features implemented:
-	* [Done Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#marking-a-task-as-completed-done)
+	* [Done Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#marking-a-task-as-completed-done
 	* [List Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
 	* [List-all Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
 	* [List-done Command](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/UserGuide.md#listing-tasks--list)
+	* [Recurring Task]
 * Code written:
 [[functional code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/main/A0148004R.md)]
 [[test code](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/test/A0148004R.md)]
