@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskPriority;
 
@@ -69,7 +70,6 @@ public class TaskCard extends UiPart{
         endDate.setText(task.getEndDate().getDisplayDate());
         startTime.setText(task.getStartTime().taskTime);
         endTime.setText(task.getEndTime().taskTime);
-
     }
     
     private void setDateTimeVisibility() {
@@ -80,6 +80,9 @@ public class TaskCard extends UiPart{
             endTime.setVisible(false);
         }
         
+        if (task.getRecurringType().recurringType.equals(RecurringType.NO_RECURRING)) {
+            recurringType.setVisible(false);
+        }
     }
     
     private void setCardPaneBackground() {
