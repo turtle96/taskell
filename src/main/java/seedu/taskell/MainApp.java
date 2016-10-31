@@ -73,6 +73,7 @@ public class MainApp extends Application {
         SaveStorageLocationCommand.setConfig(config);
         SaveStorageLocationCommand.setStorage(storage);
         CalendarView.setData(model);
+        
     }
 
     private String getApplicationParameter(String parameterName){
