@@ -25,7 +25,7 @@ public class ClearCommand extends Command {
         return self;
     }
     
-    /** set to true so clear bypasses confirm dialog
+    /** if set to true, ClearCommand bypasses confirm dialog
      *  for running test cases ONLY
      * */
     public static void setIsUnderTesting(boolean value) {
