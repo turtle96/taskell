@@ -59,9 +59,7 @@ public interface ReadOnlyTask {
         builder.append(getDescription())
                 .append(" TaskPriority: ")
                 .append(getTaskPriority())
-                .append(" RecurringType: ")
-                .append(getRecurringType())
-                .append(" TaskComplete: ")
+                .append(" TaskStatus: ")
                 .append(getTaskStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
@@ -86,7 +84,7 @@ public interface ReadOnlyTask {
                 .append(getTaskPriority())
                 .append(" RecurringType: ")
                 .append(getRecurringType())
-                .append(" TaskComplete: ")
+                .append(" TaskStatus: ")
                 .append(getTaskStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
