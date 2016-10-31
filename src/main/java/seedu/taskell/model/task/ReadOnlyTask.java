@@ -14,6 +14,7 @@ public interface ReadOnlyTask {
     TaskTime getStartTime();
     TaskTime getEndTime();
     TaskPriority getTaskPriority();
+    RecurringType getRecurringType();
     TaskStatus getTaskStatus();
 
     /**
@@ -35,6 +36,7 @@ public interface ReadOnlyTask {
                 && other.getStartTime().equals(this.getStartTime())
                 && other.getEndTime().equals(this.getEndTime())
                 && other.getTaskPriority().equals(this.getTaskPriority())
+                && other.getRecurringType().equals(this.getRecurringType())
                 && other.getTaskStatus().equals(this.getTaskStatus()));
     }
 
@@ -57,6 +59,8 @@ public interface ReadOnlyTask {
         builder.append(getDescription())
                 .append(" TaskPriority: ")
                 .append(getTaskPriority())
+                .append(" TaskStatus: ")
+                .append(getTaskStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
@@ -78,7 +82,9 @@ public interface ReadOnlyTask {
                 .append(getEndTime())
                 .append(" TaskPriority: ")
                 .append(getTaskPriority())
-                .append(" TaskComplete: ")
+                .append(" RecurringType: ")
+                .append(getRecurringType())
+                .append(" TaskStatus: ")
                 .append(getTaskStatus())
                 .append(" Tags: ");
         getTags().forEach(builder::append);

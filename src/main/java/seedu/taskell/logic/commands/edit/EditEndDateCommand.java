@@ -54,7 +54,7 @@ public class EditEndDateCommand extends Command {
         }
         Task newTask = new Task(taskToEdit.getDescription(), taskToEdit.getTaskType(), taskToEdit.getStartDate(),
 
-                endDate, taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getTaskStatus(),
+                endDate, taskToEdit.getStartTime(), taskToEdit.getEndTime(), taskToEdit.getTaskPriority(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(),
 
                 taskToEdit.getTags());
         try {

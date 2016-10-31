@@ -30,6 +30,8 @@ public class XmlAdaptedTask {
     @XmlElement(required = true)
     private String taskPriority;
     @XmlElement(required = true)
+    private String recurringType;
+    @XmlElement(required = true)
     private String taskStatus;
     
     @XmlElement
@@ -54,6 +56,7 @@ public class XmlAdaptedTask {
         startTime = source.getStartTime().taskTime;
         endTime = source.getEndTime().taskTime;
         taskPriority = source.getTaskPriority().taskPriority;
+        recurringType = source.getRecurringType().recurringType;
         taskStatus = source.getTaskStatus().taskStatus;
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
@@ -79,8 +82,9 @@ public class XmlAdaptedTask {
         final TaskTime startTime= new TaskTime(this.startTime);
         final TaskTime endTime = new TaskTime(this.endTime);
         final TaskPriority taskPriority = new TaskPriority(this.taskPriority);
+        final RecurringType recurringType = new RecurringType(this.recurringType);
         final TaskStatus taskStatus = new TaskStatus(this.taskStatus);
         final UniqueTagList tags = new UniqueTagList(taskTags);
-        return new Task(description, taskType, startDate, endDate, startTime, endTime, taskPriority, taskStatus, tags);
+        return new Task(description, taskType, startDate, endDate, startTime, endTime, taskPriority, recurringType, taskStatus, tags);
     }
 }

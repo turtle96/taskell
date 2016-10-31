@@ -3,8 +3,11 @@ package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
+import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.task.ReadOnlyTask;
+import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
+import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskStatus;
 import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
@@ -39,20 +42,40 @@ public class DoneCommand extends Command {
         
         TaskStatus finsihedStatus = new TaskStatus(TaskStatus.FINISHED);
         
-        ReadOnlyTask taskToDone = lastShownList.get(targetIndex - 1);
+        ReadOnlyTask taskToBeDone = lastShownList.get(targetIndex - 1);
+        Task newTask = null;
         
-        Task newTask = new Task(taskToDone.getDescription(), taskToDone.getTaskType(), taskToDone.getStartDate(), taskToDone.getEndDate(),                
-                taskToDone.getStartTime(), taskToDone.getEndTime(),  taskToDone.getTaskPriority(), finsihedStatus, taskToDone.getTags());
+        try {        
+            
+            if (taskToBeDone.getRecurringType().recurringType.equals(RecurringType.DAILY_RECURRING)) {
+                newTask = new Task(taskToBeDone.getDescription(), taskToBeDone.getTaskType(), taskToBeDone.getStartDate().getNextDay(), taskToBeDone.getEndDate().getNextDay(),                
+                        taskToBeDone.getStartTime(), taskToBeDone.getEndTime(), taskToBeDone.getTaskPriority(), taskToBeDone.getRecurringType(), taskToBeDone.getTaskStatus(), taskToBeDone.getTags());
+                
+            } else if (taskToBeDone.getRecurringType().recurringType.equals(RecurringType.WEEKLY_RECURRING)) {
+                newTask = new Task(taskToBeDone.getDescription(), taskToBeDone.getTaskType(), taskToBeDone.getStartDate().getNextWeek(), taskToBeDone.getEndDate().getNextWeek(),                
+                        taskToBeDone.getStartTime(), taskToBeDone.getEndTime(), taskToBeDone.getTaskPriority(), taskToBeDone.getRecurringType(), taskToBeDone.getTaskStatus(), taskToBeDone.getTags());
+                
+            } else if (taskToBeDone.getRecurringType().recurringType.equals(RecurringType.MONTHLY_RECURRING)) {
+                newTask = new Task(taskToBeDone.getDescription(), taskToBeDone.getTaskType(), taskToBeDone.getStartDate().getNextMonth(), taskToBeDone.getEndDate().getNextMonth(),                
+                        taskToBeDone.getStartTime(), taskToBeDone.getEndTime(), taskToBeDone.getTaskPriority(), taskToBeDone.getRecurringType(), taskToBeDone.getTaskStatus(), taskToBeDone.getTags());
+                
+            } else if (taskToBeDone.getRecurringType().recurringType.equals(RecurringType.DEFAULT_RECURRING)) {
+                newTask = new Task(taskToBeDone.getDescription(), taskToBeDone.getTaskType(), taskToBeDone.getStartDate(), taskToBeDone.getEndDate(),                
+                        taskToBeDone.getStartTime(), taskToBeDone.getEndTime(), taskToBeDone.getTaskPriority(), taskToBeDone.getRecurringType(), finsihedStatus, taskToBeDone.getTags());
+            }
+        } catch (IllegalValueException ive) {
+            return new CommandResult(TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS);
+        }   
         
         try {
-            model.editTask(taskToDone, newTask);
+            model.editTask(taskToBeDone, newTask);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
-        }
+        } 
 
-        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToDone));
+        return new CommandResult(String.format(MESSAGE_DONE_TASK_SUCCESS, taskToBeDone));
     }
 }
 //@@author

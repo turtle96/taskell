@@ -57,6 +57,11 @@ public class TaskBuilder {
         return this;
     }
     
+    public TaskBuilder withRecurringType(String recurringType) throws IllegalValueException {
+        this.task.setRecurringType(new RecurringType(recurringType));
+        return this;
+    }
+    
     public TaskBuilder withTaskComplete(String taskStatus) throws IllegalValueException {
         this.task.setTaskComplete(new TaskStatus(taskStatus));
         return this;

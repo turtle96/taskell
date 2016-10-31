@@ -201,6 +201,20 @@ public class TaskDateTest {
     }
     
     @Test
+    public void assertNumberOfDays() throws IllegalValueException {
+        TaskDate first = new TaskDate("1-11-2016");
+        TaskDate second = new TaskDate("20-11-2016");
+        
+        //Positive difference between given dates
+        long positiveDayDifference = TaskDate.between(first, second);
+        assertEquals(19, positiveDayDifference);
+        
+        //Negative difference between given dates
+        long negativeDayDifference = TaskDate.between(second, first);
+        assertEquals(-19, negativeDayDifference);
+    }
+    
+    @Test
     public void assertCorrectDisplayDate() throws IllegalValueException {
         TaskDate date = new TaskDate("22-10-2016");
         assertEquals("Saturday, 22 October 2016", date.getDisplayDate());
