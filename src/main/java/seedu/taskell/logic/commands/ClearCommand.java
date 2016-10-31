@@ -13,6 +13,7 @@ public class ClearCommand extends Command {
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Clear command executed.";
     private static ClearCommand self;
+    private static boolean isUnderTesting;  //for testing ONLY
 
     public ClearCommand() {}
 
@@ -23,11 +24,24 @@ public class ClearCommand extends Command {
         
         return self;
     }
+    
+    /** set to true so clear bypasses confirm dialog
+     *  for running test cases ONLY
+     * */
+    public static void setIsUnderTesting(boolean value) {
+        isUnderTesting = value;
+    }
 
     @Override
     public CommandResult execute() {
         assert model != null;
-        raiseClearCommandInputEvent();
+        
+        if (isUnderTesting) {
+            executeClear();
+        } else {
+            raiseClearCommandInputEvent();
+        }
+        
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
