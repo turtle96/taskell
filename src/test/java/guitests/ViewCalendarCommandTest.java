@@ -8,7 +8,7 @@ import seedu.taskell.logic.commands.ViewCalendarCommand;
 public class ViewCalendarCommandTest extends TaskManagerGuiTest {
     
     @Test
-    public void viewCal() {
+    public void viewCal_success() {
         String expected = ViewCalendarCommand.MESSAGE_SUCCESS;
         
         commandBox.runCommand("calendar");

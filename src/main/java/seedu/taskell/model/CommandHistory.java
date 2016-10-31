@@ -11,13 +11,13 @@ public class CommandHistory {
     private String commandText, commandType;
     private Task task;      //relevent task to be added, deleted or edited
     private Task oldTask;   //oldTask needed for EditCommands
-    private boolean toRedo;
+    private boolean isRedoCommand;
     
     public CommandHistory() {
         commandText = "default command text";
         commandType = "default command type";
         task = null;
-        toRedo = false;
+        isRedoCommand = false;
     }
     
     public CommandHistory(String commandText, String commandType) {
@@ -29,7 +29,7 @@ public class CommandHistory {
         this.commandText = commandText.trim();
         this.commandType = commandType.trim();
         this.task = null;
-        toRedo = false;
+        isRedoCommand = false;
     }
     
     public String getCommandText() {
@@ -49,7 +49,7 @@ public class CommandHistory {
     }
     
     public boolean isRedoTrue() {
-        return toRedo;
+        return isRedoCommand;
     }
     
     /**** Setter methods ****/
@@ -71,7 +71,7 @@ public class CommandHistory {
     }
     
     public void setToRedoToTrue() {
-        toRedo = true;
+        isRedoCommand = true;
     }
     
 }
