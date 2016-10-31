@@ -2,7 +2,7 @@ package seedu.taskell.model.task;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
-//@@ author A0148004R
+//@@author A0148004R
 public class RecurringType {
     
     public static final String MESSAGE_TASK_RECURRING_CONSTRAINTS = "Task recurrence should be daily, weekly or monthly"
