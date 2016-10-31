@@ -45,6 +45,8 @@ public class ClearCommand extends Command {
         return new CommandResult(MESSAGE_SUCCESS);
     }
 
+    /** @@author A0142130A **/
+    
     /** will be called from UiManager after confirmation of clear
      * */
     public void executeClear() {
@@ -54,4 +56,6 @@ public class ClearCommand extends Command {
     private void raiseClearCommandInputEvent() {
         EventsCenter.getInstance().post(new ClearCommandInputEvent());      
     }
+    
+    /** @@author **/
 }

@@ -82,11 +82,15 @@ public class UiManager extends ComponentManager implements Ui {
         showAlertDialogAndWait(mainWindow.getPrimaryStage(), type, title, headerText, contentText);
     }
     
+    /** @@author A0142130A-reused **/
+    
     Alert showAlertDialogAndWaitForConfirm(Alert.AlertType type, String title, String headerText, 
             String contentText) {
         return showAlertDialogAndWaitForConfirm(mainWindow.getPrimaryStage(), type, title, 
                 headerText, contentText);
     }
+    
+    /** @@author **/
 
     private static void showAlertDialogAndWait(Stage owner, AlertType type, String title, String headerText,
                                                String contentText) {
@@ -99,6 +103,8 @@ public class UiManager extends ComponentManager implements Ui {
 
         alert.showAndWait();
     }
+    
+    /** @@author A0142130A-reused **/
     
     private static Alert showAlertDialogAndWaitForConfirm(Stage owner, AlertType type, 
             String title, String headerText, String contentText) {
@@ -113,6 +119,8 @@ public class UiManager extends ComponentManager implements Ui {
         
         return alert;
     }
+    
+    /** @@author **/
 
     private void showFatalErrorDialogAndShutdown(String title, Throwable e) {
         logger.severe(title + " " + e.getMessage() + StringUtil.getDetails(e));
@@ -121,10 +129,14 @@ public class UiManager extends ComponentManager implements Ui {
         System.exit(1);
     }
     
+    /** @@author A0142130A **/
+    
     private Alert showConfirmClearAlertDialogAndWait() {
         return showAlertDialogAndWaitForConfirm(Alert.AlertType.CONFIRMATION, "Clear all tasks?", 
                 "Clear all tasks?", "Are you sure you wish to clear all data?");
     }
+    
+    /** @@author **/
 
     //==================== Event Handling Code =================================================================
 
