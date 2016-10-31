@@ -200,7 +200,7 @@ public class LogicManagerTest {
     
     //@@author A0139257X
     @Test
-    public void execute_add_ValidFloatingTaskWithKeywords() throws Exception {
+    public void execute_add_ValidFloatingTaskWithKeywords_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateFloatingTask("on by on at from to", "0", "neverRecur");
@@ -215,7 +215,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidFloatingTaskWithKeywordsButNoValidDateTime() throws Exception {
+    public void execute_add_ValidFloatingTaskWithKeywordsButNoValidDateTime_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateFloatingTask("sleep by the seaside", "0", "neverRecur");
@@ -230,7 +230,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithImproperUsageOfAt() throws Exception {
+    public void execute_add_ValidTaskWithImproperUsageOfAt_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateFloatingTask("go shopping at monday", "0", "neverRecur");
@@ -245,7 +245,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithValidDateButNoPreFix() throws Exception {
+    public void execute_add_ValidTaskWithValidDateButNoPreFix_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateFloatingTask("go shopping today", "0", "neverRecur");
@@ -260,7 +260,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithValidTimeButNoPreFix() throws Exception {
+    public void execute_add_ValidTaskWithValidTimeButNoPreFix_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateFloatingTask("go shopping 7pm", "0", "neverRecur");
@@ -275,7 +275,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithImproperUsageOfOn() throws Exception {
+    public void execute_add_ValidTaskWithImproperUsageOfOn_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.generateFloatingTask("go shopping on 7pm", "0", "neverRecur");
@@ -290,7 +290,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleOn() throws Exception {
+    public void execute_add_ValidTaskWithMultipleOn_success() throws Exception {
         String description = "add go shopping on 2-2-2222 on 3-3-3333";
         Task toBeAdded = new EventTask("go shopping on 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -303,7 +303,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleAt() throws Exception {
+    public void execute_add_ValidTaskWithMultipleAt_success() throws Exception {
         String description = "add go shopping at 11.58pm at 11.59pm";
         Task toBeAdded = new EventTask("go shopping at 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -316,7 +316,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleByDate() throws Exception {
+    public void execute_add_ValidTaskWithMultipleByDate_success() throws Exception {
         String description = "add go shopping by 2-2-2222 by 3-3-3333";
         Task toBeAdded = new EventTask("go shopping by 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -329,7 +329,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleByTime() throws Exception {
+    public void execute_add_ValidTaskWithMultipleByTime_success() throws Exception {
         String description = "add go shopping by 11.58pm by 11.59pm";
         Task toBeAdded = new EventTask("go shopping by 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow().toString(), "11.58pm", TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -342,7 +342,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleFromDate() throws Exception {
+    public void execute_add_ValidTaskWithMultipleFromDate_success() throws Exception {
         String description = "add go shopping from 2-2-2222 from 3-3-3333";
         Task toBeAdded = new EventTask("go shopping from 3-3-3333", "2-2-2222", "2-2-2222", TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -355,7 +355,7 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void execute_add_ValidTaskWithMultipleFromTime() throws Exception {
+    public void execute_add_ValidTaskWithMultipleFromTime_success() throws Exception {
         String description = "add go shopping from 11.58pm from 11.59pm";
         Task toBeAdded = new EventTask("go shopping from 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, "11.58pm", TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -368,7 +368,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleToDate() throws Exception {
+    public void execute_add_ValidTaskWithMultipleToDate_success() throws Exception {
         String description = "add go shopping to 2-2-2222 to 3-3-3333";
         Task toBeAdded = new EventTask("go shopping to 3-3-3333", TaskDate.DEFAULT_DATE, "2-2-2222", TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -381,7 +381,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidTaskWithMultipleToTime() throws Exception {
+    public void execute_add_ValidTaskWithMultipleToTime_success() throws Exception {
         String description = "add go shopping to 11.58pm to 11.59pm";
         Task toBeAdded = new EventTask("go shopping to 11.59pm", TaskDate.DEFAULT_DATE, TaskDate.DEFAULT_DATE, TaskTime.getTimeNow().toString(), "11.58pm", TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -394,7 +394,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidEventWithByTime() throws Exception {
+    public void execute_add_ValidEventWithByTime_success() throws Exception {
         String description = "add go shopping by 11:59pm";
         Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), TaskTime.getTimeNow().toString(), "11:59pm", TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -407,7 +407,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidEventWithAtTime() throws Exception {
+    public void execute_add_ValidEventWithAtTime_success() throws Exception {
         String description = "add go shopping at 11:59pm";
         Task toBeAdded = new EventTask("go shopping", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), "11:59pm", TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -420,7 +420,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidEventWithTagNotAtTheEnd() throws Exception {
+    public void execute_add_ValidEventWithTagNotAtTheEnd_success() throws Exception {
         String description = "add go to #girlfriend Mavis's house at 11:58pm";
         Task toBeAdded = new EventTask("go to Mavis's house", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), "11:58pm", TaskTime.DEFAULT_END_TIME, TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList(new Tag("girlfriend")));
         TaskManager expectedAB = new TaskManager();
@@ -433,7 +433,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidEventWithEndTimeBeforeStartTime() throws Exception {
+    public void execute_add_ValidEventWithEndTimeBeforeStartTime_success() throws Exception {
         String description = "add stayover at Juliet's house from 11.58pm to 10am";
         Task toBeAdded = new EventTask("stayover at Juliet's house", TaskDate.getTodayDate().toString(), TaskDate.getTodayDate().toString(), "11:58pm", "10:00am", TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, TaskStatus.INCOMPLETE, new UniqueTagList());
         TaskManager expectedAB = new TaskManager();
@@ -446,7 +446,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidEventWithSameDayNameInWeekAsToday() throws Exception {
+    public void execute_add_ValidEventWithSameDayNameInWeekAsToday_success() throws Exception {
         TaskDate today = new TaskDate(TaskDate.getTodayDate().toString());
         TaskDate tomorrow = new TaskDate(TaskDate.getTomorrowDate().toString());
         String todayNameInWeek = today.getDayNameInWeek();
@@ -463,7 +463,7 @@ public class LogicManagerTest {
     }
     
     @Test
-    public void execute_add_ValidEventDuration_successful() throws Exception {
+    public void execute_add_ValidEventDuration_successful_success() throws Exception {
      // setup expectations
         TestDataHelper helper = new TestDataHelper();
         Task toBeAdded = helper.validEventDuration();
