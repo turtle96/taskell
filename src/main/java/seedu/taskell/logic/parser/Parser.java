@@ -11,12 +11,7 @@ import java.util.regex.Pattern;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.commands.*;
-import seedu.taskell.logic.commands.edit.EditDescriptionCommand;
-import seedu.taskell.logic.commands.edit.EditEndDateCommand;
-import seedu.taskell.logic.commands.edit.EditEndTimeCommand;
-import seedu.taskell.logic.commands.edit.EditPriorityCommand;
-import seedu.taskell.logic.commands.edit.EditStartDateCommand;
-import seedu.taskell.logic.commands.edit.EditStartTimeCommand;
+import seedu.taskell.logic.commands.EditCommand;
 import seedu.taskell.logic.commands.list.ListAllCommand;
 import seedu.taskell.logic.commands.list.ListCommand;
 import seedu.taskell.logic.commands.list.ListDateCommand;
@@ -119,27 +114,6 @@ public class Parser {
         case EditCommand.COMMAND_WORD:
             return prepareEdit(arguments);
 
-        case EditStartDateCommand.COMMAND_WORD:
-            return prepareEditStartDate(arguments);
-
-        case EditEndDateCommand.COMMAND_WORD:
-            return prepareEditEndDate(arguments);
-
-        case EditDescriptionCommand.COMMAND_WORD_1:
-            return prepareEditDescription(arguments);
-
-        case EditDescriptionCommand.COMMAND_WORD_2:
-            return prepareEditDescription(arguments);
-
-        case EditStartTimeCommand.COMMAND_WORD:
-            return prepareEditStartTime(arguments);
-
-        case EditEndTimeCommand.COMMAND_WORD:
-            return prepareEditEndTime(arguments);
-
-        case EditPriorityCommand.COMMAND_WORD:
-            return prepareEditPriority(arguments);
-
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -223,7 +197,7 @@ public class Parser {
         }
         if (!isInt(intValue)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         if (targetIdx < 0 || targetIdx > 3) {
@@ -419,206 +393,6 @@ public class Parser {
                     new TaskDate(startDate), hasChangedStartDate, new TaskDate(endDate), hasChangedEndDate,
                     new TaskTime(startTime), hasChangedStartTime, new TaskTime(endTime), hasChangedEndTime,
                     new TaskPriority(taskPriority), hasChangedPriority);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit task startDate command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditStartDate(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditEndDateCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
-        }
-        if (!TaskDate.isValidDate(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditStartDateCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit task description command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditDescription(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditDescriptionCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
-        while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
-        }
-        arguments = arguments.trim();
-        try {
-            return new EditDescriptionCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit start time command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditStartTime(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-
-        if (!TaskTime.isValidTime(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditStartTimeCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit task endDate command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditEndDate(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens() || !TaskDate.isValidDate(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditEndDateCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit task end time command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditEndTime(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens() || !TaskTime.isValidTime(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditEndTimeCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit task priority command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditPriority(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        int targetIdx = Integer.valueOf(st.nextToken());
-        arguments = st.nextToken();
-        if (st.hasMoreTokens() || !TaskPriority.isValidPriority(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
-        }
-        try {
-            return new EditPriorityCommand(targetIdx, arguments);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
