@@ -21,6 +21,7 @@ import seedu.taskell.logic.commands.ViewHistoryCommand;
 import seedu.taskell.model.*;
 import seedu.taskell.storage.Storage;
 import seedu.taskell.storage.StorageManager;
+import seedu.taskell.ui.CalendarView;
 import seedu.taskell.ui.Ui;
 import seedu.taskell.ui.UiManager;
 
@@ -71,6 +72,8 @@ public class MainApp extends Application {
         ViewHistoryCommand.getInstance().setData(model);
         SaveStorageLocationCommand.setConfig(config);
         SaveStorageLocationCommand.setStorage(storage);
+        CalendarView.setData(model);
+        
     }
 
     private String getApplicationParameter(String parameterName){
