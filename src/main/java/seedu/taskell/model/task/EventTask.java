@@ -37,7 +37,9 @@ public class EventTask extends Task {
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         }
-        
+        if(!isValidRecurringEvent(startDate, endDate, recurringType)){
+            throw new IllegalValueException(RecurringType.MESSAGE_INVALID_RECURRING_DURATION);
+        }
         this.description = description;
         this.taskType = EVENT_TASK;
         this.startDate = startDate;
@@ -50,6 +52,21 @@ public class EventTask extends Task {
         this.tags = tags;
     }
     
+    //@@author A0148004R
+    private boolean isValidRecurringEvent(TaskDate startDate, TaskDate endDate, RecurringType recurringType){
+        
+        if(recurringType.recurringType.equals(RecurringType.DAILY_RECURRING)){
+            return Math.abs(TaskDate.between(startDate, endDate)) <= TaskDate.NUM_DAYS_PER_DAY;
+        } else if(recurringType.recurringType.equals(RecurringType.WEEKLY_RECURRING)){
+            return Math.abs(TaskDate.between(startDate, endDate)) <= TaskDate.NUM_DAYS_IN_A_WEEK;
+        } else if(recurringType.recurringType.equals(RecurringType.MONTHLY_RECURRING)){
+            return Math.abs(TaskDate.between(startDate, endDate)) <= TaskDate.NUM_DAYS_IN_A_MONTH;
+        } else {
+            return true;
+        }
+    }
+    
+    //@@author A0139257X
     private boolean isValidEventDuration(TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime) {
         TaskDate today = TaskDate.getTodayDate();
         TaskTime currentTime = TaskTime.getTimeNow();

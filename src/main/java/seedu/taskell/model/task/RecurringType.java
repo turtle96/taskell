@@ -2,10 +2,16 @@ package seedu.taskell.model.task;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 
+//@@ author A0148004R
 public class RecurringType {
     
     public static final String MESSAGE_TASK_RECURRING_CONSTRAINTS = "Task recurrence should be daily, weekly or monthly"
             + "\nThere should not be more than 1 recurring class for a task";
+    
+    public static final String MESSAGE_INVALID_RECURRING_DURATION = "Invalid duration!" 
+            + "\nTask with recurring type as daily shoud not have a difference of more than a day"
+            + "\nTask with recurring type as weekly should not have a difference of more than a week"
+            + "\nTask with recurring type as monthly should not have a difference of more than a month";
     
     public static final String PREFIX = "r/";
     
