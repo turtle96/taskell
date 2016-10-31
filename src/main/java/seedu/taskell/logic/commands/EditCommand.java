@@ -39,12 +39,12 @@ public class EditCommand extends Command {
     private TaskTime endTime;
     private TaskPriority taskPriority;
 
-    private boolean hasChangedDescription = false;
-    private boolean hasChangedStartDate = false;
-    private boolean hasChangedEndDate = false;
-    private boolean hasChangedStartTime = false;
-    private boolean hasChangedEndTime = false;
-    private boolean hasChangedPriority = false;
+    private boolean hasChangedDescription;
+    private boolean hasChangedStartDate;
+    private boolean hasChangedEndDate;
+    private boolean hasChangedStartTime;
+    private boolean hasChangedEndTime;
+    private boolean hasChangedPriority;
 
     public EditCommand(int targetIndex, Description newDescription, boolean hasChangedDescription,
             TaskDate newStartDate, boolean hasChangedStartDate, TaskDate newEndDate, boolean hasChangedEndDate,
