@@ -1,12 +1,12 @@
+/** @@author A0142130A **/
 package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.events.ui.ClearCommandInputEvent;
-import seedu.taskell.model.Model;
 import seedu.taskell.model.TaskManager;
 
 /**
- * Clears the task manager.
+ * Clears the task manager. Will show confirm dialog.
  */
 public class ClearCommand extends Command {
 
@@ -44,10 +44,9 @@ public class ClearCommand extends Command {
         
         return new CommandResult(MESSAGE_SUCCESS);
     }
-
-    /** @@author A0142130A **/
     
-    /** will be called from UiManager after confirmation of clear
+    /** executes reset data
+     *  will be called from UiManager after confirmation of clear
      * */
     public void executeClear() {
         model.resetData(TaskManager.getEmptyTaskManager());
