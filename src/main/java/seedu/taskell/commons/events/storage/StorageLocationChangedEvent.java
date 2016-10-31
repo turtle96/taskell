@@ -4,6 +4,9 @@ package seedu.taskell.commons.events.storage;
 import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.events.BaseEvent;
 
+/**
+ * Indicates storage location has changed.
+ */
 public class StorageLocationChangedEvent extends BaseEvent {
     
     private Config config;

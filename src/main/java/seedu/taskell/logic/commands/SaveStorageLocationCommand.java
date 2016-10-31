@@ -24,7 +24,7 @@ public class SaveStorageLocationCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Saves data file to new location specified. "
             + "New files can be auto-created as long as given directory is valid.\n"
             + "Parameters: FILEPATH (must be valid)\n"
-            + "Example: " + COMMAND_WORD + " C:/Users/chicken/Desktop/cat";
+            + "Example: " + COMMAND_WORD + " C:\\Users\\chicken\\Desktop\\cat";
     
     private static final String MESSAGE_SUCCESS = "Data successfully saved to new location.";
     private static final String MESSAGE_INVALID_PATH = "Filepath given is invalid. Filepath will be reset to old path.";

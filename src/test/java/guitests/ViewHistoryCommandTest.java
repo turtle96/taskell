@@ -11,7 +11,7 @@ import seedu.taskell.ui.DisplayPanel;
 public class ViewHistoryCommandTest extends TaskManagerGuiTest {
     
     @Test
-    public void viewHistory() {
+    public void viewHistory_success() {
         HistoryManager.getInstance().clear();
         
         String expectedMessage = ViewHistoryCommand.MESSAGE_SUCCESS;

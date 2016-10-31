@@ -83,8 +83,7 @@ public class DisplayPanel extends UiPart {
         display.setText("");
         if (list.isEmpty()) {
             display.setText(MESSAGE_NO_HISTORY);
-        }
-        else {
+        } else {
             display.setText(MESSAGE_DISPLAY_HISTORY);
             for (int i=0; i<list.size(); i++) {
                 int index = i+1;

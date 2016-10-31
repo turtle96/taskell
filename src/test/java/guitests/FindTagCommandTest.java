@@ -10,7 +10,7 @@ import seedu.taskell.testutil.TestTask;
 
 public class FindTagCommandTest extends TaskManagerGuiTest {
     @Test
-    public void findTag_nonEmptyList() {
+    public void findTag_nonEmptyList_success() {
         assertFindResult("find-tag chicken"); //no results
         assertFindResult("find-tag friends", td.archivePastEmails, td.borrowBooks); //multiple results
 
@@ -20,12 +20,12 @@ public class FindTagCommandTest extends TaskManagerGuiTest {
     }
     
     @Test
-    public void findTag_MulitpleKeywords() {
+    public void findTag_MulitpleKeywords_success() {
         assertFindResult("find-tag friends owesMoney", td.archivePastEmails, td.borrowBooks, td.collectParcel); //multiple results
     } 
 
     @Test
-    public void findTag_emptyList(){
+    public void findTag_emptyList_noResults(){
         commandBox.runCommand("clear");
         assertFindResult("find-tag friends"); //no results
     }
