@@ -162,7 +162,10 @@ public class Parser {
             
         case DoneCommand.COMMAND_WORD:
             return prepareDone(arguments);
-
+        
+        case UndoneCommand.COMMAND_WORD:
+            return prepareUndone(arguments);
+        
         case ViewHistoryCommand.COMMAND_WORD_1:
             return new ViewHistoryCommand();
             
@@ -818,7 +821,7 @@ public class Parser {
         Optional<Integer> index = parseIndex(args);
         if (!index.isPresent()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoCommand.MESSAGE_USAGE));
-        }
+        } 
         return new UndoCommand(index.get());
     }
 
@@ -873,6 +876,22 @@ public class Parser {
         }
 
         return new DoneCommand(index.get());
+    }
+   
+    /**
+     * Parses arguments in the context of the Undone task command.
+     *
+     * @param args
+     *            full command args string
+     * @return the prepared command
+     */
+    private Command prepareUndone(String args) {
+        Optional<Integer> index = parseIndex(args);
+        if (!index.isPresent()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE));
+        } 
+        
+        return new UndoneCommand(index.get());
     }
     //@@author
     
