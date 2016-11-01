@@ -23,7 +23,6 @@ public class UndoCommand extends Command {
     private static final Logger logger = LogsCenter.getLogger(UndoCommand.class.getName());
     
     public static final String COMMAND_WORD = "undo";
-    public static final String EDIT = "edit";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undo a previously executed command.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 3";
@@ -79,7 +78,7 @@ public class UndoCommand extends Command {
             return undoAdd();
         } else if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
             return undoDelete();
-        } else if (commandType.contains(EDIT)) {
+        } else if (commandType.equals(EditCommand.COMMAND_WORD)) {
             return undoEdit();
         } else {
             logger.severe("CommandHistory is invalid");
@@ -95,7 +94,7 @@ public class UndoCommand extends Command {
             return undoDelete();
         } else if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
             return undoAdd();
-        } else if (commandType.contains(EDIT)) {
+        } else if (commandType.equals(EditCommand.COMMAND_WORD)) {
             return redoEdit();
         } else {
             logger.severe("CommandHistory is invalid");
