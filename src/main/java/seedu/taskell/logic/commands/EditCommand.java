@@ -73,6 +73,7 @@ public class EditCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -101,8 +102,10 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
+            
             HistoryManager.getInstance().addTask(newTask);
             HistoryManager.getInstance().addOldTask((Task) taskToEdit);
+        
         } catch (TaskNotFoundException | DuplicateTaskException pnfe) {
             HistoryManager.getInstance().deleteLatestCommand();
             assert false : "The target task cannot be missing";
