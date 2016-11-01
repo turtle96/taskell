@@ -37,6 +37,7 @@ public class UndoCommand extends Command {
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
 
     private static final String MESSAGE_TASK_NOT_FOUND = "Task is not present in Taskell.";
+    public static final String MESSAGE_DONE_TASK_UNSUCCESSFUL = "The task status is already completed.";
     
     private ArrayList<CommandHistory> commandHistoryList;
     private History history;
@@ -118,13 +119,15 @@ public class UndoCommand extends Command {
             model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
             history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
-            indicateDisplayListChanged();
+            
             return new CommandResult(String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, 
                     commandHistory.getOldTask()));
         } catch (DuplicateTaskException e) {
+            history.deleteCommandHistory(commandHistory);
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
+            history.deleteCommandHistory(commandHistory);
             return new CommandResult(UndoneCommand.MESSAGE_UNDONE_UNSUCCESSFUL);
         }
         
@@ -135,14 +138,16 @@ public class UndoCommand extends Command {
             model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
             history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
-            indicateDisplayListChanged();
+            
             return new CommandResult(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, 
                     commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
+            history.deleteCommandHistory(commandHistory);
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
-            return new CommandResult(MESSAGE_TASK_NOT_FOUND);
+            history.deleteCommandHistory(commandHistory);
+            return new CommandResult(MESSAGE_DONE_TASK_UNSUCCESSFUL);
         }
     }
 
@@ -151,7 +156,6 @@ public class UndoCommand extends Command {
             model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
             history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
-            indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getOldTask()));
         } catch (DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
@@ -167,7 +171,6 @@ public class UndoCommand extends Command {
         try {
             model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
             history.deleteCommandHistory(commandHistory);
-            indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
@@ -184,7 +187,6 @@ public class UndoCommand extends Command {
             model.addTask(commandHistory.getTask());
             history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
-            indicateDisplayListChanged();
             return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
@@ -196,7 +198,6 @@ public class UndoCommand extends Command {
             model.deleteTask(commandHistory.getTask());
             history.deleteCommandHistory(commandHistory);
             addUndoCommand(commandHistory);
-            indicateDisplayListChanged();
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         }
