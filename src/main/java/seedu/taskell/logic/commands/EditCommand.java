@@ -7,6 +7,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
@@ -100,7 +101,10 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
+            HistoryManager.getInstance().addTask(newTask);
+            HistoryManager.getInstance().addOldTask((Task) taskToEdit);
         } catch (TaskNotFoundException | DuplicateTaskException pnfe) {
+            HistoryManager.getInstance().deleteLatestCommand();
             assert false : "The target task cannot be missing";
         } 
 
