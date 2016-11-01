@@ -6,7 +6,7 @@ import seedu.taskell.commons.events.ui.ClearCommandInputEvent;
 import seedu.taskell.model.TaskManager;
 
 /**
- * Clears the task manager. Will show confirm dialog.
+ * Clears the task manager. Will show confirm dialog before clearing.
  */
 public class ClearCommand extends Command {
 
@@ -60,5 +60,4 @@ public class ClearCommand extends Command {
         EventsCenter.getInstance().post(new ClearCommandInputEvent());      
     }
     
-    /** @@author **/
 }
