@@ -74,8 +74,15 @@ public class UndoCommand extends Command {
         
         if (commandHistory.isRedoTrue()) {
             return redoUndo();
+        } else {
+            return executeUndo();
         }
-        
+              
+    }
+
+    /** determine type of command of history and performs necessary undo changes
+     * */
+    private CommandResult executeUndo() {
         String commandType = commandHistory.getCommandType();
         if (commandType.equals(AddCommand.COMMAND_WORD)) {
             return executeDelete();
@@ -91,10 +98,14 @@ public class UndoCommand extends Command {
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
-        
     }
 
+    /** must be a previous undo command
+     *  determine type of command of history and performs necessary redo changes
+     * */
     private CommandResult redoUndo() {
+        
+        assert commandHistory.isRedoTrue();
         
         String commandType = commandHistory.getCommandType();
         if (commandType.equals(AddCommand.COMMAND_WORD)) {
@@ -114,6 +125,8 @@ public class UndoCommand extends Command {
         
     }
     
+    /** executes undone command on command history
+     * */
     private CommandResult executeUndone() {
         try {
             model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
@@ -133,6 +146,8 @@ public class UndoCommand extends Command {
         
     }
     
+    /** executes done command on command history
+     * */
     private CommandResult executeDone() {
         try {
             model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
@@ -151,6 +166,8 @@ public class UndoCommand extends Command {
         }
     }
 
+    /** executes edit command on command history, edit back to old task
+     * */
     private CommandResult undoEdit() {
         try {
             model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
@@ -167,6 +184,9 @@ public class UndoCommand extends Command {
         return null;
     }
     
+    /** executes edit command on command history, edit back to new task
+     *  i.e. old task -> new task -> old task
+     * */
     private CommandResult redoEdit() {
         try {
             model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
@@ -182,6 +202,8 @@ public class UndoCommand extends Command {
         return null;
     }
 
+    /** executes add command on command history
+     * */
     private CommandResult executeAdd() {
         try {
             model.addTask(commandHistory.getTask());
@@ -193,6 +215,8 @@ public class UndoCommand extends Command {
         }
     }
 
+    /** executes delete command on command history
+     * */
     private CommandResult executeDelete() {
         try {
             model.deleteTask(commandHistory.getTask());
@@ -204,6 +228,9 @@ public class UndoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, commandHistory.getTask()));
     }
     
+    /** appends "undo " to front of command input string and saves as an undo command
+     *  can execute redo
+     * */
     private void addUndoCommand(CommandHistory commandHistory) {
         if (commandHistory.isRedoTrue()) {
             return;
@@ -215,6 +242,8 @@ public class UndoCommand extends Command {
     
     /******** static methods *********/
     
+    /** convert 1-based index to support 0-based index within system
+     * */
     private static int getOffset(int index) {
         return index - 1;
     }
