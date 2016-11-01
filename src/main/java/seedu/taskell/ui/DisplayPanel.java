@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
- * The Display Panel of the App.
+ * The Display Panel of the App, on right side of screen
+ * shows history or calendar view
+ * calendar view is default view
  */
 public class DisplayPanel extends UiPart {
 
@@ -78,6 +80,8 @@ public class DisplayPanel extends UiPart {
         return displayPanel;
     }
     
+    /** called whenever history list needs to be shown on display panel
+     * */
     public void loadList(AnchorPane placeholder, ArrayList<String> list) {
         placeholder.getChildren().clear();
         placeholder.getChildren().add(displayTextArea);
@@ -95,8 +99,12 @@ public class DisplayPanel extends UiPart {
         }
     }
     
+    /** default view
+     *  clears panel if displayTextArea is showing
+     *  fills panel with Agenda for events for the week
+     * */
     public void loadCalendar(AnchorPane placeholder) {
-               
+
         placeholder.getChildren().clear();
         agenda = calendarView.getAgenda();
         FxViewUtil.applyAnchorBoundaryParameters(agenda, 0.0, 0.0, 0.0, 0.0);
