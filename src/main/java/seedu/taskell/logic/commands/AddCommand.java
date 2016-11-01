@@ -3,9 +3,6 @@ package seedu.taskell.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.taskell.commons.core.EventsCenter;
-import seedu.taskell.commons.core.UnmodifiableObservableList;
-import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
