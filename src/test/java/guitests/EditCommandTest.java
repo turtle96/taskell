@@ -79,6 +79,13 @@ public class EditCommandTest extends TaskManagerGuiTest {
         // invalid index
         commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " p: " + TaskPriority.DEFAULT_PRIORITY);
         assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        
+     // invalid command
+        commandBox.runCommand(COMMAND_WORD +" "+ targetIndex + " p:");
+        assertResultMessage("Invalid command format! \n" + MESSAGE_USAGE);
+        
+        commandBox.runCommand(COMMAND_WORD +" "+ targetIndex + " desc: finish homework " +" p:");
+        assertResultMessage("Invalid command format! \n" + MESSAGE_USAGE);
 
         // edit the start time of first task in the list
         targetIndex = 1;
