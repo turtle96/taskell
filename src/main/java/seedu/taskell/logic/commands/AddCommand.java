@@ -3,6 +3,9 @@ package seedu.taskell.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import seedu.taskell.commons.core.EventsCenter;
+import seedu.taskell.commons.core.UnmodifiableObservableList;
+import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
@@ -59,12 +62,17 @@ public class AddCommand extends Command {
         try {
             model.addTask(toAdd);
             HistoryManager.getInstance().addTask(toAdd);
+            jumpToNewTaskIndex();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
-
+    }
+    
+    public void jumpToNewTaskIndex() {
+        int indexOfNewTask = model.getFilteredTaskList().size()-1;
+        jumpToIndex(indexOfNewTask);
     }
 
 }
