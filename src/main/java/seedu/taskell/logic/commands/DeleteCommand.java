@@ -1,5 +1,7 @@
 package seedu.taskell.logic.commands;
 
+import java.util.ConcurrentModificationException;
+
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.model.HistoryManager;
@@ -44,7 +46,13 @@ public class DeleteCommand extends Command {
         try {
             model.deleteTask(taskToDelete);
             HistoryManager.getInstance().addTask((Task) taskToDelete);
-            HistoryManager.getInstance().updateList();
+            
+            try {
+                HistoryManager.getInstance().updateList();
+            } catch (ConcurrentModificationException e) {
+                HistoryManager.getInstance().updateList();
+            }
+            
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }

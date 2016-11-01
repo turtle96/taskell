@@ -2,6 +2,7 @@
 package seedu.taskell.model;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
@@ -60,32 +61,36 @@ public class HistoryManager implements History {
     /** should be called whenever DeleteCommand is executed
      *  deletes history of the task deleted
      * */
-    public synchronized void updateList() {
+    public synchronized void updateList() throws ConcurrentModificationException {
         if (model == null) {
             logger.severe("Model is null");
             return;
         }
         
-        for (CommandHistory commandHistory: historyList) {
-            if (isCommandTypeAddOrEdit(commandHistory) 
-                    && !isTaskPresent(commandHistory.getTask())) {
-                historyList.remove(commandHistory);
-            } else if (isUndoEditCommand(commandHistory) 
-                    && !isTaskPresent(commandHistory.getTask())) {
-                historyList.remove(commandHistory);
+        try {
+            for (CommandHistory commandHistory: historyList) {
+                if (isCommandTypeAddOrEdit(commandHistory) 
+                        && !isTaskPresent(commandHistory.getTask())) {
+                    historyList.remove(commandHistory);
+                } else if (isUndoEditCommand(commandHistory) 
+                        && !isTaskPresent(commandHistory.getTask())) {
+                    historyList.remove(commandHistory);
+                }
             }
+        } catch (ConcurrentModificationException e) {
+            throw e;
         }
     }
     
     private boolean isCommandTypeAddOrEdit(CommandHistory commandHistory) {
-        return (commandHistory.getCommandType().contains(AddCommand.COMMAND_WORD) 
-                || commandHistory.getCommandType().equals(EditCommand.COMMAND_WORD)) 
+        return (commandHistory.getCommandType().equals(AddCommand.COMMAND_WORD) 
+                || commandHistory.getCommandType().contains(EditCommand.COMMAND_WORD)) 
                 && !commandHistory.isRedoTrue();
     }
     
     private boolean isUndoEditCommand(CommandHistory commandHistory) {
         return commandHistory.isRedoTrue() 
-                && commandHistory.getCommandType().equals(EditCommand.COMMAND_WORD);
+                && commandHistory.getCommandType().contains(EditCommand.COMMAND_WORD);
     }
 
     @Override
