@@ -274,7 +274,6 @@ public class TaskDateTest {
     public void equals_success() throws IllegalValueException {
         TaskDate date = new TaskDate("1-1-2015");
         TaskDate sameDate = new TaskDate("1-1-2015");
-        TaskDate differentDate = new TaskDate("2-2-2016");
         
         assertEquals(date, date);
         assertEquals(date, sameDate);
@@ -283,7 +282,6 @@ public class TaskDateTest {
     @Test
     public void equals_failure() throws IllegalValueException {
         TaskDate date = new TaskDate("1-1-2015");
-        TaskDate sameDate = new TaskDate("1-1-2015");
         TaskDate differentDate = new TaskDate("2-2-2016");
         
         assertNotSame(date, differentDate);

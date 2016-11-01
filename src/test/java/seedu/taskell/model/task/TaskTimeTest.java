@@ -3,7 +3,6 @@ package seedu.taskell.model.task;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import org.junit.Test;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -103,8 +102,6 @@ public class TaskTimeTest {
         TaskTime timeIs12Am = new TaskTime("12am");
         TaskTime timeIs12Pm = new TaskTime("12pm");
         TaskTime timeNot12Am = new TaskTime("3am");
-        TaskTime timeNot12Pm = new TaskTime("3pm");
-        TaskTime time = new TaskTime(TaskTime.DEFAULT_END_TIME);
         
         assertFalse(timeIs12Am.isBefore(timeIs12Am));
         assertFalse(timeIs12Pm.isBefore(timeIs12Am));
@@ -116,8 +113,6 @@ public class TaskTimeTest {
         TaskTime timeIs12Am = new TaskTime("12am");
         TaskTime timeIs12Pm = new TaskTime("12pm");
         TaskTime timeNot12Am = new TaskTime("3am");
-        TaskTime timeNot12Pm = new TaskTime("3pm");
-        TaskTime time = new TaskTime(TaskTime.DEFAULT_END_TIME);
         
         assertTrue(timeIs12Pm.isAfter(timeIs12Am));
         assertTrue(timeIs12Pm.isAfter(timeNot12Am));
@@ -202,7 +197,6 @@ public class TaskTimeTest {
     public void equals_returnTrue() throws IllegalValueException {
         TaskTime time = new TaskTime("12.30am");
         TaskTime sameTime= new TaskTime("12.30am");
-        TaskTime differentTime= new TaskTime("3pm");
         
         assertEquals(time, time);
         assertEquals(time, sameTime);
@@ -211,7 +205,6 @@ public class TaskTimeTest {
     @Test
     public void equals_returnFalse() throws IllegalValueException {
         TaskTime time = new TaskTime("12.30am");
-        TaskTime sameTime= new TaskTime("12.30am");
         TaskTime differentTime= new TaskTime("3pm");
         
         assertNotSame(time, differentTime);
