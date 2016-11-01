@@ -7,10 +7,10 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
+import seedu.taskell.commons.core.ComponentManager;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.undo.ExecutedIncorrectCommandEvent;
 import seedu.taskell.logic.commands.AddCommand;
-import seedu.taskell.logic.commands.DeleteCommand;
 import seedu.taskell.logic.commands.DoneCommand;
 import seedu.taskell.logic.commands.EditCommand;
 import seedu.taskell.logic.commands.UndoneCommand;
@@ -18,7 +18,7 @@ import seedu.taskell.model.task.Task;
 
 /** Implementation of History API, manages command history available for undo
  */
-public class HistoryManager implements History {
+public class HistoryManager extends ComponentManager implements History {
 
     private static final Logger logger = LogsCenter.getLogger(HistoryManager.class.getName());
     
@@ -172,6 +172,7 @@ public class HistoryManager implements History {
 
     @Subscribe
     private void handleExecuteIncorrectCommandEvent(ExecutedIncorrectCommandEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
         if (event.isUndoableCommand()) {
             deleteLatestCommand();
         }
