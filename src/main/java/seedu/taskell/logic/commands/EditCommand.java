@@ -96,7 +96,7 @@ public class EditCommand extends Command {
         }
 
         Task newTask = new Task(description, taskToEdit.getTaskType(), startDate, endDate, startTime, endTime,
-                taskPriority, taskToEdit.getTaskStatus(), taskToEdit.getTags());
+                taskPriority, taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
 
         try {
             model.editTask(taskToEdit, newTask);

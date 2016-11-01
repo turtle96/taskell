@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 
 //@@author A0139257X
 /**
@@ -43,7 +44,9 @@ public class TaskDate {
     public static final int SATURDAY = 6;
     public static final int SUNDAY = 7;
 
+    public static final int NUM_DAYS_PER_DAY = 1;
     public static final int NUM_DAYS_IN_A_WEEK = 7;
+    public static final int NUM_DAYS_IN_A_MONTH = 30;
     public static final int NUM_MONTHS_IN_A_YEAR = 12;
     
     public static final int NOT_A_VALID_MONTH = 0;
@@ -496,7 +499,20 @@ public class TaskDate {
             throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
         }
     }
-
+    
+    //@@author A0148004R-reused
+    public TaskDate getNextMonth() throws IllegalValueException {
+        try {
+            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate nextMonth = localDate.plusMonths(1);
+            return new TaskDate(nextMonth.format(standardFormat));
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
+        }
+    }
+    //@@author
+    
+    //@@author A0139257X
     /**
      * Returns a string representing the integer value of this year
      */
@@ -590,6 +606,13 @@ public class TaskDate {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    /**
+     * Calculates the number of days from the first date to the second date
+     */
+    public static long between(TaskDate first, TaskDate second) {
+        return ChronoUnit.DAYS.between(first.getLocalDate(), second.getLocalDate());
     }
     
     public LocalDateTime toLocalDateTime(TaskTime time) {

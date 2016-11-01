@@ -1,4 +1,8 @@
 //@@author A0148004R
+/**
+ * Represents a Task's status in the task manager.
+ * Guarantees: immutable; is valid as declared in {@link #isValidTaskComplete(String)}
+ */
 package seedu.taskell.model.task;
 
 import java.util.Objects;

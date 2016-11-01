@@ -27,7 +27,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask oldTask = currentList[targetIndex - 1];
         TestTask newTask = new TestTask(new Description("make tea"), oldTask.getTaskType(), oldTask.getTaskPriority(),
                 oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getStartDate(), oldTask.getEndDate(),
-                oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " desc: " + " make tea");
         currentList[0] = newTask;
@@ -38,7 +38,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(new Description("finish software demo"), oldTask.getTaskType(),
                 oldTask.getTaskPriority(), oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getStartDate(),
-                oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getEndDate(), oldTask.getRecurringType(),oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " desc: " + " finish software demo");
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
@@ -56,7 +56,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(),
                 new TaskPriority(TaskPriority.DEFAULT_PRIORITY), oldTask.getStartTime(), oldTask.getEndTime(),
-                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " p: " + "0");
         currentList[0] = newTask;
@@ -67,7 +67,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(),
                 new TaskPriority(TaskPriority.HIGH_PRIORITY), oldTask.getStartTime(), oldTask.getEndTime(),
-                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " p: " + "3");
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
@@ -81,7 +81,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(), oldTask.getTaskPriority(),
                 new TaskTime(TaskTime.MIDNIGHT), oldTask.getEndTime(), oldTask.getStartDate(), oldTask.getEndDate(),
-                oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " st: " + "12:00AM");
         currentList[0] = newTask;
@@ -92,7 +92,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(), oldTask.getTaskPriority(),
                 new TaskTime(TaskTime.DEFAULT_START_TIME), oldTask.getEndTime(), oldTask.getStartDate(),
-                oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " st: " + "12:00AM");
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
@@ -106,7 +106,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(), oldTask.getTaskPriority(),
                 oldTask.getStartTime(), new TaskTime(TaskTime.DEFAULT_END_TIME), oldTask.getStartDate(),
-                oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " et: " + "11:59PM");
         currentList[0] = newTask;
@@ -117,7 +117,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(), oldTask.getTaskPriority(),
                 oldTask.getStartTime(), new TaskTime(TaskTime.DEFAULT_END_TIME), oldTask.getStartDate(),
-                oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " et: " + "11:59PM");
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
@@ -138,7 +138,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         TestTask oldTask = currentList[targetIndex - 1];
         TestTask newTask = new TestTask(new Description("send emails"), oldTask.getTaskType(),
                 new TaskPriority(TaskPriority.DEFAULT_PRIORITY), new TaskTime("12am"), oldTask.getEndTime(),
-                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand("edit " + targetIndex + " desc: send emails st: 12am p: 0");
         currentList[0] = newTask;
@@ -149,7 +149,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         oldTask = currentList[targetIndex - 1];
         newTask = new TestTask(oldTask.getDescription(), oldTask.getTaskType(), oldTask.getTaskPriority(),
                 new TaskTime(TaskTime.DEFAULT_START_TIME), new TaskTime(TaskTime.DEFAULT_END_TIME),
-                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getTaskStatus(), oldTask.getTags());
+                oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
         commandBox.runCommand(
                 "edit " + targetIndex + " st: " + TaskTime.DEFAULT_START_TIME + " et: " + TaskTime.DEFAULT_END_TIME);

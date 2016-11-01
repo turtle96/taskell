@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import seedu.taskell.commons.core.LogsCenter;
+import seedu.taskell.commons.events.ui.DisplayCalendarViewEvent;
 import seedu.taskell.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.taskell.commons.util.FxViewUtil;
 import seedu.taskell.logic.Logic;
@@ -79,6 +80,10 @@ public class CommandBox extends UiPart {
         mostRecentResult = logic.execute(previousCommandTest);
         resultDisplay.postMessage(mostRecentResult.feedbackToUser);
         logger.info("Result: " + mostRecentResult.feedbackToUser);
+        
+        if (!previousCommandTest.contains("hist")) {
+            raise(new DisplayCalendarViewEvent());
+        }
     }
 
 
