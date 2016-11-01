@@ -18,7 +18,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     private History history = HistoryManager.getInstance();
     
     @Test
-    public void undoAdd() {
+    public void undoAdd_success() {
         history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
@@ -36,7 +36,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
     
     @Test
-    public void undoDelete() {
+    public void undoDelete_success() {
         history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
@@ -55,7 +55,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
     
     @Test
-    public void undoAndRedoAdd() {
+    public void undoAndRedoAdd_success() {
         history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
@@ -77,7 +77,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
     
     @Test
-    public void undoAndRedoDelete() {
+    public void undoAndRedoDelete_success() {
         history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
