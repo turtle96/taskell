@@ -18,7 +18,7 @@ public class ListPriorityCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": List the task with the specified priority. "
             + "Parameters: INDEX (must be between 0 and 3 inclusive).\n" + "Example: " + COMMAND_WORD + " 1";
-
+    
     private Set<String> mostImportant = new HashSet<>(Arrays.asList(TaskPriority.HIGH_PRIORITY));
     private Set<String> important = new HashSet<>(Arrays.asList(TaskPriority.MEDIUM_PRIORITY));
     private Set<String> lessImportant = new HashSet<>(Arrays.asList(TaskPriority.LOW_PRIORITY));
@@ -37,12 +37,16 @@ public class ListPriorityCommand extends Command {
         } else {
             keyword = leastImportant;
         }
+        
     }
 
     @Override
     public CommandResult execute() {
+        
         model.updateFilteredTaskListPriority(keyword);
         return new CommandResult(getMessageForTaskListShownSummary(model.getFilteredTaskList().size()));
+    
     }
 }
+
 // @@author
