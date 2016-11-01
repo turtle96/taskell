@@ -100,6 +100,70 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         history.clear();
     }
     
+    @Test
+    public void undoEdit_success() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.holdMeeting;
+        
+        //add one task
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        assertAddSuccess(taskToAdd, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        
+        commandBox.runCommand("edit " + currentList.length + " desc: hold chicken");
+        commandBox.runCommand(UNDO);
+        
+        currentList = TestUtil.removeTaskFromList(currentList, currentList.length); //need to remove from 
+                                                                                    //list since assertAddSuccess 
+                                                                                    //will add the task back in
+        assertAddSuccess(taskToAdd, currentList);
+        
+        history.clear();
+    }
+    
+    @Test
+    public void undoDone_success() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToDelete = currentList[0];
+        int target = 1;
+        
+        commandBox.runCommand("done 1");
+        commandBox.runCommand("list");  //to show only incomplete tasks
+        assertDeleteSuccess(target, currentList);
+        currentList = TestUtil.removeTaskFromList(currentList, 1);
+        
+        commandBox.runCommand(UNDO);
+        commandBox.runCommand("list");  //to show only incomplete tasks
+        
+        TaskCardHandle newCard = taskListPanel.navigateToTask(taskToDelete.getDescription().description);
+        assertMatching(taskToDelete, newCard);
+        
+        history.clear();
+    }
+    
+    @Test
+    public void undoUndone_success() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        
+        commandBox.runCommand("done 1");
+        commandBox.runCommand("undone 1");
+        commandBox.runCommand("list");  //to show only incomplete tasks
+        
+        commandBox.runCommand(UNDO);
+        commandBox.runCommand("list");  //to show only incomplete tasks
+        
+        int target = 1;
+        assertDeleteSuccess(target, currentList);   //final list should exclude the task tested
+        
+        history.clear();
+    }
+    
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
