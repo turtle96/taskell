@@ -45,7 +45,6 @@ public class DeleteCommand extends Command {
             model.deleteTask(taskToDelete);
             HistoryManager.getInstance().addTask((Task) taskToDelete);
             HistoryManager.getInstance().updateList();
-            ViewHistoryCommand.getInstance().indicateDisplayListChanged();
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
