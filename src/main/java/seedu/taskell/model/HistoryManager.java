@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.undo.ExecutedIncorrectCommandEvent;
 import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.EditCommand;
 import seedu.taskell.model.task.Task;
 
 /** Implementation of History API, manages command history available for undo
@@ -16,7 +17,6 @@ import seedu.taskell.model.task.Task;
 public class HistoryManager implements History {
 
     private static final Logger logger = LogsCenter.getLogger(HistoryManager.class.getName());
-    private static final String EDIT = "edit";
     
     private static ArrayList<CommandHistory> historyList;
     private static Model model;
@@ -47,8 +47,6 @@ public class HistoryManager implements History {
      * */
     public ArrayList<String> getListCommandText() {
         assert historyList != null;
-        
-        updateList();
         
         ArrayList<String> list = new ArrayList<>();
         for (CommandHistory history: historyList) {
@@ -81,29 +79,29 @@ public class HistoryManager implements History {
     
     private boolean isCommandTypeAddOrEdit(CommandHistory commandHistory) {
         return (commandHistory.getCommandType().contains(AddCommand.COMMAND_WORD) 
-                || commandHistory.getCommandType().contains(EDIT)) 
+                || commandHistory.getCommandType().equals(EditCommand.COMMAND_WORD)) 
                 && !commandHistory.isRedoTrue();
     }
     
     private boolean isUndoEditCommand(CommandHistory commandHistory) {
         return commandHistory.isRedoTrue() 
-                && commandHistory.getCommandType().contains(EDIT);
+                && commandHistory.getCommandType().equals(EditCommand.COMMAND_WORD);
     }
 
     @Override
-    public void clear() {
+    public synchronized void clear() {
         logger.info("Clearing history...");
         historyList.clear();        
     }
 
     @Override
-    public void addCommand(String commandText, String commandType) {
+    public synchronized void addCommand(String commandText, String commandType) {
         assert historyList != null;
         historyList.add(new CommandHistory(commandText, commandType));
     }
 
     @Override
-    public void addTask(Task task) {
+    public synchronized void addTask(Task task) {
         logger.info("Adding task to history");
         if (historyList.isEmpty()) {
             logger.warning("No command history to add task to");
@@ -114,7 +112,7 @@ public class HistoryManager implements History {
     }
 
     @Override
-    public void addOldTask(Task task) {
+    public synchronized void addOldTask(Task task) {
         logger.info("Adding old task to history");
         if (historyList.isEmpty()) {
             logger.warning("No command history to add task to");
@@ -130,7 +128,7 @@ public class HistoryManager implements History {
     }
     
     @Override
-    public void deleteLatestCommand() {
+    public synchronized void deleteLatestCommand() {
         logger.info("Command unsuccessfully executed. Deleting command history.");
         if (historyList.isEmpty()) {
             logger.warning("No command history to delete");
@@ -140,7 +138,7 @@ public class HistoryManager implements History {
     }
 
     @Override
-    public void deleteCommandHistory(CommandHistory commandHistory) {
+    public synchronized void deleteCommandHistory(CommandHistory commandHistory) {
         historyList.remove(commandHistory);
     }
     
