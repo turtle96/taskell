@@ -201,35 +201,15 @@ public class TestUtil {
     }
 
     // @@author A0142073R
-
-    public static TestTask editTaskDescription(TestTask taskToEdit, String newDescription)
+    
+    public static TestTask editTask(TestTask taskToEdit, String newDescription)
             throws IllegalValueException {
         TestTask newTask = new TestTask(new Description(newDescription), taskToEdit.getTaskType(),
                 taskToEdit.getTaskPriority(), taskToEdit.getStartTime(), taskToEdit.getEndTime(),
                 taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
         return newTask;
     }
-
-    public static TestTask editTaskStartTime(TestTask taskToEdit, String newStartTime) throws IllegalValueException {
-        TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(),
-                taskToEdit.getTaskPriority(), new TaskTime(newStartTime), taskToEdit.getEndTime(),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
-        return newTask;
-    }
-
-    public static TestTask editTaskEndTime(TestTask taskToEdit, String newEndTime) throws IllegalValueException {
-        TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(),
-                taskToEdit.getTaskPriority(), taskToEdit.getStartTime(), new TaskTime(newEndTime),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
-        return newTask;
-    }
-
-    public static TestTask editTaskPriority(TestTask taskToEdit, String newPriority) throws IllegalValueException {
-        TestTask newTask = new TestTask(taskToEdit.getDescription(), taskToEdit.getTaskType(),
-                new TaskPriority(newPriority), taskToEdit.getStartTime(), taskToEdit.getEndTime(),
-                taskToEdit.getStartDate(), taskToEdit.getEndDate(), taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
-        return newTask;
-    }
+    
     // @@author
 
     public static void setFinalStatic(Field field, Object newValue)

@@ -11,12 +11,7 @@ import java.util.regex.Pattern;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.commands.*;
-import seedu.taskell.logic.commands.edit.EditDescriptionCommand;
-import seedu.taskell.logic.commands.edit.EditEndDateCommand;
-import seedu.taskell.logic.commands.edit.EditEndTimeCommand;
-import seedu.taskell.logic.commands.edit.EditPriorityCommand;
-import seedu.taskell.logic.commands.edit.EditStartDateCommand;
-import seedu.taskell.logic.commands.edit.EditStartTimeCommand;
+import seedu.taskell.logic.commands.EditCommand;
 import seedu.taskell.logic.commands.list.ListAllCommand;
 import seedu.taskell.logic.commands.list.ListCommand;
 import seedu.taskell.logic.commands.list.ListDateCommand;
@@ -25,6 +20,7 @@ import seedu.taskell.logic.commands.list.ListPriorityCommand;
 import seedu.taskell.model.History;
 import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
+import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
@@ -61,6 +57,20 @@ public class Parser {
     private static final String FROM = "from";
     private static final String TO = "to";
     
+    private static final String ST = "st:";
+    private static final String ET = "et:";
+    private static final String SD = "sd:";
+    private static final String ED = "ed:";
+    private static final String DESC = "desc:";
+    private static final String P = "p:";
+
+    private boolean hasChangedDescription = false;
+    private boolean hasChangedStartDate = false;
+    private boolean hasChangedEndDate = false;
+    private boolean hasChangedStartTime = false;
+    private boolean hasChangedEndTime = false;
+    private boolean hasChangedPriority = false;
+
     private static History history;
 
     public Parser() {
@@ -103,26 +113,8 @@ public class Parser {
         case DeleteCommand.COMMAND_WORD:
             return prepareDelete(arguments);
 
-        case EditStartDateCommand.COMMAND_WORD:
-            return prepareEditStartDate(arguments);
-
-        case EditEndDateCommand.COMMAND_WORD:
-            return prepareEditEndDate(arguments);
-
-        case EditDescriptionCommand.COMMAND_WORD_1:
-            return prepareEditDescription(arguments);
-
-        case EditDescriptionCommand.COMMAND_WORD_2:
-            return prepareEditDescription(arguments);
-
-        case EditStartTimeCommand.COMMAND_WORD:
-            return prepareEditStartTime(arguments);
-
-        case EditEndTimeCommand.COMMAND_WORD:
-            return prepareEditEndTime(arguments);
-
-        case EditPriorityCommand.COMMAND_WORD:
-            return prepareEditPriority(arguments);
+        case EditCommand.COMMAND_WORD:
+            return prepareEdit(arguments);
 
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
@@ -135,16 +127,16 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
-            
+
         case ListAllCommand.COMMAND_WORD:
             return new ListAllCommand();
-            
+
         case ListDoneCommand.COMMAND_WORD:
             return new ListDoneCommand();
 
         case ListDateCommand.COMMAND_WORD:
             return prepareListDate(arguments);
-            
+
         case ListPriorityCommand.COMMAND_WORD:
             return prepareListPriority(arguments);
 
@@ -159,7 +151,7 @@ public class Parser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-            
+
         case DoneCommand.COMMAND_WORD:
             return prepareDone(arguments);
 
@@ -168,21 +160,19 @@ public class Parser {
             
         case ViewHistoryCommand.COMMAND_WORD_2:
             return new ViewHistoryCommand();
-            
+
         case ViewCalendarCommand.COMMAND_WORD_1:
             return new ViewCalendarCommand();
-            
+
         case ViewCalendarCommand.COMMAND_WORD_2:
             return new ViewCalendarCommand();
-
-
 
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
-    //@@author A0142073R
+    // @@author A0142073R
     private Command prepareListDate(String arguments) {
         if (arguments.isEmpty()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
@@ -196,7 +186,6 @@ public class Parser {
         return new ListDateCommand(date);
     }
 
-    
     private Command prepareListPriority(String args) {
         if (args.isEmpty()) {
             return new IncorrectCommand(
@@ -210,7 +199,7 @@ public class Parser {
         }
         if (!isInt(intValue)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
         if (targetIdx < 0 || targetIdx > 3) {
@@ -221,213 +210,199 @@ public class Parser {
     }
 
     /**
-     * Parses arguments in the context of the edit task startDate command.
+     * Parses arguments in the context of the edit command.
      *
      * @param args
      *            full command args string
      * @return the prepared command
      */
-    private Command prepareEditStartDate(String args) {
-        String arguments = "";
+    private Command prepareEdit(String args) {
+        String description = "default";
+        String startDate = TaskDate.DEFAULT_DATE;
+        String endDate = TaskDate.DEFAULT_DATE;
+        String startTime = TaskTime.DEFAULT_START_TIME;
+        String endTime = TaskTime.DEFAULT_END_TIME;
+        String taskPriority = TaskPriority.DEFAULT_PRIORITY;
+        
+
         if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
+            // UndoCommand.deletePreviousCommand();
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditEndDateCommand.MESSAGE_USAGE));
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
         int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
+        hasChangedDescription = false;
+        hasChangedStartDate = false;
+        hasChangedEndDate = false;
+        hasChangedStartTime = false;
+        hasChangedEndTime = false;
+        hasChangedPriority = false;
+        boolean lastChar = false;
+        if (!st.hasMoreTokens()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
-        if (!TaskDate.isValidDate(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartDateCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditStartDateCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    
-    /**
-     * Parses arguments in the context of the edit task description command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditDescription(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditDescriptionCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditDescriptionCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
         while (st.hasMoreTokens()) {
-            arguments += st.nextToken() + " ";
+            String parts = st.nextToken();
+            // System.out.println("Parts is " + parts);
+            if (parts.equals(DESC)) {
+                if (hasChangedDescription == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("I am inside desc");
+                String desc = " ";
+                while (!(parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
+                        || parts.equals("ed") | parts.equals(P)) && st.hasMoreTokens()) {
+                    desc += (parts + " ");
+                    parts = st.nextToken();
+                    hasChangedDescription = true;
+                }
+                if (!(parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
+                        || parts.equals("ed") | parts.equals(P))) {
+                    // System.out.println("I am here to add the last is
+                    // "+parts);
+                    desc += parts;
+                    lastChar = true;
+                }
+                desc = desc.trim();
+                if (Description.isValidDescription(desc)) {
+                    System.out.println("The new desc is valid");
+                    description = desc.substring(5);
+                    hasChangedDescription = true;
+                }
+                // System.out.println("Description End: " + desc);
+            }
+            if (parts.equals(ST)) {
+                if (hasChangedStartTime == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("I am inside start time");
+                if (st.hasMoreTokens()) {
+                    String startT = st.nextToken();
+                    if (TaskTime.isValidTime(startT)) {
+                        startTime = startT.trim();
+                        hasChangedStartTime = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                    }
+                } else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("Start time is " + startTime);
+            }
+            if (parts.equals(ET)) {
+                if (hasChangedEndTime == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                if (st.hasMoreTokens()) {
+                    String endT = st.nextToken();
+                    if (TaskTime.isValidTime(endT)) {
+                        endTime = endT.trim();
+                        hasChangedEndTime = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
+                    }
+                } else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("End time is " + endTime);
+            }
+            if (parts.equals(SD)) {
+                if (hasChangedStartDate == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                if (st.hasMoreTokens()) {
+                    String startD = st.nextToken();
+                    if (TaskDate.isValidDate(startD)) {
+                        startDate = startD.trim();
+                        hasChangedStartDate = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                    }
+                } else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("Start Date is " + startDate);
+            }
+            if (parts.equals(ED)) {
+                if (hasChangedEndDate == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                if (st.hasMoreTokens()) {
+                    String endD = st.nextToken();
+                    if (TaskDate.isValidDate(endD)) {
+                        endDate = endD.trim();
+                        hasChangedEndDate = true;
+                    } else {
+                        return new IncorrectCommand(
+                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
+                    }
+                } else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("End Date is " + endDate);
+            }
+            if (parts.equals(P)) {
+                if (hasChangedPriority == true) {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                if (st.hasMoreTokens()) {
+                    String p = st.nextToken();
+                    if (TaskPriority.isValidPriority(p)) {
+                        taskPriority = p.trim();
+                        hasChangedPriority = true;
+                    } else {
+                        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                                TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
+                    }
+                } else {
+                    return new IncorrectCommand(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                }
+                // System.out.println("Priority is " + taskPriority);
+            }
+            if (!(parts.equals(DESC) || parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
+                    || parts.equals("ed") || parts.equals(P)) && lastChar == false) {
+                // System.out.println("I am here as incrct because of parts
+                // "+parts);
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            }
         }
-        arguments = arguments.trim();
+        // System.out
+        // .println("Desc: " + hasChangedDescription + " st: " +
+        // hasChangedStartTime + " et: " + hasChangedEndTime
+        // + " sd: " + hasChangedStartDate + " ed: " + hasChangedEndDate + " p:
+        // " + hasChangedPriority);
         try {
-            return new EditDescriptionCommand(targetIdx, arguments);
+            // System.out.println("I am here to exectue edit command");
+            return new EditCommand(targetIdx, new Description(description), hasChangedDescription,
+                    new TaskDate(startDate), hasChangedStartDate, new TaskDate(endDate), hasChangedEndDate,
+                    new TaskTime(startTime), hasChangedStartTime, new TaskTime(endTime), hasChangedEndTime,
+                    new TaskPriority(taskPriority), hasChangedPriority);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
     }
 
-    
-    /**
-     * Parses arguments in the context of the edit start time command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditStartTime(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditStartTimeCommand.MESSAGE_USAGE));
-        }
+    // @@author
 
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-
-        if (!TaskTime.isValidTime(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditStartTimeCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditStartTimeCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    /**
-     * Parses arguments in the context of the edit task endDate command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditEndDate(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens() || !TaskDate.isValidDate(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndDateCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditEndDateCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    
-    /**
-     * Parses arguments in the context of the edit task end time command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditEndTime(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
-        }
-        int targetIdx = Integer.valueOf(intValue);
-        arguments = st.nextToken();
-        if (st.hasMoreTokens() || !TaskTime.isValidTime(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditEndTimeCommand.MESSAGE_USAGE));
-        }
-
-        try {
-            return new EditEndTimeCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    
-    /**
-     * Parses arguments in the context of the edit task priority command.
-     *
-     * @param args
-     *            full command args string
-     * @return the prepared command
-     */
-    private Command prepareEditPriority(String args) {
-        String arguments = "";
-        if (args.isEmpty()) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
-        }
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        int targetIdx = Integer.valueOf(st.nextToken());
-        arguments = st.nextToken();
-        if (st.hasMoreTokens() || !TaskPriority.isValidPriority(arguments)) {
-            return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditPriorityCommand.MESSAGE_USAGE));
-        }
-        try {
-            return new EditPriorityCommand(targetIdx, arguments);
-        } catch (IllegalValueException ive) {
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-
-    //@@author
-
-
-    //@@author A0139257X
+    // @@author A0139257X
 
     /**
      * Parses arguments in the context of the add task command.
@@ -654,8 +629,9 @@ public class Parser {
         if (!hasEndDate) {
             endDate = startDate;
         }
-        
-        if ((TaskDate.isValidToday(startDate) && !hasStartTime) || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
+
+        if ((TaskDate.isValidToday(startDate) && !hasStartTime)
+                || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
             startTime = TaskTime.getTimeNow().toString();
         }
 
@@ -716,7 +692,7 @@ public class Parser {
         }
         return argsList;
     }
-  //@@author
+    // @@author
 
     /**
      * Extracts the new task's tags from the add command's tag arguments string.
@@ -857,8 +833,8 @@ public class Parser {
         return new SaveStorageLocationCommand(args);
     }
     /** @@author **/
-    
-    //@@author A0148004R
+
+    // @@author A0148004R
     /**
      * Parses arguments in the context of the done task command.
      *
@@ -874,9 +850,9 @@ public class Parser {
 
         return new DoneCommand(index.get());
     }
-    //@@author
-    
-    //@@author A0142073R
+    // @@author
+
+    // @@author A0142073R
     private static boolean isInt(String s) {
         try {
             int i = Integer.parseInt(s);
@@ -887,5 +863,5 @@ public class Parser {
             return false;
         }
     }
-    //@@author
+    // @@author
 }
