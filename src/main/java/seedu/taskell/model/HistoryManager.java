@@ -73,19 +73,23 @@ public class HistoryManager implements History {
             return;
         }
         
+        ArrayList<CommandHistory> toRemove = new ArrayList<>();
+        
         try {
             for (CommandHistory commandHistory: historyList) {
                 if (isUndoCommandTypeAndNeedPresentTask(commandHistory) 
                         && !isTaskPresent(commandHistory.getTask())) {
-                    historyList.remove(commandHistory);
+                    toRemove.add(commandHistory);
                 } else if (isRedoCommandTypeAndNeedPresentTask(commandHistory) 
                         && !isTaskPresent(commandHistory.getTask())) {
-                    historyList.remove(commandHistory);
+                    toRemove.add(commandHistory);
                 }
             }
         } catch (ConcurrentModificationException e) {
             throw e;
         }
+        
+        historyList.removeAll(toRemove);
     }
     
     /** checks if type is Add/Edit/Done/Undone that requires a task present in system to work
@@ -118,9 +122,6 @@ public class HistoryManager implements History {
         assert historyList != null;
         historyList.add(new CommandHistory(commandText, commandType));
         
-        if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
-            updateList();
-        }
     }
 
     @Override
