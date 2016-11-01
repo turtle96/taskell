@@ -185,6 +185,7 @@ public class Parser {
         return commandWord.equals(AddCommand.COMMAND_WORD) 
                 || commandWord.equals(DeleteCommand.COMMAND_WORD)
                 || commandWord.equals(EditCommand.COMMAND_WORD)
+                || commandWord.equals(DoneCommand.COMMAND_WORD)
                 || commandWord.equals(UndoneCommand.COMMAND_WORD);
     }
     
