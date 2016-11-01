@@ -12,6 +12,10 @@ public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
     public static final String MESSAGE_SUCCESS = "Clear command executed.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Clears all tasks.\n"
+            + "Example: " + COMMAND_WORD;
+    
     private static ClearCommand self;
     private static boolean isUnderTesting;  //for testing ONLY
 
