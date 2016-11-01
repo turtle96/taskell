@@ -173,6 +173,7 @@ public class Parser {
     /** if type of command is undoable, saves to history for undoing
      * */
     private void saveToHistory(String userInput, final String commandWord) {
+        
         if (isUndoableCommandType(commandWord)) {
             IncorrectCommand.setIsUndoableCommand(true);
             history.addCommand(userInput, commandWord);

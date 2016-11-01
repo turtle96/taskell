@@ -10,7 +10,10 @@ import com.google.common.eventbus.Subscribe;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.undo.ExecutedIncorrectCommandEvent;
 import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.logic.commands.DeleteCommand;
+import seedu.taskell.logic.commands.DoneCommand;
 import seedu.taskell.logic.commands.EditCommand;
+import seedu.taskell.logic.commands.UndoneCommand;
 import seedu.taskell.model.task.Task;
 
 /** Implementation of History API, manages command history available for undo
@@ -49,6 +52,8 @@ public class HistoryManager implements History {
     public ArrayList<String> getListCommandText() {
         assert historyList != null;
         
+        //updateList();
+        
         ArrayList<String> list = new ArrayList<>();
         for (CommandHistory history: historyList) {
             list.add(history.getCommandText());
@@ -62,6 +67,7 @@ public class HistoryManager implements History {
      *  deletes history of the task deleted
      * */
     public synchronized void updateList() throws ConcurrentModificationException {
+
         if (model == null) {
             logger.severe("Model is null");
             return;
@@ -69,10 +75,10 @@ public class HistoryManager implements History {
         
         try {
             for (CommandHistory commandHistory: historyList) {
-                if (isCommandTypeAddOrEdit(commandHistory) 
+                if (isUndoCommandTypeAndNeedPresentTask(commandHistory) 
                         && !isTaskPresent(commandHistory.getTask())) {
                     historyList.remove(commandHistory);
-                } else if (isUndoEditCommand(commandHistory) 
+                } else if (isRedoCommandTypeAndNeedPresentTask(commandHistory) 
                         && !isTaskPresent(commandHistory.getTask())) {
                     historyList.remove(commandHistory);
                 }
@@ -82,31 +88,43 @@ public class HistoryManager implements History {
         }
     }
     
-    private boolean isCommandTypeAddOrEdit(CommandHistory commandHistory) {
+    /** checks if type is Add/Edit/Done/Undone that requires a task present in system to work
+     * */
+    private boolean isUndoCommandTypeAndNeedPresentTask(CommandHistory commandHistory) {
         return (commandHistory.getCommandType().equals(AddCommand.COMMAND_WORD) 
-                || commandHistory.getCommandType().contains(EditCommand.COMMAND_WORD)) 
+                || commandHistory.getCommandType().equals(EditCommand.COMMAND_WORD)
+                || commandHistory.getCommandType().equals(DoneCommand.COMMAND_WORD)
+                || commandHistory.getCommandType().equals(UndoneCommand.COMMAND_WORD)) 
                 && !commandHistory.isRedoTrue();
     }
     
-    private boolean isUndoEditCommand(CommandHistory commandHistory) {
-        return commandHistory.isRedoTrue() 
-                && commandHistory.getCommandType().contains(EditCommand.COMMAND_WORD);
+    /** checks if type is Edit with isRedo set to true
+     * */
+    private boolean isRedoCommandTypeAndNeedPresentTask(CommandHistory commandHistory) {
+        return (commandHistory.getCommandType().equals(EditCommand.COMMAND_WORD)
+                || commandHistory.getCommandType().equals(DoneCommand.COMMAND_WORD)
+                || commandHistory.getCommandType().equals(UndoneCommand.COMMAND_WORD))
+                && commandHistory.isRedoTrue();
     }
 
     @Override
-    public synchronized void clear() {
+    public void clear() {
         logger.info("Clearing history...");
         historyList.clear();        
     }
 
     @Override
-    public synchronized void addCommand(String commandText, String commandType) {
+    public void addCommand(String commandText, String commandType) {
         assert historyList != null;
         historyList.add(new CommandHistory(commandText, commandType));
+        
+        if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
+            updateList();
+        }
     }
 
     @Override
-    public synchronized void addTask(Task task) {
+    public void addTask(Task task) {
         logger.info("Adding task to history");
         if (historyList.isEmpty()) {
             logger.warning("No command history to add task to");
@@ -117,7 +135,7 @@ public class HistoryManager implements History {
     }
 
     @Override
-    public synchronized void addOldTask(Task task) {
+    public void addOldTask(Task task) {
         logger.info("Adding old task to history");
         if (historyList.isEmpty()) {
             logger.warning("No command history to add task to");
@@ -133,7 +151,7 @@ public class HistoryManager implements History {
     }
     
     @Override
-    public synchronized void deleteLatestCommand() {
+    public void deleteLatestCommand() {
         logger.info("Command unsuccessfully executed. Deleting command history.");
         if (historyList.isEmpty()) {
             logger.warning("No command history to delete");
@@ -143,7 +161,7 @@ public class HistoryManager implements History {
     }
 
     @Override
-    public synchronized void deleteCommandHistory(CommandHistory commandHistory) {
+    public void deleteCommandHistory(CommandHistory commandHistory) {
         historyList.remove(commandHistory);
     }
     
