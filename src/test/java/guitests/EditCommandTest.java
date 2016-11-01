@@ -3,6 +3,7 @@ package guitests;
 
 import org.junit.Test;
 
+import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.TaskDate;
@@ -29,7 +30,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getStartDate(), oldTask.getEndDate(),
                 oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " desc: " + " make tea");
+        commandBox.runCommand("edit " + targetIndex + " desc: make tea");
         currentList[0] = newTask;
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
@@ -40,17 +41,20 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 oldTask.getTaskPriority(), oldTask.getStartTime(), oldTask.getEndTime(), oldTask.getStartDate(),
                 oldTask.getEndDate(), oldTask.getRecurringType(),oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " desc: " + " finish software demo");
+        commandBox.runCommand(COMMAND_WORD + " "+ targetIndex + " desc: finish software demo");
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
         // invalid index
         commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " desc: go shopping");
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // invalid command
         commandBox.runCommand(COMMAND_WORD);
         assertResultMessage("Invalid command format! \n" + MESSAGE_USAGE);
-
+        
+        commandBox.runCommand(COMMAND_WORD +" "+ targetIndex + " desc: finish homework " +" st: 8am "+ " desc: submit homework");
+        assertResultMessage("Invalid command format! \n" + MESSAGE_USAGE);
+        
         // edit the priority of first task in the list
         targetIndex = 1;
         oldTask = currentList[targetIndex - 1];
@@ -58,7 +62,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 new TaskPriority(TaskPriority.DEFAULT_PRIORITY), oldTask.getStartTime(), oldTask.getEndTime(),
                 oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " p: " + "0");
+        commandBox.runCommand("edit " + targetIndex + " p: " + TaskPriority.DEFAULT_PRIORITY);
         currentList[0] = newTask;
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
@@ -69,12 +73,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 new TaskPriority(TaskPriority.HIGH_PRIORITY), oldTask.getStartTime(), oldTask.getEndTime(),
                 oldTask.getStartDate(), oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " p: " + "3");
+        commandBox.runCommand("edit " + targetIndex + " p: " + TaskPriority.HIGH_PRIORITY);
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
         // invalid index
-        commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " p: 0");
-        assertResultMessage("The task index provided is invalid");
+        commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " p: " + TaskPriority.DEFAULT_PRIORITY);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // edit the start time of first task in the list
         targetIndex = 1;
@@ -83,7 +87,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 new TaskTime(TaskTime.MIDNIGHT), oldTask.getEndTime(), oldTask.getStartDate(), oldTask.getEndDate(),
                 oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " st: " + "12:00AM");
+        commandBox.runCommand("edit " + targetIndex + " st: " + TaskTime.MIDNIGHT);
         currentList[0] = newTask;
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
@@ -94,12 +98,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 new TaskTime(TaskTime.DEFAULT_START_TIME), oldTask.getEndTime(), oldTask.getStartDate(),
                 oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " st: " + "12:00AM");
+        commandBox.runCommand("edit " + targetIndex + " st: " + TaskTime.DEFAULT_START_TIME);
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
         // invalid index
-        commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " st: 3pm");
-        assertResultMessage("The task index provided is invalid");
+        commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " st: "+TaskTime.DEFAULT_START_TIME);
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
         // edit the end time of first task in the list
         targetIndex = 1;
@@ -108,7 +112,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 oldTask.getStartTime(), new TaskTime(TaskTime.DEFAULT_END_TIME), oldTask.getStartDate(),
                 oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " et: " + "11:59PM");
+        commandBox.runCommand("edit " + targetIndex + " et: " + TaskTime.DEFAULT_END_TIME);
         currentList[0] = newTask;
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
@@ -119,12 +123,12 @@ public class EditCommandTest extends TaskManagerGuiTest {
                 oldTask.getStartTime(), new TaskTime(TaskTime.DEFAULT_END_TIME), oldTask.getStartDate(),
                 oldTask.getEndDate(), oldTask.getRecurringType(), oldTask.getTaskStatus(), oldTask.getTags());
 
-        commandBox.runCommand("edit " + targetIndex + " et: " + "11:59PM");
+        commandBox.runCommand("edit " + targetIndex + " et: " + TaskTime.DEFAULT_END_TIME);
         asserteditSuccess(targetIndex, currentList, oldTask, newTask);
 
         // invalid index
         commandBox.runCommand(COMMAND_WORD + " " + currentList.length + 1 + " et: 3pm");
-        assertResultMessage("The task index provided is invalid");
+        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 
     }
 
