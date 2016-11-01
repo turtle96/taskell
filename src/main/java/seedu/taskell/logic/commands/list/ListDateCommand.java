@@ -17,7 +17,7 @@ public class ListDateCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all tasks on a given date";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists tasks on 1 specific date ony.\n"
+            + ": Lists tasks on 1 specific date only.\n"
             + "Parameters: DATE (must be a positive integer)\n" + "Example: " + COMMAND_WORD + " 8-8-2016 ";
 
     private Set<String> keywordSet;
