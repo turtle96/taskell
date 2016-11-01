@@ -195,8 +195,8 @@ public class Parser {
 
         StringTokenizer st = new StringTokenizer(arguments.trim(), " ");
         String date = st.nextToken();
-        
-        if(st.hasMoreTokens()) {
+
+        if (st.hasMoreTokens()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
         }
         if (!TaskDate.isValidDate(date)) {
@@ -206,12 +206,15 @@ public class Parser {
     }
 
     private Command prepareListPriority(String args) {
+
         if (args.isEmpty()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
         }
+
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
+        
         if (st.hasMoreTokens()) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
@@ -220,12 +223,14 @@ public class Parser {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
         }
+        
         int targetIdx = Integer.valueOf(intValue);
-        if (targetIdx < 0 || targetIdx > 3) {
+        if (targetIdx < Integer.valueOf(TaskPriority.DEFAULT_PRIORITY) || targetIdx > Integer.valueOf(TaskPriority.HIGH_PRIORITY)) {
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, ListPriorityCommand.MESSAGE_USAGE));
+                    String.format(TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS, ListPriorityCommand.MESSAGE_USAGE));
         } else
             return new ListPriorityCommand(intValue);
+        
     }
 
     /**
@@ -247,11 +252,13 @@ public class Parser {
             // UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+        
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
         String intValue = st.nextToken();
         if (!isInt(intValue)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
+        
         int targetIdx = Integer.valueOf(intValue);
         hasChangedDescription = false;
         hasChangedStartDate = false;
@@ -260,6 +267,7 @@ public class Parser {
         hasChangedEndTime = false;
         hasChangedPriority = false;
         boolean lastChar = false;
+        
         if (!st.hasMoreTokens()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
@@ -401,6 +409,7 @@ public class Parser {
                 // "+parts);
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
+            
         }
         // System.out
         // .println("Desc: " + hasChangedDescription + " st: " +
@@ -416,6 +425,7 @@ public class Parser {
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+        
     }
 
     // @@author
