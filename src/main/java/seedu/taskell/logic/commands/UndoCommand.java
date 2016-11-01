@@ -16,7 +16,7 @@ import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Undo previously executed commands (add, delete, edit)
+ * Undo previously executed commands (add, delete, edit, done, undone)
  * Note: only for current session only (meaning after app is closed, history will be cleared)
  */
 public class UndoCommand extends Command {
@@ -35,6 +35,8 @@ public class UndoCommand extends Command {
     private static final String MESSAGE_NO_TASK_TO_UNDO = "No add or delete commands available to undo.";
     private static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
+
+    private static final String MESSAGE_TASK_NOT_FOUND = "Task is not present in Taskell.";
     
     private ArrayList<CommandHistory> commandHistoryList;
     private History history;
@@ -75,11 +77,15 @@ public class UndoCommand extends Command {
         
         String commandType = commandHistory.getCommandType();
         if (commandType.equals(AddCommand.COMMAND_WORD)) {
-            return undoAdd();
+            return executeDelete();
         } else if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
-            return undoDelete();
+            return executeAdd();
         } else if (commandType.equals(EditCommand.COMMAND_WORD)) {
             return undoEdit();
+        } else if (commandType.equals(DoneCommand.COMMAND_WORD)) {
+            return executeUndone();
+        } else if (commandType.equals(UndoneCommand.COMMAND_WORD)) {
+            return executeDone();
         } else {
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
@@ -91,16 +97,53 @@ public class UndoCommand extends Command {
         
         String commandType = commandHistory.getCommandType();
         if (commandType.equals(AddCommand.COMMAND_WORD)) {
-            return undoDelete();
+            return executeAdd();
         } else if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
-            return undoAdd();
+            return executeDelete();
         } else if (commandType.equals(EditCommand.COMMAND_WORD)) {
             return redoEdit();
+        } else if (commandType.equals(DoneCommand.COMMAND_WORD)) {
+            return executeDone();
+        } else if (commandType.equals(UndoneCommand.COMMAND_WORD)) {
+            return executeUndone();
         } else {
             logger.severe("CommandHistory is invalid");
             return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
         }
         
+    }
+    
+    private CommandResult executeUndone() {
+        try {
+            model.editTask(commandHistory.getTask(), commandHistory.getOldTask());
+            history.deleteCommandHistory(commandHistory);
+            addUndoCommand(commandHistory);
+            indicateDisplayListChanged();
+            return new CommandResult(String.format(UndoneCommand.MESSAGE_UNDONE_TASK_SUCCESS, 
+                    commandHistory.getOldTask()));
+        } catch (DuplicateTaskException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException e) {
+            assert false : "The target task cannot be missing";
+            return new CommandResult(UndoneCommand.MESSAGE_UNDONE_UNSUCCESSFUL);
+        }
+        
+    }
+    
+    private CommandResult executeDone() {
+        try {
+            model.editTask(commandHistory.getOldTask(), commandHistory.getTask());
+            history.deleteCommandHistory(commandHistory);
+            addUndoCommand(commandHistory);
+            indicateDisplayListChanged();
+            return new CommandResult(String.format(DoneCommand.MESSAGE_DONE_TASK_SUCCESS, 
+                    commandHistory.getTask()));
+        } catch (DuplicateTaskException e) {
+            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+        } catch (TaskNotFoundException e) {
+            assert false : "The target task cannot be missing";
+            return new CommandResult(MESSAGE_TASK_NOT_FOUND);
+        }
     }
 
     private CommandResult undoEdit() {
@@ -136,7 +179,7 @@ public class UndoCommand extends Command {
         return null;
     }
 
-    private CommandResult undoDelete() {
+    private CommandResult executeAdd() {
         try {
             model.addTask(commandHistory.getTask());
             history.deleteCommandHistory(commandHistory);
@@ -148,7 +191,7 @@ public class UndoCommand extends Command {
         }
     }
 
-    private CommandResult undoAdd() {
+    private CommandResult executeDelete() {
         try {
             model.deleteTask(commandHistory.getTask());
             history.deleteCommandHistory(commandHistory);
