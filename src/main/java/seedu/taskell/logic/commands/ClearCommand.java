@@ -3,6 +3,7 @@ package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.events.ui.ClearCommandInputEvent;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.TaskManager;
 
 /**
@@ -50,6 +51,7 @@ public class ClearCommand extends Command {
      * */
     public void executeClear() {
         model.resetData(TaskManager.getEmptyTaskManager());
+        HistoryManager.getInstance().updateList();
     }
 
     private void raiseClearCommandInputEvent() {
