@@ -90,7 +90,7 @@ Example: `add ` netball training <i>endat</i> 7pm<br>
 
 <!--- @@author -->
 
-<!--- @@author A0148004Rz --->
+<!--- @@author A0148004R --->
 
 #### Listing tasks : `list`
 Formats: 
@@ -178,7 +178,7 @@ Format: `delete` INDEX<br>
  <br><img src="images/delete1.png" width="800"></br>
 Diagram 6: Deletes the first task in the list.<br>
 
-<!--- @@author A0148004Rz --->
+<!--- @@author A0148004R --->
 
 #### Marking a task as completed: `done`
 Format: `done` INDEX<br>
