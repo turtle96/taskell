@@ -74,7 +74,7 @@ public class TaskTime {
     
     private static boolean isValidNow(String time) {
         time = time.toLowerCase();
-        return time.equals("now");
+        return "now".equals(time);
     }
     
     private static boolean isValidNoon(String time) {
