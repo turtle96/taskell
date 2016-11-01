@@ -16,7 +16,9 @@ public class FloatingTask extends Task {
     
     public static final String RECURRING_TYPE_NOT_ALLOWED = "Floating task cannot be recurring";
     
-    public FloatingTask(String description, String taskPriority, String recurringType, String taskStatus, UniqueTagList tags) throws IllegalValueException {
+    public FloatingTask(String description, String taskPriority, String recurringType, 
+            String taskStatus, UniqueTagList tags) throws IllegalValueException {
+        
         this(new Description(description),
                 FLOATING_TASK,
                 new TaskDate(TaskDate.DEFAULT_DATE),
@@ -29,8 +31,12 @@ public class FloatingTask extends Task {
                 tags);
     }
     
-    public FloatingTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) {
-        super(description, taskType, startDate, endDate, startTime, endTime, taskPriority, recurringType, taskStatus, tags);
+    public FloatingTask(Description description, String taskType, TaskDate startDate, 
+            TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, 
+            RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) {
+        
+        super(description, taskType, startDate, endDate, startTime, endTime, 
+                taskPriority, recurringType, taskStatus, tags);
     }
 
     @Override
