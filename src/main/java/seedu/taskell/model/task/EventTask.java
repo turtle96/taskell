@@ -37,9 +37,11 @@ public class EventTask extends Task {
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         }
+        
         if(!isValidRecurringEvent(startDate, endDate, recurringType)){
             throw new IllegalValueException(RecurringType.MESSAGE_INVALID_RECURRING_DURATION);
         }
+        
         this.description = description;
         this.taskType = EVENT_TASK;
         this.startDate = startDate;
@@ -90,8 +92,8 @@ public class EventTask extends Task {
         TaskDate today = TaskDate.getTodayDate();
         if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
             endDate = endDate.getNextDay();
-        } else if (startDate.getDayNameInWeek().equals(today.getDayNameInWeek())
-                && !endDate.getDayNameInWeek().equals(today.getDayNameInWeek())) {
+        } else if((TaskDate.between(startDate, endDate) > -TaskDate.NUM_DAYS_IN_A_WEEK)&& (TaskDate.between(startDate, endDate) < 0)) {
+            System.out.println(TaskDate.between(startDate, endDate));
             endDate = endDate.getNextWeek();
         }
         return endDate;
