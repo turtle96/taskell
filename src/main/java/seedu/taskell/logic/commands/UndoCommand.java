@@ -31,12 +31,10 @@ public class UndoCommand extends Command {
     private static final String MESSAGE_ADD_TASK_SUCCESS = "Task added back: %1$s";
     private static final String MESSAGE_EDIT_TASK_SUCCESS = "Task edited back to old version: %1$s";
     
-    private static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task manager";
-    private static final String MESSAGE_NO_TASK_TO_UNDO = "No add or delete commands available to undo.";
-    private static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
+    private static final String MESSAGE_NO_COMMAND_TO_UNDO = "No commands available to undo.";
+    public static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
     private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
 
-    private static final String MESSAGE_TASK_NOT_FOUND = "Task is not present in Taskell.";
     public static final String MESSAGE_DONE_TASK_UNSUCCESSFUL = "The task status is already completed.";
     
     private ArrayList<CommandHistory> commandHistoryList;
@@ -96,7 +94,7 @@ public class UndoCommand extends Command {
             return executeDone();
         } else {
             logger.severe("CommandHistory is invalid");
-            return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
+            return new CommandResult(String.format(MESSAGE_NO_COMMAND_TO_UNDO));
         }
     }
 
@@ -120,7 +118,7 @@ public class UndoCommand extends Command {
             return executeUndone();
         } else {
             logger.severe("CommandHistory is invalid");
-            return new CommandResult(String.format(MESSAGE_NO_TASK_TO_UNDO));
+            return new CommandResult(String.format(MESSAGE_NO_COMMAND_TO_UNDO));
         }
         
     }
@@ -137,7 +135,7 @@ public class UndoCommand extends Command {
                     commandHistory.getOldTask()));
         } catch (DuplicateTaskException e) {
             history.deleteCommandHistory(commandHistory);
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+            return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
             history.deleteCommandHistory(commandHistory);
@@ -158,7 +156,7 @@ public class UndoCommand extends Command {
                     commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
             history.deleteCommandHistory(commandHistory);
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+            return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
             history.deleteCommandHistory(commandHistory);
@@ -175,7 +173,7 @@ public class UndoCommand extends Command {
             addUndoCommand(commandHistory);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getOldTask()));
         } catch (DuplicateTaskException e) {
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+            return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         }
@@ -193,7 +191,7 @@ public class UndoCommand extends Command {
             history.deleteCommandHistory(commandHistory);
             return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+            return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException e) {
             assert false : "The target task cannot be missing";
         }
@@ -211,7 +209,7 @@ public class UndoCommand extends Command {
             addUndoCommand(commandHistory);
             return new CommandResult(String.format(MESSAGE_ADD_TASK_SUCCESS, commandHistory.getTask()));
         } catch (DuplicateTaskException e) {
-            return new CommandResult(MESSAGE_DUPLICATE_TASK);
+            return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         }
     }
 
