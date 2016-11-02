@@ -4,6 +4,7 @@ package seedu.taskell.logic.commands;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
@@ -69,9 +70,13 @@ public class DoneCommand extends Command {
         
         try {
             model.editTask(taskToBeDone, newTask);
+            HistoryManager.getInstance().addTask(newTask);
+            HistoryManager.getInstance().addOldTask((Task) taskToBeDone);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
+            HistoryManager.getInstance().deleteLatestCommand();
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } 
 

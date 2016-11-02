@@ -8,6 +8,7 @@ import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.ReadOnlyTask;
@@ -80,7 +81,7 @@ public class EditCommand extends Command {
     }
 
     public void getEditInformation(ReadOnlyTask taskToEdit) {
-        
+
         if (hasChangedDescription == false) {
             description = taskToEdit.getDescription();
         }
@@ -108,6 +109,7 @@ public class EditCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -138,9 +140,13 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
+            HistoryManager.getInstance().addTask(newTask);
+            HistoryManager.getInstance().addOldTask((Task) taskToEdit);
         } catch (DuplicateTaskException pnfe) {
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException pnfe) {
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(TASK_NOT_FOUND);
         }
 
