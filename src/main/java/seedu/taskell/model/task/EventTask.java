@@ -15,7 +15,10 @@ public class EventTask extends Task {
     public static final String MESSAGE_EVENT_CONSTRAINTS = "Start date and time must be before end date and time"
             + "\nAll date and time should not before current time";
 
-    public EventTask(String description, String startDate, String endDate, String startTime, String endTime, String taskPriority, String recurringType, String taskStatus, UniqueTagList tags) throws IllegalValueException {
+    public EventTask(String description, String startDate, String endDate, String startTime, 
+            String endTime, String taskPriority, String recurringType, String taskStatus, 
+            UniqueTagList tags) throws IllegalValueException {
+        
         this(new Description(description),
                 EVENT_TASK,
                 new TaskDate(startDate),
@@ -27,11 +30,15 @@ public class EventTask extends Task {
                 new TaskStatus(taskStatus),              
                 tags);
     }
+    
     /**
      * Every field must be present and not null.
      * @throws IllegalValueException 
      */
-    public EventTask(Description description, String taskType, TaskDate startDate, TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) throws IllegalValueException {
+    public EventTask(Description description, String taskType, TaskDate startDate, 
+            TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, 
+            RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) throws IllegalValueException {
+        
         endDate = autoAdjustEndDate(startDate, endDate, startTime, endTime);
         
         if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
