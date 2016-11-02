@@ -4,6 +4,8 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
+import seedu.taskell.model.History;
+import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.Model;
 
 /**
@@ -11,6 +13,7 @@ import seedu.taskell.model.Model;
  */
 public abstract class Command {
     protected Model model;
+    protected static History history;
 
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
@@ -36,6 +39,13 @@ public abstract class Command {
      */
     public void setData(Model model) {
         this.model = model;
+    }
+    
+    /**
+     * initialize History
+     */
+    public static void initHistory() {
+        history = HistoryManager.getInstance();
     }
 
     /**
