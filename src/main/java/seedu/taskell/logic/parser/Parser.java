@@ -70,7 +70,7 @@ public class Parser {
     private boolean hasChangedEndTime = false;
     private boolean hasChangedPriority = false;
 
-    private static History history;
+    private History history;
 
     public Parser() {
         history = HistoryManager.getInstance();
