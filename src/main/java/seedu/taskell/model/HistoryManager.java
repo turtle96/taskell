@@ -17,6 +17,7 @@ import seedu.taskell.logic.commands.UndoneCommand;
 import seedu.taskell.model.task.Task;
 
 /** Implementation of History API, manages command history available for undo
+ *  uses singleton pattern to prevent multiple instantiation
  */
 public class HistoryManager extends ComponentManager implements History {
 
@@ -63,8 +64,17 @@ public class HistoryManager extends ComponentManager implements History {
     }
     
     @Override
-    /** should be called whenever DeleteCommand is executed
-     *  deletes history of the task deleted
+    public void updateHistory() {
+        try {
+            updateList();
+        } catch (ConcurrentModificationException e) {
+            logger.severe("Concurrent modification exception while updating history");
+            updateList();
+        }
+    }
+    
+    /** should be called whenever Delete or Edit or Clear is executed
+     *  deletes history of the task deleted/edited
      * */
     public synchronized void updateList() throws ConcurrentModificationException {
 
@@ -146,8 +156,7 @@ public class HistoryManager extends ComponentManager implements History {
         historyList.get(getOffset(historyList.size())).setOldTask(task);
     }
 
-    @Override
-    public boolean isTaskPresent(Task task) {
+    private boolean isTaskPresent(Task task) {
         return model.isTaskPresent(task);
     }
     
