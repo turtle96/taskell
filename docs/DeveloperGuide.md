@@ -228,6 +228,8 @@ The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Task Manager data in xml format and read it back.
 
+<!--- @@author A0142130A --->
+
 ### History Component
 
 <p align="center">
@@ -242,6 +244,8 @@ The diagram above gives an overview of how the `History` component is implemente
 The `History` component,
 * stores the commands that UndoCommand can execute (add/delete/done/undone/edit)
 * exposes list of command input strings for UI display
+
+<!--- @@author --->
 
 ### Common Classes
 
