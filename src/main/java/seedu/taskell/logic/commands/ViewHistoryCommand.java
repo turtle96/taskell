@@ -14,7 +14,7 @@ public class ViewHistoryCommand extends Command {
     public static final String COMMAND_WORD_2 = "hist";
 
     public static final String MESSAGE_SUCCESS = "Listed all commands available for undo.";
-    public static final String MESSAGE_UNSUCCESSFUL = "Error displaying history";
+    public static final String MESSAGE_UNSUCCESSFUL = "Error displaying history.";
     
     private static ViewHistoryCommand self;
     
