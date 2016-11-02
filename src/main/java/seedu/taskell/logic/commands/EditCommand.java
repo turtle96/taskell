@@ -2,6 +2,10 @@
 
 package seedu.taskell.logic.commands;
 
+import java.util.ConcurrentModificationException;
+import java.util.logging.Logger;
+
+import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
@@ -25,6 +29,8 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * time, date and priority of a task.
  */
 public class EditCommand extends Command {
+	private static final Logger logger = LogsCenter.getLogger(EditCommand.class.getName());
+	
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -151,6 +157,13 @@ public class EditCommand extends Command {
         } catch (TaskNotFoundException pnfe) {
             HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(TASK_NOT_FOUND);
+        }
+        
+        try {
+            HistoryManager.getInstance().updateList();
+        } catch (ConcurrentModificationException e) {
+            logger.severe("Concurrent modification exception while updating history");
+            HistoryManager.getInstance().updateList();
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
