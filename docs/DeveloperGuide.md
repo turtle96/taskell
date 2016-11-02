@@ -91,6 +91,7 @@ The rest of the Application consists four components.
 * [**`Logic`**](#logic-component) : Command executor.
 * [**`Model`**](#model-component) : Data Holder of the Application in-memory.
 * [**`Storage`**](#storage-component) : Data read from, and written to the hard disk.
+* [**`History`**](#history-component) : Data holder of Application's command history (for undo only).
 
 Each of the four components
 * Defines its _API_ in an `interface` with the same name as the Component.
@@ -226,6 +227,21 @@ The diagram above gives an overview of how the `Storage` component is implemente
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the Task Manager data in xml format and read it back.
+
+### History Component
+
+<p align="center">
+<img src="images/HistoryClassDiagram.png" width="500"><br>
+
+<em>Diagram 11: History Class Diagram </em>
+</p>
+
+The diagram above gives an overview of how the `History` component is implemented.<br>
+<br>**API** : [`History.java`](../src/main/java/seedu/taskell/model/History.java)
+
+The `History` component,
+* stores the commands that UndoCommand can execute (add/delete/done/undone/edit)
+* exposes list of command input strings for UI display
 
 ### Common Classes
 
