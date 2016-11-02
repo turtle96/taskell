@@ -30,6 +30,30 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     }
     
     @Test
+    public void undoAtSpecificIndex_success() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.holdMeeting;
+        
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        int index = currentList.length;
+        commandBox.runCommand("edit " + index + " desc: hello");
+        
+        commandBox.runCommand("delete 2");
+        commandBox.runCommand("hist");
+        commandBox.runCommand("undo 1");    //referring to edit
+        
+        //confirm the edited card contains the old data
+        TaskCardHandle editedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
+        assertMatching(taskToAdd, editedCard);
+        
+        history.clear();
+    }
+    
+    @Test
     public void undoAdd_success() {
         history.clear();
         
