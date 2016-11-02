@@ -69,7 +69,7 @@ public class AddCommand extends Command {
         }
     }
     
-    public void jumpToNewTaskIndex() {
+    private void jumpToNewTaskIndex() {
         int indexOfNewTask = model.getFilteredTaskList().size()-1;
         jumpToIndex(indexOfNewTask);
     }
