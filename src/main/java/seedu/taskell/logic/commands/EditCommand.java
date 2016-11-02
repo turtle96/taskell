@@ -140,8 +140,11 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
+            jumpToUpdatedTaskIndex();
+            
             HistoryManager.getInstance().addTask(newTask);
             HistoryManager.getInstance().addOldTask((Task) taskToEdit);
+            
         } catch (DuplicateTaskException pnfe) {
             HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
@@ -151,6 +154,10 @@ public class EditCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
+    }
+    
+    private void jumpToUpdatedTaskIndex() {
+        jumpToIndex(targetIndex-1); //index start from 0
     }
 }
 

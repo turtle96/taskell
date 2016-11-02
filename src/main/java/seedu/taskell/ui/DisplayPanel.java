@@ -104,7 +104,7 @@ public class DisplayPanel extends UiPart {
      *  fills panel with Agenda for events for the week
      * */
     public void loadCalendar(AnchorPane placeholder) {
-               
+
         placeholder.getChildren().clear();
         
         agenda = calendarView.getAgenda();

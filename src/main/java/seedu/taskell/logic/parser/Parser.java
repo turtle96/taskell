@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.commands.*;
-import seedu.taskell.logic.commands.EditCommand;
 import seedu.taskell.logic.commands.list.ListAllCommand;
 import seedu.taskell.logic.commands.list.ListCommand;
 import seedu.taskell.logic.commands.list.ListDateCommand;
@@ -110,7 +109,7 @@ public class Parser {
             return prepareEdit(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            return prepareClear(arguments);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
@@ -167,6 +166,20 @@ public class Parser {
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
     }
+
+
+    /** @@author A0142130A **/
+    
+    private Command prepareClear(String arguments) {
+        if (arguments.isEmpty()) {
+            return new ClearCommand();
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        }
+        
+    }
+    
+    /** @@author **/
 
     /** @@author A0142130A **/
 
