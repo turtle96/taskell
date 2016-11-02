@@ -138,6 +138,7 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
+            jumpToUpdatedTaskIndex();
         } catch (DuplicateTaskException pnfe) {
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException pnfe) {
@@ -145,6 +146,10 @@ public class EditCommand extends Command {
         }
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
+    }
+    
+    private void jumpToUpdatedTaskIndex() {
+        jumpToIndex(targetIndex-1); //index start from 0
     }
 }
 
