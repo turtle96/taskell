@@ -16,6 +16,7 @@ import seedu.taskell.commons.util.StringUtil;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.ClearCommand;
+import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.SaveStorageLocationCommand;
 import seedu.taskell.logic.commands.ViewHistoryCommand;
 import seedu.taskell.model.*;
@@ -71,6 +72,7 @@ public class MainApp extends Application {
         
         initSaveStorageLocationCommand();
         
+        Command.initHistory();
     }
 
     private void initSaveStorageLocationCommand() {
