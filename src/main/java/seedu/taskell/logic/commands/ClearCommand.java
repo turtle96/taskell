@@ -55,7 +55,7 @@ public class ClearCommand extends Command {
      * */
     public void executeClear() {
         model.resetData(TaskManager.getEmptyTaskManager());
-        HistoryManager.getInstance().updateList();
+        history.updateHistory();
     }
 
     private void raiseClearCommandInputEvent() {

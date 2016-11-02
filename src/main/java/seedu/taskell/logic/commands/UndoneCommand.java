@@ -38,7 +38,7 @@ public class UndoneCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         
@@ -47,7 +47,7 @@ public class UndoneCommand extends Command {
         ReadOnlyTask taskToBeUndone = lastShownList.get(targetIndex - 1);
         Task newTask = null;
         if(taskToBeUndone.getTaskStatus().taskStatus().equals(TaskStatus.INCOMPLETE)){
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_UNDONE_UNSUCCESSFUL);
         } else {
             newTask = new Task(taskToBeUndone.getDescription(), taskToBeUndone.getTaskType(), taskToBeUndone.getStartDate(), taskToBeUndone.getEndDate(),                
@@ -56,13 +56,13 @@ public class UndoneCommand extends Command {
         
         try {
             model.editTask(taskToBeUndone, newTask);
-            HistoryManager.getInstance().addTask((Task) taskToBeUndone);
-            HistoryManager.getInstance().addOldTask(newTask);
+            history.addTask((Task) taskToBeUndone);
+            history.addOldTask(newTask);
         } catch (TaskNotFoundException pnfe) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } 
 

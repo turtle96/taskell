@@ -16,11 +16,8 @@ public class ViewHistoryCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed all commands available for undo.";
     
     private static ViewHistoryCommand self;
-    private History history;
     
-    public ViewHistoryCommand() {
-        history = HistoryManager.getInstance();
-    }
+    public ViewHistoryCommand() {}
     
     public static ViewHistoryCommand getInstance() {
         if (self == null) {

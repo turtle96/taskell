@@ -115,7 +115,7 @@ public class EditCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -148,23 +148,18 @@ public class EditCommand extends Command {
             model.editTask(taskToEdit, newTask);
             jumpToUpdatedTaskIndex();
             
-            HistoryManager.getInstance().addTask(newTask);
-            HistoryManager.getInstance().addOldTask((Task) taskToEdit);
+            history.addTask(newTask);
+            history.addOldTask((Task) taskToEdit);
             
         } catch (DuplicateTaskException pnfe) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException pnfe) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(TASK_NOT_FOUND);
         }
         
-        try {
-            HistoryManager.getInstance().updateList();
-        } catch (ConcurrentModificationException e) {
-            logger.severe("Concurrent modification exception while updating history");
-            HistoryManager.getInstance().updateList();
-        }
+        history.updateHistory();
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
     }

@@ -38,7 +38,6 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_DONE_TASK_UNSUCCESSFUL = "The task status is already completed.";
     
     private ArrayList<CommandHistory> commandHistoryList;
-    private History history;
     
     private int index;
     private CommandHistory commandHistory;
@@ -46,7 +45,6 @@ public class UndoCommand extends Command {
     public UndoCommand(int index) {
         logger.info("Creating UndoCommand with index: " + index);
         
-        history = HistoryManager.getInstance();
         commandHistoryList = history.getList();
         this.index = index;
     }
@@ -54,7 +52,6 @@ public class UndoCommand extends Command {
     public UndoCommand() {
         logger.info("Creating UndoCommand without index");
         
-        history = HistoryManager.getInstance();
         commandHistoryList = history.getList();
         this.index = commandHistoryList.size(); //offset will be done in execute()
     }
