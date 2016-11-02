@@ -166,7 +166,7 @@ The `UI` component,
 <em>Diagram 6: Logic Class Diagram </em>
 </p>
 
-The diagram above gives an overview of how the `Logic`component is implemented.<br>
+The diagram above gives an overview of how the `Logic` component is implemented.<br>
 <br>**API** : [`Logic.java`](../src/main/java/seedu/taskell/logic/Logic.java)
 
 The `Logic` component,
@@ -180,15 +180,26 @@ The `Logic` component,
 <em>Diagram 7: Add Task Sequence Diagram For Logic</em>
 </p>
 
-The diagram above shows the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
- API call.<br>
+<!--- @@author A0142130A --->
+
+The diagram above shows the Sequence Diagram for interactions within the `Logic` component for the `execute("add buy cake")` API call.<br>
+
+<p align="center">
+<img src="images/DeleteTaskSdForLogic.png" width="800"><br>
+  
+<em>Diagram 8: Delete Task Sequence Diagram For Logic</em>
+</p>
+
+The diagram above shows the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")` API call.<br>
+ 
+ <!--- @@author --->
  
 ### Model Component
 
 <p align="center">
 <img src="images/ModelClassDiagram.png" width="800"><br>
 
-<em>Diagram 7: Model Class Diagram </em>
+<em>Diagram 9: Model Class Diagram </em>
 </p>
 
 The diagram above gives an overview of how the `Model` component is implemented.<br>
@@ -206,7 +217,7 @@ The `Model` component,
 <p align="center">
 <img src="images/StorageClassDiagram.png" width="800"><br>
 
-<em>Diagram 8: Storage Class Diagram </em>
+<em>Diagram 10: Storage Class Diagram </em>
 </p>
 
 The diagram above gives an overview of how the `Storage` component is implemented.<br>
@@ -244,7 +255,8 @@ and logging destinations.
 ### Configuration
 
 Certain properties of the application can be controlled (e.g Application name, logging level) through the configuration file 
-(default: `config.json`):
+(default: `config.json`) <br>
+To reset properties in the configuration file, delete `config.json` and run Taskell again.
 
 
 ## Testing
