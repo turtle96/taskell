@@ -181,6 +181,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     }
     
     public boolean isTaskPresent(Task task) {
+        assert task != null;
         return tasks.contains(task);
     }
 }

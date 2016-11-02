@@ -88,7 +88,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isTaskPresent(Task task) {
-        assert task != null;
+        if (task == null) {
+            return false;
+        }
         return taskManager.isTaskPresent(task);
     }
 
