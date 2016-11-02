@@ -6,14 +6,28 @@
         assert model != null;
         try {
             model.addTask(toAdd);
-            UndoCommand.addTaskToCommandHistory(toAdd);
+            HistoryManager.getInstance().addTask(toAdd);
+            jumpToNewTaskIndex();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            UndoCommand.deletePreviousCommand();
+            HistoryManager.getInstance().deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
-
+    }
+    
+    private void jumpToNewTaskIndex() {
+        int indexOfNewTask = model.getFilteredTaskList().size()-1;
+        jumpToIndex(indexOfNewTask);
     }
 
 }
+```
+###### \java\seedu\taskell\logic\commands\Command.java
+``` java
+    /**
+     * Raises an event to jump to the given index
+     */
+    protected void jumpToIndex(int index) {
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
+    }
 ```
