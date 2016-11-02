@@ -3,12 +3,8 @@ package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
-import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
-import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskStatus;
 import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;

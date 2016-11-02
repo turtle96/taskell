@@ -2,7 +2,6 @@
 
 package seedu.taskell.logic.commands;
 
-import java.util.ConcurrentModificationException;
 import java.util.logging.Logger;
 
 import seedu.taskell.commons.core.LogsCenter;
@@ -11,8 +10,6 @@ import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
-import seedu.taskell.logic.commands.UndoCommand;
-import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.ReadOnlyTask;
