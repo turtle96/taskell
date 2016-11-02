@@ -18,6 +18,18 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     private History history = HistoryManager.getInstance();
     
     @Test
+    public void undoInvalidCommands_nothingToUndo() {
+        history.clear();
+        
+        commandBox.runCommand("clear");
+        commandBox.runCommand("find chicken");
+        commandBox.runCommand("undo");
+        assertResultMessage(UndoCommand.MESSAGE_COMMAND_HISTORY_EMPTY);
+        
+        history.clear();
+    }
+    
+    @Test
     public void undoAdd_success() {
         history.clear();
         
