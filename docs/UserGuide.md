@@ -204,6 +204,8 @@ Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et:
 #### Showing calendar view : `calendar` or `cal`
 You can view the calendar for the week on the right panel to refer to the dates and any events scheduled 
 when adding tasks and scheduling events.<br>
+By default, the calendar view will be shown on the right panel. As `history` displays command history on the right panel as well, this command is meant for your convenience if you want to view calendar again.<br>
+Please note that entering other commands (i.e. `find`, `add`) will also revert the right panel back to calendar as it is the default view. <br>
 To save your time, Taskell has a short form command `cal`. <br>
 Format: `calendar`<br>
 
