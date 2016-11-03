@@ -250,6 +250,9 @@ Format: `exit`
 **A**: No, Taskell auto-saves your data every time you enter new tasks. Use `save` only when you want to
 transfer your data to a new location on your computer. <br>
 
+**Q**: Do I have to use `exit` command when I want to exit the application? <br>
+**A**: There is no need to, as Taskell can be closed by the top right X button with the mouse as well. This command is for your convenience if you prefer to use the keyboard. <br>
+
 <!--- @@author --->
 
 <!--- @@author A0142073R ---> 
