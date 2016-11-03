@@ -64,11 +64,12 @@ public class Parser {
     private static final int FROM_QUEUE = 4;
     private static final int TO_QUEUE = 5;
     
-    private static final int StartDateComponent = 0;
-    private static final int EndDateComponent = 1;
-    private static final int StartTimeComponent = 2;
-    private static final int EndTimeComponent = 3;
-    private static final int RecurringComponent = 4;
+    private static final int NUM_BOOLEAN_TASK_COMPONENT = 5;
+    private static final int START_DATE_COMPONENT = 0;
+    private static final int END_DATE_COMPONENT = 1;
+    private static final int START_TIME_COMPONENT = 2;
+    private static final int END_TIME_COMPONENT = 3;
+    private static final int RECURRING_COMPONENT = 4;
     
     private static final String ST = "st:";
     private static final String ET = "et:";
@@ -481,6 +482,7 @@ public class Parser {
         ArrayList<String> argsList = tokenizeArguments(args);;
         Queue<String> initialQueue = initialiseArgQueue(argsList);
         initialisePartitionQueue();
+        initialiseHasTaskComponentArray();
         
         String description = "";
         String startDate = TaskDate.DEFAULT_DATE;
@@ -496,11 +498,7 @@ public class Parser {
         int priorityCount = 0;
         int recurrenceCount = 0;
         
-        boolean hasStartDate = false;
-        boolean hasEndDate = false;
-        boolean hasStartTime = false;
-        boolean hasEndTime = false;
-        boolean hasRecurring = false;
+        
         
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
@@ -551,7 +549,7 @@ public class Parser {
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
                     recurringType = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
-                    hasRecurring = true;
+                    hasTaskComponentArray[RECURRING_COMPONENT] = true;
                     recurrenceCount++;
                 }
 
@@ -559,19 +557,19 @@ public class Parser {
                 if (!isPreceededByDateTimePrefix(partitionQueue)) {
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 } else if (!partitionQueue.get(ON_QUEUE).isEmpty()) {
-                    if (!hasStartDate) {
+                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
                         partitionQueue.get(ON_QUEUE).poll();
                         startDate = token;
-                        hasStartDate = true;
+                        hasTaskComponentArray[START_DATE_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(ON_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (!partitionQueue.get(BY_QUEUE).isEmpty()) {
-                    if (!hasEndDate) {
+                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
                         partitionQueue.get(BY_QUEUE).poll();
                         endDate = token;
-                        hasEndDate = true;
+                        hasTaskComponentArray[END_DATE_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(BY_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
@@ -580,19 +578,19 @@ public class Parser {
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(AT_QUEUE).poll());
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 } else if (!partitionQueue.get(FROM_QUEUE).isEmpty()) {
-                    if (!hasStartDate) {
+                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
                         partitionQueue.get(FROM_QUEUE).poll();
                         startDate = token;
-                        hasStartDate = true;
+                        hasTaskComponentArray[START_DATE_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(FROM_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (!partitionQueue.get(TO_QUEUE).isEmpty()) {
-                    if (!hasEndDate) {
+                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
                         partitionQueue.get(TO_QUEUE).poll();
                         endDate = token;
-                        hasEndDate = true;
+                        hasTaskComponentArray[END_DATE_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(TO_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
@@ -602,37 +600,37 @@ public class Parser {
                 if (!isPreceededByDateTimePrefix(partitionQueue)) {
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 } else if (!partitionQueue.get(BY_QUEUE).isEmpty()) {
-                    if (!hasEndTime) {
+                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
                         partitionQueue.get(BY_QUEUE).poll();
                         endTime = token;
-                        hasEndTime = true;
+                        hasTaskComponentArray[END_TIME_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(BY_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (!partitionQueue.get(AT_QUEUE).isEmpty()) {
-                    if (!hasStartTime) {
+                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
                         partitionQueue.get(AT_QUEUE).poll();
                         startTime = token;
-                        hasStartTime = true;
+                        hasTaskComponentArray[START_TIME_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(AT_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (!partitionQueue.get(FROM_QUEUE).isEmpty()) {
-                    if (!hasStartTime) {
+                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
                         partitionQueue.get(FROM_QUEUE).poll();
                         startTime = token;
-                        hasStartTime = true;
+                        hasTaskComponentArray[START_TIME_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(FROM_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (!partitionQueue.get(TO_QUEUE).isEmpty()) {
-                    if (!hasEndTime) {
+                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
                         partitionQueue.get(TO_QUEUE).poll();
                         endTime = token;
-                        hasEndTime = true;
+                        hasTaskComponentArray[END_TIME_COMPONENT] = true;
                     } else {
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(TO_QUEUE).poll());
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
@@ -654,16 +652,16 @@ public class Parser {
         }
         description.trim();
 
-        if (!hasEndDate) {
+        if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
             endDate = startDate;
         }
 
-        if ((TaskDate.isValidToday(startDate) && !hasStartTime)
-                || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
+        if ((TaskDate.isValidToday(startDate) && !hasTaskComponentArray[START_TIME_COMPONENT])
+                || startDate.equals(TaskDate.DEFAULT_DATE) && !hasTaskComponentArray[START_TIME_COMPONENT]) {
             startTime = TaskTime.getTimeNow().toString();
         }
 
-        if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
+        if (hasTaskComponentArray[START_DATE_COMPONENT] || hasTaskComponentArray[END_DATE_COMPONENT]|| hasTaskComponentArray[START_TIME_COMPONENT] || hasTaskComponentArray[END_TIME_COMPONENT]) {
             try {
                 return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime,
                         taskPriority, recurringType, getTagsFromArgs(tagString));
@@ -672,7 +670,7 @@ public class Parser {
             }
         } else {
 
-            if (hasRecurring) {
+            if (hasTaskComponentArray[RECURRING_COMPONENT]) {
                 return new IncorrectCommand(FloatingTask.RECURRING_TYPE_NOT_ALLOWED);
             } else {
                 try {
@@ -737,6 +735,10 @@ public class Parser {
         for (int i=0; i<NUM_QUEUE; i++) {
             partitionQueue.add(new LinkedList<String>());
         }
+    }
+    
+    private void initialiseHasTaskComponentArray() {
+        hasTaskComponentArray = new boolean[NUM_BOOLEAN_TASK_COMPONENT];
     }
 
     private ArrayList<String> tokenizeArguments(String args) {
