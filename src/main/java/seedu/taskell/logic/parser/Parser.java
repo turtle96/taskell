@@ -495,9 +495,7 @@ public class Parser {
         Queue<String> initialQueue = initialiseArgQueue(argsList);
         
         initialisePartitionQueue();
-        
         initialiseHasTaskComponentArray();
-        
         initialiseTaskComponentArray();
         
         try {
@@ -508,11 +506,9 @@ public class Parser {
         }
         
         addReservedWordToDescription();
-
-        extractDescriptionComponent();
-
-        adjustEndDate();
         
+        extractDescriptionComponent();
+        adjustEndDate();
         adjustStartTime();
 
         if (isEventTask()) {
@@ -537,6 +533,133 @@ public class Parser {
                             getTagsFromArgs(taskComponentArray[TAG]));
                 } catch (IllegalValueException ive) {
                     return new IncorrectCommand(ive.getMessage());
+                }
+            }
+        }
+    }
+    
+    private void splitInputIntoComponents(Queue<String> initialQueue) throws IllegalValueException {
+        String token = "";
+        int priorityCount = 0;
+        int recurrenceCount = 0;
+        
+        while (!initialQueue.isEmpty()) {
+            token = initialQueue.poll().trim();
+            if (!isReservedWord(token)) {
+                addReservedWordToDescription();
+                partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                continue;
+            } else if (token.equals(BY)) {
+                addReservedWordToDescription();
+                partitionQueue.get(BY_QUEUE).offer(token);
+                continue;
+            } else if (token.equals(ON)) {
+                addReservedWordToDescription();
+                partitionQueue.get(ON_QUEUE).offer(token);
+                continue;
+            } else if (token.equals(AT)) {
+                addReservedWordToDescription();
+                partitionQueue.get(AT_QUEUE).offer(token);
+                continue;
+            } else if (token.equals(FROM)) {
+                addReservedWordToDescription();
+                partitionQueue.get(FROM_QUEUE).offer(token);
+                continue;
+            } else if (token.equals(TO)) {
+                addReservedWordToDescription();
+                partitionQueue.get(TO_QUEUE).offer(token);
+                continue;
+            } else if (token.startsWith(Tag.PREFIX)) {
+                addReservedWordToDescription();
+                taskComponentArray[TAG] += " " + token;
+                continue;
+            } else if (token.startsWith(TaskPriority.PREFIX)) {
+                addReservedWordToDescription();
+                if (priorityCount > 0) {
+                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                } else {
+                    taskComponentArray[TASK_PRIORITY] = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
+                    priorityCount++;
+                }
+                continue;
+            } else if (token.startsWith(RecurringType.PREFIX)) {
+                addReservedWordToDescription();
+                if (recurrenceCount > 0) {
+                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                } else {
+                    taskComponentArray[RECURRING_TYPE] = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
+                    hasTaskComponentArray[RECURRING_COMPONENT] = true;
+                    recurrenceCount++;
+                }
+            } else if (TaskDate.isValidDate(token)) {
+                if (!isPreceededByDateTimePrefix(partitionQueue)) {
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
+                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
+                        extractStartDateWhenPreceededByPrefixOn(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
+                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
+                        extractEndDateWhenPreceededByPrefixBy(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
+                    addReservedWordToDescription();
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
+                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
+                        extractStartDateWhenPreceededByPrefixFrom(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
+                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
+                        extractEndDateWhenPreceededByPrefixTo(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                }
+            } else if (TaskTime.isValidTime(token)) {
+                if (!isPreceededByDateTimePrefix(partitionQueue)) {
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
+                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
+                        extractEndTimeWhenPreceededByPrefixBy(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
+                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
+                        extractStartTimeWhenPreceededByPrefixAt(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
+                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
+                        extractStartTimeWhenPreceededByPrefixFrom(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
+                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
+                        extractEndTimeWhenPreceededByPrefixTo(token);
+                    } else {
+                        addReservedWordToDescription();
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                    }
+                } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
+                    addReservedWordToDescription();
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 }
             }
         }
@@ -567,37 +690,62 @@ public class Parser {
         taskComponentArray[DESCRIPTION].trim();
     }
     
+    private void extractStartDateWhenPreceededByPrefixOn(String token) {
+        partitionQueue.get(ON_QUEUE).poll();
+        taskComponentArray[START_DATE] = token;
+        hasTaskComponentArray[START_DATE_COMPONENT] = true;
+    }
+    
+    private void extractStartDateWhenPreceededByPrefixFrom(String token) {
+        partitionQueue.get(FROM_QUEUE).poll();
+        taskComponentArray[START_DATE] = token;
+        hasTaskComponentArray[START_DATE_COMPONENT] = true;
+    }
+    
+    private void extractEndDateWhenPreceededByPrefixBy(String token) {
+        partitionQueue.get(BY_QUEUE).poll();
+        taskComponentArray[END_DATE] = token;
+        hasTaskComponentArray[END_DATE_COMPONENT] = true;
+    }
+    
+    private void extractEndDateWhenPreceededByPrefixTo(String token) {
+        partitionQueue.get(TO_QUEUE).poll();
+        taskComponentArray[END_DATE] = token;
+        hasTaskComponentArray[END_DATE_COMPONENT] = true;
+    }
+    
+    private void extractStartTimeWhenPreceededByPrefixAt(String token) {
+        partitionQueue.get(AT_QUEUE).poll();
+        taskComponentArray[START_TIME] = token;
+        hasTaskComponentArray[START_TIME_COMPONENT] = true;
+    }
+    
+    private void extractStartTimeWhenPreceededByPrefixFrom(String token) {
+        partitionQueue.get(FROM_QUEUE).poll();
+        taskComponentArray[START_TIME] = token;
+        hasTaskComponentArray[START_TIME_COMPONENT] = true;
+    }
+    
+    private void extractEndTimeWhenPreceededByPrefixTo(String token) {
+        partitionQueue.get(TO_QUEUE).poll();
+        taskComponentArray[END_TIME] = token;
+        hasTaskComponentArray[END_TIME_COMPONENT] = true;
+    }
+    
+    private void extractEndTimeWhenPreceededByPrefixBy(String token) {
+        partitionQueue.get(BY_QUEUE).poll();
+        taskComponentArray[END_TIME] = token;
+        hasTaskComponentArray[END_TIME_COMPONENT] = true;
+    }
+    
     private boolean isPreceededByDateTimePrefix(ArrayList<Queue<String>> partitionQueue) {
         return !partitionQueue.get(BY_QUEUE).isEmpty() || !partitionQueue.get(ON_QUEUE).isEmpty() 
                 || !partitionQueue.get(AT_QUEUE).isEmpty() || !partitionQueue.get(FROM_QUEUE).isEmpty() 
                 || !partitionQueue.get(TO_QUEUE).isEmpty();
     }
     
-    private boolean isPreceededByPrefixOn() {
-        return !partitionQueue.get(ON_QUEUE).isEmpty();
-    }
-    
-    private boolean isPreceededByPrefixBy() {
-        return !partitionQueue.get(BY_QUEUE).isEmpty();
-    }
-    
-    private boolean isPreceededByPrefixAt() {
-        return !partitionQueue.get(AT_QUEUE).isEmpty();
-    }
-    
-    private boolean isPreceededByPrefixFrom() {
-        return !partitionQueue.get(FROM_QUEUE).isEmpty();
-    }
-    
-    private boolean isPreceededByPrefixTo() {
-        return !partitionQueue.get(TO_QUEUE).isEmpty();
-    }
-    
-    private void addReservedWordToDescription() {
-        String tempToken = flushQueue(partitionQueue);
-        if (!tempToken.isEmpty()) {
-            partitionQueue.get(DESCRIPTION_QUEUE).offer(tempToken);
-        }
+    private boolean isPreceededByPrefixInQueue(int queueType) {
+        return !partitionQueue.get(queueType).isEmpty();
     }
     
     private boolean isReservedWord(String token) {
@@ -605,6 +753,13 @@ public class Parser {
                 || token.equals(TO) || TaskDate.isValidDate(token) || TaskTime.isValidTime(token) 
                 || token.startsWith(Tag.PREFIX) || token.startsWith(TaskPriority.PREFIX) 
                 || token.startsWith(RecurringType.PREFIX);
+    }
+    
+    private void addReservedWordToDescription() {
+        String tempToken = flushQueue(partitionQueue);
+        if (!tempToken.isEmpty()) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(tempToken);
+        }
     }
 
     private String flushQueue(ArrayList<Queue<String>> partitionQueue) {
@@ -665,180 +820,6 @@ public class Parser {
         return argsList;
     }
     
-    private void extractStartDateWhenPreceededByPrefixOn(String token) {
-        partitionQueue.get(ON_QUEUE).poll();
-        taskComponentArray[START_DATE] = token;
-        hasTaskComponentArray[START_DATE_COMPONENT] = true;
-    }
-    
-    private void extractStartDateWhenPreceededByPrefixFrom(String token) {
-        partitionQueue.get(FROM_QUEUE).poll();
-        taskComponentArray[START_DATE] = token;
-        hasTaskComponentArray[START_DATE_COMPONENT] = true;
-    }
-    
-    private void extractEndDateWhenPreceededByPrefixBy(String token) {
-        partitionQueue.get(BY_QUEUE).poll();
-        taskComponentArray[END_DATE] = token;
-        hasTaskComponentArray[END_DATE_COMPONENT] = true;
-    }
-    
-    private void extractEndDateWhenPreceededByPrefixTo(String token) {
-        partitionQueue.get(TO_QUEUE).poll();
-        taskComponentArray[END_DATE] = token;
-        hasTaskComponentArray[END_DATE_COMPONENT] = true;
-    }
-    
-    private void extractStartTimeWhenPreceededByPrefixAt(String token) {
-        partitionQueue.get(AT_QUEUE).poll();
-        taskComponentArray[START_TIME] = token;
-        hasTaskComponentArray[START_TIME_COMPONENT] = true;
-    }
-    
-    private void extractStartTimeWhenPreceededByPrefixFrom(String token) {
-        partitionQueue.get(FROM_QUEUE).poll();
-        taskComponentArray[START_TIME] = token;
-        hasTaskComponentArray[START_TIME_COMPONENT] = true;
-    }
-    
-    private void extractEndTimeWhenPreceededByPrefixTo(String token) {
-        partitionQueue.get(TO_QUEUE).poll();
-        taskComponentArray[END_TIME] = token;
-        hasTaskComponentArray[END_TIME_COMPONENT] = true;
-    }
-    
-    private void extractEndTimeWhenPreceededByPrefixBy(String token) {
-        partitionQueue.get(BY_QUEUE).poll();
-        taskComponentArray[END_TIME] = token;
-        hasTaskComponentArray[END_TIME_COMPONENT] = true;
-    }
-    
-    private void splitInputIntoComponents(Queue<String> initialQueue) throws IllegalValueException {
-        String token = "";
-        int priorityCount = 0;
-        int recurrenceCount = 0;
-        
-        while (!initialQueue.isEmpty()) {
-            token = initialQueue.poll().trim();
-            if (!isReservedWord(token)) {
-                addReservedWordToDescription();
-                partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                continue;
-            } else if (token.equals(BY)) {
-                addReservedWordToDescription();
-                partitionQueue.get(BY_QUEUE).offer(token);
-                continue;
-            } else if (token.equals(ON)) {
-                addReservedWordToDescription();
-                partitionQueue.get(ON_QUEUE).offer(token);
-                continue;
-            } else if (token.equals(AT)) {
-                addReservedWordToDescription();
-                partitionQueue.get(AT_QUEUE).offer(token);
-                continue;
-            } else if (token.equals(FROM)) {
-                addReservedWordToDescription();
-                partitionQueue.get(FROM_QUEUE).offer(token);
-                continue;
-            } else if (token.equals(TO)) {
-                addReservedWordToDescription();
-                partitionQueue.get(TO_QUEUE).offer(token);
-                continue;
-            } else if (token.startsWith(Tag.PREFIX)) {
-                addReservedWordToDescription();
-                taskComponentArray[TAG] += " " + token;
-                continue;
-            } else if (token.startsWith(TaskPriority.PREFIX)) {
-                addReservedWordToDescription();
-                if (priorityCount > 0) {
-                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-                } else {
-                    taskComponentArray[TASK_PRIORITY] = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
-                    priorityCount++;
-                }
-                continue;
-            } else if (token.startsWith(RecurringType.PREFIX)) {
-                addReservedWordToDescription();
-                if (recurrenceCount > 0) {
-                    throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-                } else {
-                    taskComponentArray[RECURRING_TYPE] = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
-                    hasTaskComponentArray[RECURRING_COMPONENT] = true;
-                    recurrenceCount++;
-                }
-            } else if (TaskDate.isValidDate(token)) {
-                if (!isPreceededByDateTimePrefix(partitionQueue)) {
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                } else if (isPreceededByPrefixOn()) {
-                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                        extractStartDateWhenPreceededByPrefixOn(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(ON_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixBy()) {
-                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                        extractEndDateWhenPreceededByPrefixBy(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(BY_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixAt()) {
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(AT_QUEUE).poll());
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                } else if (isPreceededByPrefixFrom()) {
-                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                        extractStartDateWhenPreceededByPrefixFrom(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(FROM_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixTo()) {
-                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                        extractEndDateWhenPreceededByPrefixTo(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(TO_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                }
-            } else if (TaskTime.isValidTime(token)) {
-                if (!isPreceededByDateTimePrefix(partitionQueue)) {
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                } else if (isPreceededByPrefixBy()) {
-                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                        extractEndTimeWhenPreceededByPrefixBy(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(BY_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixAt()) {
-                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                        extractStartTimeWhenPreceededByPrefixAt(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(AT_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixFrom()) {
-                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                        extractStartTimeWhenPreceededByPrefixFrom(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(FROM_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixTo()) {
-                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                        extractEndTimeWhenPreceededByPrefixTo(token);
-                    } else {
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(TO_QUEUE).poll());
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixOn()) {
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(ON_QUEUE).poll());
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                }
-            }
-        }
-    }
     // @@author
 
     /**
