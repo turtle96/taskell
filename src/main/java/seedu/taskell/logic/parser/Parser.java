@@ -41,15 +41,6 @@ public class Parser {
 
     private static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
 
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes
-                                                         // are reserved for
-                                                         // delimiter prefixes
-            Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
-                    + " (?<isTaskDatePrivate>p?)p/(?<startDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
-                    + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
-                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
-                    + " (?<isTaskCompletePrivate>p?)a/(?<taskComplete>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
-                                                                                                                   // number
     private static final String BY = "by";
     private static final String ON = "on";
     private static final String AT = "at";
@@ -97,17 +88,10 @@ public class Parser {
     private boolean hasChangedEndTime = false;
     private boolean hasChangedPriority = false;
     
-    
     private ArrayList<Queue<String>> partitionQueue;
     private boolean[] hasTaskComponentArray;
     private String[] taskComponentArray;
     
-    
-    
-    
-    
-    
-
     public Parser() {
         history = HistoryManager.getInstance();
     }
@@ -115,8 +99,7 @@ public class Parser {
     /**
      * Parses user input into command for execution.
      *
-     * @param userInput
-     *            full user input string
+     * @param userInput full user input string
      * @return the command based on the user input
      */
     public Command parseCommand(String userInput) {
@@ -514,6 +497,10 @@ public class Parser {
         return addTaskAccordingToType();
     }
     
+    /**
+     * Returns a new AddCommand object according to task type if successful
+     * else return IncorrectCommand
+     */
     private Command addTaskAccordingToType() {
         if (isEventTask()) {
             try {
@@ -542,6 +529,10 @@ public class Parser {
         }
     }
     
+    /**
+     * Separates the content in the initialQueue into its different task components
+     * @throws IllegalValueException
+     */
     private void splitInputIntoComponents(Queue<String> initialQueue) throws IllegalValueException {
         String token = "";
         int priorityCount = 0;
@@ -597,68 +588,75 @@ public class Parser {
         }
     }
     
-    
+    /**
+     * Determine if the given token is an intended date or is part of a description
+     * Token is actual date if it is preceded by a Date-Time prefix
+     */
     private void determineDateisActualDateOrDescription(String token) {
-        if (!isPreceededByDateTimePrefix(partitionQueue)) {
+        if (!isPrecededByDateTimePrefix(partitionQueue)) {
             partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-        } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(ON_QUEUE)) {
             if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, ON_QUEUE, START_DATE, START_DATE_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, ON_QUEUE, START_DATE, START_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(BY_QUEUE)) {
             if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_DATE, END_DATE_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, END_DATE, END_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(AT_QUEUE)) {
             addReservedWordToDescription();
             partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-        } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(FROM_QUEUE)) {
             if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_DATE, START_DATE_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, START_DATE, START_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(TO_QUEUE)) {
             if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_DATE, END_DATE_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, END_DATE, END_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
         }
     }
     
+    /**
+     * Determine if the given token is an intended time or is part of a description
+     * Token is actual time if it is preceded by a Date-Time prefix
+     */
     private void determineTimeIsActualTimeOrDescription(String token) {
-        if (!isPreceededByDateTimePrefix(partitionQueue)) {
+        if (!isPrecededByDateTimePrefix(partitionQueue)) {
             partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-        } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(BY_QUEUE)) {
             if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_TIME, END_TIME_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, END_TIME, END_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(AT_QUEUE)) {
             if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, AT_QUEUE, START_TIME, START_TIME_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, AT_QUEUE, START_TIME, START_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(FROM_QUEUE)) {
             if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_TIME, START_TIME_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, START_TIME, START_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(TO_QUEUE)) {
             if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_TIME, END_TIME_COMPONENT);
+                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, END_TIME, END_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
-        } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
+        } else if (isPrecededByPrefixInQueue(ON_QUEUE)) {
             offerTokenToQueue(DESCRIPTION_QUEUE, token);
         }
     }
@@ -697,21 +695,20 @@ public class Parser {
         taskComponentArray[DESCRIPTION].trim();
     }
     
-    
-    private void extractDateTimeWhenPreceededByPrefix(String token, int queueType, 
+    private void extractDateTimeWhenPrecededByPrefix(String token, int queueType, 
             int taskComponent, int taskComponentBoolean) {
         partitionQueue.get(queueType).poll();
         taskComponentArray[taskComponent] = token;
         hasTaskComponentArray[taskComponentBoolean] = true;
     }
     
-    private boolean isPreceededByDateTimePrefix(ArrayList<Queue<String>> partitionQueue) {
+    private boolean isPrecededByDateTimePrefix(ArrayList<Queue<String>> partitionQueue) {
         return !partitionQueue.get(BY_QUEUE).isEmpty() || !partitionQueue.get(ON_QUEUE).isEmpty() 
                 || !partitionQueue.get(AT_QUEUE).isEmpty() || !partitionQueue.get(FROM_QUEUE).isEmpty() 
                 || !partitionQueue.get(TO_QUEUE).isEmpty();
     }
     
-    private boolean isPreceededByPrefixInQueue(int queueType) {
+    private boolean isPrecededByPrefixInQueue(int queueType) {
         return !partitionQueue.get(queueType).isEmpty();
     }
     
@@ -786,7 +783,6 @@ public class Parser {
         }
         return argsList;
     }
-    
     // @@author
 
     /**
