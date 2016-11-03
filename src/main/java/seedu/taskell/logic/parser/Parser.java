@@ -596,14 +596,14 @@ public class Parser {
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
                     if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                        extractStartDateWhenPreceededByPrefixOn(token);
+                        extractDateTimeWhenPreceededByPrefix(token, ON_QUEUE, START_DATE, START_DATE_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
                     if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                        extractEndDateWhenPreceededByPrefixBy(token);
+                        extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_DATE, END_DATE_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
@@ -613,14 +613,14 @@ public class Parser {
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
                     if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                        extractStartDateWhenPreceededByPrefixFrom(token);
+                        extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_DATE, START_DATE_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
                     if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                        extractEndDateWhenPreceededByPrefixTo(token);
+                        extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_DATE, END_DATE_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
@@ -631,28 +631,28 @@ public class Parser {
                     partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
                     if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                        extractEndTimeWhenPreceededByPrefixBy(token);
+                        extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_TIME, END_TIME_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
                     if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                        extractStartTimeWhenPreceededByPrefixAt(token);
+                        extractDateTimeWhenPreceededByPrefix(token, AT_QUEUE, START_TIME, START_TIME_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
                     if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                        extractStartTimeWhenPreceededByPrefixFrom(token);
+                        extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_TIME, START_TIME_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
                     if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                        extractEndTimeWhenPreceededByPrefixTo(token);
+                        extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_TIME, END_TIME_COMPONENT);
                     } else {
                         addReservedWordToDescription();
                         partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
@@ -690,52 +690,12 @@ public class Parser {
         taskComponentArray[DESCRIPTION].trim();
     }
     
-    private void extractStartDateWhenPreceededByPrefixOn(String token) {
-        partitionQueue.get(ON_QUEUE).poll();
-        taskComponentArray[START_DATE] = token;
-        hasTaskComponentArray[START_DATE_COMPONENT] = true;
-    }
     
-    private void extractStartDateWhenPreceededByPrefixFrom(String token) {
-        partitionQueue.get(FROM_QUEUE).poll();
-        taskComponentArray[START_DATE] = token;
-        hasTaskComponentArray[START_DATE_COMPONENT] = true;
-    }
-    
-    private void extractEndDateWhenPreceededByPrefixBy(String token) {
-        partitionQueue.get(BY_QUEUE).poll();
-        taskComponentArray[END_DATE] = token;
-        hasTaskComponentArray[END_DATE_COMPONENT] = true;
-    }
-    
-    private void extractEndDateWhenPreceededByPrefixTo(String token) {
-        partitionQueue.get(TO_QUEUE).poll();
-        taskComponentArray[END_DATE] = token;
-        hasTaskComponentArray[END_DATE_COMPONENT] = true;
-    }
-    
-    private void extractStartTimeWhenPreceededByPrefixAt(String token) {
-        partitionQueue.get(AT_QUEUE).poll();
-        taskComponentArray[START_TIME] = token;
-        hasTaskComponentArray[START_TIME_COMPONENT] = true;
-    }
-    
-    private void extractStartTimeWhenPreceededByPrefixFrom(String token) {
-        partitionQueue.get(FROM_QUEUE).poll();
-        taskComponentArray[START_TIME] = token;
-        hasTaskComponentArray[START_TIME_COMPONENT] = true;
-    }
-    
-    private void extractEndTimeWhenPreceededByPrefixTo(String token) {
-        partitionQueue.get(TO_QUEUE).poll();
-        taskComponentArray[END_TIME] = token;
-        hasTaskComponentArray[END_TIME_COMPONENT] = true;
-    }
-    
-    private void extractEndTimeWhenPreceededByPrefixBy(String token) {
-        partitionQueue.get(BY_QUEUE).poll();
-        taskComponentArray[END_TIME] = token;
-        hasTaskComponentArray[END_TIME_COMPONENT] = true;
+    private void extractDateTimeWhenPreceededByPrefix(String token, int queueType, 
+            int taskComponent, int taskComponentBoolean) {
+        partitionQueue.get(queueType).poll();
+        taskComponentArray[taskComponent] = token;
+        hasTaskComponentArray[taskComponentBoolean] = true;
     }
     
     private boolean isPreceededByDateTimePrefix(ArrayList<Queue<String>> partitionQueue) {
