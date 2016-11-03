@@ -55,13 +55,29 @@ public class Parser {
     private static final String AT = "at";
     private static final String FROM = "from";
     private static final String TO = "to";
-
+    
+    private static final int NUM_QUEUE = 6;
+    private static final int DESCRIPTION_QUEUE = 0;
+    private static final int BY_QUEUE = 1;
+    private static final int ON_QUEUE = 2;
+    private static final int AT_QUEUE = 3;
+    private static final int FROM_QUEUE = 4;
+    private static final int TO_QUEUE = 5;
+    
+    private static final int StartDateComponent = 0;
+    private static final int EndDateComponent = 1;
+    private static final int StartTimeComponent = 2;
+    private static final int EndTimeComponent = 3;
+    private static final int RecurringComponent = 4;
+    
     private static final String ST = "st:";
     private static final String ET = "et:";
     private static final String SD = "sd:";
     private static final String ED = "ed:";
     private static final String DESC = "desc:";
     private static final String P = "p:";
+    
+    private static History history;
 
     private boolean hasChangedDescription = false;
     private boolean hasChangedStartDate = false;
@@ -69,8 +85,14 @@ public class Parser {
     private boolean hasChangedStartTime = false;
     private boolean hasChangedEndTime = false;
     private boolean hasChangedPriority = false;
-
-    private static History history;
+    
+    
+    private ArrayList<Queue<String>> partitionQueue;
+    private boolean[] hasTaskComponentArray;
+    
+    
+    
+    
 
     public Parser() {
         history = HistoryManager.getInstance();
@@ -448,8 +470,7 @@ public class Parser {
     /**
      * Parses arguments in the context of the add task command.
      *
-     * @param args
-     *            full command args string
+     * @param full command args string
      * @return the prepared command
      */
     private Command prepareAdd(String args) {
@@ -457,92 +478,64 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        ArrayList<String> argsList = tokenizeArguments(args);
+        ArrayList<String> argsList = tokenizeArguments(args);;
         Queue<String> initialQueue = initialiseArgQueue(argsList);
-        Queue<String> descriptionQueue = new LinkedList<String>();
-        Queue<String> byQueue = new LinkedList<String>();
-        Queue<String> onQueue = new LinkedList<String>();
-        Queue<String> atQueue = new LinkedList<String>();
-        Queue<String> fromQueue = new LinkedList<String>();
-        Queue<String> toQueue = new LinkedList<String>();
-
+        initialisePartitionQueue();
+        
         String description = "";
         String startDate = TaskDate.DEFAULT_DATE;
         String endDate = startDate;
         String startTime = TaskTime.DEFAULT_START_TIME;
         String endTime = TaskTime.DEFAULT_END_TIME;
-        String token = "";
         String taskPriority = TaskPriority.DEFAULT_PRIORITY;
         String recurringType = RecurringType.DEFAULT_RECURRING;
         String tagString = "";
+        
+        String token = "";
 
         int priorityCount = 0;
         int recurrenceCount = 0;
+        
         boolean hasStartDate = false;
         boolean hasEndDate = false;
         boolean hasStartTime = false;
         boolean hasEndTime = false;
         boolean hasRecurring = false;
+        
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
             String tempToken = "";
 
-            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(FROM) && !token.equals(TO)
-                    && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token) && !token.startsWith(Tag.PREFIX)
-                    && !token.startsWith(TaskPriority.PREFIX) && !token.startsWith(RecurringType.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                descriptionQueue.offer(token);
+            if (!isReservedWord(token)) {
+                partitionQueue = addReservedWordToDescription(partitionQueue);
+                partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 continue;
             } else if (token.equals(BY)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                byQueue.offer(token);
+                partitionQueue = addReservedWordToDescription(partitionQueue);
+                partitionQueue.get(BY_QUEUE).offer(token);
                 continue;
             } else if (token.equals(ON)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                onQueue.offer(token);
+                partitionQueue = addReservedWordToDescription(partitionQueue);
+                partitionQueue.get(ON_QUEUE).offer(token);
                 continue;
             } else if (token.equals(AT)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                atQueue.offer(token);
+                partitionQueue = addReservedWordToDescription(partitionQueue);
+                partitionQueue.get(AT_QUEUE).offer(token);
                 continue;
             } else if (token.equals(FROM)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                fromQueue.offer(token);
+                partitionQueue = addReservedWordToDescription(partitionQueue);
+                partitionQueue.get(FROM_QUEUE).offer(token);
                 continue;
             } else if (token.equals(TO)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                toQueue.offer(token);
+                partitionQueue = addReservedWordToDescription(partitionQueue);
+                partitionQueue.get(TO_QUEUE).offer(token);
                 continue;
             } else if (token.startsWith(Tag.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
+                partitionQueue = addReservedWordToDescription(partitionQueue);
                 tagString += " " + token;
                 continue;
             } else if (token.startsWith(TaskPriority.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
+                partitionQueue = addReservedWordToDescription(partitionQueue);
                 if (priorityCount > 0) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -552,118 +545,112 @@ public class Parser {
                 }
                 continue;
             } else if (token.startsWith(RecurringType.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
+                partitionQueue = addReservedWordToDescription(partitionQueue);
                 if (recurrenceCount > 0) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-
                     recurringType = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
                     hasRecurring = true;
                     recurrenceCount++;
                 }
 
             } else if (TaskDate.isValidDate(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
-                        && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token);
-                } else if (!onQueue.isEmpty()) {
+                if (!isPreceededByDateTimePrefix(partitionQueue)) {
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                } else if (!partitionQueue.get(ON_QUEUE).isEmpty()) {
                     if (!hasStartDate) {
-                        onQueue.poll();
+                        partitionQueue.get(ON_QUEUE).poll();
                         startDate = token;
                         hasStartDate = true;
                     } else {
-                        descriptionQueue.offer(onQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(ON_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!byQueue.isEmpty()) {
+                } else if (!partitionQueue.get(BY_QUEUE).isEmpty()) {
                     if (!hasEndDate) {
-                        byQueue.poll();
+                        partitionQueue.get(BY_QUEUE).poll();
                         endDate = token;
                         hasEndDate = true;
                     } else {
-                        descriptionQueue.offer(byQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(BY_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!atQueue.isEmpty()) {
-                    descriptionQueue.offer(atQueue.poll());
-                    descriptionQueue.offer(token);
-                } else if (!fromQueue.isEmpty()) {
+                } else if (!partitionQueue.get(AT_QUEUE).isEmpty()) {
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(AT_QUEUE).poll());
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                } else if (!partitionQueue.get(FROM_QUEUE).isEmpty()) {
                     if (!hasStartDate) {
-                        fromQueue.poll();
+                        partitionQueue.get(FROM_QUEUE).poll();
                         startDate = token;
                         hasStartDate = true;
                     } else {
-                        descriptionQueue.offer(fromQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(FROM_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!toQueue.isEmpty()) {
+                } else if (!partitionQueue.get(TO_QUEUE).isEmpty()) {
                     if (!hasEndDate) {
-                        toQueue.poll();
+                        partitionQueue.get(TO_QUEUE).poll();
                         endDate = token;
                         hasEndDate = true;
                     } else {
-                        descriptionQueue.offer(toQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(TO_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
                 }
             } else if (TaskTime.isValidTime(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
-                        && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token);
-                } else if (!byQueue.isEmpty()) {
+                if (!isPreceededByDateTimePrefix(partitionQueue)) {
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                } else if (!partitionQueue.get(BY_QUEUE).isEmpty()) {
                     if (!hasEndTime) {
-                        byQueue.poll();
+                        partitionQueue.get(BY_QUEUE).poll();
                         endTime = token;
                         hasEndTime = true;
                     } else {
-                        descriptionQueue.offer(byQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(BY_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!atQueue.isEmpty()) {
+                } else if (!partitionQueue.get(AT_QUEUE).isEmpty()) {
                     if (!hasStartTime) {
-                        atQueue.poll();
+                        partitionQueue.get(AT_QUEUE).poll();
                         startTime = token;
                         hasStartTime = true;
                     } else {
-                        descriptionQueue.offer(atQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(AT_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!fromQueue.isEmpty()) {
+                } else if (!partitionQueue.get(FROM_QUEUE).isEmpty()) {
                     if (!hasStartTime) {
-                        fromQueue.poll();
+                        partitionQueue.get(FROM_QUEUE).poll();
                         startTime = token;
                         hasStartTime = true;
                     } else {
-                        descriptionQueue.offer(fromQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(FROM_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!toQueue.isEmpty()) {
+                } else if (!partitionQueue.get(TO_QUEUE).isEmpty()) {
                     if (!hasEndTime) {
-                        toQueue.poll();
+                        partitionQueue.get(TO_QUEUE).poll();
                         endTime = token;
                         hasEndTime = true;
                     } else {
-                        descriptionQueue.offer(toQueue.poll());
-                        descriptionQueue.offer(token);
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(TO_QUEUE).poll());
+                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                     }
-                } else if (!onQueue.isEmpty()) {
-                    descriptionQueue.offer(onQueue.poll());
-                    descriptionQueue.offer(token);
+                } else if (!partitionQueue.get(ON_QUEUE).isEmpty()) {
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(partitionQueue.get(ON_QUEUE).poll());
+                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
                 }
             }
         }
 
-        String tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
+        String tempToken = flushQueue(partitionQueue);
         if (!tempToken.isEmpty()) {
-            descriptionQueue.offer(tempToken);
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(tempToken);
         }
 
-        while (!descriptionQueue.isEmpty()) {
-            description += descriptionQueue.poll() + " ";
+        while (!partitionQueue.get(DESCRIPTION_QUEUE).isEmpty()) {
+            description += partitionQueue.get(DESCRIPTION_QUEUE).poll() + " ";
         }
         description.trim();
 
@@ -697,21 +684,41 @@ public class Parser {
             }
         }
     }
+    
+    private boolean isPreceededByDateTimePrefix(ArrayList<Queue<String>> partitionQueue) {
+        return !partitionQueue.get(BY_QUEUE).isEmpty() || !partitionQueue.get(ON_QUEUE).isEmpty() 
+                || !partitionQueue.get(AT_QUEUE).isEmpty() || !partitionQueue.get(FROM_QUEUE).isEmpty() 
+                || !partitionQueue.get(TO_QUEUE).isEmpty();
+    }
+    
+    private ArrayList<Queue<String>> addReservedWordToDescription(ArrayList<Queue<String>> partitionQueue) {
+        String tempToken = flushQueue(partitionQueue);
+        if (!tempToken.isEmpty()) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(tempToken);
+        }
+        return partitionQueue;
+    }
+    
+    private boolean isReservedWord(String token) {
+        return token.equals(BY) || token.equals(ON) || token.equals(AT) || token.equals(FROM) 
+                || token.equals(TO) || TaskDate.isValidDate(token) || TaskTime.isValidTime(token) 
+                || token.startsWith(Tag.PREFIX) || token.startsWith(TaskPriority.PREFIX) 
+                || token.startsWith(RecurringType.PREFIX);
+    }
 
-    private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
-            Queue<String> fromQueue, Queue<String> toQueue) {
+    private String flushQueue(ArrayList<Queue<String>> partitionQueue) {
         String token = "";
 
-        if (!byQueue.isEmpty()) {
-            token = byQueue.poll();
-        } else if (!onQueue.isEmpty()) {
-            token = onQueue.poll();
-        } else if (!atQueue.isEmpty()) {
-            token = atQueue.poll();
-        } else if (!fromQueue.isEmpty()) {
-            token = fromQueue.poll();
-        } else if (!toQueue.isEmpty()) {
-            token = toQueue.poll();
+        if (!partitionQueue.get(BY_QUEUE).isEmpty()) {
+            token = partitionQueue.get(BY_QUEUE).poll();
+        } else if (!partitionQueue.get(ON_QUEUE).isEmpty()) {
+            token = partitionQueue.get(ON_QUEUE).poll();
+        } else if (!partitionQueue.get(AT_QUEUE).isEmpty()) {
+            token = partitionQueue.get(AT_QUEUE).poll();
+        } else if (!partitionQueue.get(FROM_QUEUE).isEmpty()) {
+            token = partitionQueue.get(FROM_QUEUE).poll();
+        } else if (!partitionQueue.get(TO_QUEUE).isEmpty()) {
+            token = partitionQueue.get(TO_QUEUE).poll();
         }
 
         return token;
@@ -723,6 +730,13 @@ public class Parser {
             argsQueue.offer(arg);
         }
         return argsQueue;
+    }
+    
+    private void initialisePartitionQueue() {
+        partitionQueue = new ArrayList<Queue<String>>();
+        for (int i=0; i<NUM_QUEUE; i++) {
+            partitionQueue.add(new LinkedList<String>());
+        }
     }
 
     private ArrayList<String> tokenizeArguments(String args) {
