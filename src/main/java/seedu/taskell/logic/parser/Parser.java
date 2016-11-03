@@ -511,6 +511,10 @@ public class Parser {
         adjustEndDate();
         adjustStartTime();
 
+        return addTaskAccordingToType();
+    }
+    
+    private Command addTaskAccordingToType() {
         if (isEventTask()) {
             try {
                 return new AddCommand(taskComponentArray[DESCRIPTION], Task.EVENT_TASK, 
