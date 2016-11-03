@@ -53,6 +53,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
+        
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
@@ -206,8 +207,11 @@ public class MainApp extends Application {
     /** @@author A0142130A **/
     @Subscribe
     private void handleStorageLocationChangedEvent(StorageLocationChangedEvent event) {
+        logger.info("saving storage");
         config = event.getConfig();
+        storage.clearTaskManager();
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
+        SaveStorageLocationCommand.setStorage(storage);
     }
     /** @@author **/
 
