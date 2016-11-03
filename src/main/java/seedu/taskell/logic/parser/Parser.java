@@ -505,7 +505,7 @@ public class Parser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         
-        addReservedWordToDescription();
+        addReservedWordToDescription(); //Add trailing reserved word to description
         
         extractDescriptionComponent();
         adjustEndDate();
@@ -550,28 +550,22 @@ public class Parser {
         while (!initialQueue.isEmpty()) {
             token = initialQueue.poll().trim();
             if (!isReservedWord(token)) {
-                addReservedWordToDescription();
-                partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
                 continue;
             } else if (token.equals(BY)) {
-                addReservedWordToDescription();
-                partitionQueue.get(BY_QUEUE).offer(token);
+                offerTokenToQueue(BY_QUEUE, token);
                 continue;
             } else if (token.equals(ON)) {
-                addReservedWordToDescription();
-                partitionQueue.get(ON_QUEUE).offer(token);
+                offerTokenToQueue(ON_QUEUE, token);
                 continue;
             } else if (token.equals(AT)) {
-                addReservedWordToDescription();
-                partitionQueue.get(AT_QUEUE).offer(token);
+                offerTokenToQueue(AT_QUEUE, token);
                 continue;
             } else if (token.equals(FROM)) {
-                addReservedWordToDescription();
-                partitionQueue.get(FROM_QUEUE).offer(token);
+                offerTokenToQueue(FROM_QUEUE, token);
                 continue;
             } else if (token.equals(TO)) {
-                addReservedWordToDescription();
-                partitionQueue.get(TO_QUEUE).offer(token);
+                offerTokenToQueue(TO_QUEUE, token);
                 continue;
             } else if (token.startsWith(Tag.PREFIX)) {
                 addReservedWordToDescription();
@@ -596,77 +590,86 @@ public class Parser {
                     recurrenceCount++;
                 }
             } else if (TaskDate.isValidDate(token)) {
-                if (!isPreceededByDateTimePrefix(partitionQueue)) {
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
-                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, ON_QUEUE, START_DATE, START_DATE_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
-                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_DATE, END_DATE_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
-                    addReservedWordToDescription();
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
-                    if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_DATE, START_DATE_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
-                    if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_DATE, END_DATE_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                }
+                determineDateisActualDateOrDescription(token);
             } else if (TaskTime.isValidTime(token)) {
-                if (!isPreceededByDateTimePrefix(partitionQueue)) {
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
-                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_TIME, END_TIME_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
-                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, AT_QUEUE, START_TIME, START_TIME_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
-                    if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_TIME, START_TIME_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
-                    if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                        extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_TIME, END_TIME_COMPONENT);
-                    } else {
-                        addReservedWordToDescription();
-                        partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                    }
-                } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
-                    addReservedWordToDescription();
-                    partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
-                }
+                determineTimeIsActualTimeOrDescription(token);
             }
         }
+    }
+    
+    
+    private void determineDateisActualDateOrDescription(String token) {
+        if (!isPreceededByDateTimePrefix(partitionQueue)) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+        } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
+            if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, ON_QUEUE, START_DATE, START_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
+            if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_DATE, END_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
+            addReservedWordToDescription();
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+        } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
+            if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_DATE, START_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
+            if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_DATE, END_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        }
+    }
+    
+    private void determineTimeIsActualTimeOrDescription(String token) {
+        if (!isPreceededByDateTimePrefix(partitionQueue)) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+        } else if (isPreceededByPrefixInQueue(BY_QUEUE)) {
+            if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, BY_QUEUE, END_TIME, END_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(AT_QUEUE)) {
+            if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, AT_QUEUE, START_TIME, START_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(FROM_QUEUE)) {
+            if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, FROM_QUEUE, START_TIME, START_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(TO_QUEUE)) {
+            if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
+                extractDateTimeWhenPreceededByPrefix(token, TO_QUEUE, END_TIME, END_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPreceededByPrefixInQueue(ON_QUEUE)) {
+            offerTokenToQueue(DESCRIPTION_QUEUE, token);
+        }
+    }
+    
+    /**
+     * Flush outstanding Date-Time prefix into description queue
+     * Add Token to respective queue
+     */
+    private void offerTokenToQueue(int queueType, String token) {
+        addReservedWordToDescription();
+        partitionQueue.get(queueType).offer(token);
     }
     
     private boolean isEventTask() {
