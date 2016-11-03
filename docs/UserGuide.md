@@ -160,7 +160,7 @@ Undo by index of command history.<br>
 Example: `hist`, then `undo 3`, will undo third command in command history.<br>
 
 > Take Note! <br>
-> * Undo command only supports add, edit, delete, and undo commands.
+> * Undo command only supports add, edit, delete, done, undone and undo commands.
 > * Clear commands are irreversible!
 
 <!--- @@author ---> 
@@ -209,15 +209,30 @@ Format: `calendar`<br>
 
 #### Saving the information in Taskell : `save`
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
+To obtain the filepath, navigate to the required file in your File Explorer. Copy the path at the top of the
+screen and paste into Taskell. Refer to diagram 6 for an example of a filepath. <br>
+
+<p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
+Diagram 6: Screenshot of File Explorer in Windows.  <br>
+
 If the specified directory is valid but the file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
 Format: `save FOLDERPATH`<br>
 Example: `save C:/Users/Jim/Documents`
 
-<!--- @@author ---> 
+> Take Note! <br>
+> * If you only specify a folder name without directory, i.e. `save cat`, Taskell will create a file
+named "cat" within Taskell's own directory. 
+> * Whereas `save C:/Users/Jim/Documents/cat` will open a file named "cat" within your desktop's Documents folder.
 
-#### Clearing all entries :  `clear`
+#### Clearing all entries : `clear`
+Permanently clears **all** task data. <br>
 Format: `clear`  <br>
+
+> Take Note! <br>
+> * Clear commands are irreversible!
+
+<!--- @@author ---> 
 
 #### Exiting the program : `exit`
 Format: `exit`  
@@ -225,7 +240,15 @@ Format: `exit`
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the application in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Taskell folder.
+**A**: Install the application in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Taskell folder.<br>
+
+<!--- @@author A0142130A --->
+
+**Q**: Do I have to save the data every time I enter new tasks? <br>
+**A**: No, Taskell auto-saves your data every time you enter new tasks. Use `save` only when you want to
+transfer your data to a new location on your computer. <br>
+
+<!--- @@author --->
 
 <!--- @@author A0142073R ---> 
      
