@@ -86,7 +86,7 @@ Role: Developer
 -----
 
 ## Project Mentor
-[Akshay Narayan](https://github.com/okkhoy)
+#### [Akshay Narayan](https://github.com/okkhoy)
 <img src="images/AkshayNarayan.jpg" width="150"><br>
 
 -----
