@@ -28,7 +28,7 @@
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*. 
 * Some parts of this application were adapted from [Address Book 4](https://github.com/nus-cs2103-AY1617S1/addressbook-level4) by *Damith C. Rajapakse* and his team.
 * The calendar view is implemented with the help of the [JFXtras Project](http://jfxtras.org/), specifically the [Agenda library](http://jfxtras.org/doc/8.0/jfxtras-agenda/index.html).
-* Icon is sourced from [Iconfinder](https://www.iconfinder.com/icons/1525/cyan_folder_icon#size=128), and designed by [David Vignoni](http://www.icon-king.com/)
+* Icon is sourced from [Iconfinder](https://www.iconfinder.com/icons/1525/cyan_folder_icon#size=128), and designed by [David Vignoni](http://www.icon-king.com/).
 
 
 #### License : [MIT](LICENSE)
