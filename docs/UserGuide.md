@@ -180,9 +180,13 @@ Format: `delete INDEX`<br>
 Example: `find violin`, then `delete 1`<br>
 This deletes the 1st task in the results of the find command.
 
+<!--- @@author A0142130A --->
+
  <br><p align="center"><img src="images/screenshots/delete_01.PNG" width="800"></br>
  <br><p align="center"><img src="images/screenshots/delete_02.PNG" width="800"></br><br>
 Diagrams 9 and 10: Entering `delete 20` will delete "read lord of the rings trilogy".<br>
+
+<!--- @@author --->
 
 <!--- @@author A0148004R --->
 
