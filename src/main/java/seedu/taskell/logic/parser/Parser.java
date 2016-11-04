@@ -492,14 +492,10 @@ public class Parser {
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
-            if (hasTaskComponentArray[Task.RECURRING_COMPONENT]) {
-                return new IncorrectCommand(FloatingTask.RECURRING_TYPE_NOT_ALLOWED);
-            } else {
-                try {
-                    return new AddCommand(Task.FLOATING_TASK, taskComponentArray, hasTaskComponentArray, getTagsFromArgs(taskComponentArray[Task.TAG]));
-                } catch (IllegalValueException ive) {
-                    return new IncorrectCommand(ive.getMessage());
-                }
+            try {
+                return new AddCommand(Task.FLOATING_TASK, taskComponentArray, hasTaskComponentArray, getTagsFromArgs(taskComponentArray[Task.TAG]));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
             }
         }
     }
