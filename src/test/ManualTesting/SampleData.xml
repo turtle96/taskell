@@ -16,25 +16,25 @@
     <tasks>
         <description>buy bread</description>
         <taskType>EVENT</taskType>
-        <startDate>4-11-2016</startDate>
-        <endDate>7-11-2016</endDate>
+        <startDate>4-10-2016</startDate>
+        <endDate>7-10-2016</endDate>
         <startTime>10:48PM</startTime>
         <endTime>11:59PM</endTime>
         <taskPriority>0</taskPriority>
         <recurringType>neverRecur</recurringType>
-        <taskStatus>incomplete</taskStatus>
+        <taskStatus>finished</taskStatus>
         <tagged>groceries</tagged>
     </tasks>
     <tasks>
         <description>buy cabbage</description>
         <taskType>EVENT</taskType>
-        <startDate>4-11-2016</startDate>
-        <endDate>25-11-2016</endDate>
+        <startDate>4-10-2016</startDate>
+        <endDate>25-10-2016</endDate>
         <startTime>10:51PM</startTime>
         <endTime>11:59PM</endTime>
         <taskPriority>0</taskPriority>
         <recurringType>neverRecur</recurringType>
-        <taskStatus>incomplete</taskStatus>
+        <taskStatus>finished</taskStatus>
         <tagged>groceries</tagged>
     </tasks>
     <tasks>
