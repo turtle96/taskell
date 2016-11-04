@@ -219,15 +219,31 @@ screen and paste into Taskell. Refer to diagram 6 for an example of a filepath. 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
 Diagram 8: Screenshot of File Explorer in Windows.  <br>
 
-If the specified directory is valid but the file is missing, for example if command is `save C:/Users/Jim/Documents/chicken`,  and `C:/Users/Jim/Documents/chicken` is valid
+If the specified directory is valid but the file is missing, for example if command is `save C:\Users\Jim\Documents\chicken`,  and `C:\Users\Jim\Documents\chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
 Format: `save FOLDERPATH`<br>
-Example: `save C:/Users/Jim/Documents`
+Example: `save C:\Users\Jim\Documents`
 
 > Take Note! <br>
 > * If you only specify a folder name without directory, i.e. `save cat`, Taskell will create a file
-named "cat" within Taskell's own directory. 
-> * Whereas `save C:/Users/Jim/Documents/cat` will open a file named "cat" within your desktop's Documents folder.
+named "cat" within Taskell's own directory. Whereas `save C:/Users/Jim/Documents/cat` will open a file named "cat" within your desktop's Documents folder.
+> * Windows OS has reserved symbols that cannot be used in file names. The list is given below:
+    * >
+    * <
+    * :
+    * "
+    * /
+    * \
+    * |
+    * ?
+    * *
+> * Linux OS has reserved symbols that cannot be used in file names. The list is given below:
+    * <
+    * >
+    * :
+    * &
+    * /
+    * |
 
 #### Clearing all entries : `clear`
 Permanently clears **all** task data. <br>
