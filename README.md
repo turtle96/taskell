@@ -4,7 +4,7 @@
 
 # Taskell
 
-<img src="docs/images/taskell_main_screenshot.PNG" width="600"><br>
+<p align="center"><img src="docs/images/taskell_main_screenshot.PNG" width="600"><br>
 
 * This is a desktop task manager application. It has a GUI but most of the user interactions happen using 
   a CLI (Command Line Interface).
@@ -22,11 +22,12 @@
 * [Contact Us](docs/ContactUs.md)
 
 
-#### Acknowledgement
+#### Acknowledgements
 
 * Some parts of this application were inspired by the excellent 
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*. 
-* Some parts of this application were adapted from [Address Book 4](https://github.com/nus-cs2103-AY1617S1/addressbook-level4) by *Damith C. Rajapakse* and his team
+* Some parts of this application were adapted from [Address Book 4](https://github.com/nus-cs2103-AY1617S1/addressbook-level4) by *Damith C. Rajapakse* and his team.
+* The calendar view is implemented with the help of the [JFXtras Project](http://jfxtras.org/), specifically the [Agenda library](http://jfxtras.org/doc/8.0/jfxtras-agenda/index.html).
 
 
 #### License : [MIT](LICENSE)
