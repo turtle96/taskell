@@ -214,7 +214,7 @@ Format: `calendar`<br>
 #### Saving the information in Taskell : `save`
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
 To obtain the filepath, navigate to the required file in your File Explorer. Copy the path at the top of the
-screen and paste into Taskell. Refer to diagram 6 for an example of a filepath. <br>
+screen and paste into Taskell. Refer to diagram 8 for an example of a filepath. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
 Diagram 8: Screenshot of File Explorer in Windows.  <br>
