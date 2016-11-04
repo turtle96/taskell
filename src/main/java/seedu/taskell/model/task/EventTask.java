@@ -14,20 +14,18 @@ import seedu.taskell.model.tag.UniqueTagList;
 public class EventTask extends Task {
     public static final String MESSAGE_EVENT_CONSTRAINTS = "Start date and time must be before end date and time"
             + "\nAll date and time should not before current time";
-
-    public EventTask(String description, String startDate, String endDate, String startTime, 
-            String endTime, String taskPriority, String recurringType, String taskStatus, 
-            UniqueTagList tags) throws IllegalValueException {
+    
+    public EventTask(String[] taskComponentArray, boolean[] hasTaskComponentArray, UniqueTagList tags) throws IllegalValueException {
         
-        this(new Description(description),
+        this(new Description(taskComponentArray[DESCRIPTION]),
                 EVENT_TASK,
-                new TaskDate(startDate),
-                new TaskDate(endDate),
-                new TaskTime(startTime),
-                new TaskTime(endTime),
-                new TaskPriority(taskPriority),
-                new RecurringType(recurringType),
-                new TaskStatus(taskStatus),              
+                new TaskDate(taskComponentArray[START_DATE]),
+                new TaskDate(taskComponentArray[END_DATE]),
+                new TaskTime(taskComponentArray[START_TIME]),
+                new TaskTime(taskComponentArray[END_TIME]),
+                new TaskPriority(taskComponentArray[TASK_PRIORITY]),
+                new RecurringType(taskComponentArray[RECURRING_TYPE]),
+                new TaskStatus(TaskStatus.INCOMPLETE),              
                 tags);
     }
     
