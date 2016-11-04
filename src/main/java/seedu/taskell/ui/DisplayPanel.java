@@ -77,6 +77,8 @@ public class DisplayPanel extends UiPart {
         
         displayPanel.displayTextArea.setText(WELCOME_MESSAGE);
        
+        displayPanel.displayTextArea.setWrapText(true);
+        
         return displayPanel;
     }
     
