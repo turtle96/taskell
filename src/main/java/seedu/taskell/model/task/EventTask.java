@@ -17,47 +17,56 @@ public class EventTask extends Task {
     
     public EventTask(String[] taskComponentArray, boolean[] hasTaskComponentArray, UniqueTagList tags) throws IllegalValueException {
         
-        this(new Description(taskComponentArray[DESCRIPTION]),
-                EVENT_TASK,
-                new TaskDate(taskComponentArray[START_DATE]),
-                new TaskDate(taskComponentArray[END_DATE]),
-                new TaskTime(taskComponentArray[START_TIME]),
-                new TaskTime(taskComponentArray[END_TIME]),
-                new TaskPriority(taskComponentArray[TASK_PRIORITY]),
-                new RecurringType(taskComponentArray[RECURRING_TYPE]),
-                new TaskStatus(TaskStatus.INCOMPLETE),              
-                tags);
+        TaskDate eventStartDate = new TaskDate(taskComponentArray[START_DATE]);
+        TaskDate eventEndDate = new TaskDate(taskComponentArray[END_DATE]);
+        TaskTime eventStartTime = new TaskTime(taskComponentArray[START_TIME]);
+        TaskTime eventEndTime = new TaskTime(taskComponentArray[END_TIME]);
+        RecurringType eventRecurringType = new RecurringType(taskComponentArray[RECURRING_TYPE]);
+        
+        
+        if (TaskDate.isValidFullDate(taskComponentArray[START_DATE]) 
+                && eventStartDate.isBefore(TaskDate.getTodayDate())) {
+            throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
+        } else if (TaskDate.isValidMonthAndYear(taskComponentArray[START_DATE])
+                && eventStartDate.isBefore(TaskDate.getTodayDate())) {
+            throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
+        }
+        
+        eventEndDate = autoAdjustEndDate(eventStartDate, eventEndDate, eventStartTime, eventEndTime);
+        
+        if (!isValidEventDuration(eventStartDate, eventEndDate, eventStartTime, eventEndTime)) {
+            throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
+        }
+        
+        if(!isValidRecurringEvent(eventStartDate, eventEndDate, eventRecurringType)){
+            throw new IllegalValueException(RecurringType.MESSAGE_INVALID_RECURRING_DURATION);
+        }
+        
+        this.description = new Description(taskComponentArray[DESCRIPTION]);
+        this.taskType = EVENT_TASK;
+        this.startDate = eventStartDate;
+        this.endDate = eventEndDate;
+        this.startTime = eventStartTime;
+        this.endTime = eventEndTime;
+        this.taskPriority = new TaskPriority(taskComponentArray[TASK_PRIORITY]);
+        this.recurringType = eventRecurringType;
+        this.taskStatus = new TaskStatus(TaskStatus.INCOMPLETE);
+        this.tags = tags;
+        
     }
     
     /**
      * Every field must be present and not null.
      * @throws IllegalValueException 
      */
-    public EventTask(Description description, String taskType, TaskDate startDate, 
+    /*public EventTask(Description description, String taskType, TaskDate startDate, 
             TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, 
             RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) throws IllegalValueException {
         
-        endDate = autoAdjustEndDate(startDate, endDate, startTime, endTime);
         
-        if (!isValidEventDuration(startDate, endDate, startTime, endTime)) {
-            throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
-        }
         
-        if(!isValidRecurringEvent(startDate, endDate, recurringType)){
-            throw new IllegalValueException(RecurringType.MESSAGE_INVALID_RECURRING_DURATION);
-        }
         
-        this.description = description;
-        this.taskType = EVENT_TASK;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.taskPriority = taskPriority;
-        this.recurringType = recurringType;
-        this.taskStatus = taskStatus;
-        this.tags = tags;
-    }
+    }*/
     
     //@@author A0148004R
     private boolean isValidRecurringEvent(TaskDate startDate, TaskDate endDate, RecurringType recurringType){
@@ -97,10 +106,14 @@ public class EventTask extends Task {
         TaskDate today = TaskDate.getTodayDate();
         if (startDate.equals(endDate) && startTime.isAfter(endTime)) {
             endDate = endDate.getNextDay();
-        } else if((TaskDate.between(startDate, endDate) > -TaskDate.NUM_DAYS_IN_A_WEEK)&& (TaskDate.between(startDate, endDate) < 0)) {
+        } 
+        
+        else if((TaskDate.between(startDate, endDate) > -TaskDate.NUM_DAYS_IN_A_WEEK)&& (TaskDate.between(startDate, endDate) < 0)) {
             System.out.println(TaskDate.between(startDate, endDate));
             endDate = endDate.getNextWeek();
         }
+        
+        
         return endDate;
     }
 
