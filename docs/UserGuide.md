@@ -27,7 +27,7 @@ Step 2: Download the latest `taskell.jar` from <a href="https://github.com/CS210
 	<br><img src="images/Icon.png" width="100"></br>
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
- <br><p align="center"><img src="images/GUI.png" width="800"><br>
+ <br><p align="center"><img src="images/screenshots/screen_calendar.PNG" width="800"><br><br>
 Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
 </p>
 <br>
@@ -106,8 +106,8 @@ Displays a list of all the tasks due on the specific date.<br>
 Displays a list of completed tasks.<br>
 - `list-priority` PRIORITY<br>
 Displays a list of tasks with given priority.<br>
-<br><p align="center"><img src="images/ListToday.png" width="800"></br>
-Diagram 2: Displays all the tasks to be done by today after typing list-date.
+<br><p align="center"><img src="images/screenshots/list_date.PNG" width="800"></br><br>
+Diagram 2: Displays all the tasks to be done by today after typing list-date today.
 
 <!-- @@author -->
    
@@ -125,18 +125,17 @@ This returns all tasks with description or tags that match all keywords `banana`
 Displays list of tasks with the same tags.<br>
 Example: `find homework essay cs2103`<br>
 This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
- <br><p align="center"><img src="images/findReport.png" width="800"></br>
- <br><p align="center"><img src="images/findReportResult.png" width="800"></br>
- 
- <!--- @@author ---> 
-
-Diagrams 3 and 4: Keying in `find report` displays list of tasks with report as one of the keywords in task description
+ <br><p align="center"><img src="images/screenshots/find_cs2010.PNG" width="800"></br>
+ <br><p align="center"><img src="images/screenshots/find_cs2010_results.PNG" width="800"></br> <br>
+Diagrams 3 and 4: Keying in `find cs2010` displays list of tasks with "cs2010" as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
 > * Full words will be matched e.g. `chicken` will match `chickens`.
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `chicken` will match `chicken duck`
+    
+<!--- @@author --->
 
 <!--- @@author A0142130A ---> 
 
@@ -144,6 +143,10 @@ Diagrams 3 and 4: Keying in `find report` displays list of tasks with report as 
 You can view the command history available for undo on the right panel to refer to when undoing previous commands.<br>
 To save your time, Taskell has a short form command `hist`. <br>
 Format: `history`<br>
+
+<br><p align="center"><img src="images/screenshots/history_01.PNG" width="800"></br>
+ <br><p align="center"><img src="images/screenshots/history_02.PNG" width="800"></br> <br>
+ Diagrams 5 and 6: `hist` will show list of command history on the right panel
 
 > Take Note! <br>
 > * Only commands available for undo are shown here. 
@@ -161,6 +164,10 @@ Undo most recent command executed.<br>
 Undo by index of command history.<br>
 Example: `hist`, then `undo 3`, will undo third command in command history.<br>
 
+ <br><p align="center"><img src="images/screenshots/undo_01.PNG" width="800"></br>
+ <br><p align="center"><img src="images/screenshots/undo_02.PNG" width="800"></br> <br>
+Diagrams 7 and 8: `undo 2` will undo 2nd command in history
+
 > Take Note! <br>
 > * Undo command only supports add, edit, delete, done, undone and undo commands.
 > * Clear commands are irreversible!
@@ -170,15 +177,12 @@ Example: `hist`, then `undo 3`, will undo third command in command history.<br>
 #### Deleting a task : `delete`
 To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
- <br><p align="center"><img src="images/delete1.png" width="800"></br>
-Diagram 5: Entering `delete 1 will delete "Arrange meeting with XYZ company".`<br>
-
-Example: `find violin, then delete 1<br>
+Example: `find violin`, then `delete 1`<br>
 This deletes the 1st task in the results of the find command.
 
-Format: `delete` INDEX<br>
- <br><p align="center"><img src="images/delete1.png" width="800"></br>
-Diagram 6: Deletes the first task in the list.<br>
+ <br><p align="center"><img src="images/screenshots/delete_01.PNG" width="800"></br>
+ <br><p align="center"><img src="images/screenshots/delete_02.PNG" width="800"></br><br>
+Diagrams 9 and 10: Entering `delete 20` will delete "read lord of the rings trilogy".<br>
 
 <!--- @@author A0148004R --->
 
@@ -196,7 +200,8 @@ To edit a task<br>
 Formats: 
 - `edit ` INDEX `st: `[NEWSTARTTIME] `et: `[NEWENDTIME] `desc: `[NEWDESCRIPTION] `sd: `[NEWSTARTDATE] `ed: `[NEWENDDATE] `p: `[NEWPRIORITY]<br>
  <br><p align="center"><img src="images/editCmd.png" width="800"></br>
-Diagram 7: Edits the 1st task on the list.<br>
+Diagram 11: Edits the 1st task on the list.<br>
+
 Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
 
 <!--- @@author --->
@@ -214,10 +219,10 @@ Format: `calendar`<br>
 #### Saving the information in Taskell : `save`
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
 To obtain the filepath, navigate to the required file in your File Explorer. Copy the path at the top of the
-screen and paste into Taskell. Refer to diagram 8 for an example of a filepath. <br>
+screen and paste into Taskell. Refer to diagram 12 for an example of a filepath. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
-Diagram 8: Screenshot of File Explorer in Windows.  <br>
+Diagram 12: Screenshot of File Explorer in Windows.  <br>
 
 If the specified directory is valid but the file is missing, for example if command is `save C:\Users\Jim\Documents\chicken`,  and `C:\Users\Jim\Documents\chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
@@ -247,7 +252,10 @@ named "cat" within Taskell's own directory. Whereas `save C:/Users/Jim/Documents
 
 #### Clearing all entries : `clear`
 Permanently clears **all** task data. <br>
-Format: `clear`  <br>
+Format: `clear`  
+
+ <br><p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
+Diagrams 13: Typing `clear` will prompt a confirm pop-up window <br>
 
 > Take Note! <br>
 > * Clear commands are irreversible!
