@@ -147,6 +147,11 @@ public class TaskDate {
             month = convertMonthIntoInteger(monthStr);
         }
         int year = Integer.valueOf(getThisYear());
+        
+        TaskDate date = new TaskDate(convertToStandardFormat(day, month, year));
+        if (!date.isAfter(getTodayDate())) {
+            year++;
+        }
 
         try {
             setDate(day, month, year);
@@ -174,7 +179,7 @@ public class TaskDate {
             month = convertMonthIntoInteger(monthStr);
         }
         int year = Integer.valueOf(tokenArr[1]);
-
+        
         try {
             setDate(day, month, year);
             getYear();
@@ -183,16 +188,17 @@ public class TaskDate {
         }
     }
     
-    private void setDateGivenMonth(String monthToConvert) {
+    private void setDateGivenMonth(String monthToConvert) throws IllegalValueException {
         int day = FIRST_DAY_OF_THE_MONTH;
         int month = convertMonthIntoInteger(monthToConvert);
         int year = Integer.valueOf(getThisYear());
-
-        try {
-            setDate(day, month, year);
-        } catch (DateTimeException dte) {
-            throw dte;
+        
+        TaskDate date = new TaskDate(convertToStandardFormat(day, month, year));
+        if (!date.isAfter(getTodayDate())) {
+            year++;
         }
+
+        setDate(day, month, year);
     }
     
     private void setDateGivenDayNameOfWeek(String dayName) {
