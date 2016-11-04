@@ -238,7 +238,8 @@ Example: `save C:\Users\Jim\Documents`
 named "cat" within Taskell's own directory. Whereas `save C:/Users/Jim/Documents/cat` will open a file named "cat" within your desktop's Documents folder.
 > * Both Windows and Linux OS have restricted symbols not allowed for filenames. Please be aware of the symbols
 shown in the table below.
-   Windows |  Linux 
+    
+Windows |  Linux 
 -------- | :-------- 
     * > | * <
     * < | * >
@@ -248,8 +249,7 @@ shown in the table below.
     * \ | * |
     * | | 
     * ? |
-    * * | 
-
+    * * |
 
 #### Clearing all entries : `clear`
 Permanently clears **all** task data. <br>
