@@ -1,5 +1,5 @@
 /** @@author A0142130A **/
-package seedu.taskell.model;
+package seedu.taskell.history;
 
 import seedu.taskell.model.task.Task;
 
