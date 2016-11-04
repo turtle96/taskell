@@ -55,23 +55,6 @@ public class Parser {
     private static final int FROM_QUEUE = 4;
     private static final int TO_QUEUE = 5;
     
-    private static final int NUM_BOOLEAN_TASK_COMPONENT = 5;
-    private static final int START_DATE_COMPONENT = 0;
-    private static final int END_DATE_COMPONENT = 1;
-    private static final int START_TIME_COMPONENT = 2;
-    private static final int END_TIME_COMPONENT = 3;
-    private static final int RECURRING_COMPONENT = 4;
-    
-    private static final int NUM_TASK_COMPONENT = 8;
-    private static final int DESCRIPTION = 0;
-    private static final int START_DATE = 1;
-    private static final int END_DATE = 2;
-    private static final int START_TIME = 3;
-    private static final int END_TIME = 4;
-    private static final int TASK_PRIORITY = 5;
-    private static final int RECURRING_TYPE = 6;
-    private static final int TAG = 7;
-    
     private static final String ST = "st:";
     private static final String ET = "et:";
     private static final String SD = "sd:";
@@ -504,24 +487,16 @@ public class Parser {
     private Command addTaskAccordingToType() {
         if (isEventTask()) {
             try {
-                return new AddCommand(taskComponentArray[DESCRIPTION], Task.EVENT_TASK, 
-                        taskComponentArray[START_DATE], taskComponentArray[END_DATE], 
-                        taskComponentArray[START_TIME], taskComponentArray[END_TIME],
-                        taskComponentArray[TASK_PRIORITY], taskComponentArray[RECURRING_TYPE], 
-                        getTagsFromArgs(taskComponentArray[TAG]));
+                return new AddCommand(Task.EVENT_TASK, taskComponentArray, hasTaskComponentArray, getTagsFromArgs(taskComponentArray[Task.TAG]));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
-            if (hasTaskComponentArray[RECURRING_COMPONENT]) {
+            if (hasTaskComponentArray[Task.RECURRING_COMPONENT]) {
                 return new IncorrectCommand(FloatingTask.RECURRING_TYPE_NOT_ALLOWED);
             } else {
                 try {
-                    return new AddCommand(taskComponentArray[DESCRIPTION], Task.FLOATING_TASK, 
-                            taskComponentArray[START_DATE], taskComponentArray[END_DATE], 
-                            taskComponentArray[START_TIME], taskComponentArray[END_TIME],
-                            taskComponentArray[TASK_PRIORITY], taskComponentArray[RECURRING_TYPE], 
-                            getTagsFromArgs(taskComponentArray[TAG]));
+                    return new AddCommand(Task.FLOATING_TASK, taskComponentArray, hasTaskComponentArray, getTagsFromArgs(taskComponentArray[Task.TAG]));
                 } catch (IllegalValueException ive) {
                     return new IncorrectCommand(ive.getMessage());
                 }
@@ -560,14 +535,14 @@ public class Parser {
                 continue;
             } else if (token.startsWith(Tag.PREFIX)) {
                 addReservedWordToDescription();
-                taskComponentArray[TAG] += " " + token;
+                taskComponentArray[Task.TAG] += " " + token;
                 continue;
             } else if (token.startsWith(TaskPriority.PREFIX)) {
                 addReservedWordToDescription();
                 if (priorityCount > 0) {
                     throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-                    taskComponentArray[TASK_PRIORITY] = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
+                    taskComponentArray[Task.TASK_PRIORITY] = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
                     priorityCount++;
                 }
                 continue;
@@ -576,8 +551,8 @@ public class Parser {
                 if (recurrenceCount > 0) {
                     throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
                 } else {
-                    taskComponentArray[RECURRING_TYPE] = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
-                    hasTaskComponentArray[RECURRING_COMPONENT] = true;
+                    taskComponentArray[Task.RECURRING_TYPE] = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
+                    hasTaskComponentArray[Task.RECURRING_COMPONENT] = true;
                     recurrenceCount++;
                 }
             } else if (TaskDate.isValidDate(token)) {
@@ -596,14 +571,14 @@ public class Parser {
         if (!isPrecededByDateTimePrefix(partitionQueue)) {
             partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
         } else if (isPrecededByPrefixInQueue(ON_QUEUE)) {
-            if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, ON_QUEUE, START_DATE, START_DATE_COMPONENT);
+            if (!hasTaskComponentArray[Task.START_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, ON_QUEUE, Task.START_DATE, Task.START_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
         } else if (isPrecededByPrefixInQueue(BY_QUEUE)) {
-            if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, END_DATE, END_DATE_COMPONENT);
+            if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, Task.END_DATE, Task.END_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
@@ -611,14 +586,14 @@ public class Parser {
             addReservedWordToDescription();
             partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
         } else if (isPrecededByPrefixInQueue(FROM_QUEUE)) {
-            if (!hasTaskComponentArray[START_DATE_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, START_DATE, START_DATE_COMPONENT);
+            if (!hasTaskComponentArray[Task.START_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, Task.START_DATE, Task.START_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
         } else if (isPrecededByPrefixInQueue(TO_QUEUE)) {
-            if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, END_DATE, END_DATE_COMPONENT);
+            if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, Task.END_DATE, Task.END_DATE_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
@@ -633,26 +608,26 @@ public class Parser {
         if (!isPrecededByDateTimePrefix(partitionQueue)) {
             partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
         } else if (isPrecededByPrefixInQueue(BY_QUEUE)) {
-            if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, END_TIME, END_TIME_COMPONENT);
+            if (!hasTaskComponentArray[Task.END_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, Task.END_TIME, Task.END_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
         } else if (isPrecededByPrefixInQueue(AT_QUEUE)) {
-            if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, AT_QUEUE, START_TIME, START_TIME_COMPONENT);
+            if (!hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, AT_QUEUE, Task.START_TIME, Task.START_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
         } else if (isPrecededByPrefixInQueue(FROM_QUEUE)) {
-            if (!hasTaskComponentArray[START_TIME_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, START_TIME, START_TIME_COMPONENT);
+            if (!hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, Task.START_TIME, Task.START_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
         } else if (isPrecededByPrefixInQueue(TO_QUEUE)) {
-            if (!hasTaskComponentArray[END_TIME_COMPONENT]) {
-                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, END_TIME, END_TIME_COMPONENT);
+            if (!hasTaskComponentArray[Task.END_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, Task.END_TIME, Task.END_TIME_COMPONENT);
             } else {
                 offerTokenToQueue(DESCRIPTION_QUEUE, token);
             }
@@ -671,28 +646,28 @@ public class Parser {
     }
     
     private boolean isEventTask() {
-        return hasTaskComponentArray[START_DATE_COMPONENT] || hasTaskComponentArray[END_DATE_COMPONENT]
-                || hasTaskComponentArray[START_TIME_COMPONENT] || hasTaskComponentArray[END_TIME_COMPONENT];
+        return hasTaskComponentArray[Task.START_DATE_COMPONENT] || hasTaskComponentArray[Task.END_DATE_COMPONENT]
+                || hasTaskComponentArray[Task.START_TIME_COMPONENT] || hasTaskComponentArray[Task.END_TIME_COMPONENT];
     }
     
     private void adjustStartTime() {
-        if ((TaskDate.isValidToday(taskComponentArray[START_DATE]) && !hasTaskComponentArray[START_TIME_COMPONENT])
-                || taskComponentArray[START_DATE].equals(TaskDate.DEFAULT_DATE) && !hasTaskComponentArray[START_TIME_COMPONENT]) {
-            taskComponentArray[START_TIME] = TaskTime.getTimeNow().toString();
+        if ((TaskDate.isValidToday(taskComponentArray[Task.START_DATE]) && !hasTaskComponentArray[Task.START_TIME_COMPONENT])
+                || taskComponentArray[Task.START_DATE].equals(TaskDate.DEFAULT_DATE) && !hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+            taskComponentArray[Task.START_TIME] = TaskTime.getTimeNow().toString();
         }
     }
     
     private void adjustEndDate() {
-        if (!hasTaskComponentArray[END_DATE_COMPONENT]) {
-            taskComponentArray[END_DATE] = taskComponentArray[START_DATE];
+        if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
+            taskComponentArray[Task.END_DATE] = taskComponentArray[Task.START_DATE];
         }
     }
     
     private void extractDescriptionComponent() {
         while (!partitionQueue.get(DESCRIPTION_QUEUE).isEmpty()) {
-            taskComponentArray[DESCRIPTION] += partitionQueue.get(DESCRIPTION_QUEUE).poll() + " ";
+            taskComponentArray[Task.DESCRIPTION] += partitionQueue.get(DESCRIPTION_QUEUE).poll() + " ";
         }
-        taskComponentArray[DESCRIPTION].trim();
+        taskComponentArray[Task.DESCRIPTION].trim();
     }
     
     private void extractDateTimeWhenPrecededByPrefix(String token, int queueType, 
@@ -760,19 +735,19 @@ public class Parser {
     }
     
     private void initialiseHasTaskComponentArray() {
-        hasTaskComponentArray = new boolean[NUM_BOOLEAN_TASK_COMPONENT];
+        hasTaskComponentArray = new boolean[Task.NUM_BOOLEAN_TASK_COMPONENT];
     }
     
     private void initialiseTaskComponentArray() {
-        taskComponentArray = new String[NUM_TASK_COMPONENT];
-        taskComponentArray[DESCRIPTION] = "";
-        taskComponentArray[START_DATE] = TaskDate.DEFAULT_DATE;
-        taskComponentArray[END_DATE] = taskComponentArray[START_DATE];
-        taskComponentArray[START_TIME] = TaskTime.DEFAULT_START_TIME;
-        taskComponentArray[END_TIME] = TaskTime.DEFAULT_END_TIME;
-        taskComponentArray[TASK_PRIORITY] = TaskPriority.DEFAULT_PRIORITY;
-        taskComponentArray[RECURRING_TYPE] = RecurringType.DEFAULT_RECURRING;
-        taskComponentArray[TAG] = "";
+        taskComponentArray = new String[Task.NUM_TASK_COMPONENT];
+        taskComponentArray[Task.DESCRIPTION] = "";
+        taskComponentArray[Task.START_DATE] = TaskDate.DEFAULT_DATE;
+        taskComponentArray[Task.END_DATE] = taskComponentArray[Task.START_DATE];
+        taskComponentArray[Task.START_TIME] = TaskTime.DEFAULT_START_TIME;
+        taskComponentArray[Task.END_TIME] = TaskTime.DEFAULT_END_TIME;
+        taskComponentArray[Task.TASK_PRIORITY] = TaskPriority.DEFAULT_PRIORITY;
+        taskComponentArray[Task.RECURRING_TYPE] = RecurringType.DEFAULT_RECURRING;
+        taskComponentArray[Task.TAG] = "";
     }
 
     private ArrayList<String> tokenizeArguments(String args) {
