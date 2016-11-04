@@ -60,7 +60,7 @@ This developer guide will help you understand the design and implementation of T
   
 **Problem: Eclipse reports some required libraries missing**
 * Reason: Required libraries may not have been downloaded during the project import. 
-* Solution: [Run tests using Gardle](UsingGradle.md) once (to refresh the libraries).
+* Solution: [Run tests using Gradle](UsingGradle.md) once (to refresh the libraries).
  
 
 ## Design
@@ -564,21 +564,23 @@ Use case ends
 **MSS**
 
 1. User requests to clear all tasks
-2. Taskell deletes all tasks
+2. Taskell shows pop-up to ask for confirmation
+3. User confirms
+4. Taskell deletes all tasks
 Use case ends
 
 **Extensions**
 
-2a. The list is empty
+3a. User cancels request
 
-> 2a1. Taskell shows an error message <br>
+> 3a1. Taskell does not clear all tasks <br>
 
 #### Use case: Exit task
 
 **MSS**
 
 1. User requests to exit Taskell
-2. Taskell saves all the data and stops
+2. Taskell window closes
 Use case ends
 
 **Extensions**
