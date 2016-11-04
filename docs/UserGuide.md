@@ -236,23 +236,20 @@ Example: `save C:\Users\Jim\Documents`
 > Take Note! <br>
 > * If you only specify a folder name without directory, i.e. `save cat`, Taskell will create a file
 named "cat" within Taskell's own directory. Whereas `save C:/Users/Jim/Documents/cat` will open a file named "cat" within your desktop's Documents folder.
-> * Windows OS has reserved symbols that cannot be used in file names. The list is given below:
-    * >
-    * <
-    * :
-    * "
-    * /
-    * \
-    * |
-    * ?
-    * *
-> * Linux OS has reserved symbols that cannot be used in file names. The list is given below:
-    * <
-    * >
-    * :
-    * &
-    * /
-    * |
+> * Both Windows and Linux OS have restricted symbols not allowed for filenames. Please be aware of the symbols
+shown in the table below.
+    
+Windows |  Linux 
+-------- | :-------- 
+    * > | * <
+    * < | * >
+    * : | * :
+    * " | * &
+    * / | * /
+    * \ | * |
+    * | | 
+    * ? |
+    * * |
 
 #### Clearing all entries : `clear`
 Permanently clears **all** task data. <br>
