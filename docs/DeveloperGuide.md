@@ -555,7 +555,7 @@ Use case ends
 
 **Extensions**
 
-1a. User gives invalid filename (symbols not allowed in file names)
+1a. User gives invalid filename (contains illegal symbols not allowed in file names)
 
 > 1a1. Taskell shows an error message and still saves data in previous old location.<br>
 
