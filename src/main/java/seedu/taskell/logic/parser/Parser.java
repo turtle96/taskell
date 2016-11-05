@@ -62,6 +62,8 @@ public class Parser {
     private static final String DESCRIPTION = "desc:";
     private static final String PRIORITY = "p:";
 
+    private boolean lastCharChanged;
+
     private static History history;
 
     private ArrayList<Queue<String>> partitionQueue;
@@ -266,37 +268,22 @@ public class Parser {
         }
 
         int targetIdx = Integer.valueOf(intValue);
-        return editTaskWithGIvenNewParameters(st, targetIdx);
+        return editTaskWithGivenNewParameters(st, targetIdx);
     }
 
-    private Command editTaskWithGIvenNewParameters(StringTokenizer st, int targetIdx) {
+    private Command editTaskWithGivenNewParameters(StringTokenizer st, int targetIdx) {
+        System.out.println("I am here to edit taskS");
         while (st.hasMoreTokens()) {
             String parts = st.nextToken();
-            boolean lastChar = false;
             if (parts.equals(DESCRIPTION)) {
                 if (hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
-                String desc = " ";
-                while (!(parts.equals(START_TIME) || parts.equals(END_TIME) || parts.equals(START_DATE)
-                        || parts.equals(END_DATE) | parts.equals(PRIORITY)) && st.hasMoreTokens()) {
-                    desc += (parts + " ");
-                    parts = st.nextToken();
-                    hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
-                }
-                if (!(parts.equals(START_TIME) || parts.equals(END_TIME) || parts.equals(START_DATE)
-                        || parts.equals("ed") | parts.equals(PRIORITY))) {
-                    desc += parts;
-                    lastChar = true;
-                }
-                desc = desc.trim();
-                if (Description.isValidDescription(desc)) {
-                    taskComponentArray[Task.DESCRIPTION] = desc.substring(5);
-                    hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
-                }
+                parts = updateDescription(st, parts);
             }
             if (parts.equals(START_TIME)) {
+                System.out.println("I am here to edit start time");
                 if (hasTaskComponentArray[Task.START_TIME_COMPONENT] == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -393,7 +380,7 @@ public class Parser {
             }
             if (!(parts.equals(DESCRIPTION) || parts.equals(START_TIME) || parts.equals(END_TIME)
                     || parts.equals(START_DATE) || parts.equals(END_DATE) || parts.equals(PRIORITY))
-                    && lastChar == false) {
+                    && lastCharChanged == false) {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
 
@@ -416,6 +403,31 @@ public class Parser {
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+    }
+
+    private String updateDescription(StringTokenizer st, String parts) {
+        System.out.println("Here to edit description");
+        String desc = " ";
+        while (!(parts.equals(START_TIME) || parts.equals(END_TIME) || parts.equals(START_DATE)
+                || parts.equals(END_DATE) | parts.equals(PRIORITY)) && st.hasMoreTokens()) {
+            desc += (parts + " ");
+            parts = st.nextToken();
+            hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
+        }
+        if (!(parts.equals(START_TIME) || parts.equals(END_TIME) || parts.equals(START_DATE)
+                || parts.equals(END_DATE) | parts.equals(PRIORITY))) {
+            desc += parts;
+            lastCharChanged = true;
+        }
+        desc = desc.trim();
+        if (Description.isValidDescription(desc)) {
+            System.out.println("Description is valid");
+            desc = desc.substring(5);
+            hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
+        }
+        taskComponentArray[Task.DESCRIPTION] = desc.trim();
+        System.out.println("Description is "+ taskComponentArray[Task.DESCRIPTION]);
+        return parts;
     }
 
     // @@author
