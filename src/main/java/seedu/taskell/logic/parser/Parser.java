@@ -474,7 +474,7 @@ public class Parser {
         addReservedWordToDescription(); //Add trailing reserved word to description
         
         extractDescriptionComponent();
-        adjustEndDate();
+//        adjustEndDate();
         adjustStartTime();
 
         return addTaskAccordingToType();
@@ -649,15 +649,14 @@ public class Parser {
     private void adjustStartTime() {
         if ((TaskDate.isValidToday(taskComponentArray[Task.START_DATE]) && !hasTaskComponentArray[Task.START_TIME_COMPONENT])
                 || taskComponentArray[Task.START_DATE].equals(TaskDate.DEFAULT_DATE) && !hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+            
             taskComponentArray[Task.START_TIME] = TaskTime.getTimeNow().toString();
         }
     }
     
-    private void adjustEndDate() {
-        if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
-            taskComponentArray[Task.END_DATE] = taskComponentArray[Task.START_DATE];
-        }
-    }
+//    private void adjustEndDate() {
+//        s
+//    }
     
     private void extractDescriptionComponent() {
         while (!partitionQueue.get(DESCRIPTION_QUEUE).isEmpty()) {
