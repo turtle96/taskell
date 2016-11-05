@@ -23,7 +23,7 @@ Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Compu
   > Having any Java 8 version is not enough. <br>
     This application will not work with earlier versions of Java 8.
 
-Step 2: Download the latest `taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
+Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
 	<br><img src="images/Icon.png" width="100"></br>
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
@@ -33,16 +33,22 @@ Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
 <br>
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
-   * **`list`** : displays all contacts
-   * **`add`** buy MA1101R textbook today : adds a task called buy MA1101R textbook to be done by today.
-   * **`delete`** 3 : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the application <br>
+   * `list` : displays all contacts
+   * `add` buy MA1101R textbook today : adds a task called buy MA1101R textbook to be done by today.
+   * `delete` 3 : deletes the 3rd task shown in the current list
+   * `exit` : exits the application <br>
 Refer to the [Features](#features) section below for details of each command.<br>
 
 
 ## Features
 
-This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. These parameters have to be in the order stated below. Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. INDEX refers to the index number shown in the most recent listing.
+This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. The parameters are listed below
+- PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 3 indicates default, low and high priority respectively. 
+- RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly
+- TAG: Indicates the category a task belongs to
+
+Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
+INDEX refers to the index number shown in the most recent listing.
 
 #### Viewing list of commands : `help`
 
@@ -51,44 +57,86 @@ To open the help window<br>
  
 <!--- @@author A0139257X --->
 
-#### Adding a task: `add`
+#### Adding a task: **`add`**
 To add a floating task<br>
 Format: 
-- `add` TASK <br>
-Example: `add` read Harry Potter Book <br>
+`add` TASK <br>
+Example: `add` Read Harry Potter book <br>
 
-To add a deadline task<br>
+To add a task with priority<br>
+Format:
+`add` TASK <i>p/</i>PRIORITY <br>
+Example: `add` Complete math assignment <i>p/</i>3<br>
+
+To add a task with tag(s)<br>
+Formats:
+- `add` TASK <i>#</i>TAG <br>
+Example: `add` Meet Alice in Bugis <i>#</i>friends<br>
+- `add` TASK <i>#</i>TAG <i>#</i>[MORE_TAGS] <br>
+Example: `add` Swimming with Jane <i>#</i>friends <i>#</i>leisure <br>
+
+To add a recurring task <br>
+Format:
+`add` TASK <i>r/</i>RECURRING <br>
+Example: `add` Read newspaper <i>on</i> mon <i>r/</i>daily
+> Floating tasks are not allowed to have recurring status since there are no element of date or time
+
+To add a task with date and time<br>
+Formats:
+- `add` TASK <i>from</i> START_DATE <i>to</i> END_DATE<br>
+Example: `add` Go camping at Kota Tinggi <i>from</i> 3-jun-2016 <i>to</i> 7-jun-2016
+- `add` TASK <i>from</i> START_TIME <i>to</i> END_TIME <br>
+Example: `add` Watch Dr Strange <i>from</i> 7.30pm <i>to</i> 9.25pm
+
 > Please refer to Appendix A and B for date and time format respectively that Taskell supports. <br>
 
+To allow greater flexibility in the command format, Taskell supports a few natural variation such as <i>by</i>, <i>on</i> and <i>at</i>.
+<br>
+
+The <i>by</i> keyword indicates that the task is a deadline task. Any date or time preceded by this keyword will be stored as an end date and end time respectively.
+<br>
 Formats:
-- `add` TASK <i>by</i> [DATE] <br>
-Example: add buy textbook <i>by</i> today<br>
-- `add` TASK <i>by</i> [TIME]<br>
-Example: add visit Sandy at her house by the seaside <i>by</i>  3.35pm<br>
-- `add` TASK <i>by</i>  [DATE] <i>by</i>  [TIME] <br>
-Example: `add` do lab homework <i>by</i> Friday <i>by</i> 7pm
+- `add` TASK <i>by</i> DATE <br>
+Example: `add` Buy textbook <i>by</i> tuesday
+- `add` TASK <i>by</i> TIME<br>
+Example: `add` visit Sandy at her house by the seaside <i>by</i> 3.35pm
+- `add` TASK <i>by</i>  DATE <i>by</i>  TIME <br>
+Example: `add` Do lab homework <i>by</i> Friday <i>by</i> 7pm
+<br>
 
-To have a greater flexibility in the command format, Taskell supports a few natural variation such as <i>on</i> and <i>at</i>.<br>
+The <i>on</i> keyword indicates that the task has to be done on the given date. Any date preceded by this keyword will be stored as a start date.
+<br>
 
-- `add ` TASK <i>on</i> [DATE]<br>
-Example: `add ` go for meeting <i>on</i> monday <br>
-- `add ` TASK <i>at</i> [TIME] <br>
-Example: `add ` go for meeting <i>at</i> 3pm <br>
-- `add ` TASK <i>on</i> [DATE] <i>at</i> [TIME] <br>
-Example: `add ` go for meeting <i>on</i> Sunday <i>at</i> 3pm <br>
-- `add ` TASK <i>on</i> [DATE] <i>by</i>[TIME] <br>
-Example: `add ` go for meeting <i>on</i> 1-jan <i>by</i> 3pm <br>
 
-To add an event task<br>
+Format:
+`add` TASK <i>on</i> DATE<br>
+Example: `add` Go for meeting <i>on</i> mon <br>
+
+
+The <i>at</i> keyword indicates that the task has to be done at the given time. Any time preceded by this keyword will be stored as a start time.
+<br>
+
+Format:
+`add` TASK <i>at</i> TIME <br>
+Example: `add` Go for meeting <i>at</i> 3pm <br>
+
+
+Having understood the aforementioned behaviours of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> keyword, you can fuse them together to form more complex tasks.
+<br>
 Formats:
-- `add ` TASK <i>on</i> [DATE] <i>startat</i> [TIME] <i>endat</i> [TIME]<br>
-Example: `add ` schedule meeting <i>on</i> Thursday <i>startat</i> 1pm <i>endat</i> 9pm<br>
+- `add` TASK <i>on</i> DATE <i>at</i> TIME <br>
+Example: `add` Go for meeting <i>on</i> Sunday <i>at</i> 3pm <br>
+- `add` TASK <i>on</i> DATE <i>by</i> TIME <br>
+Example: `add` Go for meeting <i>by</i> 3pm <i>on</i> 1-jan
+- `add` TASK <i>from</i> DATE <br>
+Example:`add` Go out with friends <i>from</i> 9am
+- `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <br>
+Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
 
-- `add ` TASK <i>startat</i>  [TIME]<br>
-Example: `add ` concert by 2am band <i>startat</i> 7pm<br>
+Moreover, Taskell is able to make automatic adjustments to the date and time. <br> 
+Example: `add` Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br> 
 
-- `add ` TASK <i>endat</i>  [TIME]<br>
-Example: `add ` netball training <i>endat</i> 7pm<br>
+
 
 <!--- @@author -->
 
@@ -143,7 +191,7 @@ Diagrams 3 and 4: Keying in `find report` displays list of tasks with report as 
 #### Showing history : `history` or `hist`
 You can view the command history available for undo on the right panel to refer to when undoing previous commands.<br>
 To save your time, Taskell has a short form command `hist`. <br>
-Format: `history`<br>
+Format: `history` <br>
 
 > Take Note! <br>
 > * Only commands available for undo are shown here. 
@@ -199,7 +247,7 @@ This marks the 1st task as incomplete and moves it to the uncompleted list.<br>
 #### Editing a task : `edit`
 To edit a task<br>
 Formats: 
-- `edit ` INDEX `st: `[NEWSTARTTIME] `et: `[NEWENDTIME] `desc: `[NEWDESCRIPTION] `sd: `[NEWSTARTDATE] `ed: `[NEWENDDATE] `p: `[NEWPRIORITY]<br>
+- `edit` INDEX <i>st:</i>[NEWSTARTTIME] <i>et:</i>[NEWENDTIME] <i>desc:</i> [NEWDESCRIPTION] <i>sd:</i> [NEWSTARTDATE] <i>ed:</i> [NEWENDDATE] <i>p:</i> [NEWPRIORITY]<br>
  <br><p align="center"><img src="images/editCmd.png" width="800"></br>
 Diagram 7: Edits the 1st task on the list.<br>
 Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
@@ -284,10 +332,8 @@ transfer your data to a new location on your computer. <br>
 
 Command | Format  
 -------- | :-------- 
-Add Floating Task | `add` TASK ITEM 
-Add Event | `add` TASK ITEM <strong>by</strong> [DATE]
-Add Event | `add` TASK ITEM <strong>by</strong> [TIME]
-Add Event With Deadline | `add` TASK ITEM <strong>by</strong> [DATE][TIME]
+Add Floating Task | `add` TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG]
+Add Event | `add` TASK <i>by</i> DATE <br> `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME <br> `add` TASK <i>from</i> DATE <i>to</i> DATE <br> `add` TASK <i>from</i> TIME <i>to</i> TIME <br> `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING]
 Calendar View | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
@@ -303,31 +349,24 @@ List Done Tasks | `list-done`
 Mark Task Done | `done` INDEX
 Mark Task Undone | `undone` INDEX
 Undo | `undo` or `undo` INDEX
+<!-- @@author -->
 
+<!--- @@author A0139257X --->
 ## Appendix A
 
 Supported Date Format |   Example  
 -------- | :-------- 
-DD-MM-YY |1-1-16 
-DD-MM-YY  | 1-1-2016 
-DD-MM-YY  | 1-Jan-2016
-DD-MM-YY  | 1-January-2016  
-DD-MM-YY  | 1.Jan.2016
-DD-MM-YY  | 1.January.2016  
-MM-YY  | july-16
-MM  | july
-day  | today
-day  | tdy
-day  | tmr
-day  | tomorrow
-day  | thursday
+DD-MM-YYYY |1-3-2016 <br> 1/5/2016<br> 1-jan-2016 <br> 1-April-2016 <br> 1.Jan.2016 <br> 1.May.2016
+MM-YYYY  | jul-2016 <br> july-2016
+MM  | mar <br> sept <br> December
+day  | today <br> tdy <br> tomorrow <br> tmr <br> thursday <br> thurs <br> thu
 
 ## Appendix B
 
 Supported Time Format |   Example  
 -------- | :-------- 
-12hour |1pm
-12hour |12am
-12hour |11.45pm
+In 12-hour format | 12am <br> 5:30am<br> 1pm <br> 11.45pm <br> 10-35pm
+In words | now <br> midnight <br> afternoon <br> noon
 
 <!-- @@author -->
+
