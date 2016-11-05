@@ -176,8 +176,6 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add Valid Description with startDate after endDate from 1-jan-2200 to 1-jan-2100", EventTask.MESSAGE_EVENT_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Description with startTime before Today's current time at 12am", EventTask.MESSAGE_EVENT_CONSTRAINTS);
-        assertCommandBehavior(
                 "add Valid Description p/invalidPriority ", TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS);
         assertCommandBehavior(
                 "add Valid Description p/0 p/1 ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
