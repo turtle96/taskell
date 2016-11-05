@@ -258,8 +258,8 @@ public class Parser {
         }
 
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
+        String index = st.nextToken();
+        if (!isInt(index)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
 
@@ -267,7 +267,7 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        int targetIdx = Integer.valueOf(intValue);
+        int targetIdx = Integer.valueOf(index);
         return editTaskWithGivenNewParameters(st, targetIdx);
     }
 
@@ -283,7 +283,6 @@ public class Parser {
                 parts = updateDescription(st, parts);
             }
             if (parts.equals(START_TIME)) {
-                System.out.println("I am here to edit start time");
                 if (hasTaskComponentArray[Task.START_TIME_COMPONENT] == true) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
@@ -419,14 +418,13 @@ public class Parser {
             desc += parts;
             lastCharChanged = true;
         }
-        desc = desc.trim();
-        if (Description.isValidDescription(desc)) {
-            System.out.println("Description is valid");
-            desc = desc.substring(5);
-            hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
-        }
+
+        // System.out.println("Description is valid");
+        desc = desc.substring(5).trim();
+        hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
         taskComponentArray[Task.DESCRIPTION] = desc.trim();
-        System.out.println("Description is "+ taskComponentArray[Task.DESCRIPTION]);
+        // System.out.println("Description is " +
+        // taskComponentArray[Task.DESCRIPTION]);
         return parts;
     }
 
