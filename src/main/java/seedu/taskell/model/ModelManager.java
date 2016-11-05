@@ -86,6 +86,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateTaskManagerChanged();
     }
 
+    /** @@author A0142130A **/
+    
     @Override
     public boolean isTaskPresent(Task task) {
     	if (task == null) {
@@ -94,6 +96,8 @@ public class ModelManager extends ComponentManager implements Model {
     	}
         return taskManager.isTaskPresent(task);
     }
+    
+    /** @@author **/
 
     // =========== Filtered Task List Accessors
     // ===============================================================
@@ -109,7 +113,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords) {
+    public void updateFilteredTaskListByAllKeywords(Set<String> keywords) {
         updateFilteredTaskList(new PredicateExpression(new DescriptionAndTagsQualifier(keywords)));
     }
 
@@ -186,7 +190,7 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             String searchString = task.getDescription().description + " " + task.tagsSimpleString();
-            return nameKeyWords.stream().allMatch(keyword -> StringUtil.containsIgnoreCase(searchString, keyword));
+            return nameKeyWords.stream().allMatch(keyword -> StringUtil.containsSubstringAndIgnoreCase(searchString, keyword));
         }
 
         /** @@author **/
@@ -208,7 +212,8 @@ public class ModelManager extends ComponentManager implements Model {
         @Override
         public boolean run(ReadOnlyTask task) {
             return tagsKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.tagsSimpleString(), keyword)).findAny()
+                    .filter(keyword -> StringUtil.containsSubstringAndIgnoreCase(task.tagsSimpleString(), keyword))
+                    .findAny()
                     .isPresent();
         }
 
