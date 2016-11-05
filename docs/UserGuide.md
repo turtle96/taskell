@@ -327,10 +327,8 @@ transfer your data to a new location on your computer. <br>
 
 Command | Format  
 -------- | :-------- 
-Add Floating Task | `add` TASK ITEM 
-Add Event | `add` TASK ITEM <strong>by</strong> [DATE]
-Add Event | `add` TASK ITEM <strong>by</strong> [TIME]
-Add Event With Deadline | `add` TASK ITEM <strong>by</strong> [DATE][TIME]
+Add Floating Task | `add` TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG]
+Add Event | `add` TASK <i>by</i> DATE <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING] <br> `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME
 Calendar View | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
@@ -374,3 +372,4 @@ Supported Time Format |   Example
 12hour |11.45pm
 
 <!-- @@author -->
+
