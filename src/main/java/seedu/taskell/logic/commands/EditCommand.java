@@ -100,9 +100,22 @@ public class EditCommand extends Command {
     }
 
     private boolean isValidTime(ReadOnlyTask taskToEdit) {
+        TaskTime currentTime = TaskTime.getTimeNow();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.equals(startDate) && endTime.isBefore(startTime)) {
-                return false;
+                try {
+                    endDate = endDate.getNextDay();
+                } catch (IllegalValueException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                return true;
+            } else if (endDate.equals(startDate) && endTime.isBefore(currentTime)) {
+                endTime = currentTime;
+                return true;
+            } else if (endDate.equals(startDate) && startTime.isBefore(currentTime)) {
+                startTime = currentTime;
+                return true;
             } else {
                 return true;
             }
