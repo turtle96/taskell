@@ -203,15 +203,19 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
         }
 
-        initialiseTaskComponentArray();
         StringTokenizer st = new StringTokenizer(arguments.trim(), " ");
-        taskComponentArray[Task.START_DATE] = st.nextToken();
+        String date = st.nextToken();
 
-        if (st.hasMoreTokens() || !TaskDate.isValidDate(taskComponentArray[Task.START_DATE])) {
+        if (st.hasMoreTokens() || !TaskDate.isValidDate(date)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
-        }
+        } else {
+            try {
+                return new ListDateCommand(new TaskDate(date));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
 
-        return new ListDateCommand(taskComponentArray[Task.START_DATE]);
+            }
+        }
     }
 
     private Command prepareListPriority(String args) {
