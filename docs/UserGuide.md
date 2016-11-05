@@ -23,7 +23,7 @@ Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Compu
   > Having any Java 8 version is not enough. <br>
     This application will not work with earlier versions of Java 8.
 
-Step 2: Download the latest `taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
+Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
 	<br><img src="images/Icon.png" width="100"></br>
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
@@ -33,10 +33,10 @@ Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
 <br>
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
-   * **`list`** : displays all contacts
-   * **`add`** buy MA1101R textbook today : adds a task called buy MA1101R textbook to be done by today.
-   * **`delete`** 3 : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the application <br>
+   * `list` : displays all contacts
+   * `add` buy MA1101R textbook today : adds a task called buy MA1101R textbook to be done by today.
+   * `delete` 3 : deletes the 3rd task shown in the current list
+   * `exit` : exits the application <br>
 Refer to the [Features](#features) section below for details of each command.<br>
 
 
@@ -191,7 +191,7 @@ Diagrams 3 and 4: Keying in `find report` displays list of tasks with report as 
 #### Showing history : `history` or `hist`
 You can view the command history available for undo on the right panel to refer to when undoing previous commands.<br>
 To save your time, Taskell has a short form command `hist`. <br>
-Format: `history`<br>
+Format: `history` <br>
 
 > Take Note! <br>
 > * Only commands available for undo are shown here. 
@@ -242,7 +242,7 @@ This adds the 1st task as completed and moves it to the completed list.<br>
 #### Editing a task : `edit`
 To edit a task<br>
 Formats: 
-- `edit ` INDEX `st: `[NEWSTARTTIME] `et: `[NEWENDTIME] `desc: `[NEWDESCRIPTION] `sd: `[NEWSTARTDATE] `ed: `[NEWENDDATE] `p: `[NEWPRIORITY]<br>
+- `edit` INDEX <i>st:</i>[NEWSTARTTIME] <i>et:</i>[NEWENDTIME] <i>desc:</i> [NEWDESCRIPTION] <i>sd:</i> [NEWSTARTDATE] <i>ed:</i> [NEWENDDATE] <i>p:</i> [NEWPRIORITY]<br>
  <br><p align="center"><img src="images/editCmd.png" width="800"></br>
 Diagram 7: Edits the 1st task on the list.<br>
 Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
@@ -360,8 +360,8 @@ day  | today <br> tdy <br> tomorrow <br> tmr <br> thursday <br> thurs <br> thu
 
 Supported Time Format |   Example  
 -------- | :-------- 
-In 12-hour format | 12am <br> 5:30am<br> 1pm <br> 11.45pm
-In words | now <br> midnight <br> noon
+In 12-hour format | 12am <br> 5:30am<br> 1pm <br> 11.45pm <br> 10-35pm
+In words | now <br> midnight <br> afternoon <br> noon
 
 <!-- @@author -->
 
