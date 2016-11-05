@@ -348,16 +348,6 @@ public class Parser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
         }
-        System.out.println("Idx: " + targetIdx + " ,Desc: " + taskComponentArray[Task.DESCRIPTION] + " ,startDate: "
-                + taskComponentArray[Task.START_DATE] + " ,endDate: " + taskComponentArray[Task.END_DATE]
-                + " , startTime: " + taskComponentArray[Task.START_TIME] + " , endTime: "
-                + taskComponentArray[Task.END_TIME] + "priority: " + taskComponentArray[Task.TASK_PRIORITY]);
-        System.out.println("desc: " + hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] + " sd: "
-                + hasTaskComponentArray[Task.START_DATE_COMPONENT] + " ed: "
-                + hasTaskComponentArray[Task.END_DATE_COMPONENT] + " st: "
-                + hasTaskComponentArray[Task.START_TIME_COMPONENT] + " et: "
-                + hasTaskComponentArray[Task.END_TIME_COMPONENT] + " p: "
-                + hasTaskComponentArray[Task.PRIORITY_COMPONENT]);
         try {
             return new EditCommand(targetIdx, new Description(taskComponentArray[Task.DESCRIPTION]),
                     new TaskDate(taskComponentArray[Task.START_DATE]), new TaskDate(taskComponentArray[Task.END_DATE]),
