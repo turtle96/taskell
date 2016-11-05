@@ -19,13 +19,19 @@ public class EventTask extends Task {
         
         this.taskComponentArray = taskComponentArray;
         this.hasTaskComponentArray = hasTaskComponentArray;
+        this.tags = tags;
         
+        setTaskComponents();
+    }
+    
+    private void setTaskComponents() throws IllegalValueException {
         TaskDate eventStartDate = new TaskDate(this.taskComponentArray[START_DATE]);
         TaskTime eventEndTime = new TaskTime(this.taskComponentArray[END_TIME]);
         RecurringType eventRecurringType = new RecurringType(this.taskComponentArray[RECURRING_TYPE]);
         
-        verifyStartDate(eventStartDate);
         TaskTime eventStartTime = setStartTime(eventStartDate);
+        eventStartDate = adjustStartDate(eventStartDate, eventStartTime);
+        System.out.println(eventStartDate);
         
         TaskDate eventEndDate = setEndDate(eventStartDate, eventStartTime, eventEndTime);
         
@@ -46,11 +52,9 @@ public class EventTask extends Task {
         this.taskPriority = new TaskPriority(taskComponentArray[TASK_PRIORITY]);
         this.recurringType = eventRecurringType;
         this.taskStatus = new TaskStatus(TaskStatus.INCOMPLETE);
-        this.tags = tags;
-        
     }
     
-    private void verifyStartDate(TaskDate eventStartDate) throws IllegalValueException {
+    private TaskDate adjustStartDate(TaskDate eventStartDate, TaskTime eventStartTime) throws IllegalValueException {
         if (TaskDate.isValidFullDate(taskComponentArray[START_DATE]) 
                 && eventStartDate.isBefore(TaskDate.getTodayDate())) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
@@ -58,6 +62,12 @@ public class EventTask extends Task {
                 && eventStartDate.isBefore(TaskDate.getTodayDate())) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         }
+        
+        if (!hasTaskComponentArray[START_DATE_COMPONENT] && eventStartTime.isBefore(TaskTime.getTimeNow())) {
+            eventStartDate = eventStartDate.getNextDay();
+        }
+        
+        return eventStartDate;
     }
     
     private TaskTime setStartTime(TaskDate eventStartDate) throws IllegalValueException {
@@ -70,7 +80,7 @@ public class EventTask extends Task {
     
     private TaskDate setEndDate(TaskDate eventStartDate, TaskTime eventStartTime, TaskTime eventEndTime) throws IllegalValueException {
         
-        initialiseEndDate();
+        initialiseEndDate(eventStartDate);
         
         TaskDate eventEndDate = adjustEndDateDependingOnDateForm(eventStartDate, eventStartTime, eventEndTime);
         
@@ -100,6 +110,8 @@ public class EventTask extends Task {
         TaskDate eventEndDate = new TaskDate(taskComponentArray[Task.END_DATE]);
         String userInputEndDate = taskComponentArray[END_DATE];
         
+        System.out.println("OO: " + eventEndDate);
+        
         if (TaskDate.isValidFullDate(userInputEndDate) && eventEndDate.isBefore(eventStartDate)
                 || TaskDate.isValidMonthAndYear(userInputEndDate) && eventEndDate.isBefore(eventStartDate)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
@@ -114,9 +126,9 @@ public class EventTask extends Task {
         return eventEndDate;
     }
     
-    private void initialiseEndDate() {
+    private void initialiseEndDate(TaskDate eventStartDate) {
         if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
-            taskComponentArray[Task.END_DATE] = taskComponentArray[Task.START_DATE];
+            taskComponentArray[Task.END_DATE] = eventStartDate.toString();
         }
     }
     
