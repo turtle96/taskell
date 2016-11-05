@@ -321,7 +321,7 @@ public class LogicManagerTest {
                 "11.58pm", TaskTime.DEFAULT_END_TIME, 
                 TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING,
                 TaskStatus.INCOMPLETE, new UniqueTagList(),
-                true, false, false, false, false);
+                false, false, true, false, false);
         
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
@@ -422,6 +422,8 @@ public class LogicManagerTest {
                 TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING,
                 TaskStatus.INCOMPLETE, new UniqueTagList(), 
                 false, true, false, false, false);
+        
+        System.out.println(toBeAdded);
         
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
@@ -541,7 +543,7 @@ public class LogicManagerTest {
         String description = "add go school from " + todayNameInWeek + " to " + tomorrowNameInWeek ;
         
         TestDataHelper helper = new TestDataHelper();
-        EventTask toBeAdded = helper.generateEventTask("go school", today.getNextWeek().toString(), tomorrow.toString(),
+        EventTask toBeAdded = helper.generateEventTask("go school", today.getNextWeek().toString(), tomorrow.getNextWeek().toString(),
                 TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME,
                 TaskPriority.DEFAULT_PRIORITY, RecurringType.NO_RECURRING, 
                 TaskStatus.INCOMPLETE, new UniqueTagList(), 
@@ -994,6 +996,12 @@ public class LogicManagerTest {
             boolean[] hasTaskComponentArray = initHasTaskComponentArray(hasStartDate, hasEndDate, 
                     hasStartTime, hasEndTime, hasRecurringType);
             
+            System.out.println(hasTaskComponentArray[0]);
+            System.out.println(hasTaskComponentArray[1]);
+            System.out.println(hasTaskComponentArray[2]);
+            System.out.println(hasTaskComponentArray[3]);
+            System.out.println(hasTaskComponentArray[4]);
+            
             return new EventTask(taskComponentArray, hasTaskComponentArray, tagSet);
         }
         
@@ -1018,11 +1026,13 @@ public class LogicManagerTest {
                 boolean hasRecurringType) {
             
             boolean[] hasTaskComponentArray = new boolean[Task.NUM_BOOLEAN_TASK_COMPONENT];
+            
             hasTaskComponentArray[Task.START_DATE_COMPONENT] = hasStartDate;
             hasTaskComponentArray[Task.END_DATE_COMPONENT] = hasEndDate;
             hasTaskComponentArray[Task.START_TIME_COMPONENT] = hasStartTime;
-            hasTaskComponentArray[Task.END_DATE_COMPONENT] = hasEndTime;
+            hasTaskComponentArray[Task.END_TIME_COMPONENT] = hasEndTime;
             hasTaskComponentArray[Task.RECURRING_COMPONENT] = hasRecurringType;
+            
             return hasTaskComponentArray;
         }
         
