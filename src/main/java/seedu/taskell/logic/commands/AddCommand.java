@@ -32,10 +32,7 @@ public class AddCommand extends Command {
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
-
-    public AddCommand(String description, String taskType, String startDate, String endDate, 
-            String startTime, String endTime, String taskPriority, 
-            String recurringType, Set<String> tags) throws IllegalValueException {
+    public AddCommand(String taskType, String[] taskComponentArray, boolean[] hasTaskComponentArray, Set<String> tags) throws IllegalValueException {
         
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -44,10 +41,10 @@ public class AddCommand extends Command {
         
         switch (taskType) {
         case Task.FLOATING_TASK: 
-            this.toAdd = new FloatingTask(description, taskPriority, recurringType, TaskStatus.INCOMPLETE, new UniqueTagList(tagSet));
+            this.toAdd = new FloatingTask(taskComponentArray, hasTaskComponentArray, new UniqueTagList(tagSet));
             break;
         case Task.EVENT_TASK:
-            this.toAdd = new EventTask(description, startDate, endDate, startTime, endTime, taskPriority, recurringType, TaskStatus.INCOMPLETE, new UniqueTagList(tagSet));
+            this.toAdd = new EventTask(taskComponentArray, hasTaskComponentArray, new UniqueTagList(tagSet));
             break;
         default:
             toAdd = null;
