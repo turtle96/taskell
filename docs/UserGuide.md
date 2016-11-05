@@ -187,6 +187,11 @@ Format: `done` INDEX<br>
 Example: `done` 1<br>
 This adds the 1st task as completed and moves it to the completed list.<br>
 
+#### Marking a task as uncompleted: `undone`
+Format: `undone` INDEX<br>
+Example: `undone` 1<br>
+This adds the 1st task as uncompleted and moves it to the uncompleted list.<br>
+
 <!--- @@author --->
 
 <!--- @@author A0142073R --->
