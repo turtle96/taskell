@@ -42,7 +42,13 @@ Refer to the [Features](#features) section below for details of each command.<br
 
 ## Features
 
-This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. These parameters have to be in the order stated below. Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. INDEX refers to the index number shown in the most recent listing.
+This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. The parameters are listed below
+- PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 3 indicates default, low and high priority respectively. 
+- RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly
+- TAG: Indicates the category a task belongs to
+
+Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
+INDEX refers to the index number shown in the most recent listing.
 
 #### Viewing list of commands : `help`
 
@@ -51,44 +57,86 @@ To open the help window<br>
  
 <!--- @@author A0139257X --->
 
-#### Adding a task: `add`
+#### Adding a task: **`add`**
 To add a floating task<br>
 Format: 
-- `add` TASK <br>
-Example: `add` read Harry Potter Book <br>
+`add` TASK <br>
+Example: `add` Read Harry Potter book <br>
 
-To add a deadline task<br>
+To add a task with priority<br>
+Format:
+`add` TASK <i>p/</i>PRIORITY <br>
+Example: `add` Complete math assignment <i>p/</i>3<br>
+
+To add a task with tag(s)<br>
+Formats:
+- `add` TASK <i>#</i>TAG <br>
+Example: `add` Meet Alice in Bugis <i>#</i>friends<br>
+- `add` TASK <i>#</i>TAG <i>#</i>[MORE_TAGS] <br>
+Example: `add` Swimming with Jane <i>#</i>friends <i>#</i>leisure <br>
+
+To add a recurring task <br>
+Format:
+`add` TASK <i>r/</i>RECURRING <br>
+Example: `add` Read newspaper <i>on</i> mon <i>r/</i>daily
+> Floating tasks are not allowed to have recurring status since there are no element of date or time
+
+To add a task with date and time<br>
+Formats:
+- `add` TASK <i>from</i> START_DATE <i>to</i> END_DATE<br>
+Example: `add` Go camping at Kota Tinggi <i>from</i> 3-jun-2016 <i>to</i> 7-jun-2016
+- `add` TASK <i>from</i> START_TIME <i>to</i> END_TIME <br>
+Example: `add` Watch Dr Strange <i>from</i> 7.30pm <i>to</i> 9.25pm
+
 > Please refer to Appendix A and B for date and time format respectively that Taskell supports. <br>
 
+To allow greater flexibility in the command format, Taskell supports a few natural variation such as <i>by</i>, <i>on</i> and <i>at</i>.
+<br>
+
+The <i>by</i> keyword indicates that the task is a deadline task. Any date or time preceded by this keyword will be stored as an end date and end time respectively.
+<br>
 Formats:
-- `add` TASK <i>by</i> [DATE] <br>
-Example: add buy textbook <i>by</i> today<br>
-- `add` TASK <i>by</i> [TIME]<br>
-Example: add visit Sandy at her house by the seaside <i>by</i>  3.35pm<br>
-- `add` TASK <i>by</i>  [DATE] <i>by</i>  [TIME] <br>
-Example: `add` do lab homework <i>by</i> Friday <i>by</i> 7pm
+- `add` TASK <i>by</i> DATE <br>
+Example: `add` Buy textbook <i>by</i> tuesday
+- `add` TASK <i>by</i> TIME<br>
+Example: `add` visit Sandy at her house by the seaside <i>by</i> 3.35pm
+- `add` TASK <i>by</i>  DATE <i>by</i>  TIME <br>
+Example: `add` Do lab homework <i>by</i> Friday <i>by</i> 7pm
+<br>
 
-To have a greater flexibility in the command format, Taskell supports a few natural variation such as <i>on</i> and <i>at</i>.<br>
+The <i>on</i> keyword indicates that the task has to be done on the given date. Any date preceded by this keyword will be stored as a start date.
+<br>
 
-- `add ` TASK <i>on</i> [DATE]<br>
-Example: `add ` go for meeting <i>on</i> monday <br>
-- `add ` TASK <i>at</i> [TIME] <br>
-Example: `add ` go for meeting <i>at</i> 3pm <br>
-- `add ` TASK <i>on</i> [DATE] <i>at</i> [TIME] <br>
-Example: `add ` go for meeting <i>on</i> Sunday <i>at</i> 3pm <br>
-- `add ` TASK <i>on</i> [DATE] <i>by</i>[TIME] <br>
-Example: `add ` go for meeting <i>on</i> 1-jan <i>by</i> 3pm <br>
 
-To add an event task<br>
+Format:
+`add` TASK <i>on</i> DATE<br>
+Example: `add` Go for meeting <i>on</i> mon <br>
+
+
+The <i>at</i> keyword indicates that the task has to be done at the given time. Any time preceded by this keyword will be stored as a start time.
+<br>
+
+Format:
+`add` TASK <i>at</i> TIME <br>
+Example: `add` Go for meeting <i>at</i> 3pm <br>
+
+
+Having understood the aforementioned behaviours of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> keyword, you can fuse them together to form more complex tasks.
+<br>
 Formats:
-- `add ` TASK <i>on</i> [DATE] <i>startat</i> [TIME] <i>endat</i> [TIME]<br>
-Example: `add ` schedule meeting <i>on</i> Thursday <i>startat</i> 1pm <i>endat</i> 9pm<br>
+- `add` TASK <i>on</i> DATE <i>at</i> TIME <br>
+Example: `add` Go for meeting <i>on</i> Sunday <i>at</i> 3pm <br>
+- `add` TASK <i>on</i> DATE <i>by</i> TIME <br>
+Example: `add` Go for meeting <i>by</i> 3pm <i>on</i> 1-jan
+- `add` TASK <i>from</i> DATE <br>
+Example:`add` Go out with friends <i>from</i> 9am
+- `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <br>
+Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
 
-- `add ` TASK <i>startat</i>  [TIME]<br>
-Example: `add ` concert by 2am band <i>startat</i> 7pm<br>
+Moreover, Taskell is able to make automatic adjustments to the date and time. <br> 
+Example: `add` Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br> 
 
-- `add ` TASK <i>endat</i>  [TIME]<br>
-Example: `add ` netball training <i>endat</i> 7pm<br>
+
 
 <!--- @@author -->
 
