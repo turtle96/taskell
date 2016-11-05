@@ -5,6 +5,8 @@ import java.util.logging.Logger;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
+
+import seedu.taskell.history.HistoryManager;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;

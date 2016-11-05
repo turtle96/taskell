@@ -13,6 +13,7 @@ import seedu.taskell.commons.events.ui.ExitAppRequestEvent;
 import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.commons.util.ConfigUtil;
 import seedu.taskell.commons.util.StringUtil;
+import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.ClearCommand;

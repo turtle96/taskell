@@ -4,8 +4,8 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
-import seedu.taskell.model.History;
-import seedu.taskell.model.HistoryManager;
+import seedu.taskell.history.History;
+import seedu.taskell.history.HistoryManager;
 import seedu.taskell.model.Model;
 
 /**

@@ -158,6 +158,7 @@ The `UI` component,
 * Executes user commands using the `Logic` component.
 * Binds itself to some data in the `Model` so that the UI can auto-update when data in the `Model` changes.
 * Responds to events raised from various parts of the Application and updates the UI accordingly.
+* Uses [Agenda API](http://jfxtras.org/doc/8.0/jfxtras-agenda/index.html) from JFXtras to display calendar view with task events.
 
 ### Logic Component
 
@@ -244,6 +245,7 @@ The diagram above gives an overview of how the `History` component is implemente
 The `History` component,
 * stores the commands that UndoCommand can execute (add/delete/done/undone/edit)
 * exposes list of command input strings for UI display
+* updates list of command history every time a command is executed
 
 <!--- @@author --->
 
@@ -504,7 +506,7 @@ Use case ends
 2. Taskell executes it
 3. User requests to view undo commands history
 4. User requests to undo command at specific index
-5. Taskell revert the command <br>
+5. Taskell reverts the command <br>
 Use case ends
 
 **Extensions**
@@ -553,11 +555,13 @@ Use case ends
 
 **Extensions**
 
+1a. User gives invalid filename (contains illegal symbols not allowed in file names)
+
+> 1a1. Taskell shows an error message and still saves data in previous old location.<br>
+
 2a. Data cannot be written to the requested folder (invalid directory or access prohibited)
 
 > 2a1. Taskell shows an error message and still saves data in previous old location.<br>
-
-<!--- @@author --->
 
 #### Use case: Clear task
 
@@ -574,6 +578,8 @@ Use case ends
 3a. User cancels request
 
 > 3a1. Taskell does not clear all tasks <br>
+
+<!--- @@author --->
 
 #### Use case: Exit task
 

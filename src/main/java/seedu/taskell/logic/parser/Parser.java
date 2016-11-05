@@ -10,14 +10,14 @@ import java.util.regex.Pattern;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.commons.util.StringUtil;
+import seedu.taskell.history.History;
+import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.commands.*;
 import seedu.taskell.logic.commands.list.ListAllCommand;
 import seedu.taskell.logic.commands.list.ListCommand;
 import seedu.taskell.logic.commands.list.ListDateCommand;
 import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
-import seedu.taskell.model.History;
-import seedu.taskell.model.HistoryManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.FloatingTask;

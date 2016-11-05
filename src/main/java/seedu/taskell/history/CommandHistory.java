@@ -1,5 +1,5 @@
 /** @@author A0142130A **/
-package seedu.taskell.model;
+package seedu.taskell.history;
 
 import seedu.taskell.logic.commands.DeleteCommand;
 import seedu.taskell.logic.commands.DoneCommand;
@@ -12,7 +12,7 @@ import seedu.taskell.model.task.Task;
  * */
 public class CommandHistory {
     private String commandText, commandType;
-    private Task task;      //relevent task to be added, deleted or edited
+    private Task task;      //relevant task to be added, deleted or edited
     private Task oldTask;   //oldTask needed for EditCommands
     private boolean isRedoCommand;
     

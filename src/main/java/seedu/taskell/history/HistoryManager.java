@@ -1,5 +1,5 @@
 /** @@author A0142130A **/
-package seedu.taskell.model;
+package seedu.taskell.history;
 
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
@@ -14,6 +14,8 @@ import seedu.taskell.logic.commands.AddCommand;
 import seedu.taskell.logic.commands.DoneCommand;
 import seedu.taskell.logic.commands.EditCommand;
 import seedu.taskell.logic.commands.UndoneCommand;
+
+import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;
 
 /** Implementation of History API, manages command history available for undo
@@ -52,8 +54,6 @@ public class HistoryManager extends ComponentManager implements History {
      * */
     public ArrayList<String> getListCommandText() {
         assert historyList != null;
-        
-        //updateList();
         
         ArrayList<String> list = new ArrayList<>();
         for (CommandHistory history: historyList) {
