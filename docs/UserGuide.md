@@ -328,7 +328,7 @@ transfer your data to a new location on your computer. <br>
 Command | Format  
 -------- | :-------- 
 Add Floating Task | `add` TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG]
-Add Event | `add` TASK <i>by</i> DATE <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING] <br> `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME
+Add Event | `add` TASK <i>by</i> DATE <br> `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME <br> `add` TASK <i>from</i> DATE <i>to</i> DATE <br> `add` TASK <i>from</i> TIME <i>to</i> TIME <br> `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING]
 Calendar View | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
@@ -344,32 +344,24 @@ List Done Tasks | `list-done`
 Mark Task Done | `done` INDEX
 Mark Task Undone | `undone` INDEX
 Undo | `undo` or `undo` INDEX
+<!-- @@author -->
 
+<!--- @@author A0139257X --->
 ## Appendix A
 
 Supported Date Format |   Example  
 -------- | :-------- 
-DD-MM-YY |1-1-16 
-DD-MM-YY  | 1-1-2016 
-DD-MM-YY  | 1-Jan-2016
-DD-MM-YY  | 1-January-2016  
-DD-MM-YY  | 1.Jan.2016
-DD-MM-YY  | 1.January.2016  
-MM-YY  | july-16
-MM  | july
-day  | today
-day  | tdy
-day  | tmr
-day  | tomorrow
-day  | thursday
+DD-MM-YYYY |1-3-2016 <br> 1/5/2016<br> 1-jan-2016 <br> 1-April-2016 <br> 1.Jan.2016 <br> 1.May.2016
+MM-YYYY  | jul-2016 <br> july-2016
+MM  | mar <br> sept <br> December
+day  | today <br> tdy <br> tomorrow <br> tmr <br> thursday <br> thurs <br> thu
 
 ## Appendix B
 
 Supported Time Format |   Example  
 -------- | :-------- 
-12hour |1pm
-12hour |12am
-12hour |11.45pm
+In 12-hour format | 12am <br> 5:30am<br> 1pm <br> 11.45pm
+In words | now <br> midnight <br> noon
 
 <!-- @@author -->
 
