@@ -81,7 +81,7 @@ public class EventTask extends Task {
     
     /**
      * Adjust end date when start and end date is the same but end time is before start time.
-     * Bring end date to the nexxt day
+     * Bring end date to the next day
      */
     private TaskDate adjustEndDateDependingOnEndTime(TaskDate eventStartDate, TaskDate eventEndDate, TaskTime eventStartTime, 
             TaskTime eventEndTime) throws IllegalValueException {
@@ -126,7 +126,7 @@ public class EventTask extends Task {
     private TaskDate determineDayInWeekGivenName(String[] taskComponentArray, 
             TaskDate eventStartDate, TaskDate eventEndDate) {
         
-        if (!eventEndDate.isAfter(eventStartDate)) {
+        if (!eventEndDate.isAfter(eventStartDate) && hasTaskComponentArray[END_DATE_COMPONENT]) {
             try {
                 eventEndDate = eventEndDate.getNextWeek();
             } catch (IllegalValueException e) {
