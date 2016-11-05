@@ -1,5 +1,5 @@
 /** @@author A0142130A **/
-package seedu.taskell.model;
+package seedu.taskell.history;
 
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -9,6 +9,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.undo.ExecutedIncorrectCommandEvent;
 import seedu.taskell.logic.commands.AddCommand;
+import seedu.taskell.model.Model;
 import seedu.taskell.model.task.Task;
 
 /** Implementation of History API, manages command history available for undo
