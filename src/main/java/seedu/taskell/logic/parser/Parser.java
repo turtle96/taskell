@@ -248,7 +248,6 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareEdit(String args) {
-
         initialiseTaskComponentArray();
         initialiseHasTaskComponentArray();
         taskComponentArray[Task.DESCRIPTION] = "default";
@@ -272,7 +271,7 @@ public class Parser {
     }
 
     private Command editTaskWithGivenNewParameters(StringTokenizer st, int targetIdx) {
-        System.out.println("I am here to edit taskS");
+        // System.out.println("I am here to edit tasks");
         while (st.hasMoreTokens()) {
             String parts = st.nextToken();
             if (parts.equals(DESCRIPTION)) {
@@ -364,9 +363,9 @@ public class Parser {
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
                 }
                 if (st.hasMoreTokens()) {
-                    String p = st.nextToken();
-                    if (TaskPriority.isValidPriority(p)) {
-                        taskComponentArray[Task.TASK_PRIORITY] = p.trim();
+                    String newPriority = st.nextToken();
+                    if (TaskPriority.isValidPriority(newPriority)) {
+                        taskComponentArray[Task.TASK_PRIORITY] = newPriority.trim();
                         hasTaskComponentArray[Task.PRIORITY_COMPONENT] = true;
                     } else {
                         return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -419,8 +418,10 @@ public class Parser {
             lastCharChanged = true;
         }
 
-        // System.out.println("Description is valid");
-        desc = desc.substring(5).trim();
+        // System.out.println("Description is " + desc);
+        desc = desc.trim();
+        desc = desc.substring(5);
+        // System.out.println("Description is " + desc);
         hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
         taskComponentArray[Task.DESCRIPTION] = desc.trim();
         // System.out.println("Description is " +
@@ -922,7 +923,8 @@ public class Parser {
     }
     // @@author
 
-    // @@author A0142073R
+    //@@author A0142073R
+    
     private static boolean isInt(String s) {
         try {
             int i = Integer.parseInt(s);
@@ -933,5 +935,6 @@ public class Parser {
             return false;
         }
     }
+    
     // @@author
 }
