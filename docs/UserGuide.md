@@ -185,7 +185,12 @@ Diagram 6: Deletes the first task in the list.<br>
 #### Marking a task as completed: `done`
 Format: `done` INDEX<br>
 Example: `done` 1<br>
-This adds the 1st task as completed and moves it to the completed list.<br>
+This marks the first task as finished and moves it to the completed list.<br>
+
+#### Marking a task as incomplete: `undone`
+Format: `undone` INDEX<br>
+Example: `undone` 1<br>
+This marks the 1st task as incomplete and moves it to the uncompleted list.<br>
 
 <!--- @@author --->
 
