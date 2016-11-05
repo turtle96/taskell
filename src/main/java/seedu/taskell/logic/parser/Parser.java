@@ -267,10 +267,10 @@ public class Parser {
         }
 
         int targetIdx = Integer.valueOf(index);
-        return editTaskWithGivenNewParameters(targetIdx, argsList);
+        return splitInputWithGivenNewParameters(targetIdx, argsList);
     }
 
-    private Command editTaskWithGivenNewParameters(int targetIdx, ArrayList<String> argsList) {
+    private Command splitInputWithGivenNewParameters(int targetIdx, ArrayList<String> argsList) {
         while (!argsList.isEmpty()) {
             if (argsList.get(0).equals(DESCRIPTION)) {
                 argsList.remove(0);
@@ -373,8 +373,7 @@ public class Parser {
         while (!argsList.isEmpty() && !(argsList.get(0).equals(START_TIME) || argsList.get(0).equals(END_TIME)
                 || argsList.get(0).equals(START_DATE) || argsList.get(0).equals(END_DATE)
                 || argsList.get(0).equals(PRIORITY))) {
-            desc += (argsList.get(0) + " ");
-            argsList.remove(0);
+            desc += (argsList.remove(0) + " ");
             hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
         }
         desc = desc.trim();
