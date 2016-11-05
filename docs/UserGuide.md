@@ -114,7 +114,7 @@ Diagram 2: Displays all the tasks to be done by today after typing list-date.
 <!--- @@author A0142130A --->  
 
 #### Finding tasks: `find`
-You can use the find command to view tasks with specific keywords.<br>
+You can use the find command to view tasks with specific keywords. Tasks with words that match the keyword include those that contain the keyword, for example, searching for "book" will match with "book", "textbook", "storybook" etc. You can also search with multiple keywords at the same time.<br>
 Formats: <br>
 -`find KEYWORD [MORE_KEYWORDS]`<br>
 Displays a list of tasks with description or tags that match all the keywords.<br>
@@ -122,7 +122,7 @@ Example: `find banana milk essay`<br>
 This returns all tasks with description or tags that match all keywords `banana`, `milk`, and `essay`. <br>
 
 -`find-tag TAG [MORE_TAGS]`<br>
-Displays list of tasks with the same tags.<br>
+Displays list of tasks with the same tags. Use this if you want to only search by tags and not description.<br>
 Example: `find homework essay cs2103`<br>
 This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
  <br><p align="center"><img src="images/findReport.png" width="800"></br>
