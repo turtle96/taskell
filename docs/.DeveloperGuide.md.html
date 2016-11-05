@@ -1,0 +1,1248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>/Users/zuozhuolin/main/docs/.DeveloperGuide.md.html</title>
+
+
+<style type="text/css">
+body {
+	color: #333;
+	font: 13px/1.4 "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	background: transparent;
+	color: #4183c4;
+	text-decoration: none;
+}
+
+a:active,
+a:hover {
+	outline: 0 none;
+	text-decoration: underline;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn {
+	font-style: italic;
+}
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+mark {
+	background: #ff0;
+	color: #000;
+}
+small {
+	font-size: 80%;
+}
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+img {
+	border: 0 none;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+figure {
+	margin: 1em 40px;
+}
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace,monospace;
+	font-size: 1em;
+}
+
+pre {
+	overflow: auto;
+	font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.markdown-body {
+	padding: 30px;
+	font-size: 16px;
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+.markdown-body>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.markdown-body .absent {
+	color: #c00;
+}
+
+.markdown-body .anchor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	padding-right: 6px;
+	padding-left: 30px;
+	margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+	outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+	display: none;
+	color: #000;
+	vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+	padding-left: 8px;
+	margin-left: -30px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+	display: inline-block;
+}
+
+.markdown-body h1 tt,
+.markdown-body h1 code,
+.markdown-body h2 tt,
+.markdown-body h2 code,
+.markdown-body h3 tt,
+.markdown-body h3 code,
+.markdown-body h4 tt,
+.markdown-body h4 code,
+.markdown-body h5 tt,
+.markdown-body h5 code,
+.markdown-body h6 tt,
+.markdown-body h6 code {
+	font-size: inherit;
+}
+
+.markdown-body h1 {
+	padding-bottom: 0.3em;
+	font-size: 2.25em;
+	line-height: 1.2;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.75em;
+	line-height: 1.225;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+	font-size: 1.5em;
+	line-height: 1.43;
+}
+
+.markdown-body h4 {
+	font-size: 1.25em;
+}
+
+.markdown-body h5 {
+	font-size: 1em;
+}
+
+.markdown-body h6 {
+	font-size: 1em;
+	color: #777;
+}
+
+.markdown-body p,.markdown-body blockquote,
+.markdown-body ul,.markdown-body ol,
+.markdown-body dl,.markdown-body table,
+.markdown-body pre {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.markdown-body hr {
+	height: 4px;
+	padding: 0;
+	margin: 16px 0;
+	background-color: #e7e7e7;
+	border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+	padding-left: 2em;
+}
+
+.markdown-body ul.no-list,
+.markdown-body ol.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body li>p {
+	margin-top: 16px;
+}
+
+.markdown-body dl {
+	padding: 0;
+}
+
+.markdown-body dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.markdown-body dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+	padding: 0 15px;
+	color: #777;
+	border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+	margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body table {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	word-break: normal;
+	word-break: keep-all;
+}
+
+.markdown-body table th {
+	font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+	background-color: #f8f8f8;
+}
+
+.markdown-body img {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.markdown-body span.frame {
+	display: block;
+	overflow: hidden;
+}
+
+.markdown-body span.frame>span {
+	display: block;
+	float: left;
+	width: auto;
+	padding: 7px;
+	margin: 13px 0 0;
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.markdown-body span.frame span img {
+	display: block;
+	float: left;
+}
+
+.markdown-body span.frame span span {
+	display: block;
+	padding: 5px 0 0;
+	clear: both;
+	color: #333;
+}
+
+.markdown-body span.align-center {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-center>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.markdown-body span.align-center span img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.markdown-body span.align-right {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-right>span {
+	display: block;
+	margin: 13px 0 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body span.align-right span img {
+	margin: 0;
+	text-align: right;
+}
+
+.markdown-body span.float-left {
+	display: block;
+	float: left;
+	margin-right: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-left span {
+	margin: 13px 0 0;
+}
+
+.markdown-body span.float-right {
+	display: block;
+	float: right;
+	margin-left: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-right>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body code,.markdown-body tt {
+	padding: 0;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin: 0;
+	font-size: 85%;
+	background-color: rgba(0,0,0,0.04);
+	border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after,
+.markdown-body tt:before,
+.markdown-body tt:after {
+	letter-spacing: -0.2em;
+	content: "\00a0";
+}
+
+.markdown-body code br,
+.markdown-body tt br {
+	display: none;
+}
+
+.markdown-body del code {
+	text-decoration: inherit;
+}
+
+.markdown-body pre>code {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	word-break: normal;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+}
+
+.markdown-body .highlight {
+	margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	background-color: #f7f7f7;
+	border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+}
+
+.markdown-body pre {
+	word-wrap: normal;
+}
+
+.markdown-body pre code,
+.markdown-body pre tt {
+	display: inline;
+	max-width: initial;
+	padding: 0;
+	margin: 0;
+	overflow: initial;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after,
+.markdown-body pre tt:before,
+.markdown-body pre tt:after {
+	content: normal;
+}
+
+.highlight .pl-coc,
+.highlight .pl-entl,
+.highlight .pl-entm,
+.highlight .pl-eoa,
+.highlight .pl-mai .pl-sf,
+.highlight .pl-mm,
+.highlight .pl-pdv,
+.highlight .pl-sc,
+.highlight .pl-som,
+.highlight .pl-sr,
+.highlight .pl-v,
+.highlight .pl-vpf {
+	color: #0086b3;
+}
+.highlight .pl-eoac,
+.highlight .pl-mdht,
+.highlight .pl-mi1,
+.highlight .pl-mri,
+.highlight .pl-va,
+.highlight .pl-vpu {
+	color: #008080;
+}
+.highlight .pl-c,
+.highlight .pl-pdc {
+	color: #b4b7b4;
+	font-style: italic;
+}
+.highlight .pl-k,
+.highlight .pl-ko,
+.highlight .pl-kolp,
+.highlight .pl-mc,
+.highlight .pl-mr,
+.highlight .pl-ms,
+.highlight .pl-s,
+.highlight .pl-sok,
+.highlight .pl-st {
+	color: #6e5494;
+}
+.highlight .pl-ef,
+.highlight .pl-enf,
+.highlight .pl-enm,
+.highlight .pl-entc,
+.highlight .pl-eoi,
+.highlight .pl-sf,
+.highlight .pl-smc {
+	color: #d12089;
+}
+.highlight .pl-ens,
+.highlight .pl-eoai,
+.highlight .pl-kos,
+.highlight .pl-mh .pl-pdh,
+.highlight .pl-mp,
+.highlight .pl-pde,
+.highlight .pl-stp {
+	color: #458;
+}
+.highlight .pl-enti {
+	color: #d12089;
+	font-weight: bold;
+}
+.highlight .pl-cce,
+.highlight .pl-enc,
+.highlight .pl-kou,
+.highlight .pl-mq {
+	color: #f93;
+}
+.highlight .pl-mp1 .pl-sf {
+	color: #458;
+	font-weight: bold;
+}
+.highlight .pl-cos,
+.highlight .pl-ent,
+.highlight .pl-md,
+.highlight .pl-mdhf,
+.highlight .pl-ml,
+.highlight .pl-pdc1,
+.highlight .pl-pds,
+.highlight .pl-s1,
+.highlight .pl-scp,
+.highlight .pl-sol {
+	color: #df5000;
+}
+.highlight .pl-c1,
+.highlight .pl-cn,
+.highlight .pl-pse,
+.highlight .pl-pse .pl-s2,
+.highlight .pl-vi {
+	color: #a31515;
+}
+.highlight .pl-mb,
+.highlight .pl-pdb {
+	color: #df5000;
+	font-weight: bold;
+}
+.highlight .pl-mi,
+.highlight .pl-pdi {
+	color: #6e5494;
+	font-style: italic;
+}
+.highlight .pl-ms1 {
+	background-color: #f5f5f5;
+}
+.highlight .pl-mdh,
+.highlight .pl-mdi {
+	font-weight: bold;
+}
+.highlight .pl-mdr {
+	color: #0086b3;
+	font-weight: bold;
+}
+.highlight .pl-s2 {
+	color: #333;
+}
+.highlight .pl-ii {
+	background-color: #df5000;
+	color: #fff;
+}
+.highlight .pl-ib {
+	background-color: #f93;
+}
+.highlight .pl-id {
+	background-color: #a31515;
+	color: #fff;
+}
+.highlight .pl-iu {
+	background-color: #b4b7b4;
+}
+.highlight .pl-mo {
+	color: #969896;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+function getDocumentScrollTop() 
+{
+   var res = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0;
+   // alert(res);
+   return res;
+}
+
+function setDocumentScrollTop(ypos) 
+{
+	window.scrollTo(0, ypos);
+}
+
+</script>
+
+
+</head>
+<body class="markdown-body">
+<h1> <a id="developer-guide" class="anchor" href="#developer-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Developer Guide</h1> 
+<ul> 
+ <li><a href="#introduction">Introduction</a></li> 
+ <li><a href="#setting-up">Setting Up</a></li> 
+ <li><a href="#design">Design</a></li> 
+ <li><a href="#implementation">Implementation</a></li> 
+ <li><a href="#testing">Testing</a></li> 
+ <li><a href="#dev-ops">Dev Ops</a></li> 
+ <li><a href="#appendix-a--user-stories">Appendix A: User Stories</a></li> 
+ <li><a href="#appendix-b--use-cases">Appendix B: Use Cases</a></li> 
+ <li><a href="#appendix-c--non-functional-requirements">Appendix C: Non Functional Requirements</a></li> 
+ <li><a href="#appendix-d--glossary">Appendix D: Glossary</a></li> 
+ <li><a href="#appendix-e-product-survey">Appendix E : Product Survey</a></li> 
+</ul> 
+<h2> <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2> 
+<p>Taskell is a simple software for users to keep track of their daily tasks and manage their busy schedule. Keyboard lovers will be able to experience the full benefit of Taskell as it implements a command-line interface.</p> 
+<p>This developer guide will help you understand the design and implementation of Taskell. It helps you understand how Taskell works and how you can contribute for further development. This guide follows a top-down approach by giving an overview of the essential components first, followed by thorough explanation subsequently.</p> 
+<h2> <a id="setting-up" class="anchor" href="#setting-up" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Setting Up</h2> 
+<h4> <a id="prerequisites" class="anchor" href="#prerequisites" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Prerequisites</h4> 
+<ol> 
+ <li> <p><strong>JDK <code>1.8.0_60</code></strong> or later<br /></p> 
+  <blockquote> 
+   <p>Having any Java 8 version is not enough. <br /> This app will not work with earlier versions of Java 8.</p> 
+  </blockquote> </li> 
+ <li><p><strong>Eclipse</strong> IDE</p></li> 
+ <li> <strong>E(fx)clipse</strong> plugin for Eclipse (Do the steps 2 onwards given in <a href="http://www.eclipse.org/efxclipse/install.html#for-the-ambitious">this page</a>)</li> 
+ <li> <strong>Buildship Gradle Integration</strong> plugin from the Eclipse Marketplace</li> 
+</ol> 
+<h4> <a id="importing-the-project-into-eclipse" class="anchor" href="#importing-the-project-into-eclipse" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Importing the Project into Eclipse</h4> 
+<ol> 
+ <li>Fork this repository, and clone the fork to your computer</li> 
+ <li>Open Eclipse (Note: Ensure you have installed the <strong>e(fx)clipse</strong> and <strong>buildship</strong> plugins as given in the prerequisites above)</li> 
+ <li>Click <code>File</code> &gt; <code>Import</code> </li> 
+ <li>Click <code>Gradle</code> &gt; <code>Gradle Project</code> &gt; <code>Next</code> &gt; <code>Next</code> </li> 
+ <li>Click <code>Browse</code>, then locate the project's directory</li> 
+ <li> <p>Click <code>Finish</code></p> 
+  <blockquote> 
+   <ul> 
+    <li>If you are asked whether to 'keep' or 'overwrite' configuration files, choose to 'keep'.</li> 
+    <li>Depending on your connection speed and server load, it can even take up to 30 minutes for the set up to finish (This is because Gradle downloads library files from servers during the project set up process)</li> 
+    <li>If Eclipse auto-changed any settings files during the import process, you can discard those changes.</li> 
+   </ul> 
+  </blockquote> </li> 
+</ol> 
+<h4> <a id="troubleshooting-project-setup" class="anchor" href="#troubleshooting-project-setup" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Troubleshooting project setup</h4> 
+<p><strong>Problem: Eclipse reports compile errors after new commits are pulled from Git</strong></p> 
+<ul> 
+ <li>Reason: Eclipse fails to recognize new files that appeared due to the Git pull. </li> 
+ <li>Solution: Refresh the project in Eclipse:<br /> Right click on the project (in Eclipse package explorer), choose <code>Gradle</code> -&gt; <code>Refresh Gradle Project</code>.</li> 
+</ul> 
+<p><strong>Problem: Eclipse reports some required libraries missing</strong></p> 
+<ul> 
+ <li>Reason: Required libraries may not have been downloaded during the project import. </li> 
+ <li>Solution: <a href=".UsingGradle.md.html">Run tests using Gradle</a> once (to refresh the libraries).</li> 
+</ul> 
+<h2> <a id="design" class="anchor" href="#design" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Design</h2> 
+<h3> <a id="architecture" class="anchor" href="#architecture" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Architecture</h3> 
+<p align="center"> <a href="images/Architecture.png" target="_blank"><img src="images/Architecture.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 1: Architecture Diagram</em> </p> 
+<p>The Architecture Diagram given above explains the high-level design of the Application. Given below is a quick overview of each component.<br /></p> 
+<p><code>Main</code> has only one class called <a href="../src/main/java/seedu/taskell/MainApp.java"><code>MainApp</code></a>. It is responsible for,</p> 
+<ul> 
+ <li>At application launch: Initializes the components in the correct sequence, and connects them up with each other.</li> 
+ <li>At shut down: Shuts down the components and invokes cleanup method where necessary.</li> 
+</ul> 
+<p><a href="#common-classes"><strong><code>Commons</code></strong></a> represents a collection of classes used by multiple other components. Two of those classes play important roles at the architecture level.</p> 
+<ul> 
+ <li><p><code>EventsCentre</code> : Used by components to communicate with other components using events (i.e. a form of <em>Event Driven</em> design)(written using <a href="https://github.com/google/guava/wiki/EventBusExplained">Google's Event Bus library</a>)</p></li> 
+ <li><p><code>LogsCenter</code> : Used by many classes to write log messages to the Application's log file.</p></li> 
+</ul> 
+<p>The rest of the Application consists five components.</p> 
+<ul> 
+ <li> <a href="#ui-component"><strong><code>UI</code></strong></a> : UI of the Application.</li> 
+ <li> <a href="#logic-component"><strong><code>Logic</code></strong></a> : Command executor.</li> 
+ <li> <a href="#model-component"><strong><code>Model</code></strong></a> : Data Holder of the Application in-memory.</li> 
+ <li> <a href="#storage-component"><strong><code>Storage</code></strong></a> : Data read from, and written to the hard disk.</li> 
+ <li> <a href="#history-component"><strong><code>History</code></strong></a> : Data holder of Application's command history (for undo only).</li> 
+</ul> 
+<p>Each of the five components</p> 
+<ul> 
+ <li>Defines its <em>API</em> in an <code>interface</code> with the same name as the Component.</li> 
+ <li>Exposes its functionality using a <code>{Component Name}Manager</code> class.</li> 
+</ul> 
+<p align="center"> <a href="images/LogicClassDiagram.png" target="_blank"><img src="images/LogicClassDiagram.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 2: Logic Class Diagram</em> </p> 
+<p>The <code>Logic</code> component above defines it's API in the <code>Logic.java</code> interface and exposes its functionality using the <code>LogicManager.java</code> class.<br /></p> 
+<p align="center"> <a href="images%5CSDforDeleteTask.png" target="_blank"><img src="images%5CSDforDeleteTask.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 3: Sequence Diagram for Delete Task</em> </p> 
+<p>The Sequence Diagram above shows how the components interact for the scenario where the user issues the command <code>delete 1</code>.</p> 
+<blockquote> 
+ <p>Note how the <code>Model</code> simply raises a <code>TaskManagerChangedEvent</code> when the Task Manager data is changed, instead of asking the <code>Storage</code> to save the updates to the hard disk.</p> 
+</blockquote> 
+<p align="center"> <a href="images%5CSDforDeleteTaskEventHandling.png" target="_blank"><img src="images%5CSDforDeleteTaskEventHandling.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 4: Sequence Diagram for Delete Task Event Handling</em> </p> 
+<p>The diagram above shows how the <code>EventsCenter</code> reacts to that event, which eventually results in the updates being saved to the hard disk. The status bar of the UI is updated to reflect the 'Last Updated' time. <br /></p> 
+<blockquote> 
+ <p>Note how the event is propagated through the <code>EventsCenter</code> to the <code>Storage</code> and <code>UI</code> without <code>Model</code> having to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct coupling between components.</p> 
+</blockquote> 
+<p>The sections below give more details of each component.</p> 
+<h3> <a id="ui-component" class="anchor" href="#ui-component" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>UI Component</h3> 
+<p align="center"> <a href="images/UiClassDiagram.png" target="_blank"><img src="images/UiClassDiagram.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 5: UI Class Diagram </em> </p> 
+<p>The diagram above gives an overview of how the <code>UI</code>component is implemented.<br /></p> 
+<p><strong>API</strong> : <a href="../src/main/java/seedu/taskell/ui/Ui.java"><code>Ui.java</code></a></p> 
+<p>The UI consists of a <code>MainWindow</code> that is made up of parts e.g.<code>CommandBox</code>, <code>ResultDisplay</code>, <code>TaskListPanel</code>, <code>StatusBarFooter</code>, <code>BrowserPanel</code> etc. All these, including the <code>MainWindow</code>, inherit from the abstract <code>UiPart</code> class and they can be loaded using the <code>UiPartLoader</code>.</p> 
+<p>The <code>UI</code> component uses JavaFx UI framework. The layout of these UI parts are defined in matching <code>.fxml</code> files that are in the <code>src/main/resources/view</code> folder.<br /> For example, the layout of the <a href="../src/main/java/seedu/taskell/ui/MainWindow.java"><code>MainWindow</code></a> is specified in <a href="../src/main/resources/view/MainWindow.fxml"><code>MainWindow.fxml</code></a></p> 
+<p>The <code>UI</code> component,</p> 
+<ul> 
+ <li>Executes user commands using the <code>Logic</code> component.</li> 
+ <li>Binds itself to some data in the <code>Model</code> so that the UI can auto-update when data in the <code>Model</code> changes.</li> 
+ <li>Responds to events raised from various parts of the Application and updates the UI accordingly.</li> 
+ <li>Uses <a href="http://jfxtras.org/doc/8.0/jfxtras-agenda/index.html">Agenda API</a> from JFXtras to display calendar view with task events.</li> 
+</ul> 
+<h3> <a id="logic-component" class="anchor" href="#logic-component" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logic Component</h3> 
+<p align="center"> <a href="images/LogicClassDiagram.png" target="_blank"><img src="images/LogicClassDiagram.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 6: Logic Class Diagram </em> </p> 
+<p>The diagram above gives an overview of how the <code>Logic</code> component is implemented.<br /> <br /><strong>API</strong> : <a href="../src/main/java/seedu/taskell/logic/Logic.java"><code>Logic.java</code></a></p> 
+<p>The <code>Logic</code> component,</p> 
+<ul> 
+ <li>Uses the <code>Parser</code> class to parse the user command, resulting in a <code>Command</code> object which is executed by the <code>LogicManager</code>.</li> 
+ <li>Affects the <code>Model</code> (e.g. adding a task) and/or raise events.</li> 
+ <li>Executes the necessary command and the result is encapsulated as a <code>CommandResult</code> to be passed back to the <code>UI</code>.</li> 
+</ul> 
+<p align="center"> <a href="images/AddTaskSdForLogic.png" target="_blank"><img src="images/AddTaskSdForLogic.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 7: Add Task Sequence Diagram For Logic</em> </p> 
+<p>The diagram above shows the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute(&quot;add buy cake&quot;)</code> API call.<br /></p> 
+<p align="center"> <a href="images/DeleteTaskSdForLogic.png" target="_blank"><img src="images/DeleteTaskSdForLogic.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 8: Delete Task Sequence Diagram For Logic</em> </p> 
+<p>The diagram above shows the Sequence Diagram for interactions within the <code>Logic</code> component for the <code>execute(&quot;delete 1&quot;)</code> API call.<br /></p> 
+<p></p> 
+<h3> <a id="model-component" class="anchor" href="#model-component" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Model Component</h3> 
+<p align="center"> <a href="images/ModelClassDiagram.png" target="_blank"><img src="images/ModelClassDiagram.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 9: Model Class Diagram </em> </p> 
+<p>The diagram above gives an overview of how the <code>Model</code> component is implemented.<br /> <br /><strong>API</strong> : <a href="../src/main/java/seedu/taskell/model/Model.java"><code>Model.java</code></a></p> 
+<p>The <code>Model</code> component,</p> 
+<ul> 
+ <li>stores a <code>UserPref</code> object that represents the user's preferences.</li> 
+ <li>stores the Task Manager data.</li> 
+ <li>exposes a <code>UnmodifiableObservableList&lt;ReadOnlyTask&gt;</code> that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.</li> 
+ <li>does not depend on any of the other three components.</li> 
+</ul> 
+<h3> <a id="storage-component" class="anchor" href="#storage-component" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Storage Component</h3> 
+<p align="center"> <a href="images/StorageClassDiagram.png" target="_blank"><img src="images/StorageClassDiagram.png" width="800" style="max-width:100%;" /></a><br /> <em>Diagram 10: Storage Class Diagram </em> </p> 
+<p>The diagram above gives an overview of how the <code>Storage</code> component is implemented.<br /> <br /><strong>API</strong> : <a href="../src/main/java/seedu/taskell/storage/Storage.java"><code>Storage.java</code></a></p> 
+<p>The <code>Storage</code> component,</p> 
+<ul> 
+ <li>can save <code>UserPref</code> objects in json format and read it back.</li> 
+ <li>can save the Task Manager data in xml format and read it back.</li> 
+</ul> 
+<h3> <a id="history-component" class="anchor" href="#history-component" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>History Component</h3> 
+<p align="center"> <a href="images/HistoryClassDiagram.png" target="_blank"><img src="images/HistoryClassDiagram.png" width="500" style="max-width:100%;" /></a><br /> <em>Diagram 11: History Class Diagram </em> </p> 
+<p>The diagram above gives an overview of how the <code>History</code> component is implemented.<br /> <br /><strong>API</strong> : <a href="../src/main/java/seedu/taskell/model/History.java"><code>History.java</code></a></p> 
+<p>The <code>History</code> component,</p> 
+<ul> 
+ <li>stores the commands that UndoCommand can execute (add/delete/done/undone/edit)</li> 
+ <li>exposes list of command input strings for UI display</li> 
+ <li>updates list of command history every time a command is executed</li> 
+</ul> 
+<h3> <a id="common-classes" class="anchor" href="#common-classes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Common Classes</h3> 
+<p>Classes used by multiple components are in the <code>seedu.taskmanager.commons</code> package.</p> 
+<h2> <a id="implementation" class="anchor" href="#implementation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Implementation</h2> 
+<h3> <a id="logging" class="anchor" href="#logging" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Logging</h3> 
+<p>We are using <code>java.util.logging</code> package for logging. The <code>LogsCenter</code> class is used to manage the logging levels and logging destinations.</p> 
+<ul> 
+ <li>The logging level can be controlled using the <code>logLevel</code> setting in the configuration file (See <a href="#configuration">Configuration</a>)</li> 
+ <li>The <code>Logger</code> for a class can be obtained using <code>LogsCenter.getLogger(Class)</code> which will log messages according to the specified logging level</li> 
+ <li>Currently log messages are output through: <code>Console</code> and to a <code>.log</code> file.</li> 
+</ul> 
+<p><strong>Logging Levels</strong></p> 
+<ul> 
+ <li> <code>SEVERE</code> : Critical problem detected which may possibly cause the termination of the application</li> 
+ <li> <code>WARNING</code> : Program can continue, but with caution</li> 
+ <li> <code>INFO</code> : Information showing the noteworthy actions by the Application</li> 
+ <li> <code>FINE</code> : Details that is not usually noteworthy but may be useful in debugging e.g. print the actual list instead of just its size</li> 
+</ul> 
+<h3> <a id="configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h3> 
+<p>Certain properties of the application can be controlled (e.g Application name, logging level) through the configuration file (default: <code>config.json</code>) <br /> To reset properties in the configuration file, delete <code>config.json</code> and run Taskell again.</p> 
+<h2> <a id="testing" class="anchor" href="#testing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Testing</h2> 
+<p>Tests can be found in the <code>./src/test/java</code> folder.</p> 
+<p><strong>In Eclipse</strong>:</p> 
+<ul> 
+ <li>To run all tests, right-click on the <code>src/test/java</code> folder and choose <code>Run as</code> &gt; <code>JUnit Test</code> </li> 
+ <li>To run a subset of tests, right-click on a test package, test class, or a test and choose to run as a JUnit test.</li> 
+</ul> 
+<p><strong>Using Gradle</strong>:</p> 
+<ul> 
+ <li>See <a href=".UsingGradle.md.html">UsingGradle.md</a> for how to run tests using Gradle.</li> 
+</ul> 
+<p>We have two types of tests:</p> 
+<ol> 
+ <li><p><strong>GUI Tests</strong> - These are <em>System Tests</em> that test the entire Application by simulating user actions on the GUI. These are in the <code>guitests</code> package.</p></li> 
+ <li> <p><strong>Non-GUI Tests</strong> - These are tests not involving the GUI. They include,</p> 
+  <ol> 
+   <li> <em>Unit tests</em> targeting the lowest level methods/classes. <br /> e.g. <code>seedu.taskell.model.task.TaskDateTest</code> </li> 
+   <li> <em>Integration tests</em> that are checking the integration of multiple code units (those code units are assumed to be working).<br /> e.g. <code>seedu.taskell.storage.StorageManagerTest</code> </li> 
+   <li>Hybrids of unit and integration tests. These tests are checking multiple code units as well as how the are connected together.<br /> e.g. <code>seedu.taskell.logic.LogicManagerTest</code> </li> 
+  </ol> </li> 
+</ol> 
+<p><strong>Headless GUI Testing</strong> : Thanks to the <a href="https://github.com/TestFX/TestFX">TestFX</a> library we use, our GUI tests can be run in the headless mode. In the headless mode, GUI tests do not show up on the screen. That means the developer can do other things on the Computer while the tests are running.<br /> See <a href=".UsingGradle.md.html#running-tests">UsingGradle.md</a> to learn how to run tests in headless mode.</p> 
+<h4> <a id="troubleshooting-tests" class="anchor" href="#troubleshooting-tests" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Troubleshooting tests</h4> 
+<p><strong>Problem: Tests fail because NullPointException when AssertionError is expected</strong></p> 
+<ul> 
+ <li>Reason: Assertions are not enabled for JUnit tests. This can happen if you are not using a recent Eclipse version (i.e. <em>Neon</em> or later)</li> 
+ <li>Solution: Enable assertions in JUnit tests as described <a href="http://stackoverflow.com/questions/2522897/eclipse-junit-ea-vm-option">here</a>. <br /> Delete run configurations created when you ran tests earlier.</li> 
+</ul> 
+<h2> <a id="dev-ops" class="anchor" href="#dev-ops" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dev Ops</h2> 
+<h3> <a id="build-automation" class="anchor" href="#build-automation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Build Automation</h3> 
+<p>See <a href=".UsingGradle.md.html">UsingGradle.md</a> to learn how to use Gradle for build automation.</p> 
+<h3> <a id="continuous-integration" class="anchor" href="#continuous-integration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Continuous Integration</h3> 
+<p>We use <a href="https://travis-ci.org/">Travis CI</a> to perform <em>Continuous Integration</em> on our projects. See <a href=".UsingTravis.md.html">UsingTravis.md</a> for more details.</p> 
+<h3> <a id="making-a-release" class="anchor" href="#making-a-release" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Making a Release</h3> 
+<p>Here are the steps to create a new release.</p> 
+<ol> 
+ <li>Generate a JAR file <a href=".UsingGradle.md.html#creating-the-jar-file">using Gradle</a>.</li> 
+ <li>Tag the repository with the version number. e.g. <code>v0.1</code> </li> 
+ <li> <a href="https://help.github.com/articles/creating-releases/">Create a new release using GitHub</a> and upload the JAR file your created.</li> 
+</ol> 
+<h3> <a id="managing-dependencies" class="anchor" href="#managing-dependencies" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Managing Dependencies</h3> 
+<p>A project often depends on third-party libraries. For example, Taskell depends on the <a href="http://wiki.fasterxml.com/JacksonHome">Jackson library</a> for XML parsing. Managing these <em>dependencies</em> can be automated using Gradle. For example, Gradle can download the dependencies automatically, which is better than these alternatives.<br /> a. Include those libraries in the repository (this bloats the repository size)<br /> b. Require developers to download those libraries manually (this creates extra work for developers)<br /></p> 
+<h2> <a id="appendix-a--user-stories" class="anchor" href="#appendix-a--user-stories" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix A : User Stories</h2> 
+<p>Priorities: High (must have) - <code>* * *</code>, Medium (nice to have) - <code>* *</code>, Low (unlikely to have) - <code>*</code></p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Priority</th> 
+   <th align="left">As a ...</th> 
+   <th align="left">I want to ...</th> 
+   <th align="left">So that I can...</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">new user</td> 
+   <td align="left">see user guide</td> 
+   <td align="left">refer to the different commands when I forget how to use the application.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">add a task</td> 
+   <td align="left">take note of all my tasks.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">delete a task</td> 
+   <td align="left">remove task that I no longer need.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">find a task by its description</td> 
+   <td align="left">locate details of tasks without having to go through the entire list.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">categorize my tasks</td> 
+   <td align="left">group and view tasks of similar type.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">view all the tasks, sorted by day, month</td> 
+   <td align="left">plan my schedule.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">edit task</td> 
+   <td align="left">make changes to the task created.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">have a start and end time for an event</td> 
+   <td align="left">take note of the duration of the event.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">set deadlines for a task</td> 
+   <td align="left">remember when the task is due.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">undo my previous action</td> 
+   <td align="left">correct any mistakes made.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">mark a task as done</td> 
+   <td align="left">focus on the uncompleted tasks.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">have flexible command format</td> 
+   <td align="left">have various options to execute a command.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">specify a folder with cloud syncing service as the storage location</td> 
+   <td align="left">I can easily access my task manager from different computers.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* * *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">I want to see a list of completed tasks</td> 
+   <td align="left">view all the tasks I had done.</td> 
+  </tr> 
+  <tr> 
+   <td><code>* *</code></td> 
+   <td align="left">user</td> 
+   <td align="left">delete tasks based on a certain index</td> 
+   <td align="left">delete a few tasks instead of one.</td> 
+  </tr> 
+  <tr> 
+   <td><code>*</code></td> 
+   <td align="left">user</td> 
+   <td align="left">set some of my task recursively</td> 
+   <td align="left">schedule them on a daily/weekly/monthly basis.</td> 
+  </tr> 
+  <tr> 
+   <td><code>*</code></td> 
+   <td align="left">user</td> 
+   <td align="left">be able to block multiple timeslots, and release the timeslots when timing is confirmed</td> 
+   <td align="left">schedule in events which have uncertain timings more efficiently.</td> 
+  </tr> 
+  <tr> 
+   <td><code>*</code></td> 
+   <td align="left">user</td> 
+   <td align="left">sort tasks by priority</td> 
+   <td align="left">view the most important tasks.</td> 
+  </tr> 
+  <tr> 
+   <td><code>*</code></td> 
+   <td align="left">user</td> 
+   <td align="left">edit my notification time period</td> 
+   <td align="left">customise if I wanted to be reminded earlier or later.</td> 
+  </tr> 
+  <tr> 
+   <td><code>*</code></td> 
+   <td align="left">user</td> 
+   <td align="left">use the history command</td> 
+   <td align="left">saves time typing repeated commands.</td> 
+  </tr> 
+  <tr> 
+   <td><code>*</code></td> 
+   <td align="left">user</td> 
+   <td align="left">view the task in either calendar form or list form</td> 
+   <td align="left">switch between the two display format.</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h2> <a id="appendix-b--use-cases" class="anchor" href="#appendix-b--use-cases" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix B : Use Cases</h2> 
+<h4> <a id="use-case-add-task" class="anchor" href="#use-case-add-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Add task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to add tasks</li> 
+ <li>Taskell adds the task<br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The user did not follow the given format to add the task</p> 
+<blockquote> 
+ <p>2a1. Taskell displays invalid command format warning<br /> Use case resumes at step 1</p> 
+</blockquote> 
+<h4> <a id="use-case-delete-task" class="anchor" href="#use-case-delete-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Delete task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to list tasks</li> 
+ <li>Taskell shows a list of uncompleted tasks</li> 
+ <li>User requests to delete a specific task in the list</li> 
+ <li>Taskell deletes the task <br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The list is empty</p> 
+<p>3a. The given index is invalid</p> 
+<blockquote> 
+ <p>3a1. Taskell shows an error message <br /> Use case resumes at step 2</p> 
+</blockquote> 
+<h4> <a id="use-case-done-task" class="anchor" href="#use-case-done-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Done task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to list tasks</li> 
+ <li>Taskell shows a list of uncompleted tasks</li> 
+ <li>User requests to mark a specific task in the list as completed</li> 
+ <li>Taskell marks the task as completed<br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The list is empty</p> 
+<p>3a. The given index is invalid</p> 
+<blockquote> 
+ <p>3a1. Taskell shows an error message <br /> Use case resumes at step 2</p> 
+</blockquote> 
+<h4> <a id="use-case-undone-task" class="anchor" href="#use-case-undone-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Undone task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to list tasks</li> 
+ <li>Taskell shows a list of completed tasks</li> 
+ <li>User requests to mark a specific task in the list as uncompleted</li> 
+ <li>Taskell marks the task as uncompleted<br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The list is empty</p> 
+<p>3a. The given index is invalid</p> 
+<blockquote> 
+ <p>3a1. Taskell shows an error message <br /> Use case resumes at step 2</p> 
+</blockquote> 
+<p>4a. User tries to mark a uncompleted task as uncompleted</p> 
+<h4> <a id="use-case-help-command" class="anchor" href="#use-case-help-command" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Help command</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to view the different command</li> 
+ <li>User enters &quot;help&quot;</li> 
+ <li>User displays a summary of all the different command. Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The user types &quot;help&quot; incorrectly</p> 
+<blockquote> 
+ <p>3a1. Taskell stil displays the help message <br /></p> 
+</blockquote> 
+<h4> <a id="use-case-find-tasks" class="anchor" href="#use-case-find-tasks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Find tasks</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to find tasks with specific keywords</li> 
+ <li>Taskell displays the tasks with all matching keywords <br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>1a. No keyword is given</p> 
+<blockquote> 
+ <p>1a1. Taskell shows an error message <br /></p> 
+</blockquote> 
+<h4> <a id="use-case-edit-task" class="anchor" href="#use-case-edit-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Edit task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to list tasks</li> 
+ <li>Taskell shows a list of tasks</li> 
+ <li>User requests to edit either the description, date, time or priority of a task</li> 
+ <li>Taskell edits the respective field</li> 
+ <li>Taskell displays the both the old and updated version of the task <br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The list is empty</p> 
+<p>3a. The given index is invalid 3b. The user did not key in the new field of the task 3c. The user did not key in a valid parameter</p> 
+<blockquote> 
+ <p>3a1, 3b1 and 3c1. Taskell shows an error message <br /> Use case resumes at step 2</p> 
+</blockquote> 
+<h4> <a id="use-case-undo-command" class="anchor" href="#use-case-undo-command" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Undo command</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User enters a command</li> 
+ <li>Taskell executes it</li> 
+ <li>User requests to view undo commands history</li> 
+ <li>User requests to undo command at specific index</li> 
+ <li>Taskell reverts the command <br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>3a. The user did not enter any previous command</p> 
+<blockquote> 
+ <p>3a1. Taskell shows a message indicating no commands available for undo<br /></p> 
+</blockquote> 
+<p>4a. The user enters invalid index</p> 
+<blockquote> 
+ <p>4a1. Taskell shows error message indicating index is invalid<br /></p> 
+</blockquote> 
+<h4> <a id="use-case-list-task" class="anchor" href="#use-case-list-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: List task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to list either all tasks, incomplete tasks, completed tasks, task with specific start date or task with specific priority</li> 
+ <li>Taskell shows a list of tasks accordingly Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>2a. The list is empty</p> 
+<blockquote> 
+ <p>2a1. Taskell shows an error message <br /> Use case resumes at step 2</p> 
+</blockquote> 
+<h4> <a id="use-case-view-calendar-for-the-week" class="anchor" href="#use-case-view-calendar-for-the-week" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: View calendar for the week</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to view calendar</li> 
+ <li>Taskell displays calendar</li> 
+</ol> 
+<h4> <a id="use-case-save-data-to-specified-folder" class="anchor" href="#use-case-save-data-to-specified-folder" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Save data to specified folder</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to save all tasks</li> 
+ <li>Taskell saves all tasks in the requested folder <br /> Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>1a. User gives invalid filename (contains illegal symbols not allowed in file names)</p> 
+<blockquote> 
+ <p>1a1. Taskell shows an error message and still saves data in previous old location.<br /></p> 
+</blockquote> 
+<p>2a. Data cannot be written to the requested folder (invalid directory or access prohibited)</p> 
+<blockquote> 
+ <p>2a1. Taskell shows an error message and still saves data in previous old location.<br /></p> 
+</blockquote> 
+<h4> <a id="use-case-clear-task" class="anchor" href="#use-case-clear-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Clear task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to clear all tasks</li> 
+ <li>Taskell shows pop-up to ask for confirmation</li> 
+ <li>User confirms</li> 
+ <li>Taskell deletes all tasks Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong></p> 
+<p>3a. User cancels request</p> 
+<blockquote> 
+ <p>3a1. Taskell does not clear all tasks <br /></p> 
+</blockquote> 
+<h4> <a id="use-case-exit-task" class="anchor" href="#use-case-exit-task" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use case: Exit task</h4> 
+<p><strong>MSS</strong></p> 
+<ol> 
+ <li>User requests to exit Taskell</li> 
+ <li>Taskell window closes Use case ends</li> 
+</ol> 
+<p><strong>Extensions</strong> NIL</p> 
+<h2> <a id="appendix-c--non-functional-requirements" class="anchor" href="#appendix-c--non-functional-requirements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix C : Non Functional Requirements</h2> 
+<ol> 
+ <li>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java <code>1.8.0_60</code> or higher installed.</li> 
+ <li>Should be able to hold up to 1000 tasks.</li> 
+ <li>Should come with automated unit tests and open source code.</li> 
+ <li>Should favor DOS style commands over Unix-style commands.</li> 
+ <li>Should execute commands under 5 seconds.</li> 
+</ol> 
+<h2> <a id="appendix-d--glossary" class="anchor" href="#appendix-d--glossary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix D : Glossary</h2> 
+<h5> <a id="mainstream-os" class="anchor" href="#mainstream-os" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Mainstream OS</h5> 
+<blockquote> 
+ <p>Windows, Linux, Unix, OS-X</p> 
+</blockquote> 
+<h5> <a id="floating-tasks" class="anchor" href="#floating-tasks" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Floating Tasks</h5> 
+<blockquote> 
+ <p>Tasks with no deadline</p> 
+</blockquote> 
+<h2> <a id="appendix-e--product-survey" class="anchor" href="#appendix-e--product-survey" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix E : Product Survey</h2> 
+<h4> <a id="wunderlist" class="anchor" href="#wunderlist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WunderList</h4> 
+<p><strong>Pros:</strong><br /> 1. Has support for cross-platform operations<br /> 2. Can share tasks with other people and manage them<br /> 3. Can categorize tasks into different categories<br /> 4. Can attach different types of file inside the task, such as photos, PDF and PowerPoint<br /></p> 
+<p><strong>Cons:</strong><br /> 1. Has limited number of priority levels<br /> 2. Has no undo operation<br /></p> 
+<h4> <a id="remember-the-milk" class="anchor" href="#remember-the-milk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Remember the Milk</h4> 
+<p><strong>Pros:</strong><br /> 1. Can be used offline and tasks are synced once internet connection is established<br /> 2. Can handle some natural languages processing by saving deadlines from task information itself (e.g. Do math homework tomorrow: Saves task with deadline set to tomorrow)<br /> 3. Can undo when marking tasks as done (recover from accidentally marking a task as done)<br /> 4. Can set priority, and list tasks by priority<br /> 5. Can set recursive tasks<br /></p> 
+<p><strong>Cons:</strong><br /> 1. Need to click frequently to enter or edit a task<br /> 2. Need to remember lots of shortcuts, so user is less likely to use them<br /> 3. Has a cluttered interface, which is not intuitive<br /> 4. Does not support calendar view in-house<br /></p> 
+<h4> <a id="google-calendar" class="anchor" href="#google-calendar" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Google Calendar</h4> 
+<p><strong>Pros:</strong><br /> 1. Can add in public holidays <br /> 2. Can update in terms of time zone<br /> 3. Can customize background picture<br /></p> 
+<p><strong>Cons:</strong><br /> 1. Does not have flexibility in viewing the calendar<br /> 2. Has too much information in 1 page in application<br /></p> 
+<h4> <a id="anydo" class="anchor" href="#anydo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Any.do</h4> 
+<p><strong>Pros:</strong><br /> 1. Displays a reminder when the task is almost due (set in advance)<br /> 2. Able to clear all tasks in one go<br /> 3. Do a daily review at the start/end of day<br /> 4. Arranges tasks by today, tomorrow, someday<br /></p> 
+<p><strong>Cons:</strong><br /> 1. Requires internet connection<br /> 2. Has no support for recurring tasks<br /></p> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Task Managers</th> 
+   <th align="left">WunderList</th> 
+   <th align="left">Remember the Milk</th> 
+   <th align="left">Google Calendar</th> 
+   <th align="left">Any.do</th> 
+   <th align="left">Taskell</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>CRUD</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+  </tr> 
+  <tr> 
+   <td>Undo</td> 
+   <td align="left">Not Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Not Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+  </tr> 
+  <tr> 
+   <td>Sync across multiple platform</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+  </tr> 
+  <tr> 
+   <td>Internet required</td> 
+   <td align="left">Required</td> 
+   <td align="left">Required</td> 
+   <td align="left">Required</td> 
+   <td align="left">Required</td> 
+   <td align="left">Not Required</td> 
+  </tr> 
+  <tr> 
+   <td>Calendar</td> 
+   <td align="left">Not Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+   <td align="left">Available</td> 
+  </tr> 
+  <tr> 
+   <td>Other Features</td> 
+   <td align="left">Attach different files and picture inside the task</td> 
+   <td align="left">Handle some natural languages</td> 
+   <td align="left">Able to add public holiday</td> 
+   <td align="left">Do a daily review at the start/end of day</td> 
+   <td align="left">Support for recurring tasks</td> 
+  </tr> 
+ </tbody> 
+</table>
+</body>
+</html>
