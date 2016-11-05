@@ -214,7 +214,11 @@ Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et:
 
 #### Showing calendar view : `calendar` or `cal`
 You can view the calendar for the week on the right panel to refer to the dates and any events scheduled 
-when adding tasks and scheduling events.<br>
+when adding tasks and scheduling events. There is also a single red line displayed to show you the current time for your ease in checking your schedule.<br>
+<br><p align="center"><img src="images/screenshots/calendar_circle.PNG" width="800"></br>
+Diagram 12: An example of how the current time marker looks like.<br>
+
+Calendar view depends on the list of tasks on the left panel, with each section marked with the index corresponding to the task, meaning a block marked "4" would correspond with the 4th task.<br>
 By default, the calendar view will be shown on the right panel. As `history` displays command history on the right panel as well, this command is meant for your convenience if you want to view calendar again.<br>
 Please note that entering other commands (i.e. `find`, `add`) will also revert the right panel back to calendar as it is the default view. <br>
 To save your time, Taskell has a short form command `cal`. <br>
@@ -226,7 +230,7 @@ To obtain the filepath, navigate to the required file in your File Explorer. Cop
 screen and paste into Taskell. Refer to diagram 12 for an example of a filepath. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
-Diagram 12: Screenshot of File Explorer in Windows.  <br>
+Diagram 13: Screenshot of File Explorer in Windows.  <br>
 
 If the specified directory is valid but the file is missing, for example if command is `save C:\Users\Jim\Documents\chicken`,  and `C:\Users\Jim\Documents\chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
@@ -256,7 +260,7 @@ Permanently clears **all** task data. <br>
 Format: `clear`  
 
  <br><p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
-Diagrams 13: Typing `clear` will prompt a confirm pop-up window <br>
+Diagrams 14: Typing `clear` will prompt a confirm pop-up window <br>
 
 > Take Note! <br>
 > * Clear commands are irreversible!
