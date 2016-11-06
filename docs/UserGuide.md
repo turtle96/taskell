@@ -324,15 +324,15 @@ shown in the table below.
     
 Windows |  Linux 
 -------- | :-------- 
-    * > | * <
-    * < | * >
-    * : | * :
-    * " | * &
-    * / | * /
-    * \ | * |
-    * | | 
-    * ? |
-    * * |
+    > | <
+    < | >
+    : | :
+    " | &
+    / | /
+    \ | |
+    | | 
+    ? |
+    * |
 
 #### Clearing all entries : `clear`
 Permanently clears **all** task data. <br>
