@@ -3,11 +3,8 @@ package seedu.taskell.logic.commands;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
-import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.model.task.ReadOnlyTask;
-import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
-import seedu.taskell.model.task.TaskDate;
 import seedu.taskell.model.task.TaskStatus;
 import seedu.taskell.model.task.UniqueTaskList;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
@@ -37,6 +34,7 @@ public class UndoneCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
+            history.deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
         
@@ -45,6 +43,7 @@ public class UndoneCommand extends Command {
         ReadOnlyTask taskToBeUndone = lastShownList.get(targetIndex - 1);
         Task newTask = null;
         if(taskToBeUndone.getTaskStatus().taskStatus().equals(TaskStatus.INCOMPLETE)){
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_UNDONE_UNSUCCESSFUL);
         } else {
             newTask = new Task(taskToBeUndone.getDescription(), taskToBeUndone.getTaskType(), taskToBeUndone.getStartDate(), taskToBeUndone.getEndDate(),                
@@ -53,9 +52,13 @@ public class UndoneCommand extends Command {
         
         try {
             model.editTask(taskToBeUndone, newTask);
+            history.addTask((Task) taskToBeUndone);
+            history.addOldTask(newTask);
         } catch (TaskNotFoundException pnfe) {
+            history.deleteLatestCommand();
             assert false : "The target task cannot be missing";
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            history.deleteLatestCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } 
 
