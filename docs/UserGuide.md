@@ -295,7 +295,7 @@ Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et:
 #### Showing calendar view : `calendar` or `cal`
 You can view the calendar for the week on the right panel to refer to the dates and any events scheduled 
 when adding tasks and scheduling events. There is also a single red line displayed to show you the current time for your ease in checking your schedule.<br>
-<br><p align="center"><img src="images/screenshots/calendar_circle.PNG" width="800"></br>
+<br> <p align="center"> <img src="images/screenshots/calendar_circle.png" width="800"> </br>
 Diagram 12: An example of how the current time marker looks like.<br>
 
 Calendar view depends on the list of tasks on the left panel, with each section marked with the index corresponding to the task, meaning a block marked "4" would correspond with the 4th task.<br>
