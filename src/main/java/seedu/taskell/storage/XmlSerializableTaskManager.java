@@ -64,7 +64,6 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
             return new UniqueTagList((Set<Tag>)CollectionUtil.generateUniqueList(tags));
         }
     }
-    //@@author
 
     @Override
     public UniqueTaskList getUniqueTaskList() {
@@ -73,11 +72,13 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
             try {
                 lists.add(p.toModelType());
             } catch (IllegalValueException e) {
-                //TODO: better error handling
+                EventsCenter.getInstance().post(new DuplicateDataExceptionEvent(e));
+                logger.info("Duplicated task will be removed upon adding a new task");
             }
         }
         return lists;
     }
+  //@@author
 
     @Override
     public List<ReadOnlyTask> getTaskList() {
