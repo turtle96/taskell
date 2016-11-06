@@ -70,7 +70,6 @@ public class CalendarView {
         
         agenda.appointments().addAll(appointments);
         
-        //"-fx-background-color: #EC407A; -fx-fill: #EC407A;"
     }
 
     private boolean isValidEventTask(ReadOnlyTask task) {
