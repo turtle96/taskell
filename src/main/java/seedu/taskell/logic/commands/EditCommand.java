@@ -4,8 +4,6 @@ package seedu.taskell.logic.commands;
 
 import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.time.LocalDate;
-
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
@@ -126,7 +124,7 @@ public class EditCommand extends Command {
                 return true;
             }
         } else {
-            return true;
+            return false;
         }
     }
 

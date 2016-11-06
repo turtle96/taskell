@@ -130,7 +130,7 @@ public class EventTask extends Task {
     }
     
     /**
-     * Determine end date in the week with respect to start date
+     * Determines end date in the week with respect to start date
      */
     private TaskDate determineDayInWeekGivenName(TaskDate eventStartDate, TaskDate eventEndDate) {
         
