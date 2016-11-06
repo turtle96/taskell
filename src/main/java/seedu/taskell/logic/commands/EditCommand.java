@@ -2,6 +2,8 @@
 
 package seedu.taskell.logic.commands;
 
+import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
@@ -99,15 +101,14 @@ public class EditCommand extends Command {
         }
     }
 
-    private boolean isValidTime(ReadOnlyTask taskToEdit) {
+    private boolean ableToAdjustTime(ReadOnlyTask taskToEdit) {
         TaskTime currentTime = TaskTime.getTimeNow();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.equals(startDate) && endTime.isBefore(startTime)) {
                 try {
                     endDate = endDate.getNextDay();
                 } catch (IllegalValueException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
+                    return false;
                 }
                 return true;
             } else if (endDate.equals(startDate) && endTime.isBefore(currentTime)) {
@@ -149,8 +150,8 @@ public class EditCommand extends Command {
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 
-        if (!isValidTime(taskToEdit)) {
-            return new CommandResult(MESSAGE_TIME_CONSTRAINTS);
+        if (!ableToAdjustTime(taskToEdit)) {
+            return new CommandResult(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         if (!isValidDate(taskToEdit)) {

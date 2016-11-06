@@ -213,7 +213,6 @@ public class Parser {
                 return new ListDateCommand(new TaskDate(date));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
-
             }
         }
     }
@@ -415,7 +414,6 @@ public class Parser {
                                         // description
 
         extractDescriptionComponent();
-        // adjustEndDate();
         adjustStartTime();
 
         return addTaskAccordingToType();
