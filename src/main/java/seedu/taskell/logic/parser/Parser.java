@@ -62,8 +62,6 @@ public class Parser {
     private static final String DESCRIPTION = "desc:";
     private static final String PRIORITY = "p:";
 
-    private boolean lastCharChanged;
-
     private static History history;
 
     private ArrayList<Queue<String>> partitionQueue;
