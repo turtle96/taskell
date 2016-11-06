@@ -92,7 +92,7 @@ To add a task with tag(s)<br>
 Formats:
 - `add` TASK <i>#</i>TAG <br>
 Example: `add` Meet Alice in Bugis <i>#</i>friends<br>
-- `add` TASK <i>#</i>TAG <i>#</i>[MORE_TAGS] <br>
+- `add` TASK <i>#</i>TAG [<i>#</i>MORE_TAGS] <br>
 Example: `add` Swimming with Jane <i>#</i>friends <i>#</i>leisure <br>
 
 To add a recurring task <br>
@@ -151,9 +151,16 @@ Example: `add` Go for meeting <i>by</i> 3pm <i>on</i> 1-jan
 Example:`add` Go out with friends <i>from</i> 9am
 - `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <br>
 Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
+- `add` TASK <i>from</i> DATE <i>to</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>#</i>TAG] [<i>p/</i>PRIORITY]  [<i>r/</i>RECURRING] <br>
+Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> may <i>to</i> aug <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly
 
-Moreover, Taskell is able to make automatic adjustments to the date and time. <br> 
-Example: `add` Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br> 
+Moreover, Taskell is able to make automatic adjustments to the date and time so that the task entered remains relevant <br> 
+Examples: 
+- `add` Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br>
+This task will be added as a valid task that starts today at 11pm and ends  tomorrow at 3pm
+- `add` Staycation with friends <i>from</i> sunday <i>to</i> tues <br>
+If today is a Saturday, this task will be added as a valid task that starts from tomorrow and end on this coming Tuesday <br>
+If today is a Sunday, this task will be added as a valid task that starts from next Sunday and end on the following Tuesday
 
 
 
