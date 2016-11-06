@@ -62,7 +62,7 @@ public class EditCommandTest extends TaskManagerGuiTest {
         assertResultMessage("Invalid command format! \n" + MESSAGE_USAGE);
 
         commandBox.runCommand(COMMAND_WORD + " " + COMMAND_WORD);
-        assertResultMessage(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        assertResultMessage("Invalid command format! \n" + MESSAGE_USAGE);
 
         commandBox.runCommand(
                 COMMAND_WORD + " " + targetIndex + " desc: finish homework " + " st: 8am " + " desc: submit homework");
