@@ -165,31 +165,25 @@ This task will be added as a valid task that starts today at 11pm and ends  tomo
 If today is a Saturday, this task will be added as a valid task that starts from tomorrow and end on this coming Tuesday. <br>
 If today is a Sunday, this task will be added as a valid task that starts from next Sunday and end on the following Tuesday.
 
-
-
 <!--- @@author -->
 
-<!--- @@author A0148004R --->
+<!--- @@author A0142073R --->
 
-#### Listing tasks : `list`
-You can use the `list` command to display a certain type of tasks.<br>
-
+#### Editing a task : `edit`
+You can use the `edit` command to edit any parts of a task<br>
 Formats: 
-- `list` <br>
-Displays a list of uncompleted tasks.<br>
-- `list-all` <br>
-Displays a list of all tasks, both completed and uncompleted.<br>
-- `list-date` DATE <br> 
-Displays a list of all the tasks due on the specified date.<br>
-- `list-done` <br>
-Displays a list of completed tasks.<br>
-- `list-priority` PRIORITY<br>
-Displays a list of tasks with the specified priority.
-<br><p align="center"><img src="images/screenshots/list_date.PNG" width="800"></br><br>
-Diagram 2: Displays all the tasks to be done by today after typing list-date today.
+- `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br>
+ <br><p align="center"><img src="images/editCmd.png" width="800"></br>
+Diagram 9: Edits the 1st task on the list.<br>
 
-<!-- @@author -->
-   
+Entering "`edit` 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
+
+> Take Note! <br>
+> * You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.
+> * Order of the parameters is not important.
+    
+<!--- @@author --->
+
 <!--- @@author A0142130A --->  
 
 #### Finding tasks: `find`
@@ -217,7 +211,60 @@ Diagram 3: Keying in `find` cs2010 displays list of tasks with 'cs2010' as one o
     
 <!--- @@author --->
 
+<!--- @@author A0148004R --->
+
+#### Deleting a task : `delete`
+You can use the `delete` command to delete a task at a specified INDEX.<br>
+Format: `delete` INDEX <br>
+Example: `find` violin, then `delete` 1<br>
+Deletes the first task shown in the list after executing the `find` command.
+
+#### Marking a task as completed: `done`
+You can use the `done` command to mark an uncompleted task as completed.<br>
+Format: `done` INDEX<br>
+Example: `done` 1<br>
+Marks the first task as finished and moves it to the list of completed tasks.<br>
+
+#### Marking a task as incomplete: `undone`
+You can use the `undone` command to mark a completed task as uncompleted.<br>
+Format: `undone` INDEX<br>
+Example: `undone` 1<br>
+Marks the first task as incomplete and moves it to the lsit of uncompleted tasks.<br>
+
+<!--- @@author --->
+
+<!--- @@author A0148004R --->
+
+#### Listing tasks : `list`
+You can use the `list` command to display a certain type of tasks.<br>
+
+Formats: 
+- `list` <br>
+Displays a list of uncompleted tasks.<br>
+- `list-all` <br>
+Displays a list of all tasks, both completed and uncompleted.<br>
+- `list-date` DATE <br> 
+Displays a list of all the tasks due on the specified date.<br>
+- `list-done` <br>
+Displays a list of completed tasks.<br>
+- `list-priority` PRIORITY<br>
+Displays a list of tasks with the specified priority.
+<br><p align="center"><img src="images/screenshots/list_date.PNG" width="800"></br><br>
+Diagram 2: Displays all the tasks to be done by today after typing list-date today.
+
+<!-- @@author -->
+   
 <!--- @@author A0142130A ---> 
+
+#### Clearing all entries : `clear`
+You can permanently clear **all** task data. <br>
+Format: `clear`  
+
+<p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
+Diagram 12: Typing `clear` will prompt a confirm pop-up window <br>
+
+> Take Note! <br>
+> * `clear` command is irreversible!
 
 #### Showing history : `history` or `hist`
 You can view the command history available for undo on the right panel when undoing your previous commands.<br>
@@ -250,49 +297,6 @@ Diagrams 5 and 6: `undo` 2 will undo 2nd command in history
 > Take Note! <br>
 > * Undo command only supports `add`, `edit`, `delete`, `done`, `undone` and `undo` commands.
 > * `clear` command is irreversible!
-
-<!--- @@author ---> 
-
-#### Deleting a task : `delete`
-You can use the `delete` command to delete a task at a specified INDEX.<br>
-Format: `delete` INDEX <br>
-Example: `find` violin, then `delete` 1<br>
-Deletes the first task shown in the list after executing the `find` command.
-
-<!--- @@author A0148004R --->
-
-#### Marking a task as completed: `done`
-You can use the `done` command to mark an uncompleted task as completed.<br>
-Format: `done` INDEX<br>
-Example: `done` 1<br>
-Marks the first task as finished and moves it to the lsit of completed tasks.<br>
-
-#### Marking a task as incomplete: `undone`
-You can use the `undone` command to mark a completed task as uncompleted.<br>
-Format: `undone` INDEX<br>
-Example: `undone` 1<br>
-Marks the first task as incomplete and moves it to the lsit of uncompleted tasks.<br>
-
-<!--- @@author --->
-
-<!--- @@author A0142073R --->
-
-#### Editing a task : `edit`
-You can use the `edit` command to edit any parts of a task<br>
-Formats: 
-- `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br>
- <br><p align="center"><img src="images/editCmd.png" width="800"></br>
-Diagram 9: Edits the 1st task on the list.<br>
-
-Entering "`edit` 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
-
-> Take Note! <br>
-> * You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.
-> * Order of the parameters is not important.
-    
-<!--- @@author --->
-
-<!--- @@author A0142130A ---> 
 
 #### Showing calendar view : `calendar` or `cal`
 You can use the `calendar` command to view a calendar. <br>
@@ -343,15 +347,7 @@ Windows |  Linux
        ? |
        * |
 
-#### Clearing all entries : `clear`
-You can permanently clear **all** task data. <br>
-Format: `clear`  
 
-<p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
-Diagram 12: Typing `clear` will prompt a confirm pop-up window <br>
-
-> Take Note! <br>
-> * `clear` command is irreversible!
 
 <!--- @@author ---> 
 
@@ -389,21 +385,21 @@ transfer your data to a new location on your computer. <br>
 
 Command | Format  
 -------- | :-------- 
-Add | `add` TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG] <br>`add` TASK <i>by</i> DATE <br> `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME <br> `add` TASK <i>from</i> DATE <i>to</i> DATE <br> `add` TASK <i>from</i> TIME <i>to</i> TIME <br> `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING]
+Add | `add` TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG] <br> `add` TASK <i>by</i> DATE <br>  `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME <br> `add` TASK <i>from</i> DATE <i>to</i> DATE <br> `add` TASK <i>from</i> TIME <i>to</i> TIME <br> `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING]
 Calendar View | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
-Edit | `edit` INDEX <br> `desc:` NEW_DESCRIPTION <br> `st:` NEW_START_TIME <br> `et:` NEW_END_TIME <br> `ed:` NEW_END_DATE <br> `sd:` NEW_START_DATE <br> `p:` NEW_PRIORITY
+Edit | `edit` INDEX <br> `desc:` NEW_DESCRIPTION <br> `sd:` NEW_START_DATE <br> `st:` NEW_START_TIME <br> `ed:` NEW_END_DATE <br> `et:` NEW_END_TIME <br> `p:` NEW_PRIORITY
 Find | `find` KEYWORD [MORE_KEYWORDS]
-Find by Tag | `find-tag` KEYWORD [MORE_KEYWORDS]
+Find by tag | `find-tag` KEYWORD [MORE_KEYWORDS]
 Help | `help`
 History | `history` or `hist`
-List Incomplete Tasks| `list`
-List All Tasks | `list-all`
-List by Given Date | `list-date` DATE
-List Done Tasks | `list-done`
-Mark Task Done | `done` INDEX
-Mark Task Undone | `undone` INDEX
+List all tasks | `list-all`
+List by specified date | `list-date` DATE
+List completed tasks | `list-done`
+List uncompleted tasks| `list`
+Mark task as finished | `done` INDEX
+Mark task as incomplete | `undone` INDEX
 Undo | `undo` <br> `undo` INDEX
 
 <!-- @@author -->
