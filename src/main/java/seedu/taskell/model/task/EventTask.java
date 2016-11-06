@@ -110,8 +110,6 @@ public class EventTask extends Task {
         TaskDate eventEndDate = new TaskDate(taskComponentArray[Task.END_DATE]);
         String userInputEndDate = taskComponentArray[END_DATE];
         
-        System.out.println("OO: " + eventEndDate);
-        
         if (TaskDate.isValidFullDate(userInputEndDate) && eventEndDate.isBefore(eventStartDate)
                 || TaskDate.isValidMonthAndYear(userInputEndDate) && eventEndDate.isBefore(eventStartDate)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);

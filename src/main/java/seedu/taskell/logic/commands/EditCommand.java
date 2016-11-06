@@ -2,6 +2,8 @@
 
 package seedu.taskell.logic.commands;
 
+import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
@@ -24,7 +26,7 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * description, time, date and priority of a task.
  */
 public class EditCommand extends Command {
-    
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -47,57 +49,42 @@ public class EditCommand extends Command {
     private TaskTime endTime;
     private TaskPriority taskPriority;
 
-    private boolean hasChangedDescription;
-    private boolean hasChangedStartDate;
-    private boolean hasChangedEndDate;
-    private boolean hasChangedStartTime;
-    private boolean hasChangedEndTime;
-    private boolean hasChangedPriority;
+    private boolean[] hasComponentArray = new boolean[Task.NUM_BOOLEAN_TASK_COMPONENT];
 
-    public EditCommand(int targetIndex, Description newDescription, boolean hasChangedDescription,
-            TaskDate newStartDate, boolean hasChangedStartDate, TaskDate newEndDate, boolean hasChangedEndDate,
-            TaskTime newStartTime, boolean hasChangedStartTime, TaskTime newEndTime, boolean hasChangedEndTime,
-            TaskPriority newPriority, boolean hasChangedPriority) throws IllegalValueException {
+    public EditCommand(int targetIndex, Description newDescription, TaskDate newStartDate, TaskDate newEndDate,
+            TaskTime newStartTime, TaskTime newEndTime, TaskPriority newPriority, boolean[] hasComponentArray)
+            throws IllegalValueException {
 
         this.targetIndex = targetIndex;
 
         description = newDescription;
-        this.hasChangedDescription = hasChangedDescription;
-
         startTime = newStartTime;
-        this.hasChangedStartTime = hasChangedStartTime;
-
         endTime = newEndTime;
-        this.hasChangedEndTime = hasChangedEndTime;
-
         startDate = newStartDate;
-        this.hasChangedStartDate = hasChangedStartDate;
-
         endDate = newEndDate;
-        this.hasChangedEndDate = hasChangedEndDate;
-
         taskPriority = newPriority;
-        this.hasChangedPriority = hasChangedPriority;
+
+        this.hasComponentArray = hasComponentArray;
     }
 
     public void getEditInformation(ReadOnlyTask taskToEdit) {
 
-        if (hasChangedDescription == false) {
+        if (hasComponentArray[Task.DESCRIPTION_COMPONENT] == false) {
             description = taskToEdit.getDescription();
         }
-        if (hasChangedStartTime == false) {
+        if (hasComponentArray[Task.START_TIME_COMPONENT] == false) {
             startTime = taskToEdit.getStartTime();
         }
-        if (hasChangedEndTime == false) {
+        if (hasComponentArray[Task.END_TIME_COMPONENT] == false) {
             endTime = taskToEdit.getEndTime();
         }
-        if (hasChangedStartDate == false) {
+        if (hasComponentArray[Task.START_DATE_COMPONENT] == false) {
             startDate = taskToEdit.getStartDate();
         }
-        if (hasChangedEndDate == false) {
+        if (hasComponentArray[Task.END_DATE_COMPONENT] == false) {
             endDate = taskToEdit.getEndDate();
         }
-        if (hasChangedPriority == false) {
+        if (hasComponentArray[Task.PRIORITY_COMPONENT] == false) {
             taskPriority = taskToEdit.getTaskPriority();
         }
     }
@@ -114,10 +101,22 @@ public class EditCommand extends Command {
         }
     }
 
-    private boolean isValidTime(ReadOnlyTask taskToEdit) {
+    private boolean ableToAdjustTime(ReadOnlyTask taskToEdit) {
+        TaskTime currentTime = TaskTime.getTimeNow();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.equals(startDate) && endTime.isBefore(startTime)) {
-                return false;
+                try {
+                    endDate = endDate.getNextDay();
+                } catch (IllegalValueException e) {
+                    return false;
+                }
+                return true;
+            } else if (endDate.equals(startDate) && endTime.isBefore(currentTime)) {
+                endTime = currentTime;
+                return true;
+            } else if (endDate.equals(startDate) && startTime.isBefore(currentTime)) {
+                startTime = currentTime;
+                return true;
             } else {
                 return true;
             }
@@ -125,11 +124,11 @@ public class EditCommand extends Command {
             return true;
         }
     }
-    
+
     private void jumpToNewTaskIndex() {
         jumpToIndex(targetIndex - 1);
     }
-    
+
     @Override
     public CommandResult execute() {
 
@@ -144,13 +143,15 @@ public class EditCommand extends Command {
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         getEditInformation(taskToEdit);
 
-        if (taskToEdit.getTaskType().equals(Task.FLOATING_TASK) && (hasChangedStartTime == true
-                || hasChangedEndTime == true || hasChangedStartDate == true || hasChangedEndDate == true)) {
+        if (taskToEdit.getTaskType().equals(Task.FLOATING_TASK) && (hasComponentArray[Task.START_TIME_COMPONENT] == true
+                || hasComponentArray[Task.END_TIME_COMPONENT] == true
+                || hasComponentArray[Task.START_DATE_COMPONENT] == true
+                || hasComponentArray[Task.END_DATE_COMPONENT] == true)) {
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 
-        if (!isValidTime(taskToEdit)) {
-            return new CommandResult(MESSAGE_TIME_CONSTRAINTS);
+        if (!ableToAdjustTime(taskToEdit)) {
+            return new CommandResult(MESSAGE_INVALID_COMMAND_FORMAT);
         }
 
         if (!isValidDate(taskToEdit)) {
