@@ -2,12 +2,15 @@
 
 package seedu.taskell.logic.commands;
 
+import java.util.logging.Logger;
+
+import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.CommandResult;
+
 import seedu.taskell.model.task.Description;
 import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.ReadOnlyTask;
@@ -24,7 +27,9 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  * description, time, date and priority of a task.
  */
 public class EditCommand extends Command {
-    
+
+	private static final Logger logger = LogsCenter.getLogger(EditCommand.class.getName());
+
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -137,7 +142,7 @@ public class EditCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -162,16 +167,20 @@ public class EditCommand extends Command {
 
         try {
             model.editTask(taskToEdit, newTask);
-            HistoryManager.getInstance().addTask(newTask);
-            HistoryManager.getInstance().addOldTask((Task) taskToEdit);
+
             jumpToNewTaskIndex();
+            history.addTask(newTask);
+            history.addOldTask((Task) taskToEdit);
+            
         } catch (DuplicateTaskException pnfe) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         } catch (TaskNotFoundException pnfe) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(TASK_NOT_FOUND);
         }
+        
+        history.updateHistory();
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
     }

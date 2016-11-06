@@ -88,6 +88,7 @@ public class LogicManagerTest {
         targetedJumpIndex = -1; // non yet
 
         ClearCommand.setIsUnderTesting(true);
+        Command.initHistory();
     }
 
     @After

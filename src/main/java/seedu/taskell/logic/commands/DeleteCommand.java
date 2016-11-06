@@ -1,7 +1,11 @@
 package seedu.taskell.logic.commands;
 
+import java.util.logging.Logger;
+
+import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
+
 import seedu.taskell.history.HistoryManager;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
@@ -12,6 +16,8 @@ import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
  */
 public class DeleteCommand extends Command {
 
+    private static final Logger logger = LogsCenter.getLogger(DeleteCommand.class.getName());
+    
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
@@ -35,7 +41,7 @@ public class DeleteCommand extends Command {
 
         if (lastShownList.size() < targetIndex) {
             indicateAttemptToExecuteIncorrectCommand();
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
@@ -43,12 +49,12 @@ public class DeleteCommand extends Command {
 
         try {
             model.deleteTask(taskToDelete);
-            HistoryManager.getInstance().addTask((Task) taskToDelete);
-            HistoryManager.getInstance().updateList();
-            ViewHistoryCommand.getInstance().indicateDisplayListChanged();
+            history.addTask((Task) taskToDelete);           
         } catch (TaskNotFoundException tnfe) {
             assert false : "The target task cannot be missing";
         }
+        
+        history.updateHistory();
 
         return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, taskToDelete));
     }

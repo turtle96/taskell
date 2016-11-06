@@ -12,10 +12,15 @@ public class ViewCalendarCommand extends Command {
     public static final String COMMAND_WORD_2 = "cal";
     
     public static final String MESSAGE_SUCCESS = "Displayed calendar.";
+    public static final String MESSAGE_UNSUCCESSFUL = "Error displaying calendar.";
 
     @Override
     public CommandResult execute() {
-        indicateDisplayCalendarView();
+        try {
+            indicateDisplayCalendarView();
+        } catch (Exception e) {
+            return new CommandResult(String.format(MESSAGE_UNSUCCESSFUL));
+        }
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
     

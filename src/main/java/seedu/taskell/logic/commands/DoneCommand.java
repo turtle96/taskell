@@ -69,9 +69,13 @@ public class DoneCommand extends Command {
         
         try {
             model.editTask(taskToBeDone, newTask);
+            history.addTask(newTask);
+            history.addOldTask((Task) taskToBeDone);
         } catch (TaskNotFoundException pnfe) {
             assert false : "The target task cannot be missing";
+            history.deleteLatestCommand();
         } catch (UniqueTaskList.DuplicateTaskException e) {
+            history.deleteLatestCommand();
             return new CommandResult(AddCommand.MESSAGE_DUPLICATE_TASK);
         } 
 
