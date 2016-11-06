@@ -93,7 +93,7 @@ public class EditCommand extends Command {
         TaskDate today = TaskDate.getTodayDate();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.isBefore(startDate)) {
-                endDate = today;
+                endDate = startDate;
             }
             if (endDate.isBefore(today)) {
                 endDate = today;
@@ -154,7 +154,7 @@ public class EditCommand extends Command {
         }
 
         if (!ableToAdjustTime(taskToEdit)) {
-            return new CommandResult(MESSAGE_INVALID_COMMAND_FORMAT);
+            return new CommandResult(MESSAGE_TIME_CONSTRAINTS);
         }
         adjustDate(taskToEdit);
 
@@ -167,7 +167,7 @@ public class EditCommand extends Command {
             jumpToNewTaskIndex();
             history.addTask(newTask);
             history.addOldTask((Task) taskToEdit);
-            
+
         } catch (DuplicateTaskException pnfe) {
             history.deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
@@ -175,7 +175,7 @@ public class EditCommand extends Command {
             history.deleteLatestCommand();
             return new CommandResult(TASK_NOT_FOUND);
         }
-        
+
         history.updateHistory();
 
         return new CommandResult(String.format(MESSAGE_EDIT_TASK_SUCCESS, taskToEdit, newTask));
