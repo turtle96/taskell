@@ -7,9 +7,14 @@ import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
 import seedu.taskell.commons.core.Messages;
+import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.history.History;
 import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.commands.UndoCommand;
+import seedu.taskell.model.task.RecurringType;
+import seedu.taskell.model.task.Task;
+import seedu.taskell.model.task.TaskStatus;
+import seedu.taskell.testutil.TaskBuilder;
 import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
@@ -40,6 +45,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     public void undoInvalidCommands_nothingToUndo() {
         history.clear();
         
+        //commands that should not be saved
         commandBox.runCommand("clear");
         commandBox.runCommand("find chicken");
         commandBox.runCommand("undo");
@@ -66,8 +72,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("undo 1");    //referring to edit
         
         //confirm the edited card contains the old data
-        TaskCardHandle editedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
-        assertMatching(taskToAdd, editedCard);
+        assertNavigateToTaskAndMatch(taskToAdd.getDescription().description, taskToAdd);
         
         history.clear();
     }
@@ -84,6 +89,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
+        //undo: task to be deleted
         commandBox.runCommand(UNDO);
         assertDeleteSuccess(currentList.length, currentList);
         
@@ -103,6 +109,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
+        //undo: task to be added
         commandBox.runCommand(UNDO);
         assertAddSuccess(taskToDelete, currentList);
         
@@ -121,10 +128,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertAddSuccess(taskToAdd, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToAdd);
         
+        //undo
         commandBox.runCommand(UNDO);
         assertDeleteSuccess(currentList.length, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, currentList.length);
         
+        //redo: task should be back inside
         commandBox.runCommand(UNDO);
         assertAddSuccess(taskToAdd, currentList);
         
@@ -144,10 +153,12 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         assertDeleteSuccess(target, currentList);
         currentList = TestUtil.removeTaskFromList(currentList, 1);
         
+        //undo
         commandBox.runCommand(UNDO);
         assertAddSuccess(taskToDelete, currentList);
         currentList = TestUtil.addTasksToList(currentList, taskToDelete);
         
+        //redo: task should be deleted
         target = currentList.length;
         commandBox.runCommand(UNDO);
         assertDeleteSuccess(target, currentList);
@@ -160,20 +171,56 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         history.clear();
         
         TestTask[] currentList = td.getTypicalTasks();
-        TestTask taskToAdd = td.holdMeeting;
+        TestTask taskToEdit = td.holdMeeting;
         
         //add one task
-        commandBox.runCommand(taskToAdd.getAddCommand());
-        assertAddSuccess(taskToAdd, currentList);
-        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        commandBox.runCommand(taskToEdit.getAddCommand());
+        assertAddSuccess(taskToEdit, currentList);
+        currentList = TestUtil.addTasksToList(currentList, taskToEdit);
         
+        //edit the task
         commandBox.runCommand("edit " + currentList.length + " desc: hold chicken");
+        
+        //undo should revert task to old one
         commandBox.runCommand(UNDO);
         
         currentList = TestUtil.removeTaskFromList(currentList, currentList.length); //need to remove from 
                                                                                     //list since assertAddSuccess 
                                                                                     //will add the task back in
-        assertAddSuccess(taskToAdd, currentList);
+        assertAddSuccess(taskToEdit, currentList);
+        
+        history.clear();
+    }
+    
+    @Test
+    public void undoAndRedoEdit_success() throws IllegalValueException {
+        history.clear();
+        
+        commandBox.runCommand("edit 1 desc: eat breakfast");
+        
+        TestTask taskToEdit = td.archivePastEmails;
+        
+        String editToNewDesc = "eat breakfast";
+        TestTask taskEdited = new TaskBuilder()
+                .withDescription(editToNewDesc)
+                .withTaskType(Task.EVENT_TASK)
+                .withTaskPriority("1").withStartTime("12:30AM")
+                .withEndTime("12:45AM").withStartDate("1-1-2100")
+                .withEndDate("1-12-2100")
+                .withTags("friends")
+                .withRecurringType(RecurringType.NO_RECURRING)
+                .withTaskComplete(TaskStatus.INCOMPLETE)
+                .build();
+        
+        assertNavigateToTaskAndMatch(editToNewDesc, taskEdited);
+        
+        //undo back to old description
+        commandBox.runCommand("undo");
+        assertNavigateToTaskAndMatch(taskToEdit.getDescription().toString(), taskToEdit);
+        
+        //redo: back to new description
+        commandBox.runCommand("undo");
+        assertNavigateToTaskAndMatch(editToNewDesc, taskEdited);
         
         history.clear();
     }
@@ -271,6 +318,19 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         history.clear();
     }
     
+    /** @param description to navigate to the task on GUI
+     *  @param taskToCompare if task found in GUI matches with this task
+     * */
+    private void assertNavigateToTaskAndMatch(String description, TestTask taskToCompare) {
+        TaskCardHandle cardToCheck = taskListPanel.navigateToTask(description);
+        assertMatching(taskToCompare, cardToCheck);
+    }
+    
+    /**
+     * Confirms the task to add is added and reflected on GUI
+     * @param taskToAdd
+     * @param currentList A copy of the current list of tasks (before adding).
+     */
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
