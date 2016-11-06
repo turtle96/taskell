@@ -98,6 +98,7 @@ public class TaskCard extends UiPart{
     }
 //@@author
     
+    /** @@author A0142130A **/
     /** determines if task is complete, to set to darker colour
      * */
     private void setBackgroundColour() {
@@ -105,6 +106,7 @@ public class TaskCard extends UiPart{
             cardPane.setStyle("-fx-background-color: #4DD0E1");
         }
     }
+    /** @@author **/
     
     public HBox getLayout() {
         return cardPane;
