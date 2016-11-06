@@ -186,8 +186,8 @@ public class Parser {
      * if type of command is undoable, saves to history for undoing
      */
     private void saveToHistory(String userInput, final String commandWord) {
-        if (commandWord.equals(AddCommand.COMMAND_WORD) || commandWord.equals(DeleteCommand.COMMAND_WORD)
-                || commandWord.contains(UndoCommand.EDIT)) {
+        
+        if (isUndoableCommandType(commandWord)) {
             IncorrectCommand.setIsUndoableCommand(true);
             history.addCommand(userInput, commandWord);
         } else {
@@ -195,6 +195,14 @@ public class Parser {
         }
     }
 
+    private boolean isUndoableCommandType(final String commandWord) {
+        return commandWord.equals(AddCommand.COMMAND_WORD) 
+                || commandWord.equals(DeleteCommand.COMMAND_WORD)
+                || commandWord.equals(EditCommand.COMMAND_WORD)
+                || commandWord.equals(DoneCommand.COMMAND_WORD)
+                || commandWord.equals(UndoneCommand.COMMAND_WORD);
+    }
+    
     /** @@author **/
 
     // @@author A0142073R
@@ -256,7 +264,6 @@ public class Parser {
         String taskPriority = TaskPriority.DEFAULT_PRIORITY;
 
         if (args.isEmpty()) {
-            // UndoCommand.deletePreviousCommand();
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 

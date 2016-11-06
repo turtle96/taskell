@@ -182,6 +182,7 @@ public class TaskManager implements ReadOnlyTaskManager {
     
     /** @@author A0142130A **/
     public boolean isTaskPresent(Task task) {
+        assert task != null;
         return tasks.contains(task);
     }
     /** @@author **/

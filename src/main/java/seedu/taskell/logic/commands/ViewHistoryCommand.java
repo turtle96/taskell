@@ -14,13 +14,11 @@ public class ViewHistoryCommand extends Command {
     public static final String COMMAND_WORD_2 = "hist";
 
     public static final String MESSAGE_SUCCESS = "Listed all commands available for undo.";
+    public static final String MESSAGE_UNSUCCESSFUL = "Error displaying history.";
     
     private static ViewHistoryCommand self;
-    private History history;
     
-    public ViewHistoryCommand() {
-        history = HistoryManager.getInstance();
-    }
+    public ViewHistoryCommand() {}
     
     public static ViewHistoryCommand getInstance() {
         if (self == null) {
@@ -32,7 +30,11 @@ public class ViewHistoryCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        indicateDisplayListChanged();
+        try {
+            indicateDisplayListChanged();
+        } catch (Exception e) {
+            return new CommandResult(MESSAGE_UNSUCCESSFUL);
+        }
         return new CommandResult(MESSAGE_SUCCESS);
     }
 

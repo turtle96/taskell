@@ -3,7 +3,9 @@
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
 ## Project Team
+
 <!-- @@author A0139257X -->
+
 #### [Marcus Ng Wen Jian](https://github.com/marcusngwj) <br>
 <img src="images/Marcus.png" width="150"><br>
 
@@ -22,7 +24,9 @@ Role: Team Leader
 	* Set up Codacy [[#113](https://github.com/CS2103AUG2016-W15-C3/main/pull/113)]
 
 -----
+
 <!-- @@author A0142130A -->
+
 #### [Jazlyn Ang Chue Ching](https://github.com/turtle96)
 <img src="images/Jazlyn.png" width="150"><br>
 
@@ -42,7 +46,9 @@ Role: Developer
   * Designed UI theme
 
 -----
+
 <!-- @@author A0142073R -->
+
 #### [Madasamy Ravi Nadar Mamtha](https://github.com/Mamtha3005) 
 <img src="images/Mamtha.png" width="150"><br>
 
@@ -64,7 +70,9 @@ Role: Developer
 	* Copy-editing and revising of documentation
 
 -----
+
 <!-- @@author A0148004R -->
+
 #### [Zuo ZhuoLin](https://github.com/ZuoZhuolin)
 <img src="images/ZhuoLin.png" width="150"><br>
 Role: Developer
@@ -82,6 +90,8 @@ Role: Developer
 [[docs](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/docs/A0148004R.md)]
 * Other major contributions:
 	* Contributed to second round refactoring from AddressBook Level 4 to Taskell
+
+<!-- @@author -->
 
 -----
 

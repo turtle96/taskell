@@ -1,6 +1,9 @@
 /** @@author A0142130A **/
 package seedu.taskell.history;
 
+import seedu.taskell.logic.commands.DeleteCommand;
+import seedu.taskell.logic.commands.DoneCommand;
+import seedu.taskell.logic.commands.UndoneCommand;
 import seedu.taskell.model.task.Task;
 
 /** Stores the relevant details of a command so it can be undone via UndoCommand
@@ -9,7 +12,7 @@ import seedu.taskell.model.task.Task;
  * */
 public class CommandHistory {
     private String commandText, commandType;
-    private Task task;      //relevent task to be added, deleted or edited
+    private Task task;      //relevant task to be added, deleted or edited
     private Task oldTask;   //oldTask needed for EditCommands
     private boolean isRedoCommand;
     
@@ -60,9 +63,16 @@ public class CommandHistory {
     
     public void setTask(Task task) {
         assert task != null;
+        
         this.task = task;
-        if (commandType.equals("delete")) {
+        
+        //edits text form to show task description and other parameters
+        if (commandType.equals(DeleteCommand.COMMAND_WORD)) {
             commandText = "delete " + this.task.getAsText();
+        } else if (commandType.equals(DoneCommand.COMMAND_WORD)) {
+            commandText = "done " + this.task.getAsText();
+        } else if (commandType.equals(UndoneCommand.COMMAND_WORD)) {
+            commandText = "undone " + this.task.getAsText();
         }
     }
     
