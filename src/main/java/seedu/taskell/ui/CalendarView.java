@@ -46,6 +46,8 @@ public class CalendarView {
         agenda.setStyle("-fx-font-size: 12pt");
     }
     
+    /** gets current filtered task list from model and updates agenda's data
+     * */
     public void loadTasks() {
         agenda.appointments().clear();
 
@@ -72,6 +74,8 @@ public class CalendarView {
         
     }
 
+    /** checks that task is incomplete status and is type event
+     * */
     private boolean isValidEventTask(ReadOnlyTask task) {
         return task.getTaskStatus().toString().equals(TaskStatus.INCOMPLETE) 
                 && task.getTaskType().equals(Task.EVENT_TASK);
