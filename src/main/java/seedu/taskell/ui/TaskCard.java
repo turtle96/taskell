@@ -9,6 +9,7 @@ import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskPriority;
+import seedu.taskell.model.task.TaskStatus;
 
 public class TaskCard extends UiPart{
 
@@ -63,8 +64,9 @@ public class TaskCard extends UiPart{
         setDateTime();
         setDateTimeVisibility();
         setPriorityPaneColour();
+        setBackgroundColour();
     }
-    
+
     private void setDateTime() {
         startDate.setText(task.getStartDate().getDisplayDate());
         endDate.setText(task.getEndDate().getDisplayDate());
@@ -95,6 +97,14 @@ public class TaskCard extends UiPart{
         }
     }
 //@@author
+    
+    /** determines if task is complete, to set to darker colour
+     * */
+    private void setBackgroundColour() {
+        if (task.getTaskStatus().toString().equals(TaskStatus.FINISHED)) {
+            cardPane.setStyle("-fx-background-color: #4DD0E1");
+        }
+    }
     
     public HBox getLayout() {
         return cardPane;
