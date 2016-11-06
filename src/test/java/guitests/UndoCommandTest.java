@@ -226,6 +226,32 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         history.clear();
     }
     
+    @Test
+    public void userEditedTask_undoRemovesAddHistory() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.holdMeeting;
+        
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        assertAddSuccess(taskToAdd, currentList);
+        
+        commandBox.runCommand("hist");    
+        String historyText = displayPanel.getText();
+        assertTrue(historyText.contains(taskToAdd.getAddCommand().trim()));
+        
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        String editInput = "edit " + currentList.length + " desc: hello";
+        commandBox.runCommand(editInput);
+        
+        commandBox.runCommand("hist");
+        historyText = displayPanel.getText();
+        assertTrue(!historyText.contains(taskToAdd.getAddCommand().trim()));
+        assertTrue(historyText.contains(editInput));
+        
+        history.clear();
+    }
+    
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
