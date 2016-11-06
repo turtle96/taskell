@@ -142,7 +142,6 @@ public class TaskManager implements ReadOnlyTaskManager {
     @Override
     public String toString() {
         return tasks.getInternalList().size() + " tasks, " + tags.getInternalList().size() + " tags";
-        // TODO: refine later
     }
 
     @Override
