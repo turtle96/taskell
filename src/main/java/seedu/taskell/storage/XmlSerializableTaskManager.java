@@ -3,7 +3,11 @@ package seedu.taskell.storage;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.taskell.commons.core.EventsCenter;
+import seedu.taskell.commons.core.LogsCenter;
+import seedu.taskell.commons.events.storage.DuplicateDataExceptionEvent;
 import seedu.taskell.commons.exceptions.IllegalValueException;
+import seedu.taskell.commons.util.CollectionUtil;
 import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.tag.UniqueTagList;
@@ -13,6 +17,8 @@ import seedu.taskell.model.task.UniqueTaskList;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -20,6 +26,8 @@ import java.util.stream.Collectors;
  */
 @XmlRootElement(name = "taskmanager")
 public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
+    
+    private static final Logger logger = LogsCenter.getLogger(EventsCenter.class);
 
     @XmlElement
     private List<XmlAdaptedTask> tasks;
@@ -44,16 +52,19 @@ public class XmlSerializableTaskManager implements ReadOnlyTaskManager {
         tags = src.getTagList();
     }
 
+    //@@author A0139257X-reused
+    @SuppressWarnings("unchecked")
     @Override
     public UniqueTagList getUniqueTagList() {
         try {
             return new UniqueTagList(tags);
         } catch (UniqueTagList.DuplicateTagException e) {
-            //TODO: better error handling
-            e.printStackTrace();
-            return null;
+            EventsCenter.getInstance().post(new DuplicateDataExceptionEvent(e));
+            logger.info("Duplicated tags will be removed from UniqueTagList upon adding a new task");
+            return new UniqueTagList((Set<Tag>)CollectionUtil.generateUniqueList(tags));
         }
     }
+    //@@author
 
     @Override
     public UniqueTaskList getUniqueTaskList() {
