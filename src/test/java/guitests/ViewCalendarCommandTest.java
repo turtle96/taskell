@@ -4,7 +4,6 @@ package guitests;
 import org.junit.Test;
 
 import seedu.taskell.logic.commands.ViewCalendarCommand;
-import seedu.taskell.logic.commands.ViewHistoryCommand;
 
 public class ViewCalendarCommandTest extends TaskManagerGuiTest {
     
