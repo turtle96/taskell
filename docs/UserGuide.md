@@ -371,6 +371,7 @@ transfer your data to a new location on your computer. <br>
 
 1. GUI: Graphical User Interface
 2. Floating task: A task without date and time
+3. OS: Operating System
 
 <!--- @@author --->
 
