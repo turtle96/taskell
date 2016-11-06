@@ -25,17 +25,17 @@ Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Compu
     This application will not work with earlier versions of Java 8.
 
 Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
-	<br><img src="images/Icon.png" width="100"></br>
+	<br> &nbsp; &nbsp; &nbsp; &nbsp; <img src="images/Icon.png" width="100"></br>
 	
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
-Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
- <br><p align="center"><img src="images/screenshots/screen_calendar.PNG" width="800"><br><br>
+Step 4: Double-click the file to start the application. The GUI should appear in a few seconds.
+ <br><p align="center"><img src="images/screenshots/screen_calendar.PNG" width="800"><br>
 Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
 </p>
-<br>
+
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
-   * `list` : displays all contacts
+   * `list` : displays all tasks
    * `add` buy MA1101R textbook today : adds a task called buy MA1101R textbook to be done by today.
    * `delete` 3 : deletes the 3rd task shown in the current list
    * `exit` : exits the application <br>
@@ -44,26 +44,26 @@ Refer to the [Features](#features) section below for details of each command.<br
 <!--- @@author A0139257X --->
 ## Features
 
-This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. The parameters are listed below
+This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. The parameters are listed below.
 - TASK: Indicates the content of a work
 - DATE: Indicates a date
 
 > Please refer to Appendix A for date format that Taskell supports. <br> 
-> Default start date has been set to today's date <br>
-> Default end date has been set to be the same as the start date <br>
+> Default start date has been set to today's date. <br>
+> Default end date has been set to be the same as the start date. <br>
 
 - TIME: Indicates a time
 
 > Please refer to Appendix B for time format that Taskell supports. <br>
 > Default start time has been set to 12:00AM <br>
 > Default end time has been set to 11:59PM <br>
-> If the start date is today and no start time is provided, the default start time will be set to current time
+> If the start date is today and no start time is provided, the default start time will be set to be the current time.
 
 - PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 3 indicates default, low and high priority respectively. 
 
-> In the GUI, level 1 tasks are marked as green, level 2 tasks are marked as yellow and level 3 tasks are marked as red. Tasks with default priority level are not marked with any colours
+> In the GUI, level 1,2 and 3 tasks are marked as green, yellow and red respectively. Tasks with default priority level are not marked with any colors.
 
-- RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly
+- RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly.
 - TAG: Indicates the category a task belongs to
 
 Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
@@ -78,6 +78,8 @@ To open the help window<br>
 <!--- @@author A0139257X --->
 
 #### Adding a task: **`add`**
+You can use the add command to add different tasks.<br>
+
 To add a floating task<br>
 Format: 
 `add` TASK <br>
@@ -99,7 +101,7 @@ To add a recurring task <br>
 Format:
 `add` TASK <i>r/</i>RECURRING <br>
 Example: `add` Read newspaper <i>on</i> mon <i>r/</i>daily
-> Floating tasks are not allowed to have recurring status since there are no element of date or time
+> Floating tasks are not allowed to have recurring status since there have no element of date or time
 
 To add a task with date and time<br>
 Formats:
@@ -140,7 +142,7 @@ Format:
 Example: `add` Go for meeting <i>at</i> 3pm <br>
 
 
-Having understood the aforementioned behaviours of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> keyword, you can fuse them together to form more complex tasks.
+Having understood the aforementioned behaviors of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> keyword, you can fuse them together to form more complex tasks.
 <br>
 Formats:
 - `add` TASK <i>on</i> DATE <i>at</i> TIME <br>
@@ -154,13 +156,13 @@ Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
 - `add` TASK <i>from</i> DATE <i>to</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>#</i>TAG] [<i>p/</i>PRIORITY]  [<i>r/</i>RECURRING] <br>
 Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> may <i>to</i> aug <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly
 
-Moreover, Taskell is able to make automatic adjustments to the date and time so that the task entered remains relevant <br> 
+Moreover, Taskell is able to make automatic adjustments to the date and time so that the task entered remains relevant. <br> 
 Examples: 
 - `add` Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br>
-This task will be added as a valid task that starts today at 11pm and ends  tomorrow at 3pm
+This task will be added as a valid task that starts today at 11pm and ends  tomorrow at 3pm.
 - `add` Staycation with friends <i>from</i> sunday <i>to</i> tues <br>
-If today is a Saturday, this task will be added as a valid task that starts from tomorrow and end on this coming Tuesday <br>
-If today is a Sunday, this task will be added as a valid task that starts from next Sunday and end on the following Tuesday
+If today is a Saturday, this task will be added as a valid task that starts from tomorrow and end on this coming Tuesday. <br>
+If today is a Sunday, this task will be added as a valid task that starts from next Sunday and end on the following Tuesday.
 
 
 
@@ -169,6 +171,8 @@ If today is a Sunday, this task will be added as a valid task that starts from n
 <!--- @@author A0148004R --->
 
 #### Listing tasks : `list`
+You can use the list command to display a certain type of tasks.<br>
+
 Formats: 
 - `list` <br>
 Displays a list of uncompleted tasks.<br>
@@ -179,7 +183,7 @@ Displays a list of all the tasks due on the specific date.<br>
 - `list-done` <br>
 Displays a list of completed tasks.<br>
 - `list-priority` PRIORITY<br>
-Displays a list of tasks with given priority.<br>
+Displays a list of tasks with given priority.
 <br><p align="center"><img src="images/screenshots/list_date.PNG" width="800"></br><br>
 Diagram 2: Displays all the tasks to be done by today after typing list-date today.
 
@@ -188,24 +192,24 @@ Diagram 2: Displays all the tasks to be done by today after typing list-date tod
 <!--- @@author A0142130A --->  
 
 #### Finding tasks: `find`
-You can use the find command to view tasks with specific keywords. Tasks with words that match the keyword include those that contain the keyword, for example, searching for "book" will match with "book", "textbook", "storybook" etc. You can also search with multiple keywords at the same time.<br>
+You can use the find command to view tasks with specific keywords.<br> 
 Formats: <br>
 - `find KEYWORD [MORE_KEYWORDS]`<br>
 Displays a list of tasks with description or tags that match all the keywords.<br>
 Example: `find banana milk essay`<br>
 This returns all tasks with description or tags that match all keywords `banana`, `milk`, and `essay`. <br>
 
+> Tasks with words that match the keyword include those that contain the keyword. For example, searching for "book" will match with "book", "textbook", "storybook" etc.
+
 - `find-tag TAG [MORE_TAGS]`<br>
-Displays list of tasks with the same tags. Use this if you want to only search by tags and not description.<br>
+Displays list of tasks with the same tags.<br>
 Example: `find homework essay cs2103`<br>
-This returns any task with either tag `homework`, `essay`, or `cs2103`.<br>
- <br><p align="center"><img src="images/screenshots/find_cs2010.PNG" width="800"></br>
+This returns any task with either tag `homework`, `essay`, or `cs2103`.
  <br><p align="center"><img src="images/screenshots/find_cs2010_results.PNG" width="800"></br> <br>
-Diagrams 3 and 4: Keying in `find cs2010` displays list of tasks with "cs2010" as one of the keywords in task description
+Diagram 3: Keying in `find cs2010` displays list of tasks with "cs2010" as one of the keywords in task description.
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. `chicken egg` will match `egg chicken`.
-> * Full words will be matched e.g. `chicken` will match `chickens`.
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).
     e.g. `chicken` will match `chicken duck`
     
@@ -215,32 +219,31 @@ Diagrams 3 and 4: Keying in `find cs2010` displays list of tasks with "cs2010" a
 
 #### Showing history : `history` or `hist`
 You can view the command history available for undo on the right panel to refer to when undoing previous commands.<br>
-To save your time, Taskell has a short form command `hist`. <br>
-Format: `history` <br>
 
-<br><p align="center"><img src="images/screenshots/history_01.PNG" width="800"></br>
- <br><p align="center"><img src="images/screenshots/history_02.PNG" width="800"></br> <br>
- Diagrams 5 and 6: `hist` will show list of command history on the right panel
+Format: `history` or `hist` 
+
+ <p align="center"><img src="images/screenshots/history_02.PNG" width="800"></br> <br>
+ Diagram 4: Keying in `hist` will show list of command history on the right panel
 
 > Take Note! <br>
 > * Only commands available for undo are shown here. 
-> * Refer to undo section for more information about what commands undo supports.
+> * Refer to undo section below for more information about what commands undo supports.
 
 #### Reverting previous action : `undo`
 If you wish to undo your most recent action, you can do so by using the undo command.<br>
-You can also undo previous commands, <kbd>Enter</kbd> `hist` to see a list of 
+To undo previous commands, <kbd>Enter</kbd> `hist` to see a list of 
 previous commands that can be undone.<br>
-Then use undo command with specified INDEX from the list of command history.<br>
+Then use undo command with specified INDEX from the list of command history.
 Formats: <br>
 -`undo`<br> 
 Undo most recent command executed.<br>
 -`undo INDEX`<br> 
 Undo by index of command history.<br>
-Example: `hist`, then `undo 3`, will undo third command in command history.<br>
+Example: `hist`, then `undo 3`, will undo third command in command history.
 
- <br><p align="center"><img src="images/screenshots/undo_01.PNG" width="800"></br>
+ <p align="center"><img src="images/screenshots/undo_01.PNG" width="800"></br>
  <br><p align="center"><img src="images/screenshots/undo_02.PNG" width="800"></br> <br>
-Diagrams 7 and 8: `undo 2` will undo 2nd command in history
+Diagrams 5 and 6: `undo 2` will undo 2nd command in history
 
 > Take Note! <br>
 > * Undo command only supports add, edit, delete, done, undone and undo commands.
@@ -249,27 +252,21 @@ Diagrams 7 and 8: `undo 2` will undo 2nd command in history
 <!--- @@author ---> 
 
 #### Deleting a task : `delete`
-To delete a task, use the delete command. This command deletes the task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
+You can use the delete command to delete a task at a specified INDEX. The index refers to the index number shown in the most recent listing.<br>
 Format: `delete INDEX`<br>
 Example: `find violin`, then `delete 1`<br>
 This deletes the 1st task in the results of the find command.
 
-<!--- @@author A0142130A --->
-
- <br><p align="center"><img src="images/screenshots/delete_01.PNG" width="800"></br>
- <br><p align="center"><img src="images/screenshots/delete_02.PNG" width="800"></br><br>
-Diagrams 9 and 10: Entering `delete 20` will delete "read lord of the rings trilogy".<br>
-
-<!--- @@author --->
-
 <!--- @@author A0148004R --->
 
 #### Marking a task as completed: `done`
+You can use the done command to mark an uncompleted task as completed.
 Format: `done` INDEX<br>
 Example: `done` 1<br>
 This marks the first task as finished and moves it to the completed list.<br>
 
 #### Marking a task as incomplete: `undone`
+You can use the undone command to mark a completed task as uncompleted.
 Format: `undone` INDEX<br>
 Example: `undone` 1<br>
 This marks the 1st task as incomplete and moves it to the uncompleted list.<br>
@@ -281,12 +278,16 @@ This marks the 1st task as incomplete and moves it to the uncompleted list.<br>
 #### Editing a task : `edit`
 To edit a task<br>
 Formats: 
-- `edit` INDEX <i>st:</i>[NEWSTARTTIME] <i>et:</i>[NEWENDTIME] <i>desc:</i> [NEWDESCRIPTION] <i>sd:</i> [NEWSTARTDATE] <i>ed:</i> [NEWENDDATE] <i>p:</i> [NEWPRIORITY]<br>
+- `edit` INDEX <i>st:</i> NEWSTARTTIME <i>et:</i> NEWENDTIME <i>desc:</i> NEWDESCRIPTION <i>sd:</i> NEWSTARTDATE <i>ed:</i> NEWENDDATE <i>p:</i> NEWPRIORITY <br>
  <br><p align="center"><img src="images/editCmd.png" width="800"></br>
-Diagram 11: Edits the 1st task on the list.<br>
+Diagram 9: Edits the 1st task on the list.<br>
 
 Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
 
+> Take Note! <br>
+> * You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.
+> * Order of the parameters are not important.
+    
 <!--- @@author --->
 
 <!--- @@author A0142130A ---> 
@@ -295,13 +296,12 @@ Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et:
 You can view the calendar for the week on the right panel to refer to the dates and any events scheduled 
 when adding tasks and scheduling events. There is also a single red line displayed to show you the current time for your ease in checking your schedule.<br>
 <br><p align="center"><img src="images/screenshots/calendar_circle.PNG" width="800"></br>
-Diagram 12: An example of how the current time marker looks like.<br>
+Diagram 10: An example of how the current time marker looks like.<br>
 
 Calendar view depends on the list of tasks on the left panel, with each section marked with the index corresponding to the task, meaning a block marked "4" would correspond with the 4th task.<br>
 By default, the calendar view will be shown on the right panel. As `history` displays command history on the right panel as well, this command is meant for your convenience if you want to view calendar again.<br>
 Please note that entering other commands (i.e. `find`, `add`) will also revert the right panel back to calendar as it is the default view. <br>
-To save your time, Taskell has a short form command `cal`. <br>
-Format: `calendar`<br>
+Format: `calendar` or `cal` <br>
 
 #### Saving the information in Taskell : `save`
 You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
@@ -309,7 +309,7 @@ To obtain the filepath, navigate to the required file in your File Explorer. Cop
 screen and paste into Taskell. Refer to diagram 12 for an example of a filepath. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
-Diagram 13: Screenshot of File Explorer in Windows.  <br>
+Diagram 11: Screenshot of File Explorer in Windows.  <br>
 
 If the specified directory is valid but the file is missing, for example if command is `save C:\Users\Jim\Documents\chicken`,  and `C:\Users\Jim\Documents\chicken` is valid
 but `chicken` file is not created, Taskell will create the file for you.<br>
@@ -338,8 +338,8 @@ Windows |  Linux
 Permanently clears **all** task data. <br>
 Format: `clear`  
 
- <br><p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
-Diagrams 14: Typing `clear` will prompt a confirm pop-up window <br>
+<p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
+Diagram 12: Typing `clear` will prompt a confirm pop-up window <br>
 
 > Take Note! <br>
 > * Clear commands are irreversible!
@@ -385,7 +385,8 @@ Add Event | `add` TASK <i>by</i> DATE <br> `add` TASK <i>by</i> TIME <br> `add` 
 Calendar View | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
-Edit | `edit` INDEX NEWTASK
+Edit | `edit` INDEX `desc:` NEW_DESCRIPTION 
+`st:` NEW_START_TIME `et:` NEW_END_TIME `ed:` NEW_END_DATE `sd:` NEW_START_DATE `p:` NEW_PRIORITY
 Find Tasks | `find` KEYWORD [MORE_KEYWORDS]
 Find Tasks by Tag | `find-tag` KEYWORD [MORE_KEYWORDS]
 Help | `help`
@@ -397,6 +398,7 @@ List Done Tasks | `list-done`
 Mark Task Done | `done` INDEX
 Mark Task Undone | `undone` INDEX
 Undo | `undo` or `undo` INDEX
+
 <!-- @@author -->
 
 <!--- @@author A0139257X --->
