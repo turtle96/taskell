@@ -81,7 +81,8 @@ public class CommandBox extends UiPart {
         resultDisplay.postMessage(mostRecentResult.feedbackToUser);
         logger.info("Result: " + mostRecentResult.feedbackToUser);
         
-        if (!previousCommandTest.contains("hist")) {
+        if (!previousCommandTest.equals(ViewHistoryCommand.COMMAND_WORD_1)
+                && !previousCommandTest.equals(ViewHistoryCommand.COMMAND_WORD_2)) {
             raise(new DisplayCalendarViewEvent());
         }
     }

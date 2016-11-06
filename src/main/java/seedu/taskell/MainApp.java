@@ -17,6 +17,7 @@ import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.ClearCommand;
+import seedu.taskell.logic.commands.Command;
 import seedu.taskell.logic.commands.SaveStorageLocationCommand;
 import seedu.taskell.logic.commands.ViewHistoryCommand;
 import seedu.taskell.model.*;
@@ -73,6 +74,7 @@ public class MainApp extends Application {
         
         initSaveStorageLocationCommand();
         
+        Command.initHistory();
     }
 
     private void initSaveStorageLocationCommand() {
@@ -208,7 +210,7 @@ public class MainApp extends Application {
     /** @@author A0142130A **/
     @Subscribe
     private void handleStorageLocationChangedEvent(StorageLocationChangedEvent event) {
-        logger.info("saving storage");
+        logger.info("saving new filepath to storage");
         config = event.getConfig();
         storage.clearTaskManager();
         storage = new StorageManager(config.getTaskManagerFilePath(), config.getUserPrefsFilePath());
