@@ -7,11 +7,9 @@ import jfxtras.scene.control.agenda.Agenda;
 import jfxtras.scene.control.agenda.Agenda.Appointment;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.model.Model;
-import seedu.taskell.model.ReadOnlyTaskManager;
 import seedu.taskell.model.task.ReadOnlyTask;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskStatus;
-import seedu.taskell.model.task.UniqueTaskList;
 
 /** This class holds the necessary elements to display calendar UI via Agenda API from jfxtras
  * */
@@ -46,6 +44,8 @@ public class CalendarView {
         agenda.setStyle("-fx-font-size: 12pt");
     }
     
+    /** gets current filtered task list from model and updates agenda's data
+     * */
     public void loadTasks() {
         agenda.appointments().clear();
 
@@ -70,9 +70,10 @@ public class CalendarView {
         
         agenda.appointments().addAll(appointments);
         
-        //"-fx-background-color: #EC407A; -fx-fill: #EC407A;"
     }
 
+    /** checks that task is incomplete status and is type event
+     * */
     private boolean isValidEventTask(ReadOnlyTask task) {
         return task.getTaskStatus().toString().equals(TaskStatus.INCOMPLETE) 
                 && task.getTaskType().equals(Task.EVENT_TASK);
