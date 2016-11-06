@@ -103,7 +103,7 @@ public class TaskCard extends UiPart{
      * */
     private void setBackgroundColour() {
         if (task.getTaskStatus().toString().equals(TaskStatus.FINISHED)) {
-            cardPane.setStyle("-fx-background-color: #4DD0E1");
+            cardPane.setStyle("-fx-background-color: #4DD0E1"); //cyan 300
         }
     }
     /** @@author **/
