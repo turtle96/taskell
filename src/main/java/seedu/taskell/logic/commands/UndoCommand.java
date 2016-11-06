@@ -8,10 +8,6 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 import seedu.taskell.history.CommandHistory;
-import seedu.taskell.history.History;
-import seedu.taskell.history.HistoryManager;
-import seedu.taskell.model.Model;
-import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
@@ -33,7 +29,7 @@ public class UndoCommand extends Command {
     
     private static final String MESSAGE_NO_COMMAND_TO_UNDO = "No commands available to undo.";
     public static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
-    private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "Index is invalid.";
 
     public static final String MESSAGE_DONE_TASK_UNSUCCESSFUL = "The task status is already completed.";
     

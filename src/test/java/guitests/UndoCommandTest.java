@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.taskell.commons.core.Messages;
 import seedu.taskell.history.History;
 import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.commands.UndoCommand;
@@ -16,6 +17,24 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     
     private static final String UNDO = "undo";
     private History history = HistoryManager.getInstance();
+    
+    @Test
+    public void undoAtInvalidIndex_invalidCommand() {
+        history.clear();
+        commandBox.runCommand("undo 3");
+        assertResultMessage(UndoCommand.MESSAGE_COMMAND_HISTORY_EMPTY);
+        
+        commandBox.runCommand("add 100 things");
+        commandBox.runCommand("delete 1");
+        commandBox.runCommand("undo 50");
+        assertResultMessage(UndoCommand.MESSAGE_INVALID_INDEX);
+        
+        commandBox.runCommand("undo -1");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, 
+                UndoCommand.MESSAGE_USAGE));
+        
+        history.clear();
+    }
     
     @Test
     public void undoInvalidCommands_nothingToUndo() {
@@ -201,6 +220,57 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         history.clear();
     }
     
+    @Test
+    public void userDeletedTask_undoRemovesAddHistory() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.holdMeeting;
+        
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        assertAddSuccess(taskToAdd, currentList);
+        
+        commandBox.runCommand("hist");    
+        String historyText = displayPanel.getText();
+        assertTrue(historyText.contains(taskToAdd.getAddCommand().trim()));
+        
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        commandBox.runCommand("delete " + currentList.length);
+        assertDeleteSuccess(currentList.length, currentList);
+        
+        commandBox.runCommand("hist");
+        historyText = displayPanel.getText();
+        assertTrue(!historyText.contains(taskToAdd.getAddCommand().trim()));
+        
+        history.clear();
+    }
+    
+    @Test
+    public void userEditedTask_undoRemovesAddHistory() {
+        history.clear();
+        
+        TestTask[] currentList = td.getTypicalTasks();
+        TestTask taskToAdd = td.holdMeeting;
+        
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        assertAddSuccess(taskToAdd, currentList);
+        
+        commandBox.runCommand("hist");    
+        String historyText = displayPanel.getText();
+        assertTrue(historyText.contains(taskToAdd.getAddCommand().trim()));
+        
+        currentList = TestUtil.addTasksToList(currentList, taskToAdd);
+        String editInput = "edit " + currentList.length + " desc: hello";
+        commandBox.runCommand(editInput);
+        
+        commandBox.runCommand("hist");
+        historyText = displayPanel.getText();
+        assertTrue(!historyText.contains(taskToAdd.getAddCommand().trim()));
+        assertTrue(historyText.contains(editInput));
+        
+        history.clear();
+    }
+    
     private void assertAddSuccess(TestTask taskToAdd, TestTask... currentList) {
         //confirm the new card contains the right data
         TaskCardHandle addedCard = taskListPanel.navigateToTask(taskToAdd.getDescription().description);
@@ -217,10 +287,10 @@ public class UndoCommandTest extends TaskManagerGuiTest {
      * @param currentList A copy of the current list of tasks (before deletion).
      */
     private void assertDeleteSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
-        TestTask taskToDelete = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
 
         //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder)); 
     }
+    
 }

@@ -26,9 +26,13 @@ public class MainGuiHandle extends GuiHandle {
         return new CommandBoxHandle(guiRobot, primaryStage, TestApp.APP_TITLE);
     }
     
+    /** @@author A0142130A **/
+    
     public DisplayPanelHandle getDisplayPanel() {
         return new DisplayPanelHandle(guiRobot, primaryStage);
     }
+    
+    /** @@author **/
 
     public MainMenuHandle getMainMenu() {
         return new MainMenuHandle(guiRobot, primaryStage);
