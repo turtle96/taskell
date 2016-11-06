@@ -57,11 +57,11 @@ public class AddCommand extends Command {
         assert model != null;
         try {
             model.addTask(toAdd);
-            HistoryManager.getInstance().addTask(toAdd);
+            history.addTask(toAdd);
             jumpToNewTaskIndex();
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
-            HistoryManager.getInstance().deleteLatestCommand();
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_DUPLICATE_TASK);
         }
     }
