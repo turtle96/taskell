@@ -29,7 +29,7 @@ public class UndoCommand extends Command {
     
     private static final String MESSAGE_NO_COMMAND_TO_UNDO = "No commands available to undo.";
     public static final String MESSAGE_COMMAND_HISTORY_EMPTY = "No command history available for undo.";
-    private static final String MESSAGE_INVALID_INDEX = "Index is invalid";
+    public static final String MESSAGE_INVALID_INDEX = "Index is invalid.";
 
     public static final String MESSAGE_DONE_TASK_UNSUCCESSFUL = "The task status is already completed.";
     
