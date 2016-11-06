@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
+import seedu.taskell.commons.core.Messages;
 import seedu.taskell.history.History;
 import seedu.taskell.history.HistoryManager;
 import seedu.taskell.logic.commands.UndoCommand;
@@ -16,6 +17,24 @@ public class UndoCommandTest extends TaskManagerGuiTest {
     
     private static final String UNDO = "undo";
     private History history = HistoryManager.getInstance();
+    
+    @Test
+    public void undoAtInvalidIndex_invalidCommand() {
+        history.clear();
+        commandBox.runCommand("undo 3");
+        assertResultMessage(UndoCommand.MESSAGE_COMMAND_HISTORY_EMPTY);
+        
+        commandBox.runCommand("add 100 things");
+        commandBox.runCommand("delete 1");
+        commandBox.runCommand("undo 50");
+        assertResultMessage(UndoCommand.MESSAGE_INVALID_INDEX);
+        
+        commandBox.runCommand("undo -1");
+        assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, 
+                UndoCommand.MESSAGE_USAGE));
+        
+        history.clear();
+    }
     
     @Test
     public void undoInvalidCommands_nothingToUndo() {
