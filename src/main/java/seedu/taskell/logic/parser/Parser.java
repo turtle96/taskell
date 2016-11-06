@@ -41,36 +41,32 @@ public class Parser {
 
     private static final Pattern KEYWORDS_ARGS_FORMAT = Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one
 
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes
-                                                         // are reserved for
-                                                         // delimiter prefixes
-            Pattern.compile("(?<description>[^/]+)" + " (?<isTaskTypePrivate>p?)p/(?<taskType>[^/]+)"
-                    + " (?<isTaskDatePrivate>p?)p/(?<startDate>[^/]+)" + " (?<isStartPrivate>p?)e/(?<startTime>[^/]+)"
-                    + " (?<isEndPrivate>p?)e/(?<endTime>[^/]+)"
-                    + " (?<isTaskPriorityPrivate>p?)a/(?<taskPriority>[^/]+)"
-                    + " (?<isTaskCompletePrivate>p?)a/(?<taskComplete>[^/]+)" + "(?<tagArguments>(?: t/[^/]+)*)"); // variable
-                                                                                                                   // number
     private static final String BY = "by";
     private static final String ON = "on";
     private static final String AT = "at";
     private static final String FROM = "from";
     private static final String TO = "to";
 
-    private static final String ST = "st:";
-    private static final String ET = "et:";
-    private static final String SD = "sd:";
-    private static final String ED = "ed:";
-    private static final String DESC = "desc:";
-    private static final String P = "p:";
+    private static final int NUM_QUEUE = 6;
+    private static final int DESCRIPTION_QUEUE = 0;
+    private static final int BY_QUEUE = 1;
+    private static final int ON_QUEUE = 2;
+    private static final int AT_QUEUE = 3;
+    private static final int FROM_QUEUE = 4;
+    private static final int TO_QUEUE = 5;
 
-    private boolean hasChangedDescription = false;
-    private boolean hasChangedStartDate = false;
-    private boolean hasChangedEndDate = false;
-    private boolean hasChangedStartTime = false;
-    private boolean hasChangedEndTime = false;
-    private boolean hasChangedPriority = false;
+    private static final String START_TIME = "st:";
+    private static final String END_TIME = "et:";
+    private static final String START_DATE = "sd:";
+    private static final String END_DATE = "ed:";
+    private static final String DESCRIPTION = "desc:";
+    private static final String PRIORITY = "p:";
 
-    private History history;
+    private static History history;
+
+    private ArrayList<Queue<String>> partitionQueue;
+    private boolean[] hasTaskComponentArray;
+    private String[] taskComponentArray;
 
     public Parser() {
         history = HistoryManager.getInstance();
@@ -218,9 +214,13 @@ public class Parser {
 
         if (st.hasMoreTokens() || !TaskDate.isValidDate(date)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListDateCommand.MESSAGE_USAGE));
+        } else {
+            try {
+                return new ListDateCommand(new TaskDate(date));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
+            }
         }
-
-        return new ListDateCommand(date);
     }
 
     private Command prepareListPriority(String args) {
@@ -230,21 +230,22 @@ public class Parser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
         }
 
+        initialiseTaskComponentArray();
         StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
+        taskComponentArray[Task.TASK_PRIORITY] = st.nextToken();
 
-        if (st.hasMoreTokens() || !isInt(intValue)) {
+        if (st.hasMoreTokens() || !isInt(taskComponentArray[Task.TASK_PRIORITY])) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListPriorityCommand.MESSAGE_USAGE));
         }
 
-        int targetIdx = Integer.valueOf(intValue);
+        int targetIdx = Integer.valueOf(taskComponentArray[Task.TASK_PRIORITY]);
         if (targetIdx < Integer.valueOf(TaskPriority.DEFAULT_PRIORITY)
                 || targetIdx > Integer.valueOf(TaskPriority.HIGH_PRIORITY)) {
             return new IncorrectCommand(
                     String.format(TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS, ListPriorityCommand.MESSAGE_USAGE));
         } else {
-            return new ListPriorityCommand(intValue);
+            return new ListPriorityCommand(taskComponentArray[Task.TASK_PRIORITY]);
         }
     }
 
@@ -256,182 +257,179 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareEdit(String args) {
-        String description = "default";
-        String startDate = TaskDate.DEFAULT_DATE;
-        String endDate = TaskDate.DEFAULT_DATE;
-        String startTime = TaskTime.DEFAULT_START_TIME;
-        String endTime = TaskTime.DEFAULT_END_TIME;
-        String taskPriority = TaskPriority.DEFAULT_PRIORITY;
+        initialiseTaskComponentArray();
+        initialiseHasTaskComponentArray();
+        taskComponentArray[Task.DESCRIPTION] = "default";
+        ArrayList<String> argsList = tokenizeArguments(args);
 
-        if (args.isEmpty()) {
+        if (argsList.size() <= 1) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
-        StringTokenizer st = new StringTokenizer(args.trim(), " ");
-        String intValue = st.nextToken();
-        if (!isInt(intValue)) {
+        String index = argsList.remove(0);
+        if (!isInt(index)) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
 
-        int targetIdx = Integer.valueOf(intValue);
-        hasChangedDescription = false;
-        hasChangedStartDate = false;
-        hasChangedEndDate = false;
-        hasChangedStartTime = false;
-        hasChangedEndTime = false;
-        hasChangedPriority = false;
-        boolean lastChar = false;
+        int targetIdx = Integer.valueOf(index);
+        return splitInputWithGivenNewParameters(targetIdx, argsList);
+    }
 
-        if (!st.hasMoreTokens()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-        while (st.hasMoreTokens()) {
-            String parts = st.nextToken();
-            if (parts.equals(DESC)) {
-                if (hasChangedDescription == true) {
+    private Command splitInputWithGivenNewParameters(int targetIdx, ArrayList<String> argsList) {
+        while (!argsList.isEmpty()) {
+            if (argsList.get(0).equals(DESCRIPTION) && hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] == false) {
+                updateDescription(argsList);
+            } else if (argsList.get(0).equals(START_DATE) && hasTaskComponentArray[Task.START_DATE_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, START_DATE)) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-                String desc = " ";
-                while (!(parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
-                        || parts.equals("ed") | parts.equals(P)) && st.hasMoreTokens()) {
-                    desc += (parts + " ");
-                    parts = st.nextToken();
-                    hasChangedDescription = true;
-                }
-                if (!(parts.equals(ST) || parts.equals(ET) || parts.equals(SD)
-                        || parts.equals("ed") | parts.equals(P))) {
-                    desc += parts;
-                    lastChar = true;
-                }
-                desc = desc.trim();
-                if (Description.isValidDescription(desc)) {
-                    description = desc.substring(5);
-                    hasChangedDescription = true;
-                }
-            }
-            if (parts.equals(ST)) {
-                if (hasChangedStartTime == true) {
+            } else if (argsList.get(0).equals(END_DATE) && hasTaskComponentArray[Task.END_DATE_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, END_DATE)) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-                if (st.hasMoreTokens()) {
-                    String startT = st.nextToken();
-                    if (TaskTime.isValidTime(startT)) {
-                        startTime = startT.trim();
-                        hasChangedStartTime = true;
-                    } else {
-                        return new IncorrectCommand(
-                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
-                    }
-                } else {
+            } else if (argsList.get(0).equals(START_TIME) && hasTaskComponentArray[Task.START_TIME_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, START_TIME)) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-            }
-            if (parts.equals(ET)) {
-                if (hasChangedEndTime == true) {
+            } else if (argsList.get(0).equals(END_TIME) && hasTaskComponentArray[Task.END_TIME_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, END_TIME)) {
                     return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-                if (st.hasMoreTokens()) {
-                    String endT = st.nextToken();
-                    if (TaskTime.isValidTime(endT)) {
-                        endTime = endT.trim();
-                        hasChangedEndTime = true;
-                    } else {
-                        return new IncorrectCommand(
-                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
-                    }
-                } else {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+            } else if (argsList.get(0).equals(PRIORITY) && hasTaskComponentArray[Task.PRIORITY_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, PRIORITY)) {
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                            TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
                 }
-            }
-            if (parts.equals(SD)) {
-                if (hasChangedStartDate == true) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                if (st.hasMoreTokens()) {
-                    String startD = st.nextToken();
-                    if (TaskDate.isValidDate(startD)) {
-                        startDate = startD.trim();
-                        hasChangedStartDate = true;
-                    } else {
-                        return new IncorrectCommand(
-                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
-                    }
-                } else {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-            }
-            if (parts.equals(ED)) {
-                if (hasChangedEndDate == true) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                if (st.hasMoreTokens()) {
-                    String endD = st.nextToken();
-                    if (TaskDate.isValidDate(endD)) {
-                        endDate = endD.trim();
-                        hasChangedEndDate = true;
-                    } else {
-                        return new IncorrectCommand(
-                                String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
-                    }
-                } else {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-            }
-            if (parts.equals(P)) {
-                if (hasChangedPriority == true) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                if (st.hasMoreTokens()) {
-                    String p = st.nextToken();
-                    if (TaskPriority.isValidPriority(p)) {
-                        taskPriority = p.trim();
-                        hasChangedPriority = true;
-                    } else {
-                        return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                                TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
-                    }
-                } else {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-            }
-            if (!(parts.equals(DESC) || parts.equals(ST) || parts.equals(ET) || parts.equals(SD) || parts.equals(ED)
-                    || parts.equals(P)) && lastChar == false) {
+            } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
-
         }
-        
         try {
-            return new EditCommand(targetIdx, new Description(description), hasChangedDescription,
-                    new TaskDate(startDate), hasChangedStartDate, new TaskDate(endDate), hasChangedEndDate,
-                    new TaskTime(startTime), hasChangedStartTime, new TaskTime(endTime), hasChangedEndTime,
-                    new TaskPriority(taskPriority), hasChangedPriority);
+            return new EditCommand(targetIdx, new Description(taskComponentArray[Task.DESCRIPTION]),
+                    new TaskDate(taskComponentArray[Task.START_DATE]), new TaskDate(taskComponentArray[Task.END_DATE]),
+                    new TaskTime(taskComponentArray[Task.START_TIME]), new TaskTime(taskComponentArray[Task.END_TIME]),
+                    new TaskPriority(taskComponentArray[Task.TASK_PRIORITY]), hasTaskComponentArray);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
         }
+    }
 
+    private boolean canUpdate(ArrayList<String> argsList, String parameters) {
+        argsList.remove(0);
+        String newValue = argsList.remove(0);
+        if (parameters.equals(START_DATE)) {
+            if (canUpdateStartDate(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (parameters.equals(END_DATE)) {
+            if (canUpdateEndDate(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (parameters.equals(START_TIME)) {
+            if (canUpdateStartTime(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (parameters.equals(END_TIME)) {
+            if (canUpdateEndTime(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {// edit priority
+            if (canUpdatePriority(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private boolean canUpdateStartDate(String newValue) {
+        taskComponentArray[Task.START_DATE] = newValue;
+        if (TaskDate.isValidDate(taskComponentArray[Task.START_DATE])) {
+            hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdateEndDate(String newValue) {
+        taskComponentArray[Task.END_DATE] = newValue;
+        if (TaskDate.isValidDate(taskComponentArray[Task.END_DATE])) {
+            hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdateStartTime(String newValue) {
+        taskComponentArray[Task.START_TIME] = newValue;
+        if (TaskTime.isValidTime(taskComponentArray[Task.START_TIME])) {
+            hasTaskComponentArray[Task.START_TIME_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdateEndTime(String newValue) {
+        taskComponentArray[Task.END_TIME] = newValue;
+        if (TaskTime.isValidTime(taskComponentArray[Task.END_TIME])) {
+            hasTaskComponentArray[Task.END_TIME_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdatePriority(String newValue) {
+        taskComponentArray[Task.TASK_PRIORITY] = newValue;
+        if (TaskPriority.isValidPriority(taskComponentArray[Task.TASK_PRIORITY])) {
+            hasTaskComponentArray[Task.PRIORITY_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void updateDescription(ArrayList<String> argsList) {
+        argsList.remove(0);
+        String desc = " ";
+        while (!argsList.isEmpty() && !(argsList.get(0).equals(START_TIME) || argsList.get(0).equals(END_TIME)
+                || argsList.get(0).equals(START_DATE) || argsList.get(0).equals(END_DATE)
+                || argsList.get(0).equals(PRIORITY))) {
+            desc += (argsList.remove(0) + " ");
+            hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
+        }
+        hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] = true;
+        taskComponentArray[Task.DESCRIPTION] = desc.trim();
     }
 
     // @@author
 
     // @@author A0139257X
-
     /**
      * Parses arguments in the context of the add task command.
      *
-     * @param args
-     *            full command args string
+     * @param full
+     *            command args string
      * @return the prepared command
      */
     private Command prepareAdd(String args) {
@@ -441,259 +439,258 @@ public class Parser {
 
         ArrayList<String> argsList = tokenizeArguments(args);
         Queue<String> initialQueue = initialiseArgQueue(argsList);
-        Queue<String> descriptionQueue = new LinkedList<String>();
-        Queue<String> byQueue = new LinkedList<String>();
-        Queue<String> onQueue = new LinkedList<String>();
-        Queue<String> atQueue = new LinkedList<String>();
-        Queue<String> fromQueue = new LinkedList<String>();
-        Queue<String> toQueue = new LinkedList<String>();
 
-        String description = "";
-        String startDate = TaskDate.DEFAULT_DATE;
-        String endDate = startDate;
-        String startTime = TaskTime.DEFAULT_START_TIME;
-        String endTime = TaskTime.DEFAULT_END_TIME;
-        String token = "";
-        String taskPriority = TaskPriority.DEFAULT_PRIORITY;
-        String recurringType = RecurringType.DEFAULT_RECURRING;
-        String tagString = "";
+        initialisePartitionQueue();
+        initialiseHasTaskComponentArray();
+        initialiseTaskComponentArray();
 
-        int priorityCount = 0;
-        int recurrenceCount = 0;
-        boolean hasStartDate = false;
-        boolean hasEndDate = false;
-        boolean hasStartTime = false;
-        boolean hasEndTime = false;
-        boolean hasRecurring = false;
-        while (!initialQueue.isEmpty()) {
-            token = initialQueue.poll().trim();
-            String tempToken = "";
-
-            if (!token.equals(BY) && !token.equals(ON) && !token.equals(AT) && !token.equals(FROM) && !token.equals(TO)
-                    && !TaskDate.isValidDate(token) && !TaskTime.isValidTime(token) && !token.startsWith(Tag.PREFIX)
-                    && !token.startsWith(TaskPriority.PREFIX) && !token.startsWith(RecurringType.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                descriptionQueue.offer(token);
-                continue;
-            } else if (token.equals(BY)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                byQueue.offer(token);
-                continue;
-            } else if (token.equals(ON)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                onQueue.offer(token);
-                continue;
-            } else if (token.equals(AT)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                atQueue.offer(token);
-                continue;
-            } else if (token.equals(FROM)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                fromQueue.offer(token);
-                continue;
-            } else if (token.equals(TO)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                toQueue.offer(token);
-                continue;
-            } else if (token.startsWith(Tag.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                tagString += " " + token;
-                continue;
-            } else if (token.startsWith(TaskPriority.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                if (priorityCount > 0) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-                } else {
-                    taskPriority = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
-                    priorityCount++;
-                }
-                continue;
-            } else if (token.startsWith(RecurringType.PREFIX)) {
-                tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-                if (!tempToken.isEmpty()) {
-                    descriptionQueue.offer(tempToken);
-                }
-                if (recurrenceCount > 0) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
-                } else {
-
-                    recurringType = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
-                    hasRecurring = true;
-                    recurrenceCount++;
-                }
-
-            } else if (TaskDate.isValidDate(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
-                        && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token);
-                } else if (!onQueue.isEmpty()) {
-                    if (!hasStartDate) {
-                        onQueue.poll();
-                        startDate = token;
-                        hasStartDate = true;
-                    } else {
-                        descriptionQueue.offer(onQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!byQueue.isEmpty()) {
-                    if (!hasEndDate) {
-                        byQueue.poll();
-                        endDate = token;
-                        hasEndDate = true;
-                    } else {
-                        descriptionQueue.offer(byQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!atQueue.isEmpty()) {
-                    descriptionQueue.offer(atQueue.poll());
-                    descriptionQueue.offer(token);
-                } else if (!fromQueue.isEmpty()) {
-                    if (!hasStartDate) {
-                        fromQueue.poll();
-                        startDate = token;
-                        hasStartDate = true;
-                    } else {
-                        descriptionQueue.offer(fromQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!toQueue.isEmpty()) {
-                    if (!hasEndDate) {
-                        toQueue.poll();
-                        endDate = token;
-                        hasEndDate = true;
-                    } else {
-                        descriptionQueue.offer(toQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                }
-            } else if (TaskTime.isValidTime(token)) {
-                if (byQueue.isEmpty() && onQueue.isEmpty() && atQueue.isEmpty() && fromQueue.isEmpty()
-                        && toQueue.isEmpty()) {
-                    descriptionQueue.offer(token);
-                } else if (!byQueue.isEmpty()) {
-                    if (!hasEndTime) {
-                        byQueue.poll();
-                        endTime = token;
-                        hasEndTime = true;
-                    } else {
-                        descriptionQueue.offer(byQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!atQueue.isEmpty()) {
-                    if (!hasStartTime) {
-                        atQueue.poll();
-                        startTime = token;
-                        hasStartTime = true;
-                    } else {
-                        descriptionQueue.offer(atQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!fromQueue.isEmpty()) {
-                    if (!hasStartTime) {
-                        fromQueue.poll();
-                        startTime = token;
-                        hasStartTime = true;
-                    } else {
-                        descriptionQueue.offer(fromQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!toQueue.isEmpty()) {
-                    if (!hasEndTime) {
-                        toQueue.poll();
-                        endTime = token;
-                        hasEndTime = true;
-                    } else {
-                        descriptionQueue.offer(toQueue.poll());
-                        descriptionQueue.offer(token);
-                    }
-                } else if (!onQueue.isEmpty()) {
-                    descriptionQueue.offer(onQueue.poll());
-                    descriptionQueue.offer(token);
-                }
-            }
+        try {
+            splitInputIntoComponents(initialQueue);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        String tempToken = flushQueue(byQueue, onQueue, atQueue, fromQueue, toQueue);
-        if (!tempToken.isEmpty()) {
-            descriptionQueue.offer(tempToken);
-        }
+        addReservedWordToDescription(); // Add trailing reserved word to
+                                        // description
 
-        while (!descriptionQueue.isEmpty()) {
-            description += descriptionQueue.poll() + " ";
-        }
-        description.trim();
+        extractDescriptionComponent();
+        adjustStartTime();
 
-        if (!hasEndDate) {
-            endDate = startDate;
-        }
+        return addTaskAccordingToType();
+    }
 
-        if ((TaskDate.isValidToday(startDate) && !hasStartTime)
-                || startDate.equals(TaskDate.DEFAULT_DATE) && !hasStartTime) {
-            startTime = TaskTime.getTimeNow().toString();
-        }
-
-        if (hasStartDate || hasEndDate || hasStartTime || hasEndTime) {
+    /**
+     * Returns a new AddCommand object according to task type if successful else
+     * return IncorrectCommand
+     */
+    private Command addTaskAccordingToType() {
+        if (isEventTask()) {
             try {
-                return new AddCommand(description, Task.EVENT_TASK, startDate, endDate, startTime, endTime,
-                        taskPriority, recurringType, getTagsFromArgs(tagString));
+                return new AddCommand(Task.EVENT_TASK, taskComponentArray, hasTaskComponentArray,
+                        getTagsFromArgs(taskComponentArray[Task.TAG]));
             } catch (IllegalValueException ive) {
                 return new IncorrectCommand(ive.getMessage());
             }
         } else {
-
-            if (hasRecurring) {
-                return new IncorrectCommand(FloatingTask.RECURRING_TYPE_NOT_ALLOWED);
-            } else {
-                try {
-                    return new AddCommand(description, Task.FLOATING_TASK, startDate, endDate, startTime, endTime,
-                            taskPriority, recurringType, getTagsFromArgs(tagString));
-                } catch (IllegalValueException ive) {
-                    return new IncorrectCommand(ive.getMessage());
-                }
+            try {
+                return new AddCommand(Task.FLOATING_TASK, taskComponentArray, hasTaskComponentArray,
+                        getTagsFromArgs(taskComponentArray[Task.TAG]));
+            } catch (IllegalValueException ive) {
+                return new IncorrectCommand(ive.getMessage());
             }
         }
     }
 
-    private String flushQueue(Queue<String> byQueue, Queue<String> onQueue, Queue<String> atQueue,
-            Queue<String> fromQueue, Queue<String> toQueue) {
+    /**
+     * Separates the content in the initialQueue into its different task
+     * components
+     * 
+     * @throws IllegalValueException
+     */
+    private void splitInputIntoComponents(Queue<String> initialQueue) throws IllegalValueException {
+        String token = "";
+        int priorityCount = 0;
+        int recurrenceCount = 0;
+
+        while (!initialQueue.isEmpty()) {
+            token = initialQueue.poll().trim();
+            if (!isReservedWord(token)) {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+                continue;
+            } else if (token.equals(BY)) {
+                offerTokenToQueue(BY_QUEUE, token);
+                continue;
+            } else if (token.equals(ON)) {
+                offerTokenToQueue(ON_QUEUE, token);
+                continue;
+            } else if (token.equals(AT)) {
+                offerTokenToQueue(AT_QUEUE, token);
+                continue;
+            } else if (token.equals(FROM)) {
+                offerTokenToQueue(FROM_QUEUE, token);
+                continue;
+            } else if (token.equals(TO)) {
+                offerTokenToQueue(TO_QUEUE, token);
+                continue;
+            } else if (token.startsWith(Tag.PREFIX)) {
+                addReservedWordToDescription();
+                taskComponentArray[Task.TAG] += " " + token;
+                continue;
+            } else if (token.startsWith(TaskPriority.PREFIX)) {
+                addReservedWordToDescription();
+                if (priorityCount > 0) {
+                    throw new IllegalValueException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                } else {
+                    taskComponentArray[Task.TASK_PRIORITY] = token.substring(token.indexOf(TaskPriority.PREFIX) + 2);
+                    priorityCount++;
+                }
+                continue;
+            } else if (token.startsWith(RecurringType.PREFIX)) {
+                addReservedWordToDescription();
+                if (recurrenceCount > 0) {
+                    throw new IllegalValueException(
+                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                } else {
+                    taskComponentArray[Task.RECURRING_TYPE] = token.substring(token.indexOf(RecurringType.PREFIX) + 2);
+                    hasTaskComponentArray[Task.RECURRING_COMPONENT] = true;
+                    recurrenceCount++;
+                }
+            } else if (TaskDate.isValidDate(token)) {
+                determineDateisActualDateOrDescription(token);
+            } else if (TaskTime.isValidTime(token)) {
+                determineTimeIsActualTimeOrDescription(token);
+            }
+        }
+    }
+
+    /**
+     * Determine if the given token is an intended date or is part of a
+     * description Token is actual date if it is preceded by a Date-Time prefix
+     */
+    private void determineDateisActualDateOrDescription(String token) {
+        if (!isPrecededByDateTimePrefix(partitionQueue)) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+        } else if (isPrecededByPrefixInQueue(ON_QUEUE)) {
+            if (!hasTaskComponentArray[Task.START_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, ON_QUEUE, Task.START_DATE, Task.START_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(BY_QUEUE)) {
+            if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, Task.END_DATE, Task.END_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(AT_QUEUE)) {
+            addReservedWordToDescription();
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+        } else if (isPrecededByPrefixInQueue(FROM_QUEUE)) {
+            if (!hasTaskComponentArray[Task.START_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, Task.START_DATE, Task.START_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(TO_QUEUE)) {
+            if (!hasTaskComponentArray[Task.END_DATE_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, Task.END_DATE, Task.END_DATE_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        }
+    }
+
+    /**
+     * Determine if the given token is an intended time or is part of a
+     * description Token is actual time if it is preceded by a Date-Time prefix
+     */
+    private void determineTimeIsActualTimeOrDescription(String token) {
+        if (!isPrecededByDateTimePrefix(partitionQueue)) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(token);
+        } else if (isPrecededByPrefixInQueue(BY_QUEUE)) {
+            if (!hasTaskComponentArray[Task.END_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, BY_QUEUE, Task.END_TIME, Task.END_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(AT_QUEUE)) {
+            if (!hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, AT_QUEUE, Task.START_TIME, Task.START_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(FROM_QUEUE)) {
+            if (!hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, FROM_QUEUE, Task.START_TIME, Task.START_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(TO_QUEUE)) {
+            if (!hasTaskComponentArray[Task.END_TIME_COMPONENT]) {
+                extractDateTimeWhenPrecededByPrefix(token, TO_QUEUE, Task.END_TIME, Task.END_TIME_COMPONENT);
+            } else {
+                offerTokenToQueue(DESCRIPTION_QUEUE, token);
+            }
+        } else if (isPrecededByPrefixInQueue(ON_QUEUE)) {
+            offerTokenToQueue(DESCRIPTION_QUEUE, token);
+        }
+    }
+
+    /**
+     * Flush outstanding Date-Time prefix into description queue Add Token to
+     * respective queue
+     */
+    private void offerTokenToQueue(int queueType, String token) {
+        addReservedWordToDescription();
+        partitionQueue.get(queueType).offer(token);
+    }
+
+    private boolean isEventTask() {
+        return hasTaskComponentArray[Task.START_DATE_COMPONENT] || hasTaskComponentArray[Task.END_DATE_COMPONENT]
+                || hasTaskComponentArray[Task.START_TIME_COMPONENT] || hasTaskComponentArray[Task.END_TIME_COMPONENT];
+    }
+
+    private void adjustStartTime() {
+        if ((TaskDate.isValidToday(taskComponentArray[Task.START_DATE])
+                && !hasTaskComponentArray[Task.START_TIME_COMPONENT])
+                || taskComponentArray[Task.START_DATE].equals(TaskDate.DEFAULT_DATE)
+                        && !hasTaskComponentArray[Task.START_TIME_COMPONENT]) {
+
+            taskComponentArray[Task.START_TIME] = TaskTime.getTimeNow().toString();
+        }
+    }
+
+    private void extractDescriptionComponent() {
+        while (!partitionQueue.get(DESCRIPTION_QUEUE).isEmpty()) {
+            taskComponentArray[Task.DESCRIPTION] += partitionQueue.get(DESCRIPTION_QUEUE).poll() + " ";
+        }
+        taskComponentArray[Task.DESCRIPTION].trim();
+    }
+
+    private void extractDateTimeWhenPrecededByPrefix(String token, int queueType, int taskComponent,
+            int taskComponentBoolean) {
+        partitionQueue.get(queueType).poll();
+        taskComponentArray[taskComponent] = token;
+        hasTaskComponentArray[taskComponentBoolean] = true;
+    }
+
+    private boolean isPrecededByDateTimePrefix(ArrayList<Queue<String>> partitionQueue) {
+        return !partitionQueue.get(BY_QUEUE).isEmpty() || !partitionQueue.get(ON_QUEUE).isEmpty()
+                || !partitionQueue.get(AT_QUEUE).isEmpty() || !partitionQueue.get(FROM_QUEUE).isEmpty()
+                || !partitionQueue.get(TO_QUEUE).isEmpty();
+    }
+
+    private boolean isPrecededByPrefixInQueue(int queueType) {
+        return !partitionQueue.get(queueType).isEmpty();
+    }
+
+    private boolean isReservedWord(String token) {
+        return token.equals(BY) || token.equals(ON) || token.equals(AT) || token.equals(FROM) || token.equals(TO)
+                || TaskDate.isValidDate(token) || TaskTime.isValidTime(token) || token.startsWith(Tag.PREFIX)
+                || token.startsWith(TaskPriority.PREFIX) || token.startsWith(RecurringType.PREFIX);
+    }
+
+    private void addReservedWordToDescription() {
+        String tempToken = flushQueue(partitionQueue);
+        if (!tempToken.isEmpty()) {
+            partitionQueue.get(DESCRIPTION_QUEUE).offer(tempToken);
+        }
+    }
+
+    private String flushQueue(ArrayList<Queue<String>> partitionQueue) {
         String token = "";
 
-        if (!byQueue.isEmpty()) {
-            token = byQueue.poll();
-        } else if (!onQueue.isEmpty()) {
-            token = onQueue.poll();
-        } else if (!atQueue.isEmpty()) {
-            token = atQueue.poll();
-        } else if (!fromQueue.isEmpty()) {
-            token = fromQueue.poll();
-        } else if (!toQueue.isEmpty()) {
-            token = toQueue.poll();
+        if (!partitionQueue.get(BY_QUEUE).isEmpty()) {
+            token = partitionQueue.get(BY_QUEUE).poll();
+        } else if (!partitionQueue.get(ON_QUEUE).isEmpty()) {
+            token = partitionQueue.get(ON_QUEUE).poll();
+        } else if (!partitionQueue.get(AT_QUEUE).isEmpty()) {
+            token = partitionQueue.get(AT_QUEUE).poll();
+        } else if (!partitionQueue.get(FROM_QUEUE).isEmpty()) {
+            token = partitionQueue.get(FROM_QUEUE).poll();
+        } else if (!partitionQueue.get(TO_QUEUE).isEmpty()) {
+            token = partitionQueue.get(TO_QUEUE).poll();
         }
 
         return token;
@@ -705,6 +702,29 @@ public class Parser {
             argsQueue.offer(arg);
         }
         return argsQueue;
+    }
+
+    private void initialisePartitionQueue() {
+        partitionQueue = new ArrayList<Queue<String>>();
+        for (int i = 0; i < NUM_QUEUE; i++) {
+            partitionQueue.add(new LinkedList<String>());
+        }
+    }
+
+    private void initialiseHasTaskComponentArray() {
+        hasTaskComponentArray = new boolean[Task.NUM_BOOLEAN_TASK_COMPONENT];
+    }
+
+    private void initialiseTaskComponentArray() {
+        taskComponentArray = new String[Task.NUM_TASK_COMPONENT];
+        taskComponentArray[Task.DESCRIPTION] = " ";
+        taskComponentArray[Task.START_DATE] = TaskDate.DEFAULT_DATE;
+        taskComponentArray[Task.END_DATE] = taskComponentArray[Task.START_DATE];
+        taskComponentArray[Task.START_TIME] = TaskTime.DEFAULT_START_TIME;
+        taskComponentArray[Task.END_TIME] = TaskTime.DEFAULT_END_TIME;
+        taskComponentArray[Task.TASK_PRIORITY] = TaskPriority.DEFAULT_PRIORITY;
+        taskComponentArray[Task.RECURRING_TYPE] = RecurringType.DEFAULT_RECURRING;
+        taskComponentArray[Task.TAG] = "";
     }
 
     private ArrayList<String> tokenizeArguments(String args) {
@@ -892,6 +912,7 @@ public class Parser {
     // @@author
 
     // @@author A0142073R
+
     private static boolean isInt(String s) {
         try {
             int i = Integer.parseInt(s);
@@ -902,5 +923,6 @@ public class Parser {
             return false;
         }
     }
+
     // @@author
 }

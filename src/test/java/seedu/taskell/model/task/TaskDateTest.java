@@ -1,6 +1,8 @@
 package seedu.taskell.model.task;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
+
+import org.junit.Before;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -14,6 +16,13 @@ import static org.junit.Assert.assertTrue;
 
 //@@author A0139257X
 public class TaskDateTest {
+    
+    TaskDate defaultDate;
+    
+    @Before
+    public void setup() throws IllegalValueException {
+        defaultDate = new TaskDate("1-1-2016");
+    }
     
     @Test
     public void isValidDate_dayOfTheWeek_returnTrue() {
@@ -113,13 +122,13 @@ public class TaskDateTest {
         assertEquals(today.getNextWeek(), validDayOfWeek);
         
         TaskDate validMonth = new TaskDate("september");
-        assertEquals("1-9-2016", validMonth.toString());
+        assertEquals("1-9-2017", validMonth.toString());
         
-        TaskDate validMonthAndYear = new TaskDate("dec-2016");
-        assertEquals("1-12-2016", validMonthAndYear.toString());
+        TaskDate validMonthAndYear = new TaskDate("dec-2017");
+        assertEquals("1-12-2017", validMonthAndYear.toString());
         
         TaskDate validDayAndMonth = new TaskDate("1-jan");
-        assertEquals("1-1-2016", validDayAndMonth.toString());
+        assertEquals("1-1-2017", validDayAndMonth.toString());
         
         TaskDate validFullDate = new TaskDate("1-1-2011");
         assertEquals("1-1-2011", validFullDate.toString());
@@ -161,31 +170,60 @@ public class TaskDateTest {
     
     @Test
     public void getNextDay_returnNextDay_success() throws IllegalValueException {
-        TaskDate today = new TaskDate("1-1-2016");
+        TaskDate today = defaultDate;
         TaskDate nextDay = new TaskDate("2-1-2016");
         assertEquals(nextDay, today.getNextDay());
     }
     
     @Test
     public void getNextWeek_returnNextWeek_success() throws IllegalValueException {
-        TaskDate today = new TaskDate("1-1-2016");
+        TaskDate today = defaultDate;
         TaskDate nextWeek = new TaskDate("8-1-2016");
         assertEquals(nextWeek, today.getNextWeek());
     }
     
     @Test
-    public void getLocalDate_returnLocalDate_success() throws IllegalValueException {
-        TaskDate date = new TaskDate("1-1-2100");
+    public void getNextMonth_returnNextMonth_success() throws IllegalValueException {
+        TaskDate today = defaultDate;
+        TaskDate nextMonth = new TaskDate("1-2-2016");
+        assertEquals(nextMonth, today.getNextMonth());
+    }
+    
+    @Test
+    public void getNextYear_returnNextYear_success() throws IllegalValueException {
+        TaskDate today = defaultDate;
+        TaskDate nextYear = new TaskDate("1-1-2017");
+        assertEquals(nextYear, today.getNextYear());
+    }
+    
+    @Test
+    public void getDayInt_returnsIntegerValueDayInMonth_success() throws IllegalValueException {
+        assertEquals(1, defaultDate.getDayInt());
+    }
+    
+    @Test
+    public void getMonthInt_returnsIntegerValueOfMonth_success() throws IllegalValueException {
+        assertEquals(1, defaultDate.getMonthInt());
+    }
+    
+    @Test
+    public void getYearInt_returnsIntegerValueOfYear_success() throws IllegalValueException {
+        assertEquals(2016, defaultDate.getYearInt());
+    }
+    
+    @Test
+    public void getLocalDate_returnLocalDate_success() {
+        TaskDate date = defaultDate;
         LocalDate actual = date.getLocalDate();
-        LocalDate expected = LocalDate.of(2100, 1, 1);
+        LocalDate expected = LocalDate.of(2016, 1, 1);
         assertEquals(expected, actual);
     }
     
     @Test
     public void isBefore_thisDateBeforeGivenDate_success() throws IllegalValueException {
-        TaskDate startDate = new TaskDate("1-1-2100");
-        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
-        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
+        TaskDate startDate = defaultDate;
+        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2016");
+        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2016");
         TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
         
         assertTrue(startDate.isBefore(endDateDiffDaySameMonthSameYear));
@@ -195,9 +233,9 @@ public class TaskDateTest {
     
     @Test
     public void isBefore_thisDateBeforeGivenDate_failure() throws IllegalValueException {
-        TaskDate startDate = new TaskDate("1-1-2100");
-        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
-        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
+        TaskDate startDate = defaultDate;
+        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2016");
+        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2016");
         TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
         
         assertFalse(endDateDiffDaySameMonthSameYear.isBefore(startDate));
@@ -207,9 +245,9 @@ public class TaskDateTest {
     
     @Test
     public void isAfter_thisDateAfterGivenDate_success() throws IllegalValueException {
-        TaskDate startDate = new TaskDate("1-1-2100");
-        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
-        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
+        TaskDate startDate = defaultDate;
+        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2016");
+        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2016");
         TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
         
         assertTrue(endDateDiffDaySameMonthSameYear.isAfter(startDate));
@@ -219,9 +257,9 @@ public class TaskDateTest {
     
     @Test
     public void isAfter_thisDateAfterGivenDate_failure() throws IllegalValueException {
-        TaskDate startDate = new TaskDate("1-1-2100");
-        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2100");
-        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2100");
+        TaskDate startDate = defaultDate;
+        TaskDate endDateDiffDaySameMonthSameYear = new TaskDate("10-1-2016");
+        TaskDate endDateSameDayDiffMonthSameYear = new TaskDate("1-2-2016");
         TaskDate endDateSameDaySameMonthDiffYear = new TaskDate("1-1-2200");
         
         assertFalse(startDate.isAfter(endDateDiffDaySameMonthSameYear));
@@ -231,8 +269,8 @@ public class TaskDateTest {
     
     @Test
     public void between_firstDateBeforeSecondDate_returnPositiveDifference() throws IllegalValueException {
-        TaskDate first = new TaskDate("1-11-2016");
-        TaskDate second = new TaskDate("20-11-2016");
+        TaskDate first = defaultDate;
+        TaskDate second = new TaskDate("20-1-2016");
         
         long positiveDayDifference = TaskDate.between(first, second);
         assertEquals(19, positiveDayDifference);
@@ -240,40 +278,39 @@ public class TaskDateTest {
     
     @Test
     public void between_firstDateAfterSecondDate_returnNegativeDifference() throws IllegalValueException {
-        TaskDate first = new TaskDate("1-11-2016");
-        TaskDate second = new TaskDate("20-11-2016");
+        TaskDate first = defaultDate;
+        TaskDate second = new TaskDate("20-1-2016");
         
         long negativeDayDifference = TaskDate.between(second, first);
         assertEquals(-19, negativeDayDifference);
     }
     
     @Test
-    public void getDisplayDate_success() throws IllegalValueException {
-        TaskDate date = new TaskDate("22-10-2016");
-        assertEquals("Saturday, 22 October 2016", date.getDisplayDate());
+    public void getDisplayDate_success() {
+        TaskDate date = defaultDate;
+        assertEquals("Friday, 1 January 2016", date.getDisplayDate());
     }
     
     @Test
     public void getLocalDateTime_success() throws IllegalValueException {
+        TaskDate date = defaultDate;
         TaskTime givenTime = new TaskTime("3am");
-        TaskDate date = new TaskDate("1-1-2100");
 
         LocalDateTime actual = date.toLocalDateTime(givenTime);
-        LocalDateTime expected = LocalDateTime.of(2100, 1, 1, 3, 0);
+        LocalDateTime expected = LocalDateTime.of(2016, 1, 1, 3, 0);
         
         assertEquals(expected, actual);
     }
     
     @Test
     public void toString_success() throws IllegalValueException {
-        TaskDate date = new TaskDate("1-1-2015");
-        assertEquals("1-1-2015", date.toString());
+        assertEquals("1-1-2016", defaultDate.toString());
     }
     
     @Test
     public void equals_success() throws IllegalValueException {
-        TaskDate date = new TaskDate("1-1-2015");
-        TaskDate sameDate = new TaskDate("1-1-2015");
+        TaskDate date = defaultDate;
+        TaskDate sameDate = new TaskDate("1-1-2016");
         
         assertEquals(date, date);
         assertEquals(date, sameDate);
@@ -281,7 +318,7 @@ public class TaskDateTest {
     
     @Test
     public void equals_failure() throws IllegalValueException {
-        TaskDate date = new TaskDate("1-1-2015");
+        TaskDate date = defaultDate;
         TaskDate differentDate = new TaskDate("2-2-2016");
         
         assertNotSame(date, differentDate);

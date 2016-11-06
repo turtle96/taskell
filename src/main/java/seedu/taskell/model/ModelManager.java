@@ -262,7 +262,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "date=" + String.join(", ", DateKeyWords);
+            return "date = "  + String.join(", ", DateKeyWords);
         }
     }
 
@@ -282,7 +282,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "prioritye=" + String.join(", ", PriorityKeyWords);
+            return "priority = " + String.join(", ", PriorityKeyWords);
         }
 
     }

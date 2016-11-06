@@ -49,8 +49,10 @@ public class TaskDate {
     public static final int NUM_DAYS_IN_A_MONTH = 30;
     public static final int NUM_MONTHS_IN_A_YEAR = 12;
     
-    public static final int NOT_A_VALID_MONTH = 0;
-    public static final int NOT_A_VALID_DAY_OF_THE_WEEK = 0;
+    public static final int INVALID_DAY_OF_WEEK = -1;
+    public static final int INVALID_DAY_OF_MONTH = -1;
+    public static final int INVALID_MONTH = -1;
+    public static final int INVALID_YEAR = -1;
 
     public static final int FIRST_DAY_OF_THE_MONTH = 1;
     
@@ -147,6 +149,11 @@ public class TaskDate {
             month = convertMonthIntoInteger(monthStr);
         }
         int year = Integer.valueOf(getThisYear());
+        
+        TaskDate date = new TaskDate(convertToStandardFormat(day, month, year));
+        if (!date.isAfter(getTodayDate())) {
+            year++;
+        }
 
         try {
             setDate(day, month, year);
@@ -174,7 +181,7 @@ public class TaskDate {
             month = convertMonthIntoInteger(monthStr);
         }
         int year = Integer.valueOf(tokenArr[1]);
-
+        
         try {
             setDate(day, month, year);
             getYear();
@@ -183,29 +190,53 @@ public class TaskDate {
         }
     }
     
-    private void setDateGivenMonth(String monthToConvert) {
+    private void setDateGivenMonth(String monthToConvert) throws IllegalValueException {
+        TaskDate date = determineDayGivenMonth(monthToConvert);
+        setDate(date.getLocalDate().getDayOfMonth(), 
+                date.getLocalDate().getMonthValue(),
+                date.getLocalDate().getYear());
+    }
+    
+    private TaskDate determineDayGivenMonth(String monthToConvert) throws IllegalValueException {
         int day = FIRST_DAY_OF_THE_MONTH;
         int month = convertMonthIntoInteger(monthToConvert);
         int year = Integer.valueOf(getThisYear());
-
-        try {
-            setDate(day, month, year);
-        } catch (DateTimeException dte) {
-            throw dte;
+        
+        TaskDate date = new TaskDate(convertToStandardFormat(day, month, year));
+        if (!date.isAfter(getTodayDate())) {
+            year++;
         }
+        
+        return new TaskDate(convertToStandardFormat(day, month, year));
     }
     
     private void setDateGivenDayNameOfWeek(String dayName) {
+        TaskDate finalDate = determineDayInWeekGivenName(dayName);
+        setDate(finalDate.getLocalDate().getDayOfMonth(), 
+                finalDate.getLocalDate().getMonthValue(), 
+                finalDate.getLocalDate().getYear());
+    }
+    
+    public static TaskDate determineDayInWeekGivenName(String dayName) {
         int day = convertDayOfWeekIntoInteger(dayName);
         LocalDate today = LocalDate.now();
         String todayDayNameInWeek = today.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
         int todayDayInWeek = convertDayOfWeekIntoInteger(todayDayNameInWeek);
+        
         int daysToAdd = day - todayDayInWeek;
         if (daysToAdd <= 0) {
             daysToAdd += NUM_DAYS_IN_A_WEEK;
         }
+        
         LocalDate finalDate = today.plusDays(daysToAdd);
-        setDate(finalDate.getDayOfMonth(), finalDate.getMonthValue(), finalDate.getYear());
+        String newDateString = convertToStandardFormat(finalDate.getDayOfMonth(), 
+                finalDate.getMonthValue(), finalDate.getYear());
+        
+        try {
+            return new TaskDate(newDateString);
+        } catch (IllegalValueException e) {
+            return null;
+        }
     }
     
     private void setDateGivenToday(String taskDate) {
@@ -252,32 +283,23 @@ public class TaskDate {
      * Returns true if given string is the same as a name of the week
      */
     public static boolean isValidDayOfWeek(String dateToValidate) {
-        if (convertDayOfWeekIntoInteger(dateToValidate) == NOT_A_VALID_DAY_OF_THE_WEEK) {
-            return false;
-        }
-        return true;
+        return !(convertDayOfWeekIntoInteger(dateToValidate) == INVALID_DAY_OF_WEEK);
     }
 
     public static boolean isValidMonthAndYear(String dateToValidate) {
-        if (isValidFormat(dateToValidate, "MMM yyyy") || isValidFormat(dateToValidate, "MMM-yyyy")
+        return (isValidFormat(dateToValidate, "MMM yyyy") || isValidFormat(dateToValidate, "MMM-yyyy")
                 || isValidFormat(dateToValidate, "MMM.yyyy")
-                || isValidFormat(dateToValidate, "MMM/yyyy")) {
-            return true;
-        }
-        return false;
+                || isValidFormat(dateToValidate, "MMM/yyyy"));
     }
 
     public static boolean isValidDayAndMonth(String dateToValidate) {
-        if (isValidFormat(dateToValidate, "d MMM") || isValidFormat(dateToValidate, "d-MMM")
+        return (isValidFormat(dateToValidate, "d MMM") || isValidFormat(dateToValidate, "d-MMM")
                 || isValidFormat(dateToValidate, "d.MMM")
-                || isValidFormat(dateToValidate, "d/MMM")) {
-            return true;
-        }
-        return false;
+                || isValidFormat(dateToValidate, "d/MMM"));
     }
 
     public static boolean isValidFullDate(String dateToValidate) {
-        if (isValidFormat(dateToValidate, "d M yyyy") || isValidFormat(dateToValidate, "d MMM yyyy")
+        return (isValidFormat(dateToValidate, "d M yyyy") || isValidFormat(dateToValidate, "d MMM yyyy")
                 || isValidFormat(dateToValidate, "d-M-yyyy") || isValidFormat(dateToValidate, "d-MMM-yyyy")
                 || isValidFormat(dateToValidate, "d.M.yyyy") || isValidFormat(dateToValidate, "d.MMM.yyyy")
                 || isValidFormat(dateToValidate, "d.M-yyyy") || isValidFormat(dateToValidate, "d.MMM-yyyy")
@@ -286,10 +308,7 @@ public class TaskDate {
                 || isValidFormat(dateToValidate, "d-M/yyyy") || isValidFormat(dateToValidate, "d-MMM/yyyy")
                 || isValidFormat(dateToValidate, "d/M-yyyy") || isValidFormat(dateToValidate, "d/MMM-yyyy")
                 || isValidFormat(dateToValidate, "d.M/yyyy") || isValidFormat(dateToValidate, "d.MMM/yyyy")
-                || isValidFormat(dateToValidate, "d/M.yyyy") || isValidFormat(dateToValidate, "d/MMM.yyyy")) {
-            return true;
-        }
-        return false;
+                || isValidFormat(dateToValidate, "d/M.yyyy") || isValidFormat(dateToValidate, "d/MMM.yyyy"));
     }
 
     /**
@@ -351,11 +370,7 @@ public class TaskDate {
      * Returns true if the given string has the same name as a month in the year
      */
     public static boolean isValidMonth(String month) {
-        if (convertMonthIntoInteger(month) == NOT_A_VALID_MONTH) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(convertMonthIntoInteger(month) == INVALID_MONTH);
     }
 
     /**
@@ -401,7 +416,7 @@ public class TaskDate {
         case "sunday":
             return SUNDAY;
         default:
-            return NOT_A_VALID_DAY_OF_THE_WEEK;
+            return INVALID_DAY_OF_WEEK;
         }
     }
 
@@ -464,7 +479,7 @@ public class TaskDate {
         case "december":
             return DECEMBER;
         default:
-            return NOT_A_VALID_MONTH;
+            return INVALID_MONTH;
         }
     }
 
@@ -515,7 +530,7 @@ public class TaskDate {
     //@@author A0148004R-reused
     public TaskDate getNextMonth() throws IllegalValueException {
         try {
-            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate localDate = this.getLocalDate();
             LocalDate nextMonth = localDate.plusMonths(1);
             return new TaskDate(nextMonth.format(standardFormat));
         } catch (IllegalValueException e) {
@@ -525,6 +540,16 @@ public class TaskDate {
     //@@author
     
     //@@author A0139257X
+    public TaskDate getNextYear() throws IllegalValueException {
+        try {
+            LocalDate localDate = this.getLocalDate();
+            LocalDate nextMonth = localDate.plusYears(1);
+            return new TaskDate(nextMonth.format(standardFormat));
+        } catch (IllegalValueException e) {
+            throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
+        }
+    }
+    
     /**
      * Returns a string representing the integer value of this year
      */
@@ -543,6 +568,14 @@ public class TaskDate {
         }
     }
     
+    public int getDayInt() {
+        try {
+            return Integer.valueOf(getDay());
+        } catch (NumberFormatException | IllegalValueException e) {
+            return INVALID_DAY_OF_MONTH;
+        }
+    }
+    
     public String getMonth() throws IllegalValueException {
         assert taskDate != null;
         
@@ -551,6 +584,14 @@ public class TaskDate {
             return matcherFullArg.group("month");
         } else {
             throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
+        }
+    }
+    
+    public int getMonthInt() {
+        try {
+            return Integer.valueOf(getMonth());
+        } catch (NumberFormatException | IllegalValueException e) {
+            return INVALID_MONTH;
         }
     }
     
@@ -565,7 +606,15 @@ public class TaskDate {
         }
     }
     
-    public String getDayNameInWeek() throws IllegalValueException {
+    public int getYearInt() {
+        try {
+            return Integer.valueOf(getYear());
+        } catch (NumberFormatException | IllegalValueException e) {
+            return INVALID_YEAR;
+        }
+    }
+    
+    public String getDayNameInWeek() {
         LocalDate localDate = this.getLocalDate();
         String dayNameInWeek = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
         return dayNameInWeek;
@@ -578,19 +627,11 @@ public class TaskDate {
     }
     
     public String getDisplayDate() {
-        try {
-            return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
-        } catch (IllegalValueException e) {
-            return "";
-        }
+        return getDayNameInWeek() + ", " + getDayInt() + " " + getMonthName() + " " + getYearInt();
     }
     
     public LocalDate getLocalDate() {
-        try {
-            return LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
-        } catch (NumberFormatException | IllegalValueException e) {
-            return null;
-        }
+        return LocalDate.of(getYearInt(), getMonthInt(), getDayInt());
     }
 
     public static String getDefaultDate() {
