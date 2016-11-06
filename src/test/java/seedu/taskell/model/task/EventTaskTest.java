@@ -27,10 +27,17 @@ public class EventTaskTest {
     }
     
     /**
-     * Compare string of both parameter confirms both are the same.
+     * Compare string of both parameter and confirms both are the same.
      */
     private void assertEqualEventTask(EventTaskTestExpectedResult expected, EventTask actual) {
         assertEquals(expected.toString(),(actual.toString()));
+    }
+    
+    /**
+     * Compare both messages and confirms both are the same
+     */
+    private void assertResultMessage(String expected, String actual) {
+        assertEquals(expected, actual);
     }
     
     @Test
@@ -71,7 +78,7 @@ public class EventTaskTest {
             
             assertEqualEventTask(expected, actual);
         } catch (IllegalValueException ive) {
-            assertEquals(ive.getMessage(), EventTask.MESSAGE_EVENT_CONSTRAINTS);
+            assertResultMessage(EventTask.MESSAGE_EVENT_CONSTRAINTS, ive.getMessage());
         }
     }
     
@@ -113,7 +120,7 @@ public class EventTaskTest {
             
             assertEqualEventTask(expected, actual);
         } catch (IllegalValueException ive) {
-            assertEquals(ive.getMessage(), EventTask.MESSAGE_EVENT_CONSTRAINTS);
+            assertResultMessage(EventTask.MESSAGE_EVENT_CONSTRAINTS, ive.getMessage());
         }
     }
     
@@ -263,6 +270,150 @@ public class EventTaskTest {
                 TaskPriority.DEFAULT_PRIORITY, RecurringType.DEFAULT_RECURRING);
         
         assertEqualEventTask(expected, actual);
+    }
+    
+    @Test
+    public void construct_taskRecurDaily_recurDailySuccessfully() throws IllegalValueException {
+        //Go meeting on today r/daily
+        EventTaskTestHelper helper = new EventTaskTestHelper();
+        String startDate = today.toString();
+        String recurringType = "daily";
+        helper.taskComponentArray[Task.DESCRIPTION] = defaultDescription;
+        helper.taskComponentArray[Task.START_DATE] = startDate;
+        helper.hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.RECURRING_TYPE] = recurringType;
+        
+        EventTask actual = helper.getEventTask();
+        
+        EventTaskTestExpectedResult expected = new EventTaskTestExpectedResult(defaultDescription,
+                startDate, startDate,
+                TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME.toString(),
+                TaskPriority.DEFAULT_PRIORITY, recurringType);
+        
+        assertEqualEventTask(expected, actual);
+    }
+    
+    @Test
+    public void construct_taskRecurDaily_exceptionThrown() {
+        //Go meeting by 1-1-2020 r/daily
+        EventTaskTestHelper helper = new EventTaskTestHelper();
+        String endDate = "1-1-2020";
+        String recurringType = "daily";
+        helper.taskComponentArray[Task.DESCRIPTION] = defaultDescription;
+        helper.taskComponentArray[Task.END_DATE] = endDate;
+        helper.hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.RECURRING_TYPE] = recurringType;
+        
+        try {
+            EventTask actual = helper.getEventTask();
+            
+            EventTaskTestExpectedResult expected = new EventTaskTestExpectedResult(defaultDescription,
+                    today.toString(), endDate,
+                    TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME.toString(),
+                    TaskPriority.DEFAULT_PRIORITY, recurringType);
+            
+            assertEqualEventTask(expected, actual);
+        } catch (IllegalValueException ive) {
+            assertResultMessage(RecurringType.MESSAGE_INVALID_RECURRING_DURATION, ive.getMessage());
+        }
+    }
+    
+    @Test
+    public void construct_taskRecurWeekly_successful() throws IllegalValueException {
+        //Go meeting from 1-1-2020 to 3-1-2020 r/weekly
+        EventTaskTestHelper helper = new EventTaskTestHelper();
+        String startDate = "1-1-2020";
+        String endDate = "3-1-2020";
+        String recurringType = "weekly";
+        helper.taskComponentArray[Task.DESCRIPTION] = defaultDescription;
+        helper.taskComponentArray[Task.START_DATE] = startDate;
+        helper.hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.END_DATE] = endDate;
+        helper.hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.RECURRING_TYPE] = recurringType;
+        
+        EventTask actual = helper.getEventTask();
+        
+        EventTaskTestExpectedResult expected = new EventTaskTestExpectedResult(defaultDescription,
+                startDate, endDate,
+                TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME.toString(),
+                TaskPriority.DEFAULT_PRIORITY, recurringType);
+        
+        assertEqualEventTask(expected, actual);
+    }
+    
+    @Test
+    public void construct_taskRecurWeekly_exceptionThrown() {
+        //Go meeting by 1-1-2020 r/weekly
+        EventTaskTestHelper helper = new EventTaskTestHelper();
+        String endDate = "1-1-2020";
+        String recurringType = "weekly";
+        helper.taskComponentArray[Task.DESCRIPTION] = defaultDescription;
+        helper.taskComponentArray[Task.END_DATE] = endDate;
+        helper.hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.RECURRING_TYPE] = recurringType;
+        
+        try {
+            EventTask actual = helper.getEventTask();
+            
+            EventTaskTestExpectedResult expected = new EventTaskTestExpectedResult(defaultDescription,
+                    today.toString(), endDate,
+                    TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME.toString(),
+                    TaskPriority.DEFAULT_PRIORITY, recurringType);
+            
+            assertEqualEventTask(expected, actual);
+        } catch (IllegalValueException ive) {
+            assertResultMessage(RecurringType.MESSAGE_INVALID_RECURRING_DURATION, ive.getMessage());
+        }
+    }
+    
+    @Test
+    public void construct_taskRecurMonthly_successful() throws IllegalValueException {
+        //Go meeting from 1-1-2020 to 25-1-2020 r/monthly
+        EventTaskTestHelper helper = new EventTaskTestHelper();
+        String startDate = "1-1-2020";
+        String endDate = "25-1-2020";
+        String recurringType = "monthly";
+        helper.taskComponentArray[Task.DESCRIPTION] = defaultDescription;
+        helper.taskComponentArray[Task.START_DATE] = startDate;
+        helper.hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.END_DATE] = endDate;
+        helper.hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.RECURRING_TYPE] = recurringType;
+        
+        EventTask actual = helper.getEventTask();
+        
+        EventTaskTestExpectedResult expected = new EventTaskTestExpectedResult(defaultDescription,
+                startDate, endDate,
+                TaskTime.DEFAULT_START_TIME, TaskTime.DEFAULT_END_TIME.toString(),
+                TaskPriority.DEFAULT_PRIORITY, recurringType);
+        
+        assertEqualEventTask(expected, actual);
+    }
+    
+    @Test
+    public void construct_taskRecurMonthly_exceptionThrown() {
+        //Go meeting by 1-1-2020 r/monthly
+        EventTaskTestHelper helper = new EventTaskTestHelper();
+        String endDate = "1-1-2020";
+        String recurringType = "monthly";
+        helper.taskComponentArray[Task.DESCRIPTION] = defaultDescription;
+        helper.taskComponentArray[Task.END_DATE] = endDate;
+        helper.hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+        helper.taskComponentArray[Task.RECURRING_TYPE] = recurringType;
+        
+        try {
+            EventTask actual = helper.getEventTask();
+            
+            EventTaskTestExpectedResult expected = new EventTaskTestExpectedResult(defaultDescription,
+                    today.toString(), endDate,
+                    TaskTime.getTimeNow().toString(), TaskTime.DEFAULT_END_TIME.toString(),
+                    TaskPriority.DEFAULT_PRIORITY, recurringType);
+            
+            assertEqualEventTask(expected, actual);
+        } catch (IllegalValueException ive) {
+            assertResultMessage(RecurringType.MESSAGE_INVALID_RECURRING_DURATION, ive.getMessage());
+        }
     }
 
 }
