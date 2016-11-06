@@ -3,6 +3,7 @@
 * [Quick Start](#quick-start)
 * [Features](#features)
 * [FAQ](#faq)
+* [Glossary](#glossary)
 * [Command Summary](#command-summary)
 * [Appendix A](#appendix-a)
 * [Appendix B](#appendix-b)
@@ -25,6 +26,7 @@ Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Compu
 
 Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
 	<br><img src="images/Icon.png" width="100"></br>
+	
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br>
  <br><p align="center"><img src="images/GUI.png" width="800"><br>
@@ -39,16 +41,34 @@ Step 6: Some example commands you can try:<br>
    * `exit` : exits the application <br>
 Refer to the [Features](#features) section below for details of each command.<br>
 
-
+<!--- @@author A0139257X --->
 ## Features
 
 This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. The parameters are listed below
+- TASK: Indicates the content of a work
+- DATE: Indicates a date
+
+> Please refer to Appendix A for date format that Taskell supports. <br> 
+> Default start date has been set to today's date <br>
+> Default end date has been set to be the same as the start date <br>
+
+- TIME: Indicates a time
+
+> Please refer to Appendix B for time format that Taskell supports. <br>
+> Default start time has been set to 12:00AM <br>
+> Default end time has been set to 11:59PM <br>
+> If the start date is today and no start time is provided, the default start time will be set to current time
+
 - PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 3 indicates default, low and high priority respectively. 
+
+> In the GUI, level 1 tasks are marked as green, level 2 tasks are marked as yellow and level 3 tasks are marked as red. Tasks with default priority level are not marked with any colours
+
 - RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly
 - TAG: Indicates the category a task belongs to
 
 Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
 INDEX refers to the index number shown in the most recent listing.
+<!--- @@author --->
 
 #### Viewing list of commands : `help`
 
@@ -88,7 +108,6 @@ Example: `add` Go camping at Kota Tinggi <i>from</i> 3-jun-2016 <i>to</i> 7-jun-
 - `add` TASK <i>from</i> START_TIME <i>to</i> END_TIME <br>
 Example: `add` Watch Dr Strange <i>from</i> 7.30pm <i>to</i> 9.25pm
 
-> Please refer to Appendix A and B for date and time format respectively that Taskell supports. <br>
 
 To allow greater flexibility in the command format, Taskell supports a few natural variation such as <i>by</i>, <i>on</i> and <i>at</i>.
 <br>
@@ -323,6 +342,15 @@ transfer your data to a new location on your computer. <br>
 
 **Q**: Do I have to use `exit` command when I want to exit the application? <br>
 **A**: There is no need to, as Taskell can be closed by the top right X button with the mouse as well. This command is for your convenience if you prefer to use the keyboard. <br>
+
+<!--- @@author --->
+
+<!--- @@author A0139257X ---> 
+
+## Glossary
+
+1. GUI: Graphical User Interface
+2. Floating task: A task without date and time
 
 <!--- @@author --->
 
