@@ -4,7 +4,6 @@ package guitests;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,12 +16,9 @@ import seedu.taskell.commons.core.Config;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.exceptions.DataConversionException;
 import seedu.taskell.logic.commands.SaveStorageLocationCommand;
-import seedu.taskell.model.ReadOnlyTaskManager;
-import seedu.taskell.model.TaskManager;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.storage.JsonConfigStorage;
 import seedu.taskell.testutil.TestTask;
-import seedu.taskell.testutil.TestUtil;
 
 public class SaveStorageLocationCommandTest extends TaskManagerGuiTest {
     

@@ -33,7 +33,7 @@ public interface History {
     /** Deletes a given CommandHistory */
     void deleteCommandHistory(CommandHistory commandHistory);
 
-    /** removes Tasks no longer in system (i.e. user deleted/cleared/edited) */
+    /** Removes Tasks no longer in system (i.e. user deleted/cleared/edited) */
     void updateHistory();
     
 }

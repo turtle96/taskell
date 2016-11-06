@@ -17,4 +17,5 @@ public class ViewCalendarCommandTest extends TaskManagerGuiTest {
         commandBox.runCommand("cal");
         assertResultMessage(expected);
     }
+    
 }
