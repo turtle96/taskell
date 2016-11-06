@@ -152,10 +152,12 @@ public class EditCommand extends Command {
                 || hasComponentArray[Task.END_TIME_COMPONENT] == true
                 || hasComponentArray[Task.START_DATE_COMPONENT] == true
                 || hasComponentArray[Task.END_DATE_COMPONENT] == true)) {
+            history.deleteLatestCommand();
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 
         if (!ableToAdjustTime(taskToEdit)) {
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_INVALID_COMMAND_FORMAT);
         }
         adjustDate(taskToEdit);
