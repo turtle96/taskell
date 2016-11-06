@@ -4,6 +4,7 @@ package guitests;
 import org.junit.Test;
 
 import seedu.taskell.logic.commands.ViewCalendarCommand;
+import seedu.taskell.logic.commands.ViewHistoryCommand;
 
 public class ViewCalendarCommandTest extends TaskManagerGuiTest {
     
@@ -16,5 +17,15 @@ public class ViewCalendarCommandTest extends TaskManagerGuiTest {
         
         commandBox.runCommand("cal");
         assertResultMessage(expected);
+    }
+    
+    @Test
+    public void defaultViewCal_success() {
+        
+        commandBox.runCommand("hist");
+        assertResultMessage(ViewHistoryCommand.MESSAGE_SUCCESS);
+        
+        commandBox.runCommand("cal");
+        assertResultMessage(ViewCalendarCommand.MESSAGE_SUCCESS);
     }
 }
