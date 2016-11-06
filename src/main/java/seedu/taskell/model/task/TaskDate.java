@@ -283,32 +283,23 @@ public class TaskDate {
      * Returns true if given string is the same as a name of the week
      */
     public static boolean isValidDayOfWeek(String dateToValidate) {
-        if (convertDayOfWeekIntoInteger(dateToValidate) == INVALID_DAY_OF_WEEK) {
-            return false;
-        }
-        return true;
+        return !(convertDayOfWeekIntoInteger(dateToValidate) == INVALID_DAY_OF_WEEK);
     }
 
     public static boolean isValidMonthAndYear(String dateToValidate) {
-        if (isValidFormat(dateToValidate, "MMM yyyy") || isValidFormat(dateToValidate, "MMM-yyyy")
+        return (isValidFormat(dateToValidate, "MMM yyyy") || isValidFormat(dateToValidate, "MMM-yyyy")
                 || isValidFormat(dateToValidate, "MMM.yyyy")
-                || isValidFormat(dateToValidate, "MMM/yyyy")) {
-            return true;
-        }
-        return false;
+                || isValidFormat(dateToValidate, "MMM/yyyy"));
     }
 
     public static boolean isValidDayAndMonth(String dateToValidate) {
-        if (isValidFormat(dateToValidate, "d MMM") || isValidFormat(dateToValidate, "d-MMM")
+        return (isValidFormat(dateToValidate, "d MMM") || isValidFormat(dateToValidate, "d-MMM")
                 || isValidFormat(dateToValidate, "d.MMM")
-                || isValidFormat(dateToValidate, "d/MMM")) {
-            return true;
-        }
-        return false;
+                || isValidFormat(dateToValidate, "d/MMM"));
     }
 
     public static boolean isValidFullDate(String dateToValidate) {
-        if (isValidFormat(dateToValidate, "d M yyyy") || isValidFormat(dateToValidate, "d MMM yyyy")
+        return (isValidFormat(dateToValidate, "d M yyyy") || isValidFormat(dateToValidate, "d MMM yyyy")
                 || isValidFormat(dateToValidate, "d-M-yyyy") || isValidFormat(dateToValidate, "d-MMM-yyyy")
                 || isValidFormat(dateToValidate, "d.M.yyyy") || isValidFormat(dateToValidate, "d.MMM.yyyy")
                 || isValidFormat(dateToValidate, "d.M-yyyy") || isValidFormat(dateToValidate, "d.MMM-yyyy")
@@ -317,10 +308,7 @@ public class TaskDate {
                 || isValidFormat(dateToValidate, "d-M/yyyy") || isValidFormat(dateToValidate, "d-MMM/yyyy")
                 || isValidFormat(dateToValidate, "d/M-yyyy") || isValidFormat(dateToValidate, "d/MMM-yyyy")
                 || isValidFormat(dateToValidate, "d.M/yyyy") || isValidFormat(dateToValidate, "d.MMM/yyyy")
-                || isValidFormat(dateToValidate, "d/M.yyyy") || isValidFormat(dateToValidate, "d/MMM.yyyy")) {
-            return true;
-        }
-        return false;
+                || isValidFormat(dateToValidate, "d/M.yyyy") || isValidFormat(dateToValidate, "d/MMM.yyyy"));
     }
 
     /**
@@ -382,11 +370,7 @@ public class TaskDate {
      * Returns true if the given string has the same name as a month in the year
      */
     public static boolean isValidMonth(String month) {
-        if (convertMonthIntoInteger(month) == INVALID_MONTH) {
-            return false;
-        } else {
-            return true;
-        }
+        return !(convertMonthIntoInteger(month) == INVALID_MONTH);
     }
 
     /**
