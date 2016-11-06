@@ -188,6 +188,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         TestTask[] currentList = td.getTypicalTasks();
         
         commandBox.runCommand("done 1");
+        commandBox.runCommand("list-done");  //to show only complete tasks
         commandBox.runCommand("undone 1");
         commandBox.runCommand("list");  //to show only incomplete tasks
         
