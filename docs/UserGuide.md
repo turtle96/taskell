@@ -296,11 +296,12 @@ Entering "edit 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et:
 You can view the calendar for the week on the right panel to refer to the dates and any events scheduled 
 when adding tasks and scheduling events. There is also a single red line displayed to show you the current time for your ease in checking your schedule.<br>
 <br><p align="center"><img src="images/screenshots/calendar_circle.PNG" width="800"></br>
-Diagram 10: An example of how the current time marker looks like.<br>
+Diagram 12: An example of how the current time marker looks like.<br>
 
 Calendar view depends on the list of tasks on the left panel, with each section marked with the index corresponding to the task, meaning a block marked "4" would correspond with the 4th task.<br>
 By default, the calendar view will be shown on the right panel. As `history` displays command history on the right panel as well, this command is meant for your convenience if you want to view calendar again.<br>
 Please note that entering other commands (i.e. `find`, `add`) will also revert the right panel back to calendar as it is the default view. <br>
+
 Format: `calendar` or `cal` <br>
 
 #### Saving the information in Taskell : `save`
