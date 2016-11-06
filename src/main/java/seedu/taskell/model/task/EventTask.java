@@ -31,7 +31,6 @@ public class EventTask extends Task {
         
         TaskTime eventStartTime = setStartTime(eventStartDate);
         eventStartDate = adjustStartDate(eventStartDate, eventStartTime);
-        System.out.println(eventStartDate);
         
         TaskDate eventEndDate = setEndDate(eventStartDate, eventStartTime, eventEndTime);
         
@@ -114,11 +113,11 @@ public class EventTask extends Task {
                 || TaskDate.isValidMonthAndYear(userInputEndDate) && eventEndDate.isBefore(eventStartDate)) {
             throw new IllegalValueException(MESSAGE_EVENT_CONSTRAINTS);
         } else if (TaskDate.isValidDayOfWeek(userInputEndDate)) {
-            eventEndDate = determineDayInWeekGivenName(taskComponentArray, eventStartDate, eventEndDate);
+            eventEndDate = determineDayInWeekGivenName(eventStartDate, eventEndDate);
         } else if (TaskDate.isValidMonth(userInputEndDate)) {
-            eventEndDate = determineDayGivenMonthOrYear(taskComponentArray, eventStartDate, eventEndDate);
+            eventEndDate = determineEndDateGivenMonth(eventStartDate, eventEndDate);
         } else if (TaskDate.isValidDayAndMonth(userInputEndDate)) {
-            eventEndDate = determineDayGivenMonthOrYear(taskComponentArray, eventStartDate, eventEndDate);
+            eventEndDate = determineEndDateGivenMonth(eventStartDate, eventEndDate);
         } 
         
         return eventEndDate;
@@ -133,8 +132,7 @@ public class EventTask extends Task {
     /**
      * Determine end date in the week with respect to start date
      */
-    private TaskDate determineDayInWeekGivenName(String[] taskComponentArray, 
-            TaskDate eventStartDate, TaskDate eventEndDate) {
+    private TaskDate determineDayInWeekGivenName(TaskDate eventStartDate, TaskDate eventEndDate) {
         
         if (!eventEndDate.isAfter(eventStartDate) && hasTaskComponentArray[END_DATE_COMPONENT]) {
             try {
@@ -149,11 +147,13 @@ public class EventTask extends Task {
     /**
      * Determine end date in the year with respect to start date
      */
-    private TaskDate determineDayGivenMonthOrYear(String[] taskComponentArray, 
-            TaskDate eventStartDate, TaskDate eventEndDate) {
-        if (eventEndDate.isBefore(eventStartDate)) {
+    private TaskDate determineEndDateGivenMonth(TaskDate eventStartDate, TaskDate eventEndDate) {
+        if (!eventEndDate.isAfter(eventStartDate)&& hasTaskComponentArray[END_DATE_COMPONENT]) {
             try {
-                eventEndDate = eventEndDate.getNextYear();
+                int yearOfExpectedEndDate = eventStartDate.getNextYear().getYearInt();
+                int dayInEndDate = eventEndDate.getDayInt();
+                int monthInEndDate = eventEndDate.getMonthInt();
+                eventEndDate = new TaskDate(TaskDate.convertToStandardFormat(dayInEndDate, monthInEndDate, yearOfExpectedEndDate));
             } catch (IllegalValueException e) {
                 return null;
             }

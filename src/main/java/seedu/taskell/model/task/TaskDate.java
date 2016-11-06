@@ -49,8 +49,10 @@ public class TaskDate {
     public static final int NUM_DAYS_IN_A_MONTH = 30;
     public static final int NUM_MONTHS_IN_A_YEAR = 12;
     
-    public static final int NOT_A_VALID_MONTH = 0;
-    public static final int NOT_A_VALID_DAY_OF_THE_WEEK = 0;
+    public static final int INVALID_DAY_OF_WEEK = -1;
+    public static final int INVALID_DAY_OF_MONTH = -1;
+    public static final int INVALID_MONTH = -1;
+    public static final int INVALID_YEAR = -1;
 
     public static final int FIRST_DAY_OF_THE_MONTH = 1;
     
@@ -281,7 +283,7 @@ public class TaskDate {
      * Returns true if given string is the same as a name of the week
      */
     public static boolean isValidDayOfWeek(String dateToValidate) {
-        if (convertDayOfWeekIntoInteger(dateToValidate) == NOT_A_VALID_DAY_OF_THE_WEEK) {
+        if (convertDayOfWeekIntoInteger(dateToValidate) == INVALID_DAY_OF_WEEK) {
             return false;
         }
         return true;
@@ -380,7 +382,7 @@ public class TaskDate {
      * Returns true if the given string has the same name as a month in the year
      */
     public static boolean isValidMonth(String month) {
-        if (convertMonthIntoInteger(month) == NOT_A_VALID_MONTH) {
+        if (convertMonthIntoInteger(month) == INVALID_MONTH) {
             return false;
         } else {
             return true;
@@ -430,7 +432,7 @@ public class TaskDate {
         case "sunday":
             return SUNDAY;
         default:
-            return NOT_A_VALID_DAY_OF_THE_WEEK;
+            return INVALID_DAY_OF_WEEK;
         }
     }
 
@@ -493,7 +495,7 @@ public class TaskDate {
         case "december":
             return DECEMBER;
         default:
-            return NOT_A_VALID_MONTH;
+            return INVALID_MONTH;
         }
     }
 
@@ -582,6 +584,14 @@ public class TaskDate {
         }
     }
     
+    public int getDayInt() {
+        try {
+            return Integer.valueOf(getDay());
+        } catch (NumberFormatException | IllegalValueException e) {
+            return INVALID_DAY_OF_MONTH;
+        }
+    }
+    
     public String getMonth() throws IllegalValueException {
         assert taskDate != null;
         
@@ -590,6 +600,14 @@ public class TaskDate {
             return matcherFullArg.group("month");
         } else {
             throw new IllegalValueException(MESSAGE_TASK_DATE_CONSTRAINTS);
+        }
+    }
+    
+    public int getMonthInt() {
+        try {
+            return Integer.valueOf(getMonth());
+        } catch (NumberFormatException | IllegalValueException e) {
+            return INVALID_MONTH;
         }
     }
     
@@ -604,7 +622,15 @@ public class TaskDate {
         }
     }
     
-    public String getDayNameInWeek() throws IllegalValueException {
+    public int getYearInt() {
+        try {
+            return Integer.valueOf(getYear());
+        } catch (NumberFormatException | IllegalValueException e) {
+            return INVALID_YEAR;
+        }
+    }
+    
+    public String getDayNameInWeek() {
         LocalDate localDate = this.getLocalDate();
         String dayNameInWeek = localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.US);
         return dayNameInWeek;
@@ -617,19 +643,11 @@ public class TaskDate {
     }
     
     public String getDisplayDate() {
-        try {
-            return getDayNameInWeek() + ", " + getDay() + " " + getMonthName() + " " + getYear();
-        } catch (IllegalValueException e) {
-            return "";
-        }
+        return getDayNameInWeek() + ", " + getDayInt() + " " + getMonthName() + " " + getYearInt();
     }
     
     public LocalDate getLocalDate() {
-        try {
-            return LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
-        } catch (NumberFormatException | IllegalValueException e) {
-            return null;
-        }
+        return LocalDate.of(getYearInt(), getMonthInt(), getDayInt());
     }
 
     public static String getDefaultDate() {

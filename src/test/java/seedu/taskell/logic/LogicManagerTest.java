@@ -407,8 +407,6 @@ public class LogicManagerTest {
                 TaskStatus.INCOMPLETE, new UniqueTagList(), 
                 false, true, false, false, false);
         
-        System.out.println(toBeAdded);
-        
         TaskManager expectedAB = new TaskManager();
         expectedAB.addTask(toBeAdded);
         // execute command and verify result
@@ -949,12 +947,6 @@ public class LogicManagerTest {
             
             boolean[] hasTaskComponentArray = initHasTaskComponentArray(hasStartDate, hasEndDate, 
                     hasStartTime, hasEndTime, hasRecurringType);
-            
-            System.out.println(hasTaskComponentArray[0]);
-            System.out.println(hasTaskComponentArray[1]);
-            System.out.println(hasTaskComponentArray[2]);
-            System.out.println(hasTaskComponentArray[3]);
-            System.out.println(hasTaskComponentArray[4]);
             
             return new EventTask(taskComponentArray, hasTaskComponentArray, tagSet);
         }
