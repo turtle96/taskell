@@ -62,7 +62,7 @@ public class TaskCard extends UiPart{
         
         setDateTime();
         setDateTimeVisibility();
-        setCardPaneBackground();
+        setPriorityPaneColour();
     }
     
     private void setDateTime() {
@@ -85,7 +85,7 @@ public class TaskCard extends UiPart{
         }
     }
     
-    private void setCardPaneBackground() {
+    private void setPriorityPaneColour() {
         if (task.getTaskPriority().taskPriority.equals(TaskPriority.HIGH_PRIORITY)) {
             priorityColour.setStyle(TaskPriority.HIGH_PRIORITY_BACKGROUND);
         } else if (task.getTaskPriority().taskPriority.equals(TaskPriority.MEDIUM_PRIORITY)) {
