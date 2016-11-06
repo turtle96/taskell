@@ -82,7 +82,7 @@ Role: Developer
 [[docs](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/collated/docs/A0148004R.md)]
 * Other major contributions:
 	* Contributed to second round refactoring from AddressBook Level 4 to Taskell
-
+<!-- @@author -->
 -----
 
 ## Project Mentor
