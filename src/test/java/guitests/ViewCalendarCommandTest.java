@@ -19,13 +19,4 @@ public class ViewCalendarCommandTest extends TaskManagerGuiTest {
         assertResultMessage(expected);
     }
     
-    @Test
-    public void defaultViewCal_success() {
-        
-        commandBox.runCommand("hist");
-        assertResultMessage(ViewHistoryCommand.MESSAGE_SUCCESS);
-        
-        commandBox.runCommand("cal");
-        assertResultMessage(ViewCalendarCommand.MESSAGE_SUCCESS);
-    }
 }
