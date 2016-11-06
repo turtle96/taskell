@@ -62,8 +62,6 @@ public class Parser {
     private static final String DESCRIPTION = "desc:";
     private static final String PRIORITY = "p:";
 
-    private boolean lastCharChanged;
-
     private static History history;
 
     private ArrayList<Queue<String>> partitionQueue;
@@ -264,7 +262,7 @@ public class Parser {
         taskComponentArray[Task.DESCRIPTION] = "default";
         ArrayList<String> argsList = tokenizeArguments(args);
 
-        if (argsList.isEmpty()) {
+        if (argsList.size() <= 1) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
 
@@ -273,97 +271,45 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_TASK_DISPLAYED_INDEX, EditCommand.MESSAGE_USAGE));
         }
 
-        if (argsList.isEmpty()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-
         int targetIdx = Integer.valueOf(index);
         return splitInputWithGivenNewParameters(targetIdx, argsList);
     }
 
     private Command splitInputWithGivenNewParameters(int targetIdx, ArrayList<String> argsList) {
         while (!argsList.isEmpty()) {
-            switch (argsList.get(0)) {
-            case DESCRIPTION:
-                if (hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] == true) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
+            if (argsList.get(0).equals(DESCRIPTION) && hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] == false) {
                 updateDescription(argsList);
-                break;
-
-            case START_DATE:
-                argsList.remove(0);
-
-                if (hasTaskComponentArray[Task.START_DATE_COMPONENT] == true || argsList.isEmpty()) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                taskComponentArray[Task.START_DATE] = argsList.remove(0);
-                if (TaskDate.isValidDate(taskComponentArray[Task.START_DATE])) {
-                    hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
-                } else {
+            } else if (argsList.get(0).equals(START_DATE) && hasTaskComponentArray[Task.START_DATE_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, START_DATE)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-                break;
-            case END_DATE:
-                argsList.remove(0);
-                if (hasTaskComponentArray[Task.END_DATE_COMPONENT] == true || argsList.isEmpty()) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                taskComponentArray[Task.END_DATE] = argsList.remove(0);
-                if (TaskDate.isValidDate(taskComponentArray[Task.END_DATE])) {
-                    hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
-                } else {
+            } else if (argsList.get(0).equals(END_DATE) && hasTaskComponentArray[Task.END_DATE_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, END_DATE)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-                break;
-            case START_TIME:
-                argsList.remove(0);
-                if (hasTaskComponentArray[Task.START_TIME_COMPONENT] == true || argsList.isEmpty()) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                taskComponentArray[Task.START_TIME] = argsList.remove(0);
-                if (TaskTime.isValidTime(taskComponentArray[Task.START_TIME])) {
-                    hasTaskComponentArray[Task.START_TIME_COMPONENT] = true;
-                } else {
+            } else if (argsList.get(0).equals(START_TIME) && hasTaskComponentArray[Task.START_TIME_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, START_TIME)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-                break;
-            case END_TIME:
-                argsList.remove(0);
-                if (hasTaskComponentArray[Task.END_TIME_COMPONENT] == true || argsList.isEmpty()) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                taskComponentArray[Task.END_TIME] = argsList.remove(0);
-                if (TaskTime.isValidTime(taskComponentArray[Task.END_TIME])) {
-                    hasTaskComponentArray[Task.END_TIME_COMPONENT] = true;
-                } else {
+            } else if (argsList.get(0).equals(END_TIME) && hasTaskComponentArray[Task.END_TIME_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, END_TIME)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-                break;
-            case PRIORITY:
-                argsList.remove(0);
-                if (hasTaskComponentArray[Task.PRIORITY_COMPONENT] == true || argsList.isEmpty()) {
-                    return new IncorrectCommand(
-                            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-                }
-                taskComponentArray[Task.TASK_PRIORITY] = argsList.remove(0);
-                if (TaskPriority.isValidPriority(taskComponentArray[Task.TASK_PRIORITY])) {
-                    hasTaskComponentArray[Task.PRIORITY_COMPONENT] = true;
-                } else {
+            } else if (argsList.get(0).equals(PRIORITY) && hasTaskComponentArray[Task.PRIORITY_COMPONENT] == false
+                    && argsList.size() > 1) {
+                if (!canUpdate(argsList, PRIORITY)) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                             TaskPriority.MESSAGE_TASK_PRIORITY_CONSTRAINTS));
                 }
-                break;
-            default:
+            } else {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
             }
         }
@@ -374,6 +320,92 @@ public class Parser {
                     new TaskPriority(taskComponentArray[Task.TASK_PRIORITY]), hasTaskComponentArray);
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
+        }
+    }
+
+    private boolean canUpdate(ArrayList<String> argsList, String parameters) {
+        argsList.remove(0);
+        String newValue = argsList.remove(0);
+        if (parameters.equals(START_DATE)) {
+            if (canUpdateStartDate(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (parameters.equals(END_DATE)) {
+            if (canUpdateEndDate(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (parameters.equals(START_TIME)) {
+            if (canUpdateStartTime(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (parameters.equals(END_TIME)) {
+            if (canUpdateEndTime(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {// edit priority
+            if (canUpdatePriority(newValue)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    private boolean canUpdateStartDate(String newValue) {
+        taskComponentArray[Task.START_DATE] = newValue;
+        if (TaskDate.isValidDate(taskComponentArray[Task.START_DATE])) {
+            hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdateEndDate(String newValue) {
+        taskComponentArray[Task.END_DATE] = newValue;
+        if (TaskDate.isValidDate(taskComponentArray[Task.END_DATE])) {
+            hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdateStartTime(String newValue) {
+        taskComponentArray[Task.START_TIME] = newValue;
+        if (TaskTime.isValidTime(taskComponentArray[Task.START_TIME])) {
+            hasTaskComponentArray[Task.START_TIME_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdateEndTime(String newValue) {
+        taskComponentArray[Task.END_TIME] = newValue;
+        if (TaskTime.isValidTime(taskComponentArray[Task.END_TIME])) {
+            hasTaskComponentArray[Task.END_TIME_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean canUpdatePriority(String newValue) {
+        taskComponentArray[Task.TASK_PRIORITY] = newValue;
+        if (TaskPriority.isValidPriority(taskComponentArray[Task.TASK_PRIORITY])) {
+            hasTaskComponentArray[Task.PRIORITY_COMPONENT] = true;
+            return true;
+        } else {
+            return false;
         }
     }
 

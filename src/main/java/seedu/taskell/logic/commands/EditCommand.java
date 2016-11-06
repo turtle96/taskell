@@ -4,6 +4,8 @@ package seedu.taskell.logic.commands;
 
 import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.time.LocalDate;
+
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.commons.core.UnmodifiableObservableList;
 import seedu.taskell.commons.exceptions.IllegalValueException;
@@ -89,15 +91,18 @@ public class EditCommand extends Command {
         }
     }
 
-    private boolean isValidDate(ReadOnlyTask taskToEdit) {
+    private void adjustDate(ReadOnlyTask taskToEdit) {
+        TaskDate today = TaskDate.getTodayDate();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.isBefore(startDate)) {
-                return false;
-            } else {
-                return true;
+                endDate = today;
             }
-        } else {
-            return true;
+            if (endDate.isBefore(today)) {
+                endDate = today;
+            }
+            if (startDate.isBefore(today)) {
+                startDate = today;
+            }
         }
     }
 
@@ -153,10 +158,7 @@ public class EditCommand extends Command {
         if (!ableToAdjustTime(taskToEdit)) {
             return new CommandResult(MESSAGE_INVALID_COMMAND_FORMAT);
         }
-
-        if (!isValidDate(taskToEdit)) {
-            return new CommandResult(MESSAGE_DATE_CONSTRAINTS);
-        }
+        adjustDate(taskToEdit);
 
         Task newTask = new Task(description, taskToEdit.getTaskType(), startDate, endDate, startTime, endTime,
                 taskPriority, taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
