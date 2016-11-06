@@ -101,7 +101,7 @@ To add a recurring task <br>
 Format:
 `add` TASK <i>r/</i>RECURRING <br>
 Example: `add` Read newspaper <i>on</i> mon <i>r/</i>daily
-> Floating tasks are not allowed to have recurring status since there have no element of date or time
+> Floating tasks are not allowed to have recurring status since they have no element of date or time
 
 To add a task with date and time<br>
 Formats:
