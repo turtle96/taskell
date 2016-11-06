@@ -8,10 +8,6 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.core.LogsCenter;
 import seedu.taskell.commons.events.ui.DisplayListChangedEvent;
 import seedu.taskell.history.CommandHistory;
-import seedu.taskell.history.History;
-import seedu.taskell.history.HistoryManager;
-import seedu.taskell.model.Model;
-import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.taskell.model.task.UniqueTaskList.TaskNotFoundException;
 
