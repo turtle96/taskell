@@ -44,4 +44,17 @@ public class CollectionUtil {
         }
         return true;
     }
+    
+    //@@author A0139257X-reused
+    /**
+     * Returns a set with unique items only
+     */
+    public static Set<?> generateUniqueList(Collection<?> items) {
+        Set<Object> uniqueSet = new HashSet<>();
+        for (Object item : items) {
+            uniqueSet.add(item); // see Set documentation
+        }
+        return uniqueSet;
+    }
+    //@@author
 }
