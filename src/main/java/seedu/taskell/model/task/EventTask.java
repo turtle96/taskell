@@ -31,7 +31,6 @@ public class EventTask extends Task {
         
         TaskTime eventStartTime = setStartTime(eventStartDate);
         eventStartDate = adjustStartDate(eventStartDate, eventStartTime);
-        System.out.println(eventStartDate);
         
         TaskDate eventEndDate = setEndDate(eventStartDate, eventStartTime, eventEndTime);
         
@@ -116,7 +115,7 @@ public class EventTask extends Task {
         } else if (TaskDate.isValidDayOfWeek(userInputEndDate)) {
             eventEndDate = determineDayInWeekGivenName(eventStartDate, eventEndDate);
         } else if (TaskDate.isValidMonth(userInputEndDate)) {
-            eventEndDate = determineEndDateGivenMonth( eventStartDate, eventEndDate);
+            eventEndDate = determineEndDateGivenMonth(eventStartDate, eventEndDate);
         } else if (TaskDate.isValidDayAndMonth(userInputEndDate)) {
             eventEndDate = determineEndDateGivenMonth(eventStartDate, eventEndDate);
         } 
