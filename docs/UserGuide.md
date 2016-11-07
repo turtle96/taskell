@@ -276,9 +276,8 @@ Figure 9: `clear` prompts a confirmation pop-up window<br>
 You can view the command history available for undo on the right panel when undoing your previous commands.<br>
 
 Format: `history` or `hist` 
-
- <p align="center"><img src="images/screenshots/history_02.PNG" width="800"></br> <br>
- Diagram 4: Keying in `hist` will show a list of command history on the right panel
+<p align="center"><img src="images/screenshots/historyCmd.PNG" width="800"></br> <br>
+Figure 10: `hist` displays a list of command history on the right panel
 
 > Take Note! <br>
 > * Only commands that are available for undo will be shown here. 
