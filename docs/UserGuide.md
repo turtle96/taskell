@@ -307,8 +307,8 @@ Format: `calendar` or `cal` <br>
 
 You can refer the calendar on the right panel  
 when adding tasks and scheduling events. A fine red line is used to indicate the current time.
-<br> <p align="center"> <img src="images/screenshots/calendar_circle.png" width="800"> </br>
-Diagram 12: An example of how the current time marker looks like.<br>
+<br> <p align="center"> <img src="images/screenshots/calendarCmd.png" width="800"> </br>
+Figure 12: Example of how the current time marker looks like.<br>
 
 The calendar view reflects the tasks shown in the left panel. Each block is marked with the index corresponding to the task, meaning a block marked "4" would correspond to the fourth task.<br>
 By default, the calendar view will be shown on the right panel. As the `history` command also utilises the right panel to display the command history, you have to use the `calendar` command to toggle between both views.<br>
