@@ -103,7 +103,7 @@ Command `list-date 2-11-2016`<br>
 Expected: No tasks will be shown in the left panel 
 
 ### Done command
-Command: `list`
+Command: `list` <br>
 Command: `done 1` <br>
 Expected: First task "do CS2010 ps6" is marked done and disappears from list
 
