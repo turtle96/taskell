@@ -911,14 +911,14 @@ public class Parser {
     // @@author
 
     // @@author A0142073R
-
+    /**
+     * To check if a given string is an integer
+     */
     private static boolean isInt(String s) {
         try {
-            int i = Integer.parseInt(s);
+            int integer = Integer.parseInt(s);
             return true;
-        }
-
-        catch (NumberFormatException er) {
+        } catch (NumberFormatException er) {
             return false;
         }
     }
