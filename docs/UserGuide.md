@@ -205,7 +205,7 @@ Displays list of tasks with the same tags.<br>
 Example: `find-tag` homework essay cs2103<br>
 Displays a list of tasks having tagged as either 'homework', 'essay', or 'cs2103'.
  <br><p align="center"><img src="images/screenshots/find_cs2010_results.png" width="800"></br> <br>
-Figure 4: Keying in `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description
+Figure 4: `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. 'chicken egg' will match 'egg chicken'.
@@ -256,9 +256,8 @@ Displays a list of all the tasks due on the specified date.<br>
 Displays a list of completed tasks.<br>
 - `list-priority` PRIORITY<br>
 Displays a list of tasks with the specified priority.
-<br><p align="center"><img src="images/screenshots/list_date.PNG" width="800"></br><br>
-Diagram 2: Displays all the tasks to be done by today after typing list-date today.
-
+<br><p align="center"><img src="images/screenshots/listAllCmd.png" width="800"></br>
+Figure 8: `list-all` displays both completed and uncompleted tasks<br>
 <!-- @@author -->
    
 <!--- @@author A0142130A ---> 
