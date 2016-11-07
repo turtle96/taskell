@@ -19,7 +19,7 @@ Ready to begin life anew with a more efficient task manager? Read on to find out
 
 ## Quick Start
 This section guides you through the installation of Taskell. <br>
-Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
+Step 1: Ensure you have Java version `1.8.0_60` or later installed in your computer.<br>
 
   > Having any Java 8 version is not enough. <br>
     This application will not work with earlier versions of Java 8.
