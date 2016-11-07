@@ -220,7 +220,7 @@ public class UndoCommand extends Command {
     }
     
     /** appends "undo " to front of command input string and saves as an undo command
-     *  can execute redo
+     *  so that it can execute redo
      * */
     private void addUndoCommand(CommandHistory commandHistory) {
         if (commandHistory.isRedoTrue()) {

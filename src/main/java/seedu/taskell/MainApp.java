@@ -76,6 +76,8 @@ public class MainApp extends Application {
         
         Command.initHistory();
     }
+    
+    /** @@author A0142130A **/
 
     private void initSaveStorageLocationCommand() {
         SaveStorageLocationCommand.setConfig(config);
@@ -88,6 +90,8 @@ public class MainApp extends Application {
         ClearCommand.getInstance().setData(model);
         CalendarView.setData(model);
     }
+    
+    /** @@author **/
 
     private String getApplicationParameter(String parameterName){
         Map<String, String> applicationParameters = getParameters().getNamed();

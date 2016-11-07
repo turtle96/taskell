@@ -150,6 +150,7 @@ public class EditCommand extends Command {
         if (taskToEdit.getTaskType().equals(Task.FLOATING_TASK) && (hasComponentArray[Task.START_TIME_COMPONENT]
                 || hasComponentArray[Task.END_TIME_COMPONENT] || hasComponentArray[Task.START_DATE_COMPONENT]
                 || hasComponentArray[Task.END_DATE_COMPONENT])) {
+            history.deleteLatestCommand();
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 
@@ -157,6 +158,7 @@ public class EditCommand extends Command {
             return new CommandResult(MESSAGE_DATE_CONSTRAINTS);
         }
         if (!ableToAdjustTime(taskToEdit)) {
+            history.deleteLatestCommand();
             return new CommandResult(MESSAGE_TIME_CONSTRAINTS);
         }
 
