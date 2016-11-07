@@ -9,12 +9,23 @@
 
 ## Test cases
 ### Add command
+Command: `add meet friends by today` <br>
+Expected: Task card added to left panel on today's date, 9 November 2016
+
+Command: `add walk the dog on fri` <br>
+Expected: Task card added to left panel on friday, 11 November 2016
 
 ### Edit command
+Command:  <br>
+Expected:
 
 ### List command
+Command:  <br>
+Expected:
 
 ### Delete command
+Command:  <br>
+Expected:
 
 ### Find command
 Command: `find cs2010` <br>
