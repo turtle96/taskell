@@ -186,6 +186,7 @@ Entering "`edit` 3 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm e
 > Take Note! <br>
 > * You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.
 > * Order of the parameters is not important.
+> * Editing of overdue tasks will result in both the  date and time to be set to the default values if otherwise stated.
     
 <!--- @@author --->
 
