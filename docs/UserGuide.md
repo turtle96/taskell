@@ -36,7 +36,7 @@ Figure 1: A screenshot of the Graphical User Interface (GUI)<br>
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
    * `list` : Displays all tasks
-   * `add` buy MA1101R textbook today : Adds a task called buy MA1101R textbook to be done by today.
+   * `add` buy MA1101R textbook today : Adds a task called buy MA1101R textbook to be done by today
    * `delete` 3 : Deletes the third task shown in the current list
    * `exit` : Exits the application <br>
 Refer to the [Features](#features) section below for details of each command.<br>
@@ -59,11 +59,11 @@ This section shows the different commands that you can use in Taskell. Words tha
 > Default end time has been set to 11:59PM <br>
 > If the task is added today and no start time is provided, the default start time will be set to the current time.
 
-- PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 2, 3 indicates default, low, medium and high priority respectively. 
+- PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 2, 3 indicates default, low, medium and high priority respectively
 
 > In the GUI, level 1,2 and 3 tasks are marked as green, yellow and red respectively. Tasks with default priority level are not marked with any colors.
 
-- RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly.
+- RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly
 - TAG: Indicates the category in which a task belongs to
 
 Words that are in <i>italics</i> are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
