@@ -117,7 +117,7 @@ Example: `add` Watch Dr Strange <i>from</i> 7.30pm <i>to</i> 9.25pm
 To allow greater flexibility in the command format, Taskell supports a few natural variation such as <i>by</i>, <i>on</i> and <i>at</i>.
 <br>
 
-The <i>by</i> keyword indicates that the task is a deadline task. Any date or time preceded by this keyword will be stored as an end date and end time respectively.
+The <i>by</i> prefix indicates that the task is a deadline task. Any date or time preceded by this keyword will be stored as an end date and end time respectively.
 <br>
 Formats:
 - `add` TASK <i>by</i> DATE <br>
@@ -128,21 +128,21 @@ Example: `add` visit Sandy at her house by the seaside <i>by</i> 3.35pm
 Example: `add` Do lab homework <i>by</i> Friday <i>by</i> 7pm
 <br>
 
-The <i>on</i> keyword indicates that the task has to be done on the given date. Any date preceded by this keyword will be stored as a start date.
+The <i>on</i> prefix indicates that the task has to be done on the given date. Any date preceded by this keyword will be stored as a start date.
 <br>
 Format:
 `add` TASK <i>on</i> DATE<br>
 Example: `add` Go for meeting <i>on</i> mon <br>
 
 
-The <i>at</i> keyword indicates that the task has to be done at the given time. Any time preceded by this keyword will be stored as a start time.
+The <i>at</i> prefix indicates that the task has to be done at the given time. Any time preceded by this keyword will be stored as a start time.
 <br>
 Format:
 `add` TASK <i>at</i> TIME <br>
 Example: `add` Go for meeting <i>at</i> 3pm <br>
 
 
-Having understood the aforementioned behaviors of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> keyword, you can fuse them together to form more complex tasks.
+Having understood the aforementioned behaviors of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> prefixes, you can fuse them together to form more complex tasks.
 <br>
 Formats:
 - `add` TASK <i>on</i> DATE <i>at</i> TIME <br>
