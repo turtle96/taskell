@@ -166,11 +166,11 @@ Command: `save ` (to add external filepath here) <br>
 Expected: Taskell will relocate taskmanager.xml to the given filepath, the old xml file will be deleted
 
 ### Clear command
-Command: clear
+Command: clear <br>
 Expected: A popup window will appear. Can choose 'ok' or 'cancel'. If choose ok, all data will be wiped out. If chose cancel, there will be no changes made.
 <br>
 
-Command: clear additionalParameter
+Command: clear additionalParameter <br>
 Expected: <br>
 Invalid command format! <br>
 clear: Clears all tasks. <br>
