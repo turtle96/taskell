@@ -170,7 +170,7 @@ Expected: Right panel shows list of command history so far, for add/delete/edit/
 
 ### Undo command
 Command: `undo` <br>
-Expected: Undo most recent command executed, which is delete (to fill in command), and will add back the task
+Expected: Undo most recent command executed, which is delete 50, and will add back the task
 
 Command: `undo` <br>
 Expected: Redo the previous undo command, and delete the task again
