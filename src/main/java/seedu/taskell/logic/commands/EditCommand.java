@@ -87,19 +87,27 @@ public class EditCommand extends Command {
         }
     }
 
-    private void adjustDate(ReadOnlyTask taskToEdit) {
+    private boolean ableToAdjustDate(ReadOnlyTask taskToEdit) {
         TaskDate today = TaskDate.getTodayDate();
+        TaskTime currentTime = TaskTime.getTimeNow();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.isBefore(startDate)) {
                 endDate = startDate;
             }
             if (endDate.isBefore(today)) {
                 endDate = today;
+                try {
+                    endTime = new TaskTime(TaskTime.DEFAULT_END_TIME);
+                } catch (IllegalValueException e) {
+                    return false;
+                }
             }
             if (startDate.isBefore(today)) {
                 startDate = today;
+                startTime = currentTime;
             }
         }
+        return true;
     }
 
     private boolean ableToAdjustTime(ReadOnlyTask taskToEdit) {
@@ -145,7 +153,9 @@ public class EditCommand extends Command {
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 
-        adjustDate(taskToEdit);
+        if (!ableToAdjustDate(taskToEdit)) {
+            return new CommandResult(MESSAGE_DATE_CONSTRAINTS);
+        }
         if (!ableToAdjustTime(taskToEdit)) {
             return new CommandResult(MESSAGE_TIME_CONSTRAINTS);
         }
