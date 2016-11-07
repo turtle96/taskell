@@ -114,7 +114,7 @@ public class Parser {
             return prepareFindByTag(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return prepareList(arguments);
 
         case ListAllCommand.COMMAND_WORD:
             return new ListAllCommand();
@@ -908,6 +908,15 @@ public class Parser {
         }
 
         return new UndoneCommand(index.get());
+    }
+    
+    private Command prepareList(String arguments) {
+        if (arguments.isEmpty()) {
+            return new ListCommand();
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+
     }
     // @@author
 
