@@ -72,6 +72,7 @@ INDEX refers to the index number shown in the most recent listing.
 
 #### Viewing list of commands : `help`
 You can use the `help` command to view a summary of all the commands. <br>
+
 To open the help window<br>
  Format: `help`
  
@@ -173,9 +174,10 @@ If today is a Sunday, this task will be added as a valid task that starts from n
 <!--- @@author A0142073R --->
 
 #### Editing a task : `edit`
-You can use the `edit` command to edit any parts of a task<br>
-Formats: 
-- `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] 
+You can use the `edit` command to edit any parts of a task. <br>
+
+Format: 
+`edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] 
 <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
 Figure 3: Edits the third task on the list<br>
 
@@ -191,6 +193,7 @@ Entering "`edit` 3 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm e
 
 #### Finding tasks: `find`
 You can use the `find` command to view tasks with specific keywords.<br> 
+
 Formats: <br>
 - `find` KEYWORD [MORE_KEYWORDS]<br>
 Displays a list of tasks with description or tags matching all the keywords.<br>
@@ -218,6 +221,7 @@ Figure 4: `find` cs2010 displays list of tasks with 'cs2010' as one of the keywo
 
 #### Deleting a task : `delete`
 You can use the `delete` command to delete a task at a specified INDEX.<br>
+
 Format: `delete` INDEX <br>
 Example: `find` violin, then `delete` 1<br>
 Deletes the first task shown in the list after executing the `find` command.
@@ -226,6 +230,7 @@ Figure 5: `delete` 3 deletes the first task on the list<br>
 
 #### Marking a task as completed: `done`
 You can use the `done` command to mark an uncompleted task as completed.<br>
+
 Format: `done` INDEX<br>
 Example: `done` 1<br>
 Marks the first task as finished and moves it to the list of completed tasks.
@@ -234,6 +239,7 @@ Figure 6: Marks the third task as finished<br>
 
 #### Marking a task as incomplete: `undone`
 You can use the `undone` command to mark a completed task as uncompleted.<br>
+
 Format: `undone` INDEX<br>
 Example: `undone` 1<br>
 Marks the first task as incomplete and moves it to the lsit of uncompleted tasks.<br>
@@ -263,7 +269,8 @@ Figure 8: `list-all` displays both completed and uncompleted tasks<br>
 <!--- @@author A0142130A ---> 
 
 #### Clearing all entries : `clear`
-You can permanently clear **all** task data. <br>
+You can use the `clear` command to permanently clear **all** task data. <br>
+
 Format: `clear`  
 
 <p align="center"><img src="images/screenshots/clearCmd.png" width="800"></br>
@@ -288,6 +295,7 @@ If you wish to undo your most recent action, you can do so by using the `undo` c
 To undo previous commands, <kbd>Enter</kbd> `hist` to see a list of 
 previous commands that can be undone.<br>
 Then use the `undo` command together with the specified INDEX from the list of command history.
+
 Formats: <br>
 - `undo`<br> 
 Undo the most recent command executed.<br>
@@ -303,10 +311,10 @@ Figure 11: `undo` reverts the last item on the list of command history
 
 #### Showing calendar view : `calendar` or `cal`
 You can use the `calendar` command to view a calendar. <br>
+
 Format: `calendar` or `cal` <br>
 
-You can refer the calendar on the right panel  
-when adding tasks and scheduling events. A fine red line is used to indicate the current time.
+You can refer the calendar on the right panel when adding tasks and scheduling events. A fine red line is used to indicate the current time.
 <br> <p align="center"> <img src="images/screenshots/calendarCmd.png" width="800"> </br>
 Figure 12: Example of how the current time marker looks like.<br>
 
@@ -318,12 +326,14 @@ By default, the calendar view will be shown on the right panel. As the `history`
 
 
 #### Saving the information in Taskell : `save`
-You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
-Format: `save` FOLDERPATH<br>
+You can use the `save` command to specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br>
+
+Format: `save` FILE_PATH<br>
 Example: `save` C:\Users\Jim\Documents
 <br>
-To obtain the filepath, navigate to the required file in your File Explorer. Copy the path at the top of the
-screen and paste it into Taskell. Refer to the diagram below for an example of a filepath. <br>
+
+To obtain the file-path, navigate to the required file in your File Explorer. Copy the path at the top of the
+screen and paste it into Taskell. Refer to the diagram below for an example of a file-path. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
 Figure 13: Screenshot of File Explorer in Windows.  <br>
@@ -335,7 +345,7 @@ but 'project' file has not been created, Taskell will create the file for you.<b
 > Take Note! <br>
 > * If you only specify a folder name without directory, i.e. `save` project, Taskell will create a file named 'project' within Taskell's own directory. 
 >Whereas `save` C:/Users/Jim/Documents/project will open a file named 'project' within your desktop's Documents folder.
-> * Both Windows and Linux OS have restricted symbols not allowed for filenames. Please be aware of the symbols
+> * Both Windows and Linux OS have restricted symbols that are not allowed for folder names. Please be aware of the symbols
 shown in the table below.
     
 Windows |  Linux 
@@ -349,13 +359,17 @@ Windows |  Linux
   &#124; | 
        ? |
        * |
-
+Table 1: Restricted symbols in Windows and linux
 
 
 <!--- @@author ---> 
 
 #### Exiting the program : `exit`
+You can use the `exit` command to exit Taskell.
+ 
 Format: `exit`  
+
+Alternatively, you can hold down <kbd>Alt</kbd> + <kbd>F4</kbd>. <br>
 
 ## FAQ
 
@@ -368,8 +382,6 @@ Format: `exit`
 **A**: No, Taskell automatically saves your data every time you enter new tasks. Use `save` only when you want to
 transfer your data to a new location on your computer. <br>
 
-**Q**: Do I have to use `exit` command whenever I want to exit the application? <br>
-**A**: There is not a need to, as Taskell can be closed by the top right X button with the mouse as well or simply hold down <kbd>Alt</kbd> + <kbd>F4</kbd>.  <br>
 
 <!--- @@author --->
 
@@ -393,16 +405,19 @@ Calendar View | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
 Edit | `edit` INDEX <br> `desc:` NEW_DESCRIPTION <br> `sd:` NEW_START_DATE <br> `st:` NEW_START_TIME <br> `ed:` NEW_END_DATE <br> `et:` NEW_END_TIME <br> `p:` NEW_PRIORITY
+Exit | `exit` <br> <kbd>Alt</kbd> + <kbd>F4</kbd>
 Find | `find` KEYWORD [MORE_KEYWORDS]
-Find by tag | `find-tag` KEYWORD [MORE_KEYWORDS]
+Find by tag | `find-tag` TAG [MORE_TAGS]
 Help | `help`
 History | `history` or `hist`
 List all tasks | `list-all`
+List by priority | `list-priority` PRIORITY
 List by specified date | `list-date` DATE
 List completed tasks | `list-done`
 List uncompleted tasks| `list`
 Mark task as finished | `done` INDEX
 Mark task as incomplete | `undone` INDEX
+Save | `save` FILE_PATH
 Undo | `undo` <br> `undo` INDEX
 
 <!-- @@author -->
@@ -414,7 +429,7 @@ Supported Date Format |   Example
 -------- | :-------- 
 DD-MM-YYYY |1-1-2016 <br> 1/2/2016<br> 1-mar-2016 <br> 1-April-2016 <br> 1.May.2016 <br> 1.Jun.2016
 MM-YYYY  | jul-2016 <br> july-2016
-MM  | mar <br> sept <br> December
+MM  | jan <br> sept <br> December
 day  | today <br> tdy <br> tomorrow <br> tmr <br> thursday <br> thurs <br> thu
 
 ## Appendix B
@@ -422,7 +437,7 @@ day  | today <br> tdy <br> tomorrow <br> tmr <br> thursday <br> thurs <br> thu
 Supported Time Format |   Example  
 -------- | :-------- 
 In 12-hour format | 12am <br> 5:30am<br> 1pm <br> 10-35pm <br> 11.45pm
-In words | now <br> midnight <br> afternoon <br> noon
+In words | midnight <br> afternoon <br> noon
 
 <!-- @@author -->
 
