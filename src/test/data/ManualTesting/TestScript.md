@@ -18,15 +18,21 @@ Command: `add walk the dog on fri` <br>
 Expected: Task card with description "walk the dog" added to left panel on friday's date, 11 November 2016
 
 Command: `add meet cs2013 tutor for consultation #study #project #meeting on 5-11-2016`<br>
-Expected: Should see invalid command result "Start date and time must be before end date and time <br>
+Expected: Should see invalid command result: "Start date and time must be before end date and time <br>
 All date and time should not before current time"
 
 Command: `add meet cs2013 tutor for consultation #study #project #meeting on 9-11-2016 from 5pm to 6pm`<br>
 Expected: Task card with description "meet cs2013 tutor for consultation " added to left panel on today's date, 9 November 2016, from 5pm to 6pm
 
+Command: `add `<br>
+Expected: Should see invalid command result: a message explaining how to use add command should be shown, along with parameters and examples
+
 ### Edit command
 Command:  <br>
 Expected:
+
+Command: `edit `<br>
+Expected: Should see invalid command result: a message explaining how to use edit command should be shown, along with parameters and examples
 
 ### List command
 Command:  <br>
@@ -35,6 +41,9 @@ Expected:
 ### Delete command
 Command:  <br>
 Expected:
+
+Command: `delete `<br>
+Expected: Should see invalid command result: a message explaining how to use delete command should be shown, along with parameters and examples
 
 ### Find command
 Command: `find cs2010` <br>
@@ -48,6 +57,9 @@ Expected: All tasks with "cs2106" in tags (includes substrings)
 
 Command: `find-tag exam revision`<br>
 Expected: All tasks with either "exam" or "revision" in tags (includes substrings)
+
+Command: `find `<br>
+Expected: Should see invalid command result: a message explaining how to use find command should be shown, along with parameters
 
 ### History command
 Command: `hist`<br>
