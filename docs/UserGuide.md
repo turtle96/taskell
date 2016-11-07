@@ -222,7 +222,7 @@ Format: `delete` INDEX <br>
 Example: `find` violin, then `delete` 1<br>
 Deletes the first task shown in the list after executing the `find` command.
 <br><p align="center"><img src="images/screenshots/deleteCmd.png" width="800"></br>
-Figure 5: Deletes the first task on the list<br>
+Figure 5: `delete` 3 deletes the first task on the list<br>
 
 #### Marking a task as completed: `done`
 You can use the `done` command to mark an uncompleted task as completed.<br>
@@ -266,8 +266,8 @@ Figure 8: `list-all` displays both completed and uncompleted tasks<br>
 You can permanently clear **all** task data. <br>
 Format: `clear`  
 
-<p align="center"><img src="images/screenshots/clearCmd.png" width="800"></br><br>
-Figure 9: `clear` will prompt a confirmation pop-up window<br>
+<p align="center"><img src="images/screenshots/clearCmd.png" width="800"></br>
+Figure 9: `clear` prompts a confirmation pop-up window<br>
 
 > Take Note! <br>
 > * `clear` command is irreversible!
