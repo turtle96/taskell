@@ -7,6 +7,8 @@
 5. Save config.json
 6. Launch Taskell jar
 
+4a. If Taskell is launched via Eclipse's run Java Application, use "src/test/data/ManualTesting/SampleData.xml" instead.
+
 ## Test cases
 ### Add command
 Command: `add meet friends by today` <br>
