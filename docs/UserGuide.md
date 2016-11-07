@@ -18,7 +18,7 @@ Ready to begin life anew with a more efficient task manager? Read on to find out
 <!--- @@author --> 
 
 ## Quick Start
-
+This section guides you through the installation of Taskell. <br>
 Step 1: Ensure you have Java version `1.8.0_60` or later installed in your Computer.<br>
 
   > Having any Java 8 version is not enough. <br>
@@ -29,7 +29,7 @@ Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS210
 	
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds.
- <br><p align="center"><img src="images/screenshots/screen_calendar.PNG" width="800"><br>
+ <br><p align="center"><img src="images/screenshots/GUI.PNG" width="800"><br>
 Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
 </p>
 
