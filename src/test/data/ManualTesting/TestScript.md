@@ -38,6 +38,20 @@ Expected: Should see invalid command result: a message explaining how to use edi
 Command:  <br>
 Expected:
 
+### Done command
+Command: `done 1` <br>
+Expected: First task "do CS2010 ps6" is marked done and disappears from list
+
+Command: `list-done` <br>
+Expected: Task "do CS2010 ps6" should be visible in list
+
+### Undone command
+Command: `undone 6` <br>
+Expected: Task "do CS2010 ps6" is marked undone and disappears from list
+
+Command: `list` <br>
+Expected: Task "do CS2010 ps6" should be visible in list again (at index 1)
+
 ### Delete command
 Command:  <br>
 Expected:
@@ -63,11 +77,11 @@ Expected: Should see invalid command result: a message explaining how to use fin
 
 ### History command
 Command: `hist`<br>
-Expected: Right panel shows list of command history so far, for add/delete/edit/done/undone commands
+Expected: Right panel shows list of all commands executed so far, for add/delete/edit/done/undone commands
 
 ### Undo command
 Command: `undo` <br>
-Expected: Undo most recent command executed, which is delete (to fill in command), and will add back the task
+Expected: Undo most recent command executed, which is delete, and will add back the task
 
 Command: `undo` <br>
 Expected: Redo the previous undo command, and delete the task again
@@ -86,7 +100,7 @@ Command: `save ****` <br>
 Expected: Taskell will reject as file name given has invalid symbol
 
 Command: `save A:` <br>
-Expected: Taskell will reject as the directory is invalid
+Expected: Taskell will reject as the given directory is invalid
 
 Command: `save newDataFile` <br>
 Expected: Taskell will create folder called "newDataFile" in folder of Taskell jar and relocate SampleData.xml to taskmanager.xml in that new folder, the old xml file will be deleted (due to the way Taskell is coded, the data file will be renamed to taskmanager.xml whenever `save` is executed)
