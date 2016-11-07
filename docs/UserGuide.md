@@ -30,7 +30,7 @@ Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS210
 Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds.
  <br><p align="center"><img src="images/screenshots/GUI.PNG" width="800"><br>
-Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
+Figure 1: A screenshot of the Graphical User Interface (GUI)<br>
 </p>
 
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
@@ -174,8 +174,8 @@ If today is a Sunday, this task will be added as a valid task that starts from n
 You can use the `edit` command to edit any parts of a task<br>
 Formats: 
 - `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br>
- <br><p align="center"><img src="images/editCmd.png" width="800"></br>
-Diagram 9: Edits the 1st task on the list.<br>
+ <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
+Figure 2: Edits the first task on the list.<br>
 
 Entering "`edit` 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
 
