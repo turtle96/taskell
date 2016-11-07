@@ -102,7 +102,7 @@ Format:
 `add` TASK <i>r/</i>RECURRING <br>
 Example: `add` Read newspaper <i>on</i> mon <i>r/</i>daily
 > Take Note! <br>
-> Floating tasks are not allowed to have recurring status since they do not have any element of date or time
+> Floating tasks are not allowed to have recurring status since they do not have any element of date or time.
 
 To add a task with date and time<br>
 Formats:
@@ -153,10 +153,12 @@ Example:`add` Go out with friends <i>from</i> 9am
 Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
 - `add` TASK <i>from</i> DATE <i>to</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>#</i>TAG] [<i>p/</i>PRIORITY]  [<i>r/</i>RECURRING] <br>
 Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> may <i>to</i> aug <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly
+<br><p align="center"><img src="images/screenshots/addCmd.png" width="800"></br>
+Figure 2: Adds a new task to Taskell<br>
 
 > Take note! <br>
-> A task can only contain up to a maximum of 1 start time, 1 end time, 1 start date and 1 end date. Any additional parameter will be treated as part of the description <br>
-> Any date or time not preceded by 'by', 'on', 'at', 'from' or 'to' will also be treated as part of the description
+> A task can only contain up to a maximum of 1 start time, 1 end time, 1 start date and 1 end date. Any additional parameter will be treated as part of the description. <br>
+> Any date or time not preceded by 'by', 'on', 'at', 'from' or 'to' will also be treated as part of the description.
 
 Moreover, Taskell is able to automatically make adjustments to the date and time so that the task entered remains relevant. <br> 
 Examples: 
@@ -175,7 +177,7 @@ You can use the `edit` command to edit any parts of a task<br>
 Formats: 
 - `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br>
  <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
-Figure 2: Edits the third task on the list.<br>
+Figure 3: Edits the third task on the list<br>
 
 Entering "`edit` 3 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
 
@@ -203,7 +205,7 @@ Displays list of tasks with the same tags.<br>
 Example: `find-tag` homework essay cs2103<br>
 Displays a list of tasks having tagged as either 'homework', 'essay', or 'cs2103'.
  <br><p align="center"><img src="images/screenshots/find_cs2010_results.png" width="800"></br> <br>
-Figure 3: Keying in `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description.
+Figure 4: Keying in `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. 'chicken egg' will match 'egg chicken'.
