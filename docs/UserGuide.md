@@ -202,8 +202,8 @@ Displays a list of all the tasks with description or tags matching 'banana', 'mi
 Displays list of tasks with the same tags.<br>
 Example: `find-tag` homework essay cs2103<br>
 Displays a list of tasks having tagged as either 'homework', 'essay', or 'cs2103'.
- <br><p align="center"><img src="images/screenshots/find_cs2010_results.PNG" width="800"></br> <br>
-Diagram 3: Keying in `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description.
+ <br><p align="center"><img src="images/screenshots/find_cs2010_results.png" width="800"></br> <br>
+Figure 3: Keying in `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description.
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. 'chicken egg' will match 'egg chicken'.
