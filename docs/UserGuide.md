@@ -27,9 +27,9 @@ Step 1: Ensure you have Java version `1.8.0_60` or later installed in your compu
 Step 2: Download the latest `Taskell.jar` from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br>
 	<br> &nbsp; &nbsp; &nbsp; &nbsp; <img src="images/Icon.png" width="100"></br>
 	
-Step 3: Copy the file to the folder you want to use as the home folder for your Taskell.<br>
+Step 3: Copy the file to the folder you want to use as the home folder for Taskell.<br>
 Step 4: Double-click the file to start the application. The GUI should appear in a few seconds.
- <br><p align="center"><a href="https://github.com/CS2103AUG2016-W15-C3/main/releases"><img src="images/screenshots/GUI.png" width="800"></a><br>
+ <br><p align="center"><img src="images/screenshots/GUI.png" width="800"><br>
 Figure 1: A screenshot of the Graphical User Interface (GUI)<br>
 </p>
 
