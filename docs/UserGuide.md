@@ -266,8 +266,8 @@ Figure 8: `list-all` displays both completed and uncompleted tasks<br>
 You can permanently clear **all** task data. <br>
 Format: `clear`  
 
-<p align="center"><img src="images/screenshots/clear.PNG" width="800"></br><br>
-Diagram 12: Typing `clear` will prompt a confirm pop-up window <br>
+<p align="center"><img src="images/screenshots/clearCmd.png" width="800"></br><br>
+Figure 9: `clear` will prompt a confirmation pop-up window<br>
 
 > Take Note! <br>
 > * `clear` command is irreversible!
