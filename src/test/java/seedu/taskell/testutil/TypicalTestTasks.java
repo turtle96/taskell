@@ -20,14 +20,14 @@ public class TypicalTestTasks {
                     .withEndDate("1-12-2100").withTags("friends").withRecurringType(RecurringType.NO_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE).build();
             borrowBooks = new TaskBuilder().withDescription("Borrow books").withTaskType(Task.EVENT_TASK)
                     .withTaskPriority("1").withStartTime("12:30AM").withEndTime("12:45AM").withStartDate("1-1-2100")
-                    .withEndDate("1-12-2100").withTags("owesMoney", "friends").withRecurringType(RecurringType.NO_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE)
+                    .withEndDate("1-12-2100").withTags("owesMoney", "friends").withRecurringType(RecurringType.DAILY_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE)
                     .build();
             collectParcel = new TaskBuilder().withDescription("Collect parcel").withTaskType(Task.EVENT_TASK)
                     .withStartDate("1-1-2100").withEndDate("1-12-2100").withStartTime("12:30AM").withEndTime("12:45AM")
-                    .withTaskPriority("1").withTags("owesMoney").withRecurringType(RecurringType.NO_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE).build();
+                    .withTaskPriority("1").withTags("owesMoney").withRecurringType(RecurringType.WEEKLY_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE).build();
             discardBooks = new TaskBuilder().withDescription("Discard books").withTaskType(Task.EVENT_TASK)
                     .withStartDate("1-1-2100").withEndDate("1-12-2100").withStartTime("12:30AM").withEndTime("12:45AM")
-                    .withTaskPriority("1").withRecurringType(RecurringType.NO_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE).build();
+                    .withTaskPriority("1").withRecurringType(RecurringType.MONTHLY_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE).build();
             editPowerpoint = new TaskBuilder().withDescription("Edit powerpoint").withTaskType(Task.EVENT_TASK)
                     .withStartDate("1-1-2100").withEndDate("1-12-2100").withStartTime("12:30AM").withEndTime("12:45AM")
                     .withTaskPriority("1").withRecurringType(RecurringType.NO_RECURRING).withTaskComplete(TaskStatus.INCOMPLETE).build();
