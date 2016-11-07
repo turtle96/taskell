@@ -15,3 +15,6 @@ classes/
 /data/
 /bin/
 src/test/data/SaveLocationCommandTest/newStorageLocation/taskmanager.xml
+docs/.AboutUs.md.html
+docs/.DeveloperGuide.md.html
+docs/.UserGuide.md.html
