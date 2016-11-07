@@ -102,6 +102,21 @@ Expected: List the tasks which start at 11-11-2016
 Command `list-date 2-11-2016`<br>
 Expected: No tasks will be shown in the left panel 
 
+### Done command
+Command: `list`
+Command: `done 1` <br>
+Expected: First task "do CS2010 ps6" is marked done and disappears from list
+
+Command: `list-done` <br>
+Expected: Task "do CS2010 ps6" should be visible in list
+
+### Undone command
+Command: `undone 6` <br>
+Expected: Task "do CS2010 ps6" is marked undone and disappears from list
+
+Command: `list` <br>
+Expected: Task "do CS2010 ps6" should be visible in list again (at index 1)
+
 ### Delete command
 Command: `delete `<br>
 Expected: Should see invalid command result: a message explaining how to use delete command should be shown, along with parameters and examples
@@ -126,16 +141,28 @@ Expected: The task index provided is invalid
 
 ### Find command
 Command: `find cs2010` <br>
-Expected: All tasks with "cs2010" in either description or tags (includes substrings)
+Expected: All tasks with "cs2010" in either description or tags
 
-Command: `find cs2010 assign` <br>
-Expected: All tasks with "cs2010" and "assign" in either description or tags (includes substrings)
+Command: `find cs2010 assignment` <br>
+Expected: All tasks with "cs2010" and "assign" in either description or tags
 
 Command: `find-tag cs2106`<br>
-Expected: All tasks with "cs2106" in tags (includes substrings)
+Expected: All tasks with "cs2106" in tags
+
+Command: `find-tag movie`<br>
+Expected: All tasks with "movie" in tags
 
 Command: `find-tag exam revision`<br>
-Expected: All tasks with either "exam" or "revision" in tags (includes substrings)
+Expected: All tasks with either "exam" or "revision" in tags
+
+Command: `find assign`<br>
+Expected: All tasks with "assign" in either description or tags, including substrings (means "assignment" which has "assign" is included as well)
+
+Command: `find-tag cs`<br>
+Expected: All tasks with "cs" in tags, including substrings (means "cs2010", "cs2106", which has "cs" is included as well)
+
+Command: `find `<br>
+Expected: Should see invalid command result: a message explaining how to use find command should be shown, along with parameters
 
 ### History command
 Command: `hist`<br>
@@ -152,6 +179,11 @@ Command: `hist`<br>
 Command: `undo 3` <br>
 Expected: Undo the third command listed in history
 
+### Calendar command
+Command: `hist` <br>
+Command: `cal` <br>
+Expected: Toggle right panel view back to calendar view
+
 ### Save command
 Command: `save ****` <br>
 Expected: Taskell will reject as file name given has invalid symbol
@@ -166,11 +198,11 @@ Command: `save ` (to add external filepath here) <br>
 Expected: Taskell will relocate taskmanager.xml to the given filepath, the old xml file will be deleted
 
 ### Clear command
-Command: clear <br>
+Command: `clear` <br>
 Expected: A popup window will appear. Can choose 'ok' or 'cancel'. If choose ok, all data will be wiped out. If chose cancel, there will be no changes made.
 <br>
 
-Command: clear additionalParameter <br>
+Command: `clear` additionalParameter <br>
 Expected: <br>
 Invalid command format! <br>
 clear: Clears all tasks. <br>
