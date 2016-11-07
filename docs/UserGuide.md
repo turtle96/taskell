@@ -326,7 +326,7 @@ To obtain the filepath, navigate to the required file in your File Explorer. Cop
 screen and paste it into Taskell. Refer to the diagram below for an example of a filepath. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
-Diagram 11: Screenshot of File Explorer in Windows.  <br>
+Figure 13: Screenshot of File Explorer in Windows.  <br>
 
 If the specified directory is valid but the file is missing, for example, if you entered `save` C:\Users\Jim\Documents\Project,  and 'C:\Users\Jim\Documents\Project' is valid
 but 'project' file has not been created, Taskell will create the file for you.<br>
