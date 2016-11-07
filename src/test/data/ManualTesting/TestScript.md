@@ -18,7 +18,7 @@ Expected:
 
 Command `edit 2 st: 3pm`<br>
 Expected:
-<br>Original Task: internship at cousin's company StartDate: 3-1-2016 EndDate: 8-4-2016 StartTime: 8:00AM EndTime: 5:20PM TaskPriority: 0 RecurringType: neverRecur TaskStatus: finished Tags:  
+<br>Original Task: internship at cousin's company StartDate: 3-1-2016 EndDate: 8-4-2016 StartTime: 8:00AM EndTime: 5:20PM TaskPriority: 0 RecurringType: neverRecur TaskStatus: finished Tags:  <br>
 Updated Task: internship at cousin's company StartDate: 3-1-2016 EndDate: 8-4-2016 StartTime: 3:00PM EndTime: 5:20PM TaskPriority: 0 RecurringType: neverRecur TaskStatus: finished Tags: 
 
 Command `edit 4 ed: 19-05-2016`<br>
@@ -38,7 +38,7 @@ Expected:
 
 Command `edit 10 p: 3`<br>
 Expected:
-<br>Original Task: buy new earphones StartDate: 10-11-2016 EndDate: 10-11-2016 StartTime: 12:00AM EndTime: 11:59PM TaskPriority: 0 RecurringType: neverRecur TaskStatus: incomplete Tags:  
+<br>Original Task: buy new earphones StartDate: 10-11-2016 EndDate: 10-11-2016 StartTime: 12:00AM EndTime: 11:59PM TaskPriority: 0 RecurringType: neverRecur TaskStatus: incomplete Tags:  <br>
 Updated Task: buy new earphones StartDate: 10-11-2016 EndDate: 10-11-2016 StartTime: 12:00AM EndTime: 11:59PM TaskPriority: 3 RecurringType: neverRecur TaskStatus: incomplete Tags: 
 
 Command `edit 20 desc: MA1101R exam sd: 23-11-2016 ed: 23-11-2016 p: 3`<br>
