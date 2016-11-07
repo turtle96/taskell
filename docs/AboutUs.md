@@ -7,7 +7,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <!-- @@author A0139257X -->
 
 #### [Marcus Ng Wen Jian](https://github.com/marcusngwj) <br>
-<img src="images/Marcus.png" width="150"><br>
+<img src="images/avatar/Marcus.png" width="150"><br>
 
 Role: Team Leader
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#logic-component)
@@ -28,7 +28,7 @@ Role: Team Leader
 <!-- @@author A0142130A -->
 
 #### [Jazlyn Ang Chue Ching](https://github.com/turtle96)
-<img src="images/Jazlyn.png" width="150"><br>
+<img src="images/avatar/Jazlyn.png" width="150"><br>
 
 Role: Developer 
 * Components in charge of: [Storage](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#storage-component), 
@@ -50,7 +50,7 @@ Role: Developer
 <!-- @@author A0142073R -->
 
 #### [Madasamy Ravi Nadar Mamtha](https://github.com/Mamtha3005) 
-<img src="images/Mamtha.png" width="150"><br>
+<img src="images/avatar/Mamtha.png" width="150"><br>
 
 Role: Developer
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#logic-component)
@@ -74,7 +74,7 @@ Role: Developer
 <!-- @@author A0148004R -->
 
 #### [Zuo ZhuoLin](https://github.com/ZuoZhuolin)
-<img src="images/ZhuoLin.png" width="150"><br>
+<img src="images/avatar/ZhuoLin.png" width="150"><br>
 Role: Developer
 * Components in charge of: [Model](https://github.com/CS2103AUG2016-W15-C3/main/blob/master/docs/DeveloperGuide.md#model-component)
 * Aspects/tools in charge of: Testing, Scheduling
@@ -97,7 +97,7 @@ Role: Developer
 
 ## Project Mentor
 #### [Akshay Narayan](https://github.com/okkhoy)
-<img src="images/AkshayNarayan.jpg" width="150"><br>
+<img src="images/avatar/AkshayNarayan.jpg" width="150"><br>
 
 -----
 
