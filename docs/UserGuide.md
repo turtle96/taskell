@@ -35,10 +35,10 @@ Diagram 1: A screenshot of the Graphical User Interface (GUI)<br>
 
 Step 5:	Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br>
 Step 6: Some example commands you can try:<br>
-   * `list` : displays all tasks
-   * `add` buy MA1101R textbook today : adds a task called buy MA1101R textbook to be done by today.
-   * `delete` 3 : deletes the third task shown in the current list
-   * `exit` : exits the application <br>
+   * `list` : Displays all tasks
+   * `add` buy MA1101R textbook today : Adds a task called buy MA1101R textbook to be done by today.
+   * `delete` 3 : Deletes the third task shown in the current list
+   * `exit` : Exits the application <br>
 Refer to the [Features](#features) section below for details of each command.<br>
 
 <!--- @@author A0139257X --->
@@ -66,7 +66,7 @@ This section shows the different commands that you can use in Taskell. Words tha
 - RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly.
 - TAG: Indicates the category in which a task belongs to
 
-Words that are in italics are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
+Words that are in <i>italics</i> are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br>
 INDEX refers to the index number shown in the most recent listing.
 <!--- @@author --->
 
@@ -128,8 +128,6 @@ Example: `add` Do lab homework <i>by</i> Friday <i>by</i> 7pm
 
 The <i>on</i> keyword indicates that the task has to be done on the given date. Any date preceded by this keyword will be stored as a start date.
 <br>
-
-
 Format:
 `add` TASK <i>on</i> DATE<br>
 Example: `add` Go for meeting <i>on</i> mon <br>
@@ -137,7 +135,6 @@ Example: `add` Go for meeting <i>on</i> mon <br>
 
 The <i>at</i> keyword indicates that the task has to be done at the given time. Any time preceded by this keyword will be stored as a start time.
 <br>
-
 Format:
 `add` TASK <i>at</i> TIME <br>
 Example: `add` Go for meeting <i>at</i> 3pm <br>
@@ -156,6 +153,10 @@ Example:`add` Go out with friends <i>from</i> 9am
 Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
 - `add` TASK <i>from</i> DATE <i>to</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>#</i>TAG] [<i>p/</i>PRIORITY]  [<i>r/</i>RECURRING] <br>
 Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> may <i>to</i> aug <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly
+
+> Take note! <br>
+> A task can only contain up to a maximum of 1 start time, 1 end time, 1 start date and 1 end date. Any additional parameter will be treated as part of the description <br>
+> Any date or time not preceded by 'by', 'on', 'at', 'from' or 'to' will also be treated as part of the description
 
 Moreover, Taskell is able to automatically make adjustments to the date and time so that the task entered remains relevant. <br> 
 Examples: 
