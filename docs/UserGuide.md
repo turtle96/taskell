@@ -176,7 +176,7 @@ If today is a Sunday, this task will be added as a valid task that starts from n
 You can use the `edit` command to edit any parts of a task<br>
 Formats: 
 - `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br>
- <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
+<br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
 Figure 3: Edits the third task on the list<br>
 
 Entering "`edit` 3 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
@@ -221,6 +221,8 @@ You can use the `delete` command to delete a task at a specified INDEX.<br>
 Format: `delete` INDEX <br>
 Example: `find` violin, then `delete` 1<br>
 Deletes the first task shown in the list after executing the `find` command.
+<br><p align="center"><img src="images/screenshots/deleteCmd.png" width="800"></br>
+Figure 5: Deletes the first task on the list<br>
 
 #### Marking a task as completed: `done`
 You can use the `done` command to mark an uncompleted task as completed.<br>
