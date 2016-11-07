@@ -112,10 +112,10 @@ public class EditCommand extends Command {
                     return false;
                 }
                 return true;
-            } else if (endDate.equals(startDate) && endTime.isBefore(currentTime)) {
+            } else if (endDate.equals(startDate) && endDate.equals(TaskDate.getTodayDate()) && endTime.isBefore(currentTime)) {
                 endTime = currentTime;
                 return true;
-            } else if (endDate.equals(startDate) && startTime.isBefore(currentTime)) {
+            } else if (endDate.equals(startDate) && endDate.equals(TaskDate.getTodayDate()) && startTime.isBefore(currentTime)) {
                 startTime = currentTime;
                 return true;
             } else {
