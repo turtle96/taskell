@@ -152,7 +152,7 @@ Example:`add` Go out with friends <i>from</i> 9am
 - `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <br>
 Example: `add` Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm
 - `add` TASK <i>from</i> DATE <i>to</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>#</i>TAG] [<i>p/</i>PRIORITY]  [<i>r/</i>RECURRING] <br>
-Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> may <i>to</i> aug <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly
+Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> 7-may <i>to</i> 2-jun <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly
 <br><p align="center"><img src="images/screenshots/addCmd.png" width="800"></br>
 Figure 2: Adds a new task to Taskell<br>
 
