@@ -3,7 +3,7 @@
 ``` java
     public TaskDate getNextMonth() throws IllegalValueException {
         try {
-            LocalDate localDate = LocalDate.of(Integer.valueOf(getYear()), Integer.valueOf(getMonth()), Integer.valueOf(getDay()));
+            LocalDate localDate = this.getLocalDate();
             LocalDate nextMonth = localDate.plusMonths(1);
             return new TaskDate(nextMonth.format(standardFormat));
         } catch (IllegalValueException e) {
