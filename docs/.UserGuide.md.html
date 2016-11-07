@@ -1,0 +1,1022 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>C:\Users\Marcus\Documents\00.NUS\01. Yr2_Sem1\CS2103T\Project\docs\.UserGuide.md.html</title>
+
+
+<style type="text/css">
+body {
+	color: #333;
+	font: 13px/1.4 "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	background: transparent;
+	color: #4183c4;
+	text-decoration: none;
+}
+
+a:active,
+a:hover {
+	outline: 0 none;
+	text-decoration: underline;
+}
+
+abbr[title] {
+	border-bottom: 1px dotted;
+}
+
+b,
+strong {
+	font-weight: bold;
+}
+
+dfn {
+	font-style: italic;
+}
+h1 {
+	font-size: 2em;
+	margin: 0.67em 0;
+}
+mark {
+	background: #ff0;
+	color: #000;
+}
+small {
+	font-size: 80%;
+}
+sub, sup {
+	font-size: 75%;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+sup {
+	top: -0.5em;
+}
+sub {
+	bottom: -0.25em;
+}
+img {
+	border: 0 none;
+}
+svg:not(:root) {
+	overflow: hidden;
+}
+figure {
+	margin: 1em 40px;
+}
+hr {
+	box-sizing: content-box;
+	height: 0;
+}
+
+code,
+kbd,
+pre,
+samp {
+	font-family: monospace,monospace;
+	font-size: 1em;
+}
+
+pre {
+	overflow: auto;
+	font: 12px Consolas,"Liberation Mono",Menlo,Courier,monospace;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+.markdown-body {
+	padding: 30px;
+	font-size: 16px;
+	line-height: 1.6;
+	word-wrap: break-word;
+}
+
+.markdown-body>*:first-child {
+	margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+	margin-bottom: 0 !important;
+}
+
+.markdown-body .absent {
+	color: #c00;
+}
+
+.markdown-body .anchor {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	display: block;
+	padding-right: 6px;
+	padding-left: 30px;
+	margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+	outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+	position: relative;
+	margin-top: 1em;
+	margin-bottom: 16px;
+	font-weight: bold;
+	line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+	display: none;
+	color: #000;
+	vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+	padding-left: 8px;
+	margin-left: -30px;
+	line-height: 1;
+	text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+	display: inline-block;
+}
+
+.markdown-body h1 tt,
+.markdown-body h1 code,
+.markdown-body h2 tt,
+.markdown-body h2 code,
+.markdown-body h3 tt,
+.markdown-body h3 code,
+.markdown-body h4 tt,
+.markdown-body h4 code,
+.markdown-body h5 tt,
+.markdown-body h5 code,
+.markdown-body h6 tt,
+.markdown-body h6 code {
+	font-size: inherit;
+}
+
+.markdown-body h1 {
+	padding-bottom: 0.3em;
+	font-size: 2.25em;
+	line-height: 1.2;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+	padding-bottom: 0.3em;
+	font-size: 1.75em;
+	line-height: 1.225;
+	border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+	font-size: 1.5em;
+	line-height: 1.43;
+}
+
+.markdown-body h4 {
+	font-size: 1.25em;
+}
+
+.markdown-body h5 {
+	font-size: 1em;
+}
+
+.markdown-body h6 {
+	font-size: 1em;
+	color: #777;
+}
+
+.markdown-body p,.markdown-body blockquote,
+.markdown-body ul,.markdown-body ol,
+.markdown-body dl,.markdown-body table,
+.markdown-body pre {
+	margin-top: 0;
+	margin-bottom: 16px;
+}
+
+.markdown-body hr {
+	height: 4px;
+	padding: 0;
+	margin: 16px 0;
+	background-color: #e7e7e7;
+	border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+	padding-left: 2em;
+}
+
+.markdown-body ul.no-list,
+.markdown-body ol.no-list {
+	padding: 0;
+	list-style-type: none;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.markdown-body li>p {
+	margin-top: 16px;
+}
+
+.markdown-body dl {
+	padding: 0;
+}
+
+.markdown-body dl dt {
+	padding: 0;
+	margin-top: 16px;
+	font-size: 1em;
+	font-style: italic;
+	font-weight: bold;
+}
+
+.markdown-body dl dd {
+	padding: 0 16px;
+	margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+	padding: 0 15px;
+	color: #777;
+	border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+	margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+	margin-bottom: 0;
+}
+
+.markdown-body table {
+	display: block;
+	width: 100%;
+	overflow: auto;
+	word-break: normal;
+	word-break: keep-all;
+}
+
+.markdown-body table th {
+	font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+	padding: 6px 13px;
+	border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+	background-color: #fff;
+	border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+	background-color: #f8f8f8;
+}
+
+.markdown-body img {
+	max-width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.markdown-body span.frame {
+	display: block;
+	overflow: hidden;
+}
+
+.markdown-body span.frame>span {
+	display: block;
+	float: left;
+	width: auto;
+	padding: 7px;
+	margin: 13px 0 0;
+	overflow: hidden;
+	border: 1px solid #ddd;
+}
+
+.markdown-body span.frame span img {
+	display: block;
+	float: left;
+}
+
+.markdown-body span.frame span span {
+	display: block;
+	padding: 5px 0 0;
+	clear: both;
+	color: #333;
+}
+
+.markdown-body span.align-center {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-center>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: center;
+}
+
+.markdown-body span.align-center span img {
+	margin: 0 auto;
+	text-align: center;
+}
+
+.markdown-body span.align-right {
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+.markdown-body span.align-right>span {
+	display: block;
+	margin: 13px 0 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body span.align-right span img {
+	margin: 0;
+	text-align: right;
+}
+
+.markdown-body span.float-left {
+	display: block;
+	float: left;
+	margin-right: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-left span {
+	margin: 13px 0 0;
+}
+
+.markdown-body span.float-right {
+	display: block;
+	float: right;
+	margin-left: 13px;
+	overflow: hidden;
+}
+
+.markdown-body span.float-right>span {
+	display: block;
+	margin: 13px auto 0;
+	overflow: hidden;
+	text-align: right;
+}
+
+.markdown-body code,.markdown-body tt {
+	padding: 0;
+	padding-top: 0.2em;
+	padding-bottom: 0.2em;
+	margin: 0;
+	font-size: 85%;
+	background-color: rgba(0,0,0,0.04);
+	border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after,
+.markdown-body tt:before,
+.markdown-body tt:after {
+	letter-spacing: -0.2em;
+	content: "\00a0";
+}
+
+.markdown-body code br,
+.markdown-body tt br {
+	display: none;
+}
+
+.markdown-body del code {
+	text-decoration: inherit;
+}
+
+.markdown-body pre>code {
+	padding: 0;
+	margin: 0;
+	font-size: 100%;
+	word-break: normal;
+	white-space: pre;
+	background: transparent;
+	border: 0;
+}
+
+.markdown-body .highlight {
+	margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+	padding: 16px;
+	overflow: auto;
+	font-size: 85%;
+	line-height: 1.45;
+	background-color: #f7f7f7;
+	border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+	margin-bottom: 0;
+	word-break: normal;
+}
+
+.markdown-body pre {
+	word-wrap: normal;
+}
+
+.markdown-body pre code,
+.markdown-body pre tt {
+	display: inline;
+	max-width: initial;
+	padding: 0;
+	margin: 0;
+	overflow: initial;
+	line-height: inherit;
+	word-wrap: normal;
+	background-color: transparent;
+	border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after,
+.markdown-body pre tt:before,
+.markdown-body pre tt:after {
+	content: normal;
+}
+
+.highlight .pl-coc,
+.highlight .pl-entl,
+.highlight .pl-entm,
+.highlight .pl-eoa,
+.highlight .pl-mai .pl-sf,
+.highlight .pl-mm,
+.highlight .pl-pdv,
+.highlight .pl-sc,
+.highlight .pl-som,
+.highlight .pl-sr,
+.highlight .pl-v,
+.highlight .pl-vpf {
+	color: #0086b3;
+}
+.highlight .pl-eoac,
+.highlight .pl-mdht,
+.highlight .pl-mi1,
+.highlight .pl-mri,
+.highlight .pl-va,
+.highlight .pl-vpu {
+	color: #008080;
+}
+.highlight .pl-c,
+.highlight .pl-pdc {
+	color: #b4b7b4;
+	font-style: italic;
+}
+.highlight .pl-k,
+.highlight .pl-ko,
+.highlight .pl-kolp,
+.highlight .pl-mc,
+.highlight .pl-mr,
+.highlight .pl-ms,
+.highlight .pl-s,
+.highlight .pl-sok,
+.highlight .pl-st {
+	color: #6e5494;
+}
+.highlight .pl-ef,
+.highlight .pl-enf,
+.highlight .pl-enm,
+.highlight .pl-entc,
+.highlight .pl-eoi,
+.highlight .pl-sf,
+.highlight .pl-smc {
+	color: #d12089;
+}
+.highlight .pl-ens,
+.highlight .pl-eoai,
+.highlight .pl-kos,
+.highlight .pl-mh .pl-pdh,
+.highlight .pl-mp,
+.highlight .pl-pde,
+.highlight .pl-stp {
+	color: #458;
+}
+.highlight .pl-enti {
+	color: #d12089;
+	font-weight: bold;
+}
+.highlight .pl-cce,
+.highlight .pl-enc,
+.highlight .pl-kou,
+.highlight .pl-mq {
+	color: #f93;
+}
+.highlight .pl-mp1 .pl-sf {
+	color: #458;
+	font-weight: bold;
+}
+.highlight .pl-cos,
+.highlight .pl-ent,
+.highlight .pl-md,
+.highlight .pl-mdhf,
+.highlight .pl-ml,
+.highlight .pl-pdc1,
+.highlight .pl-pds,
+.highlight .pl-s1,
+.highlight .pl-scp,
+.highlight .pl-sol {
+	color: #df5000;
+}
+.highlight .pl-c1,
+.highlight .pl-cn,
+.highlight .pl-pse,
+.highlight .pl-pse .pl-s2,
+.highlight .pl-vi {
+	color: #a31515;
+}
+.highlight .pl-mb,
+.highlight .pl-pdb {
+	color: #df5000;
+	font-weight: bold;
+}
+.highlight .pl-mi,
+.highlight .pl-pdi {
+	color: #6e5494;
+	font-style: italic;
+}
+.highlight .pl-ms1 {
+	background-color: #f5f5f5;
+}
+.highlight .pl-mdh,
+.highlight .pl-mdi {
+	font-weight: bold;
+}
+.highlight .pl-mdr {
+	color: #0086b3;
+	font-weight: bold;
+}
+.highlight .pl-s2 {
+	color: #333;
+}
+.highlight .pl-ii {
+	background-color: #df5000;
+	color: #fff;
+}
+.highlight .pl-ib {
+	background-color: #f93;
+}
+.highlight .pl-id {
+	background-color: #a31515;
+	color: #fff;
+}
+.highlight .pl-iu {
+	background-color: #b4b7b4;
+}
+.highlight .pl-mo {
+	color: #969896;
+}
+
+</style>
+
+
+<script type="text/javascript">
+
+function getDocumentScrollTop() 
+{
+   var res = document.body.scrollTop || document.documentElement.scrollTop || window.pageYOffset || 0;
+   // alert(res);
+   return res;
+}
+
+function setDocumentScrollTop(ypos) 
+{
+	window.scrollTo(0, ypos);
+}
+
+</script>
+
+
+</head>
+<body class="markdown-body">
+<h1> <a id="user-guide" class="anchor" href="#user-guide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>User Guide</h1> 
+<ul> 
+ <li><a href="#introduction">Introduction</a></li> 
+ <li><a href="#quick-start">Quick Start</a></li> 
+ <li><a href="#features">Features</a></li> 
+ <li><a href="#faq">FAQ</a></li> 
+ <li><a href="#glossary">Glossary</a></li> 
+ <li><a href="#command-summary">Command Summary</a></li> 
+ <li><a href="#appendix-a">Appendix A</a></li> 
+ <li><a href="#appendix-b">Appendix B</a></li> 
+</ul> 
+<h2> <a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2> 
+<p>Are you having a hard time remembering all the work you have to do? Do you have trouble finding a task manager that suits your preference for keyboard input? Well, worry no more, Taskell is here for you! <br /> Taskell will be your personal secretary. It will keep track of your daily tasks and remind you of any important dates and deadlines. What distinguishes Taskell from other task managers is that Taskell only requires a single line of command for every task input. This means that you can record each one of your tasks with just a single statement. You will no longer have to use a mouse if you do not wish to. <br /> Ready to begin life anew with a more efficient task manager? Read on to find out more! </p> 
+<h2> <a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Start</h2> 
+<p>This section guides you through the installation of Taskell. <br /> Step 1: Ensure you have Java version <code>1.8.0_60</code> or later installed in your Computer.<br /></p> 
+<blockquote> 
+ <p>Having any Java 8 version is not enough. <br /> This application will not work with earlier versions of Java 8.</p> 
+</blockquote> 
+<p>Step 2: Download the latest <code>Taskell.jar</code> from <a href="https://github.com/CS2103AUG2016-W15-C3/main/releases">here</a>.<br /> <br /> &nbsp; &nbsp; &nbsp; &nbsp; <a href="images/Icon.png" target="_blank"><img src="images/Icon.png" width="100" style="max-width:100%;" /></a></p> 
+<p>Step 3: Copy the file to the folder you want to use as the home folder for your Task Manager.<br /> Step 4: Double-click the file to start the application. The GUI should appear in a few seconds. <br /></p>
+<p align="center"><a href="images/screenshots/GUI.PNG" target="_blank"><img src="images/screenshots/GUI.PNG" width="800" style="max-width:100%;" /></a><br /> Diagram 1: A screenshot of the Graphical User Interface (GUI)<br /> </p> 
+<p>Step 5: Type the relevant command in the command box and press <kbd>Enter</kbd> to execute it.<br /> Step 6: Some example commands you can try:<br /></p> 
+<ul> 
+ <li> <code>list</code> : Displays all tasks</li> 
+ <li> <code>add</code> buy MA1101R textbook today : Adds a task called buy MA1101R textbook to be done by today.</li> 
+ <li> <code>delete</code> 3 : Deletes the third task shown in the current list</li> 
+ <li> <code>exit</code> : Exits the application <br /> Refer to the <a href="#features">Features</a> section below for details of each command.<br /> </li> 
+</ul> 
+<h2> <a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h2> 
+<p>This section shows the different commands that you can use in Taskell. Words that are in UPPER_CASE are parameters. The parameters are listed below.</p> 
+<ul> 
+ <li>TASK: Indicates the content of a work</li> 
+ <li>DATE: Indicates a date</li> 
+</ul> 
+<blockquote> 
+ <p>Please refer to Appendix A for the date formats that Taskell supports. <br /> Default start date has been set to today's date. <br /> Default end date has been set to be the same as the start date. <br /></p> 
+</blockquote> 
+<ul> 
+ <li>TIME: Indicates a time</li> 
+</ul> 
+<blockquote> 
+ <p>Please refer to Appendix B for the time formats that Taskell supports. <br /> Default start time has been set to 12:00AM <br /> Default end time has been set to 11:59PM <br /> If the task is added today and no start time is provided, the default start time will be set to the current time.</p> 
+</blockquote> 
+<ul> 
+ <li>PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 2, 3 indicates default, low, medium and high priority respectively. </li> 
+</ul> 
+<blockquote> 
+ <p>In the GUI, level 1,2 and 3 tasks are marked as green, yellow and red respectively. Tasks with default priority level are not marked with any colors.</p> 
+</blockquote> 
+<ul> 
+ <li>RECURRING: Indicates the repetitive nature of a task. A task can be repeated daily, weekly or monthly.</li> 
+ <li>TAG: Indicates the category in which a task belongs to</li> 
+</ul> 
+<p>Words that are in <i>italics</i> are used to identify the parameters while words enclosed in SQUARE_BRACKETS are optional. <br /> INDEX refers to the index number shown in the most recent listing.</p> 
+<h4> <a id="viewing-list-of-commands--help" class="anchor" href="#viewing-list-of-commands--help" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Viewing list of commands : <code>help</code> </h4> 
+<p>You can use the <code>help</code> command to view a summary of all the commands. <br /> To open the help window<br /> Format: <code>help</code></p> 
+<h4> <a id="adding-a-task-add" class="anchor" href="#adding-a-task-add" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding a task: <strong><code>add</code></strong> </h4> 
+<p>You can use the <code>add</code> command to add different tasks.<br /></p> 
+<p>To add a floating task<br /> Format: <code>add</code> TASK <br /> Example: <code>add</code> Read Harry Potter book <br /></p> 
+<p>To add a task with priority<br /> Format: <code>add</code> TASK <i>p/</i>PRIORITY <br /> Example: <code>add</code> Complete math assignment <i>p/</i>3<br /></p> 
+<p>To add a task with tag(s)<br /> Formats:</p> 
+<ul> 
+ <li> <code>add</code> TASK <i>#</i>TAG <br /> Example: <code>add</code> Meet Alice in Bugis <i>#</i>friends<br /> </li> 
+ <li> <code>add</code> TASK <i>#</i>TAG [<i>#</i>MORE_TAGS] <br /> Example: <code>add</code> Swimming with Jane <i>#</i>friends <i>#</i>leisure <br /> </li> 
+</ul> 
+<p>To add a recurring task <br /> Format: <code>add</code> TASK <i>r/</i>RECURRING <br /> Example: <code>add</code> Read newspaper <i>on</i> mon <i>r/</i>daily</p> 
+<blockquote> 
+ <p>Take Note! <br /> Floating tasks are not allowed to have recurring status since they do not have any element of date or time</p> 
+</blockquote> 
+<p>To add a task with date and time<br /> Formats:</p> 
+<ul> 
+ <li> <code>add</code> TASK <i>from</i> START_DATE <i>to</i> END_DATE<br /> Example: <code>add</code> Go camping at Kota Tinggi <i>from</i> 3-jun-2016 <i>to</i> 7-jun-2016</li> 
+ <li> <code>add</code> TASK <i>from</i> START_TIME <i>to</i> END_TIME <br /> Example: <code>add</code> Watch Dr Strange <i>from</i> 7.30pm <i>to</i> 9.25pm</li> 
+</ul> 
+<p>To allow greater flexibility in the command format, Taskell supports a few natural variation such as <i>by</i>, <i>on</i> and <i>at</i>. <br /></p> 
+<p>The <i>by</i> keyword indicates that the task is a deadline task. Any date or time preceded by this keyword will be stored as an end date and end time respectively. <br /> Formats:</p> 
+<ul> 
+ <li> <code>add</code> TASK <i>by</i> DATE <br /> Example: <code>add</code> Buy textbook <i>by</i> tuesday</li> 
+ <li> <code>add</code> TASK <i>by</i> TIME<br /> Example: <code>add</code> visit Sandy at her house by the seaside <i>by</i> 3.35pm</li> 
+ <li> <code>add</code> TASK <i>by</i> DATE <i>by</i> TIME <br /> Example: <code>add</code> Do lab homework <i>by</i> Friday <i>by</i> 7pm <br /> </li> 
+</ul> 
+<p>The <i>on</i> keyword indicates that the task has to be done on the given date. Any date preceded by this keyword will be stored as a start date. <br /> Format: <code>add</code> TASK <i>on</i> DATE<br /> Example: <code>add</code> Go for meeting <i>on</i> mon <br /></p> 
+<p>The <i>at</i> keyword indicates that the task has to be done at the given time. Any time preceded by this keyword will be stored as a start time. <br /> Format: <code>add</code> TASK <i>at</i> TIME <br /> Example: <code>add</code> Go for meeting <i>at</i> 3pm <br /></p> 
+<p>Having understood the aforementioned behaviors of the <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> and <i>to</i> keyword, you can fuse them together to form more complex tasks. <br /> Formats:</p> 
+<ul> 
+ <li> <code>add</code> TASK <i>on</i> DATE <i>at</i> TIME <br /> Example: <code>add</code> Go for meeting <i>on</i> Sunday <i>at</i> 3pm <br /> </li> 
+ <li> <code>add</code> TASK <i>by</i> TIME <i>on</i> DATE <br /> Example: <code>add</code> Go for meeting <i>by</i> 3pm <i>on</i> 1-jan</li> 
+ <li> <code>add</code> TASK <i>from</i> DATE <br /> Example:<code>add</code> Go out with friends <i>from</i> 9am</li> 
+ <li> <code>add</code> TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <br /> Example: <code>add</code> Watch webcast <i>on</i> sat <i>from</i> 4.45pm <i>to</i> 7pm</li> 
+ <li> <code>add</code> TASK <i>from</i> DATE <i>to</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>#</i>TAG] [<i>p/</i>PRIORITY] [<i>r/</i>RECURRING] <br /> Example: <code>add</code> Holiday in San Francisco at Ocean Beach by the sea <i>from</i> may <i>to</i> aug <i>from</i> 9am <i>to</i> 11pm <i>#</i>holiday <i>#</i>leisure <i>p/</i>3 <i>r/</i>monthly</li> 
+</ul> 
+<blockquote> 
+ <p>Take note! <br /> A task can only contain up to a maximum of 1 start time, 1 end time, 1 start date and 1 end date. Any additional parameter will be treated as part of the description <br /> Any date or time not preceded by 'by', 'on', 'at', 'from' or 'to' will also be treated as part of the description</p> 
+</blockquote> 
+<p>Moreover, Taskell is able to automatically make adjustments to the date and time so that the task entered remains relevant. <br /> Examples: </p> 
+<ul> 
+ <li> <code>add</code> Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br /> This task will be added as a valid task that starts today at 11pm and ends tomorrow at 3am.</li> 
+ <li> <code>add</code> Staycation with friends <i>from</i> sunday <i>to</i> tues <br /> If today is a Saturday, this task will be added as a valid task that starts from tomorrow and end on this coming Tuesday. <br /> If today is a Sunday, this task will be added as a valid task that starts from next Sunday and end on the following Tuesday.</li> 
+</ul> 
+<h4> <a id="editing-a-task--edit" class="anchor" href="#editing-a-task--edit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Editing a task : <code>edit</code> </h4> 
+<p>You can use the <code>edit</code> command to edit any parts of a task<br /> Formats: </p> 
+<ul> 
+ <li> <code>edit</code> INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br /> <br /><p align="center"><a href="images/editCmd.png" target="_blank"><img src="images/editCmd.png" width="800" style="max-width:100%;" /></a> Diagram 9: Edits the 1st task on the list.<br /></p> </li> 
+</ul> 
+<p>Entering &quot;<code>edit</code> 1 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3&quot;, will update description to &quot;send all emails&quot;, start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br /></p> 
+<blockquote> 
+ <p>Take Note! <br /></p> 
+ <ul> 
+  <li>You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.</li> 
+  <li>Order of the parameters is not important.</li> 
+ </ul> 
+</blockquote> 
+<h4> <a id="finding-tasks-find" class="anchor" href="#finding-tasks-find" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Finding tasks: <code>find</code> </h4> 
+<p>You can use the <code>find</code> command to view tasks with specific keywords.<br /> Formats: <br /></p> 
+<ul> 
+ <li> <code>find</code> KEYWORD [MORE_KEYWORDS]<br /> Displays a list of tasks with description or tags matching all the keywords.<br /> Example: <code>find</code> banana milk essay<br /> Displays a list of all the tasks with description or tags matching 'banana', 'milk', and 'essay'. <br /> </li> 
+</ul> 
+<blockquote> 
+ <p>Take Note! <br /> Tasks with words that match the keyword includes those that contain the keyword. For example, searching for &quot;book&quot; will match with &quot;book&quot;, &quot;textbook&quot;, &quot;storybook&quot; etc.</p> 
+</blockquote> 
+<ul> 
+ <li> <code>find-tag</code> TAG [MORE_TAGS]<br /> Displays list of tasks with the same tags.<br /> Example: <code>find-tag</code> homework essay cs2103<br /> Displays a list of tasks having tagged as either 'homework', 'essay', or 'cs2103'. <br /><p align="center"><a href="images/screenshots/find_cs2010_results.PNG" target="_blank"><img src="images/screenshots/find_cs2010_results.PNG" width="800" style="max-width:100%;" /></a> <br /> Diagram 3: Keying in <code>find</code> cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description.</p> </li> 
+</ul> 
+<blockquote> 
+ <p>Take Note! <br /></p> 
+ <ul> 
+  <li>The order of the keywords does not matter. e.g. 'chicken egg' will match 'egg chicken'.</li> 
+  <li>Tasks matching at least one keyword will be displayed. e.g. 'chicken' will match 'chicken duck'</li> 
+ </ul> 
+</blockquote> 
+<h4> <a id="deleting-a-task--delete" class="anchor" href="#deleting-a-task--delete" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Deleting a task : <code>delete</code> </h4> 
+<p>You can use the <code>delete</code> command to delete a task at a specified INDEX.<br /> Format: <code>delete</code> INDEX <br /> Example: <code>find</code> violin, then <code>delete</code> 1<br /> Deletes the first task shown in the list after executing the <code>find</code> command.</p> 
+<h4> <a id="marking-a-task-as-completed-done" class="anchor" href="#marking-a-task-as-completed-done" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Marking a task as completed: <code>done</code> </h4> 
+<p>You can use the <code>done</code> command to mark an uncompleted task as completed.<br /> Format: <code>done</code> INDEX<br /> Example: <code>done</code> 1<br /> Marks the first task as finished and moves it to the list of completed tasks.<br /></p> 
+<h4> <a id="marking-a-task-as-incomplete-undone" class="anchor" href="#marking-a-task-as-incomplete-undone" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Marking a task as incomplete: <code>undone</code> </h4> 
+<p>You can use the <code>undone</code> command to mark a completed task as uncompleted.<br /> Format: <code>undone</code> INDEX<br /> Example: <code>undone</code> 1<br /> Marks the first task as incomplete and moves it to the lsit of uncompleted tasks.<br /></p> 
+<h4> <a id="listing-tasks--list" class="anchor" href="#listing-tasks--list" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Listing tasks : <code>list</code> </h4> 
+<p>You can use the <code>list</code> command to display a certain type of tasks.<br /></p> 
+<p>Formats: </p> 
+<ul> 
+ <li> <code>list</code> <br /> Displays a list of uncompleted tasks.<br /> </li> 
+ <li> <code>list-all</code> <br /> Displays a list of all tasks, both completed and uncompleted.<br /> </li> 
+ <li> <code>list-date</code> DATE <br /> Displays a list of all the tasks due on the specified date.<br /> </li> 
+ <li> <code>list-done</code> <br /> Displays a list of completed tasks.<br /> </li> 
+ <li> <code>list-priority</code> PRIORITY<br /> Displays a list of tasks with the specified priority. <br /><p align="center"><a href="images/screenshots/list_date.PNG" target="_blank"><img src="images/screenshots/list_date.PNG" width="800" style="max-width:100%;" /></a><br /> Diagram 2: Displays all the tasks to be done by today after typing list-date today.</p> </li> 
+</ul> 
+<h4> <a id="clearing-all-entries--clear" class="anchor" href="#clearing-all-entries--clear" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Clearing all entries : <code>clear</code> </h4> 
+<p>You can permanently clear <strong>all</strong> task data. <br /> Format: <code>clear</code> </p> 
+<p></p>
+<p align="center"><a href="images/screenshots/clear.PNG" target="_blank"><img src="images/screenshots/clear.PNG" width="800" style="max-width:100%;" /></a><br /> Diagram 12: Typing <code>clear</code> will prompt a confirm pop-up window <br /></p> 
+<blockquote> 
+ <p>Take Note! <br /></p> 
+ <ul> 
+  <li> <code>clear</code> command is irreversible!</li> 
+ </ul> 
+</blockquote> 
+<h4> <a id="showing-history--history-or-hist" class="anchor" href="#showing-history--history-or-hist" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Showing history : <code>history</code> or <code>hist</code> </h4> 
+<p>You can view the command history available for undo on the right panel when undoing your previous commands.<br /></p> 
+<p>Format: <code>history</code> or <code>hist</code> </p> 
+<p></p>
+<p align="center"><a href="images/screenshots/history_02.PNG" target="_blank"><img src="images/screenshots/history_02.PNG" width="800" style="max-width:100%;" /></a> <br /> Diagram 4: Keying in <code>hist</code> will show a list of command history on the right panel</p> 
+<blockquote> 
+ <p>Take Note! <br /></p> 
+ <ul> 
+  <li>Only commands that are available for undo will be shown here. </li> 
+  <li>Refer to the <code>undo</code> section below for more information on which commands can be undone.</li> 
+ </ul> 
+</blockquote> 
+<h4> <a id="reverting-previous-action--undo" class="anchor" href="#reverting-previous-action--undo" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Reverting previous action : <code>undo</code> </h4> 
+<p>If you wish to undo your most recent action, you can do so by using the <code>undo</code> command.<br /> To undo previous commands, <kbd>Enter</kbd> <code>hist</code> to see a list of previous commands that can be undone.<br /> Then use the <code>undo</code> command together with the specified INDEX from the list of command history. Formats: <br /></p> 
+<ul> 
+ <li> <code>undo</code><br /> Undo the most recent command executed.<br /> </li> 
+ <li> <p><code>undo</code> INDEX<br /> Undo the command at the specified index in the command history.<br /> Example: <code>hist</code>, then <code>undo</code> 3, will undo the third command in the command history.</p> <p></p> <p align="center"><a href="images/screenshots/undo_01.PNG" target="_blank"><img src="images/screenshots/undo_01.PNG" width="800" style="max-width:100%;" /></a> <br /></p> <p align="center"><a href="images/screenshots/undo_02.PNG" target="_blank"><img src="images/screenshots/undo_02.PNG" width="800" style="max-width:100%;" /></a> <br /> Diagrams 5 and 6: <code>undo</code> 2 will undo 2nd command in history</p> </li> 
+</ul> 
+<blockquote> 
+ <p>Take Note! <br /></p> 
+ <ul> 
+  <li>Undo command only supports <code>add</code>, <code>edit</code>, <code>delete</code>, <code>done</code>, <code>undone</code> and <code>undo</code> commands.</li> 
+  <li> <code>clear</code> command is irreversible!</li> 
+ </ul> 
+</blockquote> 
+<h4> <a id="showing-calendar-view--calendar-or-cal" class="anchor" href="#showing-calendar-view--calendar-or-cal" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Showing calendar view : <code>calendar</code> or <code>cal</code> </h4> 
+<p>You can use the <code>calendar</code> command to view a calendar. <br /> Format: <code>calendar</code> or <code>cal</code> <br /></p> 
+<p>You can refer the calendar on the right panel<br /> when adding tasks and scheduling events. A fine red line is used to indicate the current time. <br /> </p>
+<p align="center"> <a href="images/screenshots/calendar_circle.png" target="_blank"><img src="images/screenshots/calendar_circle.png" width="800" style="max-width:100%;" /></a> Diagram 12: An example of how the current time marker looks like.<br /></p> 
+<p>The calendar view reflects the tasks shown in the left panel. Each block is marked with the index corresponding to the task, meaning a block marked &quot;4&quot; would correspond to the fourth task.<br /> By default, the calendar view will be shown on the right panel. As the <code>history</code> command also utilises the right panel to display the command history, you have to use the <code>calendar</code> command to toggle between both views.<br /></p> 
+<blockquote> 
+ <p>Take note! <br /> Entering other commands (i.e. <code>find</code>, <code>add</code>) will revert the right panel back to calendar as it is the default view. <br /></p> 
+</blockquote> 
+<h4> <a id="saving-the-information-in-taskell--save" class="anchor" href="#saving-the-information-in-taskell--save" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Saving the information in Taskell : <code>save</code> </h4> 
+<p>You can specify the path of a folder to store Taskell's data file. Please note that you should have permissions to access the folder. <br /> Format: <code>save</code> FOLDERPATH<br /> Example: <code>save</code> C:\Users\Jim\Documents <br /> To obtain the filepath, navigate to the required file in your File Explorer. Copy the path at the top of the screen and paste it into Taskell. Refer to the diagram below for an example of a filepath. <br /></p> 
+<p></p>
+<p align="center"> <a href="images/filepath_screenshot.png" target="_blank"><img src="images/filepath_screenshot.png" width="1000" style="max-width:100%;" /></a> Diagram 11: Screenshot of File Explorer in Windows. <br /></p> 
+<p>If the specified directory is valid but the file is missing, for example, if you entered <code>save</code> C:\Users\Jim\Documents\Project, and 'C:\Users\Jim\Documents\Project' is valid but 'project' file has not been created, Taskell will create the file for you.<br /></p> 
+<blockquote> 
+ <p>Take Note! <br /></p> 
+ <ul> 
+  <li>If you only specify a folder name without directory, i.e. <code>save</code> project, Taskell will create a file named 'project' within Taskell's own directory. Whereas <code>save</code> C:/Users/Jim/Documents/project will open a file named 'project' within your desktop's Documents folder.</li> 
+  <li>Both Windows and Linux OS have restricted symbols not allowed for filenames. Please be aware of the symbols shown in the table below.</li> 
+ </ul> 
+</blockquote> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Windows</th> 
+   <th align="left">Linux</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>&gt;</td> 
+   <td align="left">&gt;</td> 
+  </tr> 
+  <tr> 
+   <td>&lt;</td> 
+   <td align="left">&lt;</td> 
+  </tr> 
+  <tr> 
+   <td>:</td> 
+   <td align="left">:</td> 
+  </tr> 
+  <tr> 
+   <td>&quot;</td> 
+   <td align="left">&amp;</td> 
+  </tr> 
+  <tr> 
+   <td>/</td> 
+   <td align="left">/</td> 
+  </tr> 
+  <tr> 
+   <td>\</td> 
+   <td align="left">|</td> 
+  </tr> 
+  <tr> 
+   <td>|</td> 
+   <td align="left"></td> 
+  </tr> 
+  <tr> 
+   <td>?</td> 
+   <td align="left"></td> 
+  </tr> 
+  <tr> 
+   <td>*</td> 
+   <td align="left"></td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h4> <a id="exiting-the-program--exit" class="anchor" href="#exiting-the-program--exit" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Exiting the program : <code>exit</code> </h4> 
+<p>Format: <code>exit</code> </p> 
+<h2> <a id="faq" class="anchor" href="#faq" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>FAQ</h2> 
+<p><strong>Q</strong>: How do I transfer my data to another computer?<br /> <strong>A</strong>: Install the application in the other computer and overwrite the empty data file it creates with the file that contains the data in your previous Taskell folder.<br /></p> 
+<p><strong>Q</strong>: Do I have to save the data every time I enter new tasks? <br /> <strong>A</strong>: No, Taskell automatically saves your data every time you enter new tasks. Use <code>save</code> only when you want to transfer your data to a new location on your computer. <br /></p> 
+<p><strong>Q</strong>: Do I have to use <code>exit</code> command whenever I want to exit the application? <br /> <strong>A</strong>: There is not a need to, as Taskell can be closed by the top right X button with the mouse as well or simply hold down <kbd>Alt</kbd> + <kbd>F4</kbd>. <br /></p> 
+<h2> <a id="glossary" class="anchor" href="#glossary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Glossary</h2> 
+<ol> 
+ <li>GUI: Graphical User Interface</li> 
+ <li>Floating task: A task without date and time</li> 
+</ol> 
+<h2> <a id="command-summary" class="anchor" href="#command-summary" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Command Summary</h2> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Command</th> 
+   <th align="left">Format</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>Add</td> 
+   <td align="left"> <code>add</code> TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG] <br /> <code>add</code> TASK <i>by</i> DATE <br /> <code>add</code> TASK <i>by</i> TIME <br /> <code>add</code> TASK <i>by</i> DATE <i>by</i> TIME <br /> <code>add</code> TASK <i>at</i> TIME <br /> <code>add</code> TASK <i>on</i> DATE <br /> <code>add</code> TASK <i>on</i> DATE <i>by</i> TIME <br /> <code>add</code> Task <i>on</i> DATE <i>at</i> TIME <br /> <code>add</code> TASK <i>from</i> DATE <i>to</i> DATE <br /> <code>add</code> TASK <i>from</i> TIME <i>to</i> TIME <br /> <code>add</code> TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING]</td> 
+  </tr> 
+  <tr> 
+   <td>Calendar View</td> 
+   <td align="left"> <code>calendar</code> or <code>cal</code> </td> 
+  </tr> 
+  <tr> 
+   <td>Clear</td> 
+   <td align="left"><code>clear</code></td> 
+  </tr> 
+  <tr> 
+   <td>Delete</td> 
+   <td align="left"> <code>delete</code> INDEX</td> 
+  </tr> 
+  <tr> 
+   <td>Edit</td> 
+   <td align="left"> <code>edit</code> INDEX <br /> <code>desc:</code> NEW_DESCRIPTION <br /> <code>sd:</code> NEW_START_DATE <br /> <code>st:</code> NEW_START_TIME <br /> <code>ed:</code> NEW_END_DATE <br /> <code>et:</code> NEW_END_TIME <br /> <code>p:</code> NEW_PRIORITY</td> 
+  </tr> 
+  <tr> 
+   <td>Find</td> 
+   <td align="left"> <code>find</code> KEYWORD [MORE_KEYWORDS]</td> 
+  </tr> 
+  <tr> 
+   <td>Find by tag</td> 
+   <td align="left"> <code>find-tag</code> KEYWORD [MORE_KEYWORDS]</td> 
+  </tr> 
+  <tr> 
+   <td>Help</td> 
+   <td align="left"><code>help</code></td> 
+  </tr> 
+  <tr> 
+   <td>History</td> 
+   <td align="left"> <code>history</code> or <code>hist</code> </td> 
+  </tr> 
+  <tr> 
+   <td>List all tasks</td> 
+   <td align="left"><code>list-all</code></td> 
+  </tr> 
+  <tr> 
+   <td>List by specified date</td> 
+   <td align="left"> <code>list-date</code> DATE</td> 
+  </tr> 
+  <tr> 
+   <td>List completed tasks</td> 
+   <td align="left"><code>list-done</code></td> 
+  </tr> 
+  <tr> 
+   <td>List uncompleted tasks</td> 
+   <td align="left"><code>list</code></td> 
+  </tr> 
+  <tr> 
+   <td>Mark task as finished</td> 
+   <td align="left"> <code>done</code> INDEX</td> 
+  </tr> 
+  <tr> 
+   <td>Mark task as incomplete</td> 
+   <td align="left"> <code>undone</code> INDEX</td> 
+  </tr> 
+  <tr> 
+   <td>Undo</td> 
+   <td align="left"> <code>undo</code> <br /> <code>undo</code> INDEX</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h2> <a id="appendix-a" class="anchor" href="#appendix-a" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix A</h2> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Supported Date Format</th> 
+   <th align="left">Example</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>DD-MM-YYYY</td> 
+   <td align="left">1-1-2016 <br /> 1/2/2016<br /> 1-mar-2016 <br /> 1-April-2016 <br /> 1.May.2016 <br /> 1.Jun.2016</td> 
+  </tr> 
+  <tr> 
+   <td>MM-YYYY</td> 
+   <td align="left">jul-2016 <br /> july-2016</td> 
+  </tr> 
+  <tr> 
+   <td>MM</td> 
+   <td align="left">mar <br /> sept <br /> December</td> 
+  </tr> 
+  <tr> 
+   <td>day</td> 
+   <td align="left">today <br /> tdy <br /> tomorrow <br /> tmr <br /> thursday <br /> thurs <br /> thu</td> 
+  </tr> 
+ </tbody> 
+</table> 
+<h2> <a id="appendix-b" class="anchor" href="#appendix-b" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Appendix B</h2> 
+<table> 
+ <thead> 
+  <tr> 
+   <th>Supported Time Format</th> 
+   <th align="left">Example</th> 
+  </tr> 
+ </thead> 
+ <tbody> 
+  <tr> 
+   <td>In 12-hour format</td> 
+   <td align="left">12am <br /> 5:30am<br /> 1pm <br /> 10-35pm <br /> 11.45pm</td> 
+  </tr> 
+  <tr> 
+   <td>In words</td> 
+   <td align="left">now <br /> midnight <br /> afternoon <br /> noon</td> 
+  </tr> 
+ </tbody> 
+</table>
+</body>
+</html>
