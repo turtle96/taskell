@@ -20,7 +20,6 @@ import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Description;
-import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;

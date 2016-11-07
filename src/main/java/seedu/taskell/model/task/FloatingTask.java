@@ -22,7 +22,6 @@ public class FloatingTask extends Task {
     public FloatingTask(String[] taskComponentArray, boolean[] hasTaskComponentArray, UniqueTagList tags) throws IllegalValueException {
 
         this(new Description(taskComponentArray[DESCRIPTION]),
-                FLOATING_TASK,
                 new TaskDate(TaskDate.DEFAULT_DATE),
                 new TaskDate(TaskDate.DEFAULT_DATE),
                 new TaskTime(TaskTime.DEFAULT_START_TIME),
@@ -37,7 +36,7 @@ public class FloatingTask extends Task {
         }
     }
     
-    public FloatingTask(Description description, String taskType, TaskDate startDate, 
+    public FloatingTask(Description description, TaskDate startDate, 
             TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, 
             RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) {
         

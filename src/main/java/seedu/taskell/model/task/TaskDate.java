@@ -62,7 +62,6 @@ public class TaskDate {
 
     public static final Pattern TASK_DATE_ARGS_FORMAT = Pattern
             .compile("(?<day>(3[0-1]|2[0-9]|1[0-9]|[1-9]))" + "(-)(?<month>(1[0-2]|[1-9]))" + "(-)(?<year>([0-9]{4}))");
-    private static final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("EEEE, d MMMM yyyy");
     private static final DateTimeFormatter standardFormat = DateTimeFormatter.ofPattern("d-MM-yyyy");
     SimpleDateFormat sdf = new SimpleDateFormat("d M yyyy");
     
