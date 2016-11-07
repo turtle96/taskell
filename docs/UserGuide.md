@@ -159,10 +159,10 @@ Example: `add` Holiday in San Francisco at Ocean Beach by the sea <i>from</i> 7-
 Figure 2: Adds a new task to Taskell<br>
 
 > Take note! <br>
-> A task can only contain up to a maximum of 1 start time, 1 end time, 1 start date and 1 end date. Any additional parameter will be treated as part of the description. <br>
-> Any date or time not preceded by 'by', 'on', 'at', 'from' or 'to' will also be treated as part of the description.
+> * A task can only contain up to a maximum of 1 start time, 1 end time, 1 start date and 1 end date. Any additional date time parameters will be treated as part of the description. <br>
+> * Any date or time not preceded by <i>by</i>, <i>on</i>, <i>at</i>, <i>from</i> or <i>to</i> will also be treated as part of the description.
 
-Moreover, Taskell is able to automatically make adjustments to the date and time so that the task entered remains relevant. <br> 
+Moreover, Taskell is able to adjust the date and time automatically so that the task entered remains relevant. <br> 
 Examples: 
 - `add` Create powerpoint slides for project <i>from</i> 11pm <i>to</i> 3am <br>
 This task will be added as a valid task that starts today at 11pm and ends  tomorrow at 3am.
@@ -182,12 +182,12 @@ Format:
 <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
 Figure 3: Edits the third task on the list<br>
 
-Entering "`edit` 3 desc: send all emails sd: 11-11-2016 ed: 12-11-2016 st: 3pm et: 4pm p: 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
+Entering "`edit` 3 <i>desc:</i> send all emails <i>sd:</i> 11-11-2016 <i>ed:</i> 12-11-2016 <i>st:</i> 3pm <i>et:</i> 4pm <i>p:</i> 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
 
 > Take Note! <br>
 > * You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.
 > * Order of the parameters is not important.
-> * Editing of overdue tasks will result in both the  date and time to be set to the default values if otherwise stated.
+> * Editing of overdue tasks will result in both the  date and time to be set to the default values, unless otherwise stated.
     
 <!--- @@author --->
 
@@ -210,7 +210,7 @@ Displays list of tasks with the same tags.<br>
 Example: `find-tag` homework essay cs2103<br>
 Displays a list of tasks having tagged as either 'homework', 'essay', or 'cs2103'.
  <br><p align="center"><img src="images/screenshots/find_cs2010_results.png" width="800"></br> <br>
-Figure 4: `find` cs2010 displays list of tasks with 'cs2010' as one of the keywords in task description
+Figure 4: `find` CS2010 displays a list of tasks with 'CS2010' as one of the keywords in task description
 
 > Take Note! <br>
 > * The order of the keywords does not matter. e.g. 'chicken egg' will match 'egg chicken'.
