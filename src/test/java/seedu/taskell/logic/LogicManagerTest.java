@@ -6,7 +6,6 @@ import seedu.taskell.commons.core.EventsCenter;
 import seedu.taskell.commons.events.model.TaskManagerChangedEvent;
 import seedu.taskell.commons.events.ui.JumpToListRequestEvent;
 import seedu.taskell.commons.events.ui.ShowHelpRequestEvent;
-import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.logic.Logic;
 import seedu.taskell.logic.LogicManager;
 import seedu.taskell.logic.commands.*;
@@ -32,7 +31,6 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.taskell.commons.core.Messages.*;
 

@@ -69,22 +69,22 @@ public class EditCommand extends Command {
 
     public void getEditInformation(ReadOnlyTask taskToEdit) {
 
-        if (hasComponentArray[Task.DESCRIPTION_COMPONENT] == false) {
+        if (!hasComponentArray[Task.DESCRIPTION_COMPONENT]) {
             description = taskToEdit.getDescription();
         }
-        if (hasComponentArray[Task.START_TIME_COMPONENT] == false) {
+        if (!hasComponentArray[Task.START_TIME_COMPONENT]) {
             startTime = taskToEdit.getStartTime();
         }
-        if (hasComponentArray[Task.END_TIME_COMPONENT] == false) {
+        if (!hasComponentArray[Task.END_TIME_COMPONENT]) {
             endTime = taskToEdit.getEndTime();
         }
-        if (hasComponentArray[Task.START_DATE_COMPONENT] == false) {
+        if (!hasComponentArray[Task.START_DATE_COMPONENT]) {
             startDate = taskToEdit.getStartDate();
         }
-        if (hasComponentArray[Task.END_DATE_COMPONENT] == false) {
+        if (!hasComponentArray[Task.END_DATE_COMPONENT]) {
             endDate = taskToEdit.getEndDate();
         }
-        if (hasComponentArray[Task.PRIORITY_COMPONENT] == false) {
+        if (!hasComponentArray[Task.PRIORITY_COMPONENT]) {
             taskPriority = taskToEdit.getTaskPriority();
         }
     }
@@ -146,10 +146,10 @@ public class EditCommand extends Command {
         ReadOnlyTask taskToEdit = lastShownList.get(targetIndex - 1);
         getEditInformation(taskToEdit);
 
-        if (taskToEdit.getTaskType().equals(Task.FLOATING_TASK) && (hasComponentArray[Task.START_TIME_COMPONENT] == true
-                || hasComponentArray[Task.END_TIME_COMPONENT] == true
-                || hasComponentArray[Task.START_DATE_COMPONENT] == true
-                || hasComponentArray[Task.END_DATE_COMPONENT] == true)) {
+        if (taskToEdit.getTaskType().equals(Task.FLOATING_TASK) && (hasComponentArray[Task.START_TIME_COMPONENT]
+                || hasComponentArray[Task.END_TIME_COMPONENT]
+                || hasComponentArray[Task.START_DATE_COMPONENT]
+                || hasComponentArray[Task.END_DATE_COMPONENT])) {
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 

@@ -5,8 +5,6 @@
  */
 package seedu.taskell.model.task;
 
-import java.util.Objects;
-
 public class TaskStatus {
     public static final String FINISHED = "finished";
     public static final String INCOMPLETE = "incomplete";

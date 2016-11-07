@@ -18,7 +18,11 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks need to be done";
-
+    
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List all incompleted tasks.\n"
+            + "Example: " + COMMAND_WORD;
+    
     private Set<String> keywordSet = new HashSet<>(Arrays.asList(TaskStatus.INCOMPLETE));
 
     public ListCommand() {
