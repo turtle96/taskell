@@ -276,33 +276,33 @@ public class Parser {
 
     private Command splitInputWithGivenNewParameters(int targetIdx, ArrayList<String> argsList) {
         while (!argsList.isEmpty()) {
-            if (argsList.get(0).equals(DESCRIPTION) && hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] == false) {
+            if (argsList.get(0).equals(DESCRIPTION) && !hasTaskComponentArray[Task.DESCRIPTION_COMPONENT]) {
                 updateDescription(argsList);
-            } else if (argsList.get(0).equals(START_DATE) && hasTaskComponentArray[Task.START_DATE_COMPONENT] == false
+            } else if (argsList.get(0).equals(START_DATE) && !hasTaskComponentArray[Task.START_DATE_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, START_DATE)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(END_DATE) && hasTaskComponentArray[Task.END_DATE_COMPONENT] == false
+            } else if (argsList.get(0).equals(END_DATE) && !hasTaskComponentArray[Task.END_DATE_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, END_DATE)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(START_TIME) && hasTaskComponentArray[Task.START_TIME_COMPONENT] == false
+            } else if (argsList.get(0).equals(START_TIME) && !hasTaskComponentArray[Task.START_TIME_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, START_TIME)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(END_TIME) && hasTaskComponentArray[Task.END_TIME_COMPONENT] == false
+            } else if (argsList.get(0).equals(END_TIME) && !hasTaskComponentArray[Task.END_TIME_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, END_TIME)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(PRIORITY) && hasTaskComponentArray[Task.PRIORITY_COMPONENT] == false
+            } else if (argsList.get(0).equals(PRIORITY) && !hasTaskComponentArray[Task.PRIORITY_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, PRIORITY)) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
