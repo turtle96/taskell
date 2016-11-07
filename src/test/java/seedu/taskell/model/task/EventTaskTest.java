@@ -423,11 +423,11 @@ public class EventTaskTest {
  */
 class EventTaskTestHelper {
     
-    String[] taskComponentArray;
-    boolean[] hasTaskComponentArray;
-    UniqueTagList tags;
+    protected String[] taskComponentArray;
+    protected boolean[] hasTaskComponentArray;
+    protected UniqueTagList tags;
     
-    EventTaskTestHelper() {
+    public EventTaskTestHelper() {
         initialiseTaskComponentArray();
         initialiseHasTaskComponentArray();
         initialiseUniqueTagList();
@@ -453,7 +453,7 @@ class EventTaskTestHelper {
         tags = new UniqueTagList();
     }
     
-    EventTask getEventTask() throws IllegalValueException {
+    protected EventTask getEventTask() throws IllegalValueException {
         return new EventTask(taskComponentArray, hasTaskComponentArray, tags);
     }
 }
@@ -462,22 +462,20 @@ class EventTaskTestHelper {
  * A utility class to generate expected result of an event task.
  */
 class EventTaskTestExpectedResult {
-    Description description;
-    String taskType;
-    TaskDate startDate;
-    TaskDate endDate;
-    TaskTime startTime;
-    TaskTime endTime;
-    TaskPriority taskPriority;
-    RecurringType recurringType;
-    TaskStatus taskStatus;
-    UniqueTagList tags;
+    private Description description;
+    private TaskDate startDate;
+    private TaskDate endDate;
+    private TaskTime startTime;
+    private TaskTime endTime;
+    private TaskPriority taskPriority;
+    private RecurringType recurringType;
+    private TaskStatus taskStatus;
+    private UniqueTagList tags;
     
-    EventTaskTestExpectedResult (String description, String startDate, String endDate, 
+    public EventTaskTestExpectedResult (String description, String startDate, String endDate, 
             String startTime, String endTime, String taskPriority, String recurringType) throws IllegalValueException {
         
         this.description = new Description(description);
-        this.taskType = Task.EVENT_TASK;
         this.startDate = new TaskDate(startDate);
         this.endDate = new TaskDate(endDate);
         this.startTime = new TaskTime(startTime);
@@ -488,7 +486,7 @@ class EventTaskTestExpectedResult {
         this.tags = new UniqueTagList();
     }
     
-    String getAsTextEventTask() {
+    protected String getAsTextEventTask() {
         final StringBuilder builder = new StringBuilder();
         builder.append(this.description)
                 .append(" StartDate: ")
