@@ -52,7 +52,7 @@ Command: `save A:` <br>
 Expected: Taskell will reject as the directory is invalid
 
 Command: `save newDataFile` <br>
-Expected: Taskell will create folder called "newDataFile" in folder of Taskell jar and relocate SampleData.xml to taskmanager.xml in that new folder, the old xml file will be deleted
+Expected: Taskell will create folder called "newDataFile" in folder of Taskell jar and relocate SampleData.xml to taskmanager.xml in that new folder, the old xml file will be deleted (due to the way Taskell is coded, the data file will be renamed to taskmanager.xml whenever `save` is executed)
 
-Command: `save ` (to add external filepath here)
+Command: `save ` (to add external filepath here) <br>
 Expected: Taskell will relocate taskmanager.xml to the given filepath, the old xml file will be deleted
