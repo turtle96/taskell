@@ -182,7 +182,7 @@ Format:
 <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
 Figure 3: Edits the third task on the list<br>
 
-Entering "`edit` 3 <i>desc:</i> send all emails <i>sd:</i> 11-11-2016 <i>ed:</i> 12-11-2016 <i>st:</i> 3pm <i>et:</i> 4pm <i>p:</i> 3", will update description to "send all emails", start date to 11-11-2016, end date to 12-11-2016, start time to 3pm end time to 4pm and priority to 3.<br>
+Entering "`edit` 3 <i>desc:</i> send all emails <i>sd:</i> 11-11-2016 <i>ed:</i> 12-11-2016 <i>st:</i> 3pm <i>et:</i> 4pm <i>p:</i> 3", will update description to 'send all emails', start date to '11-11-2016', end date to '12-11-2016', start time to '3pm' end time to '4pm' and priority to '3'.<br>
 
 > Take Note! <br>
 > * You only need to key in the necessary parameters of the task you would like to change. Not all parameters are required.
@@ -203,7 +203,7 @@ Example: `find` banana milk essay<br>
 Displays a list of all the tasks with description or tags matching 'banana', 'milk', and 'essay'. <br>
 
 > Take Note! <br>
-> Tasks with words that match the keyword includes those that contain the keyword. For example, searching for "book" will match with "book", "textbook", "storybook" etc.
+> Tasks with words that match the keyword include those that contain the keyword. For example, searching for 'book' will match with 'book', 'textbook', 'storybook' etc.
 
 - `find-tag` TAG [MORE_TAGS]<br>
 Displays list of tasks with the same tags.<br>
@@ -225,10 +225,10 @@ Figure 4: `find` CS2010 displays a list of tasks with 'CS2010' as one of the key
 You can use the `delete` command to delete a task at a specified INDEX.<br>
 
 Format: `delete` INDEX <br>
-Example: `find` violin, then `delete` 1<br>
-Deletes the first task shown in the list after executing the `find` command.
+Example: `delete` 3<br>
+Deletes the third task shown in the list.
 <br><p align="center"><img src="images/screenshots/deleteCmd.png" width="800"></br>
-Figure 5: `delete` 3 deletes the first task on the list<br>
+Figure 5: `delete` 3 deletes the third task on the list<br>
 
 #### Marking a task as completed: `done`
 You can use the `done` command to mark an uncompleted task as completed.<br>
