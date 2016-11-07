@@ -74,7 +74,12 @@ Expected: Redo the previous undo command, and delete the task again
 
 Command: `hist`<br>
 Command: `undo 3` <br>
-Expected: Undo the third command listed in history
+Expected: Undo the third command listed in history, which is `add meet cs2013 tutor for consultation #study #project #meeting on 9-11-2016 from 5pm to 6pm`
+
+### Calendar command
+Command: `hist` <br>
+Command: `cal` <br>
+Expected: Toggle view back to calendar view
 
 ### Save command
 Command: `save ****` <br>
