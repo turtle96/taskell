@@ -1,11 +1,7 @@
 package seedu.taskell.model.task;
 
-import java.util.Objects;
-
 import seedu.taskell.model.task.Description;
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.commons.util.CollectionUtil;
-import seedu.taskell.logic.commands.IncorrectCommand;
 import seedu.taskell.model.tag.UniqueTagList;
 
 //@@author A0139257X
@@ -22,7 +18,6 @@ public class FloatingTask extends Task {
     public FloatingTask(String[] taskComponentArray, boolean[] hasTaskComponentArray, UniqueTagList tags) throws IllegalValueException {
 
         this(new Description(taskComponentArray[DESCRIPTION]),
-                FLOATING_TASK,
                 new TaskDate(TaskDate.DEFAULT_DATE),
                 new TaskDate(TaskDate.DEFAULT_DATE),
                 new TaskTime(TaskTime.DEFAULT_START_TIME),
@@ -37,7 +32,7 @@ public class FloatingTask extends Task {
         }
     }
     
-    public FloatingTask(Description description, String taskType, TaskDate startDate, 
+    public FloatingTask(Description description, TaskDate startDate, 
             TaskDate endDate, TaskTime startTime, TaskTime endTime, TaskPriority taskPriority, 
             RecurringType recurringType, TaskStatus taskStatus, UniqueTagList tags) {
         
