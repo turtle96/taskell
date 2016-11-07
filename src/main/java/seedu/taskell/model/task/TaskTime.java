@@ -59,17 +59,8 @@ public class TaskTime {
             return false;
         }
 
-        if (time.matches(HOUR_ONLY_TIME_REGEX) || time.matches(FULL_TIME_REGEX)) {
-            return true;
-        } else if (isValidNow(time)) {
-            return true;
-        } else if (isValidNoon(time)) {
-            return true;
-        } else if (isValidMidnight(time)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (time.matches(HOUR_ONLY_TIME_REGEX) || time.matches(FULL_TIME_REGEX)
+                || isValidNow(time) || isValidNoon(time) || isValidMidnight(time));
     }
     
     private static boolean isValidNow(String time) {

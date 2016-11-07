@@ -20,7 +20,6 @@ import seedu.taskell.logic.commands.list.ListDoneCommand;
 import seedu.taskell.logic.commands.list.ListPriorityCommand;
 import seedu.taskell.model.tag.Tag;
 import seedu.taskell.model.task.Description;
-import seedu.taskell.model.task.FloatingTask;
 import seedu.taskell.model.task.RecurringType;
 import seedu.taskell.model.task.Task;
 import seedu.taskell.model.task.TaskDate;
@@ -114,7 +113,7 @@ public class Parser {
             return prepareFindByTag(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return prepareList(arguments);
 
         case ListAllCommand.COMMAND_WORD:
             return new ListAllCommand();
@@ -182,7 +181,7 @@ public class Parser {
      * if type of command is undoable, saves to history for undoing
      */
     private void saveToHistory(String userInput, final String commandWord) {
-        
+
         if (isUndoableCommandType(commandWord)) {
             IncorrectCommand.setIsUndoableCommand(true);
             history.addCommand(userInput, commandWord);
@@ -192,13 +191,11 @@ public class Parser {
     }
 
     private boolean isUndoableCommandType(final String commandWord) {
-        return commandWord.equals(AddCommand.COMMAND_WORD) 
-                || commandWord.equals(DeleteCommand.COMMAND_WORD)
-                || commandWord.equals(EditCommand.COMMAND_WORD)
-                || commandWord.equals(DoneCommand.COMMAND_WORD)
+        return commandWord.equals(AddCommand.COMMAND_WORD) || commandWord.equals(DeleteCommand.COMMAND_WORD)
+                || commandWord.equals(EditCommand.COMMAND_WORD) || commandWord.equals(DoneCommand.COMMAND_WORD)
                 || commandWord.equals(UndoneCommand.COMMAND_WORD);
     }
-    
+
     /** @@author **/
 
     // @@author A0142073R
@@ -277,33 +274,33 @@ public class Parser {
 
     private Command splitInputWithGivenNewParameters(int targetIdx, ArrayList<String> argsList) {
         while (!argsList.isEmpty()) {
-            if (argsList.get(0).equals(DESCRIPTION) && hasTaskComponentArray[Task.DESCRIPTION_COMPONENT] == false) {
+            if (argsList.get(0).equals(DESCRIPTION) && !hasTaskComponentArray[Task.DESCRIPTION_COMPONENT]) {
                 updateDescription(argsList);
-            } else if (argsList.get(0).equals(START_DATE) && hasTaskComponentArray[Task.START_DATE_COMPONENT] == false
+            } else if (argsList.get(0).equals(START_DATE) && !hasTaskComponentArray[Task.START_DATE_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, START_DATE)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(END_DATE) && hasTaskComponentArray[Task.END_DATE_COMPONENT] == false
+            } else if (argsList.get(0).equals(END_DATE) && !hasTaskComponentArray[Task.END_DATE_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, END_DATE)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskDate.MESSAGE_TASK_DATE_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(START_TIME) && hasTaskComponentArray[Task.START_TIME_COMPONENT] == false
+            } else if (argsList.get(0).equals(START_TIME) && !hasTaskComponentArray[Task.START_TIME_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, START_TIME)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(END_TIME) && hasTaskComponentArray[Task.END_TIME_COMPONENT] == false
+            } else if (argsList.get(0).equals(END_TIME) && !hasTaskComponentArray[Task.END_TIME_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, END_TIME)) {
                     return new IncorrectCommand(
                             String.format(MESSAGE_INVALID_COMMAND_FORMAT, TaskTime.MESSAGE_TASK_TIME_CONSTRAINTS));
                 }
-            } else if (argsList.get(0).equals(PRIORITY) && hasTaskComponentArray[Task.PRIORITY_COMPONENT] == false
+            } else if (argsList.get(0).equals(PRIORITY) && !hasTaskComponentArray[Task.PRIORITY_COMPONENT]
                     && argsList.size() > 1) {
                 if (!canUpdate(argsList, PRIORITY)) {
                     return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -327,82 +324,51 @@ public class Parser {
         argsList.remove(0);
         String newValue = argsList.remove(0);
         if (parameters.equals(START_DATE)) {
-            if (canUpdateStartDate(newValue)) {
-                return true;
-            } else {
-                return false;
-            }
+            return canUpdateDateTimePriority(Task.START_DATE, Task.START_DATE_COMPONENT, parameters, newValue);
         } else if (parameters.equals(END_DATE)) {
-            if (canUpdateEndDate(newValue)) {
-                return true;
-            } else {
-                return false;
-            }
+            return canUpdateDateTimePriority(Task.END_DATE, Task.END_DATE_COMPONENT, parameters, newValue);
         } else if (parameters.equals(START_TIME)) {
-            if (canUpdateStartTime(newValue)) {
-                return true;
-            } else {
-                return false;
-            }
+            return canUpdateDateTimePriority(Task.START_TIME, Task.START_TIME_COMPONENT, parameters, newValue);
         } else if (parameters.equals(END_TIME)) {
-            if (canUpdateEndTime(newValue)) {
-                return true;
-            } else {
-                return false;
-            }
+            return canUpdateDateTimePriority(Task.END_TIME, Task.END_TIME_COMPONENT, parameters, newValue);
         } else {// edit priority
-            if (canUpdatePriority(newValue)) {
-                return true;
-            } else {
-                return false;
-            }
+            return canUpdateDateTimePriority(Task.TASK_PRIORITY, Task.PRIORITY_COMPONENT, parameters, newValue);
         }
     }
 
-    private boolean canUpdateStartDate(String newValue) {
-        taskComponentArray[Task.START_DATE] = newValue;
-        if (TaskDate.isValidDate(taskComponentArray[Task.START_DATE])) {
-            hasTaskComponentArray[Task.START_DATE_COMPONENT] = true;
+    private boolean canUpdateDateTimePriority(int componentInArray, int componentInBoolean, String parameter,
+            String newValue) {
+        taskComponentArray[componentInArray] = newValue;
+        if (parameter.equals(START_DATE) || parameter.equals(END_DATE)) {
+            return updateDate(componentInBoolean, newValue);
+        } else if (parameter.equals(START_TIME) || parameter.equals(END_TIME)) {
+            return updateTime(componentInBoolean, newValue);
+        } else {// edit priority
+            return updatePriority(componentInBoolean, newValue);
+        }
+    }
+
+    private boolean updateDate(int componentInBoolean, String newValue) {
+        if (TaskDate.isValidDate(newValue)) {
+            hasTaskComponentArray[componentInBoolean] = true;
             return true;
         } else {
             return false;
         }
     }
 
-    private boolean canUpdateEndDate(String newValue) {
-        taskComponentArray[Task.END_DATE] = newValue;
-        if (TaskDate.isValidDate(taskComponentArray[Task.END_DATE])) {
-            hasTaskComponentArray[Task.END_DATE_COMPONENT] = true;
+    private boolean updateTime(int componentInBoolean, String newValue) {
+        if (TaskTime.isValidTime(newValue)) {
+            hasTaskComponentArray[componentInBoolean] = true;
             return true;
         } else {
             return false;
         }
     }
 
-    private boolean canUpdateStartTime(String newValue) {
-        taskComponentArray[Task.START_TIME] = newValue;
-        if (TaskTime.isValidTime(taskComponentArray[Task.START_TIME])) {
-            hasTaskComponentArray[Task.START_TIME_COMPONENT] = true;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean canUpdateEndTime(String newValue) {
-        taskComponentArray[Task.END_TIME] = newValue;
-        if (TaskTime.isValidTime(taskComponentArray[Task.END_TIME])) {
-            hasTaskComponentArray[Task.END_TIME_COMPONENT] = true;
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean canUpdatePriority(String newValue) {
-        taskComponentArray[Task.TASK_PRIORITY] = newValue;
-        if (TaskPriority.isValidPriority(taskComponentArray[Task.TASK_PRIORITY])) {
-            hasTaskComponentArray[Task.PRIORITY_COMPONENT] = true;
+    private boolean updatePriority(int componentInBoolean, String newValue) {
+        if (TaskPriority.isValidPriority(newValue)) {
+            hasTaskComponentArray[componentInBoolean] = true;
             return true;
         } else {
             return false;
@@ -909,17 +875,26 @@ public class Parser {
 
         return new UndoneCommand(index.get());
     }
+    
+    private Command prepareList(String arguments) {
+        if (arguments.isEmpty()) {
+            return new ListCommand();
+        } else {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListCommand.MESSAGE_USAGE));
+        }
+
+    }
     // @@author
 
     // @@author A0142073R
-
+    /**
+     * To check if a given string is an integer
+     */
     private static boolean isInt(String s) {
         try {
-            int i = Integer.parseInt(s);
+            int integer = Integer.parseInt(s);
             return true;
-        }
-
-        catch (NumberFormatException er) {
+        } catch (NumberFormatException er) {
             return false;
         }
     }

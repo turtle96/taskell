@@ -2,6 +2,7 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Test;
 
@@ -287,7 +288,7 @@ public class UndoCommandTest extends TaskManagerGuiTest {
         
         commandBox.runCommand("hist");
         historyText = displayPanel.getText();
-        assertTrue(!historyText.contains(taskToAdd.getAddCommand().trim()));
+        assertFalse(historyText.contains(taskToAdd.getAddCommand().trim()));
         
         history.clear();
     }

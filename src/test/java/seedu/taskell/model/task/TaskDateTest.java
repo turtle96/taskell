@@ -17,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 //@@author A0139257X
 public class TaskDateTest {
     
-    TaskDate defaultDate;
+    private TaskDate defaultDate;
     
     @Before
     public void setup() throws IllegalValueException {
