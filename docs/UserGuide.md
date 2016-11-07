@@ -175,7 +175,7 @@ If today is a Sunday, this task will be added as a valid task that starts from n
 #### Editing a task : `edit`
 You can use the `edit` command to edit any parts of a task<br>
 Formats: 
-- `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] <br>
+- `edit` INDEX [<i>st:</i> NEW_START_TIME] [<i>et:</i> NEW_END_TIME] [<i>desc:</i> NEW_DESCRIPTION] [<i>sd:</i> NEW_START_DATE] [<i>ed:</i> NEW_END_DATE] [<i>p:</i> NEW_PRIORITY] 
 <br><p align="center"><img src="images/screenshots/editCmd.png" width="800"></br>
 Figure 3: Edits the third task on the list<br>
 
@@ -228,7 +228,9 @@ Figure 5: Deletes the first task on the list<br>
 You can use the `done` command to mark an uncompleted task as completed.<br>
 Format: `done` INDEX<br>
 Example: `done` 1<br>
-Marks the first task as finished and moves it to the list of completed tasks.<br>
+Marks the first task as finished and moves it to the list of completed tasks.
+<br><p align="center"><img src="images/screenshots/doneCmd.png" width="800"></br>
+Figure 6: Marks the third task as finished<br>
 
 #### Marking a task as incomplete: `undone`
 You can use the `undone` command to mark a completed task as uncompleted.<br>
