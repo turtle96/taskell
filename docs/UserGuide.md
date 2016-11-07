@@ -336,15 +336,15 @@ To obtain the file-path, navigate to the required file in your File Explorer. Co
 screen and paste it into Taskell. Refer to the diagram below for an example of a file-path. <br>
 
 <p align="center"> <img src="images/filepath_screenshot.png" width="1000"> </br>
-Figure 13: Screenshot of File Explorer in Windows.  <br>
+Figure 13: Screenshot of File Explorer in Windows <br>
 
-If the specified directory is valid but the file is missing, for example, if you entered `save` C:\Users\Jim\Documents\Project,  and 'C:\Users\Jim\Documents\Project' is valid
-but 'project' file has not been created, Taskell will create the file for you.<br>
+If the specified directory is valid but the folder is missing, for example, if you entered `save` C:\Users\Jim\Documents\Project,  and 'C:\Users\Jim\Documents\Project' is valid
+but 'Project' folder has not been created, Taskell will create the folder for you.<br>
 
 
 > Take note! <br>
-> * If you only specify a folder name without directory, i.e. `save` project, Taskell will create a file named 'project' within Taskell's own directory. 
->Whereas `save` C:/Users/Jim/Documents/project will open a file named 'project' within your desktop's Documents folder.
+> * If you only specify a folder name without directory, i.e. `save` project, Taskell will create a folder named 'project' within Taskell's own directory. 
+>Whereas `save` C:/Users/Jim/Documents/project will open a folder named 'project' within your desktop's Documents folder.
 > * Both Windows and Linux OS have restricted symbols that are not allowed for folder names. Please be aware of the symbols
 shown in the table below.
     
@@ -352,14 +352,14 @@ Windows |  Linux
 -------- | :-------- 
        > | >
        < | <
+  &#124; | &#124;
        : | :
        " | &
        / | /
-       \ | &#124;
-  &#124; | 
+       \ |
        ? |
        * |
-Table 1: Restricted symbols in Windows and linux
+Table 1: Restricted symbols in Windows and Linux
 
 
 <!--- @@author ---> 
@@ -400,11 +400,11 @@ transfer your data to a new location on your computer. <br>
 
 Command | Format  
 -------- | :-------- 
-Add | `add` TASK <i>p/</i>[PRIORITY] <i>#</i>[TAG] <br> `add` TASK <i>by</i> DATE <br>  `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME <br> `add` TASK <i>from</i> DATE <i>to</i> DATE <br> `add` TASK <i>from</i> TIME <i>to</i> TIME <br> `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME <i>p/</i>[PRIORITY] <i>#</i>[TAG] <i>r/</i>[RECURRING]
-Calendar View | `calendar` or `cal`
+Add | `add` TASK [<i>p/</i>PRIORITY] [<i>#</i>TAG] <br> `add` TASK <i>by</i> DATE <br>  `add` TASK <i>by</i> TIME <br> `add` TASK <i>by</i> DATE <i>by</i> TIME <br> `add` TASK <i>at</i> TIME <br> `add` TASK <i>on</i> DATE <br> `add` TASK <i>on</i> DATE <i>by</i> TIME <br> `add` Task <i>on</i> DATE <i>at</i> TIME <br> `add` TASK <i>from</i> DATE <i>to</i> DATE <br> `add` TASK <i>from</i> TIME <i>to</i> TIME <br> `add` TASK <i>on</i> DATE <i>from</i> TIME <i>to</i> TIME [<i>p/</i>PRIORITY] [<i>#</i>TAG] [<i>r/</i>RECURRING]
+Calendar view | `calendar` or `cal`
 Clear | `clear`
 Delete | `delete` INDEX
-Edit | `edit` INDEX <br> `desc:` NEW_DESCRIPTION <br> `sd:` NEW_START_DATE <br> `st:` NEW_START_TIME <br> `ed:` NEW_END_DATE <br> `et:` NEW_END_TIME <br> `p:` NEW_PRIORITY
+Edit | `edit` INDEX <br> <i>desc:</i> NEW_DESCRIPTION <br> <i>sd:</i> NEW_START_DATE <br> <i>st:</i> NEW_START_TIME <br> <i>ed:</i> NEW_END_DATE <br> <i>et:</i> NEW_END_TIME <br> <i>p:</i> NEW_PRIORITY
 Exit | `exit` <br> <kbd>Alt</kbd> + <kbd>F4</kbd>
 Find | `find` KEYWORD [MORE_KEYWORDS]
 Find by tag | `find-tag` TAG [MORE_TAGS]
