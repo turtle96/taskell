@@ -295,7 +295,7 @@ Undo the most recent command executed.<br>
 Undo the command at the specified index in the  command history.<br>
 Example: `hist`, then `undo` 3, will undo the third command in the command history.
 <p align="center"><img src="images/screenshots/undoCmd.png" width="800"></br>
-Figure 11: `undo` undo the last item on the list of command history
+Figure 11: `undo` reverts the last item on the list of command history
 
 > Take Note! <br>
 > * Undo command only supports `add`, `edit`, `delete`, `done`, `undone` and `undo` commands.
