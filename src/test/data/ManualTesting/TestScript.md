@@ -1,8 +1,11 @@
 # Manual Testing: Test Script
 ## How to load the sample data
 1. Navigate to Taskell folder in File Explorer
-2. Open config.json in a text editor
-3. At taskManagerFilePath, replace "data/taskmanager.xml" with "src/test/data/ManualTesting/SampleData.xml"
+2. Ensure both Taskell jar and SampleData.xml are in the same folder
+3. Open config.json in a text editor
+4. At taskManagerFilePath, replace "data/taskmanager.xml" with "SampleData.xml"
+5. Save config.json
+6. Launch Taskell jar
 
 ## Test cases
 ### Add command
@@ -14,9 +17,42 @@
 ### Delete command
 
 ### Find command
+Command: `find cs2010` <br>
+Expected: All tasks with "cs2010" in either description or tags (includes substrings)
+
+Command: `find cs2010 assign` <br>
+Expected: All tasks with "cs2010" and "assign" in either description or tags (includes substrings)
+
+Command: `find-tag cs2106`<br>
+Expected: All tasks with "cs2106" in tags (includes substrings)
+
+Command: `find-tag exam revision`<br>
+Expected: All tasks with either "exam" or "revision" in tags (includes substrings)
 
 ### History command
+Command: `hist`<br>
+Expected: Right panel shows list of command history so far, for add/delete/edit/done/undone commands
 
 ### Undo command
+Command: `undo` <br>
+Expected: Undo most recent command executed, which is delete (to fill in command), and will add back the task
+
+Command: `undo` <br>
+Expected: Redo the previous undo command, and delete the task again
+
+Command: `hist`<br>
+Command: `undo 3` <br>
+Expected: Undo the third command listed in history
 
 ### Save command
+Command: `save ****` <br>
+Expected: Taskell will reject as file name given has invalid symbol
+
+Command: `save A:` <br>
+Expected: Taskell will reject as the directory is invalid
+
+Command: `save newDataFile` <br>
+Expected: Taskell will create folder called "newDataFile" in folder of Taskell jar and relocate SampleData.xml to taskmanager.xml in that new folder, the old xml file will be deleted
+
+Command: `save ` (to add external filepath here)
+Expected: Taskell will relocate taskmanager.xml to the given filepath, the old xml file will be deleted
