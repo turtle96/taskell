@@ -13,8 +13,51 @@
 ### Edit command
 
 ### List command
+Command `list`
+Expected: List all uncompleted tasks
+
+Command `list-done`
+Expected: List all completed tasks
+
+Command `list-all`
+Expected: List all uncompleted and completed tasks
+
+Command `list-priority 1`
+Expected: List all tasks with low priority
+
+Command `list-priority 3`
+Expected: List all tasks with high priority
+
+Command `list-date 4-10-2016`
+Expected: List the tasks which start at 4-10-2016
+
+Command `list-date 4-11-2016`
+Expected: List the tasks which start at 4-11-2016 
+
+Command `list-date 11-11-2016`
+Expected: List the tasks which start at 11-11-2016
+
+Command `list-date 2-11-2016`
+Expected: No tasks will be shown in the left panel 
 
 ### Delete command
+Command `delete 1`
+Expected: Remove the first task from task list
+
+Command `delete 2`
+Expected: Remove the second task from task list
+
+Command `delete 20`
+Expected: Remove the 20th task from task list
+
+Command `delete 30`
+Expected: Remove the 30th task form task list
+
+Command `delete 50`
+Expected: Remove the 50th task from task list
+
+Command `delete 100`
+Expected: The task index provided is invalid
 
 ### Find command
 Command: `find cs2010` <br>
