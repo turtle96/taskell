@@ -236,7 +236,7 @@ Format: `done` INDEX<br>
 Example: `done` 1<br>
 Marks the first task as finished and moves it to the list of completed tasks.
 <br><p align="center"><img src="images/screenshots/doneCmd.png" width="800"></br>
-Figure 6: Marks the third task as finished<br>
+Figure 6: Marks the task as finished and moves it to the list of completed tasks<br>
 
 #### Marking a task as incomplete: `undone`
 You can use the `undone` command to mark a completed task as uncompleted.<br>
@@ -244,6 +244,8 @@ You can use the `undone` command to mark a completed task as uncompleted.<br>
 Format: `undone` INDEX<br>
 Example: `undone` 1<br>
 Marks the first task as incomplete and moves it to the lsit of uncompleted tasks.<br>
+<br><p align="center"><img src="images/screenshots/undoneCmd.png" width="800"></br>
+Figure 7: Marks the task as incomplete and moves it to the list of uncompleted tasks<br>
 
 <!--- @@author --->
 
