@@ -369,7 +369,7 @@ public class TaskDate {
      * Returns true if the given string has the same name as a month in the year
      */
     public static boolean isValidMonth(String month) {
-        return !(convertMonthIntoInteger(month) == INVALID_MONTH);
+        return (convertMonthIntoInteger(month) != INVALID_MONTH);
     }
 
     /**

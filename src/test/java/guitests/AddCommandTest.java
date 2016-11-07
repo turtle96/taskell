@@ -5,12 +5,10 @@ import org.junit.Test;
 
 import seedu.taskell.commons.core.Messages;
 import seedu.taskell.logic.commands.AddCommand;
-import seedu.taskell.logic.commands.HelpCommand;
 import seedu.taskell.testutil.TestTask;
 import seedu.taskell.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.taskell.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
 //@@author A0139257X-reused
 public class AddCommandTest extends TaskManagerGuiTest {

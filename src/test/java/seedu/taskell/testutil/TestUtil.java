@@ -378,7 +378,7 @@ public class TestUtil {
 
     public static Tag[] getTagList(String tags) {
 
-        if (tags.equals("")) {
+        if (tags.isEmpty()) {
             return new Tag[] {};
         }
 

@@ -427,7 +427,7 @@ class EventTaskTestHelper {
     protected boolean[] hasTaskComponentArray;
     protected UniqueTagList tags;
     
-    EventTaskTestHelper() {
+    public EventTaskTestHelper() {
         initialiseTaskComponentArray();
         initialiseHasTaskComponentArray();
         initialiseUniqueTagList();
@@ -453,7 +453,7 @@ class EventTaskTestHelper {
         tags = new UniqueTagList();
     }
     
-    EventTask getEventTask() throws IllegalValueException {
+    protected EventTask getEventTask() throws IllegalValueException {
         return new EventTask(taskComponentArray, hasTaskComponentArray, tags);
     }
 }
@@ -472,7 +472,7 @@ class EventTaskTestExpectedResult {
     private TaskStatus taskStatus;
     private UniqueTagList tags;
     
-    EventTaskTestExpectedResult (String description, String startDate, String endDate, 
+    public EventTaskTestExpectedResult (String description, String startDate, String endDate, 
             String startTime, String endTime, String taskPriority, String recurringType) throws IllegalValueException {
         
         this.description = new Description(description);
@@ -486,7 +486,7 @@ class EventTaskTestExpectedResult {
         this.tags = new UniqueTagList();
     }
     
-    String getAsTextEventTask() {
+    protected String getAsTextEventTask() {
         final StringBuilder builder = new StringBuilder();
         builder.append(this.description)
                 .append(" StartDate: ")

@@ -3,7 +3,6 @@ package seedu.taskell.storage;
 import javax.xml.bind.annotation.XmlValue;
 
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.commons.util.CollectionUtil;
 import seedu.taskell.model.tag.Tag;
 
 /**

@@ -1,11 +1,7 @@
 package seedu.taskell.model.task;
 
-import java.util.Objects;
-
 import seedu.taskell.model.task.Description;
 import seedu.taskell.commons.exceptions.IllegalValueException;
-import seedu.taskell.commons.util.CollectionUtil;
-import seedu.taskell.logic.commands.IncorrectCommand;
 import seedu.taskell.model.tag.UniqueTagList;
 
 //@@author A0139257X
