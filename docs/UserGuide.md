@@ -5,8 +5,8 @@
 * [FAQ](#faq)
 * [Glossary](#glossary)
 * [Command Summary](#command-summary)
-* [Appendix A](#appendix-a)
-* [Appendix B](#appendix-b)
+* [Date Format Summary](#date-format-summary)
+* [Time Format Summary](#time-format-summary)
 
 <!--- @@author A0142073R ---> 
 
@@ -48,13 +48,13 @@ This section shows the different commands that you can use in Taskell. Words tha
 - TASK: Indicates the content of a work
 - DATE: Indicates a date
 
-> Please refer to Appendix A for the date formats that Taskell supports. <br> 
+> Please refer to Date Format Summary for the date formats that Taskell supports. <br> 
 > Default start date has been set to today's date. <br>
 > Default end date has been set to be the same as the start date. <br>
 
 - TIME: Indicates a time
 
-> Please refer to Appendix B for the time formats that Taskell supports. <br>
+> Please refer to Time Format Summary for the time formats that Taskell supports. <br>
 > Default start time has been set to 12:00AM <br>
 > Default end time has been set to 11:59PM <br>
 > If the task is added today and no start time is provided, the default start time will be set to the current time.
@@ -426,7 +426,7 @@ Undo | `undo` <br> `undo` INDEX
 <!-- @@author -->
 
 <!--- @@author A0139257X --->
-## Appendix A
+## Date Format Summary
 
 Supported Date Format |   Example  
 -------- | :-------- 
@@ -435,7 +435,7 @@ MM-YYYY  | jul-2016 <br> july-2016
 MM  | jan <br> sept <br> December
 day  | today <br> tdy <br> tomorrow <br> tmr <br> thursday <br> thurs <br> thu
 
-## Appendix B
+## Time Format Summary
 
 Supported Time Format |   Example  
 -------- | :-------- 
