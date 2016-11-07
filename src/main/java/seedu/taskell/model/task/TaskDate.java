@@ -336,9 +336,9 @@ public class TaskDate {
      */
     public static boolean isValidToday(String dateToValidate) {
         assert (dateToValidate != null);
-        dateToValidate = dateToValidate.toLowerCase();
+        String dateToValidateIgnoreCase = dateToValidate.toLowerCase();
         
-        switch (dateToValidate) {
+        switch (dateToValidateIgnoreCase) {
         case "today":
             // Fallthrough
         case "tdy":
@@ -353,9 +353,9 @@ public class TaskDate {
      */
     public static boolean isValidTomorrow(String dateToValidate) {
         assert (dateToValidate != null);
-        dateToValidate = dateToValidate.toLowerCase();
+        String dateToValidateIgnoreCase = dateToValidate.toLowerCase();
         
-        switch (dateToValidate) {
+        switch (dateToValidateIgnoreCase) {
         case "tomorrow":
             // Fallthrough
         case "tmr":
@@ -377,9 +377,9 @@ public class TaskDate {
      */
     private static int convertDayOfWeekIntoInteger(String day) {
         assert (day != null);
-        day = day.toLowerCase();
+        String dayIgnoreCase = day.toLowerCase();
 
-        switch (day) {
+        switch (dayIgnoreCase) {
         case "mon":
             // Fallthrough
         case "monday":
@@ -424,11 +424,12 @@ public class TaskDate {
      */
     private static int convertMonthIntoInteger(String month) {
         assert (month!= null);
+        String monthIgnoreCase = month;
         if (Character.isLetter(month.charAt(0))) {
-            month = month.toLowerCase();
+            monthIgnoreCase = month.toLowerCase();
         }
 
-        switch (month) {
+        switch (monthIgnoreCase) {
         case "jan":
             // Fallthrough
         case "january":
