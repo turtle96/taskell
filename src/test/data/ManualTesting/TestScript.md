@@ -12,10 +12,17 @@
 ## Test cases
 ### Add command
 Command: `add meet friends by today` <br>
-Expected: Task card added to left panel on today's date, 9 November 2016
+Expected: Task card with description "meet friends" added to left panel on today's date, 9 November 2016
 
 Command: `add walk the dog on fri` <br>
-Expected: Task card added to left panel on friday, 11 November 2016
+Expected: Task card with description "walk the dog" added to left panel on friday's date, 11 November 2016
+
+Command: `add meet cs2013 tutor for consultation #study #project #meeting on 5-11-2016`<br>
+Expected: Should see invalid command result "Start date and time must be before end date and time <br>
+All date and time should not before current time"
+
+Command: `add meet cs2013 tutor for consultation #study #project #meeting on 9-11-2016 from 5pm to 6pm`<br>
+Expected: Task card with description "meet cs2013 tutor for consultation " added to left panel on today's date, 9 November 2016, from 5pm to 6pm
 
 ### Edit command
 Command:  <br>
