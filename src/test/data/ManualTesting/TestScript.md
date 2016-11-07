@@ -9,8 +9,26 @@
 
 ## Test cases
 ### Add command
+Command: `add meet friends by today` <br>
+Expected: Task card with description "meet friends" added to left panel on today's date, 9 November 2016
+
+Command: `add walk the dog on fri` <br>
+Expected: Task card with description "walk the dog" added to left panel on friday's date, 11 November 2016
+
+Command: `add meet cs2013 tutor for consultation #study #project #meeting on 5-11-2016`<br>
+Expected: Should see invalid command result: "Start date and time must be before end date and time <br>
+All date and time should not before current time"
+
+Command: `add meet cs2013 tutor for consultation #study #project #meeting on 9-11-2016 from 5pm to 6pm`<br>
+Expected: Task card with description "meet cs2013 tutor for consultation " added to left panel on today's date, 9 November 2016, from 5pm to 6pm
+
+Command: `add `<br>
+Expected: Should see invalid command result: a message explaining how to use add command should be shown, along with parameters and examples
 
 ### Edit command
+Command: `edit `<br>
+Expected: Should see invalid command result: a message explaining how to use edit command should be shown, along with parameters and examples
+
 Command `edit 1 desc: go China with family`<br>
 Expected:
 <br>Original Task: go korea with family StartDate: 7-12-2015 EndDate: 29-12-2015 StartTime: 2:00AM EndTime: 11:40PM TaskPriority: 2 RecurringType: neverRecur TaskStatus: finished Tags: [holiday] 
@@ -85,6 +103,9 @@ Command `list-date 2-11-2016`<br>
 Expected: No tasks will be shown in the left panel 
 
 ### Delete command
+Command: `delete `<br>
+Expected: Should see invalid command result: a message explaining how to use delete command should be shown, along with parameters and examples
+
 Command `delete 1`<br>
 Expected: Remove the first task from task list
 
