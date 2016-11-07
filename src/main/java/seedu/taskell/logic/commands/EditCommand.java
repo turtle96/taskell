@@ -104,6 +104,7 @@ public class EditCommand extends Command {
 
     private boolean ableToAdjustTime(ReadOnlyTask taskToEdit) {
         TaskTime currentTime = TaskTime.getTimeNow();
+        TaskDate today = TaskDate.getTodayDate();
         if (taskToEdit.getTaskType().equals(Task.EVENT_TASK)) {
             if (endDate.equals(startDate) && endTime.isBefore(startTime)) {
                 try {
@@ -111,19 +112,13 @@ public class EditCommand extends Command {
                 } catch (IllegalValueException e) {
                     return false;
                 }
-                return true;
-            } else if (endDate.equals(startDate) && endDate.equals(TaskDate.getTodayDate()) && endTime.isBefore(currentTime)) {
+            } else if (endDate.equals(startDate) && endDate.equals(today) && endTime.isBefore(currentTime)) {
                 endTime = currentTime;
-                return true;
-            } else if (endDate.equals(startDate) && endDate.equals(TaskDate.getTodayDate()) && startTime.isBefore(currentTime)) {
+            } else if (endDate.equals(startDate) && endDate.equals(today) && startTime.isBefore(currentTime)) {
                 startTime = currentTime;
-                return true;
-            } else {
-                return true;
             }
-        } else {
-            return true;
         }
+        return true;
     }
 
     private void jumpToNewTaskIndex() {
@@ -145,16 +140,15 @@ public class EditCommand extends Command {
         getEditInformation(taskToEdit);
 
         if (taskToEdit.getTaskType().equals(Task.FLOATING_TASK) && (hasComponentArray[Task.START_TIME_COMPONENT]
-                || hasComponentArray[Task.END_TIME_COMPONENT]
-                || hasComponentArray[Task.START_DATE_COMPONENT]
+                || hasComponentArray[Task.END_TIME_COMPONENT] || hasComponentArray[Task.START_DATE_COMPONENT]
                 || hasComponentArray[Task.END_DATE_COMPONENT])) {
             return new CommandResult(FloatingTask.EDIT_FLOATING_NOT_ALLOWED);
         }
 
+        adjustDate(taskToEdit);
         if (!ableToAdjustTime(taskToEdit)) {
             return new CommandResult(MESSAGE_TIME_CONSTRAINTS);
         }
-        adjustDate(taskToEdit);
 
         Task newTask = new Task(description, taskToEdit.getTaskType(), startDate, endDate, startTime, endTime,
                 taskPriority, taskToEdit.getRecurringType(), taskToEdit.getTaskStatus(), taskToEdit.getTags());
