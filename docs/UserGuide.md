@@ -38,7 +38,8 @@ Step 6: Some example commands you can try:<br>
    * `list` : Displays all tasks
    * `add` buy MA1101R textbook today : Adds a task called buy MA1101R textbook to be done by today
    * `delete` 3 : Deletes the third task shown in the current list
-   * `exit` : Exits the application <br>
+   * `exit` : Exits Taskell <br>
+   
 Refer to the [Features](#features) section below for details of each command.<br>
 
 <!--- @@author A0139257X --->
@@ -55,9 +56,9 @@ This section shows the different commands that you can use in Taskell. Words tha
 - TIME: Indicates a time
 
 > Please refer to Time Format Summary for the time formats that Taskell supports. <br>
-> Default start time has been set to 12:00AM <br>
-> Default end time has been set to 11:59PM <br>
-> If the task is added today and no start time is provided, the default start time will be set to the current time.
+> Default start time has been set to 12:00AM. <br>
+> Default end time has been set to 11:59PM. <br>
+> If you added a task today without a start time, the default start time will be set to the current time.
 
 - PRIORITY: Indicates the level of importance of a task ranging from level 0 to 3. Level 0, 1, 2, 3 indicates default, low, medium and high priority respectively
 
