@@ -240,7 +240,7 @@ Marks the first task as finished and moves it to the list of completed tasks.
 Figure 6: Marks the task as finished and moves it to the list of completed tasks<br>
 
 #### Marking a task as incomplete: `undone`
-You can use the `undone` command to mark a completed task as uncompleted.<br>
+You can use the `undone` command to mark a completed task as incomplete.<br>
 
 Format: `undone` INDEX<br>
 Example: `undone` 1<br>
@@ -257,15 +257,15 @@ You can use the `list` command to display a certain type of tasks.<br>
 
 Formats: 
 - `list` <br>
-Displays a list of uncompleted tasks.<br>
+Displays a list of uncompleted tasks<br>
 - `list-all` <br>
-Displays a list of all tasks, both completed and uncompleted.<br>
+Displays a list of all tasks, both completed and uncompleted<br>
 - `list-date` DATE <br> 
-Displays a list of all the tasks due on the specified date.<br>
+Displays a list of all the tasks due on the specified date<br>
 - `list-done` <br>
-Displays a list of completed tasks.<br>
+Displays a list of completed tasks<br>
 - `list-priority` PRIORITY<br>
-Displays a list of tasks with the specified priority.
+Displays a list of tasks with the specified priority
 <br><p align="center"><img src="images/screenshots/listAllCmd.png" width="800"></br>
 Figure 8: `list-all` displays both completed and uncompleted tasks<br>
 <!-- @@author -->
@@ -273,60 +273,56 @@ Figure 8: `list-all` displays both completed and uncompleted tasks<br>
 <!--- @@author A0142130A ---> 
 
 #### Clearing all entries : `clear`
-You can use the `clear` command to permanently clear **all** task data. <br>
+You can use the `clear` command to clear all task data permanently. <br>
 
 Format: `clear`  
 
 <p align="center"><img src="images/screenshots/clearCmd.png" width="800"></br>
 Figure 9: `clear` prompts a confirmation pop-up window<br>
 
-> Take Note! <br>
-> * `clear` command is irreversible!
+> Take note! <br>
+> `clear` command is irreversible!
 
 #### Showing history : `history` or `hist`
-You can view the command history available for undo on the right panel when undoing your previous commands.<br>
+You can use the `history` command to view a list of actions that can be undone. The command history will be shown in the right panel..<br>
 
 Format: `history` or `hist` 
 <p align="center"><img src="images/screenshots/historyCmd.png" width="800"></br> <br>
-Figure 10: `hist` displays a list of command history on the right panel
+Figure 10: `hist` displays the command history on the right panel
 
-> Take Note! <br>
+> Take note! <br>
 > * Only commands that are available for undo will be shown here. 
-> * Refer to the `undo` section below for more information on which commands can be undone.
+> * Refer to the `undo` section below to find out which commands can be undone.
 
 #### Reverting previous action : `undo`
-If you wish to undo your most recent action, you can do so by using the `undo` command.<br>
-To undo previous commands, <kbd>Enter</kbd> `hist` to see a list of 
-previous commands that can be undone.<br>
-Then use the `undo` command together with the specified INDEX from the list of command history.
+You can use the `undo` command to undo your previous actions.
 
 Formats: <br>
 - `undo`<br> 
-Undo the most recent command executed.<br>
+Undo the most recent command executed<br>
 - `undo` INDEX<br> 
 Undo the command at the specified index in the  command history.<br>
 Example: `hist`, then `undo` 3, will undo the third command in the command history.
 <p align="center"><img src="images/screenshots/undoCmd.png" width="800"></br>
-Figure 11: `undo` reverts the last item on the list of command history
+Figure 11: `undo` reverts the last item in the command history
 
-> Take Note! <br>
-> * Undo command only supports `add`, `edit`, `delete`, `done`, `undone` and `undo` commands.
-> * `clear` command is irreversible!
+> Take note! <br>
+> Undo command only supports `add`, `edit`, `delete`, `done`, `undone` and `undo` commands.
 
 #### Showing calendar view : `calendar` or `cal`
 You can use the `calendar` command to view a calendar. <br>
 
 Format: `calendar` or `cal` <br>
 
-You can refer the calendar on the right panel when adding tasks and scheduling events. A fine red line is used to indicate the current time.
+You can refer to the calendar on the right panel when adding tasks and scheduling events. A fine red line is used to indicate the current time.
 <br> <p align="center"> <img src="images/screenshots/calendarCmd.png" width="800"> </br>
-Figure 12: Example of how the current time marker looks like.<br>
+Figure 12: Example of how the current time marker looks like<br>
 
-The calendar view reflects the tasks shown in the left panel. Each block is marked with the index corresponding to the task, meaning a block marked "4" would correspond to the fourth task.<br>
-By default, the calendar view will be shown on the right panel. As the `history` command also utilises the right panel to display the command history, you have to use the `calendar` command to toggle between both views.<br>
+The calendar view reflects the tasks shown in the left panel. Each block is marked with the index corresponding to the task, meaning a block marked '4' would correspond to the fourth task.<br>
+By default, the calendar view will be shown on the right panel. As the `history` command also utilizes the right panel to display the command history, you have to use the `calendar` command to toggle between both views.<br>
 
 > Take note! <br>
-> Entering other commands (i.e. `find`, `add`) will revert the right panel back to calendar as it is the default view. <br>
+> Entering other commands (i.e. `find`, `add`) will revert the right panel back to the calendar view as it is the default view. <br>
 
 
 #### Saving the information in Taskell : `save`
@@ -346,7 +342,7 @@ If the specified directory is valid but the file is missing, for example, if you
 but 'project' file has not been created, Taskell will create the file for you.<br>
 
 
-> Take Note! <br>
+> Take note! <br>
 > * If you only specify a folder name without directory, i.e. `save` project, Taskell will create a file named 'project' within Taskell's own directory. 
 >Whereas `save` C:/Users/Jim/Documents/project will open a file named 'project' within your desktop's Documents folder.
 > * Both Windows and Linux OS have restricted symbols that are not allowed for folder names. Please be aware of the symbols
