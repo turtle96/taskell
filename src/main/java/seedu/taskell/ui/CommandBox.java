@@ -23,7 +23,7 @@ public class CommandBox extends UiPart {
     private AnchorPane placeHolderPane;
     private AnchorPane commandPane;
     private ResultDisplay resultDisplay;
-    String previousCommandTest;
+    String previousCommandText;
 
     private Logic logic;
 
@@ -71,18 +71,18 @@ public class CommandBox extends UiPart {
     @FXML
     private void handleCommandInputChanged() {
         //Take a copy of the command text
-        previousCommandTest = commandTextField.getText();
+        previousCommandText = commandTextField.getText();
 
         /* We assume the command is correct. If it is incorrect, the command box will be changed accordingly
          * in the event handling code {@link #handleIncorrectCommandAttempted}
          */
         setStyleToIndicateCorrectCommand();
-        mostRecentResult = logic.execute(previousCommandTest);
+        mostRecentResult = logic.execute(previousCommandText);
         resultDisplay.postMessage(mostRecentResult.feedbackToUser);
         logger.info("Result: " + mostRecentResult.feedbackToUser);
         
-        if (!previousCommandTest.equals(ViewHistoryCommand.COMMAND_WORD_1)
-                && !previousCommandTest.equals(ViewHistoryCommand.COMMAND_WORD_2)) {
+        if (!previousCommandText.equals(ViewHistoryCommand.COMMAND_WORD_1)
+                && !previousCommandText.equals(ViewHistoryCommand.COMMAND_WORD_2)) {
             raise(new DisplayCalendarViewEvent());
         }
     }
@@ -98,7 +98,7 @@ public class CommandBox extends UiPart {
 
     @Subscribe
     private void handleIncorrectCommandAttempted(IncorrectCommandAttemptedEvent event){
-        logger.info(LogsCenter.getEventHandlingLogMessage(event,"Invalid command: " + previousCommandTest));
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,"Invalid command: " + previousCommandText));
         setStyleToIndicateIncorrectCommand();
         restoreCommandText();
     }
@@ -107,7 +107,7 @@ public class CommandBox extends UiPart {
      * Restores the command box text to the previously entered command
      */
     private void restoreCommandText() {
-        commandTextField.setText(previousCommandTest);
+        commandTextField.setText(previousCommandText);
     }
 
     /**
