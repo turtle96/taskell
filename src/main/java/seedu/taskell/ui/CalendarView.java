@@ -16,6 +16,8 @@ import seedu.taskell.model.task.TaskStatus;
 
 public class CalendarView {
     
+    private static final int APPOINTMENT_MAX_COLOUR = 24;
+
     private static Model model;
     
     private Agenda agenda;
@@ -66,6 +68,7 @@ public class CalendarView {
             }
             
             i++;
+            i%=APPOINTMENT_MAX_COLOUR;
         }
         
         agenda.appointments().addAll(appointments);

@@ -3,6 +3,10 @@ package seedu.taskell.logic.commands;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.eventbus.EventBus;
+
+import seedu.taskell.commons.core.EventsCenter;
+import seedu.taskell.commons.events.ui.DisplayCalendarViewEvent;
 import seedu.taskell.commons.exceptions.IllegalValueException;
 import seedu.taskell.history.HistoryManager;
 import seedu.taskell.model.tag.Tag;
@@ -59,6 +63,7 @@ public class AddCommand extends Command {
             model.addTask(toAdd);
             history.addTask(toAdd);
             jumpToNewTaskIndex();
+            EventsCenter.getInstance().post(new DisplayCalendarViewEvent());
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniqueTaskList.DuplicateTaskException e) {
             history.deleteLatestCommand();
